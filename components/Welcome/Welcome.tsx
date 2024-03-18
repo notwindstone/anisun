@@ -9,7 +9,7 @@ export async function Welcome() {
 
     const getRandomTitle = await fetch('https://api.anilibria.tv/v3/title/random');
     const randomTitle = await getRandomTitle.json();
-    console.log(randomTitle.player);
+    console.log(randomTitle.player.list[1].hls.fhd);
 
     return (
         <>
