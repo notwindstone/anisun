@@ -18,6 +18,7 @@ export default function RootLayout({ children }: { children: any }) {
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
+        <title>Mantine + Next.JS</title>
       </head>
       <body>
         <MantineProvider theme={theme}>{children}</MantineProvider>
