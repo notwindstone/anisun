@@ -6,7 +6,6 @@ export default function HomePage() {
   return (
     <>
       <Welcome />
-        <VideoEmbed />
       <ColorSchemeToggle />
     </>
   );
