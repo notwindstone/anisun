@@ -1,27 +1,29 @@
 import { Text } from '@mantine/core';
 import React from 'react';
-import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
+import VideoEmbed from '@/components/VideoEmbed/VideoEmbed';
 
 export async function Welcome() {
-    const host = 'https://cache.libria.fun'
     const res = await fetch('https://api.anilibria.tv/v3/genres');
     const obj = await res.json();
     const genres = obj.map((genre: []) => (
             <Text>{genre}</Text>
         ));
 
-    const getRandomTitle = await fetch('https://api.anilibria.tv/v3/title/random');
-    const randomTitle = await getRandomTitle.json();
-    console.log(randomTitle.player.list[1].hls.fhd);
-
     const searchFrieren = await fetch('https://api.anilibria.tv/v3/title/search?search=фрирен&limit=1');
     const frierenTitle = await searchFrieren.json();
-    const frierenEpisode = frierenTitle.list[0].player.list[1].hls.fhd;
+    const frierenPlayer = frierenTitle.list[0].player;
+    const frierenHost = `https://${frierenPlayer.host}`;
+    const frierenEpisodeVideo = frierenPlayer.list[1].hls.fhd;
+    const frierenEpisodePreview = frierenPlayer.list[1].preview;
+    console.log(frierenHost + frierenEpisodePreview);
 
     return (
         <>
             {genres}
-            <VideoEmbed src={host + frierenEpisode} />
+            <VideoEmbed
+              source={frierenHost + frierenEpisodeVideo}
+              preview={frierenHost + frierenEpisodePreview}
+            />
         </>
     );
 }

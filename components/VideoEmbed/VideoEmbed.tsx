@@ -2,10 +2,15 @@
 
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 
-export default function VideoEmbed({ src }) {
+interface VideoEmbedProps {
+    source: string;
+    preview: string;
+}
+
+export default function VideoEmbed({ source, preview }: VideoEmbedProps) {
     return (
         <>
-            <VideoPlayer src={src} />
+            <VideoPlayer source={source} preview={preview} />
         </>
     );
 }
