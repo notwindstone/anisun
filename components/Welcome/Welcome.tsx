@@ -1,6 +1,7 @@
 import { Text } from '@mantine/core';
 import React from 'react';
 import VideoEmbed from '@/components/VideoEmbed/VideoEmbed';
+import Link from "next/link";
 
 export async function Welcome() {
     const res = await fetch('https://api.anilibria.tv/v3/genres');
@@ -19,6 +20,7 @@ export async function Welcome() {
 
     return (
         <>
+            <Link href="/titles">213</Link>
             {genres}
             <VideoEmbed
               source={frierenHost + frierenEpisodeVideo}

@@ -1,9 +1,9 @@
-import Page from "@/app/titles/page";
+import Page from '@/app/titles/page';
 
-export default function Layout() {
+export default function Layout({ children }: { children: React.ReactNode }) {
     return (
-        <>
-            <Page />
-        </>
-    )
+        <section>
+            {children}
+        </section>
+    );
 }
