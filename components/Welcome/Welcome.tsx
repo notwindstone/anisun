@@ -10,7 +10,7 @@ export async function Welcome() {
             <Text>{genre}</Text>
         ));
 
-    const searchFrieren = await fetch('https://api.anilibria.tv/v3/title/search?search=фрирен&limit=1');
+    const searchFrieren = await fetch('https://api.anilibria.tv/v3/title/search?search=фрирен&limit=1', { cache: 'force-cache' });
     const frierenTitle = await searchFrieren.json();
     const frierenPlayer = frierenTitle.list[0].player;
     const frierenHost = `https://${frierenPlayer.host}`;

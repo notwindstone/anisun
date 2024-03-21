@@ -1,7 +1,12 @@
 import { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 
-export default function VideoPlayer({ source, preview }) {
+interface VideoPlayerProps {
+    source: string;
+    preview: string;
+}
+
+export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
     const videoRef = useRef(null);
 
     useEffect(() => {
