@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Autocomplete, AutocompleteProps, Group, Image, Loader, Text } from '@mantine/core';
+import { Autocomplete, AutocompleteProps, ComboboxItem, Group, Image, Loader, OptionsFilter, Text } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -11,14 +11,13 @@ interface TitleProps {
     }
 }
 
-/*
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     console.log(option);
 
     return (
         <Group gap="sm">
             <div>
-                <Image src="https://anilibria.tv/storage/releases/posters/9000/NBPPaSwgJrcoO4eg__f003bb6841ce26560a643491c197878f.jpg" radius="xl" />
+                <Image src="" radius="xl" />
             </div>
             <div>
                 <Text size="sm">{option.value} Провожающая в последний путь Фрирен</Text>
@@ -27,7 +26,6 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
         </Group>
     );
 };
- */
 
 export function Search() {
     const [value, setValue] = useDebouncedState('', 200);
@@ -42,16 +40,16 @@ export function Search() {
                 const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`);
                 const responseData = await response.json();
 
-                if (!responseData.list) {
+                if (responseData.list.length > 0) {
                     const titles = responseData.list.map((title: TitleProps) => (
                         `${title.names.ru} / ${title.names.en}`
                     ));
 
                     setData(titles);
+                } else {
+                    // @ts-ignore
+                    setData([{ label: 'asd', value: any, disabled: true }]);
                 }
-
-                // @ts-ignore
-                setData([{ value: 'Ничего не найдено', disabled: true }]);
                 setLoading(false);
             } else {
                 // @ts-ignore
@@ -76,6 +74,7 @@ export function Search() {
               onOptionSubmit={(option) => {
                   console.log(option);
               }}
+              renderOption={renderAutocompleteOption}
             />
         </>
     );
