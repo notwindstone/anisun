@@ -3,17 +3,25 @@
 import { useState } from 'react';
 import { Autocomplete } from '@mantine/core';
 
+interface TitleProps {
+    names: {
+        ru: string;
+        en: string;
+    }
+}
+
 export function Search() {
     const [value, setValue] = useState('');
     const [data, setData] = useState([]);
-    const onChange = async (e) => {
+
+    const onChange = async (e: string) => {
         console.log(e);
         setValue(e);
         const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${e}&limit=5`);
         const responseData = await response.json();
-        const value = responseData.list.map((title) => (title.names.ru));
-        setData(value);
-        console.log(data, value)
+        const titles = responseData.list.map((title: TitleProps) => (`${title.names.ru} / ${title.names.en}`));
+        setData(titles);
+        console.log(data, value);
     };
     /*
     const onChange = async (e) => {
