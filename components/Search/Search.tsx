@@ -41,12 +41,21 @@ export function Search() {
 
                 const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`);
                 const responseData = await response.json();
-                const titles = responseData.list.map((title: TitleProps) => (
-                    `${title.names.ru} / ${title.names.en}`
-                ));
 
-                setData(titles);
+                if (!responseData.list) {
+                    const titles = responseData.list.map((title: TitleProps) => (
+                        `${title.names.ru} / ${title.names.en}`
+                    ));
+
+                    setData(titles);
+                }
+
+                // @ts-ignore
+                setData([{ value: 'Ничего не найдено', disabled: true }]);
                 setLoading(false);
+            } else {
+                // @ts-ignore
+                setData([{ value: 'Введите название от трёх символов', disabled: true }]);
             }
         };
 
@@ -64,6 +73,9 @@ export function Search() {
               rightSection={
                 loading ? <Loader size="1rem" /> : null
               }
+              onOptionSubmit={(option) => {
+                  console.log(option);
+              }}
             />
         </>
     );
