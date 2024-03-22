@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Autocomplete, AutocompleteProps, Group, Image, Text } from '@mantine/core';
+import { Autocomplete, AutocompleteProps, Group, Image, Loader, Text } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -11,34 +11,42 @@ interface TitleProps {
     }
 }
 
+/*
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     console.log(option);
 
     return (
         <Group gap="sm">
-            <Image src="https://cache.libria.fun/storage/releases/posters/9000/NBPPaSwgJrcoO4eg__f003bb6841ce26560a643491c197878f.jpg" size={36} radius="xl" />
             <div>
-                <Text size="sm"></Text>
-                <Text size="xs" opacity={0.5}>
-                </Text>
+                <Image src="https://anilibria.tv/storage/releases/posters/9000/NBPPaSwgJrcoO4eg__f003bb6841ce26560a643491c197878f.jpg" radius="xl" />
+            </div>
+            <div>
+                <Text size="sm">{option.value} Провожающая в последний путь Фрирен</Text>
+                <Text size="xs" opacity={0.5}>Sousou no Frieren</Text>
             </div>
         </Group>
     );
 };
+ */
 
 export function Search() {
     const [value, setValue] = useDebouncedState('', 200);
     const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const onChange = async (keyInput: string) => {
             if (keyInput.length >= 3) {
-                const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=5`);
+                setLoading(true);
+
+                const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`);
                 const responseData = await response.json();
                 const titles = responseData.list.map((title: TitleProps) => (
                     `${title.names.ru} / ${title.names.en}`
                 ));
+
                 setData(titles);
+                setLoading(false);
             }
         };
 
@@ -49,13 +57,13 @@ export function Search() {
         <>
             <Autocomplete
               variant="unstyled"
-              data={[
-                  { group: 'Возможно, вы искали', items: data },
-              ]}
-              renderOption={renderAutocompleteOption}
+              data={data}
               defaultValue={value}
               onChange={(event) => setValue(event)}
               placeholder="Поиск"
+              rightSection={
+                loading ? <Loader size="1rem" /> : null
+              }
             />
         </>
     );
