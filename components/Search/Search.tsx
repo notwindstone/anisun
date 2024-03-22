@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Autocomplete, Text } from '@mantine/core';
+import { Autocomplete, AutocompleteProps, Group, Image, Text } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -11,8 +11,23 @@ interface TitleProps {
     }
 }
 
+const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
+    console.log(option);
+
+    return (
+        <Group gap="sm">
+            <Image src="https://cache.libria.fun/storage/releases/posters/9000/NBPPaSwgJrcoO4eg__f003bb6841ce26560a643491c197878f.jpg" size={36} radius="xl" />
+            <div>
+                <Text size="sm"></Text>
+                <Text size="xs" opacity={0.5}>
+                </Text>
+            </div>
+        </Group>
+    );
+};
+
 export function Search() {
-    const [value, setValue] = useDebouncedState('', 300, { leading: true });
+    const [value, setValue] = useDebouncedState('', 200);
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -27,14 +42,17 @@ export function Search() {
             }
         };
 
-        onChange(value)
-            .catch(console.error);
+        onChange(value);
     }, [value]);
 
     return (
         <>
             <Autocomplete
-              data={data}
+              variant="unstyled"
+              data={[
+                  { group: 'Возможно, вы искали', items: data },
+              ]}
+              renderOption={renderAutocompleteOption}
               defaultValue={value}
               onChange={(event) => setValue(event)}
               placeholder="Поиск"
