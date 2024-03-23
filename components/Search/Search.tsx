@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import {AutocompleteProps, ComboboxItem, Group, Image, Loader, OptionsFilter, Select, Text} from '@mantine/core';
+import { AutocompleteProps, ComboboxItem, Group, Image, Loader, OptionsFilter, Select, Text } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -19,15 +19,16 @@ interface TitleProps {
     }
 }
 
-const optionsFilter: OptionsFilter = ({ options, search }) => {
-    const splittedSearch = search.toLowerCase().trim().split(' ');
-    return (options as ComboboxItem[]).filter((option) => {
-        return {value: 'das', label: 'asd'}
-    });
-};
+const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter((option) => ({ value: 'das', label: 'asd' }));
 
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
+
+    if (option.value === 'nothing') {
+        return (
+            <>Ничего не найдено.</>
+        );
+    }
 
     return (
         <Group gap="sm">
@@ -60,7 +61,7 @@ export function Search() {
 
             if (responseData.list.length < 1) {
                 // @ts-ignore
-                setData([{ label: ' ', value: '--Nothing found--Nothing found', disabled: true }]);
+                setData([{ label: ' ', value: 'nothing', disabled: true }]);
                 setLoading(false);
                 return;
             }
