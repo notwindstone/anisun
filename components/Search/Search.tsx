@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AutocompleteProps, Group, Image, Loader, Select, Text } from '@mantine/core';
+import {AutocompleteProps, ComboboxItem, Group, Image, Loader, OptionsFilter, Select, Text} from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -19,6 +19,13 @@ interface TitleProps {
     }
 }
 
+const optionsFilter: OptionsFilter = ({ options, search }) => {
+    const splittedSearch = search.toLowerCase().trim().split(' ');
+    return (options as ComboboxItem[]).filter((option) => {
+        return {value: 'das', label: 'asd'}
+    });
+};
+
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
@@ -29,7 +36,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             </div>
             <div>
                 <Text size="sm">{optionData[1]}</Text>
-                <Text size="xs" opacity={0.5}>{optionData[2]}, {optionData[3]}</Text>
+                <Text size="xs" opacity={0.5}>{optionData[2]}{optionData[3] ? `, ${optionData[3]}` : []}</Text>
             </div>
         </Group>
     );
@@ -53,7 +60,7 @@ export function Search() {
 
             if (responseData.list.length < 1) {
                 // @ts-ignore
-                setData([{ label: 'asd', value: 'any', disabled: true }]);
+                setData([{ label: ' ', value: '--Nothing found--Nothing found', disabled: true }]);
                 setLoading(false);
                 return;
             }
@@ -88,7 +95,7 @@ export function Search() {
                   console.log(option);
               }}
               renderOption={renderAutocompleteOption}
-
+              filter={optionsFilter}
             />
         </>
     );
