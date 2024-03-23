@@ -1,5 +1,5 @@
-import Link from "next/link";
-import {Search} from "@/components/Search/Search";
+import Link from 'next/link';
+import { Search } from '@/components/Search/Search';
 
 export default function Page() {
     return (
@@ -7,5 +7,5 @@ export default function Page() {
             <Link href="/">Return</Link>
             <Search />
         </div>
-    )
+    );
 }

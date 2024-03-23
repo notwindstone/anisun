@@ -19,7 +19,7 @@ interface TitleProps {
     }
 }
 
-const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter((option) => ({ value: 'das', label: 'asd' }));
+const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter(() => ({ value: 'das', label: 'asd' }));
 
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
@@ -33,7 +33,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     return (
         <Group gap="sm">
             <div>
-                <Image src={optionData[0]} radius="xl" />
+                <Image src="https://anilibria.tv/storage/releases/posters/9542/R1ep1mdSXtUsAhgD__cf83260f7c4329bd4a768fefb4bedd25.jpg" />
             </div>
             <div>
                 <Text size="sm">{optionData[1]}</Text>
