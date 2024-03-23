@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Autocomplete, AutocompleteProps, Group, Image, Loader, Text } from '@mantine/core';
+import { AutocompleteProps, Group, Image, Loader, Select, Text } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -59,7 +59,10 @@ export function Search() {
             }
 
             const titles = responseData.list.map((title: TitleProps) => (
-                `https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`
+                {
+                    value: `https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`,
+                    label: `${title.names.ru} / ${title.names.en}`,
+                }
             ));
 
             setData(titles);
@@ -71,11 +74,12 @@ export function Search() {
 
     return (
         <>
-            <Autocomplete
+            <Select
+              searchable
               variant="unstyled"
               data={data}
               defaultValue={value}
-              onChange={(event) => setValue(event)}
+              onSearchChange={(event) => setValue(event)}
               placeholder="Введите название от трёх символов"
               rightSection={
                 loading ? <Loader size="1rem" /> : null
@@ -84,6 +88,7 @@ export function Search() {
                   console.log(option);
               }}
               renderOption={renderAutocompleteOption}
+
             />
         </>
     );
