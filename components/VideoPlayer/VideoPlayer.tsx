@@ -31,7 +31,11 @@ export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
 
     return (
         <>
-            <video ref={videoRef} poster={preview} />
+            <video
+              width="100%"
+              ref={videoRef}
+              poster={preview}
+            />
         </>
     );
 }

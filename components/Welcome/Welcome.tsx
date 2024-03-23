@@ -14,9 +14,10 @@ export async function Welcome() {
     const frierenTitle = await searchFrieren.json();
     const frierenPlayer = frierenTitle.list[0].player;
     const frierenHost = `https://${frierenPlayer.host}`;
+    const frierenImagesHost = 'https://anilibria.tv';
     const frierenEpisodeVideo = frierenPlayer.list[1].hls.fhd;
     const frierenEpisodePreview = frierenPlayer.list[1].preview;
-    console.log(frierenHost + frierenEpisodePreview);
+    console.log(frierenImagesHost + frierenEpisodePreview);
 
     return (
         <>
@@ -24,7 +25,7 @@ export async function Welcome() {
             {genres}
             <VideoEmbed
               source={frierenHost + frierenEpisodeVideo}
-              preview={frierenHost + frierenEpisodePreview}
+              preview={frierenImagesHost + frierenEpisodePreview}
             />
         </>
     );

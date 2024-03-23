@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { Autocomplete, AutocompleteProps, ComboboxItem, Group, Image, Loader, OptionsFilter, Text } from '@mantine/core';
+import { Autocomplete, AutocompleteProps, Group, Image, Loader, Text } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -34,6 +34,30 @@ export function Search() {
 
     useEffect(() => {
         const onChange = async (keyInput: string) => {
+            if (keyInput.length < 3) {
+                return;
+            }
+
+            setLoading(true);
+
+            const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`);
+            const responseData = await response.json();
+
+            if (responseData.list.length < 1) {
+                // @ts-ignore
+                setData([{ label: 'asd', value: 'any', disabled: true }]);
+                setLoading(false);
+                return;
+            }
+
+            const titles = responseData.list.map((title: TitleProps) => (
+                `${title.names.ru} / ${title.names.en}`
+            ));
+
+            setData(titles);
+            setLoading(false);
+
+            /*
             if (keyInput.length >= 3) {
                 setLoading(true);
 
@@ -55,9 +79,10 @@ export function Search() {
                 // @ts-ignore
                 setData([{ value: 'Введите название от трёх символов', disabled: true }]);
             }
+             */
         };
 
-        onChange(value);
+        onChange(value).then();
     }, [value]);
 
     return (
@@ -67,7 +92,7 @@ export function Search() {
               data={data}
               defaultValue={value}
               onChange={(event) => setValue(event)}
-              placeholder="Поиск"
+              placeholder="Введите название от трёх символов"
               rightSection={
                 loading ? <Loader size="1rem" /> : null
               }
