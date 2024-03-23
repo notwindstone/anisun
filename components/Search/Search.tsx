@@ -64,30 +64,6 @@ export function Search() {
 
             setData(titles);
             setLoading(false);
-
-            /*
-            if (keyInput.length >= 3) {
-                setLoading(true);
-
-                const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`);
-                const responseData = await response.json();
-
-                if (responseData.list.length > 0) {
-                    const titles = responseData.list.map((title: TitleProps) => (
-                        `${title.names.ru} / ${title.names.en}`
-                    ));
-
-                    setData(titles);
-                } else {
-                    // @ts-ignore
-                    setData([{ label: 'asd', value: any, disabled: true }]);
-                }
-                setLoading(false);
-            } else {
-                // @ts-ignore
-                setData([{ value: 'Введите название от трёх символов', disabled: true }]);
-            }
-             */
         };
 
         onChange(value).then();
