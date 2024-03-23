@@ -1,7 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { AutocompleteProps, ComboboxItem, Group, Image, Loader, OptionsFilter, Select, Text } from '@mantine/core';
+import {
+    AutocompleteProps,
+    ComboboxItem,
+    Group, Image,
+    Loader,
+    OptionsFilter,
+    Select,
+    Text,
+} from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
@@ -29,11 +37,10 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             <>Ничего не найдено.</>
         );
     }
-
     return (
         <Group gap="sm">
             <div>
-                <Image src="https://anilibria.tv/storage/releases/posters/9542/R1ep1mdSXtUsAhgD__cf83260f7c4329bd4a768fefb4bedd25.jpg" />
+                <Image src={optionData[0]} />
             </div>
             <div>
                 <Text size="sm">{optionData[1]}</Text>

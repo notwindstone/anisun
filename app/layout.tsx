@@ -3,6 +3,7 @@ import React from 'react';
 import { MantineProvider, ColorSchemeScript } from '@mantine/core';
 import NextTopLoader from 'nextjs-toploader';
 import { theme } from '@/theme';
+import { Provider } from '@/utils/Provider';
 
 export const metadata = {
   title: 'Mantine Next.js template',
@@ -27,7 +28,9 @@ export default function RootLayout({ children }: { children: any }) {
           showSpinner={false}
           height={4}
         />
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <Provider>
+          <MantineProvider theme={theme}>{children}</MantineProvider>
+        </Provider>
       </body>
     </html>
   );
