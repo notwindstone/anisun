@@ -5,23 +5,31 @@ import { Autocomplete, AutocompleteProps, Group, Image, Loader, Text } from '@ma
 import { useDebouncedState } from '@mantine/hooks';
 
 interface TitleProps {
+    posters: {
+        small: {
+            url: string;
+        }
+    },
     names: {
         ru: string;
         en: string;
+    },
+    status: {
+        string: string;
     }
 }
 
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
-    console.log(option);
+    const optionData = option.value.split('--');
 
     return (
         <Group gap="sm">
             <div>
-                <Image src="" radius="xl" />
+                <Image src={optionData[0]} radius="xl" />
             </div>
             <div>
-                <Text size="sm">{option.value} Провожающая в последний путь Фрирен</Text>
-                <Text size="xs" opacity={0.5}>Sousou no Frieren</Text>
+                <Text size="sm">{optionData[1]}</Text>
+                <Text size="xs" opacity={0.5}>{optionData[2]}, {optionData[3]}</Text>
             </div>
         </Group>
     );
@@ -51,7 +59,7 @@ export function Search() {
             }
 
             const titles = responseData.list.map((title: TitleProps) => (
-                `${title.names.ru} / ${title.names.en}`
+                `https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`
             ));
 
             setData(titles);
