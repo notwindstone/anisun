@@ -9,6 +9,7 @@ import {
 } from '@tabler/icons-react';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import classes from './VideoEmbed.module.css';
+import {useState} from "react";
 
 interface VideoEmbedProps {
     host: string;
@@ -21,9 +22,12 @@ interface VideoEmbedProps {
 }
 
 export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
+    const [value, setValue] = useState('Качество')
     const video = host + source.fhd;
 
-    let test = 'Качество';
+    function handleClick() {
+        setValue('1234')
+    }
 
     return (
         <>
@@ -53,6 +57,7 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
                         Скорость воспроизведения
                     </Menu.Item>
                     <Menu.Item
+                      onClick={handleClick}
                       closeMenuOnClick={false}
                       leftSection={
                         <IconAdjustmentsAlt style={{ width: rem(24), height: rem(24) }} />
@@ -64,7 +69,7 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
                         </>
                       }
                     >
-                        Качество
+                        {value}
                     </Menu.Item>
                 </Menu.Dropdown>
             </Menu>
