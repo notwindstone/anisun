@@ -10,7 +10,7 @@ export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
     const videoRef = useRef(null);
 
     useEffect(() => {
-        const video = videoRef.current;
+        const video: any = videoRef.current;
         if (!video) return;
 
         video.controls = true;
@@ -31,6 +31,7 @@ export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
 
     return (
         <>
+            {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
             <video
               width="100%"
               ref={videoRef}

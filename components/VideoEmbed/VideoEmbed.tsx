@@ -1,7 +1,7 @@
 'use client';
 
+import { Button } from '@mantine/core';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
-import {Button} from "@mantine/core";
 
 interface VideoEmbedProps {
     host: string;
@@ -19,8 +19,10 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
     return (
         <>
             <Button
-                onClick={(event) => event.preventDefault()}
-            >Поменять качество</Button>
+              onClick={(event) => event.preventDefault()}
+            >
+                Поменять качество
+            </Button>
             <VideoPlayer source={video} preview={preview} />
         </>
     );
