@@ -4,10 +4,10 @@ import { Menu, rem, Text, UnstyledButton } from '@mantine/core';
 import {
     IconAdjustmentsAlt,
     IconChevronRight,
-    IconClockHour3,
-    IconSettingsFilled,
+    IconClockHour3, IconSettings,
 } from '@tabler/icons-react';
 import { useState } from 'react';
+import { useDisclosure } from '@mantine/hooks';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import classes from './VideoEmbed.module.css';
 
@@ -81,11 +81,15 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
     const [value, setValue] = useState(settings);
     const video = host + source.fhd;
 
+    const [opened, { toggle }] = useDisclosure(false);
+
     function handleClick() {
         setValue(qualitySettings);
     }
 
     async function handleClose() {
+        toggle();
+
         setTimeout(() => {
             setValue(settings);
         }, 150);
@@ -101,8 +105,14 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
               radius="md"
             >
                 <Menu.Target>
-                    <UnstyledButton>
-                        <IconSettingsFilled style={{ width: rem(24), height: rem(24) }} />
+                    <UnstyledButton
+                      onClick={toggle}
+                    >
+                        <IconSettings style={
+                            opened
+                                ? { width: rem(24), height: rem(24), transform: 'rotate(45deg)', transition: '0.25s' }
+                                : { width: rem(24), height: rem(24), transform: 'rotate(0deg)', transition: '0.25s' }
+                        } />
                     </UnstyledButton>
                 </Menu.Target>
                 {value}
