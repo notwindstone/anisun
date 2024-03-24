@@ -1,6 +1,7 @@
 'use client';
 
-import { Button } from '@mantine/core';
+import { Menu, rem, Text, UnstyledButton } from '@mantine/core';
+import { IconAdjustmentsAlt, IconChevronRight, IconSettings } from '@tabler/icons-react';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 
 interface VideoEmbedProps {
@@ -18,11 +19,29 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
 
     return (
         <>
-            <Button
-              onClick={(event) => event.preventDefault()}
-            >
-                Поменять качество
-            </Button>
+            <Menu>
+                <Menu.Target>
+                    <UnstyledButton>
+                        <IconSettings style={{ width: rem(24), height: rem(24) }} />
+                    </UnstyledButton>
+                </Menu.Target>
+                <Menu.Dropdown>
+                    <Menu.Label>Настройки</Menu.Label>
+                    <Menu.Item
+                      leftSection={
+                        <IconAdjustmentsAlt style={{ width: rem(24), height: rem(24) }} />
+                      }
+                      rightSection={
+                        <>
+                            <Text>1080p</Text>
+                            <IconChevronRight />
+                        </>
+                      }
+                    >
+                        Качество
+                    </Menu.Item>
+                </Menu.Dropdown>
+            </Menu>
             <VideoPlayer source={video} preview={preview} />
         </>
     );
