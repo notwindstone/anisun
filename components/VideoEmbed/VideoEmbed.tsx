@@ -1,16 +1,27 @@
 'use client';
 
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
+import {Button} from "@mantine/core";
 
 interface VideoEmbedProps {
-    source: string;
+    host: string;
+    source: {
+        fhd: string;
+        hd: string;
+        sd: string;
+    };
     preview: string;
 }
 
-export default function VideoEmbed({ source, preview }: VideoEmbedProps) {
+export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
+    const video = host + source.fhd;
+
     return (
         <>
-            <VideoPlayer source={source} preview={preview} />
+            <Button
+                onClick={(event) => event.preventDefault()}
+            >Поменять качество</Button>
+            <VideoPlayer source={video} preview={preview} />
         </>
     );
 }

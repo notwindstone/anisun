@@ -19,13 +19,14 @@ export default async function Page({ params }: { params: { code: string } }) {
     const responseData: ResponseDataProps = await response.json();
     const animePlayer = responseData.player;
     const animeHost = `https://${animePlayer.host}`;
-    const animeEpisodeVideo = animePlayer.list[1].hls.fhd;
+    const animeHLS = animePlayer.list[1].hls;
 
     return (
         <>
             <div>{params.code}</div>
             <VideoEmbed
-              source={animeHost + animeEpisodeVideo}
+              host={animeHost}
+              source={animeHLS}
               preview=""
             />
         </>
