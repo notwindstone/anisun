@@ -58,14 +58,23 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
     const qualitySettings =
         <Menu.Dropdown>
             <Menu.Label>Качество</Menu.Label>
-            <Menu.Item>
-                Скорость воспроизведения
+            <Menu.Item
+              onClick={handleClick}
+              closeMenuOnClick={false}
+            >
+                1080p
             </Menu.Item>
             <Menu.Item
               onClick={handleClick}
               closeMenuOnClick={false}
             >
-                Качество
+                720p
+            </Menu.Item>
+            <Menu.Item
+              onClick={handleClick}
+              closeMenuOnClick={false}
+            >
+                480p
             </Menu.Item>
         </Menu.Dropdown>;
 
@@ -76,13 +85,21 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
         setValue(qualitySettings);
     }
 
+    async function handleClose() {
+        setTimeout(() => {
+            setValue(settings);
+        }, 150);
+    }
+
     return (
         <>
             <Menu
+              onClose={handleClose}
               classNames={{
                 dropdown: classes.dropdown,
             }}
-              radius="md">
+              radius="md"
+            >
                 <Menu.Target>
                     <UnstyledButton>
                         <IconSettingsFilled style={{ width: rem(24), height: rem(24) }} />
