@@ -8093,6 +8093,11 @@ media-captions@^1.0.1:
   resolved "https://registry.npmjs.org/media-captions/-/media-captions-1.0.3.tgz"
   integrity sha512-y2Qi5rqjwgH97zoko1vzu5Q6nnS0KzEQSvd4NOjnFym9JqnFb5VSsUg21RNb5cQ/nhCFJ0wz/XK+2uMwFCr6TQ==
 
+media-icons@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.npmjs.org/media-icons/-/media-icons-1.1.2.tgz"
+  integrity sha512-N5O3Q35YVu7u9/gWGDjV5YAdRmG35OZbibD/vTLXEmhMpsyIS0FiE2xRLPDCIedLBoozDhniEPSEfsVN13CcfQ==
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.npmjs.org/media-typer/-/media-typer-0.3.0.tgz"
