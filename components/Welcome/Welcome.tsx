@@ -1,7 +1,7 @@
 import { Text } from '@mantine/core';
 import React from 'react';
+import Link from 'next/link';
 import VideoEmbed from '@/components/VideoEmbed/VideoEmbed';
-import Link from "next/link";
 
 export async function Welcome() {
     const res = await fetch('https://api.anilibria.tv/v3/genres');
@@ -15,7 +15,7 @@ export async function Welcome() {
     const frierenPlayer = frierenTitle.list[0].player;
     const frierenHost = `https://${frierenPlayer.host}`;
     const frierenImagesHost = 'https://anilibria.tv';
-    const frierenEpisodeVideo = frierenPlayer.list[1].hls.fhd;
+    const frierenEpisodeVideo = frierenPlayer.list[1].hls;
     const frierenEpisodePreview = frierenPlayer.list[1].preview;
     console.log(frierenImagesHost + frierenEpisodePreview);
 
@@ -24,7 +24,8 @@ export async function Welcome() {
             <Link href="/titles">213</Link>
             {genres}
             <VideoEmbed
-              source={frierenHost + frierenEpisodeVideo}
+              host={frierenHost}
+              source={frierenEpisodeVideo}
               preview={frierenImagesHost + frierenEpisodePreview}
             />
         </>

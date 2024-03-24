@@ -1,0 +1,5 @@
+.dropdown {
+    border: none;
+    background: #000000aa !important;
+    backdrop-filter: blur(2px);
+}
