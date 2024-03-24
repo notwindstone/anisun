@@ -11,8 +11,10 @@ import {
     Text,
 } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
+import { useRouter } from 'next/navigation';
 
 interface TitleProps {
+    code: string;
     posters: {
         small: {
             url: string;
@@ -40,17 +42,18 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     return (
         <Group gap="sm">
             <div>
-                <Image src={optionData[0]} />
+                <Image src={optionData[1]} />
             </div>
             <div>
-                <Text size="sm">{optionData[1]}</Text>
-                <Text size="xs" opacity={0.5}>{optionData[2]}{optionData[3] ? `, ${optionData[3]}` : []}</Text>
+                <Text size="sm">{optionData[2]}</Text>
+                <Text size="xs" opacity={0.5}>{optionData[3]}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
             </div>
         </Group>
     );
 };
 
 export function Search() {
+    const router = useRouter();
     const [value, setValue] = useDebouncedState('', 200);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -75,7 +78,7 @@ export function Search() {
 
             const titles = responseData.list.map((title: TitleProps) => (
                 {
-                    value: `https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`,
+                    value: `${title.code}--https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`,
                     label: `${title.names.ru} / ${title.names.en}`,
                 }
             ));
@@ -100,7 +103,7 @@ export function Search() {
                 loading ? <Loader size="1rem" /> : null
               }
               onOptionSubmit={(option) => {
-                  console.log(option);
+                  router.push(`/titles/${option.split('--')[0]}`);
               }}
               renderOption={renderAutocompleteOption}
               filter={optionsFilter}
