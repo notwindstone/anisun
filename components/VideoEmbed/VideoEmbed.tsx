@@ -7,9 +7,9 @@ import {
     IconClockHour3,
     IconSettingsFilled,
 } from '@tabler/icons-react';
+import { useState } from 'react';
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import classes from './VideoEmbed.module.css';
-import {useState} from "react";
 
 interface VideoEmbedProps {
     host: string;
@@ -22,11 +22,58 @@ interface VideoEmbedProps {
 }
 
 export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
-    const [value, setValue] = useState('Качество')
+    const settings =
+        <Menu.Dropdown>
+            <Menu.Label>Настройки</Menu.Label>
+            <Menu.Item
+              leftSection={
+                    <IconClockHour3 style={{ width: rem(24), height: rem(24) }} />
+                }
+              rightSection={
+                    <>
+                        <Text>Обычная</Text>
+                        <IconChevronRight />
+                    </>
+                }
+            >
+                Скорость воспроизведения
+            </Menu.Item>
+            <Menu.Item
+              onClick={handleClick}
+              closeMenuOnClick={false}
+              leftSection={
+                    <IconAdjustmentsAlt style={{ width: rem(24), height: rem(24) }} />
+                }
+              rightSection={
+                    <>
+                        <Text>1080p</Text>
+                        <IconChevronRight />
+                    </>
+                }
+            >
+                Качество
+            </Menu.Item>
+        </Menu.Dropdown>;
+
+    const qualitySettings =
+        <Menu.Dropdown>
+            <Menu.Label>Качество</Menu.Label>
+            <Menu.Item>
+                Скорость воспроизведения
+            </Menu.Item>
+            <Menu.Item
+              onClick={handleClick}
+              closeMenuOnClick={false}
+            >
+                Качество
+            </Menu.Item>
+        </Menu.Dropdown>;
+
+    const [value, setValue] = useState(settings);
     const video = host + source.fhd;
 
     function handleClick() {
-        setValue('1234')
+        setValue(qualitySettings);
     }
 
     return (
@@ -41,37 +88,7 @@ export default function VideoEmbed({ host, source, preview }: VideoEmbedProps) {
                         <IconSettingsFilled style={{ width: rem(24), height: rem(24) }} />
                     </UnstyledButton>
                 </Menu.Target>
-                <Menu.Dropdown>
-                    <Menu.Label>Настройки</Menu.Label>
-                    <Menu.Item
-                      leftSection={
-                            <IconClockHour3 style={{ width: rem(24), height: rem(24) }} />
-                        }
-                      rightSection={
-                            <>
-                                <Text>Обычная</Text>
-                                <IconChevronRight />
-                            </>
-                        }
-                    >
-                        Скорость воспроизведения
-                    </Menu.Item>
-                    <Menu.Item
-                      onClick={handleClick}
-                      closeMenuOnClick={false}
-                      leftSection={
-                        <IconAdjustmentsAlt style={{ width: rem(24), height: rem(24) }} />
-                      }
-                      rightSection={
-                        <>
-                            <Text>1080p</Text>
-                            <IconChevronRight />
-                        </>
-                      }
-                    >
-                        {value}
-                    </Menu.Item>
-                </Menu.Dropdown>
+                {value}
             </Menu>
             <VideoPlayer source={video} preview={preview} />
         </>
