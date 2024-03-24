@@ -29,7 +29,7 @@ export default function RootLayout({ children }: { children: any }) {
           height={4}
         />
         <Provider>
-          <MantineProvider theme={theme}>{children}</MantineProvider>
+              <MantineProvider theme={theme}>{children}</MantineProvider>
         </Provider>
       </body>
     </html>

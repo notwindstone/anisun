@@ -3100,7 +3100,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0", "@types/react@>=16", "@types/react@18.2.65":
+"@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0", "@types/react@^18.0.0", "@types/react@>=16", "@types/react@18.2.65":
   version "18.2.65"
   resolved "https://registry.npmjs.org/@types/react/-/react-18.2.65.tgz"
   integrity sha512-98TsY0aW4jqx/3RqsUXwMDZSWR1Z4CUlJNue8ueS2/wcxZOsz4xmW1X8ieaWVRHcmmQM3R8xVA4XWB3dJnWwDQ==
@@ -3325,6 +3325,13 @@
   version "1.2.0"
   resolved "https://registry.npmjs.org/@ungap/structured-clone/-/structured-clone-1.2.0.tgz"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
+
+"@vidstack/react@^1.10.9":
+  version "1.10.9"
+  resolved "https://registry.npmjs.org/@vidstack/react/-/react-1.10.9.tgz"
+  integrity sha512-xMRhk8T2V/ULmDylYm2+a6F6zDAjXG2lHIUL/oRbERXDV/Ou+ZE+QDxcBFu2aIQ2rQriCyhh3pNpST8f9ePWVw==
+  dependencies:
+    media-captions "^1.0.1"
 
 "@webassemblyjs/ast@^1.11.5", "@webassemblyjs/ast@1.12.1":
   version "1.12.1"
@@ -8080,6 +8087,11 @@ mdn-data@2.0.30:
   version "2.0.30"
   resolved "https://registry.npmjs.org/mdn-data/-/mdn-data-2.0.30.tgz"
   integrity sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==
+
+media-captions@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.npmjs.org/media-captions/-/media-captions-1.0.3.tgz"
+  integrity sha512-y2Qi5rqjwgH97zoko1vzu5Q6nnS0KzEQSvd4NOjnFym9JqnFb5VSsUg21RNb5cQ/nhCFJ0wz/XK+2uMwFCr6TQ==
 
 media-typer@0.3.0:
   version "0.3.0"
