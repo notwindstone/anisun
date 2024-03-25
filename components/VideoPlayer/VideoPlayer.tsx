@@ -15,6 +15,7 @@ export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
     return (
         <div className={styles.wrapper}>
             <MediaPlayer
+              className={styles.player}
               title={source}
               src={source}
               viewType="video"
@@ -24,21 +25,23 @@ export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
                 </MediaProvider>
                 <Gestures />
                 <Controls.Root className={`${styles.controls} vds-controls`}>
-                    <div className="vds-controls-spacer" />
-                    <Controls.Group className={`${styles.controlsGroup} vds-controls-group`}>
-                        <Sliders.Time />
-                    </Controls.Group>
-                    <Controls.Group className={`${styles.controlsGroup} vds-controls-group`}>
-                        <Buttons.Play tooltipPlacement="top start" />
-                        <Buttons.Mute tooltipPlacement="top" />
-                        <Sliders.Volume />
-                        <TimeGroup />
-                        <ChapterTitle className="vds-chapter-title" />
+                    <div className={styles.controlsWrapper}>
                         <div className="vds-controls-spacer" />
-                        <Menus.Settings placement="top end" tooltipPlacement="top" />
-                        <Buttons.PIP tooltipPlacement="top" />
-                        <Buttons.Fullscreen tooltipPlacement="top end" />
-                    </Controls.Group>
+                        <Controls.Group className={`${styles.controlsGroup} vds-controls-group`}>
+                            <Sliders.Time />
+                        </Controls.Group>
+                        <Controls.Group className={`${styles.controlsGroup} vds-controls-group`}>
+                            <Buttons.Play tooltipPlacement="top start" />
+                            <Buttons.Mute tooltipPlacement="top" />
+                            <Sliders.Volume />
+                            <TimeGroup />
+                            <ChapterTitle className="vds-chapter-title" />
+                            <div className="vds-controls-spacer" />
+                            <Menus.Settings placement="top end" tooltipPlacement="top" />
+                            <Buttons.PIP tooltipPlacement="top" />
+                            <Buttons.Fullscreen tooltipPlacement="top end" />
+                        </Controls.Group>
+                    </div>
                 </Controls.Root>
             </MediaPlayer>
         </div>

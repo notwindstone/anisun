@@ -5,7 +5,7 @@ import {
     Tooltip,
     useCaptionOptions,
     type MenuPlacement,
-    type TooltipPlacement,
+    type TooltipPlacement, useVideoQualityOptions,
 } from '@vidstack/react';
 import {
     ChevronLeftIcon,
@@ -40,10 +40,10 @@ export function Settings({ placement, tooltipPlacement }: SettingsProps) {
 }
 
 function CaptionSubmenu() {
-    const options = useCaptionOptions();
+    const options = useVideoQualityOptions();
         const hint = options.selectedTrack?.label ?? 'Off';
     return (
-        <Menu.Root>
+        <Menu.Root className="vds-menu">
             <SubmenuButton
               label="Captions"
               hint={hint}

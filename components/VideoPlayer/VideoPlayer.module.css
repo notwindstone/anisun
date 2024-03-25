@@ -21,8 +21,12 @@
     margin-left: 8px;
 }
 
+.controlsWrapper {
+    background: linear-gradient(to top, #00000099 0%, #00000000 100%);
+}
+
 .controls {
-    background: linear-gradient(to top, #00000099 0%, #00000011 20%, #00000000 25%);
+    justify-content: flex-end;
 }
 
 .controlsGroup {
@@ -89,4 +93,9 @@
 /* Hide captions when interacting with time slider. */
 :global(.media-player[data-preview]) .captions {
     opacity: 0;
+}
+
+.vds-menu {
+    /* CSS variables available for customization (defaults shown). */
+    --media-menu-bg: rgba(220, 31, 31, 0.95);
 }
