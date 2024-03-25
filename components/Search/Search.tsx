@@ -66,18 +66,19 @@ export function Search() {
     });
 
     async function fetchTitles(keyInput: string) {
+        const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
+
         if (keyInput.length < 3) {
-            return;
+            return nothingFound;
         }
 
         const searchData = (await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`)).data;
         const searchList = await searchData.list;
 
         if (searchList.length < 1) {
-            const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
             // @ts-ignore
             setTitles(nothingFound);
-            return nothingFounds;
+            return nothingFound;
         }
 
         const titlesList = searchList.map((title: TitleProps) => (
