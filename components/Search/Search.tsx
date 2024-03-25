@@ -12,6 +12,7 @@ import {
 } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
+import styles from './Search.module.css';
 
 interface TitleProps {
     code: string;
@@ -42,7 +43,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     return (
         <Group gap="sm">
             <div>
-                <Image src={optionData[1]} />
+                <Image className={styles.poster} src={optionData[1]} />
             </div>
             <div>
                 <Text size="sm">{optionData[2]}</Text>
@@ -54,7 +55,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
 
 export function Search() {
     const router = useRouter();
-    const [value, setValue] = useDebouncedState('', 200);
+    const [value, setValue] = useDebouncedState('', 300);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
 
