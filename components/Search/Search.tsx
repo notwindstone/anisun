@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
     AutocompleteProps,
     ComboboxItem,
@@ -12,6 +12,8 @@ import {
 } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
 import styles from './Search.module.css';
 
 interface TitleProps {
@@ -56,9 +58,37 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
 export function Search() {
     const router = useRouter();
     const [value, setValue] = useDebouncedState('', 300);
-    const [data, setData] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [titles, setTitles] = useState([]);
 
+    const { isPending } = useQuery({
+        queryKey: ['titles', value],
+        queryFn: () => fetchTitles(value),
+    });
+
+    async function fetchTitles(keyInput: string) {
+        if (keyInput.length < 3) {
+            return;
+        }
+
+        const searchList = (await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`)).data.list;
+
+        if (searchList < 1) {
+            // @ts-ignore
+            setTitles([{ label: ' ', value: 'nothing', disabled: true }]);
+            return;
+        }
+
+        const titlesList = searchList.map((title: TitleProps) => (
+            {
+                value: `${title.code}--https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`,
+                label: `${title.names.ru} / ${title.names.en}`,
+            }
+        ));
+
+        setTitles(titlesList);
+    }
+
+    /*
     useEffect(() => {
         const onChange = async (keyInput: string) => {
             if (keyInput.length < 3) {
@@ -67,8 +97,7 @@ export function Search() {
 
             setLoading(true);
 
-            const response = await fetch(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`);
-            const responseData = await response.json();
+            const responseData = await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`).then(({ data }) => data);
 
             if (responseData.list.length < 1) {
                 // @ts-ignore
@@ -90,18 +119,19 @@ export function Search() {
 
         onChange(value).then();
     }, [value]);
+     */
 
     return (
         <>
             <Select
               searchable
               variant="unstyled"
-              data={data}
+              data={titles}
               defaultValue={value}
               onSearchChange={(event) => setValue(event)}
               placeholder="Введите название от трёх символов"
               rightSection={
-                loading ? <Loader size="1rem" /> : null
+                isPending ? <Loader size="1rem" /> : null
               }
               onOptionSubmit={(option) => {
                   router.push(`/titles/${option.split('--')[0]}`);
