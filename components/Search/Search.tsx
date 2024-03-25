@@ -37,11 +37,17 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    if (option.value === 'nothing') {
-        return (
-            <>Ничего не найдено.</>
-        );
+    switch (option.value) {
+        case 'nothing':
+            return (
+                <>Ничего не найдено</>
+            );
+        case 'notEnoughChars':
+            return (
+                <>Введите название от трёх символов</>
+            );
     }
+
     return (
         <Group gap="sm">
             <div>
@@ -60,24 +66,29 @@ export function Search() {
     const [value, setValue] = useDebouncedState('', 300);
     const [titles, setTitles] = useState([]);
 
-    const { isLoading } = useQuery({
+    const { isLoading, data } = useQuery({
         queryKey: ['titles', value],
-        queryFn: async () => fetchTitles(value),
+        queryFn: async () => queryTitles(value),
     });
 
-    async function fetchTitles(keyInput: string) {
-        const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
+    setValue(value);
 
+    async function queryTitles(keyInput: string) {
+        const response = await fetchTitles(keyInput);
+        setTitles(response);
+    }
+
+    async function fetchTitles(keyInput: string) {
         if (keyInput.length < 3) {
-            return nothingFound;
+            const notEnoughChars = [{ label: ' ', value: 'notEnoughChars', disabled: true }];
+            return notEnoughChars;
         }
 
         const searchData = (await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`)).data;
         const searchList = await searchData.list;
 
         if (searchList.length < 1) {
-            // @ts-ignore
-            setTitles(nothingFound);
+            const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
             return nothingFound;
         }
 
@@ -88,9 +99,7 @@ export function Search() {
             }
         ));
 
-        setTitles(titlesList);
-
-        return searchData;
+        return titlesList;
     }
 
     /*
@@ -134,7 +143,7 @@ export function Search() {
               data={titles}
               defaultValue={value}
               onSearchChange={(event) => setValue(event)}
-              placeholder="Введите название от трёх символов"
+              placeholder="Поиск"
               rightSection={
                   isLoading ? <Loader size="1rem" /> : null
               }
