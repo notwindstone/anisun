@@ -13,7 +13,7 @@
 .controls :global(.vds-volume-slider) {
     --media-slider-height: 40px;
     --media-slider-preview-offset: 32px;
-    margin-left: 1.5px;
+    margin-left: 2px;
     max-width: 80px;
 }
 
@@ -23,25 +23,36 @@
 
 .controlsWrapper {
     background: linear-gradient(to top, #00000099 0%, #00000000 100%);
+
+    @media (max-width: $mantine-breakpoint-md) {
+        background: none;
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 
 .controls {
     justify-content: flex-end;
+
+    @media (max-width: $mantine-breakpoint-md) {
+        background: #00000044;
+    }
 }
 
 .controlsGroup {
     display: flex;
     align-items: center;
     width: 100%;
-}
-
-.controlsGroup {
     padding-inline: 8px;
 }
 
 .controlsGroup:last-child {
     margin-top: -4px;
     padding-bottom: 8px;
+
+    @media (max-width: $mantine-breakpoint-md) {
+        padding-bottom: 0;
+    }
 }
 
 .gesture {
@@ -95,7 +106,7 @@
     opacity: 0;
 }
 
-.vds-menu {
+:global(.vds-menu) .vds-menu {
     /* CSS variables available for customization (defaults shown). */
     --media-menu-bg: rgba(220, 31, 31, 0.95);
 }

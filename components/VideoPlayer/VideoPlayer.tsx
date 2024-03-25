@@ -27,7 +27,7 @@ export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
                 <Controls.Root className={`${styles.controls} vds-controls`}>
                     <div className={styles.controlsWrapper}>
                         <div className="vds-controls-spacer" />
-                        <Controls.Group className={`${styles.controlsGroup} vds-controls-group`}>
+                        <Controls.Group className={`${styles.controlsGroup} ${styles.controlsGroupSlider} vds-controls-group`}>
                             <Sliders.Time />
                         </Controls.Group>
                         <Controls.Group className={`${styles.controlsGroup} vds-controls-group`}>

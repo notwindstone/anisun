@@ -35,7 +35,7 @@ export function Play({ tooltipPlacement }: MediaButtonProps) {
     return (
         <Tooltip.Root>
             <Tooltip.Trigger asChild>
-                <PlayButton className="vds-button">{isPaused ? <PlayIcon /> : <PauseIcon />}</PlayButton>
+                <PlayButton className="vds-button-play vds-button">{isPaused ? <PlayIcon /> : <PauseIcon />}</PlayButton>
             </Tooltip.Trigger>
             <Tooltip.Content className="vds-tooltip-content" placement={tooltipPlacement}>
                 {isPaused ? 'Play' : 'Pause'}
