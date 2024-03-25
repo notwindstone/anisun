@@ -3,7 +3,6 @@ import type { ReactNode } from 'react';
 import {
     Menu,
     Tooltip,
-    useCaptionOptions,
     type MenuPlacement,
     type TooltipPlacement, useVideoQualityOptions,
 } from '@vidstack/react';
