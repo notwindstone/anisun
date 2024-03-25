@@ -60,9 +60,9 @@ export function Search() {
     const [value, setValue] = useDebouncedState('', 300);
     const [titles, setTitles] = useState([]);
 
-    const { isPending } = useQuery({
+    const { isLoading } = useQuery({
         queryKey: ['titles', value],
-        queryFn: () => fetchTitles(value),
+        queryFn: async () => fetchTitles(value),
     });
 
     async function fetchTitles(keyInput: string) {
@@ -70,12 +70,14 @@ export function Search() {
             return;
         }
 
-        const searchList = (await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`)).data.list;
+        const searchData = (await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`)).data;
+        const searchList = await searchData.list;
 
-        if (searchList < 1) {
+        if (searchList.length < 1) {
+            const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
             // @ts-ignore
-            setTitles([{ label: ' ', value: 'nothing', disabled: true }]);
-            return;
+            setTitles(nothingFound);
+            return nothingFounds;
         }
 
         const titlesList = searchList.map((title: TitleProps) => (
@@ -86,6 +88,8 @@ export function Search() {
         ));
 
         setTitles(titlesList);
+
+        return searchData;
     }
 
     /*
@@ -131,7 +135,7 @@ export function Search() {
               onSearchChange={(event) => setValue(event)}
               placeholder="Введите название от трёх символов"
               rightSection={
-                isPending ? <Loader size="1rem" /> : null
+                  isLoading ? <Loader size="1rem" /> : null
               }
               onOptionSubmit={(option) => {
                   router.push(`/titles/${option.split('--')[0]}`);
