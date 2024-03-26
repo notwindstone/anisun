@@ -61,6 +61,19 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     );
 };
 
+/* TODO: FIX ALL PROBLEMS */
+/*
+    function Component() {
+      const [filters, setFilters] = React.useState()
+      const { data } = useQuery({
+        queryKey: ['todos', filters],
+        queryFn: () => fetchTodos(filters),
+      })
+
+      return <Filters onApply={setFilters} />
+    }
+*/
+
 export function Search() {
     const router = useRouter();
     const [value, setValue] = useDebouncedState('', 300);
