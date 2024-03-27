@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     AutocompleteProps,
     ComboboxItem,
@@ -62,37 +62,21 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     );
 };
 
-/* TODO: FIX ALL PROBLEMS */
-/*
-    function Component() {
-      const [filters, setFilters] = React.useState()
-      const { data } = useQuery({
-        queryKey: ['todos', filters],
-        queryFn: () => fetchTodos(filters),
-      })
-
-      return <Filters onApply={setFilters} />
-    }
-*/
-
 export function Search() {
     const router = useRouter();
-    const [value, setValue] = useDebouncedState('', 300);
+    const [search, setSearch] = useDebouncedState('', 300);
     const [titles, setTitles] = useState([]);
 
-    const { isLoading, data } = useQuery({
-        queryKey: ['titles', value],
-        queryFn: async () => queryTitles(value),
+    const { isLoading, refetch } = useQuery({
+        queryKey: ['titles', search],
+        queryFn: async () => fetchTitles(search),
     });
-
-    async function queryTitles(keyInput: string) {
-        const response = await fetchTitles(keyInput);
-        setTitles(response);
-    }
 
     async function fetchTitles(keyInput: string) {
         if (keyInput.length < 3) {
             const notEnoughChars = [{ label: ' ', value: 'notEnoughChars', disabled: true }];
+            // @ts-ignore
+            setTitles(notEnoughChars);
             return notEnoughChars;
         }
 
@@ -101,6 +85,8 @@ export function Search() {
 
         if (searchList.length < 1) {
             const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
+            // @ts-ignore
+            setTitles(nothingFound);
             return nothingFound;
         }
 
@@ -111,41 +97,13 @@ export function Search() {
             }
         ));
 
+        setTitles(titlesList);
         return titlesList;
     }
 
-    /*
     useEffect(() => {
-        const onChange = async (keyInput: string) => {
-            if (keyInput.length < 3) {
-                return;
-            }
-
-            setLoading(true);
-
-            const responseData = await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`).then(({ data }) => data);
-
-            if (responseData.list.length < 1) {
-                // @ts-ignore
-                setData([{ label: ' ', value: 'nothing', disabled: true }]);
-                setLoading(false);
-                return;
-            }
-
-            const titles = responseData.list.map((title: TitleProps) => (
-                {
-                    value: `${title.code}--https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`,
-                    label: `${title.names.ru} / ${title.names.en}`,
-                }
-            ));
-
-            setData(titles);
-            setLoading(false);
-        };
-
-        onChange(value).then();
-    }, [value]);
-     */
+        refetch().then();
+    }, [search]);
 
     return (
         <>
@@ -153,8 +111,8 @@ export function Search() {
               searchable
               variant="unstyled"
               data={titles}
-              defaultValue={value}
-              onSearchChange={(event) => setValue(event)}
+              defaultValue={search}
+              onSearchChange={(event) => setSearch(event)}
               placeholder="Поиск"
               rightSection={
                   isLoading ? <Loader size="1rem" /> : null
