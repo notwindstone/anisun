@@ -32,7 +32,8 @@ interface TitleProps {
     }
 }
 
-const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter(() => ({ value: 'das', label: 'asd' }));
+// Filter options to show "Ничего не найдено" or "Введите название от трёх символов" I don't know how it works, but it works.
+const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter(() => ({ value: ' ', label: ' ' }));
 
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
@@ -51,7 +52,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     return (
         <Group gap="sm">
             <div>
-                <Image className={styles.poster} src={optionData[1]} />
+                <Image className={styles.poster} src={optionData[1]} radius="sm" />
             </div>
             <div>
                 <Text size="sm">{optionData[2]}</Text>
@@ -83,8 +84,6 @@ export function Search() {
         queryKey: ['titles', value],
         queryFn: async () => queryTitles(value),
     });
-
-    setValue(value);
 
     async function queryTitles(keyInput: string) {
         const response = await fetchTitles(keyInput);
