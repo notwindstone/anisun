@@ -6,6 +6,8 @@ interface ResponseDataProps {
     player: {
         host: string;
         list: {
+            episode: string;
+            uuid: string;
             hls: {
                 fhd?: string;
                 hd?: string;
@@ -30,15 +32,11 @@ export default async function Page({ params }: { params: { code: string } }) {
         );
     }
 
-    const animeHost = `https://${animePlayer.host}`;
-    const animeHLS = animePlayer.list[1].hls;
-
     return (
         <>
             <div>{params.code}</div>
             <VideoEmbed
-              host={animeHost}
-              source={animeHLS}
+              player={animePlayer}
               preview=""
             />
             <Comments />

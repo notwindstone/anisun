@@ -10,14 +10,12 @@ interface VideoPlayerProps {
     player: {
         host: string;
         list: {
-            id: {
-                episode: string;
-                uuid: string;
-                hls: {
-                    fhd?: string;
-                    hd?: string;
-                    sd?: string;
-                }
+            episode: string;
+            uuid: string;
+            hls: {
+                fhd?: string;
+                hd?: string;
+                sd?: string;
             }
         }[]
     };
@@ -30,6 +28,9 @@ interface VideoPlaylistProps {
 }
 
 export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
+    const host = `https://${player.host}`;
+    const source = player.list[1].hls;
+
     const dataHLS: VideoPlaylistProps = {
         fhd: '#EXT-X-STREAM-INF:RESOLUTION=1920x1080\n',
         hd: '#EXT-X-STREAM-INF:RESOLUTION=1280x720\n',
