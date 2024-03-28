@@ -58,6 +58,7 @@ function changeEpisode({ player }: VideoPlayerProps, episode: number) {
 
 export default function VideoPlayer({ title, player, preview }: VideoPlayerProps) {
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
+    const [hideMenu, setHideMenu] = useState('hidden');
 
     const episodesAmount = Object.entries(player.list);
 
@@ -80,6 +81,14 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
     return (
         <div className={classes.wrapper}>
             <MediaPlayer
+              onControlsChange={(isControlsShown) => {
+                  if (!isControlsShown) {
+                      setHideMenu('hidden');
+                  } else {
+                      setHideMenu('');
+                  }
+                }
+              }
               className={classes.player}
               title={title}
               aspect-ratio={16 / 9}
@@ -94,7 +103,7 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
             >
                 <MediaProvider />
                 <DefaultVideoLayout icons={defaultLayoutIcons} translations={russianTranslation}>
-                    <Menu.Root className={`${classes.playlist} vds-menu`}>
+                    <Menu.Root className={`${classes.playlist} ${classes[hideMenu]} vds-menu`}>
                         <Menu.Button className={`${classes.playlistButton} vds - menu - button vds-button`} aria-label="Chapter Switch">
                             <PlaylistIcon className={classes.playlistIcon} />
                         </Menu.Button>

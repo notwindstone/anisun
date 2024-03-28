@@ -10,6 +10,10 @@
     left: 0;
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 .playlistButton {
     background: #00000044;
     transition: 0.35s ease;
