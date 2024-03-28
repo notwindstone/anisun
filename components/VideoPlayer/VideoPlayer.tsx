@@ -1,27 +1,35 @@
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
-import { MediaPlayer, MediaProvider, Poster } from '@vidstack/react';
+import { Menu, MediaPlayer, MediaProvider } from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
-import styles from './VideoPlayer.module.css';
+import { PlaylistIcon } from '@vidstack/react/icons';
 import russianTranslation from '../../configs/russianTranslation.json';
+import classes from './VideoPlayer.module.css';
 
 interface VideoPlayerProps {
-    host: string;
-    source: {
-        fhd?: string;
-        hd?: string;
-        sd?: string;
+    player: {
+        host: string;
+        list: {
+            id: {
+                episode: string;
+                uuid: string;
+                hls: {
+                    fhd?: string;
+                    hd?: string;
+                    sd?: string;
+                }
+            }
+        }[]
     };
     preview: string;
 }
-
 interface VideoPlaylistProps {
     fhd?: string;
     hd?: string;
     sd?: string;
 }
 
-export default function VideoPlayer({ host, source, preview }: VideoPlayerProps) {
+export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
     const dataHLS: VideoPlaylistProps = {
         fhd: '#EXT-X-STREAM-INF:RESOLUTION=1920x1080\n',
         hd: '#EXT-X-STREAM-INF:RESOLUTION=1280x720\n',
@@ -48,10 +56,11 @@ export default function VideoPlayer({ host, source, preview }: VideoPlayerProps)
     const url = URL.createObjectURL(blob);
 
     return (
-        <div className={styles.wrapper}>
+        <div className={classes.wrapper}>
             <MediaPlayer
-              className={styles.player}
+              className={classes.player}
               title="1234"
+              aspect-ratio={16 / 9}
               src={
                 {
                     src: url,
@@ -59,11 +68,22 @@ export default function VideoPlayer({ host, source, preview }: VideoPlayerProps)
                 }
               }
               viewType="video"
+              poster={preview}
             >
-                <MediaProvider>
-                    <Poster src={preview} alt="Anime episode preview" />
-                </MediaProvider>
-                <DefaultVideoLayout icons={defaultLayoutIcons} translations={russianTranslation} />
+                <MediaProvider />
+                <DefaultVideoLayout icons={defaultLayoutIcons} translations={russianTranslation}>
+                    <Menu.Root className={`${classes.playlist} vds-menu`}>
+                        <Menu.Button className={`${classes.playlistButton} vds - menu - button vds-button`} aria-label="Chapter Switch">
+                            <PlaylistIcon className={classes.playlistIcon} />
+                        </Menu.Button>
+                        <Menu.Items className="vds-menu-items" placement="bottom start" offset={0}>
+                            <Menu.RadioGroup>
+                                <Menu.Radio key={1} value="123">Серия</Menu.Radio>
+                                <Menu.Radio key={2} value="456">Серия</Menu.Radio>
+                            </Menu.RadioGroup>
+                        </Menu.Items>
+                    </Menu.Root>
+                </DefaultVideoLayout>
             </MediaPlayer>
         </div>
     );
