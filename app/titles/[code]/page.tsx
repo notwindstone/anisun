@@ -1,5 +1,6 @@
 import React from 'react';
 import VideoEmbed from '@/components/VideoEmbed/VideoEmbed';
+import { Comments } from '@/components/Comments/Comments';
 
 interface ResponseDataProps {
     player: {
@@ -40,6 +41,7 @@ export default async function Page({ params }: { params: { code: string } }) {
               source={animeHLS}
               preview=""
             />
+            <Comments />
         </>
     );
 }
