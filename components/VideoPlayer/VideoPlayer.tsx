@@ -1,8 +1,9 @@
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
-import { Menu, MediaPlayer, MediaProvider } from '@vidstack/react';
+import { MediaPlayer, MediaProvider, Menu } from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
 import { PlaylistIcon } from '@vidstack/react/icons';
+import { useState } from 'react';
 import russianTranslation from '../../configs/russianTranslation.json';
 import classes from './VideoPlayer.module.css';
 
@@ -11,7 +12,6 @@ interface VideoPlayerProps {
         host: string;
         list: {
             episode: string;
-            uuid: string;
             hls: {
                 fhd?: string;
                 hd?: string;
@@ -19,7 +19,7 @@ interface VideoPlayerProps {
             }
         }[]
     };
-    preview: string;
+    preview?: string;
 }
 interface VideoPlaylistProps {
     fhd?: string;
@@ -27,9 +27,9 @@ interface VideoPlaylistProps {
     sd?: string;
 }
 
-export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
+function changeEpisode({ player }: VideoPlayerProps, episode: number) {
     const host = `https://${player.host}`;
-    const source = player.list[1].hls;
+    const source = player.list[episode].hls;
 
     const dataHLS: VideoPlaylistProps = {
         fhd: '#EXT-X-STREAM-INF:RESOLUTION=1920x1080\n',
@@ -46,15 +46,20 @@ export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
         }
     }
 
-    const playlistSource = '#EXTM3U\n' +
-        `#EXT-X-VERSION:3\n${
-        playlistHLS}`;
+    const playlistSource = `#EXTM3U\n#EXT-X-VERSION:3\n${playlistHLS}`;
 
     const blob = new Blob([playlistSource], {
         type: 'application/x-mpegurl',
     });
 
-    const url = URL.createObjectURL(blob);
+    return URL.createObjectURL(blob);
+}
+
+export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
+    const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
+
+    const episodesAmount = Object.entries(player.list).length;
+    console.log(episodesAmount);
 
     return (
         <div className={classes.wrapper}>
@@ -64,7 +69,7 @@ export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
               aspect-ratio={16 / 9}
               src={
                 {
-                    src: url,
+                    src: episodeSource,
                     type: 'application/x-mpegurl',
                 }
               }
@@ -79,8 +84,15 @@ export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
                         </Menu.Button>
                         <Menu.Items className="vds-menu-items" placement="bottom start" offset={0}>
                             <Menu.RadioGroup>
-                                <Menu.Radio key={1} value="123">Серия</Menu.Radio>
-                                <Menu.Radio key={2} value="456">Серия</Menu.Radio>
+                                <Menu.Radio
+                                  key={1}
+                                  onClick={() => {
+                                      setEpisodeSource(changeEpisode({ player }, 2));
+                                    }
+                                  }
+                                >
+                                    Серия
+                                </Menu.Radio>
                             </Menu.RadioGroup>
                         </Menu.Items>
                     </Menu.Root>

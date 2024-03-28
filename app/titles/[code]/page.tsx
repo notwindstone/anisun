@@ -7,7 +7,6 @@ interface ResponseDataProps {
         host: string;
         list: {
             episode: string;
-            uuid: string;
             hls: {
                 fhd?: string;
                 hd?: string;
@@ -37,7 +36,7 @@ export default async function Page({ params }: { params: { code: string } }) {
             <div>{params.code}</div>
             <VideoEmbed
               player={animePlayer}
-              preview=""
+              preview="https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
             />
             <Comments />
         </>

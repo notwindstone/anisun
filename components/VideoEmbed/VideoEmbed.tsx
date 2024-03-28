@@ -7,7 +7,6 @@ interface VideoEmbedProps {
         host: string;
         list: {
             episode: string;
-            uuid: string;
             hls: {
                 fhd?: string;
                 hd?: string;
