@@ -1,4 +1,4 @@
 .player {
-    --media-menu-bg: rgba(0, 0, 0, 0.8);
+    --media-menu-bg: rgba(0, 0, 0, 0.7);
     --media-menu-item-border-radius: var(--mantine-radius-sm);
 }
