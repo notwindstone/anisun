@@ -7,9 +7,9 @@ interface ResponseDataProps {
         host: string;
         list: {
             hls: {
-                fhd: string;
-                hd: string;
-                sd: string;
+                fhd?: string;
+                hd?: string;
+                sd?: string;
             }
         }[]
     },
