@@ -3,6 +3,9 @@ import VideoEmbed from '@/components/VideoEmbed/VideoEmbed';
 import { Comments } from '@/components/Comments/Comments';
 
 interface ResponseDataProps {
+    names: {
+        ru: string;
+    }
     player: {
         host: string;
         list: {
@@ -35,6 +38,7 @@ export default async function Page({ params }: { params: { code: string } }) {
         <>
             <div>{params.code}</div>
             <VideoEmbed
+              title={responseData.names.ru}
               player={animePlayer}
               preview="https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
             />

@@ -3,6 +3,7 @@
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 
 interface VideoEmbedProps {
+    title: string;
     player: {
         host: string;
         list: {
@@ -17,10 +18,10 @@ interface VideoEmbedProps {
     preview: string;
 }
 
-export default function VideoEmbed({ player, preview }: VideoEmbedProps) {
+export default function VideoEmbed({ title, player, preview }: VideoEmbedProps) {
     return (
         <>
-            <VideoPlayer player={player} preview={preview} />
+            <VideoPlayer title={title} player={player} preview={preview} />
         </>
     );
 }

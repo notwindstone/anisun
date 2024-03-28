@@ -8,6 +8,7 @@ import russianTranslation from '../../configs/russianTranslation.json';
 import classes from './VideoPlayer.module.css';
 
 interface VideoPlayerProps {
+    title?: string;
     player: {
         host: string;
         list: {
@@ -55,7 +56,7 @@ function changeEpisode({ player }: VideoPlayerProps, episode: number) {
     return URL.createObjectURL(blob);
 }
 
-export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
+export default function VideoPlayer({ title, player, preview }: VideoPlayerProps) {
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
 
     const episodesAmount = Object.entries(player.list);
@@ -80,7 +81,7 @@ export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
         <div className={classes.wrapper}>
             <MediaPlayer
               className={classes.player}
-              title="1234"
+              title={title}
               aspect-ratio={16 / 9}
               src={
                 {
