@@ -33,7 +33,12 @@ export default function VideoPlayer({ source, preview }: VideoPlayerProps) {
             <MediaPlayer
               className={styles.player}
               title="1234"
-              src={{ src: url, type: 'application/x-mpegurl' }}
+              src={
+                {
+                    src: url,
+                    type: 'application/x-mpegurl'
+                }
+              }
               viewType="video"
             >
                 <MediaProvider>
