@@ -3,6 +3,7 @@ import '@vidstack/react/player/styles/default/layouts/video.css';
 import { MediaPlayer, MediaProvider, Poster } from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
 import styles from './VideoPlayer.module.css';
+import russianTranslation from '../../configs/russianTranslation.json';
 
 interface VideoPlayerProps {
     host: string;
@@ -62,7 +63,7 @@ export default function VideoPlayer({ host, source, preview }: VideoPlayerProps)
                 <MediaProvider>
                     <Poster src={preview} alt="Anime episode preview" />
                 </MediaProvider>
-                <DefaultVideoLayout icons={defaultLayoutIcons} />
+                <DefaultVideoLayout icons={defaultLayoutIcons} translations={russianTranslation} />
             </MediaPlayer>
         </div>
     );

@@ -19,6 +19,7 @@
     "storybook:build": "storybook build"
   },
   "dependencies": {
+    "@clerk/localizations": "^1.26.16",
     "@clerk/nextjs": "^4.29.9",
     "@mantine/core": "7.6.1",
     "@mantine/hooks": "7.6.1",

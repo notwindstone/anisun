@@ -5,6 +5,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { ClerkProvider } from '@clerk/nextjs';
 import { theme } from '@/theme';
 import Providers from '@/utils/Providers';
+import {ruRU} from "@clerk/localizations";
 
 export const metadata = {
     title: 'Mantine Next.js template',
@@ -13,7 +14,7 @@ export const metadata = {
 
 export default function RootLayout({ children }: { children: any }) {
     return (
-        <ClerkProvider>
+        <ClerkProvider localization={ruRU}>
             <html lang="en">
                 <head>
                     <ColorSchemeScript />
