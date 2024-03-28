@@ -58,8 +58,23 @@ function changeEpisode({ player }: VideoPlayerProps, episode: number) {
 export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
 
-    const episodesAmount = Object.entries(player.list).length;
-    console.log(episodesAmount);
+    const episodesAmount = Object.entries(player.list);
+
+    const episodesList = episodesAmount.map((_value, index) => {
+        const episodeIndex = index + 1;
+
+        return (
+            <Menu.Radio
+              key={episodeIndex}
+              onClick={() => {
+                    setEpisodeSource(changeEpisode({ player }, episodeIndex));
+                }
+              }
+            >
+                Серия {episodeIndex}
+            </Menu.Radio>);
+        }
+    );
 
     return (
         <div className={classes.wrapper}>
@@ -84,15 +99,7 @@ export default function VideoPlayer({ player, preview }: VideoPlayerProps) {
                         </Menu.Button>
                         <Menu.Items className="vds-menu-items" placement="bottom start" offset={0}>
                             <Menu.RadioGroup>
-                                <Menu.Radio
-                                  key={1}
-                                  onClick={() => {
-                                      setEpisodeSource(changeEpisode({ player }, 2));
-                                    }
-                                  }
-                                >
-                                    Серия
-                                </Menu.Radio>
+                                {episodesList}
                             </Menu.RadioGroup>
                         </Menu.Items>
                     </Menu.Root>
