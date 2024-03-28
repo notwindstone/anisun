@@ -1,4 +1,5 @@
 import React from 'react';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/nextjs';
 import VideoEmbed from '@/components/VideoEmbed/VideoEmbed';
 import { Comments } from '@/components/Comments/Comments';
 
@@ -42,6 +43,12 @@ export default async function Page({ params }: { params: { code: string } }) {
               player={animePlayer}
               preview="https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
             />
+            <SignedIn>
+                <UserButton />
+            </SignedIn>
+            <SignedOut>
+                <SignInButton />
+            </SignedOut>
             <Comments />
         </>
     );
