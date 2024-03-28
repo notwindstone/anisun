@@ -14,6 +14,7 @@ import { useDebouncedState } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
+import { IconSearch } from '@tabler/icons-react';
 import styles from './Search.module.css';
 
 interface TitleProps {
@@ -67,7 +68,7 @@ export function Search() {
     const [search, setSearch] = useDebouncedState('', 300);
     const [titles, setTitles] = useState([]);
 
-    const { isLoading, refetch } = useQuery({
+    const { refetch, isFetching } = useQuery({
         queryKey: ['titles', search],
         queryFn: async () => fetchTitles(search),
     });
@@ -115,7 +116,7 @@ export function Search() {
               onSearchChange={(event) => setSearch(event)}
               placeholder="Поиск"
               rightSection={
-                  isLoading ? <Loader size="1rem" /> : null
+                  isFetching ? <Loader size="1rem" /> : <IconSearch size="1rem" />
               }
               onOptionSubmit={(option) => {
                   router.push(`/titles/${option.split('--')[0]}`);
