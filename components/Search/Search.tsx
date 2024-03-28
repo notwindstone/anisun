@@ -56,8 +56,8 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 <Image className={styles.poster} src={optionData[1]} radius="sm" />
             </div>
             <div>
-                <Text size="sm">{optionData[2]}</Text>
-                <Text size="xs" opacity={0.5}>{optionData[3]}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
+                <Text size="xl">{optionData[2]}</Text>
+                <Text size="md" opacity={0.5}>{optionData[3]}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
             </div>
         </Group>
     );
@@ -111,6 +111,7 @@ export function Search() {
             <Select
               searchable
               variant="unstyled"
+              maxDropdownHeight={800}
               data={titles}
               defaultValue={search}
               onSearchChange={(event) => setSearch(event)}
