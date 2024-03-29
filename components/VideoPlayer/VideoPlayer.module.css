@@ -20,7 +20,7 @@
     z-index: 20000;
 
     &:hover, &:active {
-        background: #000000;
+        background: #242424;
     }
 }
 
