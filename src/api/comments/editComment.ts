@@ -2,7 +2,7 @@ import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
 import { eq } from 'drizzle-orm';
 
-export const editTodo = async (id: number, message: string) => {
+export const editComment = async (id: number, message: string) => {
     await db
         .update(comments)
         .set({
