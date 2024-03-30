@@ -8,7 +8,7 @@ export default async function Comments() {
         return (
             <div key={comment.id}>
                 <Text>{comment.id}</Text>
-                <Avatar src={comment.avatar}/>
+                <Avatar src={comment.avatar} />
                 <Text>{comment.username}</Text>
                 <Text>{comment.message}</Text>
             </div>
