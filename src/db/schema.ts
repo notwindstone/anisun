@@ -5,3 +5,10 @@ export const auth = pgTable("auth", {
     email: text("email").notNull(),
     password: text("password").notNull(),
 });
+
+export const comments = pgTable("comments", {
+    id: integer("id").primaryKey(),
+    avatar: text("avatar").notNull(),
+    username: text("username").notNull(),
+    message: text("message").notNull(),
+})
