@@ -1,6 +1,9 @@
+"use server"
+
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
 import { eq } from 'drizzle-orm';
+import {revalidatePath} from "next/cache";
 
 export const editComment = async (id: number, message: string) => {
     await db
@@ -9,4 +12,6 @@ export const editComment = async (id: number, message: string) => {
             message: message,
         })
         .where(eq(comments.id, id));
+
+    revalidatePath("/");
 };

@@ -1,14 +1,6 @@
-import styles from "./page.module.css";
-import Comments from "@/components/Comments/Comments";
-import {addComment} from "@/api/comments/addComment";
-import {Button} from "@mantine/core";
-import {deleteComment} from "@/api/comments/deleteComment";
+import {getComments} from "@/api/comments/getComments";
 
-export default function Home() {
-    return (
-        <main className={styles.main}>
-            <>Test</>
-            <Comments />
-        </main>
-    );
+export default async function Home() {
+    const data = await getComments();
+    return <></>
 }
