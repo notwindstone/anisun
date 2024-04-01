@@ -1,0 +1,29 @@
+.player {
+    --media-menu-bg: rgba(0, 0, 0, 0.7);
+    --media-menu-item-border-radius: var(--mantine-radius-sm);
+}
+
+.playlist {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.playlistButton {
+    background: #00000044;
+    transition: 0.35s ease;
+    z-index: 20000;
+
+    &:hover, &:active {
+        background: #242424;
+    }
+}
+
+.playlistIcon {
+    color: #ffffff;
+}
