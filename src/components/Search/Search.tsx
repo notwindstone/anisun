@@ -16,6 +16,7 @@ import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { IconSearch } from '@tabler/icons-react';
 import styles from './Search.module.css';
+import searchAutocomplete from './../../configs/searchAutocomplete.json';
 
 interface TitleProps {
     code: string;
@@ -42,11 +43,17 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     switch (option.value) {
         case 'nothing':
             return (
-                <>Ничего не найдено</>
+                <>
+                    <Image className={styles.poster} alt="Anime character" radius="sm" src={searchAutocomplete.nothing.image} />
+                    <Text>{searchAutocomplete.nothing.label}</Text>
+                </>
             );
         case 'notEnoughChars':
             return (
-                <>Введите название от трёх символов</>
+                <>
+                    <Image className={styles.poster} alt="Anime character" radius="sm" src={searchAutocomplete.notEnoughChars.image} />
+                    <Text>{searchAutocomplete.notEnoughChars.label}</Text>
+                </>
             );
     }
 
