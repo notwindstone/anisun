@@ -4,6 +4,7 @@ import React from "react";
 import {ColorSchemeScript, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import NextTopLoader from "nextjs-toploader";
+import TanstackQueryProviders from "@/utils/TanstackQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,16 +21,19 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <ColorSchemeScript />
+                <ColorSchemeScript/>
             </head>
             <body className={inter.className}>
-                <MantineProvider>
-                    <NextTopLoader
-                      showSpinner={false}
-                      height={4}
-                    />
-                    {children}
-                </MantineProvider>
+                <NextTopLoader
+                    showSpinner={false}
+                    height={4}
+                />
+                <TanstackQueryProviders>
+                    <MantineProvider>
+                        {children}
+                    </MantineProvider>
+                </TanstackQueryProviders>
+
             </body>
         </html>
     );
