@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import React from "react";
 import {ColorSchemeScript, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
+import NextTopLoader from "nextjs-toploader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,10 @@ export default function RootLayout({
             </head>
             <body className={inter.className}>
                 <MantineProvider>
+                    <NextTopLoader
+                      showSpinner={false}
+                      height={4}
+                    />
                     {children}
                 </MantineProvider>
             </body>
