@@ -22,8 +22,12 @@ export default function Home() {
                 return (
                     <div key={comment.uuid}>
                         <Text>{comment.uuid}</Text>
+                        <Text>{comment.title}</Text>
                         <Avatar src={comment.avatar} size={64} />
                         <Text>{comment.username}</Text>
+                        <Text>{comment.date}</Text>
+                        <Text>{comment.likes}</Text>
+                        <Text>{comment.dislikes}</Text>
                         <Text>{comment.message}</Text>
                     </div>
                 )
