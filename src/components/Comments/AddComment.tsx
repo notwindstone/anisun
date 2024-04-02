@@ -36,7 +36,7 @@ export default function AddComment() {
                 required
                 minRows={2}
             />
-            <Button onClick={handleSubmit} variant="light">
+            <Button type="button" onClick={handleSubmit} variant="light">
                 <IconMessage />
             </Button>
         </Group>

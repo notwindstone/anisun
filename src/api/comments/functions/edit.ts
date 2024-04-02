@@ -12,6 +12,4 @@ export const edit = async (uuid: string, message: string) => {
             message: message,
         })
         .where(eq(comments.uuid, uuid));
-
-    revalidatePath("/");
 };

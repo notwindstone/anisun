@@ -1,42 +1,39 @@
 "use client"
 
-import {useEffect, useState} from "react";
 import {comments} from "@/api/comments/comments";
 import {Avatar, Group, Text} from "@mantine/core";
 import AddComment from "@/components/Comments/AddComment";
+import {useQuery} from "@tanstack/react-query";
 
 export default function Comments() {
-    const [commentsSection, setCommentsSection] = useState()
-    const [refreshToken, setRefreshToken] = useState(Math.random())
+    const { data } = useQuery({
+        queryKey: ["comments"],
+        queryFn: async () => {
+            return await comments.get("ookami-to-koushinryou-merchant-meets-the-wise-wolf")
+        },
+        refetchInterval: 5000
+    })
 
-    useEffect(() => {
-        const refreshComments = async () => {
-            const data = await comments.get("ookami-to-koushinryou-merchant-meets-the-wise-wolf")
-            const commentsData = data.map((comment) => {
-                return (
-                    <div key={comment.uuid}>
-                        <Group>
-                            <Avatar src={comment.avatar} size={64} />
-                            <Group>
-                                <Text>{comment.uuid}</Text>
-                                <Text>{comment.title}</Text>
-                                <Text>{comment.username}</Text>
-                                <Text>{comment.date}</Text>
-                                <Text>{comment.likes}</Text>
-                                <Text>{comment.dislikes}</Text>
-                            </Group>
-                            <Text>{comment.message}</Text>
-                        </Group>
+    const commentsData = data ?? []
 
-                    </div>
-                )
-            })
-            // @ts-ignore
-            setCommentsSection(commentsData)
-            setTimeout(() => setRefreshToken(Math.random()), 5000)
-        }
-        refreshComments().then()
-    }, [refreshToken]);
+    const commentsSection = commentsData.map((comment) => {
+        return (
+            <div key={comment.uuid}>
+                <Group>
+                    <Avatar src={comment.avatar} size={64} />
+                    <Group>
+                        <Text>{comment.uuid}</Text>
+                        <Text>{comment.title}</Text>
+                        <Text>{comment.username}</Text>
+                        <Text>{comment.date}</Text>
+                        <Text>{comment.likes}</Text>
+                        <Text>{comment.dislikes}</Text>
+                    </Group>
+                    <Text>{comment.message}</Text>
+                </Group>
+            </div>
+        )
+    })
 
     return (
         <>

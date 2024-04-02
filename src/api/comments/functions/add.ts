@@ -31,5 +31,4 @@ export const add = async (
         isEdited: isEdited,
     });
 
-    revalidatePath("/");
 };
