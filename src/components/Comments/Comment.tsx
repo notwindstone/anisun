@@ -17,7 +17,7 @@ interface CommentProps {
 
 export default function Comment({ comment }: { comment: CommentProps }) {
     return (
-        <Flex className={classes.root} key={comment.uuid}>
+        <Flex className={classes.root}>
             <Group>
                 <Avatar src={comment.avatar} size={64}/>
             </Group>
