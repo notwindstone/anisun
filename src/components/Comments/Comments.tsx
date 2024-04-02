@@ -3,6 +3,7 @@
 import {useEffect, useState} from "react";
 import {comments} from "@/api/comments/comments";
 import {Avatar, Text} from "@mantine/core";
+import AddComment from "@/components/Comments/AddComment";
 
 export default function Comments() {
     const [commentsSection, setCommentsSection] = useState()
@@ -34,6 +35,7 @@ export default function Comments() {
 
     return (
         <>
+            <AddComment />
             {commentsSection}
         </>
     )
