@@ -1,8 +1,9 @@
 import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
+import {getTitle} from "@/api/anilibria/getTitle";
 
-interface ResponseDataProps {
+interface ResponseProps {
     names: {
         ru: string;
     }
@@ -20,9 +21,8 @@ interface ResponseDataProps {
 }
 
 export default async function Page({ params }: { params: { code: string } }) {
-    const response = await fetch(`https://api.anilibria.tv/v3/title?code=${params.code}`);
-    const responseData: ResponseDataProps = await response.json();
-    const animePlayer = responseData.player;
+    const response: ResponseProps = await getTitle.code(params.code)
+    const animePlayer = response.player;
 
     // Some anime titles don't have a player
     if (Object.keys(animePlayer.list).length === 0) {
@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { code: string } }) {
             <Link href="/titles">Вернуться</Link>
             <div>{params.code}</div>
             <VideoEmbed
-              title={responseData.names.ru}
+              title={response.names.ru}
               player={animePlayer}
               preview="https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
             />
