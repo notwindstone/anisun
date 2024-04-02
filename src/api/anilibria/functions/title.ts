@@ -1,7 +1,7 @@
-import {getHost} from "@/api/anilibria/getHost";
 import axios from "axios";
+import {anilibria} from "@/api/anilibria/anilibria";
 
-const host = getHost.api()
+const host = anilibria.host.api()
 
 export const title = {
     id: async function (id: number) {
@@ -10,16 +10,16 @@ export const title = {
     code: async function (code: string) {
         return (await axios.get(`${host}title?code=${code}`)).data
     },
-    torrent_id: async function (torrent_id: string) {
+    torrent_id: async function (torrent_id: string[]) {
         return (await axios.get(`${host}title?torrent_id=${torrent_id}`)).data
     },
-    filter: async function (filter: string) {
+    filter: async function (filter: string[]) {
         return (await axios.get(`${host}title?filter=${filter}`)).data
     },
-    remove: async function (remove: string) {
+    remove: async function (remove: string[]) {
         return (await axios.get(`${host}title?remove=${remove}`)).data
     },
-    include: async function (include: string) {
+    include: async function (include: string[]) {
         return (await axios.get(`${host}title?include=${include}`)).data
     },
     description_type: async function (description_type: string) {

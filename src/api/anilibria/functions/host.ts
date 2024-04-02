@@ -1,6 +1,6 @@
-import anilibriaHosts from '../../configs/anilibriaHosts.json';
+import anilibriaHosts from '../../../configs/anilibriaHosts.json';
 
-export const getHost = {
+export const host = {
     api: function () {
         return anilibriaHosts.api;
     },
