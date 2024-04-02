@@ -1,5 +1,6 @@
 import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
+import Link from "next/link";
 
 interface ResponseDataProps {
     names: {
@@ -35,6 +36,7 @@ export default async function Page({ params }: { params: { code: string } }) {
 
     return (
         <>
+            <Link href="/titles">Вернуться</Link>
             <div>{params.code}</div>
             <VideoEmbed
               title={responseData.names.ru}
