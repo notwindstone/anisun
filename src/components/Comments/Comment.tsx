@@ -1,4 +1,5 @@
-import {Avatar, Group, Text} from "@mantine/core";
+import {Avatar, Flex, Group, Stack, Text} from "@mantine/core";
+import classes from './Comment.module.css'
 
 interface CommentProps {
     uuid: string;
@@ -18,17 +19,25 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     console.log(comment.uuid, comment)
 
     return (
-        <Group key={comment.uuid}>
-            <Avatar src={comment.avatar} size={64}/>
+        <Flex className={classes.root} key={comment.uuid}>
             <Group>
-                <Text>{comment.uuid}</Text>
-                <Text>{comment.title}</Text>
-                <Text>{comment.username}</Text>
-                <Text>{comment.date}</Text>
-                <Text>{comment.likes}</Text>
-                <Text>{comment.dislikes}</Text>
+                <Avatar src={comment.avatar} size={64}/>
             </Group>
-            <Text>{comment.message}</Text>
-        </Group>
+            <Stack>
+                <Group>
+                    <Text>{comment.username}</Text>
+                    <Text>{comment.uuid}</Text>
+                    <Text>{comment.title}</Text>
+                    <Text>{comment.date}</Text>
+                </Group>
+                <Group>
+                    <Text>{comment.message}</Text>
+                </Group>
+                <Group>
+                    <Text>{comment.likes}</Text>
+                    <Text>{comment.dislikes}</Text>
+                </Group>
+            </Stack>
+        </Flex>
     )
 }
