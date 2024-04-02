@@ -1,7 +1,7 @@
 import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
-import {getTitle} from "@/api/anilibria/getTitle";
+import {anilibria} from "@/api/anilibria/anilibria";
 
 interface ResponseProps {
     names: {
@@ -21,7 +21,7 @@ interface ResponseProps {
 }
 
 export default async function Page({ params }: { params: { code: string } }) {
-    const response: ResponseProps = await getTitle.code(params.code)
+    const response: ResponseProps = await anilibria.title.code(params.code)
     const animePlayer = response.player;
 
     // Some anime titles don't have a player

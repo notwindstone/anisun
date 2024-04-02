@@ -3,7 +3,7 @@ import axios from "axios";
 
 const host = getHost.api()
 
-export const getTitle = {
+export const title = {
     id: async function (id: number) {
         return (await axios.get(`${host}title?id=${id}`)).data
     },
