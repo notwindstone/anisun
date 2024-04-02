@@ -1,11 +1,13 @@
+import anilibriaHosts from '../../configs/anilibriaHosts.json';
+
 export const getHost = {
     api: function () {
-        return "https://api.anilibria.tv/v3/"
+        return anilibriaHosts.api;
     },
     player: function () {
-        return "https://cache.libria.fun"
+        return anilibriaHosts.player
     },
     storage: function () {
-        return "https://anilibria.tv"
+        return anilibriaHosts.storage
     }
 }
