@@ -16,8 +16,6 @@ interface CommentProps {
 }
 
 export default function Comment({ comment }: { comment: CommentProps }) {
-    console.log(comment.uuid, comment)
-
     return (
         <Flex className={classes.root} key={comment.uuid}>
             <Group>
