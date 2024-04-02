@@ -15,12 +15,15 @@ export default function AddComment() {
         await comments.add(
             uuid,
             "ookami-to-koushinryou-merchant-meets-the-wise-wolf",
-            "https://tabler.io/packages/logo-figma.svg",
+            uuid,
             "windstone",
+            "https://tabler.io/packages/logo-figma.svg",
             date,
             0,
             0,
-            input
+            input,
+            false,
+            false,
         )
     }
 

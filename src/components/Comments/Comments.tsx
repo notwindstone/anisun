@@ -2,7 +2,7 @@
 
 import {useEffect, useState} from "react";
 import {comments} from "@/api/comments/comments";
-import {Avatar, Text} from "@mantine/core";
+import {Avatar, Group, Text} from "@mantine/core";
 import AddComment from "@/components/Comments/AddComment";
 
 export default function Comments() {
@@ -15,14 +15,19 @@ export default function Comments() {
             const commentsData = data.map((comment) => {
                 return (
                     <div key={comment.uuid}>
-                        <Text>{comment.uuid}</Text>
-                        <Text>{comment.title}</Text>
-                        <Avatar src={comment.avatar} size={64} />
-                        <Text>{comment.username}</Text>
-                        <Text>{comment.date}</Text>
-                        <Text>{comment.likes}</Text>
-                        <Text>{comment.dislikes}</Text>
-                        <Text>{comment.message}</Text>
+                        <Group>
+                            <Avatar src={comment.avatar} size={64} />
+                            <Group>
+                                <Text>{comment.uuid}</Text>
+                                <Text>{comment.title}</Text>
+                                <Text>{comment.username}</Text>
+                                <Text>{comment.date}</Text>
+                                <Text>{comment.likes}</Text>
+                                <Text>{comment.dislikes}</Text>
+                            </Group>
+                            <Text>{comment.message}</Text>
+                        </Group>
+
                     </div>
                 )
             })
