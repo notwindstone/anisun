@@ -4,13 +4,10 @@ import Link from "next/link";
 import {comments} from "@/api/comments/comments";
 import {Avatar, Text} from "@mantine/core";
 import {useEffect, useState} from "react";
-import {nanoid} from "nanoid";
 
 async function getComments() {
-    const uuid = nanoid()
-    const date = new Date().toJSON()
-    console.log(date)
-
+    // const uuid = nanoid()
+    // const date = new Date().toJSON()
     return await comments.get()
 }
 
@@ -31,10 +28,11 @@ export default function Home() {
                     </div>
                 )
             })
+            // @ts-ignore
             setCommentsSection(commentsData)
             setTimeout(() => setRefreshToken(Math.random()), 3000)
         }
-        refreshComments()
+        refreshComments().then()
     }, [refreshToken]);
 
     return (
