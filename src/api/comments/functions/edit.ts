@@ -5,7 +5,7 @@ import { comments } from "@/db/schema";
 import { eq } from 'drizzle-orm';
 import {revalidatePath} from "next/cache";
 
-export const editComment = async (id: number, message: string) => {
+export const edit = async (id: number, message: string) => {
     await db
         .update(comments)
         .set({

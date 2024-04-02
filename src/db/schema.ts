@@ -1,4 +1,4 @@
-import { integer, text, pgTable } from "drizzle-orm/pg-core";
+import {integer, text, pgTable} from "drizzle-orm/pg-core";
 
 export const auth = pgTable("auth", {
     id: integer("id").primaryKey(),

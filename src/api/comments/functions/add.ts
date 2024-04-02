@@ -2,9 +2,9 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import {revalidatePath} from "next/cache";
+import { revalidatePath } from "next/cache";
 
-export const addComment = async (id: number, avatar: string, username: string, message: string) => {
+export const add = async (id: number, avatar: string, username: string, message: string) => {
     await db.insert(comments).values({
         id: id,
         avatar: avatar,
