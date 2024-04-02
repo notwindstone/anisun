@@ -1,5 +1,5 @@
 import axios from "axios";
-import {host} from "@/api/anilibria/functions/host";
+import { host } from "@/api/anilibria/functions/host";
 
 const anilibriaHost = host.api()
 

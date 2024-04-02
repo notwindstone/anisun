@@ -15,6 +15,7 @@
 }
 
 .playlistButton {
+    margin: 0.375rem;
     z-index: 20000;
 
     &:hover, &:active {
