@@ -23,6 +23,7 @@
     "framer-motion": "^11.0.24",
     "hls.js": "^1.5.7",
     "media-icons": "^1.1.2",
+    "nanoid": "^5.0.6",
     "next": "14.1.4",
     "next-auth": "^4.24.7",
     "nextjs-toploader": "^1.6.11",
