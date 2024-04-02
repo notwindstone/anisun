@@ -3,9 +3,14 @@ import {Button, Group, Textarea} from "@mantine/core";
 import { IconMessage } from "@tabler/icons-react";
 import {comments} from "@/api/comments/comments";
 import {nanoid} from "nanoid";
+import {useQueryClient} from "@tanstack/react-query";
 
 export default function AddComment() {
     const ref = useRef<HTMLTextAreaElement>(null);
+
+    const queryClient = useQueryClient()
+
+    const onSuccess = () => queryClient.invalidateQueries({queryKey: ["comments"]})
 
     const handleSubmit = async () => {
         const input = ref.current?.value ?? ""
@@ -25,6 +30,7 @@ export default function AddComment() {
             false,
             false,
         )
+        await onSuccess()
     }
 
     return (
@@ -37,7 +43,7 @@ export default function AddComment() {
                 minRows={2}
             />
             <Button type="button" onClick={handleSubmit} variant="light">
-                <IconMessage />
+                <IconMessage/>
             </Button>
         </Group>
     )

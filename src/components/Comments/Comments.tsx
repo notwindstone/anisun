@@ -1,17 +1,17 @@
 "use client"
 
 import {comments} from "@/api/comments/comments";
-import {Avatar, Group, Text} from "@mantine/core";
+import {Avatar, Group, Loader, Text} from "@mantine/core";
 import AddComment from "@/components/Comments/AddComment";
-import {useQuery} from "@tanstack/react-query";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
 
 export default function Comments() {
-    const { data } = useQuery({
+    const { isPending, data } = useQuery({
         queryKey: ["comments"],
         queryFn: async () => {
             return await comments.get("ookami-to-koushinryou-merchant-meets-the-wise-wolf")
         },
-        refetchInterval: 5000
+        refetchInterval: 3000
     })
 
     const commentsData = data ?? []
@@ -38,6 +38,7 @@ export default function Comments() {
     return (
         <>
             <AddComment />
+            {isPending && <Loader color="blue" />}
             {commentsSection}
         </>
     )
