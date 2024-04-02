@@ -5,7 +5,7 @@ import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/l
 import { useState } from 'react';
 import videoPlayerTranslation from '../../configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
-import {IconPlaylist} from "@tabler/icons-react";
+import {PlaylistIcon} from "@vidstack/react/icons";
 
 interface VideoPlayerProps {
     title?: string;
@@ -105,7 +105,7 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                 <DefaultVideoLayout icons={defaultLayoutIcons} translations={videoPlayerTranslation}>
                     <Menu.Root className={`${classes.playlist} ${classes[hideMenu]} vds-menu`}>
                         <Menu.Button className={`${classes.playlistButton} vds - menu - button vds-button`} aria-label="Chapter Switch">
-                            <IconPlaylist className={classes.playlistIcon} />
+                            <PlaylistIcon className={classes.playlistIcon} />
                         </Menu.Button>
                         <Menu.Items className="vds-menu-items" placement="bottom start" offset={0}>
                             <Menu.RadioGroup>

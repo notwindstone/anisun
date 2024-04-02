@@ -15,12 +15,10 @@
 }
 
 .playlistButton {
-    background: #00000044;
-    transition: 0.35s ease;
     z-index: 20000;
 
     &:hover, &:active {
-        background: #242424;
+        background: rgb(255 255 255 / 0.2);
     }
 }
 
