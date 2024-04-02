@@ -8,6 +8,7 @@ export const auth = pgTable("auth", {
 
 export const comments = pgTable("comments", {
     uuid: text("uuid").primaryKey(),
+    // Title в данном случае является названием аниме.
     title: text("title").notNull(),
     avatar: text("avatar").notNull(),
     username: text("username").notNull(),

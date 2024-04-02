@@ -4,11 +4,13 @@ import Link from "next/link";
 import {comments} from "@/api/comments/comments";
 import {Avatar, Text} from "@mantine/core";
 import {useEffect, useState} from "react";
+import {nanoid} from "nanoid";
 
 async function getComments() {
-    // const uuid = nanoid()
+    const uuid = nanoid()
     // const date = new Date().toJSON()
-    return await comments.get()
+
+    return await comments.get("ookami-to-koushinryou-merchant-meets-the-wise-wolf")
 }
 
 export default function Home() {
