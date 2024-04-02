@@ -11,6 +11,7 @@
   "dependencies": {
     "@mantine/charts": "^7.7.1",
     "@mantine/core": "^7.7.1",
+    "@mantine/form": "^7.7.1",
     "@mantine/hooks": "^7.7.1",
     "@mantine/notifications": "^7.7.1",
     "@neondatabase/serverless": "^0.9.0",
