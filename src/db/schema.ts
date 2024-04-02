@@ -1,4 +1,4 @@
-import {integer, text, pgTable} from "drizzle-orm/pg-core";
+import {integer, text, pgTable, uuid} from "drizzle-orm/pg-core";
 
 export const auth = pgTable("auth", {
     id: integer("id").primaryKey(),
@@ -7,8 +7,11 @@ export const auth = pgTable("auth", {
 });
 
 export const comments = pgTable("comments", {
-    id: integer("id").primaryKey(),
+    uuid: uuid("uuid").primaryKey(),
     avatar: text("avatar").notNull(),
     username: text("username").notNull(),
+    date: text("date").notNull(),
+    likes: integer("likes").default(0),
+    dislikes: integer("dislikes").default(0),
     message: text("message").notNull(),
 })

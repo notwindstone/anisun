@@ -5,9 +5,10 @@ import {Avatar, Text} from "@mantine/core";
 
 export default async function Home() {
     const data = await comments.get()
+
     const commentsSection = data.map((comment) => {
         return (
-            <div>
+            <div key={comment.id}>
                 <Text>{comment.id}</Text>
                 <Avatar src={comment.avatar} size={64} />
                 <Text>{comment.username}</Text>

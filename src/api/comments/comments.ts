@@ -7,5 +7,5 @@ export const comments = {
     get: get,
     add: add,
     edit: edit,
-    delete: remove
+    remove: remove
 }
