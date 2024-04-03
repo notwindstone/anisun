@@ -24,8 +24,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             <Stack>
                 <Group>
                     <Text>{comment.username}</Text>
-                    <Text>{comment.uuid}</Text>
-                    <Text>{comment.title}</Text>
                     <Text>{comment.date}</Text>
                 </Group>
                 <Group>

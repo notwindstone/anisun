@@ -5,6 +5,8 @@ import {ColorSchemeScript, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import NextTopLoader from "nextjs-toploader";
 import TanstackQueryProviders from "@/utils/TanstackQueryProvider";
+import {Notifications} from "@mantine/notifications";
+import '@mantine/notifications/styles.css';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -30,6 +32,7 @@ export default function RootLayout({
                 />
                 <TanstackQueryProviders>
                     <MantineProvider>
+                        <Notifications limit={3} />
                         {children}
                     </MantineProvider>
                 </TanstackQueryProviders>

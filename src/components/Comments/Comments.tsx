@@ -6,6 +6,8 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import Comment from "@/components/Comments/Comment";
 import {InView} from "react-intersection-observer";
 import {Loader} from "@mantine/core";
+import {Notifications} from "@mantine/notifications";
+import React from "react";
 
 interface CommentsGroupProps {
     uuid: string;
@@ -65,7 +67,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
-            <AddComment />
+            <AddComment titleCode={titleCode} />
             {commentsSection}
             <InView onChange={(inView) => {
                 if (!inView) {

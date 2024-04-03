@@ -4,8 +4,9 @@ import { IconMessage } from "@tabler/icons-react";
 import {comments} from "@/api/comments/comments";
 import {nanoid} from "nanoid";
 import {useQueryClient} from "@tanstack/react-query";
+import {notifications} from "@mantine/notifications";
 
-export default function AddComment() {
+export default function AddComment({ titleCode }: { titleCode: string }) {
     const ref = useRef<HTMLTextAreaElement>(null);
 
     const queryClient = useQueryClient()
@@ -14,12 +15,23 @@ export default function AddComment() {
 
     const handleSubmit = async () => {
         const input = ref.current?.value ?? ""
+
+        if (input.length < 10 || input.length > 2000) {
+            return notifications.show({
+                title: '123',
+                message: '123',
+                autoClose: 5000,
+                color: 'red',
+                style: { zIndex: 30000 }
+            })
+        }
+
         const uuid = nanoid()
         const date = new Date().toJSON()
 
         await comments.add(
             uuid,
-            "ookami-to-koushinryou-merchant-meets-the-wise-wolf",
+            titleCode,
             uuid,
             "windstone",
             "https://tabler.io/packages/logo-figma.svg",
@@ -30,6 +42,7 @@ export default function AddComment() {
             false,
             false,
         )
+
         await onSuccess()
     }
 
