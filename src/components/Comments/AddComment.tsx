@@ -11,18 +11,27 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
 
     const queryClient = useQueryClient()
 
-    const onSuccess = () => queryClient.invalidateQueries({queryKey: ["comments"]})
+    const onSuccess = () => {
+        notifications.show({
+            title: 'Успех',
+            message: 'Комментарий был успешно добавлен',
+            autoClose: 5000,
+            color: 'green',
+            style: { zIndex: 30000 },
+        })
+        return queryClient.invalidateQueries({queryKey: ["comments"]})
+    }
 
     const handleSubmit = async () => {
         const input = ref.current?.value ?? ""
 
         if (input.length < 10 || input.length > 2000) {
             return notifications.show({
-                title: '123',
-                message: '123',
+                title: 'Ошибка',
+                message: 'Пожалуйста, напишите комментарий от 10 до 2000 символов',
                 autoClose: 5000,
-                color: 'red',
-                style: { zIndex: 30000 }
+                color: 'yellow',
+                style: { zIndex: 30000 },
             })
         }
 
