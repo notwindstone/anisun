@@ -1,5 +1,6 @@
 import {Avatar, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
+import Link from "next/link";
 
 interface CommentProps {
     uuid: string;
@@ -19,11 +20,15 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     return (
         <Flex className={classes.root}>
             <Group>
-                <Avatar src={comment.avatar} size={64}/>
+                <Link href={`/account/${comment.username}-${comment.userid}`}>
+                    <Avatar src={comment.avatar} size={64}/>
+                </Link>
             </Group>
             <Stack>
                 <Group>
-                    <Text>{comment.username}</Text>
+                    <Link href={`/account/${comment.username}-${comment.userid}`}>
+                        <Text>{comment.username}</Text>
+                    </Link>
                     <Text>{comment.createdAt}</Text>
                 </Group>
                 <Group>

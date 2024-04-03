@@ -14,7 +14,6 @@ export const get = async (title: string, nextCursor: number = 0) => {
             .orderBy(desc(comments.createdAt))
             .limit(initialLimit)
             .offset(nextCursor);
-    await db.delete(comments)
     if (data.length === 0) {
         return { data: null, nextCursor: nextCursor + 8 }
     }
