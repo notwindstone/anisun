@@ -5,13 +5,14 @@ import { comments } from "@/db/schema";
 import { desc, eq } from 'drizzle-orm';
 
 export const get = async (title: string, nextCursor: number = 0) => {
+    const initialLimit = nextCursor === 0 ? 8 : nextCursor
     const data =
         await db
             .select()
             .from(comments)
             .where(eq(comments.title, title))
             .orderBy(desc(comments.date))
-            .limit(nextCursor)
+            .limit(initialLimit)
             .offset(nextCursor);
-    return { data: data, nextCursor: 3 };
+    return { data: data, nextCursor: nextCursor };
 };
