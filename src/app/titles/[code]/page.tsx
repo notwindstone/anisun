@@ -2,6 +2,7 @@ import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import {anilibria} from "@/api/anilibria/anilibria";
+import Comments from "@/components/Comments/Comments";
 
 interface ResponseProps {
     names: {
@@ -24,7 +25,7 @@ export default async function Page({ params }: { params: { code: string } }) {
     const response: ResponseProps = await anilibria.title.code(params.code)
     const animePlayer = response.player;
 
-    // Some anime titles don't have a player
+    // Некоторые аниме тайтлы не имеют плеера
     if (Object.keys(animePlayer.list).length === 0) {
         return (
             <>
@@ -43,6 +44,7 @@ export default async function Page({ params }: { params: { code: string } }) {
               player={animePlayer}
               preview="https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
             />
+            <Comments titleCode={params.code} />
         </>
     );
 }

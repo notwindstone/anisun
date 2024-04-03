@@ -5,6 +5,7 @@ import AddComment from "@/components/Comments/AddComment";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import Comment from "@/components/Comments/Comment";
 import {InView} from "react-intersection-observer";
+import {Loader} from "@mantine/core";
 
 interface CommentsGroupProps {
     uuid: string;
@@ -20,9 +21,9 @@ interface CommentsGroupProps {
     isEdited: boolean | null;
 }
 
-export default function Comments() {
+export default function Comments({ titleCode }: { titleCode: string }) {
     const getComments = async ({ pageParam } : { pageParam: number }) => {
-        return await comments.get("ookami-to-koushinryou-merchant-meets-the-wise-wolf", pageParam)
+        return await comments.get(titleCode, pageParam)
     }
 
     const {
@@ -32,7 +33,7 @@ export default function Comments() {
         isFetchingNextPage,
         status,
     } = useInfiniteQuery({
-        queryKey: ["comments"],
+        queryKey: ["comments", titleCode],
         queryFn: getComments,
         initialPageParam: 0,
         getNextPageParam: (lastPage) => lastPage.nextCursor,
@@ -58,7 +59,7 @@ export default function Comments() {
                     )
                 })
             })}
-            <span>{isFetchingNextPage ? 'Fetching...' : null}</span>
+            <span>{isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>
         </>
     )
 
@@ -81,7 +82,7 @@ export default function Comments() {
 
                 fetchNextPage().then()
             }}>
-                <div></div>
+                <hr></hr>
             </InView>
         </div>
     )

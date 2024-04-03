@@ -5,7 +5,6 @@ export default async function Home() {
     return (
         <>
             <Link href="/titles">Test</Link>
-            <Comments />
         </>
     )
 }
