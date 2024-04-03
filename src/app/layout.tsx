@@ -8,6 +8,7 @@ import TanstackQueryProviders from "@/utils/TanstackQueryProvider";
 import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
+import {ruRU} from "@clerk/localizations";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +23,7 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <ClerkProvider>
+        <ClerkProvider localization={ruRU}>
             <html lang="en">
                 <head>
                     <ColorSchemeScript/>

@@ -10,7 +10,7 @@ export default async function Home() {
                 <UserButton />
             </SignedIn>
             <SignedOut>
-                <SignInButton />
+                <Link href="/sign-in">Войти в аккаунт</Link>
             </SignedOut>
         </>
     )
