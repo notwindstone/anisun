@@ -20,13 +20,13 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     return (
         <Flex className={classes.root}>
             <Group>
-                <Link href={`/account/${comment.username}-${comment.userid}`}>
+                <Link href={`/account/${comment.userid}`}>
                     <Avatar src={comment.avatar} size={64}/>
                 </Link>
             </Group>
             <Stack>
                 <Group>
-                    <Link href={`/account/${comment.username}-${comment.userid}`}>
+                    <Link href={`/account/${comment.userid}`}>
                         <Text>{comment.username}</Text>
                     </Link>
                     <Text>{comment.createdAt}</Text>
