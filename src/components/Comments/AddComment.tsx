@@ -5,11 +5,14 @@ import {comments} from "@/api/comments/comments";
 import {nanoid} from "nanoid";
 import {useQueryClient} from "@tanstack/react-query";
 import {notifications} from "@mantine/notifications";
+import {useUser} from "@clerk/nextjs";
 
 export default function AddComment({ titleCode }: { titleCode: string }) {
+    const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
-
     const queryClient = useQueryClient()
+
+    const isUser = isLoaded && isSignedIn
 
     const onSuccess = () => {
         notifications.show({
@@ -22,12 +25,21 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
     }
 
     const handleSubmit = async () => {
+        if (!isUser) {
+            return notifications.show({
+                title: 'Критическая ошибка',
+                message: 'Вы не авторизованы. Войдите в аккаунт перед тем, как написать комментарий',
+                autoClose: 3000,
+                color: 'red',
+            })
+        }
+
         const input = ref.current?.value ?? ""
 
         if (input.length < 10 || input.length > 2000) {
             return notifications.show({
                 title: 'Ошибка',
-                message: 'Пожалуйста, напишите комментарий от 10 до 2000 символов',
+                message: 'В комментарии должно быть от 10 до 2000 символов',
                 autoClose: 3000,
                 color: 'yellow',
             })
@@ -36,12 +48,16 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
         const uuid = nanoid()
         const createdAt = new Date().toJSON()
 
+        const userId = user.id
+        const username = user.username ?? "Пользователь без никнейма"
+        const avatar = user.imageUrl
+
         await comments.add(
             uuid,
             titleCode,
-            uuid,
-            "windstone",
-            "https://tabler.io/packages/logo-figma.svg",
+            userId,
+            username,
+            avatar,
             createdAt,
             0,
             0,
@@ -57,14 +73,27 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
         <Group>
             <Textarea
                 ref={ref}
-                placeholder="Autosize with no rows limit"
+                placeholder={
+                    isUser
+                        ? "Написать комментарий..."
+                        : "Вы должны войти в аккаунт, чтобы написать комментарий"
+                }
                 autosize
                 required
                 minRows={2}
+                disabled={
+                    !isUser
+                }
             />
-            <Button type="button" onClick={handleSubmit} variant="light">
-                <IconMessage/>
-            </Button>
+            {
+                isUser
+                    ?
+                        <Button type="button" onClick={handleSubmit} variant="light">
+                            <IconMessage/>
+                        </Button>
+                    :
+                        <></>
+            }
         </Group>
     )
 }
