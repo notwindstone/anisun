@@ -1,9 +1,12 @@
 import {integer, text, pgTable, boolean} from "drizzle-orm/pg-core";
 
-export const auth = pgTable("auth", {
-    uuid: text("uuid").primaryKey(),
+export const user = pgTable("user", {
+    userid: text("userid").primaryKey(),
+    username: text("username"),
     email: text("email").notNull(),
-    password: text("password").notNull(),
+    avatar: text("avatar").notNull(),
+    createdAt: text("createdAt").notNull(),
+    isVerified: boolean("isVerified").default(false).notNull(),
 });
 
 export const comments = pgTable("comments", {
@@ -14,10 +17,10 @@ export const comments = pgTable("comments", {
     userid: text("userid").notNull(),
     username: text("username").notNull(),
     avatar: text("avatar").notNull(),
-    date: text("date").notNull(),
-    likes: integer("likes").default(0),
-    dislikes: integer("dislikes").default(0),
+    createdAt: text('createdAt').notNull(),
+    likes: integer("likes").default(0).notNull(),
+    dislikes: integer("dislikes").default(0).notNull(),
     message: text("message").notNull(),
-    isDeleted: boolean("isDeleted").default(false),
-    isEdited: boolean("isEdited").default(false),
+    isDeleted: boolean("isDeleted").default(false).notNull(),
+    isEdited: boolean("isEdited").default(false).notNull(),
 })

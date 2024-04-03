@@ -17,7 +17,6 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
             message: 'Комментарий был успешно добавлен',
             autoClose: 3000,
             color: 'green',
-            style: { zIndex: 30000 },
         })
         return queryClient.invalidateQueries({queryKey: ["comments"]})
     }
@@ -31,12 +30,11 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
                 message: 'Пожалуйста, напишите комментарий от 10 до 2000 символов',
                 autoClose: 3000,
                 color: 'yellow',
-                style: { zIndex: 30000 },
             })
         }
 
         const uuid = nanoid()
-        const date = new Date().toJSON()
+        const createdAt = new Date().toJSON()
 
         await comments.add(
             uuid,
@@ -44,7 +42,7 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
             uuid,
             "windstone",
             "https://tabler.io/packages/logo-figma.svg",
-            date,
+            createdAt,
             0,
             0,
             input,

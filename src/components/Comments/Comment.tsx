@@ -7,12 +7,12 @@ interface CommentProps {
     userid: string;
     username: string;
     avatar: string;
-    date: string;
-    likes: number | null;
-    dislikes: number | null;
+    createdAt: string;
+    likes: number;
+    dislikes: number;
     message: string;
-    isDeleted: boolean | null;
-    isEdited: boolean | null;
+    isDeleted: boolean;
+    isEdited: boolean;
 }
 
 export default function Comment({ comment }: { comment: CommentProps }) {
@@ -24,7 +24,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             <Stack>
                 <Group>
                     <Text>{comment.username}</Text>
-                    <Text>{comment.date}</Text>
+                    <Text>{comment.createdAt}</Text>
                 </Group>
                 <Group>
                     <Text>{comment.message}</Text>

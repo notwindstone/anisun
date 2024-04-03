@@ -7,6 +7,7 @@ import NextTopLoader from "nextjs-toploader";
 import TanstackQueryProviders from "@/utils/TanstackQueryProvider";
 import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
+import {ClerkProvider} from "@clerk/nextjs";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,23 +22,25 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-            <head>
-                <ColorSchemeScript/>
-            </head>
-            <body className={inter.className}>
-                <NextTopLoader
-                    showSpinner={false}
-                    height={4}
-                />
-                <TanstackQueryProviders>
-                    <MantineProvider>
-                        <Notifications limit={3} />
-                        {children}
-                    </MantineProvider>
-                </TanstackQueryProviders>
+        <ClerkProvider>
+            <html lang="en">
+                <head>
+                    <ColorSchemeScript/>
+                </head>
+                <body className={inter.className}>
+                    <NextTopLoader
+                        showSpinner={false}
+                        height={4}
+                    />
+                    <TanstackQueryProviders>
+                        <MantineProvider>
+                            <Notifications zIndex={30000} limit={3} />
+                            {children}
+                        </MantineProvider>
+                    </TanstackQueryProviders>
 
-            </body>
-        </html>
+                </body>
+            </html>
+        </ClerkProvider>
     );
 }

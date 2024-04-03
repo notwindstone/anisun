@@ -6,7 +6,6 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import Comment from "@/components/Comments/Comment";
 import {InView} from "react-intersection-observer";
 import {Loader} from "@mantine/core";
-import {Notifications} from "@mantine/notifications";
 import React from "react";
 
 interface CommentsGroupProps {
@@ -15,12 +14,12 @@ interface CommentsGroupProps {
     userid: string;
     username: string;
     avatar: string;
-    date: string;
-    likes: number | null;
-    dislikes: number | null;
+    createdAt: string;
+    likes: number;
+    dislikes: number;
     message: string;
-    isDeleted: boolean | null;
-    isEdited: boolean | null;
+    isDeleted: boolean;
+    isEdited: boolean;
 }
 
 export default function Comments({ titleCode }: { titleCode: string }) {

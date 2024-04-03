@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@clerk/nextjs": "^4.29.10",
     "@mantine/charts": "^7.7.1",
     "@mantine/core": "^7.7.1",
     "@mantine/form": "^7.7.1",
@@ -26,7 +27,6 @@
     "media-icons": "^1.1.2",
     "nanoid": "^5.0.6",
     "next": "14.1.4",
-    "next-auth": "^4.24.7",
     "nextjs-toploader": "^1.6.11",
     "react": "^18",
     "react-dom": "^18",

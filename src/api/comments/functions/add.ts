@@ -2,7 +2,6 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import { revalidatePath } from "next/cache";
 
 export const add = async (
     uuid: string,
@@ -10,7 +9,7 @@ export const add = async (
     userid: string,
     username: string,
     avatar: string,
-    date: string,
+    createdAt: string,
     likes: number,
     dislikes: number,
     message: string,
@@ -23,7 +22,7 @@ export const add = async (
         userid: userid,
         username: username,
         avatar: avatar,
-        date: date,
+        createdAt: createdAt,
         likes: likes,
         dislikes: dislikes,
         message: message,

@@ -11,9 +11,10 @@ export const get = async (title: string, nextCursor: number = 0) => {
             .select()
             .from(comments)
             .where(eq(comments.title, title))
-            .orderBy(desc(comments.date))
+            .orderBy(desc(comments.createdAt))
             .limit(initialLimit)
             .offset(nextCursor);
+    await db.delete(comments)
     if (data.length === 0) {
         return { data: null, nextCursor: nextCursor + 8 }
     }
