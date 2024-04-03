@@ -15,7 +15,7 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
         notifications.show({
             title: 'Успех',
             message: 'Комментарий был успешно добавлен',
-            autoClose: 5000,
+            autoClose: 3000,
             color: 'green',
             style: { zIndex: 30000 },
         })
@@ -29,7 +29,7 @@ export default function AddComment({ titleCode }: { titleCode: string }) {
             return notifications.show({
                 title: 'Ошибка',
                 message: 'Пожалуйста, напишите комментарий от 10 до 2000 символов',
-                autoClose: 5000,
+                autoClose: 3000,
                 color: 'yellow',
                 style: { zIndex: 30000 },
             })
