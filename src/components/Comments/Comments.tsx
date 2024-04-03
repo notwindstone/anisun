@@ -44,19 +44,45 @@ export default function Comments() {
 
     const commentsData = data?.pages ?? []
 
-    let commentsSection = commentsData.map((comment) => {
-        return (
-            <Comment key={comment.uuid} comment={comment} />
-        )
-    })
+    // let commentsSection = commentsData.map((comment) => {
+    //    return (
+    //        <Comment key={comment.uuid} comment={comment} />
+    //    )
+    // })
+
+    const commentsSection = status === 'pending' ? (
+        <p>Loading...</p>
+    ) : status === 'error' ? (
+        <p>Error: {error.message}</p>
+    ) : (
+        <>
+            {data.pages.map((group, i) => (
+                group.map((comment) => {
+                    return (
+                        <Comment key={comment.uuid} comment={comment} />
+                    )
+                })
+            ))}
+            <div>
+                <button
+                    onClick={() => fetchNextPage()}
+                    disabled={!hasNextPage || isFetchingNextPage}
+                >
+                    {isFetchingNextPage
+                        ? 'Loading more...'
+                        : hasNextPage
+                            ? 'Load More'
+                            : 'Nothing more to load'}
+                </button>
+            </div>
+            <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
+        </>
+    )
 
     return (
         <>
             <AddComment />
-            {isPending && <Loader color="blue" />}
             {commentsSection}
-            <Button onClick={() => setLimit(limit + 8)}>Load</Button>
-
         </>
     )
 }
