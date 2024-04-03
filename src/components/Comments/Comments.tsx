@@ -2,9 +2,24 @@
 
 import {comments} from "@/api/comments/comments";
 import AddComment from "@/components/Comments/AddComment";
-import {useInfiniteQuery, useQuery} from "@tanstack/react-query";
+import {useInfiniteQuery} from "@tanstack/react-query";
 import Comment from "@/components/Comments/Comment";
-import {useState} from "react";
+import {InView, useInView} from "react-intersection-observer";
+import {useEffect} from "react";
+
+interface CommentsGroupProps {
+    uuid: string;
+    title: string;
+    userid: string;
+    username: string;
+    avatar: string;
+    date: string;
+    likes: number | null;
+    dislikes: number | null;
+    message: string;
+    isDeleted: boolean | null;
+    isEdited: boolean | null;
+}
 
 export default function Comments() {
     const getComments = async ({ pageParam } : { pageParam: number }) => {
@@ -12,27 +27,19 @@ export default function Comments() {
     }
 
     const {
-        isPending,
         data,
         error,
         fetchNextPage,
         hasNextPage,
-        isFetching,
         isFetchingNextPage,
         status,
     } = useInfiniteQuery({
         queryKey: ["comments"],
         queryFn: getComments,
         initialPageParam: 0,
-        getNextPageParam: (lastPage, page) => lastPage.nextCursor,
+        getNextPageParam: (lastPage) => lastPage.nextCursor,
         refetchInterval: 5000,
     })
-
-    // let commentsSection = commentsData.map((comment) => {
-    //    return (
-    //        <Comment key={comment.uuid} comment={comment} />
-    //    )
-    // })
 
     const commentsSection = status === 'pending' ? (
         <p>Loading...</p>
@@ -40,33 +47,30 @@ export default function Comments() {
         <p>Error: {error.message}</p>
     ) : (
         <>
-            {data.pages.map((group, i) => (
-                group.data.map((comment) => {
+            {data.pages.map((group) => {
+                const commentsGroup: CommentsGroupProps[] = group.data
+
+                return commentsGroup.map((comment) => {
                     return (
                         <Comment key={comment.uuid} comment={comment} />
                     )
                 })
-            ))}
-            <div>
-                <button
-                    onClick={() => fetchNextPage()}
-                    disabled={!hasNextPage || isFetchingNextPage}
-                >
-                    {isFetchingNextPage
-                        ? 'Loading more...'
-                        : hasNextPage
-                            ? 'Load More'
-                            : 'Nothing more to load'}
-                </button>
-            </div>
-            <div>{isFetching && !isFetchingNextPage ? 'Fetching...' : null}</div>
+            })}
+            <span>{isFetchingNextPage ? 'Fetching...' : null}</span>
         </>
     )
 
     return (
-        <>
+        <div>
             <AddComment />
             {commentsSection}
-        </>
+            <InView onChange={(inView, entry) => {
+                if (inView) {
+                    fetchNextPage().then()
+                }
+            }}>
+                <div></div>
+            </InView>
+        </div>
     )
 }
