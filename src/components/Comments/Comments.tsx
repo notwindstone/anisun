@@ -4,8 +4,7 @@ import {comments} from "@/api/comments/comments";
 import AddComment from "@/components/Comments/AddComment";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import Comment from "@/components/Comments/Comment";
-import {InView, useInView} from "react-intersection-observer";
-import {useEffect} from "react";
+import {InView} from "react-intersection-observer";
 
 interface CommentsGroupProps {
     uuid: string;
@@ -30,7 +29,6 @@ export default function Comments() {
         data,
         error,
         fetchNextPage,
-        hasNextPage,
         isFetchingNextPage,
         status,
     } = useInfiniteQuery({
@@ -48,7 +46,11 @@ export default function Comments() {
     ) : (
         <>
             {data.pages.map((group) => {
-                const commentsGroup: CommentsGroupProps[] = group.data
+                const commentsGroup: CommentsGroupProps[] | null = group.data
+
+                if (!commentsGroup) {
+                    return null
+                }
 
                 return commentsGroup.map((comment) => {
                     return (
@@ -64,10 +66,20 @@ export default function Comments() {
         <div>
             <AddComment />
             {commentsSection}
-            <InView onChange={(inView, entry) => {
-                if (inView) {
-                    fetchNextPage().then()
+            <InView onChange={(inView) => {
+                if (!inView) {
+                    return
                 }
+
+                const dataPages = data?.pages ?? []
+                const lastDataPage = dataPages[dataPages.length - 1] ?? []
+                const hasNextPageData = lastDataPage.data
+
+                if (!hasNextPageData) {
+                    return
+                }
+
+                fetchNextPage().then()
             }}>
                 <div></div>
             </InView>

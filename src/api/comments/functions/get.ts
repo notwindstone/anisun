@@ -14,5 +14,8 @@ export const get = async (title: string, nextCursor: number = 0) => {
             .orderBy(desc(comments.date))
             .limit(initialLimit)
             .offset(nextCursor);
+    if (data.length === 0) {
+        return { data: null, nextCursor: nextCursor + 8 }
+    }
     return { data: data, nextCursor: nextCursor + 8 };
 };
