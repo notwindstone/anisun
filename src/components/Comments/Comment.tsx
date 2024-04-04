@@ -19,40 +19,44 @@ interface CommentProps {
 }
 
 export default function Comment({ comment }: { comment: CommentProps }) {
-    const [isParent, setIsParent] = useState(false)
+    const [toggle, setToggle] = useState(false)
 
     function handleResponse(parentUUID: string) {
-        setIsParent(true)
+        setToggle(!toggle)
     }
 
     return (
-        <Flex className={classes.root}>
-            <Group>
-                <Link href={`/account/${comment.userid}`}>
-                    <Avatar src={comment.avatar} size={64}/>
-                </Link>
-            </Group>
-            <Stack>
+        <>
+            <Flex className={classes.root}>
                 <Group>
                     <Link href={`/account/${comment.userid}`}>
-                        <Text>{comment.username}</Text>
+                        <Avatar src={comment.avatar} size={64}/>
                     </Link>
-                    <Text>{comment.createdAt}</Text>
                 </Group>
-                <Group>
-                    <Text>{comment.message}</Text>
-                </Group>
-                <Group>
-                    <Text>{comment.likes?.length}</Text>
-                    <Text>{comment.dislikes?.length}</Text>
-                    <Button variant="light" onClick={() => {
-                        handleResponse(comment.uuid)
-                    }}>Ответить</Button>
-                    {
-                        isParent && <AddComment titleCode={comment.title} parentUUID={comment.uuid} />
-                    }
-                </Group>
-            </Stack>
-        </Flex>
+                <Stack>
+                    <Group>
+                        <Link href={`/account/${comment.userid}`}>
+                            <Text>{comment.username}</Text>
+                        </Link>
+                        <Text>{comment.createdAt}</Text>
+                    </Group>
+                    <Group>
+                        <Text>{comment.message}</Text>
+                    </Group>
+                    <Group>
+                        <Text>{comment.likes?.length}</Text>
+                        <Text>{comment.dislikes?.length}</Text>
+                        <Button variant="light" onClick={() => {
+                            handleResponse(comment.uuid)
+                        }}>Ответить</Button>
+
+                    </Group>
+                </Stack>
+            </Flex>
+            {
+                toggle && <AddComment titleCode={comment.title} parentUUID={comment.uuid} />
+            }
+        </>
+
     )
 }
