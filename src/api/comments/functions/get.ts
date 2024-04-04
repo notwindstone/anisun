@@ -14,6 +14,23 @@ export const get = async ({ title, nextCursor = 0 }: { title: string, nextCursor
             .orderBy(desc(comments.createdAt))
             .limit(initialLimit)
             .offset(nextCursor);
+
+    const test = data.map((test1) => {
+        if (!test1.parentuuid) {
+            return test1.uuid
+        }
+    })
+
+    const childComments =
+        await db
+            .select()
+            .from(comments)
+            .where(eq(comments.parentuuid, comments.parentuuid))
+
+    let mergedData = new Set([...data, ...childComments])
+
+    console.log(data.length, mergedData.size, test)
+
     if (data.length === 0) {
         return { data: null, nextCursor: nextCursor + 8 }
     }

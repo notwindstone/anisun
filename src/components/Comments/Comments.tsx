@@ -8,6 +8,8 @@ import {InView} from "react-intersection-observer";
 import {Loader} from "@mantine/core";
 import React from "react";
 import classes from './Comments.module.css';
+import {SignedIn, SignedOut, UserButton} from "@clerk/nextjs";
+import Link from "next/link";
 
 interface CommentsGroupProps {
     uuid: string;
@@ -118,6 +120,12 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
+            <SignedIn>
+                <UserButton />
+            </SignedIn>
+            <SignedOut>
+                <Link href="/sign-in">Войти в аккаунт</Link>
+            </SignedOut>
             <AddComment titleCode={titleCode} parentUUID={null} />
             {commentsSection}
             <InView onChange={(inView) => {
