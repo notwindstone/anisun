@@ -3,8 +3,6 @@ import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
-import {nanoid} from "nanoid";
-import {notifications} from "@mantine/notifications";
 
 interface CommentProps {
     uuid: string;
@@ -20,19 +18,10 @@ interface CommentProps {
     isEdited: boolean;
 }
 
-export default function Comment({ isChildOfChild = false, parentUUIDOfLastChild, comment }: { isChildOfChild?: boolean, parentUUIDOfLastChild?: string, comment: CommentProps }) {
+export default function Comment({ isChildOfChild = false, parentUUIDOfLastChild, comment }: { isChildOfChild?: boolean, parentUUIDOfLastChild?: string | null, comment: CommentProps }) {
     const [toggle, setToggle] = useState(false)
 
-    function handleResponse(parentUUIDOfLastChild?: string) {
-        if (parentUUIDOfLastChild) {
-            return notifications.show({
-                title: 'Критическая ошибка',
-                message: 'Возникла непредвиденная проблема с вложенными комментариями',
-                autoClose: 3000,
-                color: 'red',
-            })
-        }
-
+    function handleResponse() {
         setToggle(!toggle)
     }
 
@@ -61,12 +50,12 @@ export default function Comment({ isChildOfChild = false, parentUUIDOfLastChild,
                             isChildOfChild
                                 ? (
                                     <Button variant="light" onClick={() => {
-                                        handleResponse(parentUUIDOfLastChild)
+                                        handleResponse()
                                     }}>Ответить</Button>
                                 )
                                 : (
                                     <Button variant="light" onClick={() => {
-                                        handleResponse(comment.uuid)
+                                        handleResponse()
                                     }}>Ответить</Button>
                                 )
                         }
