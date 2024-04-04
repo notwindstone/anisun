@@ -57,15 +57,30 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                 }
 
                 return commentsGroup.map((comment) => {
-                    const test = commentsGroup.filter((currentComment) => currentComment.parentuuid === comment.uuid)
+                    const childComments = commentsGroup.filter((currentComment) => currentComment.parentuuid === comment.uuid)
+
+                    const childCommentsComponent = childComments.map((childComment) => {
+                            return (
+                                <Comment key={childComment.uuid} comment={childComment}/>
+                            )
+                        })
+
                     return (
                         <div key={comment.uuid}>
                             {
+                                // Не нужно повторно показывать ответы на комментарии
                                 comment.parentuuid
-                                    ? <></>
-                                    : <Comment comment={comment}/>
+                                    ? (
+                                        <></>
+                                    )
+                                    : (
+                                        <>
+                                            <Comment comment={comment}/>
+                                            {childCommentsComponent}
+                                            <hr/>
+                                        </>
+                                    )
                             }
-                            <hr />
                         </div>
                     )
                 })
