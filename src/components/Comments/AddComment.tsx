@@ -7,7 +7,7 @@ import {useQueryClient} from "@tanstack/react-query";
 import {notifications} from "@mantine/notifications";
 import {useUser} from "@clerk/nextjs";
 
-export default function AddComment({ titleCode, parentUUID }: { titleCode: string, parentUUID: string | null }) {
+export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChild }: { titleCode: string, parentUUID: string | null, parentUUIDOfLastChild: string | null }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const queryClient = useQueryClient()
@@ -54,7 +54,7 @@ export default function AddComment({ titleCode, parentUUID }: { titleCode: strin
 
         await comments.add(
             uuid,
-            parentUUID,
+            parentUUIDOfLastChild ?? parentUUID,
             titleCode,
             userId,
             username,

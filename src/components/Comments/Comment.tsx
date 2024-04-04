@@ -18,7 +18,17 @@ interface CommentProps {
     isEdited: boolean;
 }
 
-export default function Comment({ isChildOfChild = false, parentUUIDOfLastChild, comment }: { isChildOfChild?: boolean, parentUUIDOfLastChild?: string | null, comment: CommentProps }) {
+export default function Comment(
+    {
+        isChildOfChild = false,
+        parentUUIDOfLastChild,
+        comment
+    }: {
+        isChildOfChild?: boolean,
+        parentUUIDOfLastChild: string | null,
+        comment: CommentProps
+    }) {
+
     const [toggle, setToggle] = useState(false)
 
     function handleResponse() {
@@ -46,24 +56,14 @@ export default function Comment({ isChildOfChild = false, parentUUIDOfLastChild,
                     <Group>
                         <Text>{comment.likes?.length}</Text>
                         <Text>{comment.dislikes?.length}</Text>
-                        {
-                            isChildOfChild
-                                ? (
-                                    <Button variant="light" onClick={() => {
-                                        handleResponse()
-                                    }}>Ответить</Button>
-                                )
-                                : (
-                                    <Button variant="light" onClick={() => {
-                                        handleResponse()
-                                    }}>Ответить</Button>
-                                )
-                        }
+                        <Button variant="light" onClick={() => {
+                            handleResponse()
+                        }}>Ответить</Button>
                     </Group>
                 </Stack>
             </Flex>
             {
-                toggle && <AddComment titleCode={comment.title} parentUUID={comment.uuid} />
+                toggle && <AddComment titleCode={comment.title} parentUUID={comment.uuid} parentUUIDOfLastChild={parentUUIDOfLastChild} />
             }
         </>
 
