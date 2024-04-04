@@ -7,6 +7,7 @@ import Comment from "@/components/Comments/Comment";
 import {InView} from "react-intersection-observer";
 import {Loader} from "@mantine/core";
 import React from "react";
+import classes from './Comments.module.css';
 
 interface CommentsGroupProps {
     uuid: string;
@@ -57,18 +58,42 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                 }
 
                 return commentsGroup.map((comment) => {
-                    const childComments = commentsGroup.filter((currentComment) => currentComment.parentuuid === comment.uuid)
+                    const childComments = commentsGroup
+                        .filter(
+                            (currentComment) => {
+                                return currentComment.parentuuid === comment.uuid
+                            }
+                        )
 
                     const childCommentsComponent = childComments.map((childComment) => {
+                        const childOfChildComments = commentsGroup
+                            .filter(
+                                (currentComment) => {
+                                    return currentComment.parentuuid === childComment.uuid
+                                }
+                            )
+
+                        const childOfChildCommentsComponent = childOfChildComments.map((comment) => {
                             return (
-                                <Comment isChild key={childComment.uuid} comment={childComment}/>
+                                <Comment isChild key={comment.uuid} comment={comment}/>
                             )
                         })
+
+                        return (
+                            <>
+                                <Comment isChild key={childComment.uuid} comment={childComment}/>
+                                <div className={classes.childComments}>
+                                    {childOfChildCommentsComponent}
+                                </div>
+                                <hr/>
+                            </>
+                        )
+                    })
 
                     return (
                         <div key={comment.uuid}>
                             {
-                                // Не нужно повторно показывать ответы на комментарии
+                                // Не нужно повторно отображать ответы на комментарии
                                 comment.parentuuid
                                     ? (
                                         <></>
@@ -76,7 +101,9 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                                     : (
                                         <>
                                             <Comment comment={comment}/>
-                                            {childCommentsComponent}
+                                            <div className={classes.childComments}>
+                                                {childCommentsComponent}
+                                            </div>
                                             <hr/>
                                         </>
                                     )
