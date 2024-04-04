@@ -4,6 +4,7 @@ import Link from "next/link";
 import {useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
 import {nanoid} from "nanoid";
+import {notifications} from "@mantine/notifications";
 
 interface CommentProps {
     uuid: string;
@@ -19,18 +20,25 @@ interface CommentProps {
     isEdited: boolean;
 }
 
-export default function Comment({ isChild, comment }: { isChild?: boolean, comment: CommentProps }) {
+export default function Comment({ isChildOfChild = false, parentUUIDOfLastChild, comment }: { isChildOfChild?: boolean, parentUUIDOfLastChild?: string, comment: CommentProps }) {
     const [toggle, setToggle] = useState(false)
 
-    function handleResponse(parentUUID: string) {
+    function handleResponse(parentUUIDOfLastChild?: string) {
+        if (parentUUIDOfLastChild) {
+            return notifications.show({
+                title: 'Критическая ошибка',
+                message: 'Возникла непредвиденная проблема с вложенными комментариями',
+                autoClose: 3000,
+                color: 'red',
+            })
+        }
+
         setToggle(!toggle)
     }
 
     return (
         <>
-            <Flex className={
-                isChild ? `${classes.root} ${classes.childComment}` : classes.root
-            }>
+            <Flex className={classes.root}>
                 <Group>
                     <Link href={`/account/${comment.userid}`}>
                         <Avatar src={comment.avatar} size={64}/>
@@ -49,9 +57,19 @@ export default function Comment({ isChild, comment }: { isChild?: boolean, comme
                     <Group>
                         <Text>{comment.likes?.length}</Text>
                         <Text>{comment.dislikes?.length}</Text>
-                        <Button variant="light" onClick={() => {
-                            handleResponse(comment.uuid)
-                        }}>Ответить</Button>
+                        {
+                            isChildOfChild
+                                ? (
+                                    <Button variant="light" onClick={() => {
+                                        handleResponse(parentUUIDOfLastChild)
+                                    }}>Ответить</Button>
+                                )
+                                : (
+                                    <Button variant="light" onClick={() => {
+                                        handleResponse(comment.uuid)
+                                    }}>Ответить</Button>
+                                )
+                        }
                     </Group>
                 </Stack>
             </Flex>

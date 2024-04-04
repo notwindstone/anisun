@@ -75,13 +75,13 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
                         const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
                             return (
-                                <Comment key={childOfChildComment.uuid} isChild comment={childOfChildComment}/>
+                                <Comment key={childOfChildComment.uuid} isChildOfChild comment={childOfChildComment}/>
                             )
                         })
 
                         return (
                             <div key={childComment.uuid}>
-                                <Comment isChild comment={childComment}/>
+                                <Comment comment={childComment}/>
                                 <div className={classes.childComments}>
                                     {childOfChildCommentsComponent}
                                 </div>
@@ -96,7 +96,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                                 // Не нужно повторно отображать ответы на комментарии
                                 comment.parentuuid
                                     ? (
-                                        <></>
+                                        ''
                                     )
                                     : (
                                         <>
