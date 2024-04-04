@@ -3,6 +3,7 @@ import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
+import {nanoid} from "nanoid";
 
 interface CommentProps {
     uuid: string;
