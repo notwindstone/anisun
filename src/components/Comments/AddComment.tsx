@@ -11,7 +11,6 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const queryClient = useQueryClient()
-
     const isUser = isLoaded && isSignedIn
 
     const onSuccess = () => {
@@ -21,7 +20,11 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
             autoClose: 3000,
             color: 'green',
         })
-        return queryClient.invalidateQueries({queryKey: ["comments"]})
+        return queryClient.invalidateQueries(
+            {
+                queryKey: ["comments"]
+            }
+        )
     }
 
     const handleSubmit = async () => {
@@ -36,10 +39,10 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
 
         const input = ref.current?.value ?? ""
 
-        if (input.length < 10 || input.length > 2000) {
+        if (input.length < 2 || input.length > 2000) {
             return notifications.show({
                 title: 'Ошибка',
-                message: 'В комментарии должно быть от 10 до 2000 символов',
+                message: 'В комментарии должно быть от 2 до 2000 символов',
                 autoClose: 3000,
                 color: 'yellow',
             })
