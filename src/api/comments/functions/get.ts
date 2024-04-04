@@ -4,7 +4,7 @@ import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
 import { desc, eq } from 'drizzle-orm';
 
-export const get = async (title: string, nextCursor: number = 0) => {
+export const get = async ({ title, nextCursor = 0 }: { title: string, nextCursor: number }) => {
     const initialLimit = nextCursor === 0 ? 8 : nextCursor
     const data =
         await db

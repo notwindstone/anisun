@@ -9,8 +9,8 @@ interface CommentProps {
     username: string;
     avatar: string;
     createdAt: string;
-    likes: number;
-    dislikes: number;
+    likes: unknown[] | null;
+    dislikes: unknown[] | null;
     message: string;
     isDeleted: boolean;
     isEdited: boolean;
@@ -41,8 +41,8 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                     <Text>{comment.message}</Text>
                 </Group>
                 <Group>
-                    <Text>{comment.likes}</Text>
-                    <Text>{comment.dislikes}</Text>
+                    <Text>{comment.likes?.length}</Text>
+                    <Text>{comment.dislikes?.length}</Text>
                     <Button variant="light" onClick={() => {
                         handleResponse(comment.uuid)
                     }}>Ответить</Button>

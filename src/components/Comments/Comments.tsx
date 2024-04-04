@@ -15,8 +15,8 @@ interface CommentsGroupProps {
     username: string;
     avatar: string;
     createdAt: string;
-    likes: number;
-    dislikes: number;
+    likes: unknown[] | null;
+    dislikes: unknown[] | null;
     message: string;
     isDeleted: boolean;
     isEdited: boolean;
@@ -24,7 +24,7 @@ interface CommentsGroupProps {
 
 export default function Comments({ titleCode }: { titleCode: string }) {
     const getComments = async ({ pageParam } : { pageParam: number }) => {
-        return await comments.get(titleCode, pageParam)
+        return await comments.get({title: titleCode, nextCursor: pageParam})
     }
 
     const {
