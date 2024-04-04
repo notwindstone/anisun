@@ -10,6 +10,7 @@ import React from "react";
 
 interface CommentsGroupProps {
     uuid: string;
+    parentuuid: string | null;
     title: string;
     userid: string;
     username: string;
@@ -56,8 +57,16 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                 }
 
                 return commentsGroup.map((comment) => {
+                    const test = commentsGroup.filter((currentComment) => currentComment.parentuuid === comment.uuid)
                     return (
-                        <Comment key={comment.uuid} comment={comment} />
+                        <div key={comment.uuid}>
+                            {
+                                comment.parentuuid
+                                    ? <></>
+                                    : <Comment comment={comment}/>
+                            }
+                            <hr />
+                        </div>
                     )
                 })
             })}
@@ -67,7 +76,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
-            <AddComment titleCode={titleCode} />
+            <AddComment titleCode={titleCode} parentUUID={null} />
             {commentsSection}
             <InView onChange={(inView) => {
                 if (!inView) {

@@ -49,7 +49,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         <Button variant="light" onClick={() => {
                             handleResponse(comment.uuid)
                         }}>Ответить</Button>
-
                     </Group>
                 </Stack>
             </Flex>
