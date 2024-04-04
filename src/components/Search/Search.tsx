@@ -10,7 +10,6 @@ import {
     Select,
     Text,
 } from '@mantine/core';
-import {notifications} from "@mantine/notifications";
 import { useDebouncedState } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
@@ -128,11 +127,6 @@ export function Search() {
                     isFetching ? <Loader size="1rem" /> : <IconSearch size="1rem" />
                 }
                 onOptionSubmit={(option) => {
-                    notifications.show({
-                        title: 'Загрузка',
-                        message: 'Пожалуйста, подождите. Идёт переход на другую страницу',
-                        autoClose: 3000,
-                    })
                     router.push(`/titles/${option.split('--')[0]}`);
                 }}
                 renderOption={renderAutocompleteOption}
