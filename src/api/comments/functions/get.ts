@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import { desc, eq } from 'drizzle-orm';
+import {and, desc, eq, exists, isNull} from 'drizzle-orm';
 
 export const get = async ({ title, nextCursor = 0 }: { title: string, nextCursor: number }) => {
     const initialLimit = nextCursor === 0 ? 8 : nextCursor
@@ -10,15 +10,19 @@ export const get = async ({ title, nextCursor = 0 }: { title: string, nextCursor
         await db
             .select()
             .from(comments)
-            .where(eq(comments.title, title))
+            .where(
+                and(
+                    isNull(comments.parentuuid)
+                )
+            )
             .orderBy(desc(comments.createdAt))
-            .limit(initialLimit)
-            .offset(nextCursor);
+            //.limit(initialLimit)
+            //.offset(nextCursor);
 
     const test = data.map((test1) => {
-        if (!test1.parentuuid) {
-            return test1.uuid
-        }
+
+            return test1.parentuuid
+
     })
 
     const childComments =
