@@ -1,4 +1,4 @@
-import {integer, text, pgTable, boolean} from "drizzle-orm/pg-core";
+import {text, pgTable, boolean} from "drizzle-orm/pg-core";
 
 export const user = pgTable("user", {
     userid: text("userid").primaryKey(),
@@ -18,8 +18,8 @@ export const comments = pgTable("comments", {
     username: text("username").notNull(),
     avatar: text("avatar").notNull(),
     createdAt: text('createdAt').notNull(),
-    likes: integer("likes").default(0).notNull(),
-    dislikes: integer("dislikes").default(0).notNull(),
+    likes: text("likes").default([]).notNull().array(),
+    dislikes: text("dislikes").default([]).notNull().array(),
     message: text("message").notNull(),
     isDeleted: boolean("isDeleted").default(false).notNull(),
     isEdited: boolean("isEdited").default(false).notNull(),

@@ -7,7 +7,7 @@ import {useQueryClient} from "@tanstack/react-query";
 import {notifications} from "@mantine/notifications";
 import {useUser} from "@clerk/nextjs";
 
-export default function AddComment({ titleCode }: { titleCode: string }) {
+export default function AddComment({ titleCode, isParent }: { titleCode: string, isParent?: boolean }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const queryClient = useQueryClient()

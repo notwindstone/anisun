@@ -1,4 +1,4 @@
-import {Avatar, Flex, Group, Stack, Text} from "@mantine/core";
+import {Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
 
@@ -17,6 +17,12 @@ interface CommentProps {
 }
 
 export default function Comment({ comment }: { comment: CommentProps }) {
+    function handleResponse(parentUUID) {
+        const isParent = true
+
+        console.log(parentUUID)
+    }
+
     return (
         <Flex className={classes.root}>
             <Group>
@@ -37,6 +43,9 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                 <Group>
                     <Text>{comment.likes}</Text>
                     <Text>{comment.dislikes}</Text>
+                    <Button variant="light" onClick={() => {
+                        handleResponse(comment.uuid)
+                    }}>Ответить</Button>
                 </Group>
             </Stack>
         </Flex>

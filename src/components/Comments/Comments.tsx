@@ -35,9 +35,10 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         status,
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
+        // @ts-ignore
         queryFn: getComments,
         initialPageParam: 0,
-        getNextPageParam: (lastPage) => lastPage.nextCursor,
+        getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : [],
         refetchInterval: 5000,
     })
 
