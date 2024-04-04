@@ -39,6 +39,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         status,
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
+        // @ts-ignore
         queryFn: getComments,
         initialPageParam: 0,
         getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : [],
@@ -74,7 +75,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                                 }
                             )
 
-                        const childOfChildCommentsComponent = childOfChildComments.reverse().map((childOfChildComment) => {
+                        const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
                             return (
                                 <Comment key={childOfChildComment.uuid} parentUUIDOfLastChild={childOfChildComment.parentuuid} comment={childOfChildComment}/>
                             )
