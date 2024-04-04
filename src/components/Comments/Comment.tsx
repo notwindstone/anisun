@@ -20,12 +20,10 @@ interface CommentProps {
 
 export default function Comment(
     {
-        isChildOfChild = false,
         parentUUIDOfLastChild,
         comment
     }: {
-        isChildOfChild?: boolean,
-        parentUUIDOfLastChild: string | null,
+        parentUUIDOfLastChild?: string | null,
         comment: CommentProps
     }) {
 

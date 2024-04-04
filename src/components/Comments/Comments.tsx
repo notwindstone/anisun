@@ -75,7 +75,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
                         const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
                             return (
-                                <Comment key={childOfChildComment.uuid} isChildOfChild parentUUIDOfLastChild={childOfChildComment.parentuuid} comment={childOfChildComment}/>
+                                <Comment key={childOfChildComment.uuid} parentUUIDOfLastChild={childOfChildComment.parentuuid} comment={childOfChildComment}/>
                             )
                         })
 

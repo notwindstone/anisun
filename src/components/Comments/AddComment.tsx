@@ -7,7 +7,7 @@ import {useQueryClient} from "@tanstack/react-query";
 import {notifications} from "@mantine/notifications";
 import {useUser} from "@clerk/nextjs";
 
-export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChild }: { titleCode: string, parentUUID: string | null, parentUUIDOfLastChild: string | null }) {
+export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChild }: { titleCode: string, parentUUID: string | null, parentUUIDOfLastChild?: string | null }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const queryClient = useQueryClient()
@@ -54,6 +54,15 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
 
         await comments.add(
             uuid,
+            /*
+             * Чтобы комментарии не уходили ниже 3-го уровня,
+             * я в качестве parentuuid использую айди прародителя комментария
+             *
+             * Схема: Комментарий 1
+             *            |-> Ответ на комментарий
+             *                |-> Ответ на ответ
+             *                |-> Ответ на ответ на ответ
+             */
             parentUUIDOfLastChild ?? parentUUID,
             titleCode,
             userId,
