@@ -18,7 +18,7 @@ interface CommentProps {
     isEdited: boolean;
 }
 
-export default function Comment({ comment }: { comment: CommentProps }) {
+export default function Comment({ isChild, comment }: { isChild?: boolean, comment: CommentProps }) {
     const [toggle, setToggle] = useState(false)
 
     function handleResponse(parentUUID: string) {
@@ -27,7 +27,9 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
     return (
         <>
-            <Flex className={classes.root}>
+            <Flex className={
+                isChild ? `${classes.root} ${classes.childComment}` : classes.root
+            }>
                 <Group>
                     <Link href={`/account/${comment.userid}`}>
                         <Avatar src={comment.avatar} size={64}/>
