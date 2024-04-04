@@ -5,6 +5,7 @@ import { comments } from "@/db/schema";
 
 export const add = async (
     uuid: string,
+    parentuuid: string | null,
     title: string,
     userid: string,
     username: string,
@@ -18,6 +19,7 @@ export const add = async (
 ) => {
     await db.insert(comments).values({
         uuid: uuid,
+        parentuuid: parentuuid,
         title: title,
         userid: userid,
         username: username,

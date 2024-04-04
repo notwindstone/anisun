@@ -1,6 +1,8 @@
 import {Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
+import {useState} from "react";
+import AddComment from "@/components/Comments/AddComment";
 
 interface CommentProps {
     uuid: string;
@@ -17,10 +19,10 @@ interface CommentProps {
 }
 
 export default function Comment({ comment }: { comment: CommentProps }) {
-    function handleResponse(parentUUID: string) {
-        const isParent = true
+    const [isParent, setIsParent] = useState(false)
 
-        console.log(parentUUID)
+    function handleResponse(parentUUID: string) {
+        setIsParent(true)
     }
 
     return (
@@ -46,6 +48,9 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                     <Button variant="light" onClick={() => {
                         handleResponse(comment.uuid)
                     }}>Ответить</Button>
+                    {
+                        isParent && <AddComment titleCode={comment.title} parentUUID={comment.uuid} />
+                    }
                 </Group>
             </Stack>
         </Flex>

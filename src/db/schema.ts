@@ -11,7 +11,7 @@ export const user = pgTable("user", {
 
 export const comments = pgTable("comments", {
     uuid: text("uuid").primaryKey(),
-    parent: text("parentuuid"),
+    parentuuid: text("parentuuid"),
     // Title в данном случае является названием аниме,
     // на странице которого будут показываться комментарии.
     title: text("title").notNull(),
