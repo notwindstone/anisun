@@ -17,7 +17,7 @@ interface CommentProps {
 }
 
 export default function Comment({ comment }: { comment: CommentProps }) {
-    function handleResponse(parentUUID) {
+    function handleResponse(parentUUID: string) {
         const isParent = true
 
         console.log(parentUUID)
