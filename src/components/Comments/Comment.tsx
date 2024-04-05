@@ -31,6 +31,15 @@ function notifyAboutDelay() {
     })
 }
 
+function notifyCriticalError() {
+    return notifications.show({
+        title: 'Критическая ошибка',
+        message: 'Возникла непредвиденная ошибка. Попробуйте обновить страницу',
+        autoClose: 3000,
+        color: 'red',
+    })
+}
+
 export default function Comment(
     {
         parentUUIDOfLastChild,
@@ -54,12 +63,7 @@ export default function Comment(
 
     function handleVote(voteType: string) {
         if (!isLoaded) {
-            return notifications.show({
-                title: 'Критическая ошибка',
-                message: 'Возникла непредвиденная ошибка. Попробуйте обновить страницу',
-                autoClose: 3000,
-                color: 'red',
-            })
+            return notifyCriticalError
         }
 
         if (!user) {
@@ -96,12 +100,7 @@ export default function Comment(
 
                 return handleDislike().then()
             default:
-                return notifications.show({
-                    title: 'Критическая ошибка',
-                    message: 'Что-то пошло не так...',
-                    autoClose: 3000,
-                    color: 'red',
-                })
+                return notifyCriticalError
         }
     }
 
