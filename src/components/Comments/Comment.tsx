@@ -67,6 +67,19 @@ export default function Comment(
 
         switch (voteType) {
             case 'like':
+                if (!isLikeSynced || !isDislikeSynced) {
+                    return notifications.show({
+                        title: 'Ошибка',
+                        message: 'Пожалуйста, подождите перед следующим голосом',
+                        autoClose: 3000,
+                        color: 'yellow',
+                    })
+                }
+
+                if (disliked && isLikeSynced) {
+                    handleDislike().then()
+                }
+
                 return handleLike().then()
             case 'dislike':
                 if (!isLikeSynced || !isDislikeSynced) {
@@ -77,6 +90,7 @@ export default function Comment(
                         color: 'yellow',
                     })
                 }
+
                 if (liked && isDislikeSynced) {
                     handleLike().then()
                 }
