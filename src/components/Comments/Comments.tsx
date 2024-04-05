@@ -52,71 +52,73 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         <p>Error: {error.message}</p>
     ) : (
         <>
-            {data.pages.map((group) => {
-                const commentsGroup: CommentsGroupProps[] | null = group.data
+            {
+                data.pages.map((group) => {
+                    const commentsGroup: CommentsGroupProps[] | null = group.data
 
-                if (!commentsGroup) {
-                    return null
-                }
+                    if (!commentsGroup) {
+                        return null
+                    }
 
-                return commentsGroup.map((comment) => {
-                    const childComments = commentsGroup
-                        .filter(
-                            (currentComment) => {
-                                return currentComment.parentuuid === comment.uuid
-                            }
-                        )
-
-                    const childCommentsComponent = childComments.map((childComment) => {
-                        const childOfChildComments = commentsGroup
+                    return commentsGroup.map((comment) => {
+                        const childComments = commentsGroup
                             .filter(
                                 (currentComment) => {
-                                    return currentComment.parentuuid === childComment.uuid
+                                    return currentComment.parentuuid === comment.uuid
                                 }
-                            ).sort(function(firstProp, nextProps) {
-                                // @ts-ignore
-                                return new Date(firstProp.createdAt) - new Date(nextProps.createdAt)
+                            )
+
+                        const childCommentsComponent = childComments.map((childComment) => {
+                            const childOfChildComments = commentsGroup
+                                .filter(
+                                    (currentComment) => {
+                                        return currentComment.parentuuid === childComment.uuid
+                                    }
+                                ).sort(function(firstProp, nextProps) {
+                                    // @ts-ignore
+                                    return new Date(firstProp.createdAt) - new Date(nextProps.createdAt)
+                                })
+
+                            const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
+                                return (
+                                    <Comment key={childOfChildComment.uuid} parentUUIDOfLastChild={childOfChildComment.parentuuid} comment={childOfChildComment}/>
+                                )
                             })
 
-                        const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
                             return (
-                                <Comment key={childOfChildComment.uuid} parentUUIDOfLastChild={childOfChildComment.parentuuid} comment={childOfChildComment}/>
+                                <div key={childComment.uuid}>
+                                    <Comment comment={childComment}/>
+                                    <div className={classes.childComments}>
+                                        {childOfChildCommentsComponent}
+                                    </div>
+                                    <hr/>
+                                </div>
                             )
                         })
 
                         return (
-                            <div key={childComment.uuid}>
-                                <Comment comment={childComment}/>
-                                <div className={classes.childComments}>
-                                    {childOfChildCommentsComponent}
-                                </div>
-                                <hr/>
+                            <div key={comment.uuid}>
+                                {
+                                    // Не нужно повторно отображать ответы на комментарии
+                                    comment.parentuuid
+                                        ? (
+                                            ''
+                                        )
+                                        : (
+                                            <>
+                                                <Comment comment={comment}/>
+                                                <div className={classes.childComments}>
+                                                    {childCommentsComponent}
+                                                </div>
+                                                <hr/>
+                                            </>
+                                        )
+                                }
                             </div>
                         )
                     })
-
-                    return (
-                        <div key={comment.uuid}>
-                            {
-                                // Не нужно повторно отображать ответы на комментарии
-                                comment.parentuuid
-                                    ? (
-                                        ''
-                                    )
-                                    : (
-                                        <>
-                                            <Comment comment={comment}/>
-                                            <div className={classes.childComments}>
-                                                {childCommentsComponent}
-                                            </div>
-                                            <hr/>
-                                        </>
-                                    )
-                            }
-                        </div>
-                    )
                 })
-            })}
+            }
             <span>{isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>
         </>
     )

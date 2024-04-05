@@ -5,4 +5,4 @@ const pool = new Pool({ connectionString: process.env.NEON_DATABASE_URL });
 
 const db = drizzle(pool);
 
-export default db;
+export default db

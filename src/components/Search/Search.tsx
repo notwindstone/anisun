@@ -55,6 +55,12 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     <Text>{searchAutocomplete.notEnoughChars.label}</Text>
                 </>
             );
+        case 'fetching':
+            return (
+                <>
+                    <Loader size={64} />
+                </>
+            )
     }
 
     return (
@@ -119,12 +125,16 @@ export function Search() {
                 searchable
                 variant="unstyled"
                 maxDropdownHeight={800}
-                data={titles}
+                data={
+                    isFetching
+                        ? [{ label: ' ', value: 'fetching', disabled: true }]
+                        : titles
+                }
                 defaultValue={search}
                 onSearchChange={(event) => setSearch(event)}
                 placeholder="Поиск"
                 rightSection={
-                    isFetching ? <Loader size="1rem" /> : <IconSearch size="1rem" />
+                    <IconSearch size="1rem" />
                 }
                 onOptionSubmit={(option) => {
                     router.push(`/titles/${option.split('--')[0]}`);
