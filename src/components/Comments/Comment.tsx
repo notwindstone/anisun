@@ -3,6 +3,9 @@ import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
+import {comments} from "@/api/comments/comments";
+import {useUser} from "@clerk/nextjs";
+import {notifications} from "@mantine/notifications";
 
 interface CommentProps {
     uuid: string;
@@ -27,10 +30,31 @@ export default function Comment(
         comment: CommentProps
     }) {
 
+    const { isSignedIn, user, isLoaded } = useUser();
     const [toggle, setToggle] = useState(false)
+    const [clientLikes, setClientLikes] = useState(comment.likes?.length ?? 0)
 
     function handleResponse() {
         setToggle(!toggle)
+    }
+
+    async function handleLike() {
+        if (!user) {
+            return alert('1')
+        }
+
+        const definedCommentLikes = comment.likes ?? []
+
+        if (definedCommentLikes.includes(user.id)) {
+            return alert('2')
+        }
+
+        if (definedCommentLikes.length !== clientLikes) {
+            return alert('3')
+        }
+
+        await comments.like(comment.uuid, user.id, definedCommentLikes)
+        setClientLikes(clientLikes + 1)
     }
 
     return (
@@ -52,7 +76,8 @@ export default function Comment(
                         <Text>{comment.message}</Text>
                     </Group>
                     <Group>
-                        <Text>{comment.likes?.length}</Text>
+                        <Button onClick={handleLike}>лайк</Button>
+                        <Text>{clientLikes ?? comment.likes?.length}</Text>
                         <Text>{comment.dislikes?.length}</Text>
                         <Button variant="light" onClick={() => {
                             handleResponse()
