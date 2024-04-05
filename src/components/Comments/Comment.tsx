@@ -33,9 +33,26 @@ export default function Comment(
     const { user, isLoaded } = useUser();
     const [toggle, setToggle] = useState(false)
     const [clientLikes, setClientLikes] = useState(comment.likes?.length ?? 0)
+    const [clientDislikes, setClientDislikes] = useState(comment.dislikes?.length ?? 0)
 
     function handleResponse() {
         setToggle(!toggle)
+    }
+
+    function handleVote(voteType: string) {
+        switch (voteType) {
+            case 'like':
+                return handleLike().then()
+            case 'dislike':
+                return handleDislike().then()
+            default:
+                return notifications.show({
+                    title: 'Критическая ошибка',
+                    message: 'Что-то пошло не так...',
+                    autoClose: 3000,
+                    color: 'red',
+                })
+        }
     }
 
     async function handleLike() {
@@ -83,6 +100,10 @@ export default function Comment(
         return await comments.like(comment.uuid, user.id, definedCommentLikes)
     }
 
+    async function handleDislike() {
+
+    }
+
     useEffect(() => {
         setClientLikes(comment.likes?.length ?? clientLikes)
         // eslint-disable-next-line
@@ -109,7 +130,8 @@ export default function Comment(
                     <Group>
                         <Button onClick={handleLike}>лайк</Button>
                         <Text>{clientLikes ?? comment.likes?.length}</Text>
-                        <Text>{comment.dislikes?.length}</Text>
+                        <Button onClick={handleLike}>дизлайк</Button>
+                        <Text>{clientDislikes ?? comment.dislikes?.length}</Text>
                         <Button variant="light" onClick={() => {
                             handleResponse()
                         }}>Ответить</Button>
