@@ -62,10 +62,25 @@ export default function Comment(
             })
         }
 
+        const isLikeSynced = comment.likes?.includes(user.id) === liked
+        const isDislikeSynced = comment.dislikes?.includes(user.id) === disliked
+
         switch (voteType) {
             case 'like':
                 return handleLike().then()
             case 'dislike':
+                if (!isLikeSynced || !isDislikeSynced) {
+                    return notifications.show({
+                        title: 'Ошибка',
+                        message: 'Пожалуйста, подождите перед следующим голосом',
+                        autoClose: 3000,
+                        color: 'yellow',
+                    })
+                }
+                if (liked && isDislikeSynced) {
+                    handleLike().then()
+                }
+
                 return handleDislike().then()
             default:
                 return notifications.show({
