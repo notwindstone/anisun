@@ -70,11 +70,15 @@ export default function Comment(
 
         if (definedCommentLikes.includes(user.id)) {
             const toRemove = true
+
             setClientLikes(clientLikes - 1)
+
             // @ts-ignore
             return await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
         }
+
         setClientLikes(clientLikes + 1)
+
         // @ts-ignore
         return await comments.like(comment.uuid, user.id, definedCommentLikes)
     }
