@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import {
-    AutocompleteProps,
+    AutocompleteProps, CloseButton,
     ComboboxItem, Flex,
     Group, Image,
     Loader,
@@ -14,7 +14,7 @@ import { useDebouncedState } from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
-import { IconSearch } from '@tabler/icons-react';
+import {IconSearch} from '@tabler/icons-react';
 import classes from './Search.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 
@@ -82,7 +82,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
 
 export function Search() {
     const router = useRouter();
-    const [search, setSearch] = useDebouncedState('', 300);
+    const [search, setSearch] = useDebouncedState('', 300, { leading: true });
     const [titles, setTitles] = useState([]);
 
     const { refetch, isFetching } = useQuery({
@@ -137,8 +137,15 @@ export function Search() {
                 defaultValue={search}
                 onSearchChange={(event) => setSearch(event)}
                 placeholder="Поиск"
-                rightSection={
+                leftSection={
                     <IconSearch size="1rem" />
+                }
+                // @ts-ignore
+                rightSectionPointerEvents={true}
+                rightSection={
+                    search
+                        ? <CloseButton onClick={() => setSearch('')} />
+                        : null
                 }
                 onOptionSubmit={(option) => {
                     router.push(`/titles/${option.split('--')[0]}`);

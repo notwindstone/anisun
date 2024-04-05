@@ -74,9 +74,9 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                                     (currentComment) => {
                                         return currentComment.parentuuid === childComment.uuid
                                     }
-                                ).sort(function(firstProp, nextProps) {
+                                ).sort(function(firstProp, nextProp) {
                                     // @ts-ignore
-                                    return new Date(firstProp.createdAt) - new Date(nextProps.createdAt)
+                                    return new Date(firstProp.createdAt) - new Date(nextProp.createdAt)
                                 })
 
                             const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
