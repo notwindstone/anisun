@@ -22,6 +22,15 @@ interface CommentProps {
     isEdited: boolean;
 }
 
+function notifyAboutDelay() {
+    return notifications.show({
+        title: 'Ошибка',
+        message: 'Пожалуйста, подождите перед следующим голосом',
+        autoClose: 3000,
+        color: 'yellow',
+    })
+}
+
 export default function Comment(
     {
         parentUUIDOfLastChild,
@@ -68,12 +77,7 @@ export default function Comment(
         switch (voteType) {
             case 'like':
                 if (!isLikeSynced || !isDislikeSynced) {
-                    return notifications.show({
-                        title: 'Ошибка',
-                        message: 'Пожалуйста, подождите перед следующим голосом',
-                        autoClose: 3000,
-                        color: 'yellow',
-                    })
+                    return notifyAboutDelay()
                 }
 
                 if (disliked && isLikeSynced) {
@@ -83,12 +87,7 @@ export default function Comment(
                 return handleLike().then()
             case 'dislike':
                 if (!isLikeSynced || !isDislikeSynced) {
-                    return notifications.show({
-                        title: 'Ошибка',
-                        message: 'Пожалуйста, подождите перед следующим голосом',
-                        autoClose: 3000,
-                        color: 'yellow',
-                    })
+                    return notifyAboutDelay()
                 }
 
                 if (liked && isDislikeSynced) {
@@ -110,12 +109,7 @@ export default function Comment(
         const definedCommentLikes = comment.likes ?? []
 
         if (definedCommentLikes.length !== clientLikes) {
-            return notifications.show({
-                title: 'Ошибка',
-                message: 'Пожалуйста, подождите перед следующим голосом',
-                autoClose: 3000,
-                color: 'yellow',
-            })
+            return notifyAboutDelay()
         }
 
         // Уже проверил в handleVote()
@@ -141,12 +135,7 @@ export default function Comment(
         const definedCommentDislikes = comment.dislikes ?? []
 
         if (definedCommentDislikes.length !== clientDislikes) {
-            return notifications.show({
-                title: 'Ошибка',
-                message: 'Пожалуйста, подождите перед следующим голосом',
-                autoClose: 3000,
-                color: 'yellow',
-            })
+            return notifyAboutDelay()
         }
 
         // Уже проверил в handleVote()
