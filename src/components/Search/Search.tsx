@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import {
     AutocompleteProps,
-    ComboboxItem,
+    ComboboxItem, Flex,
     Group, Image,
     Loader,
     OptionsFilter,
@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import { IconSearch } from '@tabler/icons-react';
-import styles from './Search.module.css';
+import classes from './Search.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 
 interface TitleProps {
@@ -44,29 +44,33 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
         case 'nothing':
             return (
                 <>
-                    <Image className={styles.poster} alt="Anime character" radius="sm" src={searchAutocomplete.nothing.image} />
+                    <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.nothing.image} />
                     <Text>{searchAutocomplete.nothing.label}</Text>
                 </>
             );
         case 'notEnoughChars':
             return (
                 <>
-                    <Image className={styles.poster} alt="Anime character" radius="sm" src={searchAutocomplete.notEnoughChars.image} />
+                    <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.notEnoughChars.image} />
                     <Text>{searchAutocomplete.notEnoughChars.label}</Text>
                 </>
             );
         case 'fetching':
             return (
-                <>
+                <Flex
+                    className={classes.fetchingWrapper}
+                    justify="center"
+                    align="center"
+                >
                     <Loader size={64} />
-                </>
+                </Flex>
             )
     }
 
     return (
         <Group gap="sm">
             <div>
-                <Image className={styles.poster} src={optionData[1]} alt="Anime poster" radius="sm" />
+                <Image className={classes.poster} src={optionData[1]} alt="Anime poster" radius="sm" />
             </div>
             <div>
                 <Text size="xl">{optionData[2]}</Text>
