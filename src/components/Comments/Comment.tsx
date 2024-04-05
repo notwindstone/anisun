@@ -1,4 +1,4 @@
-import {Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
 import {useEffect, useState} from "react";
@@ -6,6 +6,7 @@ import AddComment from "@/components/Comments/AddComment";
 import {comments} from "@/api/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
+import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 
 interface CommentProps {
     uuid: string;
@@ -31,9 +32,12 @@ export default function Comment(
     }) {
 
     const { user, isLoaded } = useUser();
+
     const [toggle, setToggle] = useState(false)
     const [clientLikes, setClientLikes] = useState(comment.likes?.length ?? 0)
     const [clientDislikes, setClientDislikes] = useState(comment.dislikes?.length ?? 0)
+    const [liked, setLiked] = useState(comment.likes?.includes(user.id))
+    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user.id))
 
     function handleResponse() {
         setToggle(!toggle)
@@ -161,10 +165,24 @@ export default function Comment(
                         <Text>{comment.message}</Text>
                     </Group>
                     <Group>
-                        <Button onClick={() => handleVote("like")}>лайк</Button>
-                        <Text>{clientLikes ?? comment.likes?.length}</Text>
-                        <Button onClick={() => handleVote("dislike")}>дизлайк</Button>
+                        <ActionIcon variant={
+                            liked
+                                ? "filled"
+                                : "default"
+                        } onClick={() => handleVote("like")}>
+                            <IconCaretUpFilled />
+                        </ActionIcon>
+                         <Text>{clientLikes ?? comment.likes?.length}</Text>
+
+                        <ActionIcon variant={
+                            disliked
+                                ? "filled"
+                                : "default"
+                        } onClick={() => handleVote("dislike")}>
+                            <IconCaretDownFilled />
+                        </ActionIcon>
                         <Text>{clientDislikes ?? comment.dislikes?.length}</Text>
+
                         <Button variant="light" onClick={() => {
                             handleResponse()
                         }}>Ответить</Button>
