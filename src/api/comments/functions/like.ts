@@ -2,9 +2,10 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import {eq, sql} from 'drizzle-orm';
+import {eq} from 'drizzle-orm';
 
 export const like = async (uuid: string, userId: string, commentLikes: []) => {
+    // @ts-ignore
     commentLikes.push(userId)
 
     await db

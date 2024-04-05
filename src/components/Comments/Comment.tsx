@@ -30,7 +30,7 @@ export default function Comment(
         comment: CommentProps
     }) {
 
-    const { isSignedIn, user, isLoaded } = useUser();
+    const { user, isLoaded } = useUser();
     const [toggle, setToggle] = useState(false)
     const [clientLikes, setClientLikes] = useState(comment.likes?.length ?? 0)
 
@@ -39,21 +39,47 @@ export default function Comment(
     }
 
     async function handleLike() {
+        if (!isLoaded) {
+            return notifications.show({
+                title: 'Критическая ошибка',
+                message: 'Возникла непредвиденная ошибка. Попробуйте обновить страницу',
+                autoClose: 3000,
+                color: 'red',
+            })
+        }
+
         if (!user) {
-            return alert('1')
+            return notifications.show({
+                title: 'Ошибка',
+                message: 'Войдите в аккаунт перед тем, как лайкать комментарии',
+                autoClose: 3000,
+                color: 'yellow',
+            })
         }
 
         const definedCommentLikes = comment.likes ?? []
 
         if (definedCommentLikes.includes(user.id)) {
-            return alert('2')
+            return notifications.show({
+                title: 'Ошибка',
+                message: 'Вы уже лайкали данный комментарий',
+                autoClose: 3000,
+                color: 'yellow',
+            })
         }
 
         if (definedCommentLikes.length !== clientLikes) {
-            return alert('3')
+            return notifications.show({
+                title: 'Ошибка',
+                message: 'потом уберу',
+                autoClose: 3000,
+                color: 'yellow',
+            })
         }
 
+        // @ts-ignore
         await comments.like(comment.uuid, user.id, definedCommentLikes)
+
         setClientLikes(clientLikes + 1)
     }
 
