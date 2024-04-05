@@ -7,6 +7,7 @@ import {comments} from "@/api/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
+import {MakeDate} from "@/utils/MakeDate";
 
 interface CommentProps {
     uuid: string;
@@ -69,12 +70,13 @@ export default function Comment(
         if (!user) {
             return notifications.show({
                 title: 'Ошибка',
-                message: 'Войдите в аккаунт перед тем, как ставить свой голос на комментарий',
+                message: 'Войдите в аккаунт перед тем, как оставить свой голос на комментарий',
                 autoClose: 3000,
                 color: 'yellow',
             })
         }
 
+        // Больше никаких голосов без синхронизации клиентской части с сервером во избежание багов
         const isLikeSynced = comment.likes?.includes(user.id) === liked
         const isDislikeSynced = comment.dislikes?.includes(user.id) === disliked
 
@@ -85,6 +87,7 @@ export default function Comment(
                 }
 
                 if (disliked && isLikeSynced) {
+                    // В данном случае дизлайк убирается, если он поставлен и синхронизированы лайки, и выполняется дальнейший код
                     handleDislike().then()
                 }
 
@@ -95,6 +98,7 @@ export default function Comment(
                 }
 
                 if (liked && isDislikeSynced) {
+                    // В данном случае лайк убирается, если он поставлен и синхронизированы дизлайки, и выполняется дальнейший код
                     handleLike().then()
                 }
 
@@ -180,7 +184,7 @@ export default function Comment(
                         <Link href={`/account/${comment.userid}`}>
                             <Text>{comment.username}</Text>
                         </Link>
-                        <Text>{comment.createdAt}</Text>
+                        <Text>{MakeDate(comment.createdAt)}</Text>
                     </Group>
                     <Group>
                         <Text>{comment.message}</Text>
