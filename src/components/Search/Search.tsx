@@ -121,7 +121,7 @@ export function Search() {
 
     useEffect(() => {
         refetch().then();
-    }, [search]);
+    }, [refetch, search]);
 
     return (
         <>
