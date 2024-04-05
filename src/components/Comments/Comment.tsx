@@ -1,7 +1,7 @@
 import {Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
 import {comments} from "@/api/comments/comments";
 import {useUser} from "@clerk/nextjs";
@@ -82,6 +82,11 @@ export default function Comment(
 
         setClientLikes(clientLikes + 1)
     }
+
+    useEffect(() => {
+        setClientLikes(comment.likes?.length ?? clientLikes)
+        // eslint-disable-next-line
+    }, [comment.likes?.length]);
 
     return (
         <>
