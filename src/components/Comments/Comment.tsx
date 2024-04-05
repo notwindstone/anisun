@@ -40,6 +40,24 @@ export default function Comment(
     }
 
     function handleVote(voteType: string) {
+        if (!isLoaded) {
+            return notifications.show({
+                title: 'Критическая ошибка',
+                message: 'Возникла непредвиденная ошибка. Попробуйте обновить страницу',
+                autoClose: 3000,
+                color: 'red',
+            })
+        }
+
+        if (!user) {
+            return notifications.show({
+                title: 'Ошибка',
+                message: 'Войдите в аккаунт перед тем, как ставить свой голос на комментарий',
+                autoClose: 3000,
+                color: 'yellow',
+            })
+        }
+
         switch (voteType) {
             case 'like':
                 return handleLike().then()
@@ -56,35 +74,19 @@ export default function Comment(
     }
 
     async function handleLike() {
-        if (!isLoaded) {
-            return notifications.show({
-                title: 'Критическая ошибка',
-                message: 'Возникла непредвиденная ошибка. Попробуйте обновить страницу',
-                autoClose: 3000,
-                color: 'red',
-            })
-        }
-
-        if (!user) {
-            return notifications.show({
-                title: 'Ошибка',
-                message: 'Войдите в аккаунт перед тем, как лайкать комментарии',
-                autoClose: 3000,
-                color: 'yellow',
-            })
-        }
-
         const definedCommentLikes = comment.likes ?? []
 
         if (definedCommentLikes.length !== clientLikes) {
             return notifications.show({
                 title: 'Ошибка',
-                message: 'Пожалуйста, подождите перед следующим ',
+                message: 'Пожалуйста, подождите перед следующим голосом',
                 autoClose: 3000,
                 color: 'yellow',
             })
         }
 
+        // Уже проверил в handleVote()
+        // @ts-ignore
         if (definedCommentLikes.includes(user.id)) {
             const toRemove = true
 
@@ -101,6 +103,32 @@ export default function Comment(
     }
 
     async function handleDislike() {
+        const definedCommentDislikes = comment.dislikes ?? []
+
+        if (definedCommentDislikes.length !== clientDislikes) {
+            return notifications.show({
+                title: 'Ошибка',
+                message: 'Пожалуйста, подождите перед следующим голосом',
+                autoClose: 3000,
+                color: 'yellow',
+            })
+        }
+
+        // Уже проверил в handleVote()
+        // @ts-ignore
+        if (definedCommentDislikes.includes(user.id)) {
+            const toRemove = true
+
+            setClientDislikes(clientDislikes - 1)
+
+            // @ts-ignore
+            return await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
+        }
+
+        setClientDislikes(clientDislikes + 1)
+
+        // @ts-ignore
+        return await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
 
     }
 
@@ -108,6 +136,11 @@ export default function Comment(
         setClientLikes(comment.likes?.length ?? clientLikes)
         // eslint-disable-next-line
     }, [comment.likes?.length]);
+
+    useEffect(() => {
+        setClientDislikes(comment.dislikes?.length ?? clientDislikes)
+        // eslint-disable-next-line
+    }, [comment.dislikes?.length]);
 
     return (
         <>
@@ -128,9 +161,9 @@ export default function Comment(
                         <Text>{comment.message}</Text>
                     </Group>
                     <Group>
-                        <Button onClick={handleLike}>лайк</Button>
+                        <Button onClick={() => handleVote("like")}>лайк</Button>
                         <Text>{clientLikes ?? comment.likes?.length}</Text>
-                        <Button onClick={handleLike}>дизлайк</Button>
+                        <Button onClick={() => handleVote("dislike")}>дизлайк</Button>
                         <Text>{clientDislikes ?? comment.dislikes?.length}</Text>
                         <Button variant="light" onClick={() => {
                             handleResponse()
