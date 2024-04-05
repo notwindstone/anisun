@@ -140,8 +140,7 @@ export function Search() {
                 leftSection={
                     <IconSearch size="1rem" />
                 }
-                // @ts-ignore
-                rightSectionPointerEvents={true}
+                rightSectionPointerEvents="auto"
                 rightSection={
                     search
                         ? <CloseButton onClick={() => setSearch('')} />
