@@ -36,8 +36,8 @@ export default function Comment(
     const [toggle, setToggle] = useState(false)
     const [clientLikes, setClientLikes] = useState(comment.likes?.length ?? 0)
     const [clientDislikes, setClientDislikes] = useState(comment.dislikes?.length ?? 0)
-    const [liked, setLiked] = useState(comment.likes?.includes(user.id))
-    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user.id))
+    const [liked, setLiked] = useState(comment.likes?.includes(user?.id) ?? false)
+    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id) ?? false)
 
     function handleResponse() {
         setToggle(!toggle)
@@ -95,12 +95,14 @@ export default function Comment(
             const toRemove = true
 
             setClientLikes(clientLikes - 1)
+            setLiked(false)
 
             // @ts-ignore
             return await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
         }
 
         setClientLikes(clientLikes + 1)
+        setLiked(true)
 
         // @ts-ignore
         return await comments.like(comment.uuid, user.id, definedCommentLikes)
@@ -124,12 +126,14 @@ export default function Comment(
             const toRemove = true
 
             setClientDislikes(clientDislikes - 1)
+            setDisliked(false)
 
             // @ts-ignore
             return await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
         }
 
         setClientDislikes(clientDislikes + 1)
+        setDisliked(true)
 
         // @ts-ignore
         return await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
