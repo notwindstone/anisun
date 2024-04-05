@@ -60,10 +60,9 @@ export default function Comment(
         const definedCommentLikes = comment.likes ?? []
 
         if (definedCommentLikes.length !== clientLikes) {
-            console.log(definedCommentLikes.length, clientLikes)
             return notifications.show({
                 title: 'Ошибка',
-                message: 'Пожалуйста, подождите',
+                message: 'Пожалуйста, подождите перед следующим ',
                 autoClose: 3000,
                 color: 'yellow',
             })
@@ -71,17 +70,13 @@ export default function Comment(
 
         if (definedCommentLikes.includes(user.id)) {
             const toRemove = true
-
+            setClientLikes(clientLikes - 1)
             // @ts-ignore
-            await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
-
-            return setClientLikes(clientLikes - 1)
+            return await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
         }
-
+        setClientLikes(clientLikes + 1)
         // @ts-ignore
-        await comments.like(comment.uuid, user.id, definedCommentLikes)
-
-        return setClientLikes(clientLikes + 1)
+        return await comments.like(comment.uuid, user.id, definedCommentLikes)
     }
 
     useEffect(() => {
