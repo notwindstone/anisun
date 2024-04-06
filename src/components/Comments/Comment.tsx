@@ -115,6 +115,7 @@ export default function Comment(
             const toRemove = true
 
             setLiked(false)
+            setDelayed(true)
 
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
@@ -123,14 +124,13 @@ export default function Comment(
                 queryKey: ['comments', comment.title]
             })
 
-            setDelayed(true)
-
             return setTimeout(() => {
                 setDelayed(false)
             }, 1000)
         }
 
         setLiked(true)
+        setDelayed(true)
 
         // @ts-ignore
         await comments.like(comment.uuid, user.id, definedCommentLikes)
@@ -138,8 +138,6 @@ export default function Comment(
         await queryClient.refetchQueries({
             queryKey: ['comments', comment.title]
         })
-
-        setDelayed(true)
 
         return setTimeout(() => {
             setDelayed(false)
@@ -155,6 +153,7 @@ export default function Comment(
             const toRemove = true
 
             setDisliked(false)
+            setDelayed(true)
 
             // @ts-ignore
             await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
@@ -163,14 +162,13 @@ export default function Comment(
                 queryKey: ['comments', comment.title]
             })
 
-            setDelayed(true)
-
             return setTimeout(() => {
                 setDelayed(false)
             }, 1000)
         }
 
         setDisliked(true)
+        setDelayed(true)
 
         // @ts-ignore
         await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
@@ -178,8 +176,6 @@ export default function Comment(
         await queryClient.refetchQueries({
             queryKey: ['comments', comment.title]
         })
-
-        setDelayed(true)
 
         return setTimeout(() => {
             setDelayed(false)
@@ -212,7 +208,15 @@ export default function Comment(
                         } onClick={() => handleVote("like")}>
                             <IconCaretUpFilled />
                         </ActionIcon>
-                        <Text>{comment.likes?.length}</Text>
+                        <Text>
+                            {
+                                queryClient.isFetching()
+                                    ? (
+                                        <Loader size="1rem" />
+                                    )
+                                    : comment.likes?.length
+                            }
+                        </Text>
 
                         <ActionIcon variant={
                             disliked
@@ -221,7 +225,15 @@ export default function Comment(
                         } onClick={() => handleVote("dislike")}>
                             <IconCaretDownFilled />
                         </ActionIcon>
-                        <Text>{comment.dislikes?.length}</Text>
+                        <Text>
+                            {
+                                queryClient.isFetching()
+                                    ? (
+                                        <Loader size="1rem" />
+                                    )
+                                    : comment.dislikes?.length
+                            }
+                        </Text>
 
                         <Button variant="light" onClick={() => {
                             handleResponse()
