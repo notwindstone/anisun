@@ -1,5 +1,7 @@
-import {likes} from "@/api/account/stats/likes";
+import {reputation} from "@/api/account/stats/reputation";
+import {totalComments} from "@/api/account/stats/totalComments";
 
 export const account = {
-    likes: likes,
+    reputation: reputation,
+    totalComments: totalComments,
 }

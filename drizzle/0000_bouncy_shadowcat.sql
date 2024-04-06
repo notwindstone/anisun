@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS "comments" (
 	"username" text NOT NULL,
 	"avatar" text NOT NULL,
 	"createdAt" text NOT NULL,
-	"likes" json[],
+	"reputation" json[],
 	"dislikes" json[],
 	"message" text NOT NULL,
 	"isDeleted" boolean DEFAULT false NOT NULL,
