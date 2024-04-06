@@ -23,7 +23,8 @@ interface ResponseProps {
 }
 
 export default async function Page({ params }: { params: { code: string } }) {
-    const response: ResponseProps = (await axios.get(`https://api.anilibria.tv/v3/title?code=${params.code}`)).data
+    const responseNonData: ResponseProps = await axios.get(`https://api.anilibria.tv/v3/title?code=${params.code}`)
+    const response = await responseNonData.data
     const animePlayer = response.player;
 
     // Некоторые аниме тайтлы не имеют плеера
