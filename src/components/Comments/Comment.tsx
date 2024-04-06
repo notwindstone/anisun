@@ -8,6 +8,7 @@ import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
+import {useQueryClient} from "@tanstack/react-query";
 
 interface CommentProps {
     uuid: string;
@@ -24,6 +25,8 @@ interface CommentProps {
 }
 
 function notifyAboutDelay() {
+    notifications.clean()
+
     return notifications.show({
         title: 'Ошибка',
         message: 'Пожалуйста, подождите перед следующим голосом',
@@ -33,6 +36,8 @@ function notifyAboutDelay() {
 }
 
 function notifyCriticalError() {
+    notifications.clean()
+
     return notifications.show({
         title: 'Критическая ошибка',
         message: 'Возникла непредвиденная ошибка. Попробуйте обновить страницу',
@@ -58,6 +63,8 @@ export default function Comment(
     const [liked, setLiked] = useState(comment.likes?.includes(user?.id) ?? false)
     const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id) ?? false)
 
+    const queryClient = useQueryClient()
+
     function handleResponse() {
         setToggle(!toggle)
     }
@@ -68,6 +75,8 @@ export default function Comment(
         }
 
         if (!user) {
+            notifications.clean()
+
             return notifications.show({
                 title: 'Ошибка',
                 message: 'Войдите в аккаунт перед тем, как оставить свой голос на комментарий',
