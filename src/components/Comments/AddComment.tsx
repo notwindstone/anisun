@@ -23,6 +23,7 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
             autoClose: 3000,
             color: 'green',
         })
+
         return queryClient.invalidateQueries(
             {
                 queryKey: ["comments"]

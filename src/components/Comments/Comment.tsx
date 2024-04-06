@@ -1,14 +1,14 @@
 import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
 import {comments} from "@/api/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
-import {useQueryClient} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
 interface CommentProps {
     uuid: string;
@@ -58,10 +58,19 @@ export default function Comment(
     const { user } = useUser();
 
     const [toggle, setToggle] = useState(false)
-    const [clientLikes, setClientLikes] = useState(comment.likes?.length ?? 0)
-    const [clientDislikes, setClientDislikes] = useState(comment.dislikes?.length ?? 0)
     const [liked, setLiked] = useState(comment.likes?.includes(user?.id))
     const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id))
+
+    const queryClient = useQueryClient()
+
+    const commentsData = queryClient.getQueryData(['comments', comment.title])
+
+    const mutation = useMutation({
+        mutationFn: () => commentsData,
+        onSuccess: (data) => {
+            queryClient.setQueryData(['todo', comment.title], data)
+        },
+    })
 
     function handleResponse() {
         setToggle(!toggle)
@@ -79,28 +88,16 @@ export default function Comment(
             })
         }
 
-        // Больше никаких голосов без синхронизации клиентской части с сервером во избежание багов
-        const isLikeSynced = comment.likes?.includes(user.id) === liked
-        const isDislikeSynced = comment.dislikes?.includes(user.id) === disliked
-
         switch (voteType) {
             case 'like':
-                if (!isLikeSynced || !isDislikeSynced) {
-                    return notifyAboutDelay()
-                }
-
-                if (disliked && isLikeSynced) {
+                if (disliked) {
                     // В данном случае дизлайк убирается, если он поставлен и синхронизированы лайки, и выполняется дальнейший код
                     handleDislike().then()
                 }
 
                 return handleLike().then()
             case 'dislike':
-                if (!isLikeSynced || !isDislikeSynced) {
-                    return notifyAboutDelay()
-                }
-
-                if (liked && isDislikeSynced) {
+                if (liked) {
                     // В данном случае лайк убирается, если он поставлен и синхронизированы дизлайки, и выполняется дальнейший код
                     handleLike().then()
                 }
@@ -114,23 +111,21 @@ export default function Comment(
     async function handleLike() {
         const definedCommentLikes = comment.likes ?? []
 
-        if (definedCommentLikes.length !== clientLikes) {
-            return notifyAboutDelay()
-        }
-
         // Уже проверил в handleVote()
         // @ts-ignore
         if (definedCommentLikes.includes(user.id)) {
             const toRemove = true
 
-            setClientLikes(clientLikes - 1)
             setLiked(false)
+
+            const newCommentLikes = definedCommentLikes.filter(function (value) {
+                return value !== user?.id
+            })
 
             // @ts-ignore
             return await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
         }
 
-        setClientLikes(clientLikes + 1)
         setLiked(true)
 
         // @ts-ignore
@@ -140,39 +135,23 @@ export default function Comment(
     async function handleDislike() {
         const definedCommentDislikes = comment.dislikes ?? []
 
-        if (definedCommentDislikes.length !== clientDislikes) {
-            return notifyAboutDelay()
-        }
-
         // Уже проверил в handleVote()
         // @ts-ignore
         if (definedCommentDislikes.includes(user.id)) {
             const toRemove = true
 
-            setClientDislikes(clientDislikes - 1)
             setDisliked(false)
 
             // @ts-ignore
             return await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
         }
 
-        setClientDislikes(clientDislikes + 1)
         setDisliked(true)
 
         // @ts-ignore
         return await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
 
     }
-
-    useEffect(() => {
-        setClientLikes(comment.likes?.length ?? clientLikes)
-        // eslint-disable-next-line
-    }, [comment.likes?.length]);
-
-    useEffect(() => {
-        setClientDislikes(comment.dislikes?.length ?? clientDislikes)
-        // eslint-disable-next-line
-    }, [comment.dislikes?.length]);
 
     return (
         <>
@@ -200,7 +179,7 @@ export default function Comment(
                         } onClick={() => handleVote("like")}>
                             <IconCaretUpFilled />
                         </ActionIcon>
-                        <Text>{clientLikes ?? comment.likes?.length}</Text>
+                        <Text>{comment.likes?.length}</Text>
 
                         <ActionIcon variant={
                             disliked
@@ -209,7 +188,7 @@ export default function Comment(
                         } onClick={() => handleVote("dislike")}>
                             <IconCaretDownFilled />
                         </ActionIcon>
-                        <Text>{clientDislikes ?? comment.dislikes?.length}</Text>
+                        <Text>{comment.dislikes?.length}</Text>
 
                         <Button variant="light" onClick={() => {
                             handleResponse()
