@@ -1,4 +1,4 @@
-import {useRef} from "react";
+import {useRef, useState} from "react";
 import {Button, Group, Textarea} from "@mantine/core";
 import { IconMessage } from "@tabler/icons-react";
 import {comments} from "@/api/comments/comments";
@@ -10,7 +10,10 @@ import {useUser} from "@clerk/nextjs";
 export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChild }: { titleCode: string, parentUUID: string | null, parentUUIDOfLastChild?: string | null }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
+    const [delayed, setDelayed] = useState(false)
+
     const queryClient = useQueryClient()
+
     const isUser = isLoaded && isSignedIn
 
     const onSuccess = () => {
@@ -28,6 +31,15 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
     }
 
     const handleSubmit = async () => {
+        if (delayed) {
+            return notifications.show({
+                title: 'Ошибка',
+                message: 'Пожалуйста, подождите',
+                autoClose: 3000,
+                color: 'yellow',
+            })
+        }
+
         if (!isUser) {
             return notifications.show({
                 title: 'Критическая ошибка',
@@ -80,6 +92,12 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
         )
 
         await onSuccess()
+
+        setDelayed(true)
+
+        setTimeout(() => {
+            setDelayed(false)
+        }, 5000)
     }
 
     return (
