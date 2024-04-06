@@ -1,7 +1,9 @@
+import dayjs from "dayjs";
+import 'dayjs/locale/ru'
+
 export function MakeDate(createdAt: string) {
-    const parsedDate = Date.parse(createdAt)
-    const createdDate = new Date(parsedDate)
-    const localDate = createdDate.toLocaleDateString()
-    const localTime = createdDate.toLocaleTimeString()
-    return (`${localTime}, ${localDate} `)
+    dayjs.locale('ru')
+    const currentDay = dayjs(createdAt).format('dddd DD-MM-YYYY H:mm:ss')
+
+    return (`${currentDay}`)
 }
