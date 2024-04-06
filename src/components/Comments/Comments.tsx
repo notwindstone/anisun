@@ -8,7 +8,7 @@ import {InView} from "react-intersection-observer";
 import {Loader} from "@mantine/core";
 import React from "react";
 import classes from './Comments.module.css';
-import {SignedIn, SignedOut, UserButton} from "@clerk/nextjs";
+import {SignedIn, SignedOut, UserButton, useUser} from "@clerk/nextjs";
 import Link from "next/link";
 
 interface CommentsGroupProps {
@@ -30,6 +30,8 @@ export default function Comments({ titleCode }: { titleCode: string }) {
     const getComments = async ({ pageParam } : { pageParam: number }) => {
         return await comments.get({title: titleCode, nextCursor: pageParam})
     }
+
+    const { isLoaded } = useUser();
 
     const {
         data,
@@ -132,7 +134,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                 <Link href="/sign-in">Войти в аккаунт</Link>
             </SignedOut>
             <AddComment titleCode={titleCode} parentUUID={null} />
-            {commentsSection}
+            {isLoaded && commentsSection}
             <InView onChange={(inView) => {
                 if (!inView) {
                     return
