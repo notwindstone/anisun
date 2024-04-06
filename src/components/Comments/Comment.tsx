@@ -29,7 +29,7 @@ function notifyAboutDelay() {
 
     return notifications.show({
         title: 'Ошибка',
-        message: 'Пожалуйста, подождите перед следующим голосом',
+        message: 'Пожалуйста, подождите секунду перед следующим голосом',
         autoClose: 3000,
         color: 'yellow',
     })
@@ -60,6 +60,7 @@ export default function Comment(
     const [toggle, setToggle] = useState(false)
     const [liked, setLiked] = useState(comment.likes?.includes(user?.id))
     const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id))
+    const [delayed, setDelayed] = useState(false)
 
     const queryClient = useQueryClient()
 
@@ -77,6 +78,12 @@ export default function Comment(
                 autoClose: 3000,
                 color: 'yellow',
             })
+        }
+
+        if (delayed) {
+            notifications.clean()
+
+            return notifyAboutDelay()
         }
 
         switch (voteType) {
@@ -107,18 +114,20 @@ export default function Comment(
         if (definedCommentLikes.includes(user.id)) {
             const toRemove = true
 
-            setLiked(false)
-
-            const newCommentLikes = definedCommentLikes.filter(function (value) {
-                return value !== user?.id
-            })
-
             queryClient.refetchQueries({
                 queryKey: ['comments', comment.title]
             }).then()
 
+            setLiked(false)
+
             // @ts-ignore
-            return await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
+            await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
+
+            setDelayed(true)
+
+            return setTimeout(() => {
+                setDelayed(false)
+            }, 1000)
         }
 
         queryClient.refetchQueries({
@@ -128,7 +137,13 @@ export default function Comment(
         setLiked(true)
 
         // @ts-ignore
-        return await comments.like(comment.uuid, user.id, definedCommentLikes)
+        await comments.like(comment.uuid, user.id, definedCommentLikes)
+
+        setDelayed(true)
+
+        return setTimeout(() => {
+            setDelayed(false)
+        }, 1000)
     }
 
     async function handleDislike() {
@@ -139,17 +154,36 @@ export default function Comment(
         if (definedCommentDislikes.includes(user.id)) {
             const toRemove = true
 
+            queryClient.refetchQueries({
+                queryKey: ['comments', comment.title]
+            }).then()
+
             setDisliked(false)
 
             // @ts-ignore
-            return await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
+            await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
+
+            setDelayed(true)
+
+            return setTimeout(() => {
+                setDelayed(false)
+            }, 1000)
         }
+
+        queryClient.refetchQueries({
+            queryKey: ['comments', comment.title]
+        }).then()
 
         setDisliked(true)
 
         // @ts-ignore
-        return await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
+        await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
 
+        setDelayed(true)
+
+        return setTimeout(() => {
+            setDelayed(false)
+        }, 1000)
     }
 
     return (
