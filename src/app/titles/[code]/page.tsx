@@ -3,6 +3,7 @@ import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import {anilibria} from "@/api/anilibria/anilibria";
 import Comments from "@/components/Comments/Comments";
+import axios from "axios";
 
 interface ResponseProps {
     names: {
