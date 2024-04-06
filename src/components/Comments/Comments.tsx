@@ -68,7 +68,10 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                                 (currentComment) => {
                                     return currentComment.parentuuid === comment.uuid
                                 }
-                            )
+                            ).sort(function(firstProp, nextProp) {
+                                // @ts-ignore
+                                return new Date(firstProp.createdAt) - new Date(nextProp.createdAt)
+                            })
 
                         const childCommentsComponent = childComments.map((childComment) => {
                             const childOfChildComments = commentsGroup
