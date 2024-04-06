@@ -5,13 +5,16 @@ import {account} from "@/api/account/account";
 import {Loader, Text} from "@mantine/core";
 
 export default function Account({ userid }: { userid: string }) {
-   const getAccountReputation = async () => {
-        return await account.reputation({ userid: userid })
+   const getAccountStats = async () => {
+       const accountReputation = await account.reputation({ userid: userid })
+       const accountTotalComments = await account.totalComments({ userid: userid })
+
+       return { reputation: accountReputation, totalComments: accountTotalComments }
     }
 
     const { isPending, data } = useQuery({
-        queryKey: ['accountReputation', userid],
-        queryFn: getAccountReputation,
+        queryKey: ['accountStats', userid],
+        queryFn: getAccountStats,
     })
 
     return (
@@ -22,7 +25,16 @@ export default function Account({ userid }: { userid: string }) {
                         ? (
                             <Loader size="1rem" />
                         )
-                        : data?.data
+                        : data?.reputation.data
+                }
+            </Text>
+            <Text>Комментариев:
+                {
+                    isPending
+                        ? (
+                            <Loader size="1rem" />
+                        )
+                        : data?.totalComments.data
                 }
             </Text>
         </>
