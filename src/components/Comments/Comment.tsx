@@ -102,11 +102,6 @@ export default function Comment(
     async function handleLike() {
         const definedCommentLikes = comment.likes ?? []
 
-        queryClient.setQueryData(['comments', comment.title], (oldData) => {
-            console.log(oldData)
-            return oldData
-        })
-
         // Уже проверил в handleVote()
         // @ts-ignore
         if (definedCommentLikes.includes(user.id)) {
@@ -118,9 +113,17 @@ export default function Comment(
                 return value !== user?.id
             })
 
+            queryClient.refetchQueries({
+                queryKey: ['comments', comment.title]
+            }).then()
+
             // @ts-ignore
             return await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
         }
+
+        queryClient.refetchQueries({
+            queryKey: ['comments', comment.title]
+        }).then()
 
         setLiked(true)
 
