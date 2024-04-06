@@ -55,25 +55,19 @@ export default function Comment(
         comment: CommentProps
     }) {
 
-    const { user, isLoaded } = useUser();
+    const { user } = useUser();
 
     const [toggle, setToggle] = useState(false)
     const [clientLikes, setClientLikes] = useState(comment.likes?.length ?? 0)
     const [clientDislikes, setClientDislikes] = useState(comment.dislikes?.length ?? 0)
-    const [liked, setLiked] = useState(comment.likes?.includes(user?.id) ?? false)
-    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id) ?? false)
-
-    const queryClient = useQueryClient()
+    const [liked, setLiked] = useState(comment.likes?.includes(user?.id))
+    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id))
 
     function handleResponse() {
         setToggle(!toggle)
     }
 
     function handleVote(voteType: string) {
-        if (!isLoaded) {
-            return notifyCriticalError
-        }
-
         if (!user) {
             notifications.clean()
 
