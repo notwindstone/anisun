@@ -8,7 +8,7 @@ import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {useQueryClient} from "@tanstack/react-query";
 
 interface CommentProps {
     uuid: string;
