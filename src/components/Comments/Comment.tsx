@@ -100,6 +100,12 @@ export default function Comment(
                     handleDislike().then()
                 }
 
+                queryClient.refetchQueries(
+                    {
+                        queryKey: ["comments"]
+                    }
+                ).then()
+
                 return handleLike().then()
             case 'dislike':
                 if (!isLikeSynced || !isDislikeSynced) {
@@ -110,6 +116,12 @@ export default function Comment(
                     // В данном случае лайк убирается, если он поставлен и синхронизированы дизлайки, и выполняется дальнейший код
                     handleLike().then()
                 }
+
+                queryClient.refetchQueries(
+                    {
+                        queryKey: ["comments"]
+                    }
+                ).then()
 
                 return handleDislike().then()
             default:
