@@ -23,7 +23,7 @@ interface ResponseProps {
 }
 
 export default async function Page({ params }: { params: { code: string } }) {
-    const responseNonData = await fetch(`https://api.anilibria.tv/v3/title?code=${params.code}`)
+    const responseNonData = await fetch('https://api.anilibria.tv/v3/title?code=ookami-to-koushinryou-merchant-meets-the-wise-wolf')
     const response: ResponseProps = await responseNonData.json()
     const animePlayer = response.player;
 
