@@ -7,7 +7,7 @@ import {comments} from "@/api/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
-import {MakeDate} from "@/utils/MakeDate";
+import {makeDate} from "@/utils/makeDate";
 
 interface CommentProps {
     uuid: string;
@@ -184,7 +184,7 @@ export default function Comment(
                         <Link href={`/account/${comment.userid}`}>
                             <Text>{comment.username}</Text>
                         </Link>
-                        <Text>{MakeDate(comment.createdAt)}</Text>
+                        <Text>{makeDate(comment.createdAt)}</Text>
                     </Group>
                     <Group>
                         <Text>{comment.message}</Text>
