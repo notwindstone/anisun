@@ -14,7 +14,7 @@ export default async function Page({ params }: { params: { userid: string } }) {
         <>
             <Text>{params.userid}</Text>
             <Avatar size={64} src={user.imageUrl} />
-            <Account user={user} />
+            <Account userid={user.id} />
         </>
     );
 }

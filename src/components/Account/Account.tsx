@@ -1,17 +1,30 @@
+"use client"
+
 import {useQuery} from "@tanstack/react-query";
 import {account} from "@/api/account/account";
+import {Loader, Text} from "@mantine/core";
 
-export default function Account({ user }: { user: any }) {
+export default function Account({ userid }: { userid: string }) {
    const getAccountReputation = async () => {
-        await account.reputation({ userid: user.id })
+        return await account.reputation({ userid: userid })
     }
 
-    const { isPending, isError, data } = useQuery({
-        queryKey: ['accountReputation', user.id],
+    const { isPending, data } = useQuery({
+        queryKey: ['accountReputation', userid],
         queryFn: getAccountReputation,
     })
 
     return (
-        <></>
+        <>
+            <Text>Репутация:
+                {
+                    isPending
+                        ? (
+                            <Loader size="1rem" />
+                        )
+                        : data?.data
+                }
+            </Text>
+        </>
     )
 }
