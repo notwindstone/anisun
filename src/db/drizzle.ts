@@ -13,4 +13,5 @@ import {drizzle} from "drizzle-orm/postgres-js";
 const queryClient = postgres(process.env.POSTGRESQL_DATABASE_URL!);
 const db = drizzle(queryClient);
  */
+
 export default db
