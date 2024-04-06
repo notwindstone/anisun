@@ -1,4 +1,4 @@
-import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Flex, Group, Loader, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
@@ -114,14 +114,14 @@ export default function Comment(
         if (definedCommentLikes.includes(user.id)) {
             const toRemove = true
 
-            queryClient.refetchQueries({
-                queryKey: ['comments', comment.title]
-            }).then()
-
             setLiked(false)
 
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
+
+            await queryClient.refetchQueries({
+                queryKey: ['comments', comment.title]
+            })
 
             setDelayed(true)
 
@@ -130,14 +130,14 @@ export default function Comment(
             }, 1000)
         }
 
-        queryClient.refetchQueries({
-            queryKey: ['comments', comment.title]
-        }).then()
-
         setLiked(true)
 
         // @ts-ignore
         await comments.like(comment.uuid, user.id, definedCommentLikes)
+
+        await queryClient.refetchQueries({
+            queryKey: ['comments', comment.title]
+        })
 
         setDelayed(true)
 
@@ -154,14 +154,14 @@ export default function Comment(
         if (definedCommentDislikes.includes(user.id)) {
             const toRemove = true
 
-            queryClient.refetchQueries({
-                queryKey: ['comments', comment.title]
-            }).then()
-
             setDisliked(false)
 
             // @ts-ignore
             await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
+
+            await queryClient.refetchQueries({
+                queryKey: ['comments', comment.title]
+            })
 
             setDelayed(true)
 
@@ -170,14 +170,14 @@ export default function Comment(
             }, 1000)
         }
 
-        queryClient.refetchQueries({
-            queryKey: ['comments', comment.title]
-        }).then()
-
         setDisliked(true)
 
         // @ts-ignore
         await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
+
+        await queryClient.refetchQueries({
+            queryKey: ['comments', comment.title]
+        })
 
         setDelayed(true)
 
