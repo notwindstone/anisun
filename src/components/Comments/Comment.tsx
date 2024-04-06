@@ -63,15 +63,6 @@ export default function Comment(
 
     const queryClient = useQueryClient()
 
-    const commentsData = queryClient.getQueryData(['comments', comment.title])
-
-    const mutation = useMutation({
-        mutationFn: () => commentsData,
-        onSuccess: (data) => {
-            queryClient.setQueryData(['todo', comment.title], data)
-        },
-    })
-
     function handleResponse() {
         setToggle(!toggle)
     }
@@ -110,6 +101,11 @@ export default function Comment(
 
     async function handleLike() {
         const definedCommentLikes = comment.likes ?? []
+
+        queryClient.setQueryData(['comments', comment.title], (oldData) => {
+            console.log(oldData)
+            return oldData
+        })
 
         // Уже проверил в handleVote()
         // @ts-ignore
