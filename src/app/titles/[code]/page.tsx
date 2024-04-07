@@ -1,3 +1,7 @@
+"use client"
+
+export const dynamic = 'force-dynamic'; // static by default, unless reading the request
+
 import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
