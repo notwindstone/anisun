@@ -29,9 +29,26 @@ interface CommentsGroupProps {
     children?: CommentsGroupProps[]
 }
 
-function arrangeHierarchyComments(comment: CommentsGroupProps) {
+function arrangeHierarchyComments(comment: CommentsGroupProps, otherChildren?: CommentsGroupProps[]) {
     if (!comment.children) {
-        return console.log('Присвоенные children:')
+        if (!otherChildren) {
+            return
+        }
+
+        const filteredOtherChildren = otherChildren.filter((currentComment) => {
+            return currentComment.parentuuid === comment.uuid
+        })
+
+        return filteredOtherChildren.map((filteredChild) => {
+            return (
+                <div key={filteredChild.uuid}>
+                    <Comment comment={filteredChild}/>
+                    <div className={classes.childComments}>
+                        {arrangeHierarchyComments(filteredChild, otherChildren)}
+                    </div>
+                </div>
+            )
+        })
     }
 
     const children = comment.children ?? []
@@ -49,32 +66,11 @@ function arrangeHierarchyComments(comment: CommentsGroupProps) {
             <div key={filteredChild.uuid}>
                 <Comment comment={filteredChild}/>
                 <div className={classes.childComments}>
-                    {arrangeHierarchyComments(filteredChild)}
+                    {arrangeHierarchyComments(filteredChild, children)}
                 </div>
             </div>
         )
     })
-}
-
-function recursiveComments(comment: CommentsGroupProps) {
-    const children = comment.children?.filter(
-        (currentComment) => {
-            return currentComment.parentuuid === comment.uuid
-        }
-    )
-
-    return children?.map((child) => {
-        return (
-            <div key={child.uuid}>
-                <Comment comment={child}/>
-                <div className={classes.childComments}>
-                    {recursiveComments(children[children.indexOf(child)])}
-                </div>
-                <hr/>
-            </div>
-        )
-    })
-
 }
 
 export default function Comments({ titleCode }: { titleCode: string }) {
