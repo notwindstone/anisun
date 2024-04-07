@@ -1,4 +1,4 @@
-import {ActionIcon, Avatar, Button, Flex, Group, Loader, Stack, Text} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
@@ -48,14 +48,7 @@ function notifyCriticalError() {
 }
 
 // TODO: rewrite client-server sync
-export default function Comment(
-    {
-        parentUUIDOfLastChild,
-        comment
-    }: {
-        parentUUIDOfLastChild?: string | null,
-        comment: CommentProps
-    }) {
+export default function Comment({ comment }: { comment: CommentProps }) {
 
     const { user } = useUser();
 
@@ -210,15 +203,7 @@ export default function Comment(
                         } onClick={() => handleVote("like")}>
                             <IconCaretUpFilled />
                         </ActionIcon>
-                        <Text>
-                            {
-                                queryClient.isFetching()
-                                    ? (
-                                        <Loader size="1rem" />
-                                    )
-                                    : comment.likes?.length
-                            }
-                        </Text>
+                        <Text>{comment.likes?.length}</Text>
 
                         <ActionIcon variant={
                             disliked
@@ -227,15 +212,7 @@ export default function Comment(
                         } onClick={() => handleVote("dislike")}>
                             <IconCaretDownFilled />
                         </ActionIcon>
-                        <Text>
-                            {
-                                queryClient.isFetching()
-                                    ? (
-                                        <Loader size="1rem" />
-                                    )
-                                    : comment.dislikes?.length
-                            }
-                        </Text>
+                        <Text>{comment.dislikes?.length}</Text>
 
                         <Button variant="light" onClick={() => {
                             handleResponse()
