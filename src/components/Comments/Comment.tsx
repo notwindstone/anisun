@@ -118,12 +118,12 @@ export default function Comment(
             setDelayed(true)
 
             // @ts-ignore
+            await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
+
+            // @ts-ignore
             const likeIndex = comment.likes.indexOf(user.id)
 
             comment.likes?.splice(likeIndex, 1)
-
-            // @ts-ignore
-            await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
 
             return setTimeout(() => {
                 setDelayed(false)
@@ -134,10 +134,10 @@ export default function Comment(
         setDelayed(true)
 
         // @ts-ignore
-        comment.likes?.push(user.id)
+        await comments.like(comment.uuid, user.id, definedCommentLikes)
 
         // @ts-ignore
-        await comments.like(comment.uuid, user.id, definedCommentLikes)
+        comment.likes?.push(user.id)
 
         return setTimeout(() => {
             setDelayed(false)
@@ -156,12 +156,12 @@ export default function Comment(
             setDelayed(true)
 
             // @ts-ignore
+            await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
+
+            // @ts-ignore
             const dislikeIndex = comment.dislikes.indexOf(user.id)
 
             comment.dislikes?.splice(dislikeIndex, 1)
-
-            // @ts-ignore
-            await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
 
             return setTimeout(() => {
                 setDelayed(false)
@@ -172,10 +172,10 @@ export default function Comment(
         setDelayed(true)
 
         // @ts-ignore
-        comment.dislikes?.push(user.id)
+        await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
 
         // @ts-ignore
-        await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
+        comment.dislikes?.push(user.id)
 
         return setTimeout(() => {
             setDelayed(false)
