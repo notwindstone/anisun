@@ -117,14 +117,10 @@ export default function Comment(
             setLiked(false)
             setDelayed(true)
 
-            console.log(comment.likes)
-
             // @ts-ignore
             const likeIndex = comment.likes.indexOf(user.id)
 
             comment.likes?.splice(likeIndex, 1)
-
-            console.log(comment.likes)
 
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
@@ -138,11 +134,10 @@ export default function Comment(
         setDelayed(true)
 
         // @ts-ignore
-        await comments.like(comment.uuid, user.id, definedCommentLikes)
+        comment.likes?.push(user.id)
 
-        await queryClient.refetchQueries({
-            queryKey: ['comments', comment.title]
-        })
+        // @ts-ignore
+        await comments.like(comment.uuid, user.id, definedCommentLikes)
 
         return setTimeout(() => {
             setDelayed(false)
