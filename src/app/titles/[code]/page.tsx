@@ -24,7 +24,7 @@ interface ResponseProps {
 export default async function Page({ params }: { params: { code: string } }) {
     const response: ResponseProps = await anilibria.title.code(params.code)
     const animePlayer = response.player;
-
+    console.log(params.code)
     // Некоторые аниме тайтлы не имеют плеера
     if (Object.keys(animePlayer.list).length === 0) {
         return (
