@@ -49,7 +49,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
     })
 
     const commentsSection = status === 'pending' ? (
-        <p>Loading...</p>
+        <Loader size="1rem" />
     ) : status === 'error' ? (
         <p>Error: {error.message}</p>
     ) : (

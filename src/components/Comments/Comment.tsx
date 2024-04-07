@@ -117,21 +117,17 @@ export default function Comment(
             setLiked(false)
             setDelayed(true)
 
+            console.log(comment.likes)
+
+            // @ts-ignore
+            const likeIndex = comment.likes.indexOf(user.id)
+
+            comment.likes?.splice(likeIndex, 1)
+
+            console.log(comment.likes)
+
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
-
-            const data = await queryClient.fetchQuery({
-                queryKey: ['votes', comment.uuid],
-                queryFn: async () => {
-                    return await comments.votes(comment.uuid)
-                }
-            })
-
-            console.log(data)
-
-            await queryClient.refetchQueries({
-                queryKey: ['comments', comment.title]
-            })
 
             return setTimeout(() => {
                 setDelayed(false)
