@@ -13,6 +13,7 @@ import {useQueryClient} from "@tanstack/react-query";
 interface CommentProps {
     uuid: string;
     title: string;
+    branch: string;
     userid: string;
     username: string;
     avatar: string;
@@ -243,7 +244,7 @@ export default function Comment(
                 </Stack>
             </Flex>
             {
-                toggle && <AddComment titleCode={comment.title} parentUUID={comment.uuid} parentUUIDOfLastChild={parentUUIDOfLastChild} />
+                toggle && <AddComment titleCode={comment.title} parentUUID={comment.uuid} branch={comment.branch} />
             }
         </>
 

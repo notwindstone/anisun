@@ -10,10 +10,12 @@ import React from "react";
 import classes from './Comments.module.css';
 import {SignedIn, SignedOut, UserButton, useUser} from "@clerk/nextjs";
 import Link from "next/link";
+import {nanoid} from "nanoid";
 
 interface CommentsGroupProps {
     uuid: string;
     parentuuid: string | null;
+    branch: string;
     title: string;
     userid: string;
     username: string;
@@ -24,28 +26,55 @@ interface CommentsGroupProps {
     message: string;
     isDeleted: boolean;
     isEdited: boolean;
+    children?: CommentsGroupProps[]
 }
 
-function recursiveComments(comments: CommentsGroupProps[]) {
-    const mappedComments = comments.map((comment) => {
-        const filteredComment = comments.filter(
-            (currentComment) => {
-                return currentComment.parentuuid === comment.uuid
-            }
-        )
+function arrangeHierarchyComments(comment: CommentsGroupProps) {
+    if (!comment.children) {
+        return console.log('Присвоенные children:')
+    }
 
+    const children = comment.children ?? []
+
+    if (children?.length === 0) {
+        return
+    }
+
+    const filteredChildren = children.filter((currentComment) => {
+        return currentComment.parentuuid === comment.uuid
+    })
+
+    return filteredChildren.map((filteredChild) => {
         return (
-            <div key={comment.uuid}>
-                <Comment comment={comment}/>
+            <div key={filteredChild.uuid}>
+                <Comment comment={filteredChild}/>
                 <div className={classes.childComments}>
-                    {recursiveComments(filteredComment)}
+                    {arrangeHierarchyComments(filteredChild)}
+                </div>
+            </div>
+        )
+    })
+}
+
+function recursiveComments(comment: CommentsGroupProps) {
+    const children = comment.children?.filter(
+        (currentComment) => {
+            return currentComment.parentuuid === comment.uuid
+        }
+    )
+
+    return children?.map((child) => {
+        return (
+            <div key={child.uuid}>
+                <Comment comment={child}/>
+                <div className={classes.childComments}>
+                    {recursiveComments(children[children.indexOf(child)])}
                 </div>
                 <hr/>
             </div>
         )
     })
 
-    return mappedComments
 }
 
 export default function Comments({ titleCode }: { titleCode: string }) {
@@ -70,7 +99,6 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         refetchInterval: 8000,
     })
 
-
     const commentsSection = status === 'pending' ? (
         <Loader size="1rem" />
     ) : status === 'error' ? (
@@ -79,90 +107,18 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         <>
             {
                 data.pages.map((group) => {
-                    console.log(group.data)
-
-                    return <>1234</>
-                    const commentsGroup: CommentsGroupProps[] | null = group.data
-
-                    if (!commentsGroup) {
-                        return null
-                    }
+                    const commentsGroup: CommentsGroupProps[] | null = group.data ?? []
 
                     return commentsGroup.map((comment) => {
-                        if (comment.parentuuid === null) {
-                            return (
-                                <div key={comment.uuid}>
-                                    <Comment comment={comment} />
-                                    <div className={classes.childComments}>
-                                        {recursiveComments(commentsGroup)}
-                                    </div>
-                                </div>
-                            )
-                        }
-                    })
-
-                    /*
-                    return commentsGroup.map((comment) => {
-                        const childComments = commentsGroup
-                            .filter(
-                                (currentComment) => {
-                                    return currentComment.parentuuid === comment.uuid
-                                }
-                            ).sort(function(firstProp, nextProp) {
-                                // @ts-ignore
-                                return new Date(firstProp.createdAt) - new Date(nextProp.createdAt)
-                            })
-
-                        const childCommentsComponent = childComments.map((childComment) => {
-                            const childOfChildComments = commentsGroup
-                                .filter(
-                                    (currentComment) => {
-                                        return currentComment.parentuuid === childComment.uuid
-                                    }
-                                ).sort(function(firstProp, nextProp) {
-                                    // @ts-ignore
-                                    return new Date(firstProp.createdAt) - new Date(nextProp.createdAt)
-                                })
-
-                            const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
-                                return (
-                                    <Comment key={childOfChildComment.uuid} comment={childOfChildComment}/>
-                                )
-                            })
-
-                            return (
-                                <div key={childComment.uuid}>
-                                    <Comment comment={childComment}/>
-                                    <div className={classes.childComments}>
-                                        {childOfChildCommentsComponent}
-                                    </div>
-                                    <hr/>
-                                </div>
-                            )
-                        })
-
                         return (
                             <div key={comment.uuid}>
-                                {
-                                    // Не нужно повторно отображать ответы на комментарии
-                                    comment.parentuuid
-                                        ? (
-                                            ''
-                                        )
-                                        : (
-                                            <>
-                                                <Comment comment={comment}/>
-                                                <div className={classes.childComments}>
-                                                    {childCommentsComponent}
-                                                </div>
-                                                <hr/>
-                                            </>
-                                        )
-                                }
+                                <Comment comment={comment}/>
+                                <div className={classes.childComments}>
+                                    {arrangeHierarchyComments(comment)}
+                                </div>
                             </div>
                         )
                     })
-                    */
                 })
             }
             <span>{isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>
@@ -177,7 +133,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
             <SignedOut>
                 <Link href="/sign-in">Войти в аккаунт</Link>
             </SignedOut>
-            <AddComment titleCode={titleCode} parentUUID={null} />
+            <AddComment titleCode={titleCode} parentUUID={null} branch={nanoid()} />
             {isLoaded && commentsSection}
             <InView onChange={(inView) => {
                 if (!inView) {

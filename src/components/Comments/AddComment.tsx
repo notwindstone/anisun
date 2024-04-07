@@ -7,7 +7,7 @@ import {useQueryClient} from "@tanstack/react-query";
 import {notifications} from "@mantine/notifications";
 import {useUser} from "@clerk/nextjs";
 
-export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChild }: { titleCode: string, parentUUID: string | null, parentUUIDOfLastChild?: string | null }) {
+export default function AddComment({ titleCode, parentUUID, branch }: { titleCode: string, parentUUID: string | null, branch: string }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const [delayed, setDelayed] = useState(false)
@@ -79,7 +79,8 @@ export default function AddComment({ titleCode, parentUUID, parentUUIDOfLastChil
              *                |-> Ответ на ответ
              *                |-> Ответ на ответ на ответ
              */
-            parentUUIDOfLastChild ?? parentUUID,
+            parentUUID,
+            branch,
             titleCode,
             userId,
             username,
