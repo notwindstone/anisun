@@ -120,6 +120,15 @@ export default function Comment(
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
 
+            const data = await queryClient.fetchQuery({
+                queryKey: ['votes', comment.uuid],
+                queryFn: async () => {
+                    return await comments.votes(comment.uuid)
+                }
+            })
+
+            console.log(data)
+
             await queryClient.refetchQueries({
                 queryKey: ['comments', comment.title]
             })
