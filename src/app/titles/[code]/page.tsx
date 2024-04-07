@@ -3,7 +3,6 @@ import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import {anilibria} from "@/api/anilibria/anilibria";
 import Comments from "@/components/Comments/Comments";
-import axios from "axios";
 
 interface ResponseProps {
     names: {
@@ -23,8 +22,7 @@ interface ResponseProps {
 }
 
 export default async function Page({ params }: { params: { code: string } }) {
-    const responseNonData = await fetch('https://api.anilibria.tv/v3/title?code=ookami-to-koushinryou-merchant-meets-the-wise-wolf')
-    const response: ResponseProps = await responseNonData.json()
+    const response: ResponseProps = await anilibria.title.code(params.code)
     const animePlayer = response.player;
 
     // Некоторые аниме тайтлы не имеют плеера

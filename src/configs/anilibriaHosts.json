@@ -1,5 +1,5 @@
 {
-  "api": "http://api.anilibria.tv/v3/",
-  "player": "http://cache.libria.fun",
-  "storage": "http://anilibria.tv"
+  "api": "https://api.anilibria.tv/v3/",
+  "player": "https://cache.libria.fun",
+  "storage": "https://anilibria.tv"
 }
