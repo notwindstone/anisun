@@ -26,6 +26,28 @@ interface CommentsGroupProps {
     isEdited: boolean;
 }
 
+function recursiveComments(comments: CommentsGroupProps[]) {
+    const mappedComments = comments.map((comment) => {
+        const filteredComment = comments.filter(
+            (currentComment) => {
+                return currentComment.parentuuid === comment.uuid
+            }
+        )
+
+        return (
+            <div key={comment.uuid}>
+                <Comment comment={comment}/>
+                <div className={classes.childComments}>
+                    {recursiveComments(filteredComment)}
+                </div>
+                <hr/>
+            </div>
+        )
+    })
+
+    return mappedComments
+}
+
 export default function Comments({ titleCode }: { titleCode: string }) {
     const getComments = async ({ pageParam } : { pageParam: number }) => {
         return await comments.get({title: titleCode, nextCursor: pageParam})
@@ -48,6 +70,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         refetchInterval: 8000,
     })
 
+
     const commentsSection = status === 'pending' ? (
         <Loader size="1rem" />
     ) : status === 'error' ? (
@@ -56,12 +79,29 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         <>
             {
                 data.pages.map((group) => {
+                    console.log(group.data)
+
+                    return <>1234</>
                     const commentsGroup: CommentsGroupProps[] | null = group.data
 
                     if (!commentsGroup) {
                         return null
                     }
 
+                    return commentsGroup.map((comment) => {
+                        if (comment.parentuuid === null) {
+                            return (
+                                <div key={comment.uuid}>
+                                    <Comment comment={comment} />
+                                    <div className={classes.childComments}>
+                                        {recursiveComments(commentsGroup)}
+                                    </div>
+                                </div>
+                            )
+                        }
+                    })
+
+                    /*
                     return commentsGroup.map((comment) => {
                         const childComments = commentsGroup
                             .filter(
@@ -86,7 +126,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
                             const childOfChildCommentsComponent = childOfChildComments.map((childOfChildComment) => {
                                 return (
-                                    <Comment key={childOfChildComment.uuid} parentUUIDOfLastChild={childOfChildComment.parentuuid} comment={childOfChildComment}/>
+                                    <Comment key={childOfChildComment.uuid} comment={childOfChildComment}/>
                                 )
                             })
 
@@ -122,6 +162,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                             </div>
                         )
                     })
+                    */
                 })
             }
             <span>{isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>

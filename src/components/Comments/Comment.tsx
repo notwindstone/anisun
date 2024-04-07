@@ -46,6 +46,7 @@ function notifyCriticalError() {
     })
 }
 
+// TODO: rewrite client-server sync
 export default function Comment(
     {
         parentUUIDOfLastChild,
