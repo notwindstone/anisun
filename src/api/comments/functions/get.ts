@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import {and, desc, eq, isNotNull, isNull} from 'drizzle-orm';
+import {and, asc, desc, eq, isNotNull, isNull} from 'drizzle-orm';
 
 export const get = async ({ title, nextCursor = 0 }: { title: string, nextCursor: number }) => {
     const initialLimit = nextCursor === 0 ? 8 : nextCursor
@@ -38,6 +38,7 @@ export const get = async ({ title, nextCursor = 0 }: { title: string, nextCursor
                         isNotNull(comments.parentuuid)
                     )
                 )
+                .orderBy(asc(comments.createdAt))
 
         data.push({ ...comment, children: children })
     }
