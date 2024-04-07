@@ -24,27 +24,12 @@ interface ResponseProps {
 }
 
 export default async function Page({ params }: { params: { code: string } }) {
-    const response: ResponseProps = await anilibria.title.code(params.code)
-    const animePlayer = response.player;
-
-    // Некоторые аниме тайтлы не имеют плеера
-    if (Object.keys(animePlayer.list).length === 0) {
-        return (
-            <>
-                <div>{params.code}</div>
-                <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
-            </>
-        );
-    }
-
     return (
         <>
             <Link href="/titles">Вернуться</Link>
             <div>{params.code}</div>
             <VideoEmbed
-              title={response.names.ru}
-              player={animePlayer}
-              preview="https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
+              code={params.code}
             />
             <Comments titleCode={params.code} />
         </>
