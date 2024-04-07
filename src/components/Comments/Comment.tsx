@@ -120,10 +120,9 @@ export default function Comment(
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
 
-            // @ts-ignore
-            const likeIndex = comment.likes.indexOf(user.id)
-
-            comment.likes?.splice(likeIndex, 1)
+            await queryClient.refetchQueries({
+                queryKey: ['comments', comment.title]
+            })
 
             return setTimeout(() => {
                 setDelayed(false)
@@ -136,8 +135,9 @@ export default function Comment(
         // @ts-ignore
         await comments.like(comment.uuid, user.id, definedCommentLikes)
 
-        // @ts-ignore
-        comment.likes?.push(user.id)
+        await queryClient.refetchQueries({
+            queryKey: ['comments', comment.title]
+        })
 
         return setTimeout(() => {
             setDelayed(false)
@@ -158,10 +158,9 @@ export default function Comment(
             // @ts-ignore
             await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
 
-            // @ts-ignore
-            const dislikeIndex = comment.dislikes.indexOf(user.id)
-
-            comment.dislikes?.splice(dislikeIndex, 1)
+            await queryClient.refetchQueries({
+                queryKey: ['comments', comment.title]
+            })
 
             return setTimeout(() => {
                 setDelayed(false)
@@ -174,8 +173,9 @@ export default function Comment(
         // @ts-ignore
         await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
 
-        // @ts-ignore
-        comment.dislikes?.push(user.id)
+        await queryClient.refetchQueries({
+            queryKey: ['comments', comment.title]
+        })
 
         return setTimeout(() => {
             setDelayed(false)
