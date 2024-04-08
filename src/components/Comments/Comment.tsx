@@ -60,8 +60,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     const { user } = useUser();
 
     const [toggle, setToggle] = useState(false)
-    const [liked, setLiked] = useState(comment.likes?.includes(user?.id ?? ''))
-    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id ?? ''))
     const [delayed, setDelayed] = useState(false)
 
     const queryClient = useQueryClient()
@@ -74,7 +72,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         onSuccess: (data, variables) => {
             const { uuid, branch, likes, dislikes } = variables
             const oldData: DataProps | undefined = queryClient.getQueryData(['comments', comment.title])
-            console.log(oldData)
+
             if (!oldData) {
                 return
             }
@@ -93,7 +91,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         return
                     }
 
-                    const currentChild = branchComment.children.find((child: CommentProps) => child.uuid === uuid)
+                    let currentChild = branchComment.children.find((child: CommentProps) => child.uuid === uuid)
 
                     if (!currentChild) {
                         return
@@ -101,6 +99,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
                     if (likes) {
                         currentChild.likes = likes
+
                     }
 
                     if (dislikes) {
@@ -122,6 +121,10 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             queryClient.setQueryData(['comments', { uuid, likes }], data)
         },
     })
+
+    if (!user) {
+        return
+    }
 
     function handleResponse() {
         setToggle(!toggle)
@@ -147,14 +150,14 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
         switch (voteType) {
             case 'like':
-                if (disliked) {
+                if (comment.dislikes?.includes(user?.id)) {
                     // В данном случае дизлайк убирается, если он поставлен и синхронизированы лайки, и выполняется дальнейший код
                     handleDislike().then()
                 }
 
                 return handleLike().then()
             case 'dislike':
-                if (liked) {
+                if (comment.likes?.includes(user?.id)) {
                     // В данном случае лайк убирается, если он поставлен и синхронизированы дизлайки, и выполняется дальнейший код
                     handleLike().then()
                 }
@@ -179,8 +182,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                 return value !== user?.id
             })
 
-            setLiked(false)
-
             mutation.mutate({
                 uuid: comment.uuid,
                 branch: comment.branch,
@@ -200,8 +201,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         // Уже проверил в handleVote()
         // @ts-ignore
         mutatedCommentLikes.push(user?.id)
-
-        setLiked(true)
 
         mutation.mutate({
             uuid: comment.uuid,
@@ -231,8 +230,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                 return value !== user?.id
             })
 
-            setDisliked(false)
-
             mutation.mutate({
                 uuid: comment.uuid,
                 branch: comment.branch,
@@ -252,8 +249,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         // Уже проверил в handleVote()
         // @ts-ignore
         mutatedCommentDislikes.push(user?.id)
-
-        setDisliked(true)
 
         mutation.mutate({
             uuid: comment.uuid,
@@ -289,7 +284,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                     </Group>
                     <Group>
                         <ActionIcon variant={
-                            liked
+                            comment.likes?.includes(user.id)
                                 ? "filled"
                                 : "default"
                         } onClick={() => handleVote("like")}>
@@ -298,7 +293,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         <Text>{comment.likes?.length}</Text>
 
                         <ActionIcon variant={
-                            disliked
+                            comment.dislikes?.includes(user.id)
                                 ? "filled"
                                 : "default"
                         } onClick={() => handleVote("dislike")}>
