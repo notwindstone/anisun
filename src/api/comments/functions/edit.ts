@@ -9,6 +9,7 @@ export const edit = async (uuid: string, message: string) => {
         .update(comments)
         .set({
             message: message,
+            isEdited: true,
         })
         .where(eq(comments.uuid, uuid));
 };
