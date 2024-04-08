@@ -6,7 +6,14 @@ import AddComment from "@/components/Comments/AddComment";
 import {comments} from "@/api/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
-import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
+import {
+    IconArrowBack,
+    IconBackslash,
+    IconBackspace,
+    IconCaretDownFilled,
+    IconCaretUpFilled,
+    IconTruckReturn, IconX
+} from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 
@@ -280,6 +287,9 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         console.log()
     }
 
+    async function handleReturn(uuid: string) {
+    }
+
     return (
         <>
             <Flex className={classes.root}>
@@ -297,14 +307,30 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         {
                             comment.userid === user.id
                                 && (
-                                    <ActionIcon variant="default">
-                                        <CloseIcon />
-                                    </ActionIcon>
+                                    !comment.isDeleted
+                                        ? (
+                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid)}>
+                                                <IconX />
+                                            </ActionIcon>
+                                        )
+                                        : (
+                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid)}>
+                                                <IconArrowBack />
+                                            </ActionIcon>
+                                        )
                                 )
                         }
                     </Group>
                     <Group>
-                        <Text>{comment.message}</Text>
+                        {
+                            comment.isDeleted
+                                ? (
+                                    <Text className={classes.deleted}>Сообщение было удалено</Text>
+                                )
+                                : (
+                                    <Text>{comment.message}</Text>
+                                )
+                        }
                     </Group>
                     <Group>
                         <ActionIcon variant={

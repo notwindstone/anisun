@@ -1,3 +1,7 @@
 .root {
     border: 2px solid white;
 }
+
+.deleted {
+    color: gray
+}
