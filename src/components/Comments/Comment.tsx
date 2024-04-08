@@ -18,14 +18,15 @@ interface DataProps {
 
 interface CommentProps {
     uuid: string;
+    parentuuid: string | null;
     title: string;
     branch: string;
     userid: string;
     username: string;
     avatar: string;
     createdAt: string;
-    likes: string[] | null;
-    dislikes?: string[] | null;
+    likes: unknown[] | null;
+    dislikes: unknown[] | null;
     message: string;
     isDeleted: boolean;
     isEdited: boolean;
@@ -66,18 +67,14 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
     const mutation = useMutation({
         // @ts-ignore
-        mutationFn: ({ uuid, branch, likes, dislikes }: { uuid: string, branch: string, likes?: string[] | null, dislikes?: string[] | null }) => {
-            return { uuid: uuid, branch: branch, likes: likes, dislikes: dislikes }
-        },
-        onSuccess: (data, variables) => {
-            const { uuid, branch, likes, dislikes } = variables
-            const oldData: DataProps | undefined = queryClient.getQueryData(['comments', comment.title])
+        mutationFn: ({ uuid, branch, likes, dislikes }: { uuid: string, branch: string, likes?: unknown[] | null, dislikes?: unknown[] | null }) => {
+            const mutatedData: DataProps | undefined = queryClient.getQueryData(['comments', comment.title])
 
-            if (!oldData) {
+            if (!mutatedData) {
                 return
             }
 
-            for (const pages of oldData.pages) {
+            for (const pages of mutatedData.pages) {
                 const originComment = pages.data.find(
                     (comment: CommentProps) => comment.uuid === uuid
                 )
@@ -118,7 +115,16 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                 }
             }
 
-            queryClient.setQueryData(['comments', { uuid, likes }], data)
+            return mutatedData
+        },
+
+        onSuccess: (newData) => {
+            queryClient.setQueryData(['comments', comment.title],
+                (oldData) =>
+                    oldData
+                        ? newData
+                        : oldData
+            )
         },
     })
 
@@ -182,14 +188,20 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                 return value !== user?.id
             })
 
+            console.log(definedCommentLikes, mutatedCommentLikes)
+
             mutation.mutate({
                 uuid: comment.uuid,
                 branch: comment.branch,
                 likes: mutatedCommentLikes
             })
 
+            console.log(definedCommentLikes, mutatedCommentLikes)
+
             // @ts-ignore
-            await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
+            await comments.like(comment.uuid, mutatedCommentLikes)
+
+            console.log(definedCommentLikes, mutatedCommentLikes)
 
             return setTimeout(() => {
                 setDelayed(false)
@@ -197,6 +209,8 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         }
 
         const mutatedCommentLikes = definedCommentLikes
+
+        console.log(definedCommentLikes, mutatedCommentLikes)
 
         // Уже проверил в handleVote()
         // @ts-ignore
@@ -209,7 +223,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         })
 
         // @ts-ignore
-        await comments.like(comment.uuid, user.id, definedCommentLikes)
+        await comments.like(comment.uuid, mutatedCommentLikes)
 
         return setTimeout(() => {
             setDelayed(false)
@@ -237,7 +251,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             })
 
             // @ts-ignore
-            await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
+            await comments.dislike(comment.uuid, mutatedCommentDislikes)
 
             return setTimeout(() => {
                 setDelayed(false)
@@ -257,7 +271,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         })
 
         // @ts-ignore
-        await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
+        await comments.dislike(comment.uuid, mutatedCommentDislikes)
 
         return setTimeout(() => {
             setDelayed(false)
