@@ -1,4 +1,4 @@
-import {ActionIcon, Avatar, Button, CloseIcon, Flex, Group, Stack, Text} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
@@ -8,11 +8,9 @@ import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {
     IconArrowBack,
-    IconBackslash,
-    IconBackspace,
     IconCaretDownFilled,
     IconCaretUpFilled,
-    IconTruckReturn, IconX
+    IconX
 } from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
@@ -74,7 +72,21 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
     const mutation = useMutation({
         // @ts-ignore
-        mutationFn: ({ uuid, branch, likes, dislikes }: { uuid: string, branch: string, likes?: unknown[] | null, dislikes?: unknown[] | null }) => {
+        mutationFn: (
+                {
+                    uuid,
+                    branch,
+                    likes,
+                    dislikes,
+                    remove,
+                }: {
+                    uuid: string,
+                    branch: string,
+                    likes?: unknown[] | null,
+                    dislikes?: unknown[] | null,
+                    remove?: boolean,
+                }
+            ) => {
             const mutatedData: DataProps | undefined = queryClient.getQueryData(['comments', comment.title])
 
             if (!mutatedData) {
@@ -110,6 +122,10 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         currentChild.dislikes = dislikes
                     }
 
+                    if (remove !== undefined) {
+                        currentChild.isDeleted = remove
+                    }
+
                     return
                 }
 
@@ -120,6 +136,10 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                 if (dislikes) {
                     originComment.dislikes = dislikes
                 }
+
+                if (remove !== undefined) {
+                    originComment.isDeleted = remove
+                }
             }
 
             return mutatedData
@@ -127,7 +147,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
         onSuccess: (newData) => {
             queryClient.setQueryData(['comments', comment.title],
-                (oldData) =>
+                (oldData: DataProps) =>
                     oldData
                         ? newData
                         : oldData
@@ -193,20 +213,14 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                 return value !== user?.id
             })
 
-            console.log(definedCommentLikes, mutatedCommentLikes)
-
             mutation.mutate({
                 uuid: comment.uuid,
                 branch: comment.branch,
                 likes: mutatedCommentLikes
             })
 
-            console.log(definedCommentLikes, mutatedCommentLikes)
-
             // @ts-ignore
             await comments.like(comment.uuid, mutatedCommentLikes)
-
-            console.log(definedCommentLikes, mutatedCommentLikes)
 
             return setTimeout(() => {
                 setDelayed(false)
@@ -214,8 +228,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         }
 
         const mutatedCommentLikes = definedCommentLikes
-
-        console.log(definedCommentLikes, mutatedCommentLikes)
 
         // Уже проверил в handleVote()
         // @ts-ignore
@@ -281,13 +293,14 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         }, 500)
     }
 
-    async function handleRemove(uuid: string, toRemove: boolean = true) {
+    async function handleRemove(uuid: string, branch: string, toRemove: boolean = true) {
         await comments.remove(uuid, toRemove)
 
-        console.log()
-    }
-
-    async function handleReturn(uuid: string) {
+        mutation.mutate({
+            uuid: uuid,
+            branch: branch,
+            remove: toRemove
+        })
     }
 
     return (
@@ -309,12 +322,12 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                                 && (
                                     comment.isDeleted
                                         ? (
-                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, false)}>
+                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, comment.branch, false)}>
                                                 <IconArrowBack />
                                             </ActionIcon>
                                         )
                                         : (
-                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid)}>
+                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, comment.branch)}>
                                                 <IconX />
                                             </ActionIcon>
                                         )
