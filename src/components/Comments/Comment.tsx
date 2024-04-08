@@ -68,7 +68,13 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             const oldData = queryClient.getQueryData(['comments', comment.title])
 
             for (const pages of oldData.pages) {
-                console.log(pages.data)
+                const originComment = pages.data.find((comment) => comment.uuid === uuid)
+
+                if (!originComment) {
+                    return
+                }
+
+                originComment.likes = likes
             }
 
             queryClient.setQueryData(['comments', { uuid, likes }], data)
