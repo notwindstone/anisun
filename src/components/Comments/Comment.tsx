@@ -8,7 +8,7 @@ import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
-import {useQueryClient} from "@tanstack/react-query";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
 
 interface CommentProps {
     uuid: string;
@@ -58,6 +58,22 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     const [delayed, setDelayed] = useState(false)
 
     const queryClient = useQueryClient()
+
+    const mutation = useMutation({
+        mutationFn: ({ uuid, likes }: { uuid: string, likes: [] }) => {
+            return { uuid: uuid, likes: likes }
+        },
+        onSuccess: (data, variables) => {
+            const { uuid, likes } = variables
+            const oldData = queryClient.getQueryData(['comments', comment.title])
+
+            for (const pages of oldData.pages) {
+                console.log(pages.data)
+            }
+
+            queryClient.setQueryData(['comments', { uuid, likes }], data)
+        },
+    })
 
     function handleResponse() {
         setToggle(!toggle)
@@ -109,8 +125,17 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         if (definedCommentLikes.includes(user.id)) {
             const toRemove = true
 
+            const mutatedCommentLikes = definedCommentLikes.filter(function (value) {
+                return value !== user?.id
+            })
+
             setLiked(false)
             setDelayed(true)
+
+            mutation.mutate({
+                uuid: comment.uuid,
+                likes: mutatedCommentLikes
+            })
 
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)

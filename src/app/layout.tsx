@@ -39,7 +39,6 @@ export default function RootLayout({
                             {children}
                         </MantineProvider>
                     </TanstackQueryProviders>
-
                 </body>
             </html>
         </ClerkProvider>
