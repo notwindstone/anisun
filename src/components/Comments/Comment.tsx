@@ -1,4 +1,4 @@
-import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, Textarea} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
@@ -396,7 +396,18 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                                 )
                                 : (
                                     <Text>
-                                        {comment.message}
+                                        {
+                                            edit
+                                                ? (
+                                                    <Textarea
+                                                        placeholder={comment.message}
+                                                        autosize
+                                                        required
+                                                        minRows={2}
+                                                    />
+                                                )
+                                                : comment.message
+                                        }
                                     </Text>
                                 )
                         }
