@@ -1,4 +1,4 @@
-import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text} from "@mantine/core";
+import {ActionIcon, Avatar, Button, CloseIcon, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
 import {useState} from "react";
@@ -203,7 +203,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
             return setTimeout(() => {
                 setDelayed(false)
-            }, 1000)
+            }, 500)
         }
 
         const mutatedCommentLikes = definedCommentLikes
@@ -225,7 +225,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
         return setTimeout(() => {
             setDelayed(false)
-        }, 1000)
+        }, 500)
     }
 
     async function handleDislike() {
@@ -251,7 +251,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
             return setTimeout(() => {
                 setDelayed(false)
-            }, 1000)
+            }, 500)
         }
 
         const mutatedCommentDislikes = definedCommentDislikes
@@ -271,7 +271,13 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
         return setTimeout(() => {
             setDelayed(false)
-        }, 1000)
+        }, 500)
+    }
+
+    async function handleRemove(uuid: string) {
+        await comments.remove(uuid)
+
+        console.log()
     }
 
     return (
@@ -288,6 +294,14 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                             <Text>{comment.username}</Text>
                         </Link>
                         <Text>{makeDate(comment.createdAt)}</Text>
+                        {
+                            comment.userid === user.id
+                                && (
+                                    <ActionIcon variant="default">
+                                        <CloseIcon />
+                                    </ActionIcon>
+                                )
+                        }
                     </Group>
                     <Group>
                         <Text>{comment.message}</Text>
