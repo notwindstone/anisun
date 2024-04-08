@@ -281,8 +281,8 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         }, 500)
     }
 
-    async function handleRemove(uuid: string) {
-        await comments.remove(uuid)
+    async function handleRemove(uuid: string, toRemove: boolean = true) {
+        await comments.remove(uuid, toRemove)
 
         console.log()
     }
@@ -307,15 +307,15 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         {
                             comment.userid === user.id
                                 && (
-                                    !comment.isDeleted
+                                    comment.isDeleted
                                         ? (
-                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid)}>
-                                                <IconX />
+                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, false)}>
+                                                <IconArrowBack />
                                             </ActionIcon>
                                         )
                                         : (
                                             <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid)}>
-                                                <IconArrowBack />
+                                                <IconX />
                                             </ActionIcon>
                                         )
                                 )
