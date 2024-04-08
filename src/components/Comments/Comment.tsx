@@ -1,7 +1,7 @@
 import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, Textarea} from "@mantine/core";
 import classes from './Comment.module.css'
 import Link from "next/link";
-import {useState} from "react";
+import {useRef, useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
 import {comments} from "@/api/comments/comments";
 import {useUser} from "@clerk/nextjs";
@@ -9,7 +9,7 @@ import {notifications} from "@mantine/notifications";
 import {
     IconArrowBack,
     IconCaretDownFilled,
-    IconCaretUpFilled, IconEdit,
+    IconCaretUpFilled, IconCheck, IconEdit,
     IconX
 } from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
@@ -69,6 +69,8 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     const [toggle, setToggle] = useState(false)
     const [delayed, setDelayed] = useState(false)
 
+    const ref = useRef<HTMLTextAreaElement>(null);
+
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
@@ -80,12 +82,14 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                     likes,
                     dislikes,
                     remove,
+                    message,
                 }: {
                     uuid: string,
                     branch: string,
                     likes?: unknown[] | null,
                     dislikes?: unknown[] | null,
                     remove?: boolean,
+                    message?: string,
                 }
             ) => {
             const mutatedData: DataProps | undefined = queryClient.getQueryData(['comments', comment.title])
@@ -127,6 +131,10 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         currentChild.isDeleted = remove
                     }
 
+                    if (message) {
+                        currentChild.message = message
+                    }
+
                     return
                 }
 
@@ -140,6 +148,10 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
                 if (remove !== undefined) {
                     originComment.isDeleted = remove
+                }
+
+                if (message) {
+                    originComment.message = message
                 }
             }
 
@@ -316,11 +328,20 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         }, 500)
     }
 
-    async function handleEdit(uuid: string, branch: string, message: string) {
+    async function handleEdit(uuid: string, branch: string, message?: string) {
         if (delayed) {
             notifications.clean()
 
             return notifyAboutDelay()
+        }
+
+        if (!message || message.length < 2) {
+            return notifications.show({
+                title: 'Ошибка',
+                message: 'В комментарии должно быть от 2 до 2000 символов',
+                autoClose: 3000,
+                color: 'yellow',
+            })
         }
 
         setDelayed(true)
@@ -328,8 +349,10 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         mutation.mutate({
             uuid: uuid,
             branch: branch,
-
+            message: message,
         })
+
+        toggleEdit()
 
         await comments.edit(uuid, message)
 
@@ -399,12 +422,19 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                                         {
                                             edit
                                                 ? (
-                                                    <Textarea
-                                                        placeholder={comment.message}
-                                                        autosize
-                                                        required
-                                                        minRows={2}
-                                                    />
+                                                    <>
+                                                        <Textarea
+                                                            ref={ref}
+                                                            defaultValue={comment.message}
+                                                            placeholder="Изменить комментарий..."
+                                                            autosize
+                                                            required
+                                                            minRows={2}
+                                                        />
+                                                        <ActionIcon variant="light" onClick={() => handleEdit(comment.uuid, comment.branch, ref.current?.value)}>
+                                                            <IconCheck />
+                                                        </ActionIcon>
+                                                    </>
                                                 )
                                                 : comment.message
                                         }
