@@ -43,7 +43,7 @@ function notifyAboutDelay() {
 
     return notifications.show({
         title: 'Ошибка',
-        message: 'Пожалуйста, подождите секунду перед следующим голосом',
+        message: 'Пожалуйста, подождите немного перед следующим действием',
         autoClose: 3000,
         color: 'yellow',
     })
@@ -294,13 +294,25 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     }
 
     async function handleRemove(uuid: string, branch: string, toRemove: boolean = true) {
-        await comments.remove(uuid, toRemove)
+        if (delayed) {
+            notifications.clean()
+
+            return notifyAboutDelay()
+        }
+
+        setDelayed(true)
 
         mutation.mutate({
             uuid: uuid,
             branch: branch,
             remove: toRemove
         })
+
+        await comments.remove(uuid, toRemove)
+
+        return setTimeout(() => {
+            setDelayed(false)
+        }, 500)
     }
 
     return (
