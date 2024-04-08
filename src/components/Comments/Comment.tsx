@@ -133,6 +133,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
                     if (message) {
                         currentChild.message = message
+                        currentChild.isEdited = true
                     }
 
                     return
@@ -152,6 +153,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
                 if (message) {
                     originComment.message = message
+                    originComment.isEdited = true
                 }
             }
 
