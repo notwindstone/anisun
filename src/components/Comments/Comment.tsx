@@ -9,7 +9,7 @@ import {notifications} from "@mantine/notifications";
 import {
     IconArrowBack,
     IconCaretDownFilled,
-    IconCaretUpFilled,
+    IconCaretUpFilled, IconEdit,
     IconX
 } from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
@@ -65,6 +65,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
     const { user } = useUser();
 
+    const [edit, setEdit] = useState(false)
     const [toggle, setToggle] = useState(false)
     const [delayed, setDelayed] = useState(false)
 
@@ -159,7 +160,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         return
     }
 
-    function handleResponse() {
+    function toggleResponse() {
         setToggle(!toggle)
     }
 
@@ -315,6 +316,32 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         }, 500)
     }
 
+    async function handleEdit(uuid: string, branch: string, message: string) {
+        if (delayed) {
+            notifications.clean()
+
+            return notifyAboutDelay()
+        }
+
+        setDelayed(true)
+
+        mutation.mutate({
+            uuid: uuid,
+            branch: branch,
+
+        })
+
+        await comments.edit(uuid, message)
+
+        return setTimeout(() => {
+            setDelayed(false)
+        }, 500)
+    }
+
+    function toggleEdit() {
+        setEdit(!edit)
+    }
+
     return (
         <>
             <Flex className={classes.root}>
@@ -330,19 +357,34 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         </Link>
                         <Text>{makeDate(comment.createdAt)}</Text>
                         {
+                            comment.isEdited
+                                && (
+                                    <Text className={classes.edited}>(изменено)</Text>
+                                )
+                        }
+                        {
                             comment.userid === user.id
                                 && (
-                                    comment.isDeleted
-                                        ? (
-                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, comment.branch, false)}>
-                                                <IconArrowBack />
-                                            </ActionIcon>
-                                        )
-                                        : (
-                                            <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, comment.branch)}>
-                                                <IconX />
-                                            </ActionIcon>
-                                        )
+                                    <Group>
+                                        {
+                                            comment.isDeleted
+                                                ? (
+                                                    <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, comment.branch, false)}>
+                                                        <IconArrowBack />
+                                                    </ActionIcon>
+                                                )
+                                                : (
+                                                    <>
+                                                        <ActionIcon variant="default" onClick={() => toggleEdit()}>
+                                                            <IconEdit />
+                                                        </ActionIcon>
+                                                        <ActionIcon variant="default" onClick={() => handleRemove(comment.uuid, comment.branch)}>
+                                                            <IconX />
+                                                        </ActionIcon>
+                                                    </>
+                                                )
+                                        }
+                                    </Group>
                                 )
                         }
                     </Group>
@@ -353,7 +395,9 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                                     <Text className={classes.deleted}>Сообщение было удалено</Text>
                                 )
                                 : (
-                                    <Text>{comment.message}</Text>
+                                    <Text>
+                                        {comment.message}
+                                    </Text>
                                 )
                         }
                     </Group>
@@ -377,7 +421,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
                         <Text>{comment.dislikes?.length}</Text>
 
                         <Button variant="light" onClick={() => {
-                            handleResponse()
+                            toggleResponse()
                         }}>Ответить</Button>
                     </Group>
                 </Stack>
