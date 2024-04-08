@@ -60,18 +60,22 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
-        mutationFn: ({ uuid, likes }: { uuid: string, likes: [] }) => {
-            return { uuid: uuid, likes: likes }
+        mutationFn: ({ uuid, branch, likes, dislikes }: { uuid: string, branch: string, likes?: [], dislikes?: [] }) => {
+            return { uuid: uuid, branch: branch, likes: likes, dislikes: dislikes }
         },
         onSuccess: (data, variables) => {
-            const { uuid, likes } = variables
+            const { uuid, branch, likes, dislikes } = variables
             const oldData = queryClient.getQueryData(['comments', comment.title])
 
+            if (!oldData) {
+                return
+            }
+
             for (const pages of oldData.pages) {
-                const originComment = pages.data.find((comment) => comment.uuid === uuid)
+                const originComment = pages.data.find((comment: CommentProps) => comment.uuid === uuid)
 
                 if (!originComment) {
-                    return
+                    const branchComment = pages.data.find((comment: CommentProps) => comment.branch === branch)
                 }
 
                 originComment.likes = likes
@@ -140,6 +144,7 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
             mutation.mutate({
                 uuid: comment.uuid,
+                branch: comment.branch,
                 likes: mutatedCommentLikes
             })
 

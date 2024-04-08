@@ -92,7 +92,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         queryFn: getComments,
         initialPageParam: 0,
         getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : [],
-        refetchInterval: 8000,
+        refetchInterval: 60000,
     })
 
     const commentsSection = status === 'pending' ? (
