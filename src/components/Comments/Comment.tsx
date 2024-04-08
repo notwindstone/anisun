@@ -182,8 +182,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         // Уже проверил в handleVote()
         // @ts-ignore
         if (definedCommentLikes.includes(user.id)) {
-            const toRemove = true
-
             const mutatedCommentLikes = definedCommentLikes.filter(function (value) {
                 return value !== user?.id
             })
@@ -238,8 +236,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         // Уже проверил в handleVote()
         // @ts-ignore
         if (definedCommentDislikes.includes(user.id)) {
-            const toRemove = true
-
             const mutatedCommentDislikes = definedCommentDislikes.filter(function (value) {
                 return value !== user?.id
             })
