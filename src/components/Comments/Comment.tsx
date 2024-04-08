@@ -166,6 +166,8 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     }
 
     async function handleLike() {
+        setDelayed(true)
+
         const definedCommentLikes = comment.likes ?? []
 
         // Уже проверил в handleVote()
@@ -178,7 +180,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             })
 
             setLiked(false)
-            setDelayed(true)
 
             mutation.mutate({
                 uuid: comment.uuid,
@@ -201,7 +202,6 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         mutatedCommentLikes.push(user?.id)
 
         setLiked(true)
-        setDelayed(true)
 
         mutation.mutate({
             uuid: comment.uuid,
@@ -218,6 +218,8 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     }
 
     async function handleDislike() {
+        setDelayed(true)
+
         const definedCommentDislikes = comment.dislikes ?? []
 
         // Уже проверил в handleVote()
@@ -225,30 +227,42 @@ export default function Comment({ comment }: { comment: CommentProps }) {
         if (definedCommentDislikes.includes(user.id)) {
             const toRemove = true
 
+            const mutatedCommentDislikes = definedCommentDislikes.filter(function (value) {
+                return value !== user?.id
+            })
+
             setDisliked(false)
-            setDelayed(true)
+
+            mutation.mutate({
+                uuid: comment.uuid,
+                branch: comment.branch,
+                dislikes: mutatedCommentDislikes
+            })
 
             // @ts-ignore
             await comments.dislike(comment.uuid, user.id, definedCommentDislikes, toRemove)
-
-            await queryClient.refetchQueries({
-                queryKey: ['comments', comment.title]
-            })
 
             return setTimeout(() => {
                 setDelayed(false)
             }, 1000)
         }
 
+        const mutatedCommentDislikes = definedCommentDislikes
+
+        // Уже проверил в handleVote()
+        // @ts-ignore
+        mutatedCommentDislikes.push(user?.id)
+
         setDisliked(true)
-        setDelayed(true)
+
+        mutation.mutate({
+            uuid: comment.uuid,
+            branch: comment.branch,
+            dislikes: mutatedCommentDislikes,
+        })
 
         // @ts-ignore
         await comments.dislike(comment.uuid, user.id, definedCommentDislikes)
-
-        await queryClient.refetchQueries({
-            queryKey: ['comments', comment.title]
-        })
 
         return setTimeout(() => {
             setDelayed(false)
