@@ -76,9 +76,12 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
                 if (!originComment) {
                     const branchComment = pages.data.find((comment: CommentProps) => comment.branch === branch)
+                    const currentChild = branchComment.children.find((child: CommentProps) => child.uuid === uuid)
+
+                    return currentChild.likes = likes
                 }
 
-                originComment.likes = likes
+                return originComment.likes = likes
             }
 
             queryClient.setQueryData(['comments', { uuid, likes }], data)
