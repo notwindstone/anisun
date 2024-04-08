@@ -10,6 +10,12 @@ import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 
+interface DataProps {
+    pages: {
+        data: CommentProps[];
+    }[]
+}
+
 interface CommentProps {
     uuid: string;
     title: string;
@@ -18,11 +24,12 @@ interface CommentProps {
     username: string;
     avatar: string;
     createdAt: string;
-    likes: unknown[] | null;
-    dislikes: unknown[] | null;
+    likes: string[] | null;
+    dislikes?: string[] | null;
     message: string;
     isDeleted: boolean;
     isEdited: boolean;
+    children?: CommentProps[];
 }
 
 function notifyAboutDelay() {
@@ -53,35 +60,63 @@ export default function Comment({ comment }: { comment: CommentProps }) {
     const { user } = useUser();
 
     const [toggle, setToggle] = useState(false)
-    const [liked, setLiked] = useState(comment.likes?.includes(user?.id))
-    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id))
+    const [liked, setLiked] = useState(comment.likes?.includes(user?.id ?? ''))
+    const [disliked, setDisliked] = useState(comment.dislikes?.includes(user?.id ?? ''))
     const [delayed, setDelayed] = useState(false)
 
     const queryClient = useQueryClient()
 
     const mutation = useMutation({
-        mutationFn: ({ uuid, branch, likes, dislikes }: { uuid: string, branch: string, likes?: [], dislikes?: [] }) => {
+        // @ts-ignore
+        mutationFn: ({ uuid, branch, likes, dislikes }: { uuid: string, branch: string, likes?: string[] | null, dislikes?: string[] | null }) => {
             return { uuid: uuid, branch: branch, likes: likes, dislikes: dislikes }
         },
         onSuccess: (data, variables) => {
             const { uuid, branch, likes, dislikes } = variables
-            const oldData = queryClient.getQueryData(['comments', comment.title])
-
+            const oldData: DataProps | undefined = queryClient.getQueryData(['comments', comment.title])
+            console.log(oldData)
             if (!oldData) {
                 return
             }
 
             for (const pages of oldData.pages) {
-                const originComment = pages.data.find((comment: CommentProps) => comment.uuid === uuid)
+                const originComment = pages.data.find(
+                    (comment: CommentProps) => comment.uuid === uuid
+                )
 
                 if (!originComment) {
-                    const branchComment = pages.data.find((comment: CommentProps) => comment.branch === branch)
+                    const branchComment = pages.data.find(
+                        (comment: CommentProps) => comment.branch === branch
+                    )
+
+                    if (!branchComment?.children) {
+                        return
+                    }
+
                     const currentChild = branchComment.children.find((child: CommentProps) => child.uuid === uuid)
 
-                    return currentChild.likes = likes
+                    if (!currentChild) {
+                        return
+                    }
+
+                    if (likes) {
+                        currentChild.likes = likes
+                    }
+
+                    if (dislikes) {
+                        currentChild.dislikes = dislikes
+                    }
+
+                    return
                 }
 
-                return originComment.likes = likes
+                if (likes) {
+                    originComment.likes = likes
+                }
+
+                if (dislikes) {
+                    originComment.dislikes = dislikes
+                }
             }
 
             queryClient.setQueryData(['comments', { uuid, likes }], data)
@@ -154,24 +189,28 @@ export default function Comment({ comment }: { comment: CommentProps }) {
             // @ts-ignore
             await comments.like(comment.uuid, user.id, definedCommentLikes, toRemove)
 
-            await queryClient.refetchQueries({
-                queryKey: ['comments', comment.title]
-            })
-
             return setTimeout(() => {
                 setDelayed(false)
             }, 1000)
         }
 
+        const mutatedCommentLikes = definedCommentLikes
+
+        // Уже проверил в handleVote()
+        // @ts-ignore
+        mutatedCommentLikes.push(user?.id)
+
         setLiked(true)
         setDelayed(true)
 
+        mutation.mutate({
+            uuid: comment.uuid,
+            branch: comment.branch,
+            likes: mutatedCommentLikes,
+        })
+
         // @ts-ignore
         await comments.like(comment.uuid, user.id, definedCommentLikes)
-
-        await queryClient.refetchQueries({
-            queryKey: ['comments', comment.title]
-        })
 
         return setTimeout(() => {
             setDelayed(false)
