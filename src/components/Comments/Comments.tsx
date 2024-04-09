@@ -1,6 +1,6 @@
 "use client"
 
-import {comments} from "@/api/comments/comments";
+import {comments} from "@/lib/comments/comments";
 import AddComment from "@/components/Comments/AddComment";
 import {useInfiniteQuery} from "@tanstack/react-query";
 import Comment from "@/components/Comments/Comment";

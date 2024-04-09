@@ -2,7 +2,7 @@
 
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import {useQuery} from "@tanstack/react-query";
-import {anilibria} from "@/api/anilibria/anilibria";
+import {anilibria} from "@/lib/anilibria/anilibria";
 import React from "react";
 import {Loader} from "@mantine/core";
 

@@ -1,7 +1,7 @@
 "use client"
 
 import {useQuery} from "@tanstack/react-query";
-import {account} from "@/api/account/account";
+import {account} from "@/lib/account/account";
 import {Loader, Text} from "@mantine/core";
 
 export default function Account({ userid }: { userid: string }) {

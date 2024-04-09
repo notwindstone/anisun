@@ -3,7 +3,7 @@ import classes from './Comment.module.css'
 import Link from "next/link";
 import {useRef, useState} from "react";
 import AddComment from "@/components/Comments/AddComment";
-import {comments} from "@/api/comments/comments";
+import {comments} from "@/lib/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import {notifications} from "@mantine/notifications";
 import {

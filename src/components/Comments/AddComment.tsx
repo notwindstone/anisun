@@ -1,7 +1,7 @@
 import {useRef, useState} from "react";
 import {Button, Group, Textarea} from "@mantine/core";
 import { IconMessage } from "@tabler/icons-react";
-import {comments} from "@/api/comments/comments";
+import {comments} from "@/lib/comments/comments";
 import {nanoid} from "nanoid";
 import {useQueryClient} from "@tanstack/react-query";
 import {notifications} from "@mantine/notifications";
@@ -64,9 +64,9 @@ export default function AddComment({ titleCode, parentUUID, branch }: { titleCod
         const uuid = nanoid()
         const createdAt = new Date().toJSON()
 
-        const userId = user.id
-        const username = user.username ?? "Пользователь без никнейма"
-        const avatar = user.imageUrl
+        const userId = user?.id
+        const username = user?.username ?? "Пользователь без никнейма"
+        const avatar = user?.imageUrl
 
         await comments.add(
             uuid,
