@@ -13,17 +13,31 @@ export async function generateMetadata({ params }: { params: { code: string } })
 
     const anime = await anilibria.title.code(code)
         .catch((error) => {
+            console.log(anime)
             console.log(error)
         })
 
+    if (!anime) {
+        return {
+            title: 'Просмотр аниме на Animeth',
+            description: 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере',
+            openGraph: {
+                siteName: 'Animeth',
+                type: "website",
+                title: 'Просмотр аниме на Animeth',
+                description: 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере',
+            }
+        }
+    }
+
     return {
-        title: anime.names.ru ?? 'Просмотр аниме на Animeth',
-        description: anime.description ?? 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере',
+        title: anime.names.ru,
+        description: anime.description,
         openGraph: {
             siteName: 'Animeth',
             type: "website",
-            title: anime.names.ru ?? 'Просмотр аниме на Animeth',
-            description: anime.description ?? 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере',
+            title: anime.names.ru,
+            description: anime.description,
         }
     }
 }
