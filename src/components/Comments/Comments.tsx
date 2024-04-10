@@ -11,25 +11,9 @@ import classes from './Comments.module.css';
 import {SignedIn, SignedOut, UserButton, useUser} from "@clerk/nextjs";
 import Link from "next/link";
 import {nanoid} from "nanoid";
+import {CommentType} from "@/types/commentType";
 
-interface CommentsGroupProps {
-    uuid: string;
-    parentuuid: string | null;
-    branch: string;
-    title: string;
-    userid: string;
-    username: string;
-    avatar: string;
-    createdAt: string;
-    likes: unknown[] | null;
-    dislikes: unknown[] | null;
-    message: string;
-    isDeleted: boolean;
-    isEdited: boolean;
-    children?: CommentsGroupProps[]
-}
-
-function arrangeHierarchyComments(comment: CommentsGroupProps, otherChildren?: CommentsGroupProps[]) {
+function arrangeHierarchyComments(comment: CommentType, otherChildren?: CommentType[]) {
     if (!comment.children) {
         if (!otherChildren) {
             return
@@ -103,7 +87,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         <>
             {
                 data.pages.map((group) => {
-                    const commentsGroup: CommentsGroupProps[] | null = group.data ?? []
+                    const commentsGroup: CommentType[] | null = group.data ?? []
 
                     return commentsGroup.map((comment) => {
                         return (

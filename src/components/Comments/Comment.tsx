@@ -14,28 +14,12 @@ import {
 } from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {CommentType} from "@/types/commentType";
 
 interface DataProps {
     pages: {
-        data: CommentProps[];
+        data: CommentType[];
     }[]
-}
-
-interface CommentProps {
-    uuid: string;
-    parentuuid: string | null;
-    title: string;
-    branch: string;
-    userid: string;
-    username: string;
-    avatar: string;
-    createdAt: string;
-    likes: unknown[] | null;
-    dislikes: unknown[] | null;
-    message: string;
-    isDeleted: boolean;
-    isEdited: boolean;
-    children?: CommentProps[];
 }
 
 function notifyAboutDelay() {
@@ -61,7 +45,7 @@ function notifyCriticalError() {
 }
 
 // TODO: rewrite client-server sync
-export default function Comment({ comment }: { comment: CommentProps }) {
+export default function Comment({ comment }: { comment: CommentType }) {
 
     const { user } = useUser();
 
@@ -100,19 +84,19 @@ export default function Comment({ comment }: { comment: CommentProps }) {
 
             for (const pages of mutatedData.pages) {
                 const originComment = pages.data.find(
-                    (comment: CommentProps) => comment.uuid === uuid
+                    (comment: CommentType) => comment.uuid === uuid
                 )
 
                 if (!originComment) {
                     const branchComment = pages.data.find(
-                        (comment: CommentProps) => comment.branch === branch
+                        (comment: CommentType) => comment.branch === branch
                     )
 
                     if (!branchComment?.children) {
                         return
                     }
 
-                    let currentChild = branchComment.children.find((child: CommentProps) => child.uuid === uuid)
+                    let currentChild = branchComment.children.find((child: CommentType) => child.uuid === uuid)
 
                     if (!currentChild) {
                         return
