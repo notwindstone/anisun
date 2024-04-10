@@ -13,7 +13,6 @@ export async function generateMetadata({ params }: { params: { code: string } })
 
     const anime = await anilibria.title.code(code)
         .catch((error) => {
-            console.log(anime)
             console.log(error)
         })
 
