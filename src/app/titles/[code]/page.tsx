@@ -12,6 +12,9 @@ export async function generateMetadata({ params }: { params: { code: string } })
     const code = params.code
 
     const anime = await anilibria.title.code(code)
+        .catch((error) => {
+            console.log(error)
+        })
 
     return {
         title: anime.names.ru,
