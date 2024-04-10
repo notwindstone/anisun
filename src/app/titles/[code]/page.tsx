@@ -16,6 +16,12 @@ export async function generateMetadata({ params }: { params: { code: string } })
     return {
         title: anime.names.ru,
         description: anime.description,
+        openGraph: {
+            siteName: 'Animeth',
+            type: "website",
+            title: anime.names.ru,
+            description: anime.description,
+        }
     }
 }
 
