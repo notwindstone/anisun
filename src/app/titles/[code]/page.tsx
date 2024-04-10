@@ -17,13 +17,13 @@ export async function generateMetadata({ params }: { params: { code: string } })
         })
 
     return {
-        title: anime.names.ru,
-        description: anime.description,
+        title: anime.names.ru ?? 'Просмотр аниме на Animeth',
+        description: anime.description ?? 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере',
         openGraph: {
             siteName: 'Animeth',
             type: "website",
-            title: anime.names.ru,
-            description: anime.description,
+            title: anime.names.ru ?? 'Просмотр аниме на Animeth',
+            description: anime.description ?? 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере',
         }
     }
 }
