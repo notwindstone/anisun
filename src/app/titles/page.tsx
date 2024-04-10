@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import {Search} from "@/components/Search/Search";
 
-export default function Page() {
+export default async function Page() {
     return (
         <div>
             <Link href="/">Return</Link>

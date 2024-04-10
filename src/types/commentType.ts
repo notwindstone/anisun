@@ -12,5 +12,5 @@ export type CommentType = {
     message: string;
     isDeleted: boolean;
     isEdited: boolean;
-    children?: CommentType[];
+    children?: { count: number }[];
 };
