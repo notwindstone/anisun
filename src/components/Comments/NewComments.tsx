@@ -2,9 +2,10 @@
 
 import {comments} from "@/lib/comments/comments";
 import {useInfiniteQuery} from "@tanstack/react-query";
-import {Loader} from "@mantine/core";
+import {Loader, UnstyledButton} from "@mantine/core";
 import React from "react";
 import {CommentType} from "@/types/commentType";
+import Comment from "@/components/Comments/Comment";
 
 export default function NewComments({ titleCode }: { titleCode: string }) {
     const getComments = async ({ pageParam } : { pageParam: number }) => {
@@ -37,7 +38,53 @@ export default function NewComments({ titleCode }: { titleCode: string }) {
                     const commentsGroup: CommentType[] | null = group.data ?? []
 
                     return commentsGroup.map((comment) => {
-console.log(comment.children)
+                        if (!comment.children || comment.children[0].count < 1) {
+                            return (
+                                <div key={comment.uuid}>
+                                    <Comment comment={comment}></Comment>
+                                </div>
+                            )
+                        }
+
+                        const notFetched = 'NOT_FETCHED'
+                        const expanded = 'EXPANDED'
+                        const notExpanded = 'NOT_EXPANDED'
+
+                        let currentState = notFetched
+
+                        let childrenComments
+
+                        switch (currentState) {
+                            case notFetched:
+                                childrenComments = (
+                                    <UnstyledButton>
+                                        Раскрыть {comment.children[0].count} комментариев
+                                    </UnstyledButton>
+                                )
+                                break
+                            case expanded:
+                                childrenComments = (
+                                    <></>
+                                )
+                                break
+                            case notExpanded:
+                                childrenComments = (
+                                    <></>
+                                )
+                                break
+                            default:
+                                childrenComments = (
+                                    <></>
+                                )
+                                break
+                        }
+
+                        return (
+                            <div key={comment.uuid}>
+                                <Comment comment={comment}></Comment>
+                                {childrenComments}
+                            </div>
+                        )
                     })
                 })
             }

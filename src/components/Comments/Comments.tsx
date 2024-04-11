@@ -42,15 +42,19 @@ function arrangeHierarchyComments(comment: CommentType, otherChildren?: CommentT
     }
 
     const filteredChildren = children.filter((currentComment) => {
+        // @ts-ignore
         return currentComment.parentuuid === comment.uuid
     })
 
     return filteredChildren.map((filteredChild) => {
         return (
+            // @ts-ignore
             <div key={filteredChild.uuid}>
-                <Comment comment={filteredChild}/>
+                {/* @ts-ignore */}
+                <Comment comment={filteredChild} />
                 <div className={classes.childComments}>
-                    {arrangeHierarchyComments(filteredChild, children)}
+                    {// @ts-ignore
+                        arrangeHierarchyComments(filteredChild, children)}
                 </div>
             </div>
         )
@@ -87,8 +91,10 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         <>
             {
                 data.pages.map((group) => {
+                    // @ts-ignore
                     const commentsGroup: CommentType[] | null = group.data ?? []
 
+                    // @ts-ignore
                     return commentsGroup.map((comment) => {
                         return (
                             <div key={comment.uuid}>
