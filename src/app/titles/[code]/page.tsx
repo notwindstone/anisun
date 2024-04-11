@@ -5,9 +5,7 @@ export const dynamic = 'force-dynamic'; // static by default, unless reading the
 import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
-import Comments from "@/components/Comments/Comments";
 import {anilibria} from "@/lib/anilibria/anilibria";
-import NewComments from "@/components/Comments/NewComments";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const code = params.code
@@ -47,8 +45,6 @@ export default async function Page({ params }: { params: { code: string } }) {
             <VideoEmbed
               code={params.code}
             />
-            <NewComments titleCode={params.code} />
-            <Comments titleCode={params.code} />
         </>
     );
 }
