@@ -1,8 +1,8 @@
 import {notifications} from "@mantine/notifications";
 import notificationsData from '../../../configs/notificationsData.json'
 
-export const delay = () => {
+export const incorrectInput = () => {
     notifications.clean()
 
-    return notifications.show(notificationsData.delay)
+    return notifications.show(notificationsData.incorrectInput)
 }
