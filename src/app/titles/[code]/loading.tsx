@@ -1,7 +1,7 @@
-import {LoaderEmbed} from "@/components/LoaderEmbed/LoaderEmbed";
+import {Skeleton} from "@mantine/core";
 
 export default function Loading() {
     return (
-        <LoaderEmbed />
+        <Skeleton height="56.25vw" width="100vw" visible={true} />
     )
 }
