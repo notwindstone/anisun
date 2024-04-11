@@ -4,7 +4,7 @@ import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import React from "react";
-import {Loader} from "@mantine/core";
+import {Loader, Skeleton} from "@mantine/core";
 
 interface ResponseProps {
     names: {
@@ -38,15 +38,9 @@ export default function VideoEmbed({ code }: VideoEmbedProps) {
         return response
     }
 
-    if (isFetching) {
-        return (
-            <Loader />
-        )
-    }
-
     if (!data) {
         return (
-            <>Ничего не найдено</>
+            <Skeleton visible={isFetching} height="56.25vw" width="100vw" />
         )
     }
 
