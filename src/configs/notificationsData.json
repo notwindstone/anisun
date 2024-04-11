@@ -1,0 +1,8 @@
+{
+  "delay": {
+    "title": "Ошибка",
+    "message": "Пожалуйста, подождите",
+    "autoClose": 3000,
+    "color": "yellow"
+  }
+}

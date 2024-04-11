@@ -1,12 +1,8 @@
 import {notifications} from "@mantine/notifications";
+import notificationsData from '../../../configs/notificationsData.json'
 
 export const delay = async () => {
     notifications.clean()
 
-    return notifications.show({
-        title: 'Ошибка',
-        message: 'Пожалуйста, подождите',
-        autoClose: 3000,
-        color: 'yellow'
-    })
+    return notifications.show(notificationsData.delay)
 }
