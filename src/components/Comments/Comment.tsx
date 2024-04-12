@@ -14,7 +14,7 @@ import {
 } from "@tabler/icons-react";
 import {makeDate} from "@/utils/makeDate";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {CommentType} from "@/types/commentType";
+import {CommentType} from "@/types/CommentType";
 
 interface DataProps {
     pages: {

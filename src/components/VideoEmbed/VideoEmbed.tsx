@@ -4,7 +4,7 @@ import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import React from "react";
-import {Loader, Skeleton} from "@mantine/core";
+import {Skeleton} from "@mantine/core";
 
 interface ResponseProps {
     names: {
@@ -23,11 +23,7 @@ interface ResponseProps {
     },
 }
 
-interface VideoEmbedProps {
-    code: string;
-}
-
-export default function VideoEmbed({ code }: VideoEmbedProps) {
+export default function VideoEmbed({ code }: { code: string }) {
     const { isFetching, data } = useQuery({
         queryKey: ['anime', code],
         queryFn: async () => fetchAnime(code),
