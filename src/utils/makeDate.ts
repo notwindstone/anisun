@@ -23,5 +23,6 @@ export function makeDate(createdAt: string) {
         return dayjs(createdAt).format('Сегодня в H:mm')
     }
 
+    // В любой другой день, если не прошлый год, не вчера и не сегодня
     return dayjs(createdAt).format('D MMMM в H:mm')
 }
