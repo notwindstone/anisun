@@ -4,6 +4,7 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {InView} from "react-intersection-observer";
+import {Comment} from "@/components/Comments/Comment/Comment";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -35,7 +36,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
             return commentGroup.map((comment) => {
                 return (
-                    <></>
+                    <Comment key={comment.uuid} comment={comment} />
                 )
             })
         })
