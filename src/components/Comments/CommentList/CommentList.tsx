@@ -2,7 +2,8 @@
 
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {comments} from "@/lib/comments/comments";
-import {Text} from "@mantine/core";
+import {CommentType} from "@/types/CommentType";
+import {InView} from "react-intersection-observer";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -21,9 +22,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     })
 
     async function retrieveComments({ nextCursor }: { nextCursor: number }) {
-        const data = await comments.get({ title: titleCode, nextCursor: nextCursor })
-        console.log(data, titleCode, nextCursor)
-        return data
+        return await comments.get({ title: titleCode, nextCursor: nextCursor })
     }
 
     const commentSection = status === 'pending' ? (
@@ -31,15 +30,37 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (
-        <div>
-            <>1234</>
-            <Text>{data.pages[0].data[2].children[0].count}</Text>
-        </div>
+        data.pages.map((group) => {
+            const commentGroup: CommentType[] | null = group.data ?? []
+
+            return commentGroup.map((comment) => {
+                return (
+                    <></>
+                )
+            })
+        })
     )
 
     return (
-        <>
+        <div>
             {commentSection}
-        </>
+            <InView onChange={(inView) => {
+                if (!inView) {
+                    return
+                }
+
+                const dataPages = data?.pages ?? []
+                const lastDataPage = dataPages[dataPages.length - 1] ?? []
+                const hasNextPageData = lastDataPage.data
+
+                if (!hasNextPageData) {
+                    return
+                }
+
+                fetchNextPage().then()
+            }}>
+                <hr></hr>
+            </InView>
+        </div>
     )
 }
