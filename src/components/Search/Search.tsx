@@ -3,11 +3,10 @@
 import { useEffect, useState } from 'react';
 import {
     AutocompleteProps, CloseButton,
-    ComboboxItem, Flex,
+    ComboboxItem,
     Group, Image,
-    Loader,
     OptionsFilter,
-    Select,
+    Select, Skeleton, Space,
     Text,
 } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
@@ -49,21 +48,34 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 </>
             );
         case 'notEnoughChars':
-            return (
+            /*return (
                 <>
                     <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.notEnoughChars.image} />
                     <Text>{searchAutocomplete.notEnoughChars.label}</Text>
                 </>
-            );
+            );*/
         case 'fetching':
             return (
-                <Flex
-                    className={classes.fetchingWrapper}
-                    justify="center"
-                    align="center"
-                >
-                    <Loader size={64} />
-                </Flex>
+                <Group gap="sm">
+                    <div>
+                        <Skeleton>
+                            <Image className={classes.poster} w={64} h={92} radius="sm" alt=""/>
+                        </Skeleton>
+                    </div>
+                    <div>
+                        <Text size="xl">
+                            <Skeleton>
+                                Ookami to koushinryou
+                            </Skeleton>
+                        </Text>
+                        <Space h="md" />
+                        <Text size="md">
+                            <Skeleton>
+                                Ookami to koushinryou
+                            </Skeleton>
+                        </Text>
+                    </div>
+                </Group>
             )
     }
 
