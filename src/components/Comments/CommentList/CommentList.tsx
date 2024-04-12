@@ -5,6 +5,7 @@ import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {InView} from "react-intersection-observer";
 import {Comment} from "@/components/Comments/Comment/Comment";
+import {Loader} from "@mantine/core";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -13,17 +14,17 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         fetchNextPage,
         isFetchingNextPage,
         status
-    // @ts-ignore
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
+        // @ts-ignore
         queryFn: retrieveComments,
         initialPageParam: 0,
         getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : [],
         refetchInterval: 60000,
     })
 
-    async function retrieveComments({ nextCursor }: { nextCursor: number }) {
-        return await comments.getParent({ title: titleCode, nextCursor: nextCursor })
+    async function retrieveComments({ pageParam }: { pageParam: number }) {
+        return await comments.getParent({ title: titleCode, nextCursor: pageParam })
     }
 
     const commentSection = status === 'pending' ? (
@@ -31,15 +32,20 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (
-        data.pages.map((group) => {
-            const commentGroup: CommentType[] | null = group.data ?? []
+        <>
+            {
+                data.pages.map((group) => {
+                    const commentGroup: CommentType[] | null = group.data ?? []
 
-            return commentGroup.map((comment) => {
-                return (
-                    <Comment key={comment.uuid} comment={comment} />
-                )
-            })
-        })
+                    return commentGroup.map((comment) => {
+                        return (
+                            <Comment key={comment.uuid} comment={comment}/>
+                        )
+                    })
+                })
+            }
+            <span> {isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>
+        </>
     )
 
     return (
