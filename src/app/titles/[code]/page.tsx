@@ -6,6 +6,7 @@ import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import {anilibria} from "@/lib/anilibria/anilibria";
+import CommentList from "@/components/Comments/CommentList/CommentList";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const code = params.code
@@ -45,6 +46,7 @@ export default async function Page({ params }: { params: { code: string } }) {
             <VideoEmbed
               code={params.code}
             />
+            <CommentList titleCode={params.code} />
         </>
     );
 }
