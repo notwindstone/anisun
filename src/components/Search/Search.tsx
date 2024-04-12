@@ -63,17 +63,8 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                         </Skeleton>
                     </div>
                     <div>
-                        <Text size="xl">
-                            <Skeleton>
-                                Ookami to koushinryou
-                            </Skeleton>
-                        </Text>
-                        <Space h="md" />
-                        <Text size="md">
-                            <Skeleton>
-                                Ookami to koushinryou
-                            </Skeleton>
-                        </Text>
+                        <Skeleton height={24} width={256} radius="xl" mb="xs" />
+                        <Skeleton height={24} width={256} radius="xl" />
                     </div>
                 </Group>
             )
