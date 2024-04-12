@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import {and, asc, count, desc, eq, isNotNull, isNull} from 'drizzle-orm';
+import {and, asc, count, desc, eq, isNotNull, isNull, sql} from 'drizzle-orm';
 
 export const get = async ({ title, nextCursor = 0, uuid }: { title: string, nextCursor: number, uuid?: string }) => {
     const initialLimit = nextCursor === 0 ? 8 : nextCursor
@@ -36,6 +36,18 @@ export const get = async ({ title, nextCursor = 0, uuid }: { title: string, next
 
         data.push({ ...comment, children: children })
     }
+
+    const experimentalCount = await db.execute(
+        sql
+            `
+                with recursive child as (
+                    select * from comments where parentuuid = 'wUsw3NYzo5Dmny6Pqe_Qd'
+                )
+                select * from child
+            `
+    )
+
+    console.log(experimentalCount)
 
     return { data: data, nextCursor: nextCursor + 8 };
 
