@@ -23,7 +23,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     })
 
     async function retrieveComments({ nextCursor }: { nextCursor: number }) {
-        return await comments.get({ title: titleCode, nextCursor: nextCursor })
+        return await comments.getParent({ title: titleCode, nextCursor: nextCursor })
     }
 
     const commentSection = status === 'pending' ? (
