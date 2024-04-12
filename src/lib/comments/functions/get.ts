@@ -37,18 +37,6 @@ export const get = async ({ title, nextCursor = 0, uuid }: { title: string, next
         data.push({ ...comment, children: children })
     }
 
-    const experimentalCount = await db.execute(
-        sql
-            `
-                with recursive child as (
-                    select * from comments where parentuuid = 'wUsw3NYzo5Dmny6Pqe_Qd'
-                )
-                select * from child
-            `
-    )
-
-    console.log(experimentalCount)
-
     return { data: data, nextCursor: nextCursor + 8 };
 
     /*
