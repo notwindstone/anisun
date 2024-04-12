@@ -2,12 +2,15 @@ import {useQuery} from "@tanstack/react-query";
 import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {Comment} from "@/components/Comments/Comment/Comment";
+import classes from './ChildCommentList.module.css'
+import {Skeleton} from "@mantine/core";
 
 export function ChildCommentList({ uuid }: { uuid: string }) {
     const {
         data,
         error,
-        status
+        status,
+        isPending
         // @ts-ignore
     } = useQuery({
         queryKey: ["comments", uuid],
@@ -34,8 +37,8 @@ export function ChildCommentList({ uuid }: { uuid: string }) {
     )
 
     return (
-        <div>
+        <Skeleton visible={isPending} className={classes.comments}>
             {childCommentSection}
-        </div>
+        </Skeleton>
     )
 }

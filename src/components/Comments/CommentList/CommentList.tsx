@@ -44,7 +44,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                     })
                 })
             }
-            <span> {isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>
+            <span>{isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>
         </>
     )
 

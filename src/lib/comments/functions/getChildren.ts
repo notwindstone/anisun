@@ -2,7 +2,7 @@
 
 import db from "@/db/drizzle";
 import {comments} from "@/db/schema";
-import {count, desc, eq} from "drizzle-orm";
+import {asc, count, eq} from "drizzle-orm";
 
 export const getChildren = async ({ uuid }: { uuid: string }) => {
     const parentComments =
@@ -12,7 +12,7 @@ export const getChildren = async ({ uuid }: { uuid: string }) => {
             .where(
                 eq(comments.parentuuid, uuid),
             )
-            .orderBy(desc(comments.createdAt))
+            .orderBy(asc(comments.createdAt))
 
     if (parentComments.length === 0) {
         return { data: null }
