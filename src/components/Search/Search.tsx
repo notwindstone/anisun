@@ -6,7 +6,7 @@ import {
     ComboboxItem,
     Group, Image,
     OptionsFilter,
-    Select, Skeleton, Space,
+    Select, Skeleton,
     Text,
 } from '@mantine/core';
 import { useDebouncedState } from '@mantine/hooks';
@@ -16,24 +16,10 @@ import { useQuery } from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
 import classes from './Search.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
+import {AnimeTitleType} from "@/types/AnimeTitleType";
 
-interface TitleProps {
-    code: string;
-    posters: {
-        small: {
-            url: string;
-        }
-    },
-    names: {
-        ru: string;
-        en: string;
-    },
-    status: {
-        string: string;
-    }
-}
-
-// Filter options to show "Ничего не найдено" or "Введите название от трёх символов" I don't know how it works, but it works.
+// Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
+// Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
 const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter(() => ({ value: ' ', label: ' ' }));
 
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
@@ -48,12 +34,12 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 </>
             );
         case 'notEnoughChars':
-            /*return (
+            return (
                 <>
                     <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.notEnoughChars.image} />
                     <Text>{searchAutocomplete.notEnoughChars.label}</Text>
                 </>
-            );*/
+            );
         case 'fetching':
             return (
                 <Group gap="sm">
@@ -111,7 +97,7 @@ export function Search() {
             return nothingFound;
         }
 
-        const titlesList = searchList.map((title: TitleProps) => (
+        const titlesList = searchList.map((title: AnimeTitleType) => (
             {
                 value: `${title.code}--https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`,
                 label: `${title.names.ru} / ${title.names.en}`,
@@ -119,6 +105,7 @@ export function Search() {
         ));
 
         setTitles(titlesList);
+
         return titlesList;
     }
 
@@ -146,8 +133,7 @@ export function Search() {
                 rightSectionPointerEvents="auto"
                 rightSection={
                     search
-                        ? <CloseButton onClick={() => setSearch('')} />
-                        : null
+                        && <CloseButton onClick={() => setSearch('')} />
                 }
                 onOptionSubmit={(option) => {
                     router.push(`/titles/${option.split('--')[0]}`);
