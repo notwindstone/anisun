@@ -10,6 +10,7 @@ import {makeWordEnding} from "@/utils/makeWordEnding";
 
 export function Comment({ comment }: { comment: CommentType }) {
     const [expandChild, setExpandChild] = useState(false)
+    const [reply, setReply] = useState(false)
 
     const children = comment.children ? comment.children[0].count : 0
 
@@ -45,14 +46,17 @@ export function Comment({ comment }: { comment: CommentType }) {
                         </ActionIcon>
                         <Text>{comment.dislikes?.length}</Text>
 
-                        <Button>Ответить</Button>
+                        <Button onClick={() => setReply(!reply)}>Ответить</Button>
                     </Group>
                 </Stack>
             </Flex>
             {
+                reply && <>Ответ</>
+            }
+            {
                 /*
                  * Если к комментарию только 1 ответ, то он автоматически загрузится
-                 * Если к комментарию больше 1 ответа, то будет показана кнопка "Раскрыть ответы"
+                 * Если к комментарию больше 1 ответа, то будет показана кнопка "Раскрыть {число} ответов"
                  * В ином случае (т.е. ответов нет) ничего не выведется
                  * */
                 hasOneChild
