@@ -25,7 +25,7 @@ export function ChildCommentList({ uuid }: { uuid: string }) {
     const commentGroup: CommentType[] | null = data?.data ?? []
 
     const childCommentSection = status === 'pending' ? (
-        <>Loading...</>
+        <Skeleton w="100%" h={128} />
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (
@@ -37,8 +37,8 @@ export function ChildCommentList({ uuid }: { uuid: string }) {
     )
 
     return (
-        <Skeleton visible={isPending} className={classes.comments}>
+        <div className={classes.comments}>
             {childCommentSection}
-        </Skeleton>
+        </div>
     )
 }

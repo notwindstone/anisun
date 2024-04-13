@@ -5,7 +5,7 @@ import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {InView} from "react-intersection-observer";
 import {Comment} from "@/components/Comments/Comment/Comment";
-import {Loader} from "@mantine/core";
+import {Loader, Skeleton} from "@mantine/core";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -13,7 +13,8 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         error,
         fetchNextPage,
         isFetchingNextPage,
-        status
+        status,
+        isPending
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
         // @ts-ignore
@@ -28,7 +29,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     }
 
     const commentSection = status === 'pending' ? (
-        <>Loading...</>
+        <Skeleton w="100%" h={128} />
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (

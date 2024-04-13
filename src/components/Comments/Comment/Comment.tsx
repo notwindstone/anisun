@@ -8,7 +8,7 @@ import {makeDate} from "@/utils/makeDate";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 
 export function Comment({ comment }: { comment: CommentType }) {
-    const [retrieveChild, setRetrieveChild] = useState(false)
+    const [expandChild, setExpandChild] = useState(false)
 
     const children = comment.children ? comment.children[0].count : 0
 
@@ -62,11 +62,13 @@ export function Comment({ comment }: { comment: CommentType }) {
                         ? (
                             <>
                                 <UnstyledButton
-                                    onClick={() => setRetrieveChild(true)}
+                                    onClick={() => setExpandChild(!expandChild)}
                                 >
-                                    Раскрыть ответы
+                                    {
+                                        expandChild ? "Свернуть" : "Раскрыть ответы"
+                                    }
                                 </UnstyledButton>
-                                {retrieveChild && (<ChildCommentList uuid={comment.uuid} />)}
+                                {expandChild && (<ChildCommentList uuid={comment.uuid} />)}
                             </>
                         )
                         : null
