@@ -6,6 +6,7 @@ import classes from "./Comment.module.css";
 import Link from "next/link";
 import {makeDate} from "@/utils/makeDate";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
+import {makeWordEnding} from "@/utils/makeWordEnding";
 
 export function Comment({ comment }: { comment: CommentType }) {
     const [expandChild, setExpandChild] = useState(false)
@@ -65,7 +66,7 @@ export function Comment({ comment }: { comment: CommentType }) {
                                     onClick={() => setExpandChild(!expandChild)}
                                 >
                                     {
-                                        expandChild ? "Свернуть" : `Раскрыть ${children}`
+                                        expandChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding(children)}`
                                     }
                                 </UnstyledButton>
                                 {expandChild && (<ChildCommentList uuid={comment.uuid} />)}
