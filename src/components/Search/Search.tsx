@@ -9,7 +9,7 @@ import {
     Select, Skeleton,
     Text,
 } from '@mantine/core';
-import { useDebouncedState } from '@mantine/hooks';
+import {useClickOutside, useDebouncedState} from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
@@ -73,6 +73,8 @@ export function Search() {
     const router = useRouter();
     const [search, setSearch] = useDebouncedState('', 300, { leading: true });
     const [titles, setTitles] = useState([]);
+    const [opened, setOpened] = useState(false)
+    const ref = useClickOutside(() => setOpened(false))
 
     const { refetch, isFetching } = useQuery({
         queryKey: ['titles', search],
@@ -116,6 +118,9 @@ export function Search() {
     return (
         <>
             <Select
+                ref={ref}
+                onClick={() => setOpened(true)}
+                dropdownOpened={opened}
                 searchable
                 variant="unstyled"
                 maxDropdownHeight={800}
@@ -124,7 +129,7 @@ export function Search() {
                         ? [{ label: ' ', value: 'fetching', disabled: true }]
                         : titles
                 }
-                defaultValue={search}
+                defaultSearchValue={search}
                 onSearchChange={(event) => setSearch(event)}
                 placeholder="Поиск"
                 leftSection={

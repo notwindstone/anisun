@@ -12,7 +12,6 @@ export function Comment({ comment }: { comment: CommentType }) {
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
 
-
     const children = comment.children ? comment.children[0].count : 0
 
     const hasOneChild = children === 1
