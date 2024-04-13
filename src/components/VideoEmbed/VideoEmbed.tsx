@@ -28,13 +28,16 @@ export default function VideoEmbed({ code }: { code: string }) {
     }
 
     const anilibriaData = data.anilibria
+    const kodikData = data.kodik
 
-    const title = anilibriaData.names.ru
-    const player = anilibriaData.player;
-    const preview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
+    const anilibriaTitle = anilibriaData.names.ru
+    const anilibriaPlayer = anilibriaData.player;
+    const anilibriaPreview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
+
+    const kodikPlayer = kodikData.results[0].link
 
     // Некоторые аниме тайтлы не имеют плеера
-    if (Object.keys(player.list).length === 0) {
+    if (Object.keys(anilibriaPlayer.list).length === 0) {
         return (
             <>
                 <div>{code}</div>
@@ -43,20 +46,18 @@ export default function VideoEmbed({ code }: { code: string }) {
         );
     }
 
-    console.log(data.kodik)
-
     return (
         <>
             <iframe
-                src="//aniqit.com/serial/58183/c2e6168a788b1c673508a967dca7837a/720p"
+                src={kodikPlayer}
                 width="610"
                 height="370"
                 allow="autoplay *; fullscreen *"
             />
             <VideoPlayer
-                title={title}
-                player={player}
-                preview={preview}
+                title={anilibriaTitle}
+                player={anilibriaPlayer}
+                preview={anilibriaPreview}
             />
         </>
     );
