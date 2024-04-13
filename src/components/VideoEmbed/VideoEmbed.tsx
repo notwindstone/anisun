@@ -5,23 +5,8 @@ import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import React from "react";
 import {Skeleton} from "@mantine/core";
-
-interface ResponseProps {
-    names: {
-        ru: string;
-    }
-    player: {
-        host: string;
-        list: {
-            episode: string;
-            hls: {
-                fhd?: string;
-                hd?: string;
-                sd?: string;
-            }
-        }[]
-    },
-}
+import {AnimeTitleResponseType} from "@/types/AnimeTitleResponseType";
+import {kodik} from "@/lib/kodik/kodik";
 
 export default function VideoEmbed({ code }: { code: string }) {
     const { isFetching, data } = useQuery({
@@ -30,8 +15,10 @@ export default function VideoEmbed({ code }: { code: string }) {
     });
 
     async function fetchAnime(code: string) {
-        const response: ResponseProps = await anilibria.title.code(code)
-        return response
+        const anilibriaResponse: AnimeTitleResponseType = await anilibria.title.code(code)
+        const kodikResponse = await kodik.code(code)
+
+        return { anilibria: anilibriaResponse, kodik: kodikResponse }
     }
 
     if (!data) {
@@ -40,8 +27,10 @@ export default function VideoEmbed({ code }: { code: string }) {
         )
     }
 
-    const title = data.names.ru
-    const player = data.player;
+    const anilibriaData = data.anilibria
+
+    const title = anilibriaData.names.ru
+    const player = anilibriaData.player;
     const preview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
 
     // Некоторые аниме тайтлы не имеют плеера
@@ -53,6 +42,8 @@ export default function VideoEmbed({ code }: { code: string }) {
             </>
         );
     }
+
+    console.log(data.kodik)
 
     return (
         <>
