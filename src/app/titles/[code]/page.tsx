@@ -43,9 +43,9 @@ export default async function Page({ params }: { params: { code: string } }) {
         <>
             <Link href="/titles">Вернуться</Link>
             <div>{params.code}</div>
-            /*<VideoEmbed
+            {/*<VideoEmbed
               code={params.code}
-            />*/
+            />*/}
             <CommentList titleCode={params.code} />
         </>
     );
