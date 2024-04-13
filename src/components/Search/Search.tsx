@@ -9,7 +9,7 @@ import {
     Select, Skeleton,
     Text,
 } from '@mantine/core';
-import {useClickOutside, useDebouncedState} from '@mantine/hooks';
+import {useDebouncedState} from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
@@ -17,6 +17,7 @@ import {IconSearch} from '@tabler/icons-react';
 import classes from './Search.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 import {AnimeTitleType} from "@/types/AnimeTitleType";
+import NProgress from 'nprogress'
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
@@ -73,8 +74,6 @@ export function Search() {
     const router = useRouter();
     const [search, setSearch] = useDebouncedState('', 300, { leading: true });
     const [titles, setTitles] = useState([]);
-    const [opened, setOpened] = useState(false)
-    const ref = useClickOutside(() => setOpened(false))
 
     const { refetch, isFetching } = useQuery({
         queryKey: ['titles', search],
@@ -118,9 +117,6 @@ export function Search() {
     return (
         <>
             <Select
-                ref={ref}
-                onClick={() => setOpened(true)}
-                dropdownOpened={opened}
                 searchable
                 variant="unstyled"
                 maxDropdownHeight={800}
@@ -141,6 +137,7 @@ export function Search() {
                         && <CloseButton onClick={() => setSearch('')} />
                 }
                 onOptionSubmit={(option) => {
+                    NProgress.start()
                     router.push(`/titles/${option.split('--')[0]}`);
                 }}
                 renderOption={renderAutocompleteOption}
