@@ -1,16 +1,17 @@
 import {CommentType} from "@/types/CommentType";
 import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, UnstyledButton} from "@mantine/core";
-import {useState} from "react";
 import {ChildCommentList} from "@/components/Comments/ChildCommentList/ChildCommentList";
 import classes from "./Comment.module.css";
 import Link from "next/link";
 import {makeDate} from "@/utils/makeDate";
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {makeWordEnding} from "@/utils/makeWordEnding";
+import {useDisclosure} from "@mantine/hooks";
 
 export function Comment({ comment }: { comment: CommentType }) {
-    const [expandChild, setExpandChild] = useState(false)
-    const [reply, setReply] = useState(false)
+    const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
+    const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
+
 
     const children = comment.children ? comment.children[0].count : 0
 
@@ -46,12 +47,12 @@ export function Comment({ comment }: { comment: CommentType }) {
                         </ActionIcon>
                         <Text>{comment.dislikes?.length}</Text>
 
-                        <Button onClick={() => setReply(!reply)}>Ответить</Button>
+                        <Button onClick={toggleReply}>Ответить</Button>
                     </Group>
                 </Stack>
             </Flex>
             {
-                reply && <>Ответ</>
+                isToggledReply && <>Ответ</>
             }
             {
                 /*
@@ -67,13 +68,13 @@ export function Comment({ comment }: { comment: CommentType }) {
                         ? (
                             <>
                                 <UnstyledButton
-                                    onClick={() => setExpandChild(!expandChild)}
+                                    onClick={toggleChild}
                                 >
                                     {
-                                        expandChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding(children)}`
+                                        isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding(children)}`
                                     }
                                 </UnstyledButton>
-                                {expandChild && (<ChildCommentList uuid={comment.uuid} />)}
+                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} />)}
                             </>
                         )
                         : null
