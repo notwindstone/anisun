@@ -56,7 +56,9 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
                 return
             }
 
-            mutatedData.pages[0].data.push({
+            let comments = mutatedData.pages[0].data
+
+            comments.unshift({
                 uuid,
                 parentuuid,
                 title,
@@ -72,14 +74,14 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
                 children,
             })
 
-            return mutatedData
+            return comments
         },
 
         onSuccess: (newData) => {
             queryClient.setQueryData(['comments', title],
                 (oldData: MutatedDataType) =>
                     oldData
-                        ? newData
+                        ? [comments, ...oldData.pages[0].data]
                         : oldData
             )
 
