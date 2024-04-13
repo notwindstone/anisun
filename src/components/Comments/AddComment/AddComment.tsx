@@ -6,6 +6,7 @@ import {IconMessage} from "@tabler/icons-react";
 import {notify} from "@/utils/notify/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
+import {MutatedDataType} from "@/types/MutatedDataType";
 
 export function AddComment({ title, parentUUID }: { title: string, parentUUID: string | null }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -32,6 +33,7 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
                 message,
                 isDeleted,
                 isEdited,
+                children,
             }: {
                 uuid: string,
                 parentuuid: string | null,
@@ -45,14 +47,43 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
                 message: string,
                 isDeleted: boolean,
                 isEdited: boolean,
+                children: { count: number }[],
             }
         ) => {
-            const mutatedData = queryClient.getQueryData(['comments', title])
+            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', title])
 
             if (!mutatedData) {
                 return
             }
 
+            mutatedData.pages[0].data.push({
+                uuid,
+                parentuuid,
+                title,
+                userid,
+                username,
+                avatar,
+                createdAt,
+                likes,
+                dislikes,
+                message,
+                isDeleted,
+                isEdited,
+                children,
+            })
+
+            return mutatedData
+        },
+
+        onSuccess: (newData) => {
+            queryClient.setQueryData(['comments', title],
+                (oldData: MutatedDataType) =>
+                    oldData
+                        ? newData
+                        : oldData
+            )
+
+            console.log(newData)
         }
     })
 
@@ -77,6 +108,7 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
         const userId = user?.id
         const username = user?.username ?? "Пользователь без никнейма"
         const avatar = user?.imageUrl
+        const children = [{ count: 0 }]
 
         mutation.mutate({
             uuid: uuid,
@@ -100,6 +132,7 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
             message: message,
             isDeleted: false,
             isEdited: false,
+            children: children,
         })
 
         await comments.add(
