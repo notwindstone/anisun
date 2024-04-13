@@ -2,7 +2,6 @@ export type CommentType = {
     uuid: string;
     parentuuid: string | null;
     title: string;
-    branch: string;
     userid: string;
     username: string;
     avatar: string;

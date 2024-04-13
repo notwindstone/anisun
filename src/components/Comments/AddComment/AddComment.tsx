@@ -3,6 +3,7 @@ import {useRef, useState} from "react";
 import {useQueryClient} from "@tanstack/react-query";
 import {ActionIcon, Group, Textarea} from "@mantine/core";
 import {IconMessage} from "@tabler/icons-react";
+import {handleAdd} from "@/utils/comments/handleAdd";
 
 export function AddComment({ title, parentUUID }: { title: string, parentUUID: string | null }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -32,7 +33,7 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
             {
                 isUser
                     ? (
-                        <ActionIcon type="button" onClick={} variant="light">
+                        <ActionIcon type="button" onClick={() => handleAdd({ title, parentUUID })} variant="light">
                             <IconMessage />
                         </ActionIcon>
                     ) : (

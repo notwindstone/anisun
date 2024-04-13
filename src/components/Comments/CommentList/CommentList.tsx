@@ -6,6 +6,7 @@ import {CommentType} from "@/types/CommentType";
 import {InView} from "react-intersection-observer";
 import {Comment} from "@/components/Comments/Comment/Comment";
 import {Loader, Skeleton} from "@mantine/core";
+import {AddComment} from "@/components/Comments/AddComment/AddComment";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -50,6 +51,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
+            <AddComment title={titleCode} parentUUID={null} />
             {commentSection}
             <InView onChange={(inView) => {
                 if (!inView) {

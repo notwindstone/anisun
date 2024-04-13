@@ -2,9 +2,9 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import {and, asc, count, desc, eq, isNotNull, isNull, sql} from 'drizzle-orm';
+import {and, count, desc, eq, isNull} from 'drizzle-orm';
 
-export const getParent = async ({ title, nextCursor = 0, uuid }: { title: string, nextCursor: number, uuid?: string }) => {
+export const getParent = async ({ title, nextCursor = 0 }: { title: string, nextCursor: number, uuid?: string }) => {
     const initialLimit = nextCursor === 0 ? 8 : nextCursor
 
     const originComments =
