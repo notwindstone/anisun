@@ -10,7 +10,6 @@ export function ChildCommentList({ uuid }: { uuid: string }) {
         data,
         error,
         status,
-        isPending
         // @ts-ignore
     } = useQuery({
         queryKey: ["comments", uuid],

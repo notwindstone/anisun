@@ -14,7 +14,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         fetchNextPage,
         isFetchingNextPage,
         status,
-        isPending
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
         // @ts-ignore

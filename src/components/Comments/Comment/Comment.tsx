@@ -65,7 +65,7 @@ export function Comment({ comment }: { comment: CommentType }) {
                                     onClick={() => setExpandChild(!expandChild)}
                                 >
                                     {
-                                        expandChild ? "Свернуть" : "Раскрыть ответы"
+                                        expandChild ? "Свернуть" : `Раскрыть ${children}`
                                     }
                                 </UnstyledButton>
                                 {expandChild && (<ChildCommentList uuid={comment.uuid} />)}
