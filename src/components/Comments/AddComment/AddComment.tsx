@@ -72,10 +72,11 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
                 children,
             })
 
+mutatedData.pages[0].data[1].message === "Fucking test"
+
+
             return mutatedData
         },
-
-mutatedData.pages[0].data[1].message === "Fucking test"
 
         onSuccess: (newData) => {
             queryClient.setQueryData(['comments', title],
