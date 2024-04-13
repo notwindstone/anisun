@@ -30,9 +30,9 @@ export default function RootLayout({
                 </head>
                 <body className={inter.className}>
                     <NextTopLoader
-                        color="#0076ff"
-                        showSpinner={false}
-                        height={4}
+                      color="#0076ff"
+                      showSpinner={false}
+                      height={4}
                     />
                     <TanstackQueryProviders>
                         <MantineProvider>

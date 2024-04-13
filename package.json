@@ -29,7 +29,6 @@
     "media-icons": "^1.1.2",
     "nanoid": "^5.0.6",
     "next": "14.1.4",
-    "next-nprogress-bar": "^2.3.11",
     "nextjs-toploader": "^1.6.11",
     "node-shikimori": "^2.0.2",
     "nprogress": "^0.2.0",

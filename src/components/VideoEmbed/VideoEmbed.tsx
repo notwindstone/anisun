@@ -56,7 +56,17 @@ export default function VideoEmbed({ code }: { code: string }) {
 
     return (
         <>
-            <VideoPlayer title={title} player={player} preview={preview} />
+            <iframe
+                src="//aniqit.com/serial/58183/c2e6168a788b1c673508a967dca7837a/720p"
+                width="610"
+                height="370"
+                allow="autoplay *; fullscreen *"
+            />
+            <VideoPlayer
+                title={title}
+                player={player}
+                preview={preview}
+            />
         </>
     );
 }
