@@ -79,6 +79,8 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             return mutatedData
         },
 
+        onSettled: () => queryClient.invalidateQueries({ queryKey: ['comments', titleCode] }),
+
         onSuccess: (newData) => {
             queryClient.cancelQueries({ queryKey: ['comments', titleCode] }).then()
 
@@ -114,7 +116,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
-            <CommentSkeleton />
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             {commentSection}
             <InView onChange={(inView) => {
