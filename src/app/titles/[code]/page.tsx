@@ -8,7 +8,7 @@ import Link from "next/link";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import CommentList from "@/components/Comments/CommentList/CommentList";
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
+/*export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const code = params.code
 
     const anime = await anilibria.title.code(code)
@@ -36,16 +36,16 @@ export async function generateMetadata({ params }: { params: { code: string } })
             description: anime.description,
         }
     }
-}
+}*/
 
 export default async function Page({ params }: { params: { code: string } }) {
     return (
         <>
             <Link href="/titles">Вернуться</Link>
             <div>{params.code}</div>
-            <VideoEmbed
+            {/*<VideoEmbed
               code={params.code}
-            />
+            />*/}
             <CommentList titleCode={params.code} />
         </>
     );
