@@ -3,7 +3,7 @@ import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {Comment} from "@/components/Comments/Comment/Comment";
 import classes from './ChildCommentList.module.css'
-import {Skeleton} from "@mantine/core";
+import CommentSkeleton from "../../Skeletons/CommentSkeleton/CommentSkeleton";
 
 export function ChildCommentList({ uuid }: { uuid: string }) {
     const {
@@ -24,7 +24,7 @@ export function ChildCommentList({ uuid }: { uuid: string }) {
     const commentGroup: CommentType[] | null = data?.data ?? []
 
     const childCommentSection = status === 'pending' ? (
-        <Skeleton w="100%" h={128} />
+        <CommentSkeleton />
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (

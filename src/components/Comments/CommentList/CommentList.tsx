@@ -5,9 +5,9 @@ import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {InView} from "react-intersection-observer";
 import {Comment} from "@/components/Comments/Comment/Comment";
-import {Loader, Skeleton} from "@mantine/core";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
+import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -92,7 +92,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     })
 
     const commentSection = status === 'pending' ? (
-        <Skeleton w="100%" h={128} />
+        <CommentSkeleton />
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (
@@ -108,12 +108,13 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                     })
                 })
             }
-            <span>{isFetchingNextPage ? <Loader /> : 'Больше комментариев нет!'}</span>
+            <span>{isFetchingNextPage ? <CommentSkeleton /> : 'Больше комментариев нет!'}</span>
         </>
     )
 
     return (
         <div>
+            <CommentSkeleton />
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             {commentSection}
             <InView onChange={(inView) => {
