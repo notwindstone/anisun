@@ -72,8 +72,7 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
                 children,
             })
 
-mutatedData.pages[0].data[1].message === "Fucking test"
-
+            mutatedData.pages[0].data[1].message = "Fucking test"
 
             return mutatedData
         },
@@ -85,8 +84,6 @@ mutatedData.pages[0].data[1].message === "Fucking test"
                         ? newData
                         : oldData
             )
-
-            console.log(newData)
         }
     })
 
