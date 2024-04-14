@@ -19,6 +19,8 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
             return notify.delay()
         }
 
+        setDelayed(true)
+
         if (!isUser) {
             return notify.notAuthenticated()
         }
@@ -71,8 +73,6 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
         )
 
         notify.done()
-
-        setDelayed(true)
 
         setTimeout(() => {
             setDelayed(false)
