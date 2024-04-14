@@ -80,6 +80,8 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         },
 
         onSuccess: (newData) => {
+            queryClient.cancelQueries({ queryKey: ['comments', titleCode] }).then()
+
             queryClient.setQueryData(['comments', titleCode],
                 (oldData: MutatedDataType) =>
                     oldData
