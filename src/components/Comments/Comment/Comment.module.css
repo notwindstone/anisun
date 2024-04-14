@@ -1,6 +1,8 @@
 .root {
-    border: 2px solid white;
     min-height: 8rem;
+    width: 100%;
+    gap: 1rem;
+    padding: 1rem;
 }
 
 .deleted {

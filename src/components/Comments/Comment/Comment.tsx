@@ -20,11 +20,9 @@ export function Comment({ comment }: { comment: CommentType }) {
     return (
         <div>
             <Flex className={classes.root}>
-                <Group>
-                    <Link href={`/account/${comment.userid}`}>
-                        <Avatar src={comment.avatar} size={64}/>
-                    </Link>
-                </Group>
+                <Link href={`/account/${comment.userid}`}>
+                    <Avatar src={comment.avatar} size={64}/>
+                </Link>
                 <Stack>
                     <Group>
                         <Link href={`/account/${comment.userid}`}>

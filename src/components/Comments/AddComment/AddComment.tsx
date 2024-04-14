@@ -101,9 +101,7 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                         <ActionIcon type="button" onClick={handleSubmit} variant="light">
                             <IconMessage />
                         </ActionIcon>
-                    ) : (
-                        <></>
-                    )
+                    ) : null
             }
         </Group>
     )

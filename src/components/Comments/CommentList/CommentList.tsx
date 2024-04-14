@@ -25,6 +25,8 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         refetchInterval: 60000,
     })
 
+
+
     async function retrieveComments({ pageParam }: { pageParam: number }) {
         return await comments.getParent({ title: titleCode, nextCursor: pageParam })
     }
