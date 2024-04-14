@@ -114,15 +114,6 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
 
         mutation.mutate({
             uuid: uuid,
-            /*
-             * Чтобы комментарии не уходили ниже 3-го уровня,
-             * я в качестве parentuuid использую айди прародителя комментария
-             *
-             * Схема: Комментарий 1
-             *            |-> Ответ на комментарий
-             *                |-> Ответ на ответ
-             *                |-> Ответ на ответ на ответ
-             */
             parentuuid: parentUUID,
             title: title,
             userid: userId,
@@ -139,15 +130,6 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
 
         await comments.add(
             uuid,
-            /*
-             * Чтобы комментарии не уходили ниже 3-го уровня,
-             * я в качестве parentuuid использую айди прародителя комментария
-             *
-             * Схема: Комментарий 1
-             *            |-> Ответ на комментарий
-             *                |-> Ответ на ответ
-             *                |-> Ответ на ответ на ответ
-             */
             parentUUID,
             title,
             userId,
