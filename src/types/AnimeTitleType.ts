@@ -11,5 +11,6 @@ export type AnimeTitleType = {
     },
     status: {
         string: string;
-    }
+    },
+    description: string
 }

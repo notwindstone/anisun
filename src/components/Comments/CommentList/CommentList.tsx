@@ -5,7 +5,7 @@ import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {InView} from "react-intersection-observer";
 import {Comment} from "@/components/Comments/Comment/Comment";
-import {Button, Loader, Skeleton} from "@mantine/core";
+import {Loader, Skeleton} from "@mantine/core";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 
@@ -29,9 +29,12 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         return await comments.getParent({ title: titleCode, nextCursor: pageParam })
     }
 
+    function handleNewComment(newComment: CommentType) {
+        mutation.mutate(newComment)
+    }
 
-    /* TODO */
     const queryClient = useQueryClient()
+
     const mutation = useMutation({
         // @ts-ignore
         mutationFn: (
@@ -49,21 +52,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                 isDeleted,
                 isEdited,
                 children,
-            }: {
-                uuid: string,
-                parentuuid: string | null,
-                title: string,
-                userid: string,
-                username: string,
-                avatar: string,
-                createdAt: string,
-                likes: string[],
-                dislikes: string[],
-                message: string,
-                isDeleted: boolean,
-                isEdited: boolean,
-                children: { count: number }[],
-            }
+            }: CommentType
         ) => {
             const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', title])
 
@@ -87,8 +76,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                 children,
             })
 
-            mutatedData.pages[0].data[1].message = "Fucking test"
-
             return mutatedData
         },
 
@@ -101,25 +88,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             )
         }
     })
-    function handleSub() {
-        mutation.mutate({
-            uuid: 'uuid',
-            parentuuid: null,
-            title: titleCode,
-            userid: 'userId',
-            username: 'username',
-            avatar: 'avatar',
-            createdAt: 'createdAt',
-            likes: [],
-            dislikes: [],
-            message: 'message',
-            isDeleted: false,
-            isEdited: false,
-            children: [{ count: 2 }],
-        })
-    }
-
-
 
     const commentSection = status === 'pending' ? (
         <Skeleton w="100%" h={128} />
@@ -144,8 +112,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
-            <Button onClick={handleSub}>Click</Button>
-            <AddComment title={titleCode} parentUUID={null} />
+            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             {commentSection}
             <InView onChange={(inView) => {
                 if (!inView) {

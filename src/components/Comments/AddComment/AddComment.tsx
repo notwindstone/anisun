@@ -1,91 +1,18 @@
 import {useUser} from "@clerk/nextjs";
 import {useRef, useState} from "react";
-import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {ActionIcon, Group, Textarea} from "@mantine/core";
 import {IconMessage} from "@tabler/icons-react";
 import {notify} from "@/utils/notify/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
-import {MutatedDataType} from "@/types/MutatedDataType";
+import {CommentType} from "@/types/CommentType";
 
-export function AddComment({ title, parentUUID }: { title: string, parentUUID: string | null }) {
+export function AddComment({ title, parentUUID, sendComment }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const [delayed, setDelayed] = useState(false)
 
-    const queryClient = useQueryClient()
-
     const isUser = isLoaded && isSignedIn
-
-    const mutation = useMutation({
-        // @ts-ignore
-        mutationFn: (
-            {
-                uuid,
-                parentuuid,
-                title,
-                userid,
-                username,
-                avatar,
-                createdAt,
-                likes,
-                dislikes,
-                message,
-                isDeleted,
-                isEdited,
-                children,
-            }: {
-                uuid: string,
-                parentuuid: string | null,
-                title: string,
-                userid: string,
-                username: string,
-                avatar: string,
-                createdAt: string,
-                likes: string[],
-                dislikes: string[],
-                message: string,
-                isDeleted: boolean,
-                isEdited: boolean,
-                children: { count: number }[],
-            }
-        ) => {
-            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', title])
-
-            if (!mutatedData) {
-                return
-            }
-
-            mutatedData.pages[0].data.unshift({
-                uuid,
-                parentuuid,
-                title,
-                userid,
-                username,
-                avatar,
-                createdAt,
-                likes,
-                dislikes,
-                message,
-                isDeleted,
-                isEdited,
-                children,
-            })
-
-            mutatedData.pages[0].data[1].message = "Fucking test"
-
-            return mutatedData
-        },
-
-        onSuccess: (newData) => {
-            queryClient.setQueryData(['comments', title],
-                (oldData: MutatedDataType) =>
-                    oldData
-                        ? newData
-                        : oldData
-            )
-        }
-    })
 
     const handleSubmit = async () => {
         if (delayed) {
@@ -110,7 +37,7 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
         const avatar = user?.imageUrl
         const children = [{ count: 0 }]
 
-        mutation.mutate({
+        const comment = {
             uuid: uuid,
             parentuuid: parentUUID,
             title: title,
@@ -123,8 +50,10 @@ export function AddComment({ title, parentUUID }: { title: string, parentUUID: s
             message: message,
             isDeleted: false,
             isEdited: false,
-            children: children,
-        })
+            children: children
+        }
+
+        sendComment(comment)
 
         await comments.add(
             uuid,

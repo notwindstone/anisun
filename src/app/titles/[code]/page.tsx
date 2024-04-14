@@ -7,11 +7,12 @@ import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import CommentList from "@/components/Comments/CommentList/CommentList";
+import {AnimeTitleType} from '../../../types/AnimeTitleType'
 
-/*export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const code = params.code
 
-    const anime = await anilibria.title.code(code)
+    const anime: AnimeTitleType = await anilibria.title.code(code)
 
     if (!anime) {
         return {
@@ -36,16 +37,16 @@ import CommentList from "@/components/Comments/CommentList/CommentList";
             description: anime.description,
         }
     }
-}*/
+}
 
 export default async function Page({ params }: { params: { code: string } }) {
     return (
         <>
             <Link href="/titles">Вернуться</Link>
             <div>{params.code}</div>
-            {/*<VideoEmbed
+            <VideoEmbed
               code={params.code}
-            />*/}
+            />
             <CommentList titleCode={params.code} />
         </>
     );
