@@ -5,8 +5,6 @@ import { comments } from "@/db/schema";
 import {and, count, desc, eq, isNull} from 'drizzle-orm';
 
 export const getParent = async ({ title, nextCursor = 0 }: { title: string, nextCursor: number, uuid?: string }) => {
-    const initialLimit = nextCursor === 0 ? 8 : nextCursor
-
     const originComments =
         await db
             .select()
@@ -18,7 +16,7 @@ export const getParent = async ({ title, nextCursor = 0 }: { title: string, next
                 )
             )
             .orderBy(desc(comments.createdAt))
-            .limit(initialLimit)
+            .limit(8)
             .offset(nextCursor);
 
     if (originComments.length === 0) {

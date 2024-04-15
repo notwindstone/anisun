@@ -19,8 +19,6 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
             return notify.delay()
         }
 
-        setDelayed(true)
-
         if (!isUser) {
             return notify.notAuthenticated()
         }
@@ -30,6 +28,8 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
         if (message.length < 2 || message.length > 2000) {
             return notify.incorrectInput()
         }
+
+        setDelayed(true)
 
         const uuid = nanoid()
         const createdAt = new Date().toJSON()
