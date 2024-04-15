@@ -4,8 +4,9 @@ import {CommentType} from "@/types/CommentType";
 import {Comment} from "@/components/Comments/Comment/Comment";
 import classes from './ChildCommentList.module.css'
 import CommentSkeleton from "../../Skeletons/CommentSkeleton/CommentSkeleton";
+import {nanoid} from "nanoid";
 
-export function ChildCommentList({ uuid }: { uuid: string }) {
+export function ChildCommentList({ uuid, childComments }: { uuid: string, childComments: number }) {
     const {
         data,
         error,
@@ -23,8 +24,15 @@ export function ChildCommentList({ uuid }: { uuid: string }) {
 
     const commentGroup: CommentType[] | null = data?.data ?? []
 
+    const commentSkeletons = Array.from({ length: childComments }).map(() => {
+        return (
+            // Использую nanoid() вместо переданного uuid, т.к. после загрузки комментариев <Skeleton /> почему-то остаются
+            <CommentSkeleton key={nanoid()} />
+        )
+    })
+
     const childCommentSection = status === 'pending' ? (
-        <CommentSkeleton />
+        commentSkeletons
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (

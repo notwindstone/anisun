@@ -59,7 +59,7 @@ export function Comment({ comment }: { comment: CommentType }) {
                  * */
                 hasOneChild
                     ? (
-                        <ChildCommentList uuid={comment.uuid} />
+                        <ChildCommentList uuid={comment.uuid} childComments={children} />
                     )
                     : hasMoreThanOneChild
                         ? (
@@ -71,7 +71,7 @@ export function Comment({ comment }: { comment: CommentType }) {
                                         isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding(children)}`
                                     }
                                 </UnstyledButton>
-                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} />)}
+                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} childComments={children} />)}
                             </>
                         )
                         : null
