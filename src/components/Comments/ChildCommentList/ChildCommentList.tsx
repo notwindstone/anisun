@@ -5,8 +5,9 @@ import {Comment} from "@/components/Comments/Comment/Comment";
 import classes from './ChildCommentList.module.css'
 import CommentSkeleton from "../../Skeletons/CommentSkeleton/CommentSkeleton";
 import {nanoid} from "nanoid";
+import {UserResource} from "@clerk/types";
 
-export function ChildCommentList({ uuid, childComments }: { uuid: string, childComments: number }) {
+export function ChildCommentList({ uuid, childComments, user, isUser }: { uuid: string, childComments: number, user: UserResource | null | undefined, isUser: boolean }) {
     const {
         data,
         error,
@@ -38,7 +39,7 @@ export function ChildCommentList({ uuid, childComments }: { uuid: string, childC
     ) : (
         commentGroup.map((comment) => {
             return (
-                <Comment key={comment.uuid} comment={comment} />
+                <Comment key={comment.uuid} comment={comment} user={user} isUser={isUser} isChild />
             )
         })
     )

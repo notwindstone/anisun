@@ -11,12 +11,20 @@ import {UserResource} from "@clerk/types";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {MutatedDataType} from "@/types/MutatedDataType";
 
-export function Comment({ comment, user, isUser }: { comment: CommentType, user: UserResource | null | undefined, isUser: boolean }) {
+export function Comment({ comment, user, isUser, isChild }: { comment: CommentType, user: UserResource | null | undefined, isUser: boolean, isChild?: boolean }) {
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
 
     function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
-        mutation.mutate({
+        if (isChild) {
+            childMutation.mutate({
+                uuid: comment.uuid,
+                likes: newLikes,
+                dislikes: newDislikes,
+            })
+        }
+
+        parentMutation.mutate({
             uuid: comment.uuid,
             likes: newLikes,
             dislikes: newDislikes,
@@ -30,7 +38,7 @@ export function Comment({ comment, user, isUser }: { comment: CommentType, user:
 
     const queryClient = useQueryClient()
 
-    const mutation = useMutation({
+    const parentMutation = useMutation({
         // @ts-ignore
         mutationFn: (
             {
@@ -44,7 +52,7 @@ export function Comment({ comment, user, isUser }: { comment: CommentType, user:
             }
         ) => {
             const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', comment.title])
-            console.log(mutatedData)
+
             if (!mutatedData) {
                 return
             }
@@ -70,10 +78,58 @@ export function Comment({ comment, user, isUser }: { comment: CommentType, user:
             return mutatedData
         },
 
-        onSettled: () => queryClient.invalidateQueries({ queryKey: ['comments', comment.title] }),
-
         onSuccess: (newData) => {
             queryClient.setQueryData(['comments', comment.title],
+                (oldData: MutatedDataType) =>
+                    oldData
+                        ? newData
+                        : oldData
+            )
+        }
+    })
+
+    const childMutation = useMutation({
+        // @ts-ignore
+        mutationFn: (
+            {
+                uuid,
+                likes,
+                dislikes,
+            }: {
+                uuid: string
+                likes: unknown[] | undefined,
+                dislikes: unknown[] | undefined,
+            }
+        ) => {
+            const mutatedData: { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', comment.parentuuid])
+
+            const mutatedCommentsData = mutatedData?.data
+
+            if (!mutatedCommentsData) {
+                return
+            }
+
+            const mutatingComment = mutatedCommentsData.find(
+                (currentComment: CommentType) => currentComment.uuid === uuid
+            )
+
+            if (!mutatingComment) {
+                return
+            }
+
+            if (likes) {
+                mutatingComment.likes = likes
+            }
+
+            if (dislikes) {
+                mutatingComment.dislikes = dislikes
+            }
+
+            return mutatedData
+        },
+
+        onSuccess: (newData) => {
+            queryClient.setQueryData(['comments', comment.parentuuid],
                 (oldData: MutatedDataType) =>
                     oldData
                         ? newData
@@ -122,7 +178,7 @@ export function Comment({ comment, user, isUser }: { comment: CommentType, user:
                  * */
                 hasOneChild
                     ? (
-                        <ChildCommentList uuid={comment.uuid} childComments={children} />
+                        <ChildCommentList uuid={comment.uuid} childComments={children} user={user} isUser={isUser} />
                     )
                     : hasMoreThanOneChild
                         ? (
@@ -134,7 +190,7 @@ export function Comment({ comment, user, isUser }: { comment: CommentType, user:
                                         isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding(children)}`
                                     }
                                 </UnstyledButton>
-                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} childComments={children} />)}
+                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} childComments={children} user={user} isUser={isUser} />)}
                             </>
                         )
                         : null
