@@ -109,7 +109,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
                     return commentGroup.map((comment) => {
                         return (
-                            <Comment key={comment.uuid} comment={comment}/>
+                            <Comment key={comment.uuid} comment={comment} user={user} isUser={isUser} />
                         )
                     })
                 })

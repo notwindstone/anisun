@@ -1,15 +1,15 @@
 import {CommentType} from "@/types/CommentType";
-import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, UnstyledButton} from "@mantine/core";
+import {Avatar, Button, Flex, Group, Stack, Text, UnstyledButton} from "@mantine/core";
 import {ChildCommentList} from "@/components/Comments/ChildCommentList/ChildCommentList";
 import classes from "./Comment.module.css";
 import Link from "next/link";
 import {makeDate} from "@/utils/makeDate";
-import {IconCaretDownFilled} from "@tabler/icons-react";
 import {makeWordEnding} from "@/utils/makeWordEnding";
 import {useDisclosure} from "@mantine/hooks";
-import {LikeComment} from "@/components/Comments/LikeComment/LikeComment";
+import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
+import {UserResource} from "@clerk/types";
 
-export function Comment({ comment }: { comment: CommentType }) {
+export function Comment({ comment, user, isUser }: { comment: CommentType, user: UserResource | null | undefined, isUser: boolean }) {
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
 
@@ -40,13 +40,14 @@ export function Comment({ comment }: { comment: CommentType }) {
                         <Text>{comment.message}</Text>
                     </Group>
                     <Group>
-                        <LikeComment uuid={comment.uuid} likes={comment.likes} sendComment={handleLikeComment} />
-                        <Text>{comment.likes?.length}</Text>
-
-                        <ActionIcon>
-                            <IconCaretDownFilled />
-                        </ActionIcon>
-                        <Text>{comment.dislikes?.length}</Text>
+                        <VoteComment
+                            uuid={comment.uuid}
+                            likes={comment.likes}
+                            dislikes={comment.dislikes}
+                            sendComment={handleLikeComment}
+                            user={user}
+                            isUser={isUser}
+                        />
 
                         <Button onClick={toggleReply}>Ответить</Button>
                     </Group>

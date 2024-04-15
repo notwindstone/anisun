@@ -18,10 +18,10 @@
     "color": "yellow"
   },
   "notAuthenticated": {
-    "title": "Критическая ошибка",
+    "title": "Ошибка",
     "message": "Вы не авторизованы. Войдите в аккаунт перед тем, как написать комментарий",
     "autoClose": 3000,
-    "color": "red"
+    "color": "yellow"
   },
   "critical": {
     "title": "Критическая ошибка",
