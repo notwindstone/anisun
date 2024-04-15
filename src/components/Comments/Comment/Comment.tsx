@@ -4,13 +4,19 @@ import {ChildCommentList} from "@/components/Comments/ChildCommentList/ChildComm
 import classes from "./Comment.module.css";
 import Link from "next/link";
 import {makeDate} from "@/utils/makeDate";
-import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
+import {IconCaretDownFilled} from "@tabler/icons-react";
 import {makeWordEnding} from "@/utils/makeWordEnding";
 import {useDisclosure} from "@mantine/hooks";
+import {LikeComment} from "@/components/Comments/LikeComment/LikeComment";
 
 export function Comment({ comment }: { comment: CommentType }) {
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
+
+    function handleLikeComment(newLikes: string[]) {
+        //mutation.mutate(newComment)
+        console.log(newLikes)
+    }
 
     const children = comment.children ? comment.children[0].count : 0
 
@@ -34,9 +40,7 @@ export function Comment({ comment }: { comment: CommentType }) {
                         <Text>{comment.message}</Text>
                     </Group>
                     <Group>
-                        <ActionIcon>
-                            <IconCaretUpFilled />
-                        </ActionIcon>
+                        <LikeComment uuid={comment.uuid} likes={comment.likes} sendComment={handleLikeComment} />
                         <Text>{comment.likes?.length}</Text>
 
                         <ActionIcon>
