@@ -8,20 +8,79 @@ import {makeWordEnding} from "@/utils/makeWordEnding";
 import {useDisclosure} from "@mantine/hooks";
 import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
 import {UserResource} from "@clerk/types";
+import {useMutation, useQueryClient} from "@tanstack/react-query";
+import {MutatedDataType} from "@/types/MutatedDataType";
 
 export function Comment({ comment, user, isUser }: { comment: CommentType, user: UserResource | null | undefined, isUser: boolean }) {
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
 
     function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
-        //mutation.mutate(newComment)
-        console.log(`likes: ${newLikes}, dislikes: ${newDislikes}`)
+        mutation.mutate({
+            uuid: comment.uuid,
+            likes: newLikes,
+            dislikes: newDislikes,
+        })
     }
 
     const children = comment.children ? comment.children[0].count : 0
 
     const hasOneChild = children === 1
     const hasMoreThanOneChild = children > 1
+
+    const queryClient = useQueryClient()
+
+    const mutation = useMutation({
+        // @ts-ignore
+        mutationFn: (
+            {
+                uuid,
+                likes,
+                dislikes,
+            }: {
+                uuid: string
+                likes: unknown[] | undefined,
+                dislikes: unknown[] | undefined,
+            }
+        ) => {
+            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', comment.title])
+            console.log(mutatedData)
+            if (!mutatedData) {
+                return
+            }
+
+            for (const pages of mutatedData.pages) {
+                const mutatingComment = pages.data.find(
+                    (currentComment: CommentType) => currentComment.uuid === uuid
+                )
+
+                if (!mutatingComment) {
+                    continue
+                }
+
+                if (likes) {
+                    mutatingComment.likes = likes
+                }
+
+                if (dislikes) {
+                    mutatingComment.dislikes = dislikes
+                }
+            }
+
+            return mutatedData
+        },
+
+        onSettled: () => queryClient.invalidateQueries({ queryKey: ['comments', comment.title] }),
+
+        onSuccess: (newData) => {
+            queryClient.setQueryData(['comments', comment.title],
+                (oldData: MutatedDataType) =>
+                    oldData
+                        ? newData
+                        : oldData
+            )
+        }
+    })
 
     return (
         <div>
