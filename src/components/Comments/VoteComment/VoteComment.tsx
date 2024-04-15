@@ -3,8 +3,9 @@ import {ActionIcon, Text} from "@mantine/core";
 import {UserResource} from "@clerk/types";
 import {useState} from "react";
 import {notify} from "@/utils/notify/notify";
+import {comments} from "@/lib/comments/comments";
 
-export function VoteComment({ uuid, likes, dislikes, sendComment, user, isUser }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendComment: (likes: string[]) => void, user: UserResource | null | undefined, isUser: boolean }) {
+export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ likes, dislikes }: { likes?: unknown[], dislikes?: unknown[] }) => void, user: UserResource | null | undefined, isUser: boolean }) {
     const [delayed, setDelayed] = useState(false)
 
     const isLiked = likes?.includes(user?.id)
@@ -31,12 +32,52 @@ export function VoteComment({ uuid, likes, dislikes, sendComment, user, isUser }
             return
         }
 
-        console.log('oops')
+        setDelayed(true)
+
+        if (isDisliked) {
+            handleDislike().then()
+        }
+
+        const definedCommentLikes = likes ?? []
+
+        if (isLiked) {
+            const mutatedCommentLikes = definedCommentLikes.filter((userid) => {
+                return userid !== user?.id
+            })
+
+            sendVotes({ likes: mutatedCommentLikes })
+
+            // @ts-ignore
+            await comments.like(uuid, mutatedCommentLikes)
+
+            return setTimeout(() => {
+                setDelayed(false)
+            }, 500)
+        }
+
+        const mutatedCommentLikes = definedCommentLikes
+
+        mutatedCommentLikes.push(user?.id)
+
+        sendVotes({ likes: mutatedCommentLikes })
+
+        // @ts-ignore
+        await comments.like(uuid, mutatedCommentLikes)
+
+        return setTimeout(() => {
+            setDelayed(false)
+        }, 500)
     }
 
     const handleDislike = async () => {
         if (!handleChecks()) {
             return
+        }
+
+        setDelayed(true)
+
+        if (isLiked) {
+            handleLike().then()
         }
 
         console.log('oops')

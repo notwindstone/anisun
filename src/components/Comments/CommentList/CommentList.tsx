@@ -130,7 +130,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                 const dataPages = data?.pages ?? []
                 const lastDataPage = dataPages[dataPages.length - 1] ?? []
                 const hasNextPageData = lastDataPage.data
-                console.log(lastDataPage)
+
                 if (!hasNextPageData) {
                     return
                 }
