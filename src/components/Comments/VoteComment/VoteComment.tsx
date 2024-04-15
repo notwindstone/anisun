@@ -5,11 +5,14 @@ import {useState} from "react";
 import {notify} from "@/utils/notify/notify";
 import {comments} from "@/lib/comments/comments";
 
-export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ likes, dislikes }: { likes?: unknown[], dislikes?: unknown[] }) => void, user: UserResource | null | undefined, isUser: boolean }) {
+export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) => void, user: UserResource | null | undefined, isUser: boolean }) {
     const [delayed, setDelayed] = useState(false)
 
-    const isLiked = likes?.includes(user?.id)
-    const isDisliked = dislikes?.includes(user?.id)
+    likes = likes ?? []
+    dislikes = dislikes ?? []
+
+    const isLiked = likes.includes(user?.id)
+    const isDisliked = dislikes.includes(user?.id)
 
     const handleChecks = () => {
         if (delayed) {
@@ -38,14 +41,12 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: 
             handleDislike().then()
         }
 
-        const definedCommentLikes = likes ?? []
-
         if (isLiked) {
-            const mutatedCommentLikes = definedCommentLikes.filter((userid) => {
+            const mutatedCommentLikes = likes.filter((userid) => {
                 return userid !== user?.id
             })
 
-            sendVotes({ likes: mutatedCommentLikes })
+            sendVotes({ newLikes: mutatedCommentLikes })
 
             // @ts-ignore
             await comments.like(uuid, mutatedCommentLikes)
@@ -55,14 +56,14 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: 
             }, 500)
         }
 
-        const mutatedCommentLikes = definedCommentLikes
+        const mutatedCommentLikes = [...likes]
 
         mutatedCommentLikes.push(user?.id)
 
-        sendVotes({ likes: mutatedCommentLikes })
+        sendVotes({ newLikes: mutatedCommentLikes })
 
         // @ts-ignore
-        await comments.like(uuid, mutatedCommentLikes)
+        //await comments.like(uuid, mutatedCommentLikes)
 
         return setTimeout(() => {
             setDelayed(false)

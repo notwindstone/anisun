@@ -13,9 +13,9 @@ export function Comment({ comment, user, isUser }: { comment: CommentType, user:
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
 
-    function handleNewVotes({ likes, dislikes }: { likes?: unknown[], dislikes?: unknown[] }) {
+    function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
         //mutation.mutate(newComment)
-        console.log(`likes: ${likes}, dislikes: ${dislikes}`)
+        console.log(`likes: ${newLikes}, dislikes: ${newDislikes}`)
     }
 
     const children = comment.children ? comment.children[0].count : 0
@@ -48,7 +48,6 @@ export function Comment({ comment, user, isUser }: { comment: CommentType, user:
                             user={user}
                             isUser={isUser}
                         />
-
                         <Button onClick={toggleReply}>Ответить</Button>
                     </Group>
                 </Stack>
