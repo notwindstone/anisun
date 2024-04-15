@@ -8,6 +8,7 @@ import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
+import {useUser} from "@clerk/nextjs";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -24,6 +25,9 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : [],
         refetchInterval: 60000,
     })
+    const { isLoaded, isSignedIn, user } = useUser();
+
+    const isUser = isLoaded && isSignedIn
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
         return await comments.getParent({ title: titleCode, nextCursor: pageParam })
@@ -116,7 +120,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
-            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
+            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             {commentSection}
             <InView onChange={(inView) => {
                 if (!inView) {

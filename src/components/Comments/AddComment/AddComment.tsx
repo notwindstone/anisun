@@ -1,4 +1,3 @@
-import {useUser} from "@clerk/nextjs";
 import {useRef, useState} from "react";
 import {ActionIcon, Group, Textarea} from "@mantine/core";
 import {IconMessage} from "@tabler/icons-react";
@@ -6,20 +5,18 @@ import {notify} from "@/utils/notify/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
+import {UserResource} from "@clerk/types";
 
-export function AddComment({ title, parentUUID, sendComment }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void }) {
-    const { isLoaded, isSignedIn, user } = useUser();
+export function AddComment({ title, parentUUID, sendComment, user, isUser }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void, user: UserResource | null | undefined, isUser: boolean }) {
     const ref = useRef<HTMLTextAreaElement>(null);
     const [delayed, setDelayed] = useState(false)
-
-    const isUser = isLoaded && isSignedIn
 
     const handleSubmit = async () => {
         if (delayed) {
             return notify.delay()
         }
 
-        if (!isUser) {
+        if (!isUser || !user) {
             return notify.notAuthenticated()
         }
 
