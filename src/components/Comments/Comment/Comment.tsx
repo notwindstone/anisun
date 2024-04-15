@@ -16,18 +16,14 @@ export function Comment({ comment, user, isUser, isChild }: { comment: CommentTy
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
 
     function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
-        if (isChild) {
-            childMutation.mutate({
-                uuid: comment.uuid,
-                likes: newLikes,
-                dislikes: newDislikes,
-            })
-        }
+        const mutationQueryKey = isChild ? comment.parentuuid : comment.title
 
-        parentMutation.mutate({
+        mutation.mutate({
             uuid: comment.uuid,
             likes: newLikes,
             dislikes: newDislikes,
+            mutationQueryKey: mutationQueryKey,
+            isChild: isChild,
         })
     }
 
@@ -38,25 +34,57 @@ export function Comment({ comment, user, isUser, isChild }: { comment: CommentTy
 
     const queryClient = useQueryClient()
 
-    const parentMutation = useMutation({
+    const mutation = useMutation({
         // @ts-ignore
         mutationFn: (
             {
                 uuid,
                 likes,
                 dislikes,
+                mutationQueryKey,
+                isChild,
             }: {
                 uuid: string
                 likes: unknown[] | undefined,
                 dislikes: unknown[] | undefined,
+                mutationQueryKey: string | null,
+                isChild?: boolean,
             }
         ) => {
-            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', comment.title])
+            const mutatedData: MutatedDataType | { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', mutationQueryKey])
 
             if (!mutatedData) {
                 return
             }
 
+            if (isChild) {
+                // @ts-ignore
+                const mutatedCommentsData = mutatedData.data
+
+                if (!mutatedCommentsData) {
+                    return
+                }
+
+                const mutatingComment = mutatedCommentsData.find(
+                    (currentComment: CommentType) => currentComment.uuid === uuid
+                )
+
+                if (!mutatingComment) {
+                    return
+                }
+
+                if (likes) {
+                    mutatingComment.likes = likes
+                }
+
+                if (dislikes) {
+                    mutatingComment.dislikes = dislikes
+                }
+
+                return { data: mutatedData, mutationQueryKey: mutationQueryKey }
+            }
+
+            // @ts-ignore
             for (const pages of mutatedData.pages) {
                 const mutatingComment = pages.data.find(
                     (currentComment: CommentType) => currentComment.uuid === uuid
@@ -75,64 +103,14 @@ export function Comment({ comment, user, isUser, isChild }: { comment: CommentTy
                 }
             }
 
-            return mutatedData
+            return { data: mutatedData, mutationQueryKey: mutationQueryKey }
         },
 
-        onSuccess: (newData) => {
-            queryClient.setQueryData(['comments', comment.title],
+        onSuccess: (newData: { data: MutatedDataType, mutationQueryKey: string }) => {
+            queryClient.setQueryData(['comments', newData.mutationQueryKey],
                 (oldData: MutatedDataType) =>
                     oldData
-                        ? newData
-                        : oldData
-            )
-        }
-    })
-
-    const childMutation = useMutation({
-        // @ts-ignore
-        mutationFn: (
-            {
-                uuid,
-                likes,
-                dislikes,
-            }: {
-                uuid: string
-                likes: unknown[] | undefined,
-                dislikes: unknown[] | undefined,
-            }
-        ) => {
-            const mutatedData: { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', comment.parentuuid])
-
-            const mutatedCommentsData = mutatedData?.data
-
-            if (!mutatedCommentsData) {
-                return
-            }
-
-            const mutatingComment = mutatedCommentsData.find(
-                (currentComment: CommentType) => currentComment.uuid === uuid
-            )
-
-            if (!mutatingComment) {
-                return
-            }
-
-            if (likes) {
-                mutatingComment.likes = likes
-            }
-
-            if (dislikes) {
-                mutatingComment.dislikes = dislikes
-            }
-
-            return mutatedData
-        },
-
-        onSuccess: (newData) => {
-            queryClient.setQueryData(['comments', comment.parentuuid],
-                (oldData: MutatedDataType) =>
-                    oldData
-                        ? newData
+                        ? newData.data
                         : oldData
             )
         }
