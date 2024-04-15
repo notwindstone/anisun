@@ -63,7 +63,7 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: 
         sendVotes({ newLikes: mutatedCommentLikes })
 
         // @ts-ignore
-        //await comments.like(uuid, mutatedCommentLikes)
+        await comments.like(uuid, mutatedCommentLikes)
 
         return setTimeout(() => {
             setDelayed(false)
@@ -81,7 +81,33 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: 
             handleLike().then()
         }
 
-        console.log('oops')
+        if (isDisliked) {
+            const mutatedCommentDislikes = dislikes.filter((userid) => {
+                return userid !== user?.id
+            })
+
+            sendVotes({ newDislikes: mutatedCommentDislikes })
+
+            // @ts-ignore
+            await comments.dislike(uuid, mutatedCommentDislikes)
+
+            return setTimeout(() => {
+                setDelayed(false)
+            }, 500)
+        }
+
+        const mutatedCommentDislikes = [...dislikes]
+
+        mutatedCommentDislikes.push(user?.id)
+
+        sendVotes({ newDislikes: mutatedCommentDislikes })
+
+        // @ts-ignore
+        await comments.dislike(uuid, mutatedCommentDislikes)
+
+        return setTimeout(() => {
+            setDelayed(false)
+        }, 500)
     }
 
     return (
