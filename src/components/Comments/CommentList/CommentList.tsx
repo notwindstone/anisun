@@ -9,12 +9,9 @@ import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 import {useUser} from "@clerk/nextjs";
-import {useState} from "react";
-import {Select} from "@mantine/core";
+import {Button, Group, Text} from "@mantine/core";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
-    const [filters, setFilters] = useState('FROM_NEWEST')
-    const [delayed, setDelayed] = useState(false)
     const {
         data,
         error,
@@ -22,11 +19,11 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         isFetchingNextPage,
         status,
     } = useInfiniteQuery({
-        queryKey: ["comments", titleCode, filters],
+        queryKey: ["comments", titleCode],
         // @ts-ignore
         queryFn: retrieveComments,
         initialPageParam: 0,
-        getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 0,
+        getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 8,
         refetchInterval: 60000,
     })
     const { isLoaded, isSignedIn, user } = useUser();
@@ -34,7 +31,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     const isUser = isLoaded && isSignedIn
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
-        return await comments.getParent({ title: titleCode, nextCursor: pageParam, filters: filters })
+        return await comments.getParent({ title: titleCode, nextCursor: pageParam })
     }
 
     function handleNewComment(newComment: CommentType) {
@@ -62,7 +59,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                 children,
             }: CommentType
         ) => {
-            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', title, filters])
+            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', title])
 
             if (!mutatedData) {
                 return
@@ -101,10 +98,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         }
     })
 
-    const dataPages = data?.pages ?? []
-    const lastDataPage = dataPages[dataPages.length - 1] ?? []
-    const hasNextPageData = lastDataPage.data
-
     const commentSection = status === 'pending' ? (
         <CommentSkeleton />
     ) : status === 'error' ? (
@@ -124,45 +117,45 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                     })
                 })
             }
-            {
-                hasNextPageData && isFetchingNextPage && <CommentSkeleton />
-            }
         </>
     )
 
     return (
         <div>
-            <Select
-                placeholder="Сортировка комментариев"
-                data={[
-                    { value: 'FROM_NEWEST', label: 'От самого нового' },
-                    { value: 'FROM_OLDEST', label: 'От самого старого' },
-                    { value: 'MOST_LIKED', label: 'От самого залайканного' },
-                ]}
-                onOptionSubmit={(option) => setFilters(option)}
-            />
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             {commentSection}
             {
-                !hasNextPageData && !isFetchingNextPage && status !== 'pending' && <>Похоже, что больше комментариев нет</>
+                isFetchingNextPage && <CommentSkeleton />
             }
             <InView
                 onChange={(inView) => {
-                    if (!inView || delayed) {
+                    if (!inView) {
                         return
                     }
 
-                    setDelayed(true)
+                    const dataPages = data?.pages ?? []
+                    const lastDataPage = dataPages[dataPages.length - 1] ?? []
+                    const hasNextPageData = lastDataPage.data
+
+                    if (!hasNextPageData) {
+                        return
+                    }
 
                     fetchNextPage().then()
-
-                    setTimeout(() => {
-                        setDelayed(false)
-                    }, 1000)
                 }}
             >
                 <hr></hr>
             </InView>
+            {
+                !isFetchingNextPage
+                && status !== 'pending'
+                && (
+                    <Group>
+                        <Text>Похоже, что больше комментариев нет</Text>
+                        <Button variant="light" onClick={() => fetchNextPage()}>Попробовать ещё</Button>
+                    </Group>
+                )
+            }
         </div>
     )
 }
