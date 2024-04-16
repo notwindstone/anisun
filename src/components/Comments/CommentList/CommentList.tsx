@@ -9,8 +9,7 @@ import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 import {useUser} from "@clerk/nextjs";
-import {Button, Group, Text} from "@mantine/core";
-import {nanoid} from "nanoid";
+import {Text} from "@mantine/core";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -114,13 +113,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                         return (
                             <>
                                 <Text>Возникла неизвестная ошибка. Пожалуйста, подождите...</Text>
-                                {
-                                    Array.from({ length: 8 }).map(() => {
-                                        return (
-                                            <CommentSkeleton key={nanoid()} />
-                                        )
-                                    })
-                                }
+                                <CommentSkeleton />
                             </>
                         )
                     }
@@ -136,10 +129,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             }
         </>
     )
-
-    const dataPages = data?.pages ?? []
-    const lastDataPage = dataPages[dataPages.length - 1] ?? []
-    const hasNextPageData = lastDataPage.data
 
     return (
         <div>
@@ -160,14 +149,10 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                 <hr></hr>
             </InView>
             {
-                !hasNextPageData
-                    && !isFetchingNextPage
+                !isFetchingNextPage
                     && status !== 'pending'
                     && (
-                        <Group>
-                            <Text>Похоже, что больше комментариев нет</Text>
-                            <Button variant="light" onClick={() => fetchNextPage()}>Попробовать ещё</Button>
-                        </Group>
+                        <Text>Похоже, что больше комментариев нет</Text>
                     )
             }
         </div>
