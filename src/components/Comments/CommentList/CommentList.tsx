@@ -120,6 +120,10 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         </>
     )
 
+    const dataPages = data?.pages ?? []
+    const lastDataPage = dataPages[dataPages.length - 1] ?? []
+    const hasNextPageData = lastDataPage.data
+
     return (
         <div>
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
@@ -133,10 +137,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                         return
                     }
 
-                    const dataPages = data?.pages ?? []
-                    const lastDataPage = dataPages[dataPages.length - 1] ?? []
-                    const hasNextPageData = lastDataPage.data
-
                     if (!hasNextPageData) {
                         return
                     }
@@ -147,14 +147,15 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                 <hr></hr>
             </InView>
             {
-                !isFetchingNextPage
-                && status !== 'pending'
-                && (
-                    <Group>
-                        <Text>Похоже, что больше комментариев нет</Text>
-                        <Button variant="light" onClick={() => fetchNextPage()}>Попробовать ещё</Button>
-                    </Group>
-                )
+                !hasNextPageData
+                    && !isFetchingNextPage
+                    && status !== 'pending'
+                    && (
+                        <Group>
+                            <Text>Похоже, что больше комментариев нет</Text>
+                            <Button variant="light" onClick={() => fetchNextPage()}>Попробовать ещё</Button>
+                        </Group>
+                    )
             }
         </div>
     )
