@@ -20,13 +20,12 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         fetchNextPage,
         isFetchingNextPage,
         status,
-        refetch,
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode, filters],
         // @ts-ignore
         queryFn: retrieveComments,
         initialPageParam: 0,
-        getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : [],
+        getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 0,
         refetchInterval: 60000,
     })
     const { isLoaded, isSignedIn, user } = useUser();
@@ -109,6 +108,8 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         <>
             {
                 data.pages.map((group) => {
+                    group = group ?? []
+
                     const commentGroup: CommentType[] | null = group.data ?? []
 
                     return commentGroup.map((comment) => {
@@ -140,15 +141,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                     return
                 }
 
-                const dataPages = data?.pages ?? []
-                const lastDataPage = dataPages[dataPages.length - 1] ?? []
-                const hasNextPageData = lastDataPage.data
-
-                if (!hasNextPageData) {
-                    return
-                }
-
-                fetchNextPage().then()
+                fetchNextPage().then().catch((e) => console.log(e))
             }}>
                 <hr></hr>
             </InView>
