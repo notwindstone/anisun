@@ -10,8 +10,10 @@ import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 import {useUser} from "@clerk/nextjs";
 import {Text} from "@mantine/core";
+import {useState} from "react";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
+    const [delayed, setDelayed] = useState(false)
     const {
         data,
         error,
@@ -32,7 +34,9 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     const isUser = isLoaded && isSignedIn
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
-        return await comments.getParent({ title: titleCode, nextCursor: pageParam })
+        const loggedData = await comments.getParent({ title: titleCode, nextCursor: pageParam })
+        console.log(loggedData)
+        return loggedData
     }
 
     function handleNewComment(newComment: CommentType) {
@@ -108,14 +112,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             {
                 data.pages.map((group) => {
                     if (!group) {
-                        refetch().then()
-
-                        return (
-                            <>
-                                <Text>Возникла неизвестная ошибка. Пожалуйста, подождите...</Text>
-                                <CommentSkeleton />
-                            </>
-                        )
+                        return
                     }
 
                     const commentGroup: CommentType[] | null = group.data ?? []
@@ -143,7 +140,17 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                         return
                     }
 
+                    if (delayed) {
+                        return
+                    }
+
+                    setDelayed(true)
+
                     fetchNextPage().then()
+
+                    return setTimeout(() => {
+                        setDelayed(false)
+                    }, 500)
                 }}
             >
                 <hr></hr>
