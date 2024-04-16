@@ -14,6 +14,7 @@ import {Select} from "@mantine/core";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const [filters, setFilters] = useState('FROM_NEWEST')
+    const [delayed, setDelayed] = useState(false)
     const {
         data,
         error,
@@ -100,6 +101,10 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         }
     })
 
+    const dataPages = data?.pages ?? []
+    const lastDataPage = dataPages[dataPages.length - 1] ?? []
+    const hasNextPageData = lastDataPage.data
+
     const commentSection = status === 'pending' ? (
         <CommentSkeleton />
     ) : status === 'error' ? (
@@ -119,7 +124,9 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                     })
                 })
             }
-            <span>{isFetchingNextPage ? <CommentSkeleton /> : 'Больше комментариев нет!'}</span>
+            {
+                hasNextPageData && isFetchingNextPage && <CommentSkeleton />
+            }
         </>
     )
 
@@ -136,13 +143,24 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             />
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             {commentSection}
-            <InView onChange={(inView) => {
-                if (!inView) {
-                    return
-                }
+            {
+                !hasNextPageData && !isFetchingNextPage && status !== 'pending' && <>Похоже, что больше комментариев нет</>
+            }
+            <InView
+                onChange={(inView) => {
+                    if (!inView || delayed) {
+                        return
+                    }
 
-                fetchNextPage().then().catch((e) => console.log(e))
-            }}>
+                    setDelayed(true)
+
+                    fetchNextPage().then()
+
+                    setTimeout(() => {
+                        setDelayed(false)
+                    }, 1000)
+                }}
+            >
                 <hr></hr>
             </InView>
         </div>
