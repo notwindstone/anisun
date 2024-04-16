@@ -23,10 +23,9 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         refetch,
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
-        // @ts-ignore
         queryFn: retrieveComments,
         initialPageParam: 0,
-        getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 8,
+        getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 16,
         refetchInterval: 60000,
     })
     const { isLoaded, isSignedIn, user } = useUser();
@@ -35,7 +34,9 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
         const loggedData = await comments.getParent({ title: titleCode, nextCursor: pageParam })
-        console.log(loggedData)
+
+        console.log(loggedData, pageParam)
+
         return loggedData
     }
 
