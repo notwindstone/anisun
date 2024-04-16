@@ -10,6 +10,7 @@ import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 import {useUser} from "@clerk/nextjs";
 import {Button, Group, Text} from "@mantine/core";
+import {nanoid} from "nanoid";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const {
@@ -18,6 +19,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         fetchNextPage,
         isFetchingNextPage,
         status,
+        refetch,
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
         // @ts-ignore
@@ -106,7 +108,22 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         <>
             {
                 data.pages.map((group) => {
-                    group = group ?? []
+                    if (!group) {
+                        refetch().then()
+
+                        return (
+                            <>
+                                <Text>Возникла неизвестная ошибка. Пожалуйста, подождите...</Text>
+                                {
+                                    Array.from({ length: 8 }).map(() => {
+                                        return (
+                                            <CommentSkeleton key={nanoid()} />
+                                        )
+                                    })
+                                }
+                            </>
+                        )
+                    }
 
                     const commentGroup: CommentType[] | null = group.data ?? []
 
@@ -134,10 +151,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             <InView
                 onChange={(inView) => {
                     if (!inView) {
-                        return
-                    }
-
-                    if (!hasNextPageData) {
                         return
                     }
 
