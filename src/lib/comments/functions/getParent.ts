@@ -2,20 +2,37 @@
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
-import {and, count, desc, eq, isNull} from 'drizzle-orm';
+import {and, asc, count, desc, eq, isNull} from 'drizzle-orm';
 
-export const getParent = async ({ title, nextCursor = 0 }: { title: string, nextCursor: number, uuid?: string }) => {
+export const getParent = async ({ title, nextCursor = 0, filters = 'FROM_NEWEST' }: { title: string, nextCursor: number, uuid?: string, filters?: string }) => {
+    let order
+
+    switch (filters) {
+        case 'FROM_NEWEST':
+            order = desc(comments.createdAt)
+            break
+        case 'FROM_OLDEST':
+            order = asc(comments.createdAt)
+            break
+        case 'MOST_LIKED':
+            order = desc(comments.likes)
+            break
+        default:
+            order = desc(comments.createdAt)
+            break
+    }
+
     const originComments =
         await db
             .select()
             .from(comments)
+            .orderBy(order)
             .where(
                 and(
                     eq(comments.title, title),
                     isNull(comments.parentuuid)
                 )
             )
-            .orderBy(desc(comments.createdAt))
             .limit(8)
             .offset(nextCursor);
 

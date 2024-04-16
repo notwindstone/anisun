@@ -9,16 +9,20 @@ import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 import {useUser} from "@clerk/nextjs";
+import {useState} from "react";
+import {Select} from "@mantine/core";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
+    const [filters, setFilters] = useState('FROM_NEWEST')
     const {
         data,
         error,
         fetchNextPage,
         isFetchingNextPage,
         status,
+        refetch,
     } = useInfiniteQuery({
-        queryKey: ["comments", titleCode],
+        queryKey: ["comments", titleCode, filters],
         // @ts-ignore
         queryFn: retrieveComments,
         initialPageParam: 0,
@@ -30,7 +34,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     const isUser = isLoaded && isSignedIn
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
-        return await comments.getParent({ title: titleCode, nextCursor: pageParam })
+        return await comments.getParent({ title: titleCode, nextCursor: pageParam, filters: filters })
     }
 
     function handleNewComment(newComment: CommentType) {
@@ -58,7 +62,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                 children,
             }: CommentType
         ) => {
-            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', title])
+            const mutatedData: MutatedDataType | undefined = queryClient.getQueryData(['comments', title, filters])
 
             if (!mutatedData) {
                 return
@@ -120,6 +124,15 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
+            <Select
+                placeholder="Сортировка комментариев"
+                data={[
+                    { value: 'FROM_NEWEST', label: 'От самого нового' },
+                    { value: 'FROM_OLDEST', label: 'От самого старого' },
+                    { value: 'MOST_LIKED', label: 'От самого залайканного' },
+                ]}
+                onOptionSubmit={(option) => setFilters(option)}
+            />
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             {commentSection}
             <InView onChange={(inView) => {
