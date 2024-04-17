@@ -8,7 +8,7 @@ export const title = {
         return (await axios.get(`${anilibriaHost}title?id=${id}`)).data
     },
     code: async function (code: string) {
-        return (await axios.get(`${anilibriaHost}title?code=${code}`)).data
+        return (await axios.get(`${anilibriaHost}title?code=${code}`).catch(e => null))?.data
     },
     torrent_id: async function (torrent_id: string[]) {
         return (await axios.get(`${anilibriaHost}title?torrent_id=${torrent_id}`)).data

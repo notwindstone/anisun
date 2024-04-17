@@ -31,21 +31,17 @@ export default function VideoEmbed({ code }: { code: string }) {
     const anilibriaData = data.anilibria
     const kodikData = data.kodik
 
+    if (!kodikData || !anilibriaData) {
+        return (
+            <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
+        );
+    }
+
     const anilibriaTitle = anilibriaData.names.ru
     const anilibriaPlayer = anilibriaData.player;
     const anilibriaPreview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
 
     const kodikPlayer = kodikData.results[0].link
-
-    // Некоторые аниме тайтлы не имеют плеера
-    if (Object.keys(anilibriaPlayer.list).length === 0) {
-        return (
-            <>
-                <div>{code}</div>
-                <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
-            </>
-        );
-    }
 
     let currentPlayer
 
@@ -61,6 +57,15 @@ export default function VideoEmbed({ code }: { code: string }) {
             )
             break
         case 'Animeth':
+            // Некоторые аниме тайтлы не имеют плеера
+            if (Object.keys(anilibriaPlayer.list).length === 0) {
+                return (
+                    <>
+                        <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
+                    </>
+                );
+            }
+
             currentPlayer = (
                 <VideoPlayer
                     title={anilibriaTitle}
