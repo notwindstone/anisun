@@ -40,7 +40,8 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
 
     const children = comment.children ? comment.children[0].count : 0
 
-    const hasOneChild = children === 1
+    let hasOneChild = children === 1
+    console.log(hasOneChild)
     const hasMoreThanOneChild = children > 1
 
     const queryClient = useQueryClient()
@@ -70,11 +71,15 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
 
             if (isNewComment) {
                 if (!mutatedData) {
+                    comment.children = [{ count: 1 }]
+
                     return { data: { data: [newComment] }, mutationQueryKey: mutationQueryKey }
                 }
 
                 // @ts-ignore
-                return mutatedData.data.unshift(newComment)
+                mutatedData.data.unshift(newComment)
+
+                return { data: mutatedData, mutationQueryKey: mutationQueryKey }
             }
 
             if (!mutatedData) {
