@@ -10,6 +10,7 @@ import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import {useUser} from "@clerk/nextjs";
+import {AddComment} from "@/components/Comments/AddComment/AddComment";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -28,6 +29,11 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
             mutationQueryKey: mutationQueryKey,
             isChild: isChild,
         })
+    }
+
+    function handleNewComment(newComment: CommentType) {
+        console.log(newComment)
+        //mutation.mutate(newComment)
     }
 
     const children = comment.children ? comment.children[0].count : 0
@@ -149,7 +155,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 </Stack>
             </Flex>
             {
-                isToggledReply && <>Ответ</>
+                isToggledReply && <AddComment title={comment.title} parentUUID={comment.uuid} sendComment={handleNewComment} />
             }
             {
                 /*
