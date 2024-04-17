@@ -141,7 +141,10 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             {
                 isFetchingNextPage && <CommentSkeleton />
             }
-            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
+            {
+                totalCount > 0
+                    && <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
+            }
             <Space h="xl" />
             <InView
                 onChange={(inView) => {
