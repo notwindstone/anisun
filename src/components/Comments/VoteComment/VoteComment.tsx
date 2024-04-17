@@ -1,12 +1,15 @@
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {ActionIcon, Text} from "@mantine/core";
-import {UserResource} from "@clerk/types";
 import {useState} from "react";
 import {notify} from "@/utils/notify/notify";
 import {comments} from "@/lib/comments/comments";
+import {useUser} from "@clerk/nextjs";
 
-export function VoteComment({ uuid, likes, dislikes, sendVotes, user, isUser }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) => void, user: UserResource | null | undefined, isUser: boolean }) {
+export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) => void }) {
+    const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false)
+
+    const isUser = isLoaded && isSignedIn
 
     likes = likes ?? []
     dislikes = dislikes ?? []

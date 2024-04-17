@@ -9,15 +9,11 @@ import {useDisclosure} from "@mantine/hooks";
 import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {MutatedDataType} from "@/types/MutatedDataType";
-import {useUser} from "@clerk/nextjs";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
-    const { isLoaded, isSignedIn, user } = useUser();
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
-
-    const isUser = isLoaded && isSignedIn
 
     function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
         const mutationQueryKey = isChild ? comment.parentuuid : comment.title
@@ -166,8 +162,6 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                             likes={comment.likes}
                             dislikes={comment.dislikes}
                             sendVotes={handleNewVotes}
-                            user={user}
-                            isUser={isUser}
                         />
                         <Button onClick={toggleReply}>Ответить</Button>
                     </Group>
