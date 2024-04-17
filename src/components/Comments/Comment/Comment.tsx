@@ -10,6 +10,7 @@ import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
+import {DeleteComment} from "@/components/Comments/DeleteComment/DeleteComment";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
@@ -34,6 +35,17 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
         mutation.mutate({ mutationQueryKey, newComment: newComment, isNewComment: true })
     }
 
+    function handleDelete(isDeleted: boolean) {
+        const mutationQueryKey = isChild ? comment.parentuuid : comment.title
+
+        mutation.mutate({
+            uuid: comment.uuid,
+            mutationQueryKey: mutationQueryKey,
+            isDeleted: isDeleted,
+            isChild: isChild,
+        })
+    }
+
     const children = comment.children ? comment.children[0].count : 0
 
     let hasOneChild = children === 1
@@ -52,14 +64,16 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 isChild,
                 newComment,
                 isNewComment,
+                isDeleted,
             }: {
                 uuid: string,
-                likes: unknown[] | undefined,
-                dislikes: unknown[] | undefined,
+                likes?: unknown[] | undefined,
+                dislikes?: unknown[] | undefined,
                 mutationQueryKey: string | null,
                 isChild?: boolean,
                 newComment?: CommentType,
                 isNewComment?: boolean,
+                isDeleted?: boolean,
             }
         ) => {
             const mutatedData: MutatedDataType | { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', mutationQueryKey])
@@ -97,6 +111,10 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                     return
                 }
 
+                if (isDeleted !== undefined) {
+                    mutatingComment.isDeleted = isDeleted
+                }
+
                 if (likes) {
                     mutatingComment.likes = likes
                 }
@@ -116,6 +134,10 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
 
                 if (!mutatingComment) {
                     continue
+                }
+
+                if (isDeleted !== undefined) {
+                    mutatingComment.isDeleted = isDeleted
                 }
 
                 if (likes) {
@@ -152,9 +174,19 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                             <Text>{comment.username}</Text>
                         </Link>
                         <Text>{makeDate(comment.createdAt)}</Text>
+
+                        <DeleteComment uuid={comment.uuid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
                     </Group>
                     <Group>
-                        <Text>{comment.message}</Text>
+                        {
+                            comment.isDeleted
+                                ? (
+                                    <Text className={classes.deleted}>Сообщение было удалено</Text>
+                                )
+                                : (
+                                    <Text>{comment.message}</Text>
+                                )
+                        }
                     </Group>
                     <Group>
                         <VoteComment

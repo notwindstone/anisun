@@ -38,10 +38,13 @@ export function EditComment({ uuid, sendEdit }: { uuid: string, sendEdit: ({ mes
     const handleEdit = ({ message }: { message: string | undefined }) => {
         handleChecks(message ?? '')
 
+        setDelayed(true)
+
+
     }
 
     return (
-        <ActionIcon variant="light" onClick={() => handleEdit({ message: ref.current?.value })}>
+        <ActionIcon variant="light" onClick={toggle}>
             <IconEdit />
         </ActionIcon>
     )
