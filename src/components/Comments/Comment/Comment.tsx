@@ -41,7 +41,6 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
     const children = comment.children ? comment.children[0].count : 0
 
     let hasOneChild = children === 1
-    console.log(hasOneChild)
     const hasMoreThanOneChild = children > 1
 
     const queryClient = useQueryClient()

@@ -3,12 +3,13 @@
 import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
-import React from "react";
-import {Skeleton} from "@mantine/core";
+import React, {useState} from "react";
+import {SegmentedControl, Skeleton} from "@mantine/core";
 import {AnimeTitleResponseType} from "@/types/AnimeTitleResponseType";
 import {kodik} from "@/lib/kodik/kodik";
 
 export default function VideoEmbed({ code }: { code: string }) {
+    const [value, setValue] = useState('Kodik')
     const { isFetching, data } = useQuery({
         queryKey: ['anime', code],
         queryFn: async () => fetchAnime(code),
@@ -46,19 +47,52 @@ export default function VideoEmbed({ code }: { code: string }) {
         );
     }
 
+    let currentPlayer
+
+    switch (value) {
+        case 'Kodik':
+            currentPlayer = (
+                <iframe
+                    src={kodikPlayer}
+                    width="610"
+                    height="370"
+                    allow="autoplay *; fullscreen *"
+                />
+            )
+            break
+        case 'Animeth':
+            currentPlayer = (
+                <VideoPlayer
+                    title={anilibriaTitle}
+                    player={anilibriaPlayer}
+                    preview={anilibriaPreview}
+                />
+            )
+            break
+        default:
+            currentPlayer = (
+                <iframe
+                    src={kodikPlayer}
+                    width="610"
+                    height="370"
+                    allow="autoplay *; fullscreen *"
+                />
+            )
+            break
+    }
+
     return (
         <>
-            <iframe
-                src={kodikPlayer}
-                width="610"
-                height="370"
-                allow="autoplay *; fullscreen *"
+            <SegmentedControl
+                withItemsBorders={false}
+                defaultValue={value}
+                onChange={setValue}
+                data={[
+                    { value: 'Kodik', label: 'Kodik (с выбором озвучки и рекламой)' },
+                    { value: 'Animeth', label: 'Animeth (только AniLibria, но без рекламы)' }
+                ]}
             />
-            <VideoPlayer
-                title={anilibriaTitle}
-                player={anilibriaPlayer}
-                preview={anilibriaPreview}
-            />
+            {currentPlayer}
         </>
     );
 }
