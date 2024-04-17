@@ -3,7 +3,7 @@
  * 2, 3, 4, 22, 23, 24, 32, 33, 34 ... ответа
  * 5, 6, 7, 8, 9, 10-20, 25, 26, 27, 28, 29, 30, ... ответов
  */
-export function makeWordEnding(replies: number) {
+export function makeWordEnding({ replies, wordTypes }: { replies: number, wordTypes: string[] }) {
     const twoToFour = [2, 3, 4]
     const tenToTwenty = [10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
@@ -13,7 +13,7 @@ export function makeWordEnding(replies: number) {
         replies !== 11
 
     if (firstCase) {
-        return 'ответ'
+        return wordTypes[0]
     }
 
     // 2, 3, 4, 22, 23, 24, 32, 33, 34, ...
@@ -22,9 +22,9 @@ export function makeWordEnding(replies: number) {
         !tenToTwenty.includes(replies)
 
     if (secondCase) {
-        return 'ответа'
+        return wordTypes[1]
     }
 
-    // 5, 6, 7, 8, 9, 10-20, 25, 26, 27, 28, 29, 30
-    return 'ответов'
+    // 0, 5, 6, 7, 8, 9, 10-20, 25, 26, 27, 28, 29, 30
+    return wordTypes[2]
 }

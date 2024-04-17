@@ -12,6 +12,7 @@ import {useUser} from "@clerk/nextjs";
 import {Button, Text} from "@mantine/core";
 import {useState} from "react";
 import {nanoid} from "nanoid";
+import {makeWordEnding} from "@/utils/makeWordEnding";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -126,10 +127,14 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         </>
     )
 
+    const totalCount = data?.pages[0].total[0].count ?? 0
+
     return (
         <div>
             <Text>
-                {data?.pages[0].total[0].count} комментариев
+                {
+                    `${totalCount} ${makeWordEnding({ replies: totalCount, wordTypes: ['комментарий', 'комментария', 'комментариев'] })}`
+                }
             </Text>
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             {commentSection}

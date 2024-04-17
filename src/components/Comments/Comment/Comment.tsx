@@ -165,7 +165,7 @@ export function Comment({ comment, user, isUser, isChild }: { comment: CommentTy
                                     onClick={toggleChild}
                                 >
                                     {
-                                        isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding(children)}`
+                                        isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding({ replies: children, wordTypes: ['ответ', 'ответа', 'ответов'] })}`
                                     }
                                 </UnstyledButton>
                                 {isExpandedChild && (<ChildCommentList uuid={comment.uuid} childComments={children} user={user} isUser={isUser} />)}
