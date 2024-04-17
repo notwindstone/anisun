@@ -1,5 +1,5 @@
 import {CommentType} from "@/types/CommentType";
-import {Avatar, Button, Flex, Group, Stack, Text, UnstyledButton} from "@mantine/core";
+import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, Textarea, UnstyledButton} from "@mantine/core";
 import {ChildCommentList} from "@/components/Comments/ChildCommentList/ChildCommentList";
 import classes from "./Comment.module.css";
 import Link from "next/link";
@@ -11,10 +11,15 @@ import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {DeleteComment} from "@/components/Comments/DeleteComment/DeleteComment";
+import {IconCheck} from "@tabler/icons-react";
+import {useRef, useState} from "react";
+import {EditComment} from "@/components/Comments/EditComment/EditComment";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
+    const [isEditing, setIsEditing] = useState(false)
+    const ref = useRef<HTMLTextAreaElement>(null);
 
     function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
         const mutationQueryKey = isChild ? comment.parentuuid : comment.title
@@ -44,6 +49,16 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
             isDeleted: isDeleted,
             isChild: isChild,
         })
+    }
+
+    function handleStateEdit(isEditingState: boolean) {
+        setIsEditing(isEditingState)
+        console.log(isEditing)
+    }
+
+    function handleMessageEdit(uuid: string, message?: string) {
+        message = message ?? ''
+
     }
 
     const children = comment.children ? comment.children[0].count : 0
@@ -175,6 +190,11 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                         </Link>
                         <Text>{makeDate(comment.createdAt)}</Text>
 
+                        {
+                            !comment.isDeleted
+                                && <EditComment sendEdit={handleStateEdit} />
+
+                        }
                         <DeleteComment uuid={comment.uuid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
                     </Group>
                     <Group>
@@ -184,7 +204,25 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                     <Text className={classes.deleted}>Сообщение было удалено</Text>
                                 )
                                 : (
-                                    <Text>{comment.message}</Text>
+                                    isEditing
+                                        ? (
+                                            <>
+                                                <Textarea
+                                                    ref={ref}
+                                                    defaultValue={comment.message}
+                                                    placeholder="Изменить комментарий..."
+                                                    autosize
+                                                    required
+                                                    minRows={2}
+                                                />
+                                                <ActionIcon variant="light" onClick={() => handleMessageEdit(comment.uuid, ref.current?.value)}>
+                                                    <IconCheck />
+                                                </ActionIcon>
+                                            </>
+                                        )
+                                        : (
+                                            <Text>{comment.message}</Text>
+                                        )
                                 )
                         }
                     </Group>
