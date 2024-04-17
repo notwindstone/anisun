@@ -5,11 +5,14 @@ import {notify} from "@/utils/notify/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
-import {UserResource} from "@clerk/types";
+import {useUser} from "@clerk/nextjs";
 
-export function AddComment({ title, parentUUID, sendComment, user, isUser }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void, user: UserResource | null | undefined, isUser: boolean }) {
+export function AddComment({ title, parentUUID, sendComment }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void }) {
+    const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const [delayed, setDelayed] = useState(false)
+
+    const isUser = isLoaded && isSignedIn
 
     const handleSubmit = async () => {
         if (delayed) {

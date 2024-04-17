@@ -8,14 +8,12 @@ import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
-import {useUser} from "@clerk/nextjs";
 import {Button, Skeleton, Space, Text} from "@mantine/core";
 import {useState} from "react";
 import {nanoid} from "nanoid";
 import {makeWordEnding} from "@/utils/makeWordEnding";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
-    const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false)
     const {
         data,
@@ -30,8 +28,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 16,
         refetchInterval: 60000,
     })
-
-    const isUser = isLoaded && isSignedIn
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
         return await comments.getParent({ title: titleCode, nextCursor: pageParam })
@@ -119,7 +115,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
                     return commentGroup.map((comment) => {
                         return (
-                            <Comment key={comment.uuid} comment={comment} user={user} isUser={isUser} />
+                            <Comment key={comment.uuid} comment={comment} />
                         )
                     })
                 })
@@ -140,12 +136,12 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                         </Text>
                     )
             }
-            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
+            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             {commentSection}
             {
                 isFetchingNextPage && <CommentSkeleton />
             }
-            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
+            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             <Space h="xl" />
             <InView
                 onChange={(inView) => {

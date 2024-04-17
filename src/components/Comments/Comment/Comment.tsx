@@ -7,13 +7,16 @@ import {makeDate} from "@/utils/makeDate";
 import {makeWordEnding} from "@/utils/makeWordEnding";
 import {useDisclosure} from "@mantine/hooks";
 import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
-import {UserResource} from "@clerk/types";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {MutatedDataType} from "@/types/MutatedDataType";
+import {useUser} from "@clerk/nextjs";
 
-export function Comment({ comment, user, isUser, isChild }: { comment: CommentType, user: UserResource | null | undefined, isUser: boolean, isChild?: boolean }) {
+export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
+    const { isLoaded, isSignedIn, user } = useUser();
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
+
+    const isUser = isLoaded && isSignedIn
 
     function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
         const mutationQueryKey = isChild ? comment.parentuuid : comment.title
@@ -156,7 +159,7 @@ export function Comment({ comment, user, isUser, isChild }: { comment: CommentTy
                  * */
                 hasOneChild
                     ? (
-                        <ChildCommentList uuid={comment.uuid} childComments={children} user={user} isUser={isUser} />
+                        <ChildCommentList uuid={comment.uuid} childComments={children} />
                     )
                     : hasMoreThanOneChild
                         ? (
@@ -168,7 +171,7 @@ export function Comment({ comment, user, isUser, isChild }: { comment: CommentTy
                                         isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding({ replies: children, wordTypes: ['ответ', 'ответа', 'ответов'] })}`
                                     }
                                 </UnstyledButton>
-                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} childComments={children} user={user} isUser={isUser} />)}
+                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} childComments={children} />)}
                             </>
                         )
                         : null
