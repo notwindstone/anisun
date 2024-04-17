@@ -4,7 +4,7 @@ import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import React, {useState} from "react";
-import {SegmentedControl, Skeleton} from "@mantine/core";
+import {SegmentedControl, Skeleton, Text} from "@mantine/core";
 import {AnimeTitleResponseType} from "@/types/AnimeTitleResponseType";
 import {kodik} from "@/lib/kodik/kodik";
 
@@ -88,6 +88,7 @@ export default function VideoEmbed({ code }: { code: string }) {
 
     return (
         <>
+            <Text>Выберите плеер</Text>
             <SegmentedControl
                 withItemsBorders={false}
                 defaultValue={value}

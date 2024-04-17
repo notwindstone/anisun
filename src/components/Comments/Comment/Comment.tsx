@@ -190,6 +190,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                         ? (
                             <>
                                 <UnstyledButton
+                                    className={classes.collapse}
                                     onClick={toggleChild}
                                 >
                                     {
