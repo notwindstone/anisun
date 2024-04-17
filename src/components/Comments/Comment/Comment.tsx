@@ -32,8 +32,10 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
     }
 
     function handleNewComment(newComment: CommentType) {
-        console.log(newComment)
-        //mutation.mutate(newComment)
+        const mutationQueryKey = newComment.parentuuid
+
+        // @ts-ignore
+        mutation.mutate({ mutationQueryKey, newComment: newComment, isNewComment: true })
     }
 
     const children = comment.children ? comment.children[0].count : 0
@@ -52,15 +54,28 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 dislikes,
                 mutationQueryKey,
                 isChild,
+                newComment,
+                isNewComment,
             }: {
-                uuid: string
+                uuid: string,
                 likes: unknown[] | undefined,
                 dislikes: unknown[] | undefined,
                 mutationQueryKey: string | null,
                 isChild?: boolean,
+                newComment?: CommentType,
+                isNewComment?: boolean,
             }
         ) => {
             const mutatedData: MutatedDataType | { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', mutationQueryKey])
+
+            if (isNewComment) {
+                if (!mutatedData) {
+                    return { data: { data: [newComment] }, mutationQueryKey: mutationQueryKey }
+                }
+
+                // @ts-ignore
+                return mutatedData.data.unshift(newComment)
+            }
 
             if (!mutatedData) {
                 return
