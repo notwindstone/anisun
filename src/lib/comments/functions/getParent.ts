@@ -5,7 +5,12 @@ import { comments } from "@/db/schema";
 import {and, count, desc, eq, isNull} from 'drizzle-orm';
 
 export const getParent = async ({ title, nextCursor = 0 }: { title: string, nextCursor: number }) => {
-    console.log('Меня вызвали 1 раз')
+    const countAllComments =
+        await db
+            .select({ count: count() })
+            .from(comments)
+            .where(eq(comments.title, title))
+
     const originComments =
         await db
             .select()
@@ -21,7 +26,7 @@ export const getParent = async ({ title, nextCursor = 0 }: { title: string, next
             .offset(nextCursor);
 
     if (originComments.length === 0) {
-        return { data: null, nextCursor: nextCursor + 16 }
+        return { total: countAllComments, data: null, nextCursor: nextCursor + 16 }
     }
 
     let data = []
@@ -36,5 +41,5 @@ export const getParent = async ({ title, nextCursor = 0 }: { title: string, next
         data.push({ ...comment, children: children })
     }
 
-    return { data: data, nextCursor: nextCursor + 16 };
+    return { total: countAllComments, data: data, nextCursor: nextCursor + 16 };
 };

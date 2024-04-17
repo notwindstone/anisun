@@ -9,8 +9,9 @@ import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 import {useUser} from "@clerk/nextjs";
-import {Text} from "@mantine/core";
+import {Button, Text} from "@mantine/core";
 import {useState} from "react";
+import {nanoid} from "nanoid";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -21,7 +22,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         fetchNextPage,
         isFetchingNextPage,
         status,
-        refetch,
     } = useInfiniteQuery({
         queryKey: ["comments", titleCode],
         queryFn: retrieveComments,
@@ -33,11 +33,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     const isUser = isLoaded && isSignedIn
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
-        const loggedData = await comments.getParent({ title: titleCode, nextCursor: pageParam })
-
-        console.log(loggedData, pageParam)
-
-        return loggedData
+        return await comments.getParent({ title: titleCode, nextCursor: pageParam })
     }
 
     function handleNewComment(newComment: CommentType) {
@@ -113,7 +109,9 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             {
                 data.pages.map((group) => {
                     if (!group) {
-                        return
+                        return (
+                            <Button key={nanoid()} variant="light" onClick={async () => fetchNextPage()}>Раскрыть ещё</Button>
+                        )
                     }
 
                     const commentGroup: CommentType[] | null = group.data ?? []
@@ -130,11 +128,15 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
+            <Text>
+                {data?.pages[0].total[0].count} комментариев
+            </Text>
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             {commentSection}
             {
                 isFetchingNextPage && <CommentSkeleton />
             }
+            <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             <InView
                 onChange={(inView) => {
                     if (!inView) {
