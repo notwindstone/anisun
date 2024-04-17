@@ -5,6 +5,12 @@
     "autoClose": 3000,
     "color": "green"
   },
+  "loading": {
+    "title": "Загрузка",
+    "message": "Пожалуйста, подождите",
+    "autoClose": 3000,
+    "color": "blue"
+  },
   "delay": {
     "title": "Ошибка",
     "message": "Пожалуйста, подождите",

@@ -19,7 +19,9 @@ export function ChildCommentList({ uuid, childComments }: { uuid: string, childC
     })
 
     async function retrieveChildComments() {
-        return await comments.getChildren({ uuid: uuid })
+        const childd = await comments.getChildren({ uuid: uuid })
+        console.log(childd)
+        return childd
     }
 
     const commentGroup: CommentType[] | null = data?.data ?? []

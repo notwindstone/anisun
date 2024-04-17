@@ -31,6 +31,10 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
 
         setDelayed(true)
 
+        const notificationId = nanoid()
+
+        notify.loading(notificationId, true)
+
         const uuid = nanoid()
         const createdAt = new Date().toJSON()
 
@@ -72,7 +76,7 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
             false,
         )
 
-        notify.done()
+        notify.loading(notificationId, false)
 
         setTimeout(() => {
             setDelayed(false)
