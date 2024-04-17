@@ -9,7 +9,7 @@ import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
 import {useUser} from "@clerk/nextjs";
-import {Button, Text} from "@mantine/core";
+import {Button, Skeleton, Space, Text} from "@mantine/core";
 import {useState} from "react";
 import {nanoid} from "nanoid";
 import {makeWordEnding} from "@/utils/makeWordEnding";
@@ -131,17 +131,22 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     return (
         <div>
-            <Text>
-                {
-                    `${totalCount} ${makeWordEnding({ replies: totalCount, wordTypes: ['комментарий', 'комментария', 'комментариев'] })}`
-                }
-            </Text>
+            {   status === 'pending'
+                    ? (
+                        <Skeleton w={144} h={24}></Skeleton>
+                    ) : (
+                        <Text>
+                            {totalCount} {makeWordEnding({ replies: totalCount, wordTypes: ['комментарий', 'комментария', 'комментариев'] })}
+                        </Text>
+                    )
+            }
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
             {commentSection}
             {
                 isFetchingNextPage && <CommentSkeleton />
             }
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} user={user} isUser={isUser} />
+            <Space h="xl" />
             <InView
                 onChange={(inView) => {
                     if (!inView) {
