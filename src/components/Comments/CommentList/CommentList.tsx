@@ -13,6 +13,7 @@ import {Text} from "@mantine/core";
 import {useState} from "react";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
+    const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false)
     const {
         data,
@@ -28,7 +29,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 16,
         refetchInterval: 60000,
     })
-    const { isLoaded, isSignedIn, user } = useUser();
 
     const isUser = isLoaded && isSignedIn
 
