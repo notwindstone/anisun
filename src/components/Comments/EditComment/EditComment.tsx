@@ -1,6 +1,4 @@
-import {useState} from "react";
 import {useUser} from "@clerk/nextjs";
-import {notify} from "@/utils/notify/notify";
 import {useDisclosure} from "@mantine/hooks";
 import {ActionIcon} from "@mantine/core";
 import {IconEdit} from "@tabler/icons-react";

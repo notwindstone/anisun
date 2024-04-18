@@ -16,6 +16,7 @@ import {useRef, useState} from "react";
 import {EditComment} from "@/components/Comments/EditComment/EditComment";
 import {notify} from "@/utils/notify/notify";
 import {comments} from "@/lib/comments/comments";
+import {MutationCommentType, MutationInputType} from "@/types/MutationInputType";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
     const [editDelayed, setEditDelayed] = useState(false)
@@ -100,6 +101,27 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
         return true
     }
 
+    function handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes }: MutationCommentType) {
+        if (isEdited) {
+            mutatingComment.message = message ?? ''
+            mutatingComment.isEdited = isEdited
+        }
+
+        if (isDeleted !== undefined) {
+            mutatingComment.isDeleted = isDeleted
+        }
+
+        if (likes) {
+            mutatingComment.likes = likes
+        }
+
+        if (dislikes) {
+            mutatingComment.dislikes = dislikes
+        }
+
+        return mutatingComment
+    }
+
     const children = comment.children ? comment.children[0].count : 0
 
     let hasOneChild = children === 1
@@ -120,17 +142,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 isDeleted,
                 isEdited,
                 message,
-            }: {
-                uuid: string,
-                likes?: unknown[] | undefined,
-                dislikes?: unknown[] | undefined,
-                mutationQueryKey: string | null,
-                isChild?: boolean,
-                newComment?: CommentType,
-                isDeleted?: boolean,
-                isEdited?: boolean,
-                message?: string,
-            }
+            }: MutationInputType
         ) => {
             const mutatedData: MutatedDataType | { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', mutationQueryKey])
 
@@ -159,7 +171,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                     return
                 }
 
-                const mutatingComment = mutatedCommentsData.find(
+                let mutatingComment = mutatedCommentsData.find(
                     (currentComment: CommentType) => currentComment.uuid === uuid
                 )
 
@@ -167,30 +179,14 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                     return
                 }
 
-                if (isEdited) {
-                    console.log(message)
-                    mutatingComment.message = message
-                    mutatingComment.isEdited = isEdited
-                }
-
-                if (isDeleted !== undefined) {
-                    mutatingComment.isDeleted = isDeleted
-                }
-
-                if (likes) {
-                    mutatingComment.likes = likes
-                }
-
-                if (dislikes) {
-                    mutatingComment.dislikes = dislikes
-                }
+                mutatingComment = handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes })
 
                 return { data: mutatedData, mutationQueryKey: mutationQueryKey }
             }
 
             // @ts-ignore
             for (const pages of mutatedData.pages) {
-                const mutatingComment = pages.data.find(
+                let mutatingComment = pages.data.find(
                     (currentComment: CommentType) => currentComment.uuid === uuid
                 )
 
@@ -198,22 +194,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                     continue
                 }
 
-                if (isEdited) {
-                    mutatingComment.message = message
-                    mutatingComment.isEdited = isEdited
-                }
-
-                if (isDeleted !== undefined) {
-                    mutatingComment.isDeleted = isDeleted
-                }
-
-                if (likes) {
-                    mutatingComment.likes = likes
-                }
-
-                if (dislikes) {
-                    mutatingComment.dislikes = dislikes
-                }
+                mutatingComment = handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes })
             }
 
             return { data: mutatedData, mutationQueryKey: mutationQueryKey }
