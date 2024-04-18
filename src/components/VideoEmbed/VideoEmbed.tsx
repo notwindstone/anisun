@@ -8,7 +8,7 @@ import {SegmentedControl, Skeleton, Text} from "@mantine/core";
 import {AnimeTitleResponseType} from "@/types/AnimeTitleResponseType";
 import { Client } from 'kodikwrapper';
 
-export default function VideoEmbed({ code }: { code: string }) {
+export default function VideoEmbed({ code, id }: { code: string, id: number }) {
     const client = new Client({
         token: process.env.KODIK_TOKEN!,
     });
@@ -19,13 +19,12 @@ export default function VideoEmbed({ code }: { code: string }) {
     });
 
     async function fetchAnime(code: string) {
-        const anilibriaResponse: AnimeTitleResponseType = await anilibria.title.code(code)
+        //const anilibriaResponse: AnimeTitleResponseType = await anilibria.title.code(code)
         const kodikResponse = await client.search({
-            limit: 1,
-            title: code,
+            shikimori_id: id
         }).then((response) => response.results.shift())
 
-        return { anilibria: anilibriaResponse, kodik: kodikResponse }
+        return { anilibria: null, kodik: kodikResponse }
     }
 
     if (!data) {
@@ -39,7 +38,15 @@ export default function VideoEmbed({ code }: { code: string }) {
 
     if (!kodikData || !anilibriaData) {
         return (
-            <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
+            <>
+                <iframe
+                    src={kodikData?.link}
+                    width="610"
+                    height="370"
+                    allow="autoplay *; fullscreen *"
+                />
+                <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
+            </>
         );
     }
 
