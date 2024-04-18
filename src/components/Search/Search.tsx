@@ -11,13 +11,14 @@ import {
 } from '@mantine/core';
 import {useDebouncedState} from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
 import classes from './Search.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
-import {AnimeTitleType} from "@/types/AnimeTitleType";
-import NProgress from 'nprogress'
+import NProgress from 'nprogress';
+import { client } from 'node-shikimori';
+import {ShikimoriAnimesListType} from "@/types/ShikimoriAnimesListType";
+import NextImage from 'next/image'
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
@@ -46,7 +47,13 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 <Group gap="sm">
                     <div>
                         <Skeleton>
-                            <Image className={classes.poster} w={64} h={92} radius="sm" alt=""/>
+                            <Image
+                                className={classes.poster}
+                                w={96}
+                                h={128}
+                                radius="sm"
+                                alt=""
+                            />
                         </Skeleton>
                     </div>
                     <div>
@@ -60,17 +67,27 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     return (
         <Group gap="sm">
             <div>
-                <Image className={classes.poster} src={optionData[1]} alt="Anime poster" radius="sm" />
+                <Image
+                    alt="Anime poster"
+                    src={optionData[1]}
+                    placeholder="blur"
+                    width={96}
+                    height={128}
+                    blurDataURL={optionData[2]}
+                    component={NextImage}
+                    className={classes.poster}
+                    radius="sm" />
             </div>
             <div>
-                <Text size="xl">{optionData[2]}</Text>
-                <Text size="md" opacity={0.5}>{optionData[3]}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
+                <Text size="xl">{optionData[3]}</Text>
+                <Text size="md" opacity={0.5}>{optionData[4]}{optionData[5] ? `, ${optionData[5]}` : []}</Text>
             </div>
         </Group>
     );
 };
 
 export function Search() {
+    const shikimori = client();
     const router = useRouter();
     const [search, setSearch] = useDebouncedState('', 300, { leading: true });
     const [titles, setTitles] = useState([]);
@@ -88,8 +105,10 @@ export function Search() {
             return notEnoughChars;
         }
 
-        const searchData = (await axios.get(`https://api.anilibria.tv/v3/title/search?search=${keyInput}&limit=6`)).data;
-        const searchList = await searchData.list;
+        const searchList = await shikimori.animes.list({
+            search: keyInput,
+            limit: 6
+        })
 
         if (searchList.length < 1) {
             const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
@@ -98,13 +117,17 @@ export function Search() {
             return nothingFound;
         }
 
-        const titlesList = searchList.map((title: AnimeTitleType) => (
+        const shikimoriURL = 'https://shikimori.one'
+
+        // @ts-ignore
+        const titlesList = searchList.map((title: ShikimoriAnimesListType) => (
             {
-                value: `${title.code}--https://anilibria.tv${title.posters.small.url}--${title.names.ru}--${title.status.string}--${title.names.en}`,
-                label: `${title.names.ru} / ${title.names.en}`,
+                value: `${title.url.replace('/animes/', '')}--${shikimoriURL + title.image.preview}--${shikimoriURL + title.image.x48}--${title.russian}--${title.status}--${title.name}`,
+                label: `${title.russian} / ${title.name}`,
             }
         ));
 
+        // @ts-ignore
         setTitles(titlesList);
 
         return titlesList;

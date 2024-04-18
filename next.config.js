@@ -2,6 +2,16 @@ module.exports = {
   env: {
     KODIK_TOKEN: process.env.KODIK_TOKEN,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'shikimori.one',
+        port: '',
+        pathname: '/**',
+      }
+    ]
+  },
   async headers() {
     return [
       {
