@@ -32,6 +32,8 @@ export default function VideoEmbed({ code }: { code: string }) {
     const kodikData = data.kodik
 
     if (!kodikData || !anilibriaData) {
+        console.log(kodikData, anilibriaData)
+
         return (
             <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
         );
