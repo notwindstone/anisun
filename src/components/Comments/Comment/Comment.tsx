@@ -14,8 +14,10 @@ import {DeleteComment} from "@/components/Comments/DeleteComment/DeleteComment";
 import {IconCheck} from "@tabler/icons-react";
 import {useRef, useState} from "react";
 import {EditComment} from "@/components/Comments/EditComment/EditComment";
+import {notify} from "@/utils/notify/notify";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
+    const [editDelayed, setEditDelayed] = useState(false)
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
     const [isEditing, setIsEditing] = useState(false)
@@ -37,7 +39,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
         const mutationQueryKey = newComment.parentuuid
 
         // @ts-ignore
-        mutation.mutate({ mutationQueryKey, newComment: newComment, isNewComment: true })
+        mutation.mutate({ mutationQueryKey, newComment: newComment })
     }
 
     function handleDelete(isDeleted: boolean) {
@@ -53,12 +55,43 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
 
     function handleStateEdit(isEditingState: boolean) {
         setIsEditing(isEditingState)
-        console.log(isEditing)
     }
 
-    function handleMessageEdit(uuid: string, message?: string) {
+    function handleMessageEdit({ uuid, message }: { uuid: string, message?: string }) {
+        const mutationQueryKey = isChild ? comment.parentuuid : comment.title
+
         message = message ?? ''
 
+        if (!handleChecks(message)) {
+            return
+        }
+
+        setEditDelayed(true)
+
+        mutation.mutate({
+            uuid: uuid,
+            isEdited: true,
+            message: message,
+            mutationQueryKey: mutationQueryKey,
+        })
+
+        setEditDelayed(false)
+    }
+
+    function handleChecks(message: string) {
+        if (editDelayed) {
+            notify.delay()
+
+            return false
+        }
+
+        if (message.length < 2 || message.length > 2000) {
+            notify.incorrectInput()
+
+            return false
+        }
+
+        return true
     }
 
     const children = comment.children ? comment.children[0].count : 0
@@ -78,8 +111,9 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 mutationQueryKey,
                 isChild,
                 newComment,
-                isNewComment,
                 isDeleted,
+                isEdited,
+                message,
             }: {
                 uuid: string,
                 likes?: unknown[] | undefined,
@@ -87,13 +121,14 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 mutationQueryKey: string | null,
                 isChild?: boolean,
                 newComment?: CommentType,
-                isNewComment?: boolean,
                 isDeleted?: boolean,
+                isEdited?: boolean,
+                message?: string,
             }
         ) => {
             const mutatedData: MutatedDataType | { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', mutationQueryKey])
 
-            if (isNewComment) {
+            if (newComment) {
                 if (!mutatedData) {
                     comment.children = [{ count: 1 }]
 
@@ -126,6 +161,11 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                     return
                 }
 
+                if (isEdited) {
+                    mutatingComment.message = message
+                    mutatingComment.isEdited = isEdited
+                }
+
                 if (isDeleted !== undefined) {
                     mutatingComment.isDeleted = isDeleted
                 }
@@ -149,6 +189,11 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
 
                 if (!mutatingComment) {
                     continue
+                }
+
+                if (isEdited) {
+                    mutatingComment.message = message
+                    mutatingComment.isEdited = isEdited
                 }
 
                 if (isDeleted !== undefined) {
@@ -192,7 +237,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
 
                         {
                             !comment.isDeleted
-                                && <EditComment sendEdit={handleStateEdit} />
+                                && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />
 
                         }
                         <DeleteComment uuid={comment.uuid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
@@ -215,7 +260,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                                     required
                                                     minRows={2}
                                                 />
-                                                <ActionIcon variant="light" onClick={() => handleMessageEdit(comment.uuid, ref.current?.value)}>
+                                                <ActionIcon variant="light" onClick={() => handleMessageEdit({ uuid: comment.uuid, message: ref.current?.value })}>
                                                     <IconCheck />
                                                 </ActionIcon>
                                             </>

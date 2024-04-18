@@ -5,42 +5,19 @@ import {useDisclosure} from "@mantine/hooks";
 import {ActionIcon} from "@mantine/core";
 import {IconEdit} from "@tabler/icons-react";
 
-export function EditComment({ sendEdit }: { sendEdit: (isEditing: boolean) => void }) {
+export function EditComment({ userid, sendEdit }: { userid: string, sendEdit: (isEditing: boolean) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
-    const [delayed, setDelayed] = useState(false)
     const [isEditing, { toggle }] = useDisclosure(false)
 
     const isUser = isLoaded && isSignedIn
 
-    const handleChecks = () => {
-        if (delayed) {
-            notify.delay()
-
-            return false
-        }
-
-        if (!isUser || !user) {
-            notify.notAuthenticated()
-
-            return false
-        }
-
-        return true
+    if (!isUser || userid !== user?.id) {
+        return
     }
 
     const handleEdit = () => {
-        if (!handleChecks()) {
-            return
-        }
-
-        setDelayed(true)
         toggle()
-
         sendEdit(!isEditing)
-
-        return setTimeout(() => {
-            setDelayed(false)
-        }, 500)
     }
 
     return (
