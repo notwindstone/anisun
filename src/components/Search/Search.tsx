@@ -3,8 +3,8 @@
 import { useEffect, useState } from 'react';
 import {
     AutocompleteProps, CloseButton,
-    ComboboxItem,
-    Group, Image,
+    ComboboxItem, Flex,
+    Image,
     OptionsFilter,
     Select, Skeleton,
     Text,
@@ -61,7 +61,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             );
         case 'fetching':
             return (
-                <Group gap="sm">
+                <Flex align="center" gap="sm">
                     <div>
                         <Skeleton width={96} height={128}>
                         </Skeleton>
@@ -70,12 +70,12 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                         <Skeleton height={24} width={256} radius="xl" mb="xs" />
                         <Skeleton height={24} width={256} radius="xl" />
                     </div>
-                </Group>
+                </Flex>
             )
     }
 
     return (
-        <Group gap="sm">
+        <Flex align="center" gap="sm">
             <div>
                 <Image
                     alt="Anime poster"
@@ -90,10 +90,10 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 />
             </div>
             <div>
-                <Text size="xl">{optionData[2]}</Text>
-                <Text size="md" opacity={0.5}>{status}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
+                <Text lineClamp={2} size="xl">{optionData[2]}</Text>
+                <Text lineClamp={2} size="md" opacity={0.5}>{status}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
             </div>
-        </Group>
+        </Flex>
     );
 };
 
