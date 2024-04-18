@@ -6,12 +6,16 @@ import {ActionIcon} from "@mantine/core";
 import {IconArrowBack, IconX} from "@tabler/icons-react";
 import {comments} from "@/lib/comments/comments";
 
-export function DeleteComment({ uuid, isInitiallyDeleted, sendDelete }: { uuid: string, isInitiallyDeleted: boolean, sendDelete: (isDeleted: boolean) => void }) {
+export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: { uuid: string, userid: string, isInitiallyDeleted: boolean, sendDelete: (isDeleted: boolean) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false)
     const [isDeleted, { toggle }] = useDisclosure(isInitiallyDeleted)
 
     const isUser = isLoaded && isSignedIn
+
+    if (!isUser || userid !== user?.id) {
+        return
+    }
 
     const handleChecks = () => {
         if (delayed) {

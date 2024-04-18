@@ -166,7 +166,6 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 if (!mutatingComment) {
                     return
                 }
-                console.log(message)
 
                 if (isEdited) {
                     console.log(message)
@@ -248,7 +247,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                 && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />
 
                         }
-                        <DeleteComment uuid={comment.uuid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
+                        <DeleteComment uuid={comment.uuid} userid={comment.userid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
                     </Group>
                     <Group>
                         {
