@@ -27,6 +27,23 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
+    let status
+
+    switch (optionData[3]) {
+        case 'anons':
+            status = 'Анонсировано'
+            break
+        case 'ongoing':
+            status = 'В работе'
+            break
+        case 'released':
+            status = 'Завершено'
+            break
+        default:
+            status = 'Неизвестно'
+            break
+    }
+
     switch (option.value) {
         case 'nothing':
             return (
@@ -46,14 +63,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             return (
                 <Group gap="sm">
                     <div>
-                        <Skeleton>
-                            <Image
-                                className={classes.poster}
-                                w={96}
-                                h={128}
-                                radius="sm"
-                                alt=""
-                            />
+                        <Skeleton width={96} height={128}>
                         </Skeleton>
                     </div>
                     <div>
@@ -71,16 +81,17 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     alt="Anime poster"
                     src={optionData[1]}
                     placeholder="blur"
+                    blurDataURL="/blurredPlaceholderImage.png"
                     width={96}
                     height={128}
-                    blurDataURL={optionData[2]}
                     component={NextImage}
                     className={classes.poster}
-                    radius="sm" />
+                    radius="sm"
+                />
             </div>
             <div>
-                <Text size="xl">{optionData[3]}</Text>
-                <Text size="md" opacity={0.5}>{optionData[4]}{optionData[5] ? `, ${optionData[5]}` : []}</Text>
+                <Text size="xl">{optionData[2]}</Text>
+                <Text size="md" opacity={0.5}>{status}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
             </div>
         </Group>
     );
@@ -107,7 +118,7 @@ export function Search() {
 
         const searchList = await shikimori.animes.list({
             search: keyInput,
-            limit: 6
+            limit: 5
         })
 
         if (searchList.length < 1) {
@@ -122,7 +133,7 @@ export function Search() {
         // @ts-ignore
         const titlesList = searchList.map((title: ShikimoriAnimesListType) => (
             {
-                value: `${title.url.replace('/animes/', '')}--${shikimoriURL + title.image.preview}--${shikimoriURL + title.image.x48}--${title.russian}--${title.status}--${title.name}`,
+                value: `${title.url.replace('/animes/', '')}--${shikimoriURL + title.image.preview}--${title.russian}--${title.status}--${title.name}`,
                 label: `${title.russian} / ${title.name}`,
             }
         ));
