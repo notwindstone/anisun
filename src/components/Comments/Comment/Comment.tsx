@@ -15,6 +15,7 @@ import {IconCheck} from "@tabler/icons-react";
 import {useRef, useState} from "react";
 import {EditComment} from "@/components/Comments/EditComment/EditComment";
 import {notify} from "@/utils/notify/notify";
+import {comments} from "@/lib/comments/comments";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
     const [editDelayed, setEditDelayed] = useState(false)
@@ -57,7 +58,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
         setIsEditing(isEditingState)
     }
 
-    function handleMessageEdit({ uuid, message }: { uuid: string, message?: string }) {
+    async function handleMessageEdit({ uuid, message }: { uuid: string, message?: string }) {
         const mutationQueryKey = isChild ? comment.parentuuid : comment.title
 
         message = message ?? ''
@@ -73,9 +74,14 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
             isEdited: true,
             message: message,
             mutationQueryKey: mutationQueryKey,
+            isChild: isChild,
         })
 
-        setEditDelayed(false)
+        setIsEditing(false)
+
+        await comments.edit(uuid, message)
+
+        return setEditDelayed(false)
     }
 
     function handleChecks(message: string) {
@@ -160,8 +166,10 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 if (!mutatingComment) {
                     return
                 }
+                console.log(message)
 
                 if (isEdited) {
+                    console.log(message)
                     mutatingComment.message = message
                     mutatingComment.isEdited = isEdited
                 }
