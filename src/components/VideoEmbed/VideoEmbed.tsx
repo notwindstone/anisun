@@ -5,26 +5,58 @@ import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import React, {useState} from "react";
 import {SegmentedControl, Skeleton, Text} from "@mantine/core";
-import {AnimeTitleResponseType} from "@/types/AnimeTitleResponseType";
 import { Client } from 'kodikwrapper';
+import { client } from 'node-shikimori';
 
-export default function VideoEmbed({ code, id }: { code: string, id: number }) {
-    const client = new Client({
+export default function VideoEmbed({ id }: { id: number }) {
+    const kodikClient = new Client({
         token: process.env.KODIK_TOKEN!,
     });
+    const shikimoriClient = client();
     const [value, setValue] = useState('Kodik')
     const { isFetching, data } = useQuery({
-        queryKey: ['anime', code],
-        queryFn: async () => fetchAnime(code),
+        queryKey: ['anime', id],
+        queryFn: async () => fetchAnime(),
     });
 
-    async function fetchAnime(code: string) {
-        //const anilibriaResponse: AnimeTitleResponseType = await anilibria.title.code(code)
-        const kodikResponse = await client.search({
+    async function getAnilibriaTitle({ franchise, russianName, year }: { franchise: string | null, russianName: string, year: string | undefined }) {
+        const anilibriaTitleFromFranchise = await anilibria.search({ title: franchise, year: year })
+
+        if (anilibriaTitleFromFranchise) {
+            return anilibriaTitleFromFranchise
+        }
+
+        const anilibriaTitleFromRussianName = await anilibria.search({ title: russianName, year: year })
+
+        if (anilibriaTitleFromRussianName) {
+            return anilibriaTitleFromRussianName
+        }
+
+        return null
+    }
+
+    async function fetchAnime() {
+        const shikimoriAnime = await shikimoriClient.animes.byId({
+            id: id,
+        })
+
+        const shikimoriFranchise = shikimoriAnime.franchise
+        const shikimoriRussianName = shikimoriAnime.russian
+        const shikimoriYear = shikimoriAnime.aired_on?.split('-')[0]
+
+        const anilibriaResponse = await getAnilibriaTitle(
+            {
+                franchise: shikimoriFranchise,
+                russianName: shikimoriRussianName,
+                year: shikimoriYear
+            }
+        )
+
+        const kodikResponse = await kodikClient.search({
             shikimori_id: id
         }).then((response) => response.results.shift())
 
-        return { anilibria: null, kodik: kodikResponse }
+        return { anilibria: anilibriaResponse, kodik: kodikResponse }
     }
 
     if (!data) {
@@ -79,7 +111,6 @@ export default function VideoEmbed({ code, id }: { code: string, id: number }) {
                     </>
                 );
             }
-
             currentPlayer = (
                 <VideoPlayer
                     title={anilibriaTitle}
