@@ -6,9 +6,12 @@ import {anilibria} from "@/lib/anilibria/anilibria";
 import React, {useState} from "react";
 import {SegmentedControl, Skeleton, Text} from "@mantine/core";
 import {AnimeTitleResponseType} from "@/types/AnimeTitleResponseType";
-import {kodik} from "@/lib/kodik/kodik";
+import { Client } from 'kodikwrapper';
 
 export default function VideoEmbed({ code }: { code: string }) {
+    const client = new Client({
+        token: process.env.KODIK_TOKEN!,
+    });
     const [value, setValue] = useState('Kodik')
     const { isFetching, data } = useQuery({
         queryKey: ['anime', code],
@@ -17,7 +20,10 @@ export default function VideoEmbed({ code }: { code: string }) {
 
     async function fetchAnime(code: string) {
         const anilibriaResponse: AnimeTitleResponseType = await anilibria.title.code(code)
-        const kodikResponse = await kodik.code(code)
+        const kodikResponse = await client.search({
+            limit: 1,
+            title: code,
+        }).then((response) => response.results.shift())
 
         return { anilibria: anilibriaResponse, kodik: kodikResponse }
     }
@@ -32,8 +38,6 @@ export default function VideoEmbed({ code }: { code: string }) {
     const kodikData = data.kodik
 
     if (!kodikData || !anilibriaData) {
-        console.log(kodikData, anilibriaData)
-
         return (
             <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
         );
@@ -44,7 +48,7 @@ export default function VideoEmbed({ code }: { code: string }) {
     const anilibriaPreview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
     const hasAnilibriaPlayer = Object.keys(anilibriaPlayer.list).length > 0
 
-    const kodikPlayer = kodikData.results[0].link
+    const kodikPlayer = kodikData.link
 
     let currentPlayer
 
