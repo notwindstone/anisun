@@ -30,7 +30,7 @@ export function HeroContent() {
     const carouselSection = isPending ? (
         <Skeleton />
     ) : (
-        <Carousel slideSize={300} height={400} slideGap="md" controlsOffset="md" controlSize={40} loop dragFree withIndicators>
+        <Carousel slideSize={225} height={317} slideGap="md" controlsOffset="md" controlSize={40} loop dragFree withIndicators>
             {
                 data && data?.map((animeTitle) => {
                     return (
