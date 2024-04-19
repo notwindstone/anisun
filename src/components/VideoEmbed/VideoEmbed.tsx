@@ -69,13 +69,21 @@ export default function VideoEmbed({ id }: { id: number }) {
     const kodikData = data.kodik
 
     let segmentedControlData = []
+    let anilibriaTitle, anilibriaPlayer, anilibriaPreview, hasAnilibriaPlayer, kodikPlayer
 
     if (kodikData) {
         segmentedControlData.push({ value: 'Kodik', label: 'Kodik (с выбором озвучки и рекламой)' })
+
+        kodikPlayer = kodikData?.link
     }
 
     if (anilibriaData) {
         segmentedControlData.push({ value: 'Animeth', label: 'Animeth (только AniLibria, но без рекламы)' })
+
+        anilibriaTitle = anilibriaData.names.ru
+        anilibriaPlayer = anilibriaData.player;
+        anilibriaPreview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
+        hasAnilibriaPlayer = Object.keys(anilibriaPlayer.list).length > 0
     }
 
     if (segmentedControlData.length === 0) {
@@ -85,13 +93,6 @@ export default function VideoEmbed({ id }: { id: number }) {
             </>
         );
     }
-
-    const anilibriaTitle = anilibriaData.names.ru
-    const anilibriaPlayer = anilibriaData.player;
-    const anilibriaPreview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
-    const hasAnilibriaPlayer = Object.keys(anilibriaPlayer.list).length > 0
-
-    const kodikPlayer = kodikData?.link
 
     let currentPlayer
 

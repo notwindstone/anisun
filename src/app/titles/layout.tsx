@@ -6,7 +6,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     return (
         <section>
             <UserButton />
-            <Suspense fallback={<Skeleton />} />
+            <Suspense fallback={<Skeleton width={256} height={256} />} />
             {children}
         </section>
     );
