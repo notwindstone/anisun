@@ -1,5 +1,5 @@
 import React from 'react';
-import {Avatar, Text} from "@mantine/core";
+import {Text} from "@mantine/core";
 import {clerkClient} from "@clerk/nextjs";
 import Account from "@/components/Account/Account";
 
@@ -15,7 +15,6 @@ export default async function Page({ params }: { params: { userid: string } }) {
     return (
         <>
             <Text>{params.userid}</Text>
-            <Avatar size={64} src={user.imageUrl} />
             <Account user={userObject} />
         </>
     );

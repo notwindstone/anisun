@@ -2,11 +2,12 @@
 
 import {useQuery} from "@tanstack/react-query";
 import {account} from "@/lib/account/account";
-import {Skeleton, Text} from "@mantine/core";
+import {Avatar, Skeleton, Text, Title} from "@mantine/core";
 import React from "react";
 import {UserResource} from "@clerk/types";
 import dayjs from "dayjs";
 import 'dayjs/locale/ru'
+import Link from "next/link";
 
 export default function Account({ user }: { user: UserResource }) {
     dayjs.locale('ru')
@@ -24,7 +25,31 @@ export default function Account({ user }: { user: UserResource }) {
 
     return (
         <>
-            <Text>{dayjs(user.createdAt).format('D MMMM YYYY в H:mm')}</Text>
+            <Avatar
+                src={user.imageUrl}
+                alt={user.username ?? 'unknown username'}
+                size={64}
+                component={Link}
+                href="/"
+            >
+                {
+                    user.username
+                        ? user.username[0]
+                        : '?'
+                }
+            </Avatar>
+            <Title>{user.username}</Title>
+            <Text>
+                {
+                    dayjs(user.lastSignInAt).format('D MMMM YYYY в H:mm')
+                }
+            </Text>
+
+            <Text>
+                {
+                    dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
+                }
+            </Text>
 
             <Skeleton visible={isPending} width={256} height={24}>
                 <Text>Репутация: {data?.reputation}</Text>
