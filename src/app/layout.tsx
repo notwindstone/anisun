@@ -11,6 +11,7 @@ import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
 import MobileModal from "@/components/MobileModal/MobileModal";
 import Footer from "@/components/Footer/Footer";
+import Main from "@/components/Main/Main";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +40,9 @@ export default function RootLayout({
                     <TanstackQueryProviders>
                         <MantineProvider defaultColorScheme="dark">
                             <Notifications zIndex={30000} limit={3} />
-                            {children}
+                            <Main>
+                                {children}
+                            </Main>
                             <MobileModal />
                             <Footer />
                         </MantineProvider>

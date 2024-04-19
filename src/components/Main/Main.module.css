@@ -1,0 +1,4 @@
+.root {
+    background: var(--mantine-color-body);
+    z-index: 0;
+}
