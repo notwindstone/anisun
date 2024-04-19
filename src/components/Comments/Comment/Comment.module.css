@@ -1,8 +1,8 @@
 .root {
-    min-height: 8rem;
+    min-height: rem(160px);
     width: 100%;
-    gap: 1rem;
-    padding: 1rem;
+    gap: rem(16px);
+    padding: rem(16px);
 }
 
 .deleted {
@@ -14,5 +14,5 @@
 }
 
 .collapse {
-    margin-left: 2rem;
+    margin-left: rem(32px);
 }
