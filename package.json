@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/localizations": "^1.28.0",
     "@clerk/nextjs": "^4.29.10",
+    "@mantine/carousel": "^7.7.1",
     "@mantine/charts": "^7.7.1",
     "@mantine/core": "^7.7.1",
     "@mantine/form": "^7.7.1",
@@ -24,6 +25,7 @@
     "dayjs": "^1.11.10",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.30.6",
+    "embla-carousel-react": "^7.1.0",
     "framer-motion": "^11.0.24",
     "hls.js": "^1.5.7",
     "kodikwrapper": "^3.0.1",

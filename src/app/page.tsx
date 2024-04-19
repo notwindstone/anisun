@@ -1,9 +1,12 @@
 import Link from "next/link";
 import {SignedIn, SignedOut, UserButton} from "@clerk/nextjs";
+import classes from './page.module.css'
+import {HeroContent} from "@/components/HeroContent/HeroContent";
 
 export default async function Home() {
     return (
-        <>
+        <div>
+            <HeroContent />
             <Link href="/titles">Test</Link>
             <SignedIn>
                 <UserButton />
@@ -11,6 +14,6 @@ export default async function Home() {
             <SignedOut>
                 <Link href="/sign-in">Войти в аккаунт</Link>
             </SignedOut>
-        </>
+        </div>
     )
 }

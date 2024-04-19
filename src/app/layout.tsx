@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import React from "react";
 import {ColorSchemeScript, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
+import '@mantine/carousel/styles.css';
 import NextTopLoader from "nextjs-toploader";
 import TanstackQueryProviders from "@/utils/TanstackQueryProvider";
 import {Notifications} from "@mantine/notifications";
