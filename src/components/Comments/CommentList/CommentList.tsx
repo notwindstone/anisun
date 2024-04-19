@@ -138,14 +138,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             }
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             {commentSection}
-            {
-                isFetchingNextPage && <CommentSkeleton />
-            }
-            {
-                totalCount > 0
-                    && <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
-            }
-            <Space h="xl" />
             <InView
                 onChange={(inView) => {
                     if (!inView) {
@@ -167,6 +159,15 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             >
                 <hr></hr>
             </InView>
+            {
+                isFetchingNextPage
+                    && <CommentSkeleton />
+            }
+            {
+                totalCount > 0
+                    && <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
+            }
+            <Space h="xl" />
             {
                 !isFetchingNextPage
                     && status !== 'pending'
