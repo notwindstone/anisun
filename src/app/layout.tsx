@@ -10,6 +10,7 @@ import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
 import MobileModal from "@/components/MobileModal/MobileModal";
+import Footer from "@/components/Footer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,6 +41,7 @@ export default function RootLayout({
                             <Notifications zIndex={30000} limit={3} />
                             {children}
                             <MobileModal />
+                            <Footer />
                         </MantineProvider>
                     </TanstackQueryProviders>
                 </body>

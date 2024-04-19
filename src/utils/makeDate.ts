@@ -22,11 +22,11 @@ export function makeDate(createdAt: string) {
     const isToday = dayjs(createdAt).isSame(dayjs(), 'day')
     const isSameHour = dayjs(createdAt).isSame(dayjs(), 'hour')
 
-    if (isSameHour) {
-        return dayjs(createdAt).fromNow()
-    }
-
     if (isToday) {
+        if (isSameHour) {
+            return dayjs(createdAt).fromNow()
+        }
+
         return dayjs(createdAt).format('Сегодня в H:mm')
     }
 
