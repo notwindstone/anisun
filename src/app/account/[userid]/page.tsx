@@ -10,11 +10,13 @@ export default async function Page({ params }: { params: { userid: string } }) {
         return
     }
 
+    const userObject = JSON.parse(JSON.stringify(user))
+
     return (
         <>
             <Text>{params.userid}</Text>
             <Avatar size={64} src={user.imageUrl} />
-            <Account userid={user.id} />
+            <Account user={userObject} />
         </>
     );
 }

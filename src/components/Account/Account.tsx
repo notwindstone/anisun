@@ -2,41 +2,37 @@
 
 import {useQuery} from "@tanstack/react-query";
 import {account} from "@/lib/account/account";
-import {Loader, Text} from "@mantine/core";
+import {Skeleton, Text} from "@mantine/core";
+import React from "react";
+import {UserResource} from "@clerk/types";
+import dayjs from "dayjs";
+import 'dayjs/locale/ru'
 
-export default function Account({ userid }: { userid: string }) {
-   const getAccountStats = async () => {
-       const accountReputation = await account.reputation({ userid: userid })
-       const accountTotalComments = await account.totalComments({ userid: userid })
+export default function Account({ user }: { user: UserResource }) {
+    dayjs.locale('ru')
+    const getAccountStats = async () => {
+       const accountReputation = await account.reputation({ userid: user.id })
+       const accountTotalComments = await account.totalComments({ userid: user.id })
 
-       return { reputation: accountReputation, totalComments: accountTotalComments }
+       return { reputation: accountReputation.data, totalComments: accountTotalComments.data }
     }
 
     const { isPending, data } = useQuery({
-        queryKey: ['accountStats', userid],
+        queryKey: ['accountStats', user.id],
         queryFn: getAccountStats,
     })
 
     return (
         <>
-            <Text>Репутация:
-                {
-                    isPending
-                        ? (
-                            <Loader size="1rem" />
-                        )
-                        : data?.reputation.data
-                }
-            </Text>
-            <Text>Комментариев:
-                {
-                    isPending
-                        ? (
-                            <Loader size="1rem" />
-                        )
-                        : data?.totalComments.data
-                }
-            </Text>
+            <Text>{dayjs(user.createdAt).format('D MMMM YYYY в H:mm')}</Text>
+
+            <Skeleton visible={isPending} width={256} height={24}>
+                <Text>Репутация: {data?.reputation}</Text>
+            </Skeleton>
+
+            <Skeleton visible={isPending} width={256} height={24}>
+                <Text>Комментариев: {data?.totalComments}</Text>
+            </Skeleton>
         </>
     )
 }
