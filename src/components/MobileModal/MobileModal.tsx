@@ -1,22 +1,19 @@
 'use client'
 
-import Sheet from 'react-modal-sheet';
-import { useState } from 'react';
+import {useDisclosure, useMediaQuery} from "@mantine/hooks";
+import {em} from "@mantine/core";
 
 export default function MobileModal() {
-    const [isOpen, setOpen] = useState(false);
+    const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+    const [isOpen, { toggle }] = useDisclosure(false);
 
     return (
         <>
-            <button onClick={() => setOpen(true)}>Open sheet</button>
-
-            <Sheet isOpen={isOpen} onClose={() => setOpen(false)}>
-                <Sheet.Container>
-                    <Sheet.Header />
-                    <Sheet.Content>{/* Your sheet content goes here */}</Sheet.Content>
-                </Sheet.Container>
-                <Sheet.Backdrop />
-            </Sheet>
+            {
+                isMobile && (
+                    <div>12341234</div>
+                )
+            }
         </>
     );
 }
