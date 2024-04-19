@@ -68,15 +68,19 @@ export default function VideoEmbed({ id }: { id: number }) {
     const anilibriaData = data.anilibria
     const kodikData = data.kodik
 
-    if (!kodikData || !anilibriaData) {
+    let segmentedControlData = []
+
+    if (kodikData) {
+        segmentedControlData.push({ value: 'Kodik', label: 'Kodik (с выбором озвучки и рекламой)' })
+    }
+
+    if (anilibriaData) {
+        segmentedControlData.push({ value: 'Animeth', label: 'Animeth (только AniLibria, но без рекламы)' })
+    }
+
+    if (segmentedControlData.length === 0) {
         return (
             <>
-                <iframe
-                    src={kodikData?.link}
-                    width="610"
-                    height="370"
-                    allow="autoplay *; fullscreen *"
-                />
                 <div>К сожалению, онлайн-плеер для данного аниме недоступен.</div>
             </>
         );
@@ -87,7 +91,7 @@ export default function VideoEmbed({ id }: { id: number }) {
     const anilibriaPreview = "https://anilibria.tv/storage/releases/episodes/previews/9542/1/DMzcnlKyg89dRv5f__86bf22cbc0faac3d42cc7b87ea8c712f.jpg"
     const hasAnilibriaPlayer = Object.keys(anilibriaPlayer.list).length > 0
 
-    const kodikPlayer = kodikData.link
+    const kodikPlayer = kodikData?.link
 
     let currentPlayer
 
@@ -111,6 +115,7 @@ export default function VideoEmbed({ id }: { id: number }) {
                     </>
                 );
             }
+
             currentPlayer = (
                 <VideoPlayer
                     title={anilibriaTitle}
@@ -138,10 +143,7 @@ export default function VideoEmbed({ id }: { id: number }) {
                 withItemsBorders={false}
                 defaultValue={value}
                 onChange={setValue}
-                data={[
-                    { value: 'Kodik', label: 'Kodik (с выбором озвучки и рекламой)' },
-                    { value: 'Animeth', label: 'Animeth (только AniLibria, но без рекламы)' }
-                ]}
+                data={segmentedControlData}
             />
             {currentPlayer}
         </>

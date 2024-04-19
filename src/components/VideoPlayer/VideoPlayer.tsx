@@ -69,8 +69,8 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                 <Menu.Radio
                     key={episodeIndex}
                     onClick={() => {
-                        setEpisodeSource(changeEpisode({ player }, episodeIndex));
-                    }
+                            setEpisodeSource(changeEpisode({ player }, episodeIndex));
+                        }
                     }
                 >
                     Серия {episodeIndex}
@@ -82,12 +82,12 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
         <div className={classes.wrapper}>
             <MediaPlayer
                 onControlsChange={(isControlsShown) => {
-                    if (!isControlsShown) {
-                        setHideMenu('hidden');
-                    } else {
-                        setHideMenu('');
+                        if (!isControlsShown) {
+                            setHideMenu('hidden');
+                        } else {
+                            setHideMenu('');
+                        }
                     }
-                }
                 }
                 className={classes.player}
                 title={title}

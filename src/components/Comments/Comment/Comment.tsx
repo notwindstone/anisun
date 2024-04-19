@@ -214,7 +214,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
         <div>
             <Flex className={classes.root}>
                 <Link href={`/account/${comment.userid}`}>
-                    <Avatar src={comment.avatar} size={64}/>
+                    <Avatar src={comment.avatar} alt={comment.username} size={64}>{comment.username[0]}</Avatar>
                 </Link>
                 <Stack>
                     <Group>

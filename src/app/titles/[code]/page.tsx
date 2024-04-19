@@ -7,7 +7,6 @@ import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import CommentList from "@/components/Comments/CommentList/CommentList";
 import {client} from "node-shikimori";
-import {Client} from "kodikwrapper";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
