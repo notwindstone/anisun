@@ -4,9 +4,8 @@ import classes from './HeroContent.module.css';
 import {Carousel} from "@mantine/carousel";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "node-shikimori";
-import {Image, Skeleton} from "@mantine/core";
-import NextImage from "next/image";
-import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
+import {Skeleton} from "@mantine/core";
+import CarouselCard from "@/components/CarouselCard/CarouselCard";
 
 export function HeroContent() {
     const shikimori = client();
@@ -36,24 +35,7 @@ export function HeroContent() {
                 data && data?.map((animeTitle) => {
                     return (
                         <Carousel.Slide key={animeTitle.id}>
-                            <div>
-                                {translateShikimoriStatus(animeTitle.status)}
-                                {animeTitle.score}
-                                {animeTitle.aired_on?.split('-')[0]}
-                                {animeTitle.episodes}
-                                {animeTitle.russian}
-                            </div>
-                            <Image
-                                alt="Anime poster"
-                                src={shikimoriURL + animeTitle.image.original}
-                                placeholder="blur"
-                                blurDataURL="/blurredPlaceholderImage.png"
-                                width={300}
-                                height={400}
-                                component={NextImage}
-                                className={classes.poster}
-                                radius="sm"
-                            />
+                            <CarouselCard animeTitle={animeTitle} shikimoriURL={shikimoriURL} />
                         </Carousel.Slide>
                     )
                 })
