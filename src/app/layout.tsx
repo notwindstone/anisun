@@ -36,7 +36,7 @@ export default function RootLayout({
                       height={4}
                     />
                     <TanstackQueryProviders>
-                        <MantineProvider>
+                        <MantineProvider defaultColorScheme="dark">
                             <Notifications zIndex={30000} limit={3} />
                             {children}
                             <MobileModal />
