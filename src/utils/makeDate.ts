@@ -1,8 +1,10 @@
 import dayjs from "dayjs";
 import 'dayjs/locale/ru'
+import relativeTime from 'dayjs/plugin/relativeTime'
 
 export function makeDate(createdAt: string) {
     dayjs.locale('ru')
+    dayjs.extend(relativeTime)
 
     const isPreviousYear = dayjs(createdAt).isBefore(dayjs(), 'year')
 
@@ -18,6 +20,11 @@ export function makeDate(createdAt: string) {
     }
 
     const isToday = dayjs(createdAt).isSame(dayjs(), 'day')
+    const isSameHour = dayjs(createdAt).isSame(dayjs(), 'hour')
+
+    if (isSameHour) {
+        return dayjs(createdAt).fromNow()
+    }
 
     if (isToday) {
         return dayjs(createdAt).format('Сегодня в H:mm')
