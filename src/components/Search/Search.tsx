@@ -19,6 +19,7 @@ import NProgress from 'nprogress';
 import { client } from 'node-shikimori';
 import {ShikimoriAnimesListType} from "@/types/ShikimoriAnimesListType";
 import NextImage from 'next/image'
+import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
@@ -27,22 +28,7 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    let status
-
-    switch (optionData[3]) {
-        case 'anons':
-            status = 'Анонсировано'
-            break
-        case 'ongoing':
-            status = 'В работе'
-            break
-        case 'released':
-            status = 'Завершено'
-            break
-        default:
-            status = 'Неизвестно'
-            break
-    }
+    let status = translateShikimoriStatus(optionData[3])
 
     switch (option.value) {
         case 'nothing':
