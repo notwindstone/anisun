@@ -16,10 +16,10 @@ import {IconSearch} from '@tabler/icons-react';
 import classes from './Search.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 import NProgress from 'nprogress';
-import {ShikimoriAnimesListType} from "@/types/ShikimoriAnimesListType";
 import NextImage from 'next/image'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import {client} from "@/lib/shikimori/client";
+import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
@@ -102,10 +102,12 @@ export function Search() {
             return notEnoughChars;
         }
 
-        const searchList = await shikimori.animes.list({
+        const searchList = (await shikimori.animes.list({
             search: keyInput,
             limit: 5
-        })
+        })).animes
+
+        console.log(searchList)
 
         if (searchList.length < 1) {
             const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
@@ -114,12 +116,10 @@ export function Search() {
             return nothingFound;
         }
 
-        const shikimoriURL = 'https://shikimori.one'
-
         // @ts-ignore
-        const titlesList = searchList.map((title: ShikimoriAnimesListType) => (
+        const titlesList = searchList.map((title: AnimeType) => (
             {
-                value: `${title.url.replace('/animes/', '')}--${shikimoriURL + title.image.preview}--${title.russian}--${title.status}--${title.name}`,
+                value: `${title.url.replace('https://shikimori.one/animes/', '')}--${title.poster?.mainUrl}--${title.russian}--${title.status}--${title.name}`,
                 label: `${title.russian} / ${title.name}`,
             }
         ));
