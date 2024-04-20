@@ -7,6 +7,7 @@ import {Skeleton} from "@mantine/core";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
 import axios from "axios";
 import {useState} from "react";
+import {AnimeType} from "@/types/Shikimori/AnimeType";
 
 export function HeroContent() {
     const currentYear = new Date().getFullYear().toString()
@@ -100,12 +101,12 @@ export function HeroContent() {
 
         return await axios
                 .request(options)
-                .then((response) => response.data)
+                .then((response: { data: { data: { animes: AnimeType[] } } }) => response.data.data)
     }
 
     const carouselSlides = Array.from({ length: 7 })
 
-    if (status === 'success' && data.data.animes.length < 7) {
+    if (status === 'success' && data.animes.length < 7) {
         const previousYear = (new Date().getFullYear() - 1).toString()
         setYear(previousYear)
     }
@@ -121,7 +122,7 @@ export function HeroContent() {
                                     status === 'success'
                                         ? (
                                             <>
-                                                <CarouselCard animeTitle={data.data.animes[index]} />
+                                                <CarouselCard animeTitle={data.animes[index]} />
                                             </>
                                         )
                                         : status === 'error' ? (

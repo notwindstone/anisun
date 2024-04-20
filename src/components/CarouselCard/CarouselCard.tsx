@@ -2,8 +2,9 @@ import {Badge, Flex, Group, Image, Paper} from "@mantine/core";
 import classes from './CarouselCard.module.css'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import NextImage from "next/image";
+import {AnimeType} from "@/types/Shikimori/AnimeType";
 
-export default function CarouselCard({ animeTitle }: { animeTitle: {} }) {
+export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) {
     return (
         <Paper
             radius="md"
