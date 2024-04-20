@@ -29,7 +29,7 @@ export function HeroContent() {
             data: {
                 query: `
                     {
-                        animes(limit: 7, status: "ongoing", season: "${year}", order: popularity) {
+                        animes(limit: 10, status: "ongoing", season: "${year}", order: popularity) {
                             id
                             malId
                             name
@@ -104,9 +104,9 @@ export function HeroContent() {
                 .then((response: { data: { data: { animes: AnimeType[] } } }) => response.data.data)
     }
 
-    const carouselSlides = Array.from({ length: 7 })
+    const carouselSlides = Array.from({ length: 10 })
 
-    if (status === 'success' && data.animes.length < 7) {
+    if (status === 'success' && data.animes.length < 10) {
         const previousYear = (new Date().getFullYear() - 1).toString()
         setYear(previousYear)
     }
