@@ -8,100 +8,20 @@ import CarouselCard from "@/components/CarouselCard/CarouselCard";
 import axios from "axios";
 import {useState} from "react";
 import {AnimeType} from "@/types/Shikimori/AnimeType";
+import {client} from "@/lib/shikimori/client";
 
 export function HeroContent() {
+    const shikimori = client()
     const currentYear = new Date().getFullYear().toString()
     const [year, setYear] = useState(currentYear)
 
     const { data, status, error } = useQuery({
         queryKey: ['hero', year],
-        queryFn: getRandomTitles,
+        queryFn: getPopularTitles,
     });
 
-    async function getRandomTitles() {
-        const options = {
-            method: 'POST',
-            url: 'https://shikimori.one/api/graphql',
-            headers: {
-                'content-type': 'application/json',
-                'User-Agent': 'Animeth'
-            },
-            data: {
-                query: `
-                    {
-                        animes(limit: 10, status: "ongoing", season: "${year}", order: popularity) {
-                            id
-                            malId
-                            name
-                            russian
-                            licenseNameRu
-                            english
-                            japanese
-                            synonyms
-                            kind
-                            rating
-                            score
-                            status
-                            episodes
-                            episodesAired
-                            duration
-                            airedOn {
-                                year
-                                month
-                                day
-                                date
-                            }
-                            releasedOn {
-                                year
-                                month
-                                day
-                                date
-                            }
-                            url
-                            season
-                        
-                            poster {
-                                id
-                                originalUrl
-                                mainUrl
-                            }
-                        
-                            fansubbers
-                            fandubbers
-                            licensors
-                            createdAt
-                            updatedAt
-                            nextEpisodeAt
-                            isCensored
-                            
-                            screenshots {
-                                id
-                                originalUrl
-                                x166Url
-                                x332Url
-                            }
-                        
-                            scoresStats {
-                                score
-                                count
-                            }
-                            statusesStats {
-                                status
-                                count
-                            }
-                        
-                            description
-                            descriptionHtml
-                            descriptionSource
-                        }
-                    }
-                `
-            }
-        }
-
-        return await axios
-                .request(options)
-                .then((response: { data: { data: { animes: AnimeType[] } } }) => response.data.data)
+    async function getPopularTitles() {
+        return await shikimori.animes.list({ limit: 10, status: "ongoing", year: year, order: "popularity" })
     }
 
     const carouselSlides = Array.from({ length: 10 })

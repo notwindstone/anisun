@@ -11,7 +11,7 @@ export const options = ({ limit, status, year, order } : { limit: number, status
         data: {
             query: `
                     {
-                        animes(limit: "${limit}", status: "${status}", season: "${year}", order: "${order}) {
+                        animes(limit: ${limit}, status: "${status}", season: "${year}", order: ${order}) {
                             id
                             malId
                             name
