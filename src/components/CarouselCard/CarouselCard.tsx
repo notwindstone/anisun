@@ -13,17 +13,17 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
             <Group
                 className={classes.overlay}
             >
-                <Badge className={classes.status} color="violet">{translateShikimoriStatus(animeTitle.status)}</Badge>
+                <Badge className={classes.status} color="violet">{translateShikimoriStatus(animeTitle.status ?? '')}</Badge>
                 <Flex className={classes.info}>
                     <Badge className={classes.score} color="green">{animeTitle.score}</Badge>
-                    {animeTitle.airedOn.year}
+                    {animeTitle.airedOn?.year}
                     {animeTitle.episodes}
                     {animeTitle.russian}
                 </Flex>
             </Group >
             <Image
                 alt="Anime poster"
-                src={animeTitle.poster.originalUrl}
+                src={animeTitle.poster?.originalUrl}
                 placeholder="blur"
                 blurDataURL="/blurredPlaceholderImage.png"
                 width={300}
