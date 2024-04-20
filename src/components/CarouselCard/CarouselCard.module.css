@@ -1,9 +1,9 @@
 .overlay {
     position: absolute;
+    user-select: none;
 }
 
 .info {
-
 }
 
 .status {

@@ -33,7 +33,6 @@
     "nanoid": "^5.0.6",
     "next": "14.1.4",
     "nextjs-toploader": "^1.6.11",
-    "node-shikimori": "^2.0.2",
     "nprogress": "^0.2.0",
     "postgres": "^3.4.4",
     "react": "^18",
