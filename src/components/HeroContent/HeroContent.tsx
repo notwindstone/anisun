@@ -6,21 +6,21 @@ import {useQuery} from "@tanstack/react-query";
 import {Skeleton} from "@mantine/core";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
 import axios from "axios";
+import {useState} from "react";
 
 export function HeroContent() {
-    const shikimoriURL = 'https://shikimori.one/api/graphql'
+    const currentYear = new Date().getFullYear().toString()
+    const [year, setYear] = useState(currentYear)
 
     const { data, status, error } = useQuery({
-        queryKey: ['hero'],
+        queryKey: ['hero', year],
         queryFn: getRandomTitles,
     });
 
     async function getRandomTitles() {
-        const currentYear = new Date().getFullYear().toString()
-
         const options = {
             method: 'POST',
-            url: shikimoriURL,
+            url: 'https://shikimori.one/api/graphql',
             headers: {
                 'content-type': 'application/json',
                 'User-Agent': 'Animeth'
@@ -28,7 +28,7 @@ export function HeroContent() {
             data: {
                 query: `
                     {
-                        animes(limit: 10, status: "ongoing", season: "${currentYear}", order: popularity) {
+                        animes(limit: 7, status: "ongoing", season: "${year}", order: popularity) {
                             id
                             malId
                             name
@@ -103,7 +103,12 @@ export function HeroContent() {
                 .then((response) => response.data)
     }
 
-    const carouselSlides = Array.from({ length: 10 })
+    const carouselSlides = Array.from({ length: 7 })
+
+    if (status === 'success' && data.data.animes.length < 7) {
+        const previousYear = (new Date().getFullYear() - 1).toString()
+        setYear(previousYear)
+    }
 
     return (
         <div className={classes.hero}>
@@ -115,7 +120,9 @@ export function HeroContent() {
                                 {
                                     status === 'success'
                                         ? (
-                                            <CarouselCard animeTitle={data.data.animes[index]} shikimoriURL={shikimoriURL} />
+                                            <>
+                                                <CarouselCard animeTitle={data.data.animes[index]} />
+                                            </>
                                         )
                                         : status === 'error' ? (
                                             <>Error: {error.message}</>

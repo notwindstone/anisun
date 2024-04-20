@@ -3,7 +3,7 @@ import classes from './CarouselCard.module.css'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import NextImage from "next/image";
 
-export default function CarouselCard({ animeTitle, shikimoriURL }: { animeTitle, shikimoriURL: string }) {
+export default function CarouselCard({ animeTitle }: { animeTitle: {} }) {
     return (
         <Paper
             radius="md"
