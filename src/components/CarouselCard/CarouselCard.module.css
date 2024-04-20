@@ -1,0 +1,17 @@
+.overlay {
+    position: absolute;
+    user-select: none;
+}
+
+.info {
+}
+
+.status {
+    position: absolute;
+    top: rem(16px);
+    left: rem(16px);
+}
+
+.score {
+
+}

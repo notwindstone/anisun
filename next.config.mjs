@@ -1,15 +1,12 @@
-import bundleAnalyzer from '@next/bundle-analyzer';
-
-const withBundleAnalyzer = bundleAnalyzer({
-  enabled: process.env.ANALYZE === 'true',
-});
-
-export default withBundleAnalyzer({
-  reactStrictMode: false,
-  eslint: {
-    ignoreDuringBuilds: true,
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  env: {
+    KODIK_TOKEN: process.env.KODIK_TOKEN,
   },
   experimental: {
     optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
   },
-});
+};
+
+export default nextConfig;

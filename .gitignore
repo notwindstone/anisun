@@ -1,5 +1,4 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-/.idea
 
 # dependencies
 /node_modules
@@ -28,6 +27,7 @@ yarn-error.log*
 
 # local env files
 .env*.local
+.env
 
 # vercel
 .vercel

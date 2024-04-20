@@ -1,0 +1,38 @@
+{
+  "done": {
+    "title": "Успех",
+    "message": "Комментарий был успешно добавлен",
+    "autoClose": 3000,
+    "color": "green"
+  },
+  "loading": {
+    "title": "Загрузка",
+    "message": "Пожалуйста, подождите",
+    "autoClose": 3000,
+    "color": "blue"
+  },
+  "delay": {
+    "title": "Ошибка",
+    "message": "Пожалуйста, подождите",
+    "autoClose": 3000,
+    "color": "yellow"
+  },
+  "incorrectInput": {
+    "title": "Ошибка",
+    "message": "В комментарии должно быть от 2 до 2000 символов",
+    "autoClose": 3000,
+    "color": "yellow"
+  },
+  "notAuthenticated": {
+    "title": "Ошибка",
+    "message": "Вы не авторизованы. Войдите в аккаунт перед тем, как написать комментарий",
+    "autoClose": 3000,
+    "color": "yellow"
+  },
+  "critical": {
+    "title": "Критическая ошибка",
+    "message": "Возникла критическая ошибка. Попробуйте обновить страницу",
+    "autoClose": 3000,
+    "color": "red"
+  }
+}

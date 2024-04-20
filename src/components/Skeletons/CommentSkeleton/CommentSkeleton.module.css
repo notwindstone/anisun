@@ -1,0 +1,18 @@
+.root {
+    width: 100%;
+    height: rem(160px);
+    gap: rem(16px);
+    padding: rem(16px);
+}
+
+.content {
+    width: 50%;
+}
+
+.info {
+    gap: rem(16px);
+}
+
+.skeleton {
+    max-width: 100%;
+}

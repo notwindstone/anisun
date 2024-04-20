@@ -1,0 +1,20 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1712406779181,
+      "tag": "0000_bouncy_shadowcat",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1712498373857,
+      "tag": "0001_puzzling_mongu",
+      "breakpoints": true
+    }
+  ]
+}
