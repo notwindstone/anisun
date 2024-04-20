@@ -107,7 +107,7 @@ export function HeroContent() {
 
     return (
         <div className={classes.hero}>
-            <Carousel slideSize={225} height={317} slideGap="md" controlsOffset="md" controlSize={40} loop dragFree withIndicators>
+            <Carousel slideSize={225} height={325} slideGap="md" controlsOffset="md" controlSize={40} loop dragFree withIndicators>
                 {
                     carouselSlides.map((_slide, index) => {
                         return (
@@ -120,7 +120,7 @@ export function HeroContent() {
                                         : status === 'error' ? (
                                             <>Error: {error.message}</>
                                         ) : (
-                                            <Skeleton width={225} height={317} />
+                                            <Skeleton width={209} height={317} />
                                         )
                                 }
                             </Carousel.Slide>

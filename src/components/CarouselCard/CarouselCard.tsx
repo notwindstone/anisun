@@ -25,8 +25,8 @@ export default function CarouselCard({ animeTitle, shikimoriURL }: { animeTitle,
                 src={animeTitle.poster.originalUrl}
                 placeholder="blur"
                 blurDataURL="/blurredPlaceholderImage.png"
-                width={225}
-                height={317}
+                width={300}
+                height={325}
                 component={NextImage}
                 className={classes.poster}
                 radius="sm"
