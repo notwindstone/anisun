@@ -16,7 +16,7 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
                 <Badge className={classes.status} color="violet">{translateShikimoriStatus(animeTitle.status)}</Badge>
                 <Flex className={classes.info}>
                     <Badge className={classes.score} color="green">{animeTitle.score}</Badge>
-                    {animeTitle.aired_on?.split('-')[0]}
+                    {animeTitle.airedOn.year}
                     {animeTitle.episodes}
                     {animeTitle.russian}
                 </Flex>
