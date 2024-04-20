@@ -19,6 +19,7 @@ import NProgress from 'nprogress';
 import {ShikimoriAnimesListType} from "@/types/ShikimoriAnimesListType";
 import NextImage from 'next/image'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
+import {client} from "@/lib/shikimori/client";
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично

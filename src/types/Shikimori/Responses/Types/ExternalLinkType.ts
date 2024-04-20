@@ -1,4 +1,4 @@
-import {ExternalLinkEnum} from "@/types/Shikimori/ExternalLinkEnum";
+import {ExternalLinkEnum} from "@/types/Shikimori/Responses/Enums/ExternalLinkEnum";
 
 export type ExternalLinkType = {
     id: string | null;

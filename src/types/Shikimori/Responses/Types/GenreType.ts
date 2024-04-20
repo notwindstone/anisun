@@ -1,4 +1,4 @@
-import {GenreKindEnum} from "@/types/Shikimori/GenreKindEnum";
+import {GenreKindEnum} from "@/types/Shikimori/Responses/Enums/GenreKindEnum";
 
 export type GenreType = {
     id: string;

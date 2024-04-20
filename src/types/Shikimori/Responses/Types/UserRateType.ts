@@ -1,5 +1,5 @@
-import {AnimeType} from "@/types/Shikimori/AnimeType";
-import {UserRateStatusType} from "@/types/Shikimori/UserRateStatusType";
+import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
+import {UserRateStatusType} from "@/types/Shikimori/Responses/Types/UserRateStatusType";
 
 export type UserRateType = {
     anime: AnimeType | null;

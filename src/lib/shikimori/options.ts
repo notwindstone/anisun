@@ -1,6 +1,14 @@
-import {StatusType} from "@/types/Shikimori/StatusType";
+import {AnimesType} from "@/types/Shikimori/Queries/AnimesType";
 
-export const options = ({ limit, status, year, order } : { limit: number, status: StatusType, year: string, order: string }) => {
+export const options = ({ search, limit, status, year, order }: AnimesType) => {
+    let query = ""
+
+    if (search) query = `${query}search: "${search}", `
+    if (limit) query = `${query}limit: ${limit}, `
+    if (status) query = `${query}status: "${status}", `
+    if (year) query = `${query}season: "${year}", `
+    if (order) query = `${query}order: ${order}, `
+
     return {
         method: 'POST',
         url: 'https://shikimori.one/api/graphql',
@@ -11,7 +19,7 @@ export const options = ({ limit, status, year, order } : { limit: number, status
         data: {
             query: `
                     {
-                        animes(limit: ${limit}, status: "${status}", season: "${year}", order: ${order}) {
+                        animes(${query}) {
                             id
                             malId
                             name

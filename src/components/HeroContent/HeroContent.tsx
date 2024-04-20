@@ -5,9 +5,7 @@ import {Carousel} from "@mantine/carousel";
 import {useQuery} from "@tanstack/react-query";
 import {Skeleton} from "@mantine/core";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
-import axios from "axios";
 import {useState} from "react";
-import {AnimeType} from "@/types/Shikimori/AnimeType";
 import {client} from "@/lib/shikimori/client";
 
 export function HeroContent() {
