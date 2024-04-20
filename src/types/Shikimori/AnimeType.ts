@@ -11,6 +11,10 @@ import {VideoType} from "@/types/Shikimori/VideoType";
 import {ScreenshotType} from "@/types/Shikimori/ScreenshotType";
 import {ScoreStatType} from "@/types/Shikimori/ScoreStatType";
 import {StatusStatType} from "@/types/Shikimori/StatusStatType";
+import {AnimeKindType} from "@/types/Shikimori/AnimeKindType";
+import {AnimeRatingType} from "@/types/Shikimori/AnimeRatingType";
+import {TopicType} from "@/types/Shikimori/TopicType";
+import {UserRateType} from "@/types/Shikimori/UserRateType";
 
 export type AnimeType = {
     airedOn: IncompleteDateType | null;
@@ -31,7 +35,7 @@ export type AnimeType = {
     id: string;
     isCensored: boolean | null;
     japanese: string | null;
-    kind: string | null;
+    kind: AnimeKindType | null;
     licenseNameRu: string | null;
     licensors: string[];
     malId: string | null;
@@ -39,7 +43,7 @@ export type AnimeType = {
     nextEpisodeAt: string | null;
     personRoles: PersonRoleType[];
     poster: PosterType | null;
-    rating: string | null;
+    rating: AnimeRatingType | null;
     related: RelatedType[];
     releasedOn: IncompleteDateType | null;
     russian: string | null;
@@ -51,9 +55,9 @@ export type AnimeType = {
     statusesStats: StatusStatType[];
     studios: StudioType[];
     synonyms: string[];
-    topic: string | null;
+    topic: TopicType | null;
     updatedAt: string;
     url: string;
-    userRate: string | null;
+    userRate: UserRateType | null;
     videos: VideoType[];
 }

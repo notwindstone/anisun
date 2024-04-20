@@ -1,4 +1,6 @@
+import {UserRateStatusType} from "@/types/Shikimori/UserRateStatusType";
+
 export type StatusStatType = {
-    status: "planned" | "completed" | "watching" | "dropped" | "on_hold";
+    status: UserRateStatusType;
     count: number;
 }
