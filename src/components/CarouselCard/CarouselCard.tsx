@@ -22,7 +22,7 @@ export default function CarouselCard({ animeTitle, shikimoriURL }: { animeTitle,
             </Group >
             <Image
                 alt="Anime poster"
-                src={shikimoriURL + animeTitle.image.original}
+                src={animeTitle.poster.originalUrl}
                 placeholder="blur"
                 blurDataURL="/blurredPlaceholderImage.png"
                 width={225}

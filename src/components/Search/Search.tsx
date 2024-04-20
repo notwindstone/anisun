@@ -16,7 +16,6 @@ import {IconSearch} from '@tabler/icons-react';
 import classes from './Search.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 import NProgress from 'nprogress';
-import { client } from 'node-shikimori';
 import {ShikimoriAnimesListType} from "@/types/ShikimoriAnimesListType";
 import NextImage from 'next/image'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";

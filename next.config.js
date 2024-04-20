@@ -12,6 +12,12 @@ module.exports = {
       },
       {
         protocol: 'https',
+        hostname: 'desu.shikimori.one',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
         hostname: 'img.clerk.com',
         port: '',
         pathname: '/**',

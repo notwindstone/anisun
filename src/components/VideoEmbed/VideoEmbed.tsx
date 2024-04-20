@@ -6,13 +6,11 @@ import {anilibria} from "@/lib/anilibria/anilibria";
 import React, {useState} from "react";
 import {SegmentedControl, Skeleton, Text} from "@mantine/core";
 import { Client } from 'kodikwrapper';
-import { client } from 'node-shikimori';
 
 export default function VideoEmbed({ id }: { id: number }) {
     const kodikClient = new Client({
         token: process.env.KODIK_TOKEN!,
     });
-    const shikimoriClient = client();
     const [value, setValue] = useState('Kodik')
     const { isFetching, data } = useQuery({
         queryKey: ['anime', id],
