@@ -11,6 +11,7 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
             className={classes.card}
         >
             <Overlay
+                radius="md"
                 gradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%)"
                 className={classes.overlay}
             >
@@ -27,7 +28,7 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
                     </Badge>
                     <Title className={classes.title} order={3} lineClamp={2}>{animeTitle.russian}</Title>
                 </Flex>
-            </Overlay >
+            </Overlay>
             <Image
                 alt="Anime poster"
                 src={animeTitle.poster?.originalUrl}
@@ -37,7 +38,7 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
                 height={325}
                 component={NextImage}
                 className={classes.poster}
-                radius="sm"
+                radius="md"
             />
         </Paper>
     );
