@@ -16,9 +16,21 @@ import Main from "@/components/Main/Main";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const title = 'Главная'
+const description = "Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Плеер сделан на AniLibria API и Kodik, а поиск аниме через Shikimori API."
+
 export const metadata: Metadata = {
-    title: "Animeth",
-    description: "Anime player on NextJS with Tanstack Query, Drizzle ORM, NeonDB, Mantine UI kit and Shikimori, Anilibria APIs",
+    icons: {
+        icon: "/favicon.png"
+    },
+    title: title,
+    description: description,
+    openGraph: {
+        siteName: 'Animeth',
+        type: "website",
+        title: title,
+        description: description,
+    }
 };
 
 export default function RootLayout({

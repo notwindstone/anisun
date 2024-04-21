@@ -37,7 +37,7 @@ export function HeroContent() {
     return (
         <div className={classes.hero}>
             <Title>Сейчас популярно:</Title>
-            <Carousel slideSize={225} height={325} slideGap="md" controlsOffset="md" controlSize={40} loop dragFree withIndicators>
+            <Carousel slideSize={225} height={325} slideGap="md" controlsOffset="md" controlSize={40} loop dragFree>
                 {
                     carouselSlides.map((_slide, index) => {
                         return (
