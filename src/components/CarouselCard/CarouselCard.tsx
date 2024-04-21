@@ -3,10 +3,13 @@ import classes from './CarouselCard.module.css'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import NextImage from "next/image";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
+import Link from "next/link";
 
 export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) {
     return (
         <Paper
+            component={Link}
+            href={`/titles/${animeTitle.url.replace('https://shikimori.one/animes/', '')}`}
             radius="md"
             className={classes.card}
         >
