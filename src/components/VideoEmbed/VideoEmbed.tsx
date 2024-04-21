@@ -40,13 +40,13 @@ export default function VideoEmbed({ id }: { id: string }) {
             ids: id,
         })).animes[0]
 
-        const shikimoriFranchise = shikimoriAnime.franchise
+        const shikimoriEnglishName = shikimoriAnime.name
         const shikimoriRussianName = shikimoriAnime.russian ?? ''
         const shikimoriYear = shikimoriAnime.airedOn?.year.toString() ?? ''
 
         const anilibriaResponse = await getAnilibriaTitle(
             {
-                franchise: shikimoriFranchise,
+                franchise: shikimoriEnglishName,
                 russianName: shikimoriRussianName,
                 year: shikimoriYear
             }
