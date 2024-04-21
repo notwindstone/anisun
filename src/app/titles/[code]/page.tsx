@@ -6,13 +6,13 @@ import React from 'react';
 import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import CommentList from "@/components/Comments/CommentList/CommentList";
-import {client} from "node-shikimori";
+import {client} from "@/lib/shikimori/client";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
-    const shikimoriId = parseInt(params.code.split('-')[0])
+    const shikimoriId = params.code.split('-')[0]
 
-    const anime = await shikimori.animes.byId({ id: shikimoriId })
+    const anime = await shikimori.animes.byId({ ids: shikimoriId })
 
     const placeholderTitle = 'Просмотр аниме на Animeth'
     const placeholderDescription = 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере'

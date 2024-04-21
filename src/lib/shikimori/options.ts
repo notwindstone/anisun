@@ -1,8 +1,9 @@
 import {AnimesType} from "@/types/Shikimori/Queries/AnimesType";
 
-export const options = ({ search, limit, status, year, order }: AnimesType) => {
+export const options = ({ ids, search, limit, status, year, order }: AnimesType) => {
     let query = ""
 
+    if (ids) query = `${query}ids: "${ids}"`
     if (search) query = `${query}search: "${search}", `
     if (limit) query = `${query}limit: ${limit}, `
     if (status) query = `${query}status: "${status}", `
