@@ -3,7 +3,7 @@
 import classes from './HeroContent.module.css';
 import {Carousel} from "@mantine/carousel";
 import {useQuery} from "@tanstack/react-query";
-import {Skeleton} from "@mantine/core";
+import {Skeleton, Title} from "@mantine/core";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
 import {useState} from "react";
 import {client} from "@/lib/shikimori/client";
@@ -19,18 +19,24 @@ export function HeroContent() {
     });
 
     async function getPopularTitles() {
-        return await shikimori.animes.list({ limit: 10, status: "ongoing", year: year, order: "popularity" })
+        return await shikimori.animes.list({
+            limit: 12,
+            status: "ongoing",
+            year: year,
+            order: "popularity"
+        })
     }
 
-    const carouselSlides = Array.from({ length: 10 })
+    const carouselSlides = Array.from({ length: 12 })
 
-    if (status === 'success' && data.animes.length < 10) {
+    if (status === 'success' && data.animes.length < 12) {
         const previousYear = (new Date().getFullYear() - 1).toString()
         setYear(previousYear)
     }
 
     return (
         <div className={classes.hero}>
+            <Title>Сейчас популярно:</Title>
             <Carousel slideSize={225} height={325} slideGap="md" controlsOffset="md" controlSize={40} loop dragFree withIndicators>
                 {
                     carouselSlides.map((_slide, index) => {
