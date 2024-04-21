@@ -12,7 +12,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
     const shikimori = client();
     const shikimoriId = params.code.split('-')[0]
 
-    const anime = await shikimori.animes.byId({ ids: shikimoriId })
+    const anime = (await shikimori.animes.byId({ ids: shikimoriId })).animes[0]
 
     const placeholderTitle = 'Просмотр аниме на Animeth'
     const placeholderDescription = 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере'
@@ -36,14 +36,14 @@ export async function generateMetadata({ params }: { params: { code: string } })
         openGraph: {
             siteName: 'Animeth',
             type: "website",
-            title: anime.russian,
+            title: anime.russian ?? placeholderTitle,
             description: anime.description ?? placeholderDescription,
         }
     }
 }
 
 export default async function Page({ params }: { params: { code: string } }) {
-    const shikimoriId = parseInt(params.code.split('-')[0])
+    const shikimoriId = params.code.split('-')[0]
 
     return (
         <>

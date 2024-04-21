@@ -6,8 +6,10 @@ import {anilibria} from "@/lib/anilibria/anilibria";
 import React, {useState} from "react";
 import {SegmentedControl, Skeleton, Text} from "@mantine/core";
 import { Client } from 'kodikwrapper';
+import {client} from "@/lib/shikimori/client";
 
-export default function VideoEmbed({ id }: { id: number }) {
+export default function VideoEmbed({ id }: { id: string }) {
+    const shikimori = client()
     const kodikClient = new Client({
         token: process.env.KODIK_TOKEN!,
     });
@@ -34,13 +36,13 @@ export default function VideoEmbed({ id }: { id: number }) {
     }
 
     async function fetchAnime() {
-        const shikimoriAnime = await shikimoriClient.animes.byId({
-            id: id,
-        })
+        const shikimoriAnime = (await shikimori.animes.byId({
+            ids: id,
+        })).animes[0]
 
         const shikimoriFranchise = shikimoriAnime.franchise
-        const shikimoriRussianName = shikimoriAnime.russian
-        const shikimoriYear = shikimoriAnime.aired_on?.split('-')[0]
+        const shikimoriRussianName = shikimoriAnime.russian ?? ''
+        const shikimoriYear = shikimoriAnime.airedOn?.year.toString() ?? ''
 
         const anilibriaResponse = await getAnilibriaTitle(
             {
@@ -51,7 +53,7 @@ export default function VideoEmbed({ id }: { id: number }) {
         )
 
         const kodikResponse = await kodikClient.search({
-            shikimori_id: id
+            shikimori_id: parseInt(id)
         }).then((response) => response.results.shift())
 
         return { anilibria: anilibriaResponse, kodik: kodikResponse }
