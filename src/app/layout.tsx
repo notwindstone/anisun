@@ -26,9 +26,6 @@ export const metadata: Metadata = {
     title: title,
     description: description,
     openGraph: {
-        images: {
-            url: "/favicon.png"
-        },
         siteName: 'Animeth',
         type: "website",
         title: title,
