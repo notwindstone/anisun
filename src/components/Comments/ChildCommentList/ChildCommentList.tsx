@@ -15,7 +15,6 @@ export function ChildCommentList({ uuid, childComments }: { uuid: string, childC
     } = useQuery({
         queryKey: ["comments", uuid],
         queryFn: retrieveChildComments,
-        refetchInterval: 60000,
     })
 
     async function retrieveChildComments() {

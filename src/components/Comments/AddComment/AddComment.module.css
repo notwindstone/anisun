@@ -1,0 +1,21 @@
+.root {
+    border: 1px solid var(--input-bd);
+
+    &:hover {
+        border: 1px solid var(--input-bd-focus);
+    }
+}
+
+.avatar {
+
+}
+
+.wrapper {
+    --input-bd: none !important;
+    --input-bd-focus: none !important;
+    --input-bg: none !important;
+}
+
+.input {
+    background: none;
+}

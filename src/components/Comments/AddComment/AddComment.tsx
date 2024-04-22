@@ -1,11 +1,12 @@
 import {useRef, useState} from "react";
-import {ActionIcon, Group, Textarea} from "@mantine/core";
+import {ActionIcon, Avatar, Group, Paper, Text, Textarea} from "@mantine/core";
 import {IconMessage} from "@tabler/icons-react";
 import {notify} from "@/utils/notify/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
 import {useUser} from "@clerk/nextjs";
+import classes from './AddComment.module.css'
 
 export function AddComment({ title, parentUUID, sendComment }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -84,8 +85,21 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
     }
 
     return (
-        <Group>
+        <Paper className={classes.root}>
+            {
+                isUser && (
+                    <>
+                        <Text>{user?.username}</Text>
+                        <Avatar className={classes.avatar} src={user?.imageUrl} />
+                    </>
+                )
+
+            }
             <Textarea
+                classNames={{
+                    wrapper: classes.wrapper,
+                    input: classes.input,
+                }}
                 ref={ref}
                 placeholder={
                     isUser
@@ -107,6 +121,6 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                         </ActionIcon>
                     ) : null
             }
-        </Group>
+        </Paper>
     )
 }

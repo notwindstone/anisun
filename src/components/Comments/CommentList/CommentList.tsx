@@ -26,7 +26,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         queryFn: retrieveComments,
         initialPageParam: 0,
         getNextPageParam: (lastPage) => lastPage ? lastPage.nextCursor : 16,
-        refetchInterval: 60000,
     })
 
     async function retrieveComments({ pageParam }: { pageParam: number }) {
