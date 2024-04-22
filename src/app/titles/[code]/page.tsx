@@ -44,7 +44,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
 
 export default async function Page({ params }: { params: { code: string } }) {
     const shikimoriId = params.code.split('-')[0].replace(/\D/g, '')
-    console.log(shikimoriId)
+
     return (
         <>
             <Link href="/titles">Вернуться</Link>

@@ -4,6 +4,7 @@ import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import NextImage from "next/image";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 import Link from "next/link";
+import globalVariables from '../../configs/globalVariables.json'
 
 export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) {
     return (
@@ -34,9 +35,9 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
             </Overlay>
             <Image
                 alt="Anime poster"
-                src={"/blurredPlaceholderImage.png"}
+                src={animeTitle.poster?.originalUrl}
                 placeholder="blur"
-                blurDataURL="/blurredPlaceholderImage.png"
+                blurDataURL={globalVariables.imagePlaceholder}
                 width={300}
                 height={325}
                 component={NextImage}

@@ -20,6 +20,7 @@ import NextImage from 'next/image'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import {client} from "@/lib/shikimori/client";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
+import globalVariables from '../../configs/globalVariables.json'
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
@@ -67,7 +68,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     alt="Anime poster"
                     src={optionData[1]}
                     placeholder="blur"
-                    blurDataURL="/blurredPlaceholderImage.png"
+                    blurDataURL={globalVariables.imagePlaceholder}
                     width={96}
                     height={128}
                     component={NextImage}

@@ -5,7 +5,10 @@ const nextConfig = {
     KODIK_TOKEN: process.env.KODIK_TOKEN,
   },
   experimental: {
-    optimizePackageImports: ['@mantine/core', '@mantine/hooks'],
+    optimizePackageImports: [
+      '@mantine/core',
+      '@mantine/hooks',
+    ],
   },
 };
 
