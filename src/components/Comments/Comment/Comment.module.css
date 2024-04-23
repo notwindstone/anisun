@@ -5,6 +5,10 @@
     padding: rem(16px);
 }
 
+.stack {
+    max-width: calc(100% - rem(64px));
+}
+
 .deleted {
     color: gray
 }
@@ -19,4 +23,6 @@
 
 .message {
     white-space: pre-wrap;
+    overflow-wrap: break-word;
+    max-width: 100%;
 }

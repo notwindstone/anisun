@@ -7,6 +7,7 @@ import React, {useState} from "react";
 import {SegmentedControl, Skeleton, Text} from "@mantine/core";
 import { Client } from 'kodikwrapper';
 import {client} from "@/lib/shikimori/client";
+import classes from './VideoEmbed.module.css';
 
 export default function VideoEmbed({ id }: { id: string }) {
     const shikimori = client()
@@ -99,12 +100,15 @@ export default function VideoEmbed({ id }: { id: string }) {
     switch (value) {
         case 'Kodik':
             currentPlayer = (
-                <iframe
-                    src={kodikPlayer}
-                    width="610"
-                    height="370"
-                    allow="autoplay *; fullscreen *"
-                />
+                <div className={classes.wrapper}>
+                    <iframe
+                        className={classes.frame}
+                        src={kodikPlayer}
+                        width="610"
+                        height="370"
+                        allow="autoplay *; fullscreen *"
+                    />
+                </div>
             )
             break
         case 'Animeth':
@@ -127,26 +131,30 @@ export default function VideoEmbed({ id }: { id: string }) {
             break
         default:
             currentPlayer = (
-                <iframe
-                    src={kodikPlayer}
-                    width="610"
-                    height="370"
-                    allow="autoplay *; fullscreen *"
-                />
+                <div className={classes.wrapper}>
+                    <iframe
+                        className={classes.frame}
+                        src={kodikPlayer}
+                        width="610"
+                        height="370"
+                        allow="autoplay *; fullscreen *"
+                    />
+                </div>
             )
             break
     }
 
     return (
-        <>
+        <div className={classes.root}>
             <Text>Выберите плеер</Text>
             <SegmentedControl
+                className={classes.control}
                 withItemsBorders={false}
                 defaultValue={value}
                 onChange={setValue}
                 data={segmentedControlData}
             />
             {currentPlayer}
-        </>
+        </div>
     );
 }

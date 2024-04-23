@@ -124,6 +124,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
 
     const totalCount = data?.pages?.[0].total?.[0].count ?? 0
 
+
     return (
         <Container size={800}>
             {   status === 'pending'

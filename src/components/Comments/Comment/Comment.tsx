@@ -224,14 +224,14 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 >
                     {comment.username[0]}
                 </Avatar>
-                <Stack>
+                <Stack className={classes.stack}>
                     <Group>
                         <Link href={`/account/${comment.userid}`}>
                             <Text>{comment.username}</Text>
                         </Link>
                         <Text>{makeDate(comment.createdAt)}</Text>
                         {
-                            comment.isEdited
+                            comment.isEdited && !comment.isDeleted
                                 && <Text className={classes.edited}>(изменено)</Text>
                         }
                         {
