@@ -56,7 +56,9 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
     }
 
     function handleStateEdit(isEditingState: boolean) {
-        setIsEditing(isEditingState)
+        const isEditingSynced =
+            isEditingState === isEditing ? !isEditingState : isEditingState
+        setIsEditing(isEditingSynced)
     }
 
     async function handleMessageEdit({ uuid, message }: { uuid: string, message?: string }) {
@@ -228,11 +230,13 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                             <Text>{comment.username}</Text>
                         </Link>
                         <Text>{makeDate(comment.createdAt)}</Text>
-
+                        {
+                            comment.isEdited
+                                && <Text className={classes.edited}>(изменено)</Text>
+                        }
                         {
                             !comment.isDeleted
                                 && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />
-
                         }
                         <DeleteComment uuid={comment.uuid} userid={comment.userid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
                     </Group>
@@ -260,7 +264,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                             </>
                                         )
                                         : (
-                                            <Text>{comment.message}</Text>
+                                            <Text className={classes.message}>{comment.message}</Text>
                                         )
                                 )
                         }

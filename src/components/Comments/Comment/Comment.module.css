@@ -16,3 +16,7 @@
 .collapse {
     margin-left: rem(32px);
 }
+
+.message {
+    white-space: pre-wrap;
+}
