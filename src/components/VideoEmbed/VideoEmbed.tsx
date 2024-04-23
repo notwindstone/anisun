@@ -145,7 +145,7 @@ export default function VideoEmbed({ id }: { id: string }) {
     }
 
     return (
-        <div className={classes.root}>
+        <>
             <Text>Выберите плеер</Text>
             <SegmentedControl
                 className={classes.control}
@@ -154,7 +154,9 @@ export default function VideoEmbed({ id }: { id: string }) {
                 onChange={setValue}
                 data={segmentedControlData}
             />
-            {currentPlayer}
-        </div>
+            <div className={classes.root}>
+                {currentPlayer}
+            </div>
+        </>
     );
 }

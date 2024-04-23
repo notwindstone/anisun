@@ -1,4 +1,10 @@
-.root {}
+.root {
+    @media (max-width: $mantine-breakpoint-xs) {
+        position: sticky;
+        top: 0;
+        z-index: 99;
+    }
+}
 
 .control {
     max-width: 100%;
