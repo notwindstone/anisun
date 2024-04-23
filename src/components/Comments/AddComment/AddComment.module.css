@@ -1,8 +1,13 @@
 .root {
-    border: 1px solid var(--input-bd);
+    border: 1px solid #333555;
+    transition: 0.15s ease;
 
-    &:hover {
-        border: 1px solid var(--input-bd-focus);
+    @mixin hover {
+        background: #fff
+    }
+
+    &:focus-within {
+        border: 1px solid red
     }
 }
 
