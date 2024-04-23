@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import {ColorSchemeScript, MantineProvider} from "@mantine/core";
+import {ColorSchemeScript, createTheme, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import NextTopLoader from "nextjs-toploader";
@@ -19,6 +19,10 @@ const inter = Inter({ subsets: ["latin"] });
 
 const title = 'Главная'
 const description = "Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Плеер сделан на AniLibria API и Kodik, а поиск аниме через Shikimori API."
+
+const theme = createTheme({
+    defaultRadius: "md",
+})
 
 export const metadata: Metadata = {
     icons: {
@@ -52,7 +56,7 @@ export default function RootLayout({
                       height={4}
                     />
                     <TanstackQueryProviders>
-                        <MantineProvider defaultColorScheme="dark">
+                        <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={30000} limit={3} />
                             <Main>
                                 {children}
