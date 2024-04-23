@@ -119,7 +119,8 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                         <Flex justify="flex-end">
                             <Button
                                 className={classes.submit}
-                                type="button" onClick={handleSubmit}
+                                type="button"
+                                onClick={handleSubmit}
                                 variant="filled"
                             >
                                 Ответить

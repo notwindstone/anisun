@@ -25,10 +25,17 @@
 .submit {
     color: var(--animeth-button-text-color);
     background: var(--animeth-primary-color);
+    transition: 0.1s ease;
 
     @mixin hover {
+        transform: translateY(rem(-2px));
         color: var(--animeth-button-text-color);
         background: var(--animeth-button-background-hover-color);
+        box-shadow: 0 10px 50px -10px var(--animeth-accent-color);
+    }
+
+    &:active {
+        transform: translateY(0);
     }
 }
 
