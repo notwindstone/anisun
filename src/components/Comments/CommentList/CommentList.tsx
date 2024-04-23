@@ -8,7 +8,7 @@ import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
-import {Button, Skeleton, Space, Text} from "@mantine/core";
+import {Button, Container, Skeleton, Space, Text} from "@mantine/core";
 import {useState} from "react";
 import {nanoid} from "nanoid";
 import {makeWordEnding} from "@/utils/makeWordEnding";
@@ -125,7 +125,7 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     const totalCount = data?.pages?.[0].total?.[0].count ?? 0
 
     return (
-        <div>
+        <Container size={800}>
             {   status === 'pending'
                     ? (
                         <Skeleton w={144} h={24}></Skeleton>
@@ -174,6 +174,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
                         <Text>Похоже, что больше комментариев нет</Text>
                     )
             }
-        </div>
+        </Container>
     )
 }

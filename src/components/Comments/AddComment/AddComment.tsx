@@ -1,6 +1,5 @@
 import {useRef, useState} from "react";
-import {ActionIcon, Avatar, Group, Paper, Text, Textarea} from "@mantine/core";
-import {IconMessage} from "@tabler/icons-react";
+import {Avatar, Button, Flex, Group, Paper, Space, Text, Textarea} from "@mantine/core";
 import {notify} from "@/utils/notify/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
@@ -88,13 +87,14 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
         <Paper className={classes.root}>
             {
                 isUser && (
-                    <>
-                        <Text>{user?.username}</Text>
+                    <Group>
                         <Avatar className={classes.avatar} src={user?.imageUrl} />
-                    </>
+                        <Text className={classes.username}>{user?.username}</Text>
+                    </Group>
                 )
 
             }
+            <Space h="md" />
             <Textarea
                 classNames={{
                     wrapper: classes.wrapper,
@@ -116,9 +116,16 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
             {
                 isUser
                     ? (
-                        <ActionIcon type="button" onClick={handleSubmit} variant="light">
-                            <IconMessage />
-                        </ActionIcon>
+                        <Flex justify="flex-end">
+                            <Button
+                                className={classes.submit}
+                                radius="md"
+                                type="button" onClick={handleSubmit}
+                                variant="filled"
+                            >
+                                Ответить
+                            </Button>
+                        </Flex>
                     ) : null
             }
         </Paper>

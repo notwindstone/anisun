@@ -63,7 +63,9 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
             <Modal opened={opened} onClose={close} title={modalTitle}>
                 <Text>{modalDescription}</Text>
                 <Flex
-                    justify="space-between"
+                    mt="1rem"
+                    justify="flex-end"
+                    gap="1rem"
                 >
                     <Button variant="default" onClick={close}>Нет</Button>
                     <Button onClick={() => handleDelete()}>Да</Button>

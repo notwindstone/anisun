@@ -1,26 +1,44 @@
 .root {
-    border: 1px solid #333555;
+    background: light-dark(#f7f4f7, #0b080b);
+    padding: rem(16px);
+    border-radius: var(--mantine-radius-md);
+    border: rem(1px) solid light-dark(#f7f4f7, #0b080b);
     transition: 0.15s ease;
 
     @mixin hover {
-        background: #fff
+        border: rem(1px) solid light-dark(#cd98c7, #673261);
     }
 
     &:focus-within {
-        border: 1px solid red
+        @mixin hover {
+            border: rem(1px) solid light-dark(#5b285c, #d6a3d7)
+        }
+
+        background: light-dark(#e3e1e3, #1a141a);
+        border: rem(1px) solid light-dark(#5b285c, #d6a3d7)
     }
 }
 
-.avatar {
-
+.username {
+    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
 }
 
+.submit {
+    color: light-dark(#fff, #000);
+    background: light-dark(#5b285c, #d6a3d7);
+}
+
+.avatar {}
+
 .wrapper {
+    /* Сброс дефолтных стилей <TextArea /> компонента из Mantine */
     --input-bd: none !important;
     --input-bd-focus: none !important;
     --input-bg: none !important;
 }
 
 .input {
+    margin: 0;
+    padding: 0;
     background: none;
 }
