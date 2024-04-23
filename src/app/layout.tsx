@@ -13,6 +13,7 @@ import {ruRU} from "@clerk/localizations";
 import MobileModal from "@/components/MobileModal/MobileModal";
 import Footer from "@/components/Footer/Footer";
 import Main from "@/components/Main/Main";
+import './global.css'
 
 const inter = Inter({ subsets: ["latin"] });
 

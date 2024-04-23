@@ -1,6 +1,5 @@
 import Link from "next/link";
 import {SignedIn, SignedOut, UserButton} from "@clerk/nextjs";
-import classes from './page.module.css'
 import {HeroContent} from "@/components/HeroContent/HeroContent";
 
 export default async function Home() {

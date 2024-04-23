@@ -1,34 +1,40 @@
 .root {
-    background: light-dark(#f7f4f7, #0b080b);
+    background: var(--animeth-block-background-color);
     padding: rem(16px);
-    border-radius: var(--mantine-radius-md);
-    border: rem(1px) solid light-dark(#f7f4f7, #0b080b);
+    border: rem(2px) solid var(--animeth-block-background-color);
     transition: 0.15s ease;
 
     @mixin hover {
-        border: rem(1px) solid light-dark(#cd98c7, #673261);
+        border: rem(2px) solid var(--animeth-secondary-color);
     }
 
     &:focus-within {
         @mixin hover {
-            border: rem(1px) solid light-dark(#5b285c, #d6a3d7)
+            border: rem(2px) solid var(--animeth-primary-color);
         }
 
-        background: light-dark(#e3e1e3, #1a141a);
-        border: rem(1px) solid light-dark(#5b285c, #d6a3d7)
+        background: var(--animeth-focused-block-background-color);
+        border: rem(2px) solid var(--animeth-primary-color);
     }
 }
 
 .username {
-    color: light-dark(var(--mantine-color-black), var(--mantine-color-white));
+    color: var(--animeth-text-contrast-color);
 }
 
 .submit {
-    color: light-dark(#fff, #000);
-    background: light-dark(#5b285c, #d6a3d7);
+    color: var(--animeth-button-text-color);
+    background: var(--animeth-primary-color);
+
+    @mixin hover {
+        color: var(--animeth-button-text-color);
+        background: var(--animeth-button-background-hover-color);
+    }
 }
 
-.avatar {}
+.avatar {
+    border: rem(2px) solid var(--animeth-primary-color);
+}
 
 .wrapper {
     /* Сброс дефолтных стилей <TextArea /> компонента из Mantine */
