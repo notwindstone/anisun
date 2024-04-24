@@ -6,8 +6,8 @@ import {
     ComboboxItem, Flex,
     Image,
     OptionsFilter,
-    Select, Skeleton,
-    Text,
+    Select, Skeleton, Stack,
+    Text, Title,
 } from '@mantine/core';
 import {useDebouncedState} from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
@@ -34,17 +34,17 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     switch (option.value) {
         case 'nothing':
             return (
-                <>
+                <Stack className={classes.stack} align="center" justify="center">
                     <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.nothing.image} />
-                    <Text>{searchAutocomplete.nothing.label}</Text>
-                </>
+                    <Title order={3}>{searchAutocomplete.nothing.label}</Title>
+                </Stack>
             );
         case 'notEnoughChars':
             return (
-                <>
+                <Stack className={classes.stack} align="center" justify="center">
                     <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.notEnoughChars.image} />
-                    <Text>{searchAutocomplete.notEnoughChars.label}</Text>
-                </>
+                    <Title order={3}>{searchAutocomplete.notEnoughChars.label}</Title>
+                </Stack>
             );
         case 'fetching':
             return (
