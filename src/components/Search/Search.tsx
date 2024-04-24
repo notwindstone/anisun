@@ -21,6 +21,7 @@ import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import {client} from "@/lib/shikimori/client";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 import globalVariables from '../../configs/globalVariables.json'
+import translateShikimoriKind from "@/utils/translateShikimoriKind";
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
@@ -29,7 +30,8 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    let status = translateShikimoriStatus(optionData[3])
+    let status = translateShikimoriStatus(optionData[4])
+    let kind = translateShikimoriKind(optionData[3])
 
     switch (option.value) {
         case 'nothing':
@@ -78,7 +80,8 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             </div>
             <div>
                 <Text lineClamp={2} size="xl">{optionData[2]}</Text>
-                <Text lineClamp={2} size="md" opacity={0.5}>{status}{optionData[4] ? `, ${optionData[4]}` : []}</Text>
+                <Text lineClamp={2} size="lg">{kind}</Text>
+                <Text lineClamp={2} size="md" opacity={0.5}>{status}{optionData[5] ? `, ${optionData[5]}` : []}</Text>
             </div>
         </Flex>
     );
@@ -120,7 +123,7 @@ export function Search() {
         // @ts-ignore
         const titlesList = searchList.map((title: AnimeType) => (
             {
-                value: `${title.url.replace('https://shikimori.one/animes/', '')}--${title.poster?.mainUrl}--${title.russian}--${title.status}--${title.name}`,
+                value: `${title.url.replace('https://shikimori.one/animes/', '')}--${title.poster?.mainUrl}--${title.russian}--${title.kind}--${title.status}--${title.name}`,
                 label: `${title.russian} / ${title.name}`,
             }
         ));
