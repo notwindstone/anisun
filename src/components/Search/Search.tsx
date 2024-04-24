@@ -52,10 +52,10 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             return (
                 <Flex align="center" gap="sm">
                     <div>
-                        <Skeleton width={96} height={128}>
-                        </Skeleton>
+                        <Skeleton width={96} height={128} />
                     </div>
                     <div>
+                        <Skeleton height={24} width={256} radius="xl" mb="xs" />
                         <Skeleton height={24} width={256} radius="xl" mb="xs" />
                         <Skeleton height={24} width={256} radius="xl" />
                     </div>
@@ -79,8 +79,8 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 />
             </div>
             <div>
-                <Text lineClamp={2} size="xl">{optionData[2]}</Text>
-                <Text lineClamp={2} size="lg">{kind}</Text>
+                <Title lineClamp={2} order={3}>{optionData[2]}</Title>
+                <Text lineClamp={2} size="lg" opacity={0.8}>{kind}</Text>
                 <Text lineClamp={2} size="md" opacity={0.5}>{status}{optionData[5] ? `, ${optionData[5]}` : []}</Text>
             </div>
         </Flex>
