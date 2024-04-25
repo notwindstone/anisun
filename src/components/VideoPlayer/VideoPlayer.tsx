@@ -6,6 +6,7 @@ import { useState } from 'react';
 import videoPlayerTranslation from '../../configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
+import {Text, Title} from "@mantine/core";
 
 interface VideoPlayerProps {
     title?: string;
@@ -69,7 +70,7 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
             return (
                 <Menu.Radio
                     className={
-                        currentEpisode === episodeIndex ? classes.currentEpisode : undefined
+                        currentEpisode === episodeIndex ? classes.currentEpisodeButton : undefined
                     }
                     key={episodeIndex}
                     onClick={() => {
@@ -117,6 +118,7 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                                 {episodesList}
                             </Menu.RadioGroup>
                         </Menu.Items>
+                        <Text fw={700} className={classes.currentEpisodeMarker}>{currentEpisode} серия</Text>
                     </Menu.Root>
                 </DefaultVideoLayout>
             </MediaPlayer>

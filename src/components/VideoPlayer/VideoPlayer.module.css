@@ -4,7 +4,8 @@
 }
 
 .playlist {
-    display: block !important;
+    display: flex !important;
+    align-items: center;
     position: absolute;
     top: 0;
     left: 0;
@@ -27,6 +28,11 @@
     color: #ffffff;
 }
 
-.currentEpisode {
+.currentEpisodeMarker {
+    color: var(--animeth-text-contrast-color);
+    z-index: 20000;
+}
+
+.currentEpisodeButton {
     background: var(--animeth-focused-block-background-color) !important;
 }
