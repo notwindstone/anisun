@@ -1,12 +1,12 @@
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
-import { MediaPlayer, MediaProvider, Menu } from '@vidstack/react';
+import {MediaPlayer, MediaPlayerInstance, MediaProvider, Menu, useMediaStore} from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
-import { useState } from 'react';
+import {useRef, useState} from 'react';
 import videoPlayerTranslation from '../../configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
-import {Text, Title} from "@mantine/core";
+import {Button, Text} from "@mantine/core";
 
 interface VideoPlayerProps {
     title?: string;
@@ -58,10 +58,13 @@ function changeEpisode({ player }: VideoPlayerProps, episode: number) {
 }
 
 export default function VideoPlayer({ title, player, preview }: VideoPlayerProps) {
+    const mediaPlayerRef = useRef<MediaPlayerInstance>(null);
+    const { currentTime, duration, title: animeTitle } = useMediaStore(mediaPlayerRef);
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
     const [hideMenu, setHideMenu] = useState('hidden');
     const [currentEpisode, setCurrentEpisode] = useState(1)
 
+    const isLastTenSeconds = (duration - currentTime) <= 10
     const episodesAmount = Object.entries(player.list);
 
     const episodesList = episodesAmount.map((_value, index) => {
@@ -83,6 +86,16 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                 </Menu.Radio>);
         }
     );
+
+    const episodesCount = episodesList.length
+    const hasNextEpisode = (episodesCount - currentEpisode) > 0
+
+    function setNextEpisode() {
+        const nextEpisode = currentEpisode + 1
+
+        setCurrentEpisode(nextEpisode)
+        setEpisodeSource(changeEpisode({ player }, nextEpisode));
+    }
 
     return (
         <div className={classes.wrapper}>
@@ -106,6 +119,7 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                 }
                 viewType="video"
                 poster={preview}
+                ref={mediaPlayerRef}
             >
                 <MediaProvider />
                 <DefaultVideoLayout icons={defaultLayoutIcons} translations={videoPlayerTranslation}>
@@ -119,6 +133,17 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                             </Menu.RadioGroup>
                         </Menu.Items>
                         <Text fw={700} className={classes.currentEpisodeMarker}>{currentEpisode} серия</Text>
+                        {
+                            isLastTenSeconds && hasNextEpisode
+                                ? (
+                                    <div className={classes.nextEpisode}>
+                                        <Button className={classes.nextEpisodeButton} onClick={setNextEpisode}>Дальше</Button>
+                                    </div>
+                                )
+                                : (
+                                    <div className={classes.nextEpisode}></div>
+                                )
+                        }
                     </Menu.Root>
                 </DefaultVideoLayout>
             </MediaPlayer>

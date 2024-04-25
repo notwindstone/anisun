@@ -111,8 +111,6 @@ export function Search() {
             limit: 5
         })).animes
 
-        console.log(searchList)
-
         if (searchList.length < 1) {
             const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
             // @ts-ignore
