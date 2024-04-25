@@ -31,8 +31,8 @@ export default function Account({ user }: { user: UserResource }) {
             <Image
                 radius="md"
                 src={user.imageUrl}
-                w={512}
-                h={512}
+                w={384}
+                h={384}
                 alt={`Аватар пользователя ${user.username ?? 'unknown username'}`}
             />
             <Stack className={classes.tooltipInfo} align="center" gap={0}>
