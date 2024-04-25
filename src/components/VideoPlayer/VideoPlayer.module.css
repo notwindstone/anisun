@@ -23,7 +23,7 @@
 
 .playlistButton {
     margin: rem(6px) rem(50px) rem(6px) rem(6px);
-    z-index: 20000;
+    z-index: 99;
 
     @media (max-width: $mantine-breakpoint-sm) {
         margin: rem(6px);
@@ -40,7 +40,7 @@
 
 .currentEpisodeMarker {
     color: var(--animeth-text-contrast-color);
-    z-index: 20000;
+    z-index: 99;
 }
 
 .currentEpisodeButton {
@@ -64,7 +64,7 @@
     padding: 0 rem(8px);
     margin: 0 rem(8px);
     color: var(--animeth-text-contrast-color);
-    z-index: 20000;
+    z-index: 99;
 
     &:active, &:hover {
         color: var(--animeth-text-contrast-color);

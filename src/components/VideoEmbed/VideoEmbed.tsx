@@ -4,10 +4,11 @@ import VideoPlayer from '@/components/VideoPlayer/VideoPlayer';
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import React, {useState} from "react";
-import {SegmentedControl, Skeleton, Text} from "@mantine/core";
+import {Alert, SegmentedControl, Skeleton, Text} from "@mantine/core";
 import { Client } from 'kodikwrapper';
 import {client} from "@/lib/shikimori/client";
 import classes from './VideoEmbed.module.css';
+import {IconInfoCircle} from "@tabler/icons-react";
 
 export default function VideoEmbed({ id }: { id: string }) {
     const shikimori = client()
@@ -73,13 +74,13 @@ export default function VideoEmbed({ id }: { id: string }) {
     let anilibriaTitle, anilibriaPlayer, anilibriaPreview, hasAnilibriaPlayer, kodikPlayer
 
     if (kodikData) {
-        segmentedControlData.push({ value: 'Kodik', label: 'Kodik (с выбором озвучки и рекламой)' })
+        segmentedControlData.push({ value: 'Kodik', label: 'Kodik' })
 
         kodikPlayer = kodikData?.link
     }
 
     if (anilibriaData) {
-        segmentedControlData.push({ value: 'Animeth', label: 'Animeth (только AniLibria, но без рекламы)' })
+        segmentedControlData.push({ value: 'Animeth', label: 'Animeth' })
 
         anilibriaTitle = anilibriaData.names.ru
         anilibriaPlayer = anilibriaData.player;
@@ -144,9 +145,17 @@ export default function VideoEmbed({ id }: { id: string }) {
             break
     }
 
+    const kodikDescription = 'К сожалению, в плеере Kodik нельзя отключить рекламу. Она встроена в плеер и не зависит от нашего сайта. Зато доступен широкий выбор озвучек!'
+    const animethDescription = 'В нашем плеере нет рекламы, а озвучка используется от AniLibria, однако её нельзя поменять или включить субтитры.'
+
     return (
         <>
             <Text>Выберите плеер</Text>
+            <Alert variant="light" color="gray" title="Информация о плеере" icon={<IconInfoCircle />}>
+                {
+                    value === 'Kodik' ? kodikDescription : animethDescription
+                }
+            </Alert>
             <SegmentedControl
                 className={classes.control}
                 withItemsBorders={false}
