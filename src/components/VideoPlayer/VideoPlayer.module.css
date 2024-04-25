@@ -11,6 +11,10 @@
     position: absolute;
     top: 0;
     left: 0;
+
+    @media (max-width: $mantine-breakpoint-sm) {
+        justify-content: flex-start;
+    }
 }
 
 .hidden {
@@ -20,6 +24,10 @@
 .playlistButton {
     margin: rem(6px) rem(50px) rem(6px) rem(6px);
     z-index: 20000;
+
+    @media (max-width: $mantine-breakpoint-sm) {
+        margin: rem(6px);
+    }
 
     &:hover, &:active {
         background: rgb(255 255 255 / 0.2);
@@ -46,6 +54,10 @@
     justify-content: flex-end;
     width: rem(96px);
     height: rem(52px);
+
+    @media (max-width: $mantine-breakpoint-sm) {
+        width: fit-content;
+    }
 }
 
 .nextEpisodeButton {
