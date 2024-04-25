@@ -59,7 +59,7 @@ function changeEpisode({ player }: VideoPlayerProps, episode: number) {
 
 export default function VideoPlayer({ title, player, preview }: VideoPlayerProps) {
     const mediaPlayerRef = useRef<MediaPlayerInstance>(null);
-    const { currentTime, duration, title: animeTitle } = useMediaStore(mediaPlayerRef);
+    const { started, currentTime, duration, playing, title: animeTitle } = useMediaStore(mediaPlayerRef);
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
     const [hideMenu, setHideMenu] = useState('hidden');
     const [currentEpisode, setCurrentEpisode] = useState(1)
@@ -134,10 +134,10 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                         </Menu.Items>
                         <Text fw={700} className={classes.currentEpisodeMarker}>{currentEpisode} серия</Text>
                         {
-                            isLastTenSeconds && hasNextEpisode
+                            started && isLastTenSeconds && hasNextEpisode
                                 ? (
                                     <div className={classes.nextEpisode}>
-                                        <Button className={classes.nextEpisodeButton} onClick={setNextEpisode}>Дальше</Button>
+                                        <Button variant="transparent" className={classes.nextEpisodeButton} onClick={setNextEpisode}>Дальше</Button>
                                     </div>
                                 )
                                 : (

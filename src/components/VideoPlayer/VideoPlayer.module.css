@@ -41,6 +41,21 @@
 }
 
 .nextEpisode {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
     width: rem(96px);
     height: rem(52px);
+}
+
+.nextEpisodeButton {
+    padding: 0 rem(8px);
+    margin: 0 rem(8px);
+    color: var(--animeth-text-contrast-color);
+    z-index: 20000;
+
+    &:active, &:hover {
+        color: var(--animeth-text-contrast-color);
+        background: rgb(255 255 255 / 0.2);
+    }
 }
