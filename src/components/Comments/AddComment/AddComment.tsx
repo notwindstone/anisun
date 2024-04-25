@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import {Avatar, Button, Flex, Group, Paper, Space, Text, Textarea} from "@mantine/core";
+import {Avatar, Button, Flex, Group, Paper, Skeleton, Space, Text, Textarea} from "@mantine/core";
 import {notify} from "@/utils/notify/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
@@ -86,12 +86,18 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
     return (
         <Paper className={classes.root}>
             {
-                isUser && (
-                    <Group>
-                        <Avatar className={classes.avatar} src={user?.imageUrl} />
-                        <Text className={classes.username}>{user?.username}</Text>
-                    </Group>
-                )
+                isUser
+                    ? (
+                        <Group>
+                            <Avatar size={40} className={classes.avatar} src={user?.imageUrl} />
+                            <Text className={classes.username}>{user?.username}</Text>
+                        </Group>
+                    ) : (
+                        <Group>
+                            <Skeleton w={40} h={40} circle />
+                            <Skeleton h={20} w={128} />
+                        </Group>
+                    )
 
             }
             <Space h="md" />
@@ -109,25 +115,18 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                 autosize
                 required
                 minRows={2}
-                disabled={
-                    !isUser
-                }
             />
-            {
-                isUser
-                    ? (
-                        <Flex justify="flex-end">
-                            <Button
-                                className={classes.submit}
-                                type="button"
-                                onClick={handleSubmit}
-                                variant="filled"
-                            >
-                                Ответить
-                            </Button>
-                        </Flex>
-                    ) : null
-            }
+            <Flex justify="flex-end">
+                <Button
+                    className={classes.submit}
+                    type="button"
+                    onClick={handleSubmit}
+                    variant="filled"
+                    disabled={!isUser}
+                >
+                    Ответить
+                </Button>
+            </Flex>
         </Paper>
     )
 }
