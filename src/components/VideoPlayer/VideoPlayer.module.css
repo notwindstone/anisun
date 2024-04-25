@@ -1,6 +1,6 @@
 .player {
     --media-menu-bg: rgba(0, 0, 0, 0.7);
-    --media-menu-item-border-radius: var(--mantine-radius-sm);
+    --media-menu-item-border-radius: var(--mantine-radius-md);
 }
 
 .playlist {
@@ -25,4 +25,8 @@
 
 .playlistIcon {
     color: #ffffff;
+}
+
+.currentEpisode {
+    background: var(--animeth-focused-block-background-color) !important;
 }

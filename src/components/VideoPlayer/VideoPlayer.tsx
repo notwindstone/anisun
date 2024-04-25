@@ -59,6 +59,7 @@ function changeEpisode({ player }: VideoPlayerProps, episode: number) {
 export default function VideoPlayer({ title, player, preview }: VideoPlayerProps) {
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
     const [hideMenu, setHideMenu] = useState('hidden');
+    const [currentEpisode, setCurrentEpisode] = useState(1)
 
     const episodesAmount = Object.entries(player.list);
 
@@ -67,8 +68,12 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
 
             return (
                 <Menu.Radio
+                    className={
+                        currentEpisode === episodeIndex ? classes.currentEpisode : undefined
+                    }
                     key={episodeIndex}
                     onClick={() => {
+                            setCurrentEpisode(episodeIndex)
                             setEpisodeSource(changeEpisode({ player }, episodeIndex));
                         }
                     }
