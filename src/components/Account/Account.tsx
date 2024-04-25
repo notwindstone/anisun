@@ -2,12 +2,13 @@
 
 import {useQuery} from "@tanstack/react-query";
 import {account} from "@/lib/account/account";
-import {Avatar, Skeleton, Text, Title} from "@mantine/core";
+import {Avatar, Flex, Image, Skeleton, Stack, Text, Title, Tooltip} from "@mantine/core";
 import React from "react";
 import {UserResource} from "@clerk/types";
 import dayjs from "dayjs";
 import 'dayjs/locale/ru'
 import Link from "next/link";
+import classes from './Account.module.css';
 
 export default function Account({ user }: { user: UserResource }) {
     dayjs.locale('ru')
@@ -23,30 +24,47 @@ export default function Account({ user }: { user: UserResource }) {
         queryFn: getAccountStats,
     })
 
+    const lastSignedIn = dayjs(user.lastSignInAt).format('D MMMM YYYY в H:mm')
+
+    const tooltipAvatarInfo = (
+        <Flex align="center" direction="column" className={classes.tooltipMenu}>
+            <Image
+                radius="md"
+                src={user.imageUrl}
+                w={512}
+                h={512}
+                alt={`Аватар пользователя ${user.username ?? 'unknown username'}`}
+            />
+            <Stack className={classes.tooltipInfo} align="center" gap={0}>
+                <Title order={2}>{user.username ?? 'unknown username'}</Title>
+                <Text>Последний вход: {lastSignedIn}</Text>
+            </Stack>
+        </Flex>
+    )
+
     return (
         <>
-            <Avatar
-                src={user.imageUrl}
-                alt={user.username ?? 'unknown username'}
-                size={64}
-                component={Link}
-                href="/"
-            >
-                {
-                    user.username
-                        ? user.username[0]
-                        : '?'
-                }
-            </Avatar>
+            <Tooltip color="black" openDelay={500} label={tooltipAvatarInfo} position="top-start">
+                <Avatar
+                    src={user.imageUrl}
+                    alt={user.username ?? 'unknown username'}
+                    size={64}
+                    component={Link}
+                    href={user.imageUrl}
+                    target="_blank"
+                >
+                    {
+                        user.username
+                            ? user.username[0]
+                            : '?'
+                    }
+                </Avatar>
+            </Tooltip>
             <Title>{user.username}</Title>
-            <Text>
-                {
-                    dayjs(user.lastSignInAt).format('D MMMM YYYY в H:mm')
-                }
+            <Text>Последний вход: {lastSignedIn}
             </Text>
 
-            <Text>
-                {
+            <Text>Дата создания аккаунта: {
                     dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
                 }
             </Text>
