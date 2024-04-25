@@ -60,7 +60,7 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
 
     return (
         <>
-            <Modal opened={opened} onClose={close} title={modalTitle}>
+            <Modal opened={opened} onClose={close} title={modalTitle} centered>
                 <Text>{modalDescription}</Text>
                 <Flex
                     mt="1rem"

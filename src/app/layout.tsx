@@ -51,7 +51,7 @@ export default function RootLayout({
                 </head>
                 <body className={inter.className}>
                     <NextTopLoader
-                      color="#0076ff"
+                      color="var(--animeth-accent-color)"
                       showSpinner={false}
                       height={4}
                     />

@@ -39,7 +39,7 @@
         transform: translateY(0);
     }
 
-    @media (max-width: $mantine-breakpoint-md) {
+    @media (max-width: $mantine-breakpoint-xs) {
         &:active {
             transform: translateY(rem(-2px));
         }

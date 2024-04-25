@@ -12,6 +12,7 @@ import {Button, Container, Skeleton, Space, Text} from "@mantine/core";
 import {useState} from "react";
 import {nanoid} from "nanoid";
 import {makeWordEnding} from "@/utils/makeWordEnding";
+import classes from './CommentList.module.css';
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
     const [delayed, setDelayed] = useState(false)
@@ -161,7 +162,8 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             </InView>
             {
                 isFetchingNextPage
-                    && <CommentSkeleton />
+                    ? <CommentSkeleton />
+                    : <div className={classes.commentPlaceholder} />
             }
             {
                 totalCount > 0

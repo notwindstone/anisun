@@ -7,33 +7,14 @@ import videoPlayerTranslation from '../../configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
 import {Button, Text} from "@mantine/core";
+import {VideoPlayerType} from "@/types/VideoPlayerType";
+import {VideoPlaylistType} from "@/types/VideoPlaylistType";
 
-interface VideoPlayerProps {
-    title?: string;
-    player: {
-        host: string;
-        list: {
-            episode: string;
-            hls: {
-                fhd?: string;
-                hd?: string;
-                sd?: string;
-            }
-        }[]
-    };
-    preview?: string;
-}
-interface VideoPlaylistProps {
-    fhd?: string;
-    hd?: string;
-    sd?: string;
-}
-
-function changeEpisode({ player }: VideoPlayerProps, episode: number) {
+function changeEpisode({ player }: VideoPlayerType, episode: number) {
     const host = `https://${player.host}`;
     const source = player.list[episode].hls;
 
-    const dataHLS: VideoPlaylistProps = {
+    const dataHLS: VideoPlaylistType = {
         fhd: '#EXT-X-STREAM-INF:RESOLUTION=1920x1080\n',
         hd: '#EXT-X-STREAM-INF:RESOLUTION=1280x720\n',
         sd: '#EXT-X-STREAM-INF:RESOLUTION=720x480\n',
@@ -57,9 +38,9 @@ function changeEpisode({ player }: VideoPlayerProps, episode: number) {
     return URL.createObjectURL(blob);
 }
 
-export default function VideoPlayer({ title, player, preview }: VideoPlayerProps) {
+export default function VideoPlayer({ title, player, preview }: VideoPlayerType) {
     const mediaPlayerRef = useRef<MediaPlayerInstance>(null);
-    const { started, currentTime, duration, playing, title: animeTitle } = useMediaStore(mediaPlayerRef);
+    const { started, currentTime, duration } = useMediaStore(mediaPlayerRef);
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
     const [hideMenu, setHideMenu] = useState('hidden');
     const [currentEpisode, setCurrentEpisode] = useState(1)
@@ -141,7 +122,7 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerProps
                                     </div>
                                 )
                                 : (
-                                    <div className={classes.nextEpisode}></div>
+                                    <div className={classes.nextEpisode} />
                                 )
                         }
                     </Menu.Root>

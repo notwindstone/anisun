@@ -1,4 +1,4 @@
-import {Badge, Flex, Group, Image, Overlay, Paper, Title} from "@mantine/core";
+import {Badge, Flex, Image, Overlay, Paper, Title} from "@mantine/core";
 import classes from './CarouselCard.module.css'
 import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import NextImage from "next/image";
