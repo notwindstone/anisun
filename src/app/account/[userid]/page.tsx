@@ -8,7 +8,12 @@ export default async function Page({ params }: { params: { userid: string } }) {
     const user = await clerkClient.users.getUser(params.userid);
 
     if (!user) {
-        return
+        return (
+            <>
+                <Link href="/">Вернуться</Link>
+                <Text>Похоже, что такого пользователя не существует.</Text>
+            </>
+        )
     }
 
     const userObject = JSON.parse(JSON.stringify(user))
