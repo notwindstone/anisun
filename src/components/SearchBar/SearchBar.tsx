@@ -2,18 +2,19 @@
 
 import { useEffect, useState } from 'react';
 import {
+    Autocomplete,
     AutocompleteProps, CloseButton,
     ComboboxItem, Flex,
     Image,
     OptionsFilter,
-    Select, Skeleton, Stack,
+    Skeleton, Stack,
     Text, Title,
 } from '@mantine/core';
 import {useDebouncedState} from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
-import classes from './Search.module.css';
+import classes from './SearchBar.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 import NProgress from 'nprogress';
 import NextImage from 'next/image'
@@ -83,7 +84,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     );
 };
 
-export function Search() {
+export default function SearchBar() {
     const shikimori = client();
     const router = useRouter();
     const [search, setSearch] = useDebouncedState('', 300, { leading: true });
@@ -95,6 +96,12 @@ export function Search() {
     });
 
     async function fetchTitles(keyInput: string) {
+        const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length
+
+        if (isOnlyWhiteSpace) {
+            return
+        }
+        
         const searchList = (await shikimori.animes.list({
             search: keyInput,
             limit: 10
@@ -117,7 +124,7 @@ export function Search() {
                     value: `${titleCode}--${posterSourceURL}--${title.russian}--${title.kind}--${title.status}--${title.name}`,
                     label: `${title.russian} / ${title.name}`,
                 }
-        )});
+            )});
 
         // @ts-ignore
         setTitles(titlesList);
@@ -131,17 +138,16 @@ export function Search() {
 
     return (
         <>
-            <Select
-                searchable
+            <Autocomplete
                 variant="unstyled"
                 maxDropdownHeight={800}
                 data={
                     isFetching
+                        // @ts-ignore
                         ? [{ label: ' ', value: 'fetching', disabled: true }]
                         : titles
                 }
-                defaultSearchValue={search}
-                onSearchChange={(event) => setSearch(event)}
+                onChange={(event) => setSearch(event)}
                 placeholder="Поиск"
                 leftSection={
                     <IconSearch size="1rem" />
@@ -149,7 +155,7 @@ export function Search() {
                 rightSectionPointerEvents="auto"
                 rightSection={
                     search
-                        && <CloseButton onClick={() => setSearch('')} />
+                    && <CloseButton onClick={() => setSearch('')} />
                 }
                 onOptionSubmit={(option) => {
                     NProgress.start()
