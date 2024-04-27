@@ -3,16 +3,20 @@
 import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {
     Autocomplete,
-    AutocompleteProps, CloseButton,
-    ComboboxItem, Flex,
+    AutocompleteProps,
+    CloseButton,
+    ComboboxItem,
+    Flex,
     Image,
     OptionsFilter,
-    Skeleton, Stack,
-    Text, Title,
+    Skeleton,
+    Stack,
+    Text,
+    Title,
 } from '@mantine/core';
 import {useDebouncedValue} from '@mantine/hooks';
-import { useRouter } from 'next/navigation';
-import { useQuery } from '@tanstack/react-query';
+import {useRouter} from 'next/navigation';
+import {useQuery} from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
 import classes from './SearchBar.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
@@ -113,7 +117,7 @@ export default function SearchBar() {
         disabled: true
     }]);
 
-    const { refetch, isFetching } = useQuery({
+    const { data, isFetching } = useQuery({
         queryKey: ['titles', search],
         queryFn: async () => fetchTitles(search),
     });
@@ -122,10 +126,7 @@ export default function SearchBar() {
         const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length
 
         if (isOnlyWhiteSpace) {
-            const noValue = [{ label: ' ', value: 'noValue', disabled: true }]
-
-            setTitles(noValue);
-            return noValue
+            return [{label: ' ', value: 'noValue', disabled: true}]
         }
         
         const searchList = (await shikimori.animes.list({
@@ -134,13 +135,10 @@ export default function SearchBar() {
         })).animes
 
         if (searchList.length < 1) {
-            const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
-
-            setTitles(nothingFound);
-            return nothingFound;
+            return [{label: ' ', value: 'nothing', disabled: true}];
         }
 
-        const titlesList = searchList.map((title: AnimeType) => {
+        return searchList.map((title: AnimeType) => {
             const titleCode = title.url.replace('https://shikimori.one/animes/', '')
             const posterSourceURL = title.poster?.mainUrl
 
@@ -149,16 +147,15 @@ export default function SearchBar() {
                     value: `${titleCode}--${posterSourceURL}--${title.russian}--${title.kind}--${title.status}--${title.name}`,
                     label: `${title.russian} / ${title.name}`,
                 }
-            )});
-
-        setTitles(titlesList);
-
-        return titlesList;
+            )
+        });
     }
 
     useEffect(() => {
-        refetch().then();
-    }, [refetch, search]);
+        // Не проблема, т.к. есть проверка на isFetching в <Autocomplete data={проверка} />
+        // @ts-ignore
+        setTitles(data)
+    }, [data, search]);
 
     return (
         <>
