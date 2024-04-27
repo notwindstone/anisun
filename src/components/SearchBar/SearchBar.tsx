@@ -10,7 +10,7 @@ import {
     Skeleton, Stack,
     Text, Title,
 } from '@mantine/core';
-import {useDebouncedState} from '@mantine/hooks';
+import {useDebouncedValue} from '@mantine/hooks';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
@@ -95,8 +95,23 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
 export default function SearchBar() {
     const shikimori = client();
     const router = useRouter();
-    const [search, setSearch] = useDebouncedState('', 300, { leading: true });
-    const [titles, setTitles]: [titles: SearchBarDataType, setTitles: Dispatch<SetStateAction<SearchBarDataType>>] = useState([{ label: ' ', value: 'noValue', disabled: true }]);
+    const [input, setInput] = useState('')
+    const [search] = useDebouncedValue(input, 300, { leading: true });
+
+    // TypeScript is insane (это пиздец ебаный, в смысле type boolean | undefined is not assignable to type true
+    // сука он вообще нахуй? или это я дебил и не понимаю чего-то тут
+    // @ts-ignore
+    const [
+        titles,
+        setTitles
+    ]: [
+        titles: SearchBarDataType,
+        setTitles: Dispatch<SetStateAction<SearchBarDataType>>
+    ] = useState([{
+        label: ' ',
+        value: 'noValue',
+        disabled: true
+    }]);
 
     const { refetch, isFetching } = useQuery({
         queryKey: ['titles', search],
@@ -155,15 +170,20 @@ export default function SearchBar() {
                         ? [{ label: ' ', value: 'fetching', disabled: true }]
                         : titles
                 }
-                onChange={(event) => setSearch(event)}
+                onChange={(event) => {
+                    setInput(event)
+                }}
                 placeholder="Поиск"
                 leftSection={
                     <IconSearch size="1rem" />
                 }
+                value={input}
                 rightSectionPointerEvents="auto"
                 rightSection={
                     search
-                    && <CloseButton onClick={() => setSearch('')} />
+                        && <CloseButton onClick={() => {
+                            setInput('')
+                        }} />
                 }
                 onOptionSubmit={(option) => {
                     NProgress.start()
