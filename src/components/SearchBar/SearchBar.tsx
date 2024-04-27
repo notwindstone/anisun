@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import {Dispatch, SetStateAction, useEffect, useState} from 'react';
 import {
     Autocomplete,
     AutocompleteProps, CloseButton,
@@ -23,9 +23,10 @@ import {client} from "@/lib/shikimori/client";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 import globalVariables from '../../configs/globalVariables.json'
 import translateShikimoriKind from "@/utils/translateShikimoriKind";
+import {SearchBarDataType} from "@/types/SearchBarDataType";
 
-// Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название от трёх символов" в зависимости от значения
-// Я не понял, как работает optionsFilter в Mantine, но он работает, поэтому всё отлично
+// Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название аниме" в зависимости от значения
+// Я не понял, как работает optionsFilter в Mantine, но он работает так, как мне нужно, поэтому всё отлично
 const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter(() => ({ value: ' ', label: ' ' }));
 
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
@@ -45,6 +46,13 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     <Title order={3}>{searchAutocomplete.nothing.label}</Title>
                 </Stack>
             );
+        case 'noValue':
+            return (
+                <Stack className={classes.stack} align="center" justify="center">
+                    <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.noValue.image} />
+                    <Title order={3}>{searchAutocomplete.noValue.label}</Title>
+                </Stack>
+            )
         case 'fetching':
             return (
                 <Flex align="center" gap="sm">
@@ -88,7 +96,7 @@ export default function SearchBar() {
     const shikimori = client();
     const router = useRouter();
     const [search, setSearch] = useDebouncedState('', 300, { leading: true });
-    const [titles, setTitles] = useState([]);
+    const [titles, setTitles]: [titles: SearchBarDataType, setTitles: Dispatch<SetStateAction<SearchBarDataType>>] = useState([{ label: ' ', value: 'noValue', disabled: true }]);
 
     const { refetch, isFetching } = useQuery({
         queryKey: ['titles', search],
@@ -99,7 +107,10 @@ export default function SearchBar() {
         const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length
 
         if (isOnlyWhiteSpace) {
-            return
+            const noValue = [{ label: ' ', value: 'noValue', disabled: true }]
+
+            setTitles(noValue);
+            return noValue
         }
         
         const searchList = (await shikimori.animes.list({
@@ -109,12 +120,11 @@ export default function SearchBar() {
 
         if (searchList.length < 1) {
             const nothingFound = [{ label: ' ', value: 'nothing', disabled: true }];
-            // @ts-ignore
+
             setTitles(nothingFound);
             return nothingFound;
         }
 
-        // @ts-ignore
         const titlesList = searchList.map((title: AnimeType) => {
             const titleCode = title.url.replace('https://shikimori.one/animes/', '')
             const posterSourceURL = title.poster?.mainUrl
@@ -126,7 +136,6 @@ export default function SearchBar() {
                 }
             )});
 
-        // @ts-ignore
         setTitles(titlesList);
 
         return titlesList;
@@ -143,7 +152,6 @@ export default function SearchBar() {
                 maxDropdownHeight={800}
                 data={
                     isFetching
-                        // @ts-ignore
                         ? [{ label: ' ', value: 'fetching', disabled: true }]
                         : titles
                 }

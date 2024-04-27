@@ -2,5 +2,9 @@
   "nothing": {
     "label": "Ничего не найдено",
     "image": "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
+  },
+  "noValue": {
+    "label": "Введите название аниме",
+    "image": "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
   }
 }
