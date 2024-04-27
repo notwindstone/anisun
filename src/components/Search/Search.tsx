@@ -30,8 +30,11 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    let status = translateShikimoriStatus(optionData[4])
+    const posterSourceURL = optionData[1]
+    const russianName = optionData[2]
     let kind = translateShikimoriKind(optionData[3])
+    let status = translateShikimoriStatus(optionData[4])
+    const englishName = optionData[5]
 
     switch (option.value) {
         case 'nothing':
@@ -39,13 +42,6 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 <Stack className={classes.stack} align="center" justify="center">
                     <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.nothing.image} />
                     <Title order={3}>{searchAutocomplete.nothing.label}</Title>
-                </Stack>
-            );
-        case 'notEnoughChars':
-            return (
-                <Stack className={classes.stack} align="center" justify="center">
-                    <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.notEnoughChars.image} />
-                    <Title order={3}>{searchAutocomplete.notEnoughChars.label}</Title>
                 </Stack>
             );
         case 'fetching':
@@ -68,7 +64,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             <div>
                 <Image
                     alt="Anime poster"
-                    src={optionData[1]}
+                    src={posterSourceURL}
                     placeholder="blur"
                     blurDataURL={globalVariables.imagePlaceholder}
                     width={96}
@@ -79,9 +75,9 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 />
             </div>
             <div>
-                <Title lineClamp={2} order={3}>{optionData[2]}</Title>
+                <Title lineClamp={2} order={3}>{russianName}</Title>
                 <Text lineClamp={2} size="lg" opacity={0.8}>{kind}</Text>
-                <Text lineClamp={2} size="md" opacity={0.5}>{status}{optionData[5] ? `, ${optionData[5]}` : []}</Text>
+                <Text lineClamp={2} size="md" opacity={0.5}>{status}{englishName ? `, ${englishName}` : []}</Text>
             </div>
         </Flex>
     );
@@ -99,13 +95,6 @@ export function Search() {
     });
 
     async function fetchTitles(keyInput: string) {
-        if (keyInput.length < 3) {
-            const notEnoughChars = [{ label: ' ', value: 'notEnoughChars', disabled: true }];
-            // @ts-ignore
-            setTitles(notEnoughChars);
-            return notEnoughChars;
-        }
-
         const searchList = (await shikimori.animes.list({
             search: keyInput,
             limit: 5
@@ -119,12 +108,16 @@ export function Search() {
         }
 
         // @ts-ignore
-        const titlesList = searchList.map((title: AnimeType) => (
-            {
-                value: `${title.url.replace('https://shikimori.one/animes/', '')}--${title.poster?.mainUrl}--${title.russian}--${title.kind}--${title.status}--${title.name}`,
-                label: `${title.russian} / ${title.name}`,
-            }
-        ));
+        const titlesList = searchList.map((title: AnimeType) => {
+            const titleCode = title.url.replace('https://shikimori.one/animes/', '')
+            const posterSourceURL = title.poster?.mainUrl
+
+            return (
+                {
+                    value: `${titleCode}--${posterSourceURL}--${title.russian}--${title.kind}--${title.status}--${title.name}`,
+                    label: `${title.russian} / ${title.name}`,
+                }
+        )});
 
         // @ts-ignore
         setTitles(titlesList);

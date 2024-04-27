@@ -2,9 +2,5 @@
   "nothing": {
     "label": "Ничего не найдено",
     "image": "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
-  },
-  "notEnoughChars": {
-    "label": "Введите название от трёх символов",
-    "image": "https://assets.vercel.com/image/upload/front/favicon/vercel/180x180.png"
   }
 }
