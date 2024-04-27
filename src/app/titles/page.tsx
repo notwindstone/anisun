@@ -1,7 +1,6 @@
 "use server"
 
 import Link from 'next/link';
-import {Search} from "@/components/Search/Search";
 import type {Metadata} from "next";
 import SearchBar from "@/components/SearchBar/SearchBar";
 
@@ -25,7 +24,6 @@ export default async function Page() {
     return (
         <div>
             <Link href="/">Return</Link>
-            <Search />
             <SearchBar />
         </div>
     );

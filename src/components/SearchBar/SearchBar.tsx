@@ -36,7 +36,10 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    const posterSourceURL = optionData[1]
+    const posterSourceURL =
+        optionData[1] === 'undefined'
+            ? '/missing-image.png'
+            : optionData[1]
     const russianName = optionData[2]
     let kind = translateShikimoriKind(optionData[3])
     let status = translateShikimoriStatus(optionData[4])
