@@ -7,6 +7,7 @@ import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
 import Link from "next/link";
 import CommentList from "@/components/Comments/CommentList/CommentList";
 import {client} from "@/lib/shikimori/client";
+import AnimeInfo from "@/components/AnimeInfo/AnimeInfo";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
@@ -49,6 +50,7 @@ export default async function Page({ params }: { params: { code: string } }) {
         <>
             <Link href="/titles">Вернуться</Link>
             <div>{params.code}</div>
+            <AnimeInfo shikimoriId={shikimoriId} />
             <VideoEmbed
                 id={shikimoriId}
             />

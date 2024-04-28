@@ -49,20 +49,20 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
         case 'nothing':
             return (
                 <Stack className={classes.stack} align="center" justify="center">
-                    <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.nothing.image} />
+                    <Image className={classes.poster} alt="Anime character" radius="md" src={searchAutocomplete.nothing.image} />
                     <Title order={3}>{searchAutocomplete.nothing.label}</Title>
                 </Stack>
             );
         case 'noValue':
             return (
                 <Stack className={classes.stack} align="center" justify="center">
-                    <Image className={classes.poster} alt="Anime character" radius="sm" src={searchAutocomplete.noValue.image} />
+                    <Image className={classes.poster} alt="Anime character" radius="md" src={searchAutocomplete.noValue.image} />
                     <Title order={3}>{searchAutocomplete.noValue.label}</Title>
                 </Stack>
             )
         case 'fetching':
             return (
-                <Flex align="center" gap="sm">
+                <Flex align="center" gap="md">
                     <div>
                         <Skeleton width={96} height={128} />
                     </div>
@@ -76,7 +76,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     }
 
     return (
-        <Flex align="center" gap="sm">
+        <Flex align="center" gap="md">
             <div>
                 <Image
                     alt="Anime poster"
@@ -87,7 +87,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     height={128}
                     component={NextImage}
                     className={classes.poster}
-                    radius="sm"
+                    radius="md"
                 />
             </div>
             <div>
@@ -105,7 +105,7 @@ export default function SearchBar() {
     const [input, setInput] = useState('')
     const [search] = useDebouncedValue(input, 300, { leading: true });
 
-    // TypeScript is insane (это пиздец ебаный, в смысле type boolean | undefined is not assignable to type true
+    // TypeScript is insane (это пиздец ебаный, в смысле type boolean is not assignable to type true
     // сука он вообще нахуй? или это я дебил и не понимаю чего-то тут
     // @ts-ignore
     const [
@@ -158,7 +158,7 @@ export default function SearchBar() {
         // Не проблема, т.к. есть проверка на isFetching в <Autocomplete data={проверка} />
         // @ts-ignore
         setTitles(data)
-    }, [data, search]);
+    }, [data]);
 
     return (
         <>
