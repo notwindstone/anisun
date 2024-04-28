@@ -1,32 +1,58 @@
 "use client"
 
-import {Image} from "@mantine/core";
+import {Breadcrumbs, Group, Image, Text, Title} from "@mantine/core";
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
+import Link from "next/link";
+import translateShikimoriKind from "@/utils/translateShikimoriKind";
+import {usePathname} from "next/navigation";
 
 export default function AnimeInfo({ shikimoriId }: { shikimoriId: string }) {
+    const pathname = usePathname();
     const shikimori = client();
-    const { data, isFetching } = useQuery({
+    const {
+        data,
+        status,
+        error
+    } = useQuery({
         queryKey: ['animeInfo', shikimoriId],
         queryFn: async () => getAnime(shikimoriId),
     });
 
     async function getAnime(id: string) {
-        return (await shikimori.animes.list({
+        return (await shikimori.animes.byId({
             ids: id,
-            limit: 1
-        })).animes
+        })).animes[0]
     }
 
-    console.log(isFetching, data)
+    const kind = translateShikimoriKind(data?.kind ?? '')
 
-    return (
+    const breadcrumbs = [
+        { title: 'Аниме', link: '/' },
+        { title: kind, link: '/titles/' },
+        { title: data?.genres?.[0]?.russian, link: `/titles/` },
+        { title: data?.russian, link: pathname }
+    ].map((item, index) => (
+        <Link href={item.link} key={index}>
+            {item.title}
+        </Link>
+    ));
+
+    return status === 'pending' ? (
+        <>Loading</>
+    ) : status === 'error' ? (
+        <>Error: {error?.message}</>
+    ) : (
         <>
+            <Title>{data?.russian} <span>/</span> {data?.name}</Title>
+            <Breadcrumbs>
+                {breadcrumbs}
+            </Breadcrumbs>
             <Image
                 alt="Anime poster"
-                src={"https://desu.shikimori.one/uploads/poster/animes/5114/40c4cba552dc60ebf02f8fc373b9a503.jpeg"}
+                src={data?.poster?.originalUrl}
                 placeholder="blur"
                 blurDataURL={globalVariables.imagePlaceholder}
                 width={700}

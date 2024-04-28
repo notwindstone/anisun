@@ -8,9 +8,8 @@ import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
-import {Button, Container, Skeleton, Space, Text} from "@mantine/core";
+import {Container, Skeleton, Space, Text} from "@mantine/core";
 import {useState} from "react";
-import {nanoid} from "nanoid";
 import {makeWordEnding} from "@/utils/makeWordEnding";
 import classes from './CommentList.module.css';
 
@@ -100,15 +99,13 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
     const commentSection = status === 'pending' ? (
         <CommentSkeleton />
     ) : status === 'error' ? (
-        <>Error: {error.message}</>
+        <>Error: {error?.message}</>
     ) : (
         <>
             {
                 data.pages.map((group) => {
                     if (!group) {
-                        return (
-                            <Button key={nanoid()} variant="light" onClick={async () => fetchNextPage()}>Раскрыть ещё</Button>
-                        )
+                        return
                     }
 
                     const commentGroup: CommentType[] | null = group.data ?? []
@@ -123,8 +120,23 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         </>
     )
 
-    const totalCount = data?.pages?.[0].total?.[0].count ?? 0
+    // Каким-то образом _data._pages[0] может оказаться undefined
+    let hasData
+    let hasPages
+    let hasPage
+    let hasCommentCount
 
+    if (data) hasData = true
+    if (hasData && data?.pages) hasPages = true
+    if (hasPages && data?.pages?.[0]) hasPage = true
+    if (hasPage && data?.pages?.[0].total?.[0].count) hasCommentCount = true
+
+    const hasAllData = hasData && hasPages && hasPage && hasCommentCount
+
+    const totalCount =
+        hasAllData
+            ? data?.pages?.[0].total?.[0].count ?? 0
+            : 0
 
     return (
         <Container size={800}>
