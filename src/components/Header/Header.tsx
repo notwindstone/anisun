@@ -7,6 +7,7 @@ import Link from "next/link";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import {IconSearch, IconUser} from "@tabler/icons-react";
 import {useMediaQuery} from "@mantine/hooks";
+import classes from './Header.module.css';
 
 export default function Header() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -21,7 +22,7 @@ export default function Header() {
                 justify="space-between"
                 align="center"
             >
-                <Group>
+                <Group className={classes.fixedGroup} justify="flex-start">
                     <Image
                         alt="Animeth website icon"
                         src="/favicon.png"
@@ -35,9 +36,13 @@ export default function Header() {
                         blurDataURL={globalVariables.imagePlaceholder}
                     />
                     <Title>Animeth</Title>
-                    <UnstyledButton>Перейти</UnstyledButton>
                 </Group>
                 <Group>
+                    <Link href="/">Главная</Link>
+                    <Link href="/titles">Аниме</Link>
+                    <Link href="/about">О сайте</Link>
+                </Group>
+                <Group className={classes.fixedGroup} justify="flex-end">
                     <ActionIcon radius="xl">
                         <IconSearch />
                     </ActionIcon>
