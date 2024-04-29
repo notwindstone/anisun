@@ -14,6 +14,7 @@ import MobileModal from "@/components/MobileModal/MobileModal";
 import Footer from "@/components/Footer/Footer";
 import Main from "@/components/Main/Main";
 import './global.css'
+import Header from "@/components/Header/Header";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,6 +59,7 @@ export default function RootLayout({
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={30000} limit={3} />
+                            <Header />
                             <Main>
                                 {children}
                             </Main>
