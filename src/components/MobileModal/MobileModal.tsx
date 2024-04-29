@@ -10,11 +10,7 @@ import MobileModalProfile from "@/components/MobileModal/MobileModalProfile/Mobi
 export default function MobileModal() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
-    if (!isMobile) {
-        return
-    }
-
-    return (
+    return isMobile && (
         <div className={classes.wrapper}>
             <Flex
                 className={classes.root}
