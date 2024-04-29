@@ -55,6 +55,7 @@ export default function RootLayout({
                       color="var(--animeth-accent-color)"
                       showSpinner={false}
                       height={4}
+                      zIndex={50000}
                     />
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
