@@ -103,7 +103,7 @@ export default function SearchBar() {
     const shikimori = client();
     const router = useRouter();
     const [input, setInput] = useState('')
-    const [search] = useDebouncedValue(input, 300, { leading: true });
+    const [search] = useDebouncedValue(input, 300);
 
     // TypeScript is insane (это пиздец ебаный, в смысле type boolean is not assignable to type true
     // сука он вообще нахуй? или это я дебил и не понимаю чего-то тут

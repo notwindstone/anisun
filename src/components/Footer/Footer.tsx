@@ -1,12 +1,19 @@
 import { Text, Container, ActionIcon, Group, rem } from '@mantine/core';
-import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import {
+    IconBrandDiscord,
+    IconPlayerPlay,
+    IconBrandTelegram,
+    IconBrandGithub,
+} from '@tabler/icons-react';
 import classes from './Footer.module.css';
 import Spacer from "@/components/Footer/Spacer";
 import Link from "next/link";
 
+const discordLink = "https://discord.gg/JhmkZDScfg"
+
 const data = [
     {
-        title: 'About',
+        title: 'О проекте',
         links: [
             { label: 'Features', link: '/' },
             { label: 'Pricing', link: '/' },
@@ -15,18 +22,9 @@ const data = [
         ],
     },
     {
-        title: 'Project',
+        title: 'Сообщество',
         links: [
-            { label: 'Contribute', link: '/' },
-            { label: 'Media assets', link: '/' },
-            { label: 'Changelog', link: '/' },
-            { label: 'Releases', link: '/' },
-        ],
-    },
-    {
-        title: 'Community',
-        links: [
-            { label: 'Join Discord', link: '/' },
+            { label: 'Discord', link: discordLink },
             { label: 'Follow on Twitter', link: '/' },
             { label: 'Email newsletter', link: '/' },
             { label: 'GitHub discussions', link: '/' },
@@ -61,27 +59,27 @@ export default function Footer() {
             <footer className={classes.footer}>
                 <Container className={classes.inner}>
                     <div className={classes.logo}>
-                        <IconBrandYoutube size={30}/>
+                        <IconPlayerPlay size={30}/>
                         <Text size="xs" c="dimmed" className={classes.description}>
-                            Build fully functional accessible web applications faster than ever
+                            Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Используется плеер на AniLibria API и Kodik, а поиск аниме происходит через Shikimori API.
                         </Text>
                     </div>
                     <div className={classes.groups}>{groups}</div>
                 </Container>
                 <Container className={classes.afterFooter}>
                     <Text c="dimmed" size="sm">
-                        © 2020 mantine.dev. All rights reserved.
+                        © 2024 animeth.vercel.app
                     </Text>
 
                     <Group gap={0} className={classes.social} justify="flex-end" wrap="nowrap">
-                        <ActionIcon size="lg" color="gray" variant="subtle">
-                            <IconBrandTwitter style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
+                        <ActionIcon component={Link} href="https://t.me/democracysucks" size="lg" color="gray" variant="subtle">
+                            <IconBrandTelegram style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
                         </ActionIcon>
-                        <ActionIcon size="lg" color="gray" variant="subtle">
-                            <IconBrandYoutube style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
+                        <ActionIcon component={Link} href={discordLink} size="lg" color="gray" variant="subtle">
+                            <IconBrandDiscord style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
                         </ActionIcon>
-                        <ActionIcon size="lg" color="gray" variant="subtle">
-                            <IconBrandInstagram style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
+                        <ActionIcon component={Link} href="https://github.com/windstone-aristotle-yellow/animeth" size="lg" color="gray" variant="subtle">
+                            <IconBrandGithub style={{width: rem(18), height: rem(18)}} stroke={1.5}/>
                         </ActionIcon>
                     </Group>
                 </Container>
