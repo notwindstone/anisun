@@ -14,6 +14,7 @@ export default function MobileModalSearch() {
                 opened={opened}
                 onClose={close}
                 className={classes.drawer}
+                zIndex={29999}
             >
                 MobileModalSearch
             </Drawer>

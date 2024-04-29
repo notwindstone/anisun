@@ -7,6 +7,8 @@
         --animeth-secondary-color: #cd98c7;
         --animeth-accent-color: #730085;
         /* Специфические цвета */
+        --animeth-footer-color: #f4f3f4;
+        --animeth-border-color: #e5e5e5;
         --animeth-text-contrast-color: #000;
         --animeth-text-contrast-reversed-color: #fff;
         --animeth-button-text-color: #fff;
@@ -23,6 +25,8 @@
         --animeth-secondary-color: #673261;
         --animeth-accent-color: #ed7aff;
         /* Специфические цвета */
+        --animeth-footer-color: #0c0b0c;
+        --animeth-border-color: #1a1a1a;
         --animeth-text-contrast-color: #fff;
         --animeth-text-contrast-reversed-color: #000;
         --animeth-button-text-color: #000;

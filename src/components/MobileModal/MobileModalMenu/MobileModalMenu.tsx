@@ -14,6 +14,7 @@ export default function MobileModalMenu() {
                 opened={opened}
                 onClose={close}
                 className={classes.drawer}
+                zIndex={29999}
             >
                 MobileModalMenu
             </Drawer>

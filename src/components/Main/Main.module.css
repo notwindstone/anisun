@@ -1,4 +1,4 @@
 .root {
-    background: var(--mantine-color-body);
+    background: var(--animeth-background-color);
     z-index: 0;
 }

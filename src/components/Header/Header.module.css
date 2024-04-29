@@ -7,5 +7,6 @@
     height: rem(96px);
     z-index: 30000;
     transition: transform 300ms ease;
-    background: var(--animeth-block-background-color);
+    background: var(--animeth-background-color);
+    border-bottom: rem(1px) solid var(--animeth-border-color);
 }

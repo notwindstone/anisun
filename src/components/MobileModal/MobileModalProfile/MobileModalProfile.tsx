@@ -14,6 +14,7 @@ export default function MobileModalProfile() {
                 opened={opened}
                 onClose={close}
                 className={classes.drawer}
+                zIndex={29999}
             >
                 MobileModalProfile
             </Drawer>

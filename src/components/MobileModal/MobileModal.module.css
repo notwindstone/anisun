@@ -8,6 +8,7 @@
     left: 0;
     right: 0;
     height: rem(128px);
+    z-index: 20000;
 }
 
 .root {
