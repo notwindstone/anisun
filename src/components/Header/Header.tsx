@@ -8,6 +8,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import {IconChevronDown, IconSearch, IconUser} from "@tabler/icons-react";
 import {useHeadroom, useMediaQuery} from "@mantine/hooks";
 import classes from './Header.module.css';
+import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 
 export default function Header() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -40,6 +41,7 @@ export default function Header() {
             </Group>
             <Group justify="flex-end">
                 <SearchBar />
+                <ColorSchemeControl />
                 <ActionIcon radius="xl">
                     <IconUser />
                 </ActionIcon>
