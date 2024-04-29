@@ -1,6 +1,6 @@
 "use client"
 
-import {ActionIcon, em, Flex, Group, HoverCard, Image, rem, Text, Title} from "@mantine/core";
+import {ActionIcon, Divider, em, Flex, Group, HoverCard, Image, rem, Stack, Text, Title} from "@mantine/core";
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
 import Link from "next/link";
@@ -21,7 +21,7 @@ export default function Header() {
                 justify="space-between"
                 align="center"
             >
-                <Group className={classes.fixedGroup} justify="flex-start">
+                <Group justify="flex-start">
                     <Image
                         alt="Animeth website icon"
                         src="/favicon.png"
@@ -36,27 +36,8 @@ export default function Header() {
                     />
                     <Title>Animeth</Title>
                 </Group>
-                <Group>
-                    <Link href="/">Главная</Link>
-                    <HoverCard>
-                        <HoverCard.Target>
-                            <Group gap={rem(8)}>
-                                <Text>Аниме</Text>
-                                <IconChevronDown
-                                    style={{ width: rem(16), height: rem(16) }}
-                                />
-                            </Group>
-                        </HoverCard.Target>
-                        <HoverCard.Dropdown>
-
-                        </HoverCard.Dropdown>
-                    </HoverCard>
-                    <Link href="/about">О сайте</Link>
-                </Group>
-                <Group className={classes.fixedGroup} justify="flex-end">
-                    <ActionIcon radius="xl">
-                        <IconSearch />
-                    </ActionIcon>
+                <Group justify="flex-end">
+                    <SearchBar />
                     <ActionIcon radius="xl">
                         <IconUser />
                     </ActionIcon>

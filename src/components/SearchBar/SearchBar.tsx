@@ -163,6 +163,7 @@ export default function SearchBar() {
     return (
         <>
             <Autocomplete
+                className={classes.root}
                 variant="unstyled"
                 maxDropdownHeight={800}
                 data={

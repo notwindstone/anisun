@@ -1,3 +1,7 @@
+.root {
+    min-width: rem(384px);
+}
+
 .poster {
     width: 6rem;
 }
