@@ -1,5 +1,9 @@
-.root {
+.wrapper {
     min-width: rem(384px);
+}
+
+.dropdown {
+    z-index: 30000 !important;
 }
 
 .poster {
