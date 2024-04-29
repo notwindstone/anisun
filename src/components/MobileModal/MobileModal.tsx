@@ -1,9 +1,11 @@
 'use client'
 
-import {useMediaQuery} from "@mantine/hooks";
-import {ActionIcon, Button, em, Flex, Text} from "@mantine/core";
+import { useMediaQuery } from "@mantine/hooks";
+import { em, Flex } from "@mantine/core";
 import classes from './MobileModal.module.css';
-import {IconMenu2, IconSearch, IconUser} from "@tabler/icons-react";
+import MobileModalMenu from "@/components/MobileModal/MobileModalMenu/MobileModalMenu";
+import MobileModalSearch from "@/components/MobileModal/MobileModalSearch/MobileModalSearch";
+import MobileModalProfile from "@/components/MobileModal/MobileModalProfile/MobileModalProfile";
 
 export default function MobileModal() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -19,15 +21,9 @@ export default function MobileModal() {
                 justify="space-between"
                 align="center"
             >
-                <ActionIcon>
-                    <IconMenu2 />
-                </ActionIcon>
-                <Button leftSection={<IconSearch />}>
-                    <Text>Поиск</Text>
-                </Button>
-                <ActionIcon>
-                    <IconUser />
-                </ActionIcon>
+                <MobileModalMenu />
+                <MobileModalSearch />
+                <MobileModalProfile />
             </Flex>
         </div>
     );

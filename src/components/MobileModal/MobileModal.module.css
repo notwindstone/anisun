@@ -1,3 +1,7 @@
+.drawer {
+    background: var(--animeth-block-background-color)
+}
+
 .wrapper {
     position: fixed;
     bottom: 0;
