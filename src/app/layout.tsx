@@ -23,6 +23,7 @@ const description = "Сайт для онлайн просмотра аниме 
 
 const theme = createTheme({
     defaultRadius: "md",
+    primaryColor: 'violet',
 })
 
 export const metadata: Metadata = {
@@ -50,7 +51,7 @@ export default function RootLayout({
                 <head>
                     <ColorSchemeScript/>
                 </head>
-                <body className={inter.className}>
+                <body style={{ background: 'var(--animeth-background-color)' }} className={inter.className}>
                     <NextTopLoader
                       color="var(--animeth-accent-color)"
                       showSpinner={false}

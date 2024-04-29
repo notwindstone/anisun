@@ -13,7 +13,10 @@ export default function MobileModalMenu() {
                 size="100%"
                 opened={opened}
                 onClose={close}
-                className={classes.drawer}
+                classNames={{
+                    content: classes.drawer,
+                    header: classes.drawer
+                }}
                 zIndex={29999}
             >
                 MobileModalMenu
