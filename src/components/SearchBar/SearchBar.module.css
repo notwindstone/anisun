@@ -4,6 +4,11 @@
 
 .dropdown {
     z-index: 30000 !important;
+    border-radius: var(--mantine-radius-md);
+}
+
+.option {
+    border-radius: var(--mantine-radius-md);
 }
 
 .poster {

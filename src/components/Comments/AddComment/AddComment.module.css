@@ -13,7 +13,6 @@
             border: rem(2px) solid var(--animeth-primary-color);
         }
 
-        box-shadow: 0 0 80px -10px alpha(var(--animeth-primary-color), 0.2);
         background: var(--animeth-focused-block-background-color);
         border: rem(2px) solid var(--animeth-primary-color);
     }
@@ -32,7 +31,6 @@
         transform: translateY(rem(-2px));
         color: var(--animeth-button-text-color);
         background: var(--animeth-button-background-hover-color);
-        box-shadow: 0 10px 50px -10px var(--animeth-accent-color);
     }
 
     &:active {

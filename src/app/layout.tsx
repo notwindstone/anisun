@@ -22,7 +22,7 @@ const title = 'Главная'
 const description = "Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Плеер сделан на AniLibria API и Kodik, а поиск аниме через Shikimori API."
 
 const theme = createTheme({
-    defaultRadius: "md",
+    defaultRadius: "xl",
     primaryColor: 'violet',
 })
 

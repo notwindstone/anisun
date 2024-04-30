@@ -63,7 +63,7 @@ export default function VideoEmbed({ id }: { id: string }) {
 
     if (!data) {
         return (
-            <Skeleton visible={isFetching} height="56.25vw" width="100vw" />
+            <Skeleton visible={isFetching} height="56.25vw" width="100vw" radius="md" />
         )
     }
 

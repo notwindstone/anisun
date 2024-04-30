@@ -11,11 +11,11 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
         <Paper
             component={Link}
             href={`/titles/${animeTitle.url.replace('https://shikimori.one/animes/', '')}`}
-            radius="md"
+            radius="xl"
             className={classes.card}
         >
             <Overlay
-                radius="md"
+                radius="xl"
                 gradient="linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%)"
                 className={classes.overlay}
             >
@@ -42,7 +42,7 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
                 height={325}
                 component={NextImage}
                 className={classes.poster}
-                radius="md"
+                radius="xl"
             />
         </Paper>
     );

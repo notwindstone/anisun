@@ -64,7 +64,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             return (
                 <Flex align="center" gap="md">
                     <div>
-                        <Skeleton width={96} height={128} />
+                        <Skeleton width={96} height={128} radius="md" />
                     </div>
                     <div>
                         <Skeleton height={24} width={256} radius="xl" mb="xs" />
@@ -165,7 +165,8 @@ export default function SearchBar() {
             <Autocomplete
                 classNames={{
                     wrapper: classes.wrapper,
-                    dropdown: classes.dropdown
+                    dropdown: classes.dropdown,
+                    option: classes.option,
                 }}
                 variant="unstyled"
                 maxDropdownHeight={800}

@@ -9,11 +9,12 @@
     right: 0;
     height: rem(128px);
     z-index: 20000;
+    transition: transform 300ms ease;
 }
 
 .root {
     width: 100%;
     height: 100%;
     background: var(--animeth-background-color);
-    border-radius: var(--mantine-radius-lg) var(--mantine-radius-lg) 0 0;
+    border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) 0 0;
 }

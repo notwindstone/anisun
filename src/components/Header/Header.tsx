@@ -22,7 +22,7 @@ export default function Header() {
             justify="space-between"
             align="center"
             className={classes.header}
-            style={{ transform: `translate3d(0, ${pinned ? 0 : rem(-110)}, 0)` }}
+            style={{ transform: `translate3d(0, ${pinned ? 0 : rem(-96)}, 0)` }}
         >
             <Group justify="flex-start">
                 <Image
