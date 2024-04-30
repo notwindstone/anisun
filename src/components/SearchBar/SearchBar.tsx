@@ -99,7 +99,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     );
 };
 
-export default function SearchBar() {
+export default function SearchBar({ close }: { close?: () => void }) {
     const shikimori = client();
     const router = useRouter();
     const [input, setInput] = useState('')
@@ -191,6 +191,7 @@ export default function SearchBar() {
                         }} />
                 }
                 onOptionSubmit={(option) => {
+                    close && close()
                     NProgress.start()
                     router.push(`/titles/${option.split('--')[0]}`);
                 }}

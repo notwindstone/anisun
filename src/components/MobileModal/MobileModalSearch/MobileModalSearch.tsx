@@ -23,7 +23,7 @@ export default function MobileModalSearch() {
                     <Title order={2}>Поиск аниме</Title>
                 }
             >
-                <SearchBar />
+                <SearchBar close={close} />
             </Drawer>
             <Button onClick={open} leftSection={<IconSearch/>}>
                 <Text>Поиск</Text>
