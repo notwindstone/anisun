@@ -36,10 +36,7 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    const posterSourceURL =
-        optionData[1] === 'undefined'
-            ? '/missing-image.png'
-            : optionData[1]
+    const posterSourceURL = optionData[1]
     const russianName = optionData[2]
     let kind = translateShikimoriKind(optionData[3])
     let status = translateShikimoriStatus(optionData[4])
@@ -143,12 +140,16 @@ export default function SearchBar({ close }: { close?: () => void }) {
 
         return searchList.map((title: AnimeType) => {
             const titleCode = title.url.replace('https://shikimori.one/animes/', '')
-            const posterSourceURL = title.poster?.mainUrl
+            const posterSourceURL = title.poster?.mainUrl ?? '/missing-image.png'
+            const originalName = title.name
+            const russianName = title.russian ?? originalName
+            const animeKind = title.kind
+            const animeStatus = title.status
 
             return (
                 {
-                    value: `${titleCode}--${posterSourceURL}--${title.russian}--${title.kind}--${title.status}--${title.name}`,
-                    label: `${title.russian} / ${title.name}`,
+                    value: `${titleCode}--${posterSourceURL}--${russianName}--${animeKind}--${animeStatus}--${originalName}`,
+                    label: `${russianName} / ${originalName}`,
                 }
             )
         });
