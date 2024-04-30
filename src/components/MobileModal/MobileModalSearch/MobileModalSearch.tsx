@@ -1,7 +1,8 @@
 import {IconSearch} from "@tabler/icons-react";
-import {Button, Drawer, Text} from "@mantine/core";
+import {Button, Drawer, Text, Title} from "@mantine/core";
 import classes from "@/components/MobileModal/MobileModal.module.css";
 import {useDisclosure} from "@mantine/hooks";
+import SearchBar from "@/components/SearchBar/SearchBar";
 
 export default function MobileModalSearch() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -18,8 +19,11 @@ export default function MobileModalSearch() {
                     header: classes.drawer
                 }}
                 zIndex={29999}
+                title={
+                    <Title order={2}>Поиск аниме</Title>
+                }
             >
-                MobileModalSearch
+                <SearchBar />
             </Drawer>
             <Button onClick={open} leftSection={<IconSearch/>}>
                 <Text>Поиск</Text>

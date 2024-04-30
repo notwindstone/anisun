@@ -5,10 +5,16 @@
 .dropdown {
     z-index: 30000 !important;
     border-radius: var(--mantine-radius-md);
+    border-color: var(--animeth-block-background-color);
+    background: var(--animeth-block-background-color);
 }
 
 .option {
     border-radius: var(--mantine-radius-md);
+
+    @mixin hover {
+        background: var(--animeth-focused-block-background-color)
+    }
 }
 
 .poster {
