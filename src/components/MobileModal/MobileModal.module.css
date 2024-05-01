@@ -29,21 +29,32 @@
 
     @mixin hover {
         .button {
-            background: lighten(var(--animeth-accent-color), 0.3);
+            background: light-dark(
+                lighten(var(--animeth-accent-color), 0.3),
+                darken(var(--animeth-accent-color), 0.5)
+            );
         }
     }
 }
 
 .button {
+    width: rem(92px);
     height: rem(32px);
-    background: var(--animeth-accent-color);
+    background: light-dark(
+        lighten(var(--animeth-accent-color), 0.5),
+        darken(var(--animeth-accent-color), 0.7)
+    );
     transition: 200ms ease;
 }
 
 .icon {
-    color: lighten(var(--animeth-secondary-color), 0.05);
+    color: light-dark(
+        darken(var(--animeth-primary-color), 0.2),
+        lighten(var(--animeth-primary-color), 0.2)
+    );
 }
 
 .text {
+    text-align: center;
     color: var(--animeth-text-color);
 }

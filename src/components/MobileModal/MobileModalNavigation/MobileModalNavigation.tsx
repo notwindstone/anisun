@@ -1,16 +1,16 @@
-import {useDisclosure} from "@mantine/hooks";
+import { IconHomeFilled } from "@tabler/icons-react";
+import {Center, Drawer, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileModal/MobileModal.module.css";
-import {Center, Drawer, rem, Stack, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
-import {IconHomeFilled, IconMenu2} from "@tabler/icons-react";
+import {useDisclosure} from "@mantine/hooks";
 
-export default function MobileModalProfile() {
+export default function MobileModalNavigation() {
     const [opened, { open, close }] = useDisclosure(false);
 
     return (
         <>
             <Drawer
                 position="bottom"
-                size="80vh"
+                size="60vh"
                 opened={opened}
                 onClose={close}
                 classNames={{
@@ -19,14 +19,14 @@ export default function MobileModalProfile() {
                 }}
                 zIndex={29999}
             >
-                MobileModalProfile
+                MobileModalMenu
             </Drawer>
             <Center flex={1}>
                 <UnstyledButton onClick={open} className={classes.buttonWrapper}>
-                    <ThemeIcon w={rem(86)} className={classes.button}>
-                        <IconMenu2 className={classes.icon} size={rem(28)} />
+                    <ThemeIcon className={classes.button}>
+                        <IconHomeFilled className={classes.icon} size={rem(28)} />
                     </ThemeIcon>
-                    <Text className={classes.text}>Настройки</Text>
+                    <Text className={classes.text}>Навигация</Text>
                 </UnstyledButton>
             </Center>
         </>

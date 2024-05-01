@@ -3,9 +3,9 @@
 import {useHeadroom, useMediaQuery} from "@mantine/hooks";
 import {em, Flex, rem} from "@mantine/core";
 import classes from './MobileModal.module.css';
-import MobileModalMenu from "@/components/MobileModal/MobileModalMenu/MobileModalMenu";
+import MobileModalNavigation from "@/components/MobileModal/MobileModalNavigation/MobileModalNavigation";
 import MobileModalSearch from "@/components/MobileModal/MobileModalSearch/MobileModalSearch";
-import MobileModalProfile from "@/components/MobileModal/MobileModalProfile/MobileModalProfile";
+import MobileModalMenu from "@/components/MobileModal/MobileModalMenu/MobileModalMenu";
 
 export default function MobileModal() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -21,9 +21,9 @@ export default function MobileModal() {
                 justify="space-between"
                 align="center"
             >
-                <MobileModalMenu />
+                <MobileModalNavigation />
                 <MobileModalSearch />
-                <MobileModalProfile />
+                <MobileModalMenu />
             </Flex>
         </div>
     );

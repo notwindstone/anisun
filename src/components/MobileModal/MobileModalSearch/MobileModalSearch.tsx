@@ -27,7 +27,7 @@ export default function MobileModalSearch() {
             </Drawer>
             <Center flex={1}>
                 <UnstyledButton onClick={open} className={classes.buttonWrapper}>
-                    <ThemeIcon w={52} className={classes.button}>
+                    <ThemeIcon className={classes.button}>
                         <IconBrandSafari className={classes.icon} size={rem(28)} />
                     </ThemeIcon>
                     <Text className={classes.text}>Поиск</Text>

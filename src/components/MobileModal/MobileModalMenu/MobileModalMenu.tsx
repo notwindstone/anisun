@@ -1,7 +1,8 @@
-import { IconHomeFilled } from "@tabler/icons-react";
-import {Center, Drawer, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
-import classes from "@/components/MobileModal/MobileModal.module.css";
 import {useDisclosure} from "@mantine/hooks";
+import classes from "@/components/MobileModal/MobileModal.module.css";
+import {Center, Drawer, rem, Stack, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
+import {IconHomeFilled, IconMenu2} from "@tabler/icons-react";
+import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 
 export default function MobileModalMenu() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -10,7 +11,7 @@ export default function MobileModalMenu() {
         <>
             <Drawer
                 position="bottom"
-                size="60vh"
+                size="80vh"
                 opened={opened}
                 onClose={close}
                 classNames={{
@@ -19,14 +20,15 @@ export default function MobileModalMenu() {
                 }}
                 zIndex={29999}
             >
-                MobileModalMenu
+                <ColorSchemeControl />
+                1234
             </Drawer>
             <Center flex={1}>
                 <UnstyledButton onClick={open} className={classes.buttonWrapper}>
-                    <ThemeIcon w={rem(86)} className={classes.button}>
-                        <IconHomeFilled className={classes.icon} size={rem(28)} />
+                    <ThemeIcon className={classes.button}>
+                        <IconMenu2 className={classes.icon} size={rem(28)} />
                     </ThemeIcon>
-                    <Text className={classes.text}>Навигация</Text>
+                    <Text className={classes.text}>Меню</Text>
                 </UnstyledButton>
             </Center>
         </>
