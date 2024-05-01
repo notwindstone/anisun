@@ -74,7 +74,8 @@ export default function AnimeTitleList() {
                 >
                     {rowVirtualizer.getVirtualItems().map((item) => (
                         <Grid
-                            p={rem(32)}
+                            pl={rem(32)}
+                            pr={rem(32)}
                             key={item.key}
                             style={{
                                 position: 'absolute',

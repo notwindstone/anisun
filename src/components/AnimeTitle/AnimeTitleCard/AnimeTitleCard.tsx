@@ -6,6 +6,7 @@ import classes from './AnimeTitleCard.module.css';
 
 export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
     const poster = anime.poster?.originalUrl ?? '/missing-image.png'
+    const avatar = anime.studios[0].imageUrl ?? '/missing-image.png'
 
     return (
         <div>
@@ -14,7 +15,7 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
                     <Image
                         radius="lg"
                         alt={`Постер к ${anime.name}`}
-                        src={poster}
+                        src={'/missing-image.png'}
                         component={NextImage}
                         className={classes.poster}
                         width={270}
@@ -24,12 +25,12 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
                     />
                 </AspectRatio>
                 <Flex direction="row" gap={rem(16)}>
-                    <Avatar src={anime.studios[0].imageUrl} size={64} />
+                    <Avatar src={avatar} size={64} />
                     <Stack>
                         <Title order={3} lineClamp={2}>{anime.name}</Title>
                         <Text lineClamp={1}>
                             {
-                                anime.studios.map((studio, index) => {
+                                anime.studios?.map((studio, index) => {
                                     const lastElement = anime.studios.length - 1 === index
 
                                     return (
