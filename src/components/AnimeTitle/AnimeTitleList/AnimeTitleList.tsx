@@ -2,11 +2,11 @@
 
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import {Divider, Grid, rem, Title} from "@mantine/core";
+import {Divider, Grid, rem} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 import AnimeVideoSkeleton from "@/components/Skeletons/AnimeVideoSkeleton/AnimeVideoSkeleton";
-import {useVirtualizer, useWindowVirtualizer} from '@tanstack/react-virtual';
-import React, {useEffect} from "react";
+import {useVirtualizer} from '@tanstack/react-virtual';
+import React from "react";
 import {InView} from "react-intersection-observer";
 import classes from './AnimeTitleList.module.css'
 import {useViewportSize} from "@mantine/hooks";
@@ -57,6 +57,9 @@ export default function AnimeTitleList() {
         getScrollElement: () => parentRef.current,
         estimateSize: () => estimatedSize,
     })
+
+    if (status === 'pending' && !isFetchingNextPage) return skeletons
+
     async function getAnimeList(pageParam: number) {
         const animeList = (await shikimori.animes.list({
             limit: 16,
@@ -104,7 +107,7 @@ export default function AnimeTitleList() {
                         </Grid>
                     ))}
                 </div>
-                {status === 'pending' || isFetchingNextPage && skeletons}
+                {isFetchingNextPage && skeletons}
                 <InView
                     className={classes.intersection}
                     onChange={(inView) => {
