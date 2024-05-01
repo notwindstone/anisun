@@ -31,7 +31,15 @@
     border-radius: var(--mantine-radius-md) var(--mantine-radius-md) var(--local-search-bar-border-radius) var(--local-search-bar-border-radius);
 
     @mixin hover {
-        background: darken(var(--animeth-accent-color), 0.1)
+        background: alpha(var(--animeth-accent-color), 0.2)
+    }
+
+    &:where([data-combobox-disabled]) {
+        opacity: unset;
+
+        @mixin hover {
+            background: unset;
+        }
     }
 }
 
