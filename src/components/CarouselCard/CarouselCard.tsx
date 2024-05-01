@@ -20,14 +20,14 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
                 className={classes.overlay}
             >
                 <Badge className={classes.status} color="black">{translateShikimoriStatus(animeTitle.status ?? '')}</Badge>
-                <Badge className={classes.score} color="violet">{animeTitle.score}</Badge>
+                <Badge className={classes.score}>{animeTitle.score}</Badge>
                 <Flex
                     className={classes.info}
                     direction="column"
                     justify="flex-end"
                     gap="0.25rem"
                 >
-                    <Badge className={classes.episodes} color="violet">
+                    <Badge className={classes.episodes}>
                         {animeTitle.episodesAired} / {animeTitle.episodes}
                     </Badge>
                     <Title className={classes.title} order={3} lineClamp={2}>{animeTitle.russian}</Title>

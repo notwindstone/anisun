@@ -1,12 +1,13 @@
 :root {
     @mixin light-root {
         /* Общие цвета */
-        --animeth-text-color: #1e0e20;
+        --animeth-text-color: #1c1b23;
         --animeth-background-color: #fff;
-        --animeth-primary-color: #5b285c;
-        --animeth-secondary-color: #cd98c7;
-        --animeth-accent-color: #730085;
+        --animeth-primary-color: #7b46af;
+        --animeth-secondary-color: #e4d4f8;
+        --animeth-accent-color: #7b45b0;
         /* Специфические цвета */
+
         --animeth-nav-button-color: #eccbe4;
         --animeth-footer-color: #f4f3f4;
         --animeth-border-color: #e5e5e5;
@@ -20,12 +21,13 @@
 
     @mixin dark-root {
         /* Общие цвета */
-        --animeth-text-color: #efdff1;
+        --animeth-text-color: #ffffff;
         --animeth-background-color: #000;
-        --animeth-primary-color: #d6a3d7;
-        --animeth-secondary-color: #673261;
-        --animeth-accent-color: #ed7aff;
+        --animeth-primary-color: #a176ff;
+        --animeth-secondary-color: #0d0a15;
+        --animeth-accent-color: #a177ff;
         /* Специфические цвета */
+
         --animeth-nav-button-color: #eccbe4;
         --animeth-footer-color: #0c0b0c;
         --animeth-border-color: #1a1a1a;

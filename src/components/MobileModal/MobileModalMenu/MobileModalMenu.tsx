@@ -23,10 +23,10 @@ export default function MobileModalMenu() {
             </Drawer>
             <UnstyledButton flex={1} onClick={open}>
                 <Stack align="center" justify="center" gap={rem(4)}>
-                    <ThemeIcon color="var(--animeth-nav-button-color)" w={rem(84)} h={36}>
-                        <IconHomeFilled color="black" size={rem(28)} />
+                    <ThemeIcon color="var(--animeth-accent-color)" w={rem(84)} h={36}>
+                        <IconHomeFilled color="var(--animeth-secondary-color)" size={rem(28)} />
                     </ThemeIcon>
-                    <Text>Навигация</Text>
+                    <Text c="var(--animeth-text-color)">Навигация</Text>
                 </Stack>
             </UnstyledButton>
         </>
