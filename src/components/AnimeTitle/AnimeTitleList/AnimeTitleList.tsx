@@ -47,10 +47,10 @@ export default function AnimeTitleList() {
 
     let estimatedSize: number
 
-    if (width < 576) estimatedSize = 8000
-    if (width >= 576 && width < 768) estimatedSize = 4000
-    if (width >= 768 && width < 1200) estimatedSize = 3000
-    if (width >= 1200) estimatedSize = 2000
+    if (width < 576) estimatedSize = 8112
+    if (width >= 576 && width < 768) estimatedSize = 4112
+    if (width >= 768 && width < 1200) estimatedSize = 3112
+    if (width >= 1200) estimatedSize = 2112
 
     const rowVirtualizer = useVirtualizer({
         count: allRows.length,
