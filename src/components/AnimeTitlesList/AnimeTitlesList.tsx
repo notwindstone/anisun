@@ -1,3 +1,5 @@
+"use client"
+
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 
@@ -8,6 +10,7 @@ export default function AnimeTitleList() {
         status,
         fetchNextPage,
         isFetchingNextPage,
+        error,
     } = useInfiniteQuery({
         queryKey: ['animeTitlesList'],
         queryFn: ({ pageParam }) => getAnimeList(pageParam),
@@ -19,13 +22,27 @@ export default function AnimeTitleList() {
     async function getAnimeList(pageParam: number) {
         const animeList = (await shikimori.animes.list({
             limit: 16,
+            page: pageParam
         })).animes
 
-        return { animeList: animeList, nextCursor: 2 }
+        return { animeList: animeList, nextCursor: pageParam + 1 }
     }
-
-    return (
+    console.log(data)
+    return status === 'pending' ? (
+        <>Loading</>
+    ) : status === 'error' ? (
+        <>Error: {error.message}</>
+    ) : (
         <>
+            {
+                data?.pages.map((page) => {
+                    return page.animeList.map((anime) => {
+                        return (
+                            <div key={anime.id}>{anime.name}</div>
+                        )
+                    })
+                })
+            }
         </>
     )
 }

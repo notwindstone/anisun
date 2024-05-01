@@ -12,13 +12,14 @@ export const animes = () => {
             .then((response: { data: { data: { animes: AnimeType[] } } }) => response.data.data)
     }
 
-    const list = async ({ search, limit, status, year, order }: AnimesType) => {
+    const list = async ({ search, limit, status, year, order, page }: AnimesType) => {
         const params = options({
             search: search,
             limit: limit,
             status: status,
             year: year,
-            order: order
+            order: order,
+            page: page,
         })
 
         return await axios

@@ -7,4 +7,5 @@ export type AnimesType = {
     status?: StatusType;
     year?: string;
     order?: string;
+    page?: number;
 }
