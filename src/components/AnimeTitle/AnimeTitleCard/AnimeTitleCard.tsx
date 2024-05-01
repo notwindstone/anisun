@@ -12,8 +12,9 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
             <Stack className={classes.root}>
                 <AspectRatio ratio={270 / 180}>
                     <Image
+                        radius="lg"
                         alt={`Постер к ${anime.name}`}
-                        src={globalVariables.imagePlaceholder}
+                        src={poster}
                         component={NextImage}
                         className={classes.poster}
                         width={270}
@@ -23,7 +24,7 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
                     />
                 </AspectRatio>
                 <Flex direction="row" gap={rem(16)}>
-                    <Avatar />
+                    <Avatar src={anime.studios[0].imageUrl} size={64} />
                     <Stack>
                         <Title order={3} lineClamp={2}>{anime.name}</Title>
                         <Text lineClamp={1}>

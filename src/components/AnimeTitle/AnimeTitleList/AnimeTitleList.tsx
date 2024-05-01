@@ -3,9 +3,10 @@
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {InView} from "react-intersection-observer";
-import {Divider, Flex, Grid, rem} from "@mantine/core";
+import {Divider, Grid, rem} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 import AnimeVideoSkeleton from "@/components/Skeletons/AnimeVideoSkeleton/AnimeVideoSkeleton";
+import classes from './AnimeTitleList.module.css';
 
 export default function AnimeTitleList() {
     const shikimori = client()
@@ -19,7 +20,7 @@ export default function AnimeTitleList() {
         queryKey: ['animeTitlesList'],
         queryFn: ({ pageParam }) => getAnimeList(pageParam),
         initialPageParam: 1,
-        getNextPageParam: (lastPage, allPages, lastPageParam, allPageParams) =>
+        getNextPageParam: (lastPage) =>
             lastPage.nextCursor,
     })
 
@@ -32,8 +33,16 @@ export default function AnimeTitleList() {
         return { animeList: animeList, nextCursor: pageParam + 1 }
     }
 
+    const skeletons = Array.from({ length: 16 }).map((_skeleton, index) => {
+        return (
+            <Grid.Col span={{ base: 12, xs: 6, sm: 4, lg: 3 }} key={index}>
+                <AnimeVideoSkeleton key={index} />
+            </Grid.Col>
+        )
+    })
+
     const animeTitleListSection = status === 'pending' ? (
-        <>Loading</>
+        <>{skeletons}</>
     ) : status === 'error' ? (
         <>Error: {error.message}</>
     ) : (
@@ -58,15 +67,7 @@ export default function AnimeTitleList() {
             <Grid p={rem(32)}>
                 {animeTitleListSection}
                 {
-                    isFetchingNextPage && (
-                        Array.from({ length: 16 }).map((_skeleton, index) => {
-                            return (
-                                <Grid.Col span={{ base: 12, xs: 6, sm: 4, lg: 3 }} key={index}>
-                                    <AnimeVideoSkeleton key={index} />
-                                </Grid.Col>
-                            )
-                        })
-                    )
+                    isFetchingNextPage && skeletons
                 }
             </Grid>
             <InView
@@ -82,7 +83,7 @@ export default function AnimeTitleList() {
                     fetchNextPage().then()
                 }}
             >
-                <Divider h={2} />
+                <Divider className={classes.divider} h={8} />
             </InView>
         </>
     )
