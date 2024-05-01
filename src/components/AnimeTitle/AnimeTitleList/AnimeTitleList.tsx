@@ -4,6 +4,7 @@ import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {InView} from "react-intersection-observer";
 import {Divider} from "@mantine/core";
+import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 
 export default function AnimeTitleList() {
     const shikimori = client()
@@ -40,7 +41,7 @@ export default function AnimeTitleList() {
                 data?.pages.map((page) => {
                     return page.animeList.map((anime) => {
                         return (
-                            <div key={anime.id}>{anime.id} - {anime.name}</div>
+                            <AnimeTitleCard key={anime.id} anime={anime} />
                         )
                     })
                 })

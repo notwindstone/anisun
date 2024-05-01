@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {SignedIn, SignedOut, UserButton} from "@clerk/nextjs";
 import {HeroContent} from "@/components/HeroContent/HeroContent";
-import AnimeTitleList from "@/components/AnimeTitlesList/AnimeTitlesList";
+import AnimeTitleList from "@/components/AnimeTitle/AnimeTitleList/AnimeTitleList";
 
 export default async function Home() {
     return (
