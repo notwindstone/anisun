@@ -1,5 +1,5 @@
-import {IconBrandSafari, IconHome, IconMenu2} from "@tabler/icons-react";
-import {ActionIcon, Drawer, rem, Stack, Text, UnstyledButton} from "@mantine/core";
+import { IconHomeFilled } from "@tabler/icons-react";
+import {Drawer, rem, Stack, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileModal/MobileModal.module.css";
 import {useDisclosure} from "@mantine/hooks";
 
@@ -21,10 +21,12 @@ export default function MobileModalMenu() {
             >
                 MobileModalMenu
             </Drawer>
-            <UnstyledButton onClick={open}>
+            <UnstyledButton flex={1} onClick={open}>
                 <Stack align="center" justify="center" gap={rem(4)}>
-                    <IconHome size={rem(28)} />
-                    <Text>Главная</Text>
+                    <ThemeIcon color="var(--animeth-nav-button-color)" w={rem(84)} h={36}>
+                        <IconHomeFilled color="black" size={rem(28)} />
+                    </ThemeIcon>
+                    <Text>Навигация</Text>
                 </Stack>
             </UnstyledButton>
         </>

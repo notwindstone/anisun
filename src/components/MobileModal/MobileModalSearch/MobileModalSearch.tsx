@@ -25,7 +25,7 @@ export default function MobileModalSearch() {
             >
                 <SearchBar close={close} />
             </Drawer>
-            <UnstyledButton onClick={open}>
+            <UnstyledButton flex={1} onClick={open}>
                 <Stack align="center" justify="center" gap={rem(4)}>
                     <IconBrandSafari size={rem(28)} />
                     <Text>Навигация</Text>

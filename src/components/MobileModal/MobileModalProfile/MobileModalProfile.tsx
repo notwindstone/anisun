@@ -21,7 +21,7 @@ export default function MobileModalProfile() {
             >
                 MobileModalProfile
             </Drawer>
-            <UnstyledButton onClick={open}>
+            <UnstyledButton flex={1} onClick={open}>
                 <Stack align="center" justify="center" gap={rem(4)}>
                     <IconMenu2 size={rem(28)} />
                     <Text>Ещё</Text>
