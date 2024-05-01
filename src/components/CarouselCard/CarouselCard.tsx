@@ -35,7 +35,7 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
             </Overlay>
             <Image
                 alt="Anime poster"
-                src={animeTitle.poster?.originalUrl}
+                src={'/missing-image.png'}
                 placeholder="blur"
                 blurDataURL={globalVariables.imagePlaceholder}
                 width={300}

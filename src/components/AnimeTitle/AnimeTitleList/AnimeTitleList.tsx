@@ -47,10 +47,9 @@ export default function AnimeTitleList() {
 
     let estimatedSize: number
 
-    if (width < 576) estimatedSize = 8112
-    if (width >= 576 && width < 768) estimatedSize = 4112
-    if (width >= 768 && width < 1200) estimatedSize = 3112
-    if (width >= 1200) estimatedSize = 2112
+    if (width < 576) estimatedSize = 8240
+    if (width >= 576 && width < 768) estimatedSize = 4128
+    if (width >= 768) estimatedSize = 2128
 
     const rowVirtualizer = useVirtualizer({
         count: allRows.length,
@@ -96,7 +95,7 @@ export default function AnimeTitleList() {
                             {
                                 allRows[item.index].map((animeTitle) => {
                                     return (
-                                        <Grid.Col key={animeTitle.id} span={{ base: 12, xs: 6, sm: 4, lg: 3 }}>
+                                        <Grid.Col key={animeTitle.id} span={{ base: 12, xs: 6, lg: 3 }}>
                                             <AnimeTitleCard anime={animeTitle} />
                                         </Grid.Col>
                                     )
@@ -105,7 +104,7 @@ export default function AnimeTitleList() {
                         </Grid>
                     ))}
                 </div>
-                {status === 'pending' && skeletons}
+                {status === 'pending' || isFetchingNextPage && skeletons}
                 <InView
                     className={classes.intersection}
                     onChange={(inView) => {
