@@ -3,7 +3,7 @@
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {InView} from "react-intersection-observer";
-import {Divider, Flex} from "@mantine/core";
+import {Divider, Flex, Grid, rem} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 
 export default function AnimeTitleList() {
@@ -41,7 +41,9 @@ export default function AnimeTitleList() {
                 data?.pages.map((page) => {
                     return page.animeList.map((anime) => {
                         return (
-                            <AnimeTitleCard key={anime.id} anime={anime} />
+                            <Grid.Col span={{ base: 12, xs: 6, sm: 4, lg: 3 }} key={anime.id}>
+                                <AnimeTitleCard anime={anime} />
+                            </Grid.Col>
                         )
                     })
                 })
@@ -52,9 +54,9 @@ export default function AnimeTitleList() {
 
     return (
         <>
-            <Flex wrap="wrap">
+            <Grid p={rem(32)}>
                 {animeTitleListSection}
-            </Flex>
+            </Grid>
             <InView
                 onChange={(inView) => {
                     if (!inView) {

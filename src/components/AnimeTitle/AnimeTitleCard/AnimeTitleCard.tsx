@@ -1,5 +1,5 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType"
-import {AspectRatio, Avatar, Flex, Group, Image, Stack, Text, Title} from "@mantine/core";
+import {AspectRatio, Avatar, Flex, Image, rem, Stack, Text, Title} from "@mantine/core";
 import NextImage from "next/image";
 import globalVariables from '@/configs/globalVariables.json';
 import classes from './AnimeTitleCard.module.css';
@@ -9,11 +9,11 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
 
     return (
         <div>
-            <Stack>
+            <Stack className={classes.root}>
                 <AspectRatio ratio={270 / 180}>
                     <Image
                         alt={`Постер к ${anime.name}`}
-                        src={poster}
+                        src={globalVariables.imagePlaceholder}
                         component={NextImage}
                         className={classes.poster}
                         width={270}
@@ -22,7 +22,7 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
                         blurDataURL={globalVariables.imagePlaceholder}
                     />
                 </AspectRatio>
-                <Group>
+                <Flex direction="row" gap={rem(16)}>
                     <Avatar />
                     <Stack>
                         <Title order={3} lineClamp={2}>{anime.name}</Title>
@@ -40,7 +40,7 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
                         <Text>{anime.score}</Text>
                         <Text>{anime.airedOn?.year}</Text>
                     </Stack>
-                </Group>
+                </Flex>
             </Stack>
         </div>
     )
