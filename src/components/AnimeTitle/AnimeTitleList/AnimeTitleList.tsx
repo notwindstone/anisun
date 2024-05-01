@@ -2,11 +2,13 @@
 
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import {Grid, rem, Title} from "@mantine/core";
+import {Divider, Grid, rem, Title} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 import AnimeVideoSkeleton from "@/components/Skeletons/AnimeVideoSkeleton/AnimeVideoSkeleton";
 import {useVirtualizer, useWindowVirtualizer} from '@tanstack/react-virtual';
 import React, {useEffect} from "react";
+import {InView} from "react-intersection-observer";
+import classes from './AnimeTitleList.module.css'
 
 export default function AnimeTitleList() {
     const shikimori = client()
@@ -39,7 +41,7 @@ export default function AnimeTitleList() {
         count: allRows.length,
         // @ts-ignore
         getScrollElement: () => parentRef.current,
-        estimateSize: () => 500,
+        estimateSize: () => 2000,
     })
     async function getAnimeList(pageParam: number) {
         const animeList = (await shikimori.animes.list({
@@ -63,6 +65,7 @@ export default function AnimeTitleList() {
                 >
                     {rowVirtualizer.getVirtualItems().map((item) => (
                         <Grid
+                            p={rem(32)}
                             key={item.key}
                             style={{
                                 position: 'absolute',
@@ -74,10 +77,36 @@ export default function AnimeTitleList() {
                                 }px)`,
                             }}
                         >
-                            <Grid.Col>{item.index}{console.log(allRows[item.index])}</Grid.Col>
+                            {
+                                allRows[item.index].map((animeTitle) => {
+                                    return (
+                                        <Grid.Col key={animeTitle.id} span={{ base: 12, xs: 6, sm: 4, lg: 3 }}>
+                                            <AnimeTitleCard anime={animeTitle} />
+                                        </Grid.Col>
+                                    )
+                                })
+                            }
                         </Grid>
                     ))}
                 </div>
+                <InView
+                    className={classes.intersection}
+                    onChange={(inView) => {
+                        if (!inView) {
+                            return
+                        }
+
+                        console.log('fetching...')
+
+                        if (isFetchingNextPage) {
+                            return
+                        }
+
+                        fetchNextPage().then()
+                    }}
+                >
+                    <Divider h={8} />
+                </InView>
             </div>
         </>
     )
