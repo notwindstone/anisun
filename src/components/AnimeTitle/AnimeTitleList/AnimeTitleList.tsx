@@ -32,7 +32,7 @@ export default function AnimeTitleList() {
             {
                 Array.from({ length: 16 }).map((_skeleton, index) => {
                     return (
-                        <Grid.Col span={{ base: 12, xs: 6, sm: 4, lg: 3 }} key={index}>
+                        <Grid.Col span={{ base: 12, xs: 6, lg: 3 }} key={index}>
                             <AnimeVideoSkeleton key={index} />
                         </Grid.Col>
                     )
