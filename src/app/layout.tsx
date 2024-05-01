@@ -66,7 +66,6 @@ export default function RootLayout({
                                 {children}
                             </Main>
                             <MobileModal />
-                            <Footer />
                         </MantineProvider>
                     </TanstackQueryProviders>
                 </body>

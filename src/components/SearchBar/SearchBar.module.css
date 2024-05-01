@@ -10,19 +10,14 @@
     @media (max-width: rem(750)) {
         min-width: unset;
     }
-
-    &:focus-within {
-        border-radius: var(--local-search-bar-border-radius) var(--local-search-bar-border-radius) 0 0;
-    }
 }
 
 .dropdown {
     /* пиздец */
     --local-search-bar-border-radius: rem(16px);
 
-    margin-top: rem(-8px);
     z-index: 30000 !important;
-    border-radius: 0 0 var(--local-search-bar-border-radius) var(--local-search-bar-border-radius);
+    border-radius: var(--local-search-bar-border-radius);
     border-color: var(--animeth-secondary-color);
     background: var(--animeth-secondary-color);
 }
@@ -36,6 +31,7 @@
 
     &:where([data-combobox-disabled]) {
         opacity: unset;
+        cursor: default;
 
         @mixin hover {
             background: unset;
