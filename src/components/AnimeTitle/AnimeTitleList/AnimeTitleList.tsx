@@ -27,13 +27,19 @@ export default function AnimeTitleList() {
             lastPage.nextCursor,
     })
 
-    const skeletons = Array.from({ length: 16 }).map((_skeleton, index) => {
-        return (
-            <Grid.Col span={{ base: 12, xs: 6, sm: 4, lg: 3 }} key={index}>
-                <AnimeVideoSkeleton key={index} />
-            </Grid.Col>
-        )
-    })
+    const skeletons = (
+        <Grid pl={rem(32)} pr={rem(32)}>
+            {
+                Array.from({ length: 16 }).map((_skeleton, index) => {
+                    return (
+                        <Grid.Col span={{ base: 12, xs: 6, sm: 4, lg: 3 }} key={index}>
+                            <AnimeVideoSkeleton key={index} />
+                        </Grid.Col>
+                    )
+                })
+            }
+        </Grid>
+    )
 
     const parentRef = React.useRef()
 
@@ -99,6 +105,7 @@ export default function AnimeTitleList() {
                         </Grid>
                     ))}
                 </div>
+                {status === 'pending' && skeletons}
                 <InView
                     className={classes.intersection}
                     onChange={(inView) => {
