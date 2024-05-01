@@ -1,5 +1,6 @@
 .drawer {
-    background: var(--animeth-background-color)
+    background: var(--animeth-background-color);
+    border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) 0 0;
 }
 
 .wrapper {
@@ -17,4 +18,32 @@
     height: 100%;
     background: var(--animeth-secondary-color);
     border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) 0 0;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    gap: rem(4px);
+
+    @mixin hover {
+        .button {
+            background: lighten(var(--animeth-accent-color), 0.3);
+        }
+    }
+}
+
+.button {
+    height: rem(32px);
+    background: var(--animeth-accent-color);
+    transition: 200ms ease;
+}
+
+.icon {
+    color: lighten(var(--animeth-secondary-color), 0.05);
+}
+
+.text {
+    color: var(--animeth-text-color);
 }

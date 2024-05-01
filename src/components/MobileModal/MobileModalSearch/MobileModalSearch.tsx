@@ -1,5 +1,5 @@
 import {IconBrandSafari, IconSearch} from "@tabler/icons-react";
-import {Button, Drawer, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
+import {Button, Center, Drawer, rem, Stack, Text, ThemeIcon, Title, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileModal/MobileModal.module.css";
 import {useDisclosure} from "@mantine/hooks";
 import SearchBar from "@/components/SearchBar/SearchBar";
@@ -11,7 +11,7 @@ export default function MobileModalSearch() {
         <>
             <Drawer
                 position="bottom"
-                size="100vh"
+                size="80vh"
                 opened={opened}
                 onClose={close}
                 classNames={{
@@ -25,12 +25,14 @@ export default function MobileModalSearch() {
             >
                 <SearchBar close={close} />
             </Drawer>
-            <UnstyledButton flex={1} onClick={open}>
-                <Stack align="center" justify="center" gap={rem(4)}>
-                    <IconBrandSafari size={rem(28)} />
-                    <Text>Навигация</Text>
-                </Stack>
-            </UnstyledButton>
+            <Center flex={1}>
+                <UnstyledButton onClick={open} className={classes.buttonWrapper}>
+                    <ThemeIcon w={52} className={classes.button}>
+                        <IconBrandSafari className={classes.icon} size={rem(28)} />
+                    </ThemeIcon>
+                    <Text className={classes.text}>Поиск</Text>
+                </UnstyledButton>
+            </Center>
         </>
     )
 }
