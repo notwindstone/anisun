@@ -3,7 +3,7 @@
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {InView} from "react-intersection-observer";
-import {Divider} from "@mantine/core";
+import {Divider, Flex} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 
 export default function AnimeTitleList() {
@@ -31,7 +31,7 @@ export default function AnimeTitleList() {
         return { animeList: animeList, nextCursor: pageParam + 1 }
     }
 
-    return status === 'pending' ? (
+    const animeTitleListSection = status === 'pending' ? (
         <>Loading</>
     ) : status === 'error' ? (
         <>Error: {error.message}</>
@@ -46,6 +46,15 @@ export default function AnimeTitleList() {
                     })
                 })
             }
+
+        </>
+    )
+
+    return (
+        <>
+            <Flex wrap="wrap">
+                {animeTitleListSection}
+            </Flex>
             <InView
                 onChange={(inView) => {
                     if (!inView) {
