@@ -9,8 +9,10 @@ import {useVirtualizer, useWindowVirtualizer} from '@tanstack/react-virtual';
 import React, {useEffect} from "react";
 import {InView} from "react-intersection-observer";
 import classes from './AnimeTitleList.module.css'
+import {useViewportSize} from "@mantine/hooks";
 
 export default function AnimeTitleList() {
+    const { width } = useViewportSize();
     const shikimori = client()
     const {
         data,
@@ -37,11 +39,18 @@ export default function AnimeTitleList() {
 
     const allRows = data ? data?.pages.map((d) => d.animeList) : []
 
+    let estimatedSize: number
+
+    if (width < 576) estimatedSize = 8000
+    if (width >= 576 && width < 768) estimatedSize = 4000
+    if (width >= 768 && width < 1200) estimatedSize = 3000
+    if (width >= 1200) estimatedSize = 2000
+
     const rowVirtualizer = useVirtualizer({
         count: allRows.length,
         // @ts-ignore
         getScrollElement: () => parentRef.current,
-        estimateSize: () => 2000,
+        estimateSize: () => estimatedSize,
     })
     async function getAnimeList(pageParam: number) {
         const animeList = (await shikimori.animes.list({
