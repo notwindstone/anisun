@@ -164,6 +164,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
     return (
         <>
             <Autocomplete
+                comboboxProps={{ position: 'bottom' }}
                 classNames={{
                     wrapper: classes.wrapper,
                     dropdown: classes.dropdown,

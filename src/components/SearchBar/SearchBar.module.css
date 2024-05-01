@@ -1,24 +1,37 @@
 .wrapper {
+    /* пиздец */
+    --local-search-bar-border-radius: rem(16px);
+
+    background: var(--animeth-secondary-color);
     width: 100%;
     min-width: rem(384px);
+    border-radius: var(--local-search-bar-border-radius);
 
     @media (max-width: rem(750)) {
         min-width: unset;
     }
+
+    &:focus-within {
+        border-radius: var(--local-search-bar-border-radius) var(--local-search-bar-border-radius) 0 0;
+    }
 }
 
 .dropdown {
+    /* пиздец */
+    --local-search-bar-border-radius: rem(16px);
+
+    margin-top: rem(-8px);
     z-index: 30000 !important;
-    border-radius: var(--mantine-radius-md);
-    border-color: var(--animeth-block-background-color);
-    background: var(--animeth-block-background-color);
+    border-radius: 0 0 var(--local-search-bar-border-radius) var(--local-search-bar-border-radius);
+    border-color: var(--animeth-secondary-color);
+    background: var(--animeth-secondary-color);
 }
 
 .option {
-    border-radius: var(--mantine-radius-md);
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) var(--local-search-bar-border-radius) var(--local-search-bar-border-radius);
 
     @mixin hover {
-        background: var(--animeth-focused-block-background-color)
+        background: darken(var(--animeth-accent-color), 0.1)
     }
 }
 

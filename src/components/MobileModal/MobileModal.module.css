@@ -16,7 +16,7 @@
 .root {
     width: 100%;
     height: 100%;
-    background: var(--animeth-secondary-color);
+    background: var(--animeth-background-color);
     border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) 0 0;
 }
 
@@ -30,8 +30,8 @@
     @mixin hover {
         .button {
             background: light-dark(
-                lighten(var(--animeth-accent-color), 0.3),
-                darken(var(--animeth-accent-color), 0.5)
+                lighten(var(--animeth-secondary-color), 0.4),
+                darken(var(--animeth-primary-color), 0.8)
             );
         }
     }
@@ -40,18 +40,12 @@
 .button {
     width: rem(92px);
     height: rem(32px);
-    background: light-dark(
-        lighten(var(--animeth-accent-color), 0.5),
-        darken(var(--animeth-accent-color), 0.7)
-    );
+    background: var(--animeth-secondary-color);
     transition: 200ms ease;
 }
 
 .icon {
-    color: light-dark(
-        darken(var(--animeth-primary-color), 0.2),
-        lighten(var(--animeth-primary-color), 0.2)
-    );
+    color: var(--animeth-primary-color)
 }
 
 .text {
