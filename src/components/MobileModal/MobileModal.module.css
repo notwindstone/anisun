@@ -7,7 +7,7 @@
     bottom: 0;
     left: 0;
     right: 0;
-    height: rem(128px);
+    height: rem(92px);
     z-index: 20000;
     transition: transform 300ms ease;
 }
