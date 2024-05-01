@@ -2,6 +2,8 @@
 
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
+import {InView} from "react-intersection-observer";
+import {Divider} from "@mantine/core";
 
 export default function AnimeTitleList() {
     const shikimori = client()
@@ -27,7 +29,7 @@ export default function AnimeTitleList() {
 
         return { animeList: animeList, nextCursor: pageParam + 1 }
     }
-    console.log(data)
+
     return status === 'pending' ? (
         <>Loading</>
     ) : status === 'error' ? (
@@ -38,11 +40,26 @@ export default function AnimeTitleList() {
                 data?.pages.map((page) => {
                     return page.animeList.map((anime) => {
                         return (
-                            <div key={anime.id}>{anime.name}</div>
+                            <div key={anime.id}>{anime.id} - {anime.name}</div>
                         )
                     })
                 })
             }
+            <InView
+                onChange={(inView) => {
+                    if (!inView) {
+                        return
+                    }
+
+                    if (isFetchingNextPage) {
+                        return
+                    }
+
+                    fetchNextPage().then()
+                }}
+            >
+                <Divider h={2} />
+            </InView>
         </>
     )
 }
