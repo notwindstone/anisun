@@ -1,6 +1,10 @@
 .wrapper {
     width: 100%;
     min-width: rem(384px);
+
+    @media (max-width: rem(750)) {
+        min-width: unset;
+    }
 }
 
 .dropdown {
