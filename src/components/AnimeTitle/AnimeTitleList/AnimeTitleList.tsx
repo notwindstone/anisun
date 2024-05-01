@@ -5,6 +5,7 @@ import {client} from "@/lib/shikimori/client";
 import {InView} from "react-intersection-observer";
 import {Divider, Flex, Grid, rem} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
+import AnimeVideoSkeleton from "@/components/Skeletons/AnimeVideoSkeleton/AnimeVideoSkeleton";
 
 export default function AnimeTitleList() {
     const shikimori = client()
@@ -56,6 +57,17 @@ export default function AnimeTitleList() {
         <>
             <Grid p={rem(32)}>
                 {animeTitleListSection}
+                {
+                    isFetchingNextPage && (
+                        Array.from({ length: 16 }).map((_skeleton, index) => {
+                            return (
+                                <Grid.Col span={{ base: 12, xs: 6, sm: 4, lg: 3 }} key={index}>
+                                    <AnimeVideoSkeleton key={index} />
+                                </Grid.Col>
+                            )
+                        })
+                    )
+                }
             </Grid>
             <InView
                 onChange={(inView) => {
