@@ -35,16 +35,16 @@
 }
 
 .playlistIcon {
-    color: #ffffff;
+    color: #fff;
 }
 
 .currentEpisodeMarker {
-    color: var(--animeth-text-contrast-color);
+    color: #fff;
     z-index: 99;
 }
 
 .currentEpisodeButton {
-    color: var(--animeth-text-contrast-reversed-color) !important;
+    color: #000 !important;
     background: var(--animeth-primary-color) !important;
 }
 
@@ -63,11 +63,11 @@
 .nextEpisodeButton {
     padding: 0 rem(8px);
     margin: 0 rem(8px);
-    color: var(--animeth-text-contrast-color);
+    color: #fff;
     z-index: 99;
 
     &:active, &:hover {
-        color: var(--animeth-text-contrast-color);
+        color: #fff;
         background: rgb(255 255 255 / 0.2);
     }
 }
