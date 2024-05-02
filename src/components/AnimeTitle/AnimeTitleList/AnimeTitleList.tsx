@@ -124,7 +124,7 @@ export default function AnimeTitleList() {
                         fetchNextPage().then()
                     }}
                 >
-                    <Divider h={8} />
+                    <Divider className={classes.divider} h={8} />
                 </InView>
             </div>
         </>
