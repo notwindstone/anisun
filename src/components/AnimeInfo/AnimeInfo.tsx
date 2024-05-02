@@ -8,6 +8,7 @@ import {client} from "@/lib/shikimori/client";
 import Link from "next/link";
 import translateShikimoriKind from "@/utils/translateShikimoriKind";
 import {usePathname} from "next/navigation";
+import classes from './AnimeInfo.module.css';
 
 export default function AnimeInfo({ shikimoriId }: { shikimoriId: string }) {
     const pathname = usePathname();
@@ -47,7 +48,7 @@ export default function AnimeInfo({ shikimoriId }: { shikimoriId: string }) {
     ) : (
         <>
             <Title>{data?.russian} <span>/</span> {data?.name}</Title>
-            <Breadcrumbs>
+            <Breadcrumbs className={classes.breadcrumbs}>
                 {breadcrumbs}
             </Breadcrumbs>
             <Image

@@ -44,7 +44,7 @@
 }
 
 .currentEpisodeButton {
-    color: #000 !important;
+    color: var(--animeth-text-contrast-reversed-color) !important;
     background: var(--animeth-primary-color) !important;
 }
 
