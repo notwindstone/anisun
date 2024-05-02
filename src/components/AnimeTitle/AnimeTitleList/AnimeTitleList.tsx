@@ -6,17 +6,18 @@ import {Grid, rem} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 import AnimeVideoSkeleton from "@/components/Skeletons/AnimeVideoSkeleton/AnimeVideoSkeleton";
 import {useVirtualizer} from '@tanstack/react-virtual';
-import React from "react";
+import React, {useEffect} from "react";
 import classes from './AnimeTitleList.module.css'
 import {useViewportSize} from "@mantine/hooks";
 
-export default function AnimeTitleList() {
+export default function AnimeTitleList({ inViewport }: { inViewport: boolean }) {
     const { width } = useViewportSize();
     const shikimori = client()
     const {
         data,
         status,
         isFetchingNextPage,
+        fetchNextPage,
     } = useInfiniteQuery({
         queryKey: ['animeTitlesList'],
         queryFn: ({ pageParam }) => getAnimeList(pageParam),
@@ -24,6 +25,14 @@ export default function AnimeTitleList() {
         getNextPageParam: (lastPage) =>
             lastPage.nextCursor,
     })
+
+    useEffect(() => {
+        if (status === 'pending' || isFetchingNextPage || !inViewport) {
+            return
+        }
+
+        fetchNextPage().then()
+    }, [inViewport]);
 
     const skeletons = (
         <Grid pl={rem(32)} pr={rem(32)}>

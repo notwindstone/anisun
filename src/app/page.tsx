@@ -15,7 +15,6 @@ export default async function Home() {
             <SignedOut>
                 <Link href="/sign-in">Войти в аккаунт</Link>
             </SignedOut>
-            <AnimeTitleList />
             <FetchingIntersection />
         </div>
     )
