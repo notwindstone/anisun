@@ -15,7 +15,7 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
                     <Image
                         radius="lg"
                         alt={`Постер к ${anime.name}`}
-                        src={poster}
+                        src={'/missing-image.png'}
                         component={NextImage}
                         className={classes.poster}
                         width={270}

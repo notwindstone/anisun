@@ -2,12 +2,11 @@
 
 import {useInfiniteQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import {Divider, Grid, rem} from "@mantine/core";
+import {Grid, rem} from "@mantine/core";
 import AnimeTitleCard from "@/components/AnimeTitle/AnimeTitleCard/AnimeTitleCard";
 import AnimeVideoSkeleton from "@/components/Skeletons/AnimeVideoSkeleton/AnimeVideoSkeleton";
 import {useVirtualizer} from '@tanstack/react-virtual';
 import React from "react";
-import {InView} from "react-intersection-observer";
 import classes from './AnimeTitleList.module.css'
 import {useViewportSize} from "@mantine/hooks";
 
@@ -17,7 +16,6 @@ export default function AnimeTitleList() {
     const {
         data,
         status,
-        fetchNextPage,
         isFetchingNextPage,
     } = useInfiniteQuery({
         queryKey: ['animeTitlesList'],
@@ -108,24 +106,6 @@ export default function AnimeTitleList() {
                     ))}
                 </div>
                 {isFetchingNextPage && skeletons}
-                <InView
-                    className={classes.intersection}
-                    onChange={(inView) => {
-                        if (!inView) {
-                            return
-                        }
-
-                        console.log('fetching...')
-
-                        if (isFetchingNextPage) {
-                            return
-                        }
-
-                        fetchNextPage().then()
-                    }}
-                >
-                    <Divider className={classes.divider} h={8} />
-                </InView>
             </div>
         </>
     )
