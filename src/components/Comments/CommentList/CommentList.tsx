@@ -3,17 +3,18 @@
 import {useInfiniteQuery, useMutation, useQueryClient} from "@tanstack/react-query";
 import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/CommentType";
-import {InView} from "react-intersection-observer";
 import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/MutatedDataType";
 import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
-import {Container, Skeleton, Space, Text} from "@mantine/core";
-import {useState} from "react";
+import {Center, Container, Skeleton, Space, Text} from "@mantine/core";
+import {useEffect, useState} from "react";
 import {makeWordEnding} from "@/utils/makeWordEnding";
 import classes from './CommentList.module.css';
+import {useInViewport} from "@mantine/hooks";
 
 export default function CommentList({ titleCode }: { titleCode: string }) {
+    const { ref, inViewport } = useInViewport();
     const [delayed, setDelayed] = useState(false)
     const {
         data,
@@ -138,6 +139,26 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             ? data?.pages?.[0].total?.[0].count ?? 0
             : 0
 
+    useEffect(() => {
+        if (
+            status === 'pending' ||
+            isFetchingNextPage ||
+            delayed ||
+            !inViewport
+        ) {
+            return
+        }
+        console.log(inViewport)
+
+        setDelayed(true)
+
+        fetchNextPage().then()
+
+        setTimeout(() => {
+            setDelayed(false)
+        }, 500)
+    }, [inViewport]);
+
     return (
         <Container size={800}>
             {   status === 'pending'
@@ -151,27 +172,9 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
             }
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             {commentSection}
-            <InView
-                onChange={(inView) => {
-                    if (!inView) {
-                        return
-                    }
-
-                    if (delayed) {
-                        return
-                    }
-
-                    setDelayed(true)
-
-                    fetchNextPage().then()
-
-                    return setTimeout(() => {
-                        setDelayed(false)
-                    }, 500)
-                }}
-            >
-                <hr></hr>
-            </InView>
+            <Center ref={ref} bg="black" h={256}>
+                <Text c="white">Прокрутите ниже, чтобы загрузить контент</Text>
+            </Center>
             {
                 isFetchingNextPage
                     ? <CommentSkeleton />
