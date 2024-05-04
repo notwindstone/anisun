@@ -89,15 +89,16 @@ export default function AnimeTitleList({ inViewport }: { inViewport: boolean }) 
                 >
                     {rowVirtualizer.getVirtualItems().map((item) => (
                         <Grid
+                            className={classes.grid}
                             pl={rem(32)}
                             pr={rem(32)}
                             key={item.key}
                             style={{
                                 position: 'absolute',
                                 top: 0,
-                                left: 0,
+                                left: "50%",
                                 height: `fit-content`,
-                                transform: `translateY(${
+                                transform: `translateX(-50%) translateY(${
                                     item.start - rowVirtualizer.options.scrollMargin
                                 }px)`,
                             }}

@@ -11,7 +11,7 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
     return (
         <div>
             <Stack className={classes.root}>
-                <AspectRatio ratio={270 / 180}>
+                <AspectRatio className={classes.aspectRatio} ratio={270 / 180}>
                     <Image
                         radius="lg"
                         alt={`Постер к ${anime.name}`}
@@ -24,7 +24,7 @@ export default function AnimeTitleCard({ anime }: { anime: AnimeType }) {
                         blurDataURL={globalVariables.imagePlaceholder}
                     />
                 </AspectRatio>
-                <Flex direction="row" gap={rem(16)}>
+                <Flex className={classes.info} direction="row" gap={rem(16)}>
                     <Avatar src={avatar} size={64} />
                     <Stack>
                         <Title order={3} lineClamp={2}>{anime.name}</Title>
