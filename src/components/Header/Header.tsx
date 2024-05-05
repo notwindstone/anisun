@@ -23,7 +23,9 @@ import {IconChevronDown, IconLogout, IconSearch, IconSettings, IconUser, IconUse
 import {useHeadroom, useMediaQuery} from "@mantine/hooks";
 import classes from './Header.module.css';
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
-import {SignedIn, SignedOut, SignInButton, SignUpButton, useUser} from "@clerk/nextjs";
+import {SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, useUser} from "@clerk/nextjs";
+import {useRouter} from "next/navigation";
+import NProgress from "nprogress";
 
 export default function Header() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -100,21 +102,29 @@ export default function Header() {
                                         <Text>Настройки</Text>
                                     </Group>
                                 </UnstyledButton>
-                                <UnstyledButton
-                                    pt={rem(8)}
-                                >
-                                    <Group align="center">
-                                        <IconLogout />
-                                        <Text>Выйти</Text>
-                                    </Group>
-                                </UnstyledButton>
+                                <SignOutButton>
+                                    <UnstyledButton
+                                        onClick={() => {
+                                            NProgress.start()
+                                            NProgress.done()
+                                        }}
+                                        pt={rem(8)}
+                                    >
+                                        <Group align="center">
+                                            <IconLogout />
+                                            <Text>Выйти</Text>
+                                        </Group>
+                                    </UnstyledButton>
+                                </SignOutButton>
                             </Stack>
                         </Popover.Dropdown>
                     </Popover>
                 </SignedIn>
                 <SignedOut>
-                    <SignInButton />
-                    <SignUpButton />
+                    <Group>
+                        <Link href="/sign-in">Войти</Link>
+                        <Link href="/sign-up">Зарегистрироваться</Link>
+                    </Group>
                 </SignedOut>
             </Group>
         </Flex>
