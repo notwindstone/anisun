@@ -24,3 +24,18 @@
         border: rem(2px) solid var(--animeth-secondary-color);
     }
 }
+
+.modal {
+    padding: rem(96px) rem(32px);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 32000;
+    background: #00000088;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.closeButton {
+    flex-shrink: 0;
+}
