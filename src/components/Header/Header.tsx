@@ -32,6 +32,7 @@ export default function Header() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const pinned = useHeadroom({ fixedAt: 120 })
     const { user } = useUser();
+    const router = useRouter();
 
     // isMobile является undefined при первоначальной загрузке страницы
     // поэтому при использовании условия !isMobile, а не isMobile === false
@@ -95,6 +96,14 @@ export default function Header() {
                                         <Title order={4}>{user?.username}</Title>
                                     </Group>
                                     <UnstyledButton
+                                        onClick={() => {
+                                            if (!user) {
+                                                return
+                                            }
+
+                                            NProgress.start()
+                                            router.push(`/account/${user.id}`)
+                                        }}
                                         pt={rem(8)}
                                         pb={rem(8)}
                                     >

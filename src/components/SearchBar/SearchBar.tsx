@@ -193,6 +193,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
                         }} />
                 }
                 onOptionSubmit={(option) => {
+                    // Если функция close существует, то она вызывается
                     close && close()
                     NProgress.start()
                     router.push(`/titles/${option.split('--')[0]}`);
