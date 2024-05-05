@@ -24,7 +24,7 @@ import {useDisclosure, useHeadroom, useMediaQuery} from "@mantine/hooks";
 import classes from './Header.module.css';
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 import {SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserProfile, useUser} from "@clerk/nextjs";
-import {useRouter} from "next/navigation";
+import {useRouter, usePathname} from "next/navigation";
 import NProgress from "nprogress";
 
 export default function Header() {
@@ -33,6 +33,12 @@ export default function Header() {
     const pinned = useHeadroom({ fixedAt: 120 })
     const { user } = useUser();
     const router = useRouter();
+    const pathname = usePathname();
+    const envType = process.env.NODE_ENV
+    const hostURL =
+        envType === 'production'
+            ? 'https://animeth.vercel.app'
+            : envType === 'development' ? 'http://localhost:3000' : 'https://animeth.vercel.app'
 
     // isMobile является undefined при первоначальной загрузке страницы
     // поэтому при использовании условия !isMobile, а не isMobile === false
@@ -142,7 +148,7 @@ export default function Header() {
                     </SignedIn>
                     <SignedOut>
                         <Group>
-                            <Link href="/sign-in">Войти</Link>
+                            <Link href={`/sign-in?redirect_url=${hostURL}${pathname}`}>Войти</Link>
                             <Link href="/sign-up">Зарегистрироваться</Link>
                         </Group>
                     </SignedOut>
