@@ -149,7 +149,7 @@ export default function Header() {
                     <SignedOut>
                         <Group>
                             <Link href={`/sign-in?redirect_url=${hostURL}${pathname}`}>Войти</Link>
-                            <Link href="/sign-up">Зарегистрироваться</Link>
+                            <Link href={`/sign-up?redirect_url=${hostURL}${pathname}`}>Зарегистрироваться</Link>
                         </Group>
                     </SignedOut>
                 </Group>
