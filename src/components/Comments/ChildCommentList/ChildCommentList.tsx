@@ -11,7 +11,6 @@ export function ChildCommentList({ uuid, childComments }: { uuid: string, childC
         data,
         error,
         status,
-        // @ts-ignore
     } = useQuery({
         queryKey: ["comments", uuid],
         queryFn: retrieveChildComments,

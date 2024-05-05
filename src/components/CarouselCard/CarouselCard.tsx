@@ -28,7 +28,7 @@ export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) 
                     gap="0.25rem"
                 >
                     <Badge className={classes.episodes}>
-                        {animeTitle.episodesAired} / {animeTitle.episodes}
+                        {animeTitle.episodesAired} / {animeTitle.episodes === 0 ? "?" : animeTitle.episodes}
                     </Badge>
                     <Title className={classes.title} order={3} lineClamp={2}>{animeTitle.russian}</Title>
                 </Flex>
