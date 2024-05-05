@@ -5,13 +5,15 @@ import {Carousel} from "@mantine/carousel";
 import {useQuery} from "@tanstack/react-query";
 import {Skeleton, Title} from "@mantine/core";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
-import {useState} from "react";
+import {Dispatch, SetStateAction, useState} from "react";
 import {client} from "@/lib/shikimori/client";
+import {StatusType} from "@/types/Shikimori/Responses/Types/StatusType";
 
 export function HeroContent() {
     const shikimori = client()
     const currentYear = new Date().getFullYear().toString()
     const [year, setYear] = useState(currentYear)
+    const [animeStatus, setAnimeStatus]: [animeStatus: StatusType | undefined, Dispatch<SetStateAction<StatusType | undefined>>] = useState<StatusType | undefined>("ongoing")
 
     const { data, status, error } = useQuery({
         queryKey: ['hero', year],
@@ -20,18 +22,19 @@ export function HeroContent() {
 
     async function getPopularTitles() {
         return await shikimori.animes.list({
-            limit: 12,
-            status: "ongoing",
+            limit: 15,
+            status: animeStatus,
             year: year,
             order: "popularity"
         })
     }
 
-    const carouselSlides = Array.from({ length: 12 })
+    const carouselSlides = Array.from({ length: 15 })
 
-    if (status === 'success' && data.animes.length < 12) {
+    if (status === 'success' && data.animes.length < 15) {
         const previousYear = (new Date().getFullYear() - 1).toString()
         setYear(previousYear)
+        setAnimeStatus("released")
     }
 
     return (

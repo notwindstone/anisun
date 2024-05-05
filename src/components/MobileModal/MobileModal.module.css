@@ -1,4 +1,5 @@
 .drawer {
+    border-top: rem(1px) solid var(--animeth-block-background-color);
     background: var(--animeth-background-color);
     border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) 0 0;
 }
@@ -14,6 +15,7 @@
 }
 
 .root {
+    border-top: rem(1px) solid var(--animeth-block-background-color);
     width: 100%;
     height: 100%;
     background: var(--animeth-background-color);
