@@ -10,3 +10,17 @@
     background: var(--animeth-background-color);
     border-bottom: rem(1px) solid var(--animeth-border-color);
 }
+
+.dropdown {
+    z-index: 31000 !important;
+}
+
+.avatar {
+    border: rem(2px) solid var(--animeth-background-color);
+    cursor: pointer;
+    transition: 150ms ease;
+
+    @mixin hover {
+        border: rem(2px) solid var(--animeth-secondary-color);
+    }
+}

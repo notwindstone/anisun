@@ -1,6 +1,20 @@
 "use client"
 
-import {ActionIcon, Avatar, Divider, em, Flex, Group, HoverCard, Image, rem, Stack, Text, Title} from "@mantine/core";
+import {
+    ActionIcon,
+    Avatar, Button,
+    Divider,
+    em,
+    Flex,
+    Group,
+    HoverCard,
+    Image, NavLink,
+    Popover,
+    rem,
+    Stack,
+    Text,
+    Title, UnstyledButton
+} from "@mantine/core";
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
 import Link from "next/link";
@@ -45,15 +59,35 @@ export default function Header() {
                 <SearchBar />
                 <ColorSchemeControl />
                 <SignedIn>
-                    <Avatar
-                        src={user?.imageUrl ?? '/missing-image.png'}
-                        alt={`Аватар пользователя ${user?.username}`}
-                        size={48}
-                        component={Link}
-                        href={`/account/${user?.id}`}
-                    >
-                        {user?.username?.[0]}
-                    </Avatar>
+                    <Popover transitionProps={{ transition: 'fade-up' }} width={280} shadow="md">
+                        <Popover.Target>
+                            <Avatar
+                                className={classes.avatar}
+                                src={user?.imageUrl ?? '/missing-image.png'}
+                                alt={`Аватар пользователя ${user?.username}`}
+                                size={48}
+                            >
+                                {user?.username?.[0]}
+                            </Avatar>
+                        </Popover.Target>
+                        <Popover.Dropdown className={classes.dropdown}>
+                            <Stack p={rem(8)}>
+                                <Group>
+                                    <Avatar
+                                        src={user?.imageUrl ?? '/missing-image.png'}
+                                        alt={`Аватар пользователя ${user?.username}`}
+                                        size={48}
+                                    >
+                                        {user?.username?.[0]}
+                                    </Avatar>
+                                    <Title order={4}>{user?.username}</Title>
+                                </Group>
+                                <UnstyledButton>Мой профиль</UnstyledButton>
+                                <UnstyledButton>Настройки</UnstyledButton>
+                                <UnstyledButton>Выйти</UnstyledButton>
+                            </Stack>
+                        </Popover.Dropdown>
+                    </Popover>
                 </SignedIn>
                 <SignedOut>
                     <SignInButton />
