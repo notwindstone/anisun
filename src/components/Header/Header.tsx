@@ -19,7 +19,7 @@ import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
 import Link from "next/link";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import {IconChevronDown, IconSearch, IconUser} from "@tabler/icons-react";
+import {IconChevronDown, IconLogout, IconSearch, IconSettings, IconUser, IconUserCircle} from "@tabler/icons-react";
 import {useHeadroom, useMediaQuery} from "@mantine/hooks";
 import classes from './Header.module.css';
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
@@ -71,8 +71,8 @@ export default function Header() {
                             </Avatar>
                         </Popover.Target>
                         <Popover.Dropdown className={classes.dropdown}>
-                            <Stack p={rem(8)}>
-                                <Group>
+                            <Stack p={rem(8)} gap={0}>
+                                <Group pb={rem(8)}>
                                     <Avatar
                                         src={user?.imageUrl ?? '/missing-image.png'}
                                         alt={`Аватар пользователя ${user?.username}`}
@@ -82,9 +82,32 @@ export default function Header() {
                                     </Avatar>
                                     <Title order={4}>{user?.username}</Title>
                                 </Group>
-                                <UnstyledButton>Мой профиль</UnstyledButton>
-                                <UnstyledButton>Настройки</UnstyledButton>
-                                <UnstyledButton>Выйти</UnstyledButton>
+                                <UnstyledButton
+                                    pt={rem(8)}
+                                    pb={rem(8)}
+                                >
+                                    <Group align="center">
+                                        <IconUserCircle />
+                                        <Text>Мой профиль</Text>
+                                    </Group>
+                                </UnstyledButton>
+                                <UnstyledButton
+                                    pt={rem(8)}
+                                    pb={rem(8)}
+                                >
+                                    <Group align="center">
+                                        <IconSettings />
+                                        <Text>Настройки</Text>
+                                    </Group>
+                                </UnstyledButton>
+                                <UnstyledButton
+                                    pt={rem(8)}
+                                >
+                                    <Group align="center">
+                                        <IconLogout />
+                                        <Text>Выйти</Text>
+                                    </Group>
+                                </UnstyledButton>
                             </Stack>
                         </Popover.Dropdown>
                     </Popover>
