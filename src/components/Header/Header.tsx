@@ -1,6 +1,6 @@
 "use client"
 
-import {ActionIcon, Divider, em, Flex, Group, HoverCard, Image, rem, Stack, Text, Title} from "@mantine/core";
+import {ActionIcon, Avatar, Divider, em, Flex, Group, HoverCard, Image, rem, Stack, Text, Title} from "@mantine/core";
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
 import Link from "next/link";
@@ -9,10 +9,12 @@ import {IconChevronDown, IconSearch, IconUser} from "@tabler/icons-react";
 import {useHeadroom, useMediaQuery} from "@mantine/hooks";
 import classes from './Header.module.css';
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
+import {SignedIn, SignedOut, SignInButton, SignUpButton, useUser} from "@clerk/nextjs";
 
 export default function Header() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const pinned = useHeadroom({ fixedAt: 120 })
+    const { user } = useUser();
 
     // isMobile является undefined при первоначальной загрузке страницы
     // поэтому при использовании условия !isMobile, а не isMobile === false
@@ -42,9 +44,21 @@ export default function Header() {
             <Group justify="flex-end">
                 <SearchBar />
                 <ColorSchemeControl />
-                <ActionIcon radius="xl">
-                    <IconUser />
-                </ActionIcon>
+                <SignedIn>
+                    <Avatar
+                        src={user?.imageUrl ?? '/missing-image.png'}
+                        alt={`Аватар пользователя ${user?.username}`}
+                        size={48}
+                        component={Link}
+                        href={`/account/${user?.id}`}
+                    >
+                        {user?.username?.[0]}
+                    </Avatar>
+                </SignedIn>
+                <SignedOut>
+                    <SignInButton />
+                    <SignUpButton />
+                </SignedOut>
             </Group>
         </Flex>
     )

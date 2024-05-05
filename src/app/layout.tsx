@@ -11,7 +11,6 @@ import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
 import MobileModal from "@/components/MobileModal/MobileModal";
-import Footer from "@/components/Footer/Footer";
 import Main from "@/components/Main/Main";
 import './global.css'
 import Header from "@/components/Header/Header";
