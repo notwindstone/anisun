@@ -1,4 +1,5 @@
 import {StatusType} from "@/types/Shikimori/Responses/Types/StatusType";
+import {OrderType} from "@/types/Shikimori/Queries/OrderType";
 
 export type AnimesType = {
     ids?: string;
@@ -6,6 +7,6 @@ export type AnimesType = {
     limit?: number;
     status?: StatusType;
     year?: string;
-    order?: string;
+    order?: OrderType;
     page?: number;
 }
