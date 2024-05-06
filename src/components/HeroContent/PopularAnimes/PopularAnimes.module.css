@@ -1,0 +1,4 @@
+.control {
+    background: var(--animeth-secondary-color);
+    box-shadow: 0 0 rem(8px) var(--animeth-secondary-color);
+}
