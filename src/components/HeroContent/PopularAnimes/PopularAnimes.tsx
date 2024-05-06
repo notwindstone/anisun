@@ -3,12 +3,12 @@
 import classes from './PopularAnimes.module.css';
 import {Carousel} from "@mantine/carousel";
 import {useQuery} from "@tanstack/react-query";
-import {Skeleton, Title} from "@mantine/core";
-import CarouselCard from "@/components/CarouselCard/CarouselCard";
+import {Title} from "@mantine/core";
 import {Dispatch, SetStateAction, useRef, useState} from "react";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/Responses/Types/StatusType";
 import AutoScroll from 'embla-carousel-auto-scroll'
+import CarouselSlides from "@/components/HeroContent/CarouselSlides/CarouselSlides";
 
 export function PopularAnimes() {
     const autoplay
@@ -64,27 +64,7 @@ export function PopularAnimes() {
                 onMouseEnter={autoplay.current.stop}
                 onMouseLeave={autoplay.current.play}
             >
-                {
-                    carouselSlides.map((_slide, index) => {
-                        return (
-                            <Carousel.Slide key={index}>
-                                {
-                                    status === 'success'
-                                        ? (
-                                            <>
-                                                <CarouselCard animeTitle={data.animes[index]} />
-                                            </>
-                                        )
-                                        : status === 'error' ? (
-                                            <>Error: {error.message}</>
-                                        ) : (
-                                            <Skeleton width={209} height={317} />
-                                        )
-                                }
-                            </Carousel.Slide>
-                        )
-                    })
-                }
+                <CarouselSlides carouselSlides={carouselSlides} error={error} status={status} data={data} />
             </Carousel>
         </div>
     );
