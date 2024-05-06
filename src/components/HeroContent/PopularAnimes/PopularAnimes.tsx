@@ -5,11 +5,20 @@ import {Carousel} from "@mantine/carousel";
 import {useQuery} from "@tanstack/react-query";
 import {Skeleton, Title} from "@mantine/core";
 import CarouselCard from "@/components/CarouselCard/CarouselCard";
-import {Dispatch, SetStateAction, useState} from "react";
+import {Dispatch, SetStateAction, useRef, useState} from "react";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/Responses/Types/StatusType";
+import AutoScroll from 'embla-carousel-auto-scroll'
 
 export function PopularAnimes() {
+    const autoplay
+        = useRef(
+            AutoScroll({
+                speed: 2,
+                direction: "forward",
+                startDelay: 2000
+            })
+    );
     const shikimori = client()
     const currentYear = new Date().getFullYear().toString()
     const [year, setYear] = useState(currentYear)
@@ -51,6 +60,9 @@ export function PopularAnimes() {
                 controlSize={40}
                 loop
                 dragFree
+                plugins={[autoplay.current]}
+                onMouseEnter={autoplay.current.stop}
+                onMouseLeave={autoplay.current.play}
             >
                 {
                     carouselSlides.map((_slide, index) => {
