@@ -2,6 +2,20 @@
     position: absolute;
     user-select: none;
     margin-right: 1rem;
+    outline: rem(2px) solid #00000000;
+    outline-offset: rem(-2px);
+
+    @mixin hover {
+        outline: rem(2px) solid var(--animeth-accent-color);
+    }
+}
+
+.card {
+    @mixin hover {
+        .poster {
+            filter: brightness(75%);
+        }
+    }
 }
 
 .info {
@@ -24,4 +38,8 @@
 
 .title {
     color: var(--mantine-color-white)
+}
+
+.poster, .overlay {
+    transition: 200ms ease;
 }
