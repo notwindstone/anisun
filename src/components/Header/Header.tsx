@@ -2,14 +2,10 @@
 
 import {
     ActionIcon,
-    Avatar, Button, Center,
-    Divider,
-    em,
+    Avatar, Button, em,
     Flex,
     Group,
-    HoverCard,
-    Image, Modal, NavLink,
-    Popover,
+    Image, Popover,
     rem,
     Stack,
     Text,
@@ -17,9 +13,8 @@ import {
 } from "@mantine/core";
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
-import Link from "next/link";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import {IconChevronDown, IconLogout, IconSearch, IconSettings, IconUser, IconUserCircle} from "@tabler/icons-react";
+import {IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
 import {useDisclosure, useHeadroom, useMediaQuery} from "@mantine/hooks";
 import classes from './Header.module.css';
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
@@ -185,8 +180,15 @@ export default function Header() {
                                     <Button
                                         variant="light"
                                         onClick={() => {
+                                            const signInRoute = "/sign-in"
+                                            const signInURL = `/sign-in?redirect_url=${hostURL}${pathname}`
+
                                             NProgress.start()
-                                            router.push(`/sign-in?redirect_url=${hostURL}${pathname}`)
+                                            router.push(signInURL)
+
+                                            if (signInRoute === pathname) {
+                                                return NProgress.done()
+                                            }
                                         }}
                                     >
                                         Войти
@@ -194,8 +196,15 @@ export default function Header() {
                                     <Button
                                         variant="light"
                                         onClick={() => {
+                                            const signUpRoute = "/sign-up"
+                                            const signUpURL = `/sign-up?redirect_url=${hostURL}${pathname}`
+
                                             NProgress.start()
-                                            router.push(`/sign-up?redirect_url=${hostURL}${pathname}`)
+                                            router.push(signUpURL)
+
+                                            if (signUpRoute === pathname) {
+                                                return NProgress.done()
+                                            }
                                         }}
                                     >
                                         Зарегистрироваться
