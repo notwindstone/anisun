@@ -111,9 +111,15 @@ export default function Header() {
                                                 return
                                             }
 
+                                            const accountURL = `/account/${user.id}`
+
                                             setAccountPopoverOpened((o) => !o)
                                             NProgress.start()
-                                            router.push(`/account/${user.id}`)
+                                            router.push(accountURL)
+
+                                            if (accountURL === pathname) {
+                                                return NProgress.done()
+                                            }
                                         }}
                                         pt={rem(8)}
                                         pb={rem(8)}
@@ -124,7 +130,10 @@ export default function Header() {
                                         </Group>
                                     </UnstyledButton>
                                     <UnstyledButton
-                                        onClick={open}
+                                        onClick={() => {
+                                            open()
+                                            setAccountPopoverOpened((o) => !o)
+                                        }}
                                         pt={rem(8)}
                                         pb={rem(8)}
                                     >
