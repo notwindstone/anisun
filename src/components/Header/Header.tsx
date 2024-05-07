@@ -14,11 +14,17 @@ import {
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import {IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
+import {
+    IconCloudLockOpen,
+    IconLogin,
+    IconLogout,
+    IconSettings,
+    IconUserCircle
+} from "@tabler/icons-react";
 import {useDisclosure, useHeadroom, useMediaQuery} from "@mantine/hooks";
 import classes from './Header.module.css';
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
-import {SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserProfile, useUser} from "@clerk/nextjs";
+import {SignedIn, SignedOut, SignOutButton, UserProfile, useUser} from "@clerk/nextjs";
 import {useRouter, usePathname} from "next/navigation";
 import NProgress from "nprogress";
 import {useState} from "react";
@@ -176,9 +182,9 @@ export default function Header() {
                                 </ActionIcon>
                             </Popover.Target>
                             <Popover.Dropdown className={classes.dropdown}>
-                                <Group>
-                                    <Button
-                                        variant="light"
+                                <Stack p={rem(8)} gap={0}>
+                                    <Title pb={rem(8)} order={2}>Аккаунт</Title>
+                                    <UnstyledButton
                                         onClick={() => {
                                             const signInRoute = "/sign-in"
                                             const signInURL = `/sign-in?redirect_url=${hostURL}${pathname}`
@@ -190,11 +196,15 @@ export default function Header() {
                                                 return NProgress.done()
                                             }
                                         }}
+                                        pt={rem(8)}
+                                        pb={rem(8)}
                                     >
-                                        Войти
-                                    </Button>
-                                    <Button
-                                        variant="light"
+                                        <Group align="center">
+                                            <IconLogin />
+                                            <Text>Войти</Text>
+                                        </Group>
+                                    </UnstyledButton>
+                                    <UnstyledButton
                                         onClick={() => {
                                             const signUpRoute = "/sign-up"
                                             const signUpURL = `/sign-up?redirect_url=${hostURL}${pathname}`
@@ -206,10 +216,14 @@ export default function Header() {
                                                 return NProgress.done()
                                             }
                                         }}
+                                        pt={rem(8)}
                                     >
-                                        Зарегистрироваться
-                                    </Button>
-                                </Group>
+                                        <Group align="center">
+                                            <IconCloudLockOpen />
+                                            <Text>Зарегистрироваться</Text>
+                                        </Group>
+                                    </UnstyledButton>
+                                </Stack>
                             </Popover.Dropdown>
                         </Popover>
                     </SignedOut>
