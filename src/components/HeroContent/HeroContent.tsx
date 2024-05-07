@@ -1,12 +1,21 @@
 import classes from './HeroContent.module.css';
-import {PopularAnimes} from "@/components/HeroContent/PopularAnimes/PopularAnimes";
-import {NewestAnimes} from "@/components/HeroContent/NewestAnimes/NewestAnimes";
+import ConfiguredCarousel from "@/components/HeroContent/ConfiguredCarousel/ConfiguredCarousel";
 
 export function HeroContent() {
     return (
         <div className={classes.hero}>
-            <PopularAnimes />
-            <NewestAnimes />
+            <ConfiguredCarousel
+                order="popularity"
+                direction="forward"
+                title="Сейчас популярно"
+                queryKey="popular"
+            />
+            <ConfiguredCarousel
+                direction="backward"
+                queryKey="newest"
+                order="created_at"
+                title="Новинки"
+            />
         </div>
     );
 }

@@ -1,21 +1,33 @@
 "use client"
 
-import classes from './NewestAnimes.module.css';
-import {Carousel} from "@mantine/carousel";
-import {useQuery} from "@tanstack/react-query";
-import {Title} from "@mantine/core";
 import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
+import AutoScroll from "embla-carousel-auto-scroll";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/Responses/Types/StatusType";
-import AutoScroll from "embla-carousel-auto-scroll";
+import {useQuery} from "@tanstack/react-query";
+import classes from "./ConfiguredCarousel.module.css"
+import {Title} from "@mantine/core";
+import {Carousel} from "@mantine/carousel";
 import CarouselSlides from "@/components/HeroContent/CarouselSlides/CarouselSlides";
 
-export function NewestAnimes() {
+export default function ConfiguredCarousel(
+    {
+        direction,
+        queryKey,
+        order,
+        title,
+    }: {
+        direction: "forward" | "backward";
+        queryKey: "newest" | "popular";
+        order: "created_at" | "popularity";
+        title: string;
+    }
+) {
     const autoplay
         = useRef(
         AutoScroll({
             speed: 2,
-            direction: "backward",
+            direction: direction,
             playOnInit: false,
         })
     );
@@ -25,7 +37,7 @@ export function NewestAnimes() {
     const [animeStatus, setAnimeStatus]: [animeStatus: StatusType | undefined, Dispatch<SetStateAction<StatusType | undefined>>] = useState<StatusType | undefined>("ongoing")
 
     const { data, status, error } = useQuery({
-        queryKey: ['hero', 'newest', year],
+        queryKey: ['hero', queryKey, year],
         queryFn: getNewestTitles,
     });
 
@@ -34,7 +46,7 @@ export function NewestAnimes() {
             limit: 15,
             status: animeStatus,
             year: year,
-            order: "created_at"
+            order: order
         })
     }
 
@@ -56,7 +68,7 @@ export function NewestAnimes() {
 
     return (
         <div className={classes.hero}>
-            <Title>Новинки</Title>
+            <Title>{title}</Title>
             <Carousel
                 classNames={{
                     control: classes.control
