@@ -4,7 +4,7 @@ import classes from './PopularAnimes.module.css';
 import {Carousel} from "@mantine/carousel";
 import {useQuery} from "@tanstack/react-query";
 import {Title} from "@mantine/core";
-import {Dispatch, SetStateAction, useRef, useState} from "react";
+import {Dispatch, SetStateAction, useEffect, useRef, useState} from "react";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/Responses/Types/StatusType";
 import AutoScroll from 'embla-carousel-auto-scroll'
@@ -16,7 +16,7 @@ export function PopularAnimes() {
             AutoScroll({
                 speed: 2,
                 direction: "forward",
-                startDelay: 2000
+                playOnInit: false,
             })
     );
     const shikimori = client()
@@ -45,6 +45,14 @@ export function PopularAnimes() {
         setYear(previousYear)
         setAnimeStatus("released")
     }
+
+    useEffect(() => {
+        if (data?.animes.length !== 15) {
+            return
+        }
+
+        autoplay.current.play()
+    }, [data]);
 
     return (
         <div className={classes.hero}>
