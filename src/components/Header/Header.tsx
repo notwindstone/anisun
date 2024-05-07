@@ -95,7 +95,7 @@ export default function Header() {
                                     className={classes.avatar}
                                     src={user?.imageUrl ?? '/blurred.png'}
                                     alt={`Аватар пользователя ${user?.username}`}
-                                    size={48}
+                                    size="lg"
                                 >
                                     {user?.username?.[0]}
                                 </Avatar>
@@ -106,7 +106,7 @@ export default function Header() {
                                         <Avatar
                                             src={user?.imageUrl ?? '/blurred.png'}
                                             alt={`Аватар пользователя ${user?.username}`}
-                                            size={48}
+                                            size="lg"
                                         >
                                             {user?.username?.[0]}
                                         </Avatar>
@@ -132,7 +132,7 @@ export default function Header() {
                                         pb={rem(8)}
                                     >
                                         <Group align="center">
-                                            <IconUserCircle />
+                                            <IconUserCircle stroke={1.5} />
                                             <Text>Мой профиль</Text>
                                         </Group>
                                     </UnstyledButton>
@@ -145,7 +145,7 @@ export default function Header() {
                                         pb={rem(8)}
                                     >
                                         <Group align="center">
-                                            <IconSettings />
+                                            <IconSettings stroke={1.5} />
                                             <Text>Настройки</Text>
                                         </Group>
                                     </UnstyledButton>
@@ -159,7 +159,7 @@ export default function Header() {
                                             pt={rem(8)}
                                         >
                                             <Group align="center">
-                                                <IconLogout />
+                                                <IconLogout stroke={1.5} />
                                                 <Text>Выйти</Text>
                                             </Group>
                                         </UnstyledButton>
@@ -177,8 +177,8 @@ export default function Header() {
                             shadow="md"
                         >
                             <Popover.Target>
-                                <ActionIcon onClick={() => setUnsignedPopoverOpened((o) => !o)}>
-                                    <IconUserCircle />
+                                <ActionIcon variant="light" size="lg" onClick={() => setUnsignedPopoverOpened((o) => !o)}>
+                                    <IconUserCircle size="lg" stroke={1.5} />
                                 </ActionIcon>
                             </Popover.Target>
                             <Popover.Dropdown className={classes.dropdown}>
@@ -200,7 +200,7 @@ export default function Header() {
                                         pb={rem(8)}
                                     >
                                         <Group align="center">
-                                            <IconLogin />
+                                            <IconLogin stroke={1.5}/>
                                             <Text>Войти</Text>
                                         </Group>
                                     </UnstyledButton>
@@ -219,7 +219,7 @@ export default function Header() {
                                         pt={rem(8)}
                                     >
                                         <Group align="center">
-                                            <IconCloudLockOpen />
+                                            <IconCloudLockOpen stroke={1.5} />
                                             <Text>Зарегистрироваться</Text>
                                         </Group>
                                     </UnstyledButton>
