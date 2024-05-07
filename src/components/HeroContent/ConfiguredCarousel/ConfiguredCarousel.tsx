@@ -63,7 +63,7 @@ export default function ConfiguredCarousel(
             return
         }
 
-        autoplay.current.play()
+        autoplay?.current?.play()
     }, [data]);
 
     return (

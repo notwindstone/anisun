@@ -26,9 +26,12 @@ import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeContr
 import {SignedIn, SignedOut, SignInButton, SignOutButton, SignUpButton, UserProfile, useUser} from "@clerk/nextjs";
 import {useRouter, usePathname} from "next/navigation";
 import NProgress from "nprogress";
+import {useState} from "react";
 
 export default function Header() {
     const [opened, { open, close }] = useDisclosure(false);
+    const [accountPopoverOpened, setAccountPopoverOpened] = useState(false)
+    const [unsignedPopoverOpened, setUnsignedPopoverOpened] = useState(false)
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const pinned = useHeadroom({ fixedAt: 120 })
     const { user } = useUser();
@@ -78,9 +81,10 @@ export default function Header() {
                     <SearchBar />
                     <ColorSchemeControl />
                     <SignedIn>
-                        <Popover transitionProps={{ transition: 'fade-up' }} width={280} shadow="md">
+                        <Popover opened={accountPopoverOpened} onChange={setAccountPopoverOpened} transitionProps={{ transition: 'fade-up' }} width={280} shadow="md">
                             <Popover.Target>
                                 <Avatar
+                                    onClick={() => setAccountPopoverOpened((o) => !o)}
                                     className={classes.avatar}
                                     src={user?.imageUrl ?? '/blurred.png'}
                                     alt={`Аватар пользователя ${user?.username}`}
@@ -107,6 +111,7 @@ export default function Header() {
                                                 return
                                             }
 
+                                            setAccountPopoverOpened((o) => !o)
                                             NProgress.start()
                                             router.push(`/account/${user.id}`)
                                         }}
@@ -131,6 +136,7 @@ export default function Header() {
                                     <SignOutButton>
                                         <UnstyledButton
                                             onClick={() => {
+                                                setAccountPopoverOpened((o) => !o)
                                                 NProgress.start()
                                                 NProgress.done()
                                             }}
@@ -148,6 +154,12 @@ export default function Header() {
                     </SignedIn>
                     <SignedOut>
                         <Group>
+                            <Button variant="light">
+                                Войти
+                            </Button>
+                            <Button variant="light">
+                                Зарегистрироваться
+                            </Button>
                             <Link href={`/sign-in?redirect_url=${hostURL}${pathname}`}>Войти</Link>
                             <Link href={`/sign-up?redirect_url=${hostURL}${pathname}`}>Зарегистрироваться</Link>
                         </Group>
