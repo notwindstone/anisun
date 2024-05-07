@@ -169,6 +169,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
                     wrapper: classes.wrapper,
                     dropdown: classes.dropdown,
                     option: classes.option,
+                    input: classes.input
                 }}
                 variant="unstyled"
                 maxDropdownHeight={800}
@@ -182,7 +183,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
                 }}
                 placeholder="Поиск"
                 leftSection={
-                    <IconSearch size="1rem" />
+                    <IconSearch className={classes.icon} size="1rem" />
                 }
                 value={input}
                 rightSectionPointerEvents="auto"

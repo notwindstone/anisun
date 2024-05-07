@@ -2,13 +2,30 @@
     /* пиздец */
     --local-search-bar-border-radius: rem(16px);
 
-    background: var(--animeth-secondary-color);
+    background: var(--animeth-background-color);
+    outline: rem(2px) solid #00000000;
+    outline-offset: rem(-2px);
     width: 100%;
     min-width: rem(384px);
     border-radius: var(--local-search-bar-border-radius);
+    transition: 200ms ease;
 
     @media (max-width: rem(750)) {
         min-width: unset;
+    }
+
+    &:focus-within {
+        outline: rem(2px) solid var(--mantine-color-violet-filled);
+    }
+}
+
+.icon {
+    color: var(--mantine-color-violet-light-color);
+}
+
+.input {
+    &::placeholder {
+        color: var(--mantine-color-violet-light-color);
     }
 }
 
@@ -16,10 +33,11 @@
     /* пиздец */
     --local-search-bar-border-radius: rem(16px);
 
+    outline: rem(2px) solid var(--mantine-color-violet-filled);
+    outline-offset: rem(-2px);
     z-index: 30000 !important;
     border-radius: var(--local-search-bar-border-radius);
-    border-color: var(--animeth-secondary-color);
-    background: var(--animeth-secondary-color);
+    background: var(--animeth-background-color);
 }
 
 .option {
