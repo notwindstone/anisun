@@ -81,7 +81,13 @@ export default function Header() {
                     <SearchBar />
                     <ColorSchemeControl />
                     <SignedIn>
-                        <Popover opened={accountPopoverOpened} onChange={setAccountPopoverOpened} transitionProps={{ transition: 'fade-up' }} width={280} shadow="md">
+                        <Popover
+                            opened={accountPopoverOpened}
+                            onChange={setAccountPopoverOpened}
+                            transitionProps={{ transition: 'fade-up' }}
+                            width={280}
+                            shadow="md"
+                        >
                             <Popover.Target>
                                 <Avatar
                                     onClick={() => setAccountPopoverOpened((o) => !o)}
@@ -162,16 +168,41 @@ export default function Header() {
                         </Popover>
                     </SignedIn>
                     <SignedOut>
-                        <Group>
-                            <Button variant="light">
-                                Войти
-                            </Button>
-                            <Button variant="light">
-                                Зарегистрироваться
-                            </Button>
-                            <Link href={`/sign-in?redirect_url=${hostURL}${pathname}`}>Войти</Link>
-                            <Link href={`/sign-up?redirect_url=${hostURL}${pathname}`}>Зарегистрироваться</Link>
-                        </Group>
+                        <Popover
+                            opened={unsignedPopoverOpened}
+                            onChange={setUnsignedPopoverOpened}
+                            transitionProps={{ transition: 'fade-up' }}
+                            width={280}
+                            shadow="md"
+                        >
+                            <Popover.Target>
+                                <ActionIcon onClick={() => setUnsignedPopoverOpened((o) => !o)}>
+                                    <IconUserCircle />
+                                </ActionIcon>
+                            </Popover.Target>
+                            <Popover.Dropdown className={classes.dropdown}>
+                                <Group>
+                                    <Button
+                                        variant="light"
+                                        onClick={() => {
+                                            NProgress.start()
+                                            router.push(`/sign-in?redirect_url=${hostURL}${pathname}`)
+                                        }}
+                                    >
+                                        Войти
+                                    </Button>
+                                    <Button
+                                        variant="light"
+                                        onClick={() => {
+                                            NProgress.start()
+                                            router.push(`/sign-up?redirect_url=${hostURL}${pathname}`)
+                                        }}
+                                    >
+                                        Зарегистрироваться
+                                    </Button>
+                                </Group>
+                            </Popover.Dropdown>
+                        </Popover>
                     </SignedOut>
                 </Group>
             </Flex>
