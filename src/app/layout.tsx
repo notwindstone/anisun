@@ -60,7 +60,7 @@ export default function RootLayout({
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={30000} limit={3} />
-                            <Group wrap="nowrap">
+                            <Group gap={0} wrap="nowrap">
                                 <SideBar />
                                 <div className="app-wrapper">
                                     <Main>

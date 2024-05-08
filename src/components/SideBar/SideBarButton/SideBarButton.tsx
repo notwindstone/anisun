@@ -1,39 +1,16 @@
 import {Tooltip, UnstyledButton} from "@mantine/core";
 import classes from './SideBarButton.module.css';
-import {
-    IconHome,
-    IconHomeFilled,
-    IconSearch,
-    IconTrendingUp,
-} from "@tabler/icons-react";
-import {useState} from "react";
+import {SideBarLink} from "@/types/SideBarLink";
+import {useContext} from "react";
+import {SideBarLinkContext} from "@/components/SideBar/SideBar";
 
-const navLinks = [
-    {
-        label: 'Главная',
-        icon: <IconHome size={32} stroke={1.5} />,
-        activeIcon: <IconHomeFilled size={32} stroke={3} />,
-    },
-    {
-        label: 'Поиск',
-        icon: <IconSearch size={32} stroke={1.5} />,
-        activeIcon: <IconSearch size={32} stroke={3} />,
-    },
-    {
-        label: 'Популярное',
-        icon: <IconTrendingUp size={32} stroke={1.5} />,
-        activeIcon: <IconTrendingUp size={32} stroke={3} />,
-    }
-]
+export default function SideBarButton({ link, index }: { link: SideBarLink, index: number }) {
+    const { active, setActive } = useContext(SideBarLinkContext)
+    const isActive = active === index
 
-export default function SideBarButton() {
-    const [active, setActive] = useState(0)
-    const navButtons = navLinks.map((link, index) => {
-        const isActive = active === index
-
-        return (
+    return (
+        <>
             <Tooltip
-                key={link.label}
                 color="gray"
                 withArrow
                 position="right"
@@ -53,12 +30,6 @@ export default function SideBarButton() {
                     }
                 </UnstyledButton>
             </Tooltip>
-        )
-    })
-
-    return (
-        <>
-            {navButtons}
         </>
     )
 }
