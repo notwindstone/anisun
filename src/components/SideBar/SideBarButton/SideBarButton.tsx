@@ -12,7 +12,6 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
         <>
             <Tooltip
                 color="gray"
-                withArrow
                 position="right"
                 label={link.label}
                 transitionProps={{ transition: 'fade-right' }}

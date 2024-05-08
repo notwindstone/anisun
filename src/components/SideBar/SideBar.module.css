@@ -4,3 +4,21 @@
     width: rem(96px);
     height: 100vh;
 }
+
+.menuButton {
+    width: rem(64px);
+    height: rem(64px);
+    border-radius: var(--mantine-radius-md);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 150ms ease;
+
+    @mixin hover {
+        background: alpha(var(--mantine-color-default-hover), 0.5);
+    }
+
+    &:active {
+        background: var(--mantine-color-default-hover);
+    }
+}

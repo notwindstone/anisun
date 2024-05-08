@@ -5,6 +5,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    transition: 150ms ease;
 
     @mixin hover {
         background: alpha(var(--mantine-color-default-hover), 0.5);
