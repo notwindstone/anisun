@@ -13,7 +13,6 @@ import {ruRU} from "@clerk/localizations";
 import MobileModal from "@/components/MobileModal/MobileModal";
 import Main from "@/components/Main/Main";
 import './global.css'
-import Header from "@/components/Header/Header";
 import SideBar from "@/components/SideBar/SideBar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -63,9 +62,11 @@ export default function RootLayout({
                             <Notifications zIndex={30000} limit={3} />
                             <Group wrap="nowrap">
                                 <SideBar />
-                                <Main>
-                                    {children}
-                                </Main>
+                                <div className="app-wrapper">
+                                    <Main>
+                                        {children}
+                                    </Main>
+                                </div>
                             </Group>
                             <MobileModal />
                         </MantineProvider>

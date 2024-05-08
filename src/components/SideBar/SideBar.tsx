@@ -4,6 +4,7 @@ import {useMediaQuery} from "@mantine/hooks";
 import {ActionIcon, em, Stack, Tooltip} from "@mantine/core";
 import {IconHomeFilled} from "@tabler/icons-react";
 import classes from './SideBar.module.css';
+import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
 
 export default function SideBar() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -11,18 +12,11 @@ export default function SideBar() {
     return isMobile === false && (
         <>
             <aside className={classes.sidebar}>
-                <Stack>
-                    <Tooltip
-                        color="gray"
-                        withArrow
-                        position="right"
-                        label="Главная"
-                        transitionProps={{ transition: 'fade-right' }}
-                    >
-                        <ActionIcon>
-                            <IconHomeFilled />
-                        </ActionIcon>
-                    </Tooltip>
+                <Stack
+                    justify="flex-start"
+                    align="center"
+                >
+                    <SideBarButton />
                 </Stack>
             </aside>
         </>
