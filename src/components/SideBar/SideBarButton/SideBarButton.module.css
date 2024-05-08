@@ -7,6 +7,14 @@
     align-items: center;
 
     @mixin hover {
+        background: alpha(var(--mantine-color-default-hover), 0.5);
+    }
+}
+
+.activeButton {
+    background: var(--mantine-color-default-hover);
+
+    @mixin hover {
         background: var(--mantine-color-default-hover);
     }
 }
