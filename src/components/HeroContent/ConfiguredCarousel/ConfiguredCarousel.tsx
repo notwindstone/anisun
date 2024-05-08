@@ -59,11 +59,16 @@ export default function ConfiguredCarousel(
     }
 
     useEffect(() => {
-        if (data?.animes.length !== 15) {
+        if (data?.animes.length !== 15 || !autoplay) {
             return
         }
 
-        autoplay?.current?.play()
+        try {
+            autoplay.current.play()
+        }
+        catch (e) {
+            return
+        }
     }, [data]);
 
     return (

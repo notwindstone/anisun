@@ -60,7 +60,6 @@ export default function RootLayout({
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={30000} limit={3} />
-                            <Header />
                             <Main>
                                 {children}
                             </Main>
