@@ -1,7 +1,7 @@
 "use client"
 
 import {useMediaQuery} from "@mantine/hooks";
-import {ActionIcon, em, Stack, Tooltip} from "@mantine/core";
+import {em, Stack} from "@mantine/core";
 import {IconHome, IconHomeFilled, IconSearch, IconTrendingUp} from "@tabler/icons-react";
 import classes from './SideBar.module.css';
 import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
@@ -26,7 +26,14 @@ const navLinks = [
     }
 ]
 
-export const SideBarLinkContext = React.createContext({ active: 0, setActive: () => {} });
+export const SideBarLinkContext
+    = React.createContext<{
+    active: number,
+    setActive: React.Dispatch<number>
+}>({
+    active: 0,
+    setActive: () => null
+});
 
 export default function SideBar() {
     const [active, setActive] = useState(0)
@@ -36,7 +43,7 @@ export default function SideBar() {
             <SideBarButton
                 key={link.label}
                 link={link}
-                index={index}
+                order={index}
             />
         )
     })

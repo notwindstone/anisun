@@ -4,9 +4,9 @@ import {SideBarLink} from "@/types/SideBarLink";
 import {useContext} from "react";
 import {SideBarLinkContext} from "@/components/SideBar/SideBar";
 
-export default function SideBarButton({ link, index }: { link: SideBarLink, index: number }) {
+export default function SideBarButton({ link, order }: { link: SideBarLink, order: number }) {
     const { active, setActive } = useContext(SideBarLinkContext)
-    const isActive = active === index
+    const isActive = active === order
 
     return (
         <>
@@ -21,7 +21,7 @@ export default function SideBarButton({ link, index }: { link: SideBarLink, inde
                     className={
                         `${classes.button} ${isActive && classes.activeButton}`
                     }
-                    onClick={() => setActive(index)}
+                    onClick={() => setActive(order)}
                 >
                     {
                         isActive
