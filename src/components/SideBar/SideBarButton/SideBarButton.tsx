@@ -1,4 +1,4 @@
-import {Center, Text, Tooltip, UnstyledButton} from "@mantine/core";
+import {Center, Text, Tooltip, Transition, UnstyledButton} from "@mantine/core";
 import classes from './SideBarButton.module.css';
 import {SideBarLink} from "@/types/SideBarLink";
 import {useContext} from "react";
@@ -33,11 +33,14 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
                                 : link.icon
                         }
                     </Center>
-                    {
-                        opened && (
-                            <Text>{link.label}</Text>
-                        )
-                    }
+                    <Transition
+                        mounted={opened}
+                        transition="fade-right"
+                        duration={150}
+                        timingFunction="ease"
+                    >
+                        {(styles) => <Text fw={500} size="lg" style={styles}>{link.label}</Text>}
+                    </Transition>
                 </UnstyledButton>
             </Tooltip>
         </>

@@ -1,7 +1,7 @@
 "use client"
 
 import {useDisclosure, useMediaQuery} from "@mantine/hooks";
-import {em, Group, Image, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
+import {em, Group, Image, rem, Stack, Text, Title, Transition, UnstyledButton} from "@mantine/core";
 import {
     IconHistory,
     IconHome,
@@ -99,9 +99,14 @@ export default function SideBar() {
                         >
                             <IconMenu2 {...iconProps} />
                         </UnstyledButton>
-                        {
-                            opened && (
-                                <Group align="center" wrap="nowrap">
+                        <Transition
+                            mounted={opened}
+                            transition="fade-right"
+                            duration={150}
+                            timingFunction="ease"
+                        >
+                            {(styles) => (
+                                <Group style={styles} align="center" wrap="nowrap">
                                     <Image
                                         alt="Animeth website icon"
                                         src="/favicon.png"
@@ -124,8 +129,8 @@ export default function SideBar() {
                                         ANIMETH
                                     </Text>
                                 </Group>
-                            )
-                        }
+                            )}
+                        </Transition>
                     </Group>
                     <SideBarLinkContext.Provider value={{ active, setActive, opened }}>
                         {navButtons}
