@@ -76,12 +76,11 @@ export default function SideBar() {
     const [opened, { toggle }] = useDisclosure(false);
     const [active, setActive] = useState(0)
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-    const navButtons = navLinks.map((link: SideBarLink, index) => {
+    const navButtons = navLinks.map((link: SideBarLink) => {
         return (
             <SideBarButton
                 key={link.label}
                 link={link}
-                order={index}
             />
         )
     })

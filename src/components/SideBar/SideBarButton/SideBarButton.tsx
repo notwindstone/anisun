@@ -28,14 +28,14 @@ import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 
-export default function SideBarButton({ link, order }: { link: SideBarLink, order: number }) {
+export default function SideBarButton({ link }: { link: SideBarLink }) {
     const { user } = useUser();
     const [ripple, event] = useRipple();
     const { active, setActive, opened } = useContext(SideBarLinkContext)
     const [expanded, setExpanded] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
-    const isActive = active === order
+    const isActive = link.pathname === pathname
     const isPopover = link.content !== undefined
     const envType = process.env.NODE_ENV
     const hostURL =
@@ -181,7 +181,6 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
             }
             onClick={() => {
                 setExpanded(!expanded)
-                setActive(order)
 
                 if (link.pathname !== undefined) {
                     NProgress.start()
