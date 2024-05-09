@@ -182,6 +182,15 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
             onClick={() => {
                 setExpanded(!expanded)
                 setActive(order)
+
+                if (link.pathname !== undefined) {
+                    NProgress.start()
+                    router.push(link.pathname)
+                }
+
+                if (link.pathname === pathname) {
+                    return NProgress.done()
+                }
             }}
         >
             <Center className={classes.iconWrapper} w={64} h={64}>
