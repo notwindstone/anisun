@@ -12,6 +12,7 @@
 }
 
 .menuButton {
+    z-index: 1000;
     width: rem(64px);
     height: rem(64px);
     border-radius: var(--mantine-radius-md);
@@ -22,9 +23,5 @@
 
     @mixin hover {
         background: alpha(var(--mantine-color-default-hover), 0.5);
-    }
-
-    &:active {
-        background: var(--mantine-color-default-hover);
     }
 }

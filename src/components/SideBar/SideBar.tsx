@@ -16,6 +16,7 @@ import React, {useState} from "react";
 import {SideBarLink} from "@/types/SideBarLink";
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
+import useRipple from "use-ripple-hook";
 
 const iconProps = {size: 32, stroke: 1.5}
 const activeIconProps = {size: 32, stroke: 2.5}
@@ -71,6 +72,7 @@ export const SideBarLinkContext
 });
 
 export default function SideBar() {
+    const [ripple, event] = useRipple();
     const [opened, { toggle }] = useDisclosure(false);
     const [active, setActive] = useState(0)
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
@@ -98,11 +100,13 @@ export default function SideBar() {
                 >
                     <Group
                         align="center"
-                        gap={rem(16)}
+                        gap={0}
                         wrap="nowrap"
                         mb={rem(16)}
                     >
                         <UnstyledButton
+                            ref={ripple}
+                            onPointerDown={event}
                             className={
                                 `${classes.menuButton}`
                             }
@@ -118,7 +122,7 @@ export default function SideBar() {
                         >
                             {
                                 (styles) => (
-                                    <Group style={styles} align="center" wrap="nowrap">
+                                    <Group gap={rem(16)} style={styles} align="center" wrap="nowrap">
                                         <Image
                                             alt="Animeth website icon"
                                             src="/favicon.png"

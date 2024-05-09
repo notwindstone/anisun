@@ -1,11 +1,13 @@
-import {Center, Group, Popover, rem, Text, Tooltip, Transition, UnstyledButton} from "@mantine/core";
+import {Button, Center, Flex, Group, Popover, rem, Text, Tooltip, Transition, UnstyledButton} from "@mantine/core";
 import classes from './SideBarButton.module.css';
 import {SideBarLink} from "@/types/SideBarLink";
 import {useContext, useState} from "react";
 import {SideBarLinkContext} from "@/components/SideBar/SideBar";
 import {IconChevronRight} from "@tabler/icons-react";
+import useRipple from "use-ripple-hook";
 
 export default function SideBarButton({ link, order }: { link: SideBarLink, order: number }) {
+    const [ripple, event] = useRipple();
     const { active, setActive, opened } = useContext(SideBarLinkContext)
     const [expanded, setExpanded] = useState(false);
     const isActive = active === order
@@ -13,6 +15,8 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
 
     const button = (
         <UnstyledButton
+            ref={ripple}
+            onPointerDown={event}
             className={
                 `
                     ${classes.button} 
@@ -65,6 +69,9 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
     return isPopover ? (
         <>
             <Popover
+                classNames={{
+                    dropdown: classes.dropdown,
+                }}
                 opened={expanded}
                 onChange={setExpanded}
                 width={200}
@@ -75,7 +82,7 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
                     {button}
                 </Popover.Target>
                 <Popover.Dropdown>
-                    <Text size="xs">This is uncontrolled popover, it is opened when button is clicked</Text>
+                    {link.content}
                 </Popover.Dropdown>
             </Popover>
         </>

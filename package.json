@@ -39,7 +39,8 @@
     "postgres": "^3.4.4",
     "react": "^18",
     "react-dom": "^18",
-    "recharts": "^2.12.3"
+    "recharts": "^2.12.3",
+    "use-ripple-hook": "^1.0.24"
   },
   "devDependencies": {
     "@types/node": "^20",
