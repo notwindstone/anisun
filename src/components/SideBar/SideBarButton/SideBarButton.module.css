@@ -1,4 +1,5 @@
 .button {
+    z-index: 1000;
     width: rem(64px);
     height: rem(64px);
     border-radius: var(--mantine-radius-md);
@@ -37,7 +38,7 @@
 
 .dropdown {
     border-radius: rem(12px);
-    background: #00000044;
+    background: #00000066;
     backdrop-filter: blur(rem(10px));
 }
 

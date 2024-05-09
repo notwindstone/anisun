@@ -32,13 +32,13 @@ const navLinks = [
         label: 'Аккаунт',
         icon: <IconUserCircle {...iconProps} />,
         activeIcon: <IconUserCircle {...activeIconProps} />,
-        content: <></>,
+        content: "account",
     },
     {
         label: 'Поиск',
         icon: <IconSearch {...iconProps} />,
         activeIcon: <IconSearch {...activeIconProps} />,
-        content: <></>,
+        content: "search",
     },
     {
         label: 'Популярное',
@@ -56,7 +56,7 @@ const navLinks = [
         label: 'Настройки',
         icon: <IconSettings {...iconProps} />,
         activeIcon: <IconSettings {...activeIconProps} />,
-        content: <></>,
+        content: "settings",
     }
 ]
 
