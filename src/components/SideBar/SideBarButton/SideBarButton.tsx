@@ -1,11 +1,30 @@
-import {Center, Group, Popover, rem, Stack, Text, Title, Tooltip, Transition, UnstyledButton} from "@mantine/core";
+import {
+    Avatar,
+    Center,
+    Group,
+    Popover,
+    rem,
+    Stack,
+    Text,
+    Title,
+    Tooltip,
+    Transition,
+    UnstyledButton
+} from "@mantine/core";
 import classes from './SideBarButton.module.css';
 import {SideBarLink} from "@/types/SideBarLink";
 import {useContext, useState} from "react";
 import {SideBarLinkContext} from "@/components/SideBar/SideBar";
-import {IconChevronRight, IconCloudLockOpen, IconLogin} from "@tabler/icons-react";
+import {
+    IconChevronRight,
+    IconCloudLockOpen,
+    IconLogin,
+    IconLogout,
+    IconSettings,
+    IconUserCircle
+} from "@tabler/icons-react";
 import useRipple from "use-ripple-hook";
-import {useUser} from "@clerk/nextjs";
+import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 
@@ -29,50 +48,119 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
     switch (link.content) {
         case "account":
             content = (
-                <Stack p={rem(8)} gap={0}>
-                    <Title c="white" pb={rem(8)} order={2}>Аккаунт</Title>
-                    <UnstyledButton
-                        onClick={() => {
-                            const signInRoute = "/sign-in"
-                            const signInURL = `/sign-in?redirect_url=${hostURL}${pathname}`
+                <>
+                    <SignedIn>
+                        <Stack p={rem(8)} gap={0}>
+                            <Group pb={rem(8)}>
+                                <Avatar
+                                    src={user?.imageUrl ?? '/blurred.png'}
+                                    alt={`Аватар пользователя ${user?.username}`}
+                                    size="lg"
+                                >
+                                    {user?.username?.[0]}
+                                </Avatar>
+                                <Title c="white" order={4}>{user?.username}</Title>
+                            </Group>
+                            <UnstyledButton
+                                onClick={() => {
+                                    if (!user) {
+                                        return
+                                    }
 
-                            setExpanded(!expanded)
-                            NProgress.start()
-                            router.push(signInURL)
+                                    const accountURL = `/account/${user.id}`
 
-                            if (signInRoute === pathname) {
-                                return NProgress.done()
-                            }
-                        }}
-                        pt={rem(8)}
-                        pb={rem(8)}
-                    >
-                        <Group align="center">
-                            <IconLogin color="white" stroke={1.5}/>
-                            <Text c="white">Войти</Text>
-                        </Group>
-                    </UnstyledButton>
-                    <UnstyledButton
-                        onClick={() => {
-                            const signUpRoute = "/sign-up"
-                            const signUpURL = `/sign-up?redirect_url=${hostURL}${pathname}`
+                                    setExpanded(!expanded)
+                                    NProgress.start()
+                                    router.push(accountURL)
 
-                            setExpanded(!expanded)
-                            NProgress.start()
-                            router.push(signUpURL)
+                                    if (accountURL === pathname) {
+                                        return NProgress.done()
+                                    }
+                                }}
+                                pt={rem(8)}
+                                pb={rem(8)}
+                            >
+                                <Group align="center">
+                                    <IconUserCircle color="white" stroke={1.5} />
+                                    <Text c="white">Мой профиль</Text>
+                                </Group>
+                            </UnstyledButton>
+                            <UnstyledButton
+                                onClick={() => {
+                                    setExpanded(!expanded)
+                                }}
+                                pt={rem(8)}
+                                pb={rem(8)}
+                            >
+                                <Group align="center">
+                                    <IconSettings color="white" stroke={1.5} />
+                                    <Text c="white">Настройки</Text>
+                                </Group>
+                            </UnstyledButton>
+                            <SignOutButton>
+                                <UnstyledButton
+                                    onClick={() => {
+                                        setExpanded(!expanded)
+                                        NProgress.start()
+                                        NProgress.done()
+                                    }}
+                                    pt={rem(8)}
+                                >
+                                    <Group align="center">
+                                        <IconLogout color="white" stroke={1.5} />
+                                        <Text c="white">Выйти</Text>
+                                    </Group>
+                                </UnstyledButton>
+                            </SignOutButton>
+                        </Stack>
+                    </SignedIn>
+                    <SignedOut>
+                        <Stack p={rem(8)} gap={0}>
+                            <Title c="white" pb={rem(8)} order={2}>Аккаунт</Title>
+                            <UnstyledButton
+                                onClick={() => {
+                                    const signInRoute = "/sign-in"
+                                    const signInURL = `/sign-in?redirect_url=${hostURL}${pathname}`
 
-                            if (signUpRoute === pathname) {
-                                return NProgress.done()
-                            }
-                        }}
-                        pt={rem(8)}
-                    >
-                        <Group align="center">
-                            <IconCloudLockOpen color="white" stroke={1.5} />
-                            <Text c="white">Зарегистрироваться</Text>
-                        </Group>
-                    </UnstyledButton>
-                </Stack>
+                                    setExpanded(!expanded)
+                                    NProgress.start()
+                                    router.push(signInURL)
+
+                                    if (signInRoute === pathname) {
+                                        return NProgress.done()
+                                    }
+                                }}
+                                pt={rem(8)}
+                                pb={rem(8)}
+                            >
+                                <Group align="center">
+                                    <IconLogin color="white" stroke={1.5}/>
+                                    <Text c="white">Войти</Text>
+                                </Group>
+                            </UnstyledButton>
+                            <UnstyledButton
+                                onClick={() => {
+                                    const signUpRoute = "/sign-up"
+                                    const signUpURL = `/sign-up?redirect_url=${hostURL}${pathname}`
+
+                                    setExpanded(!expanded)
+                                    NProgress.start()
+                                    router.push(signUpURL)
+
+                                    if (signUpRoute === pathname) {
+                                        return NProgress.done()
+                                    }
+                                }}
+                                pt={rem(8)}
+                            >
+                                <Group align="center">
+                                    <IconCloudLockOpen color="white" stroke={1.5} />
+                                    <Text c="white">Зарегистрироваться</Text>
+                                </Group>
+                            </UnstyledButton>
+                        </Stack>
+                    </SignedOut>
+                </>
             )
             break;
         default:
