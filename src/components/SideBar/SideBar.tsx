@@ -1,6 +1,6 @@
 "use client"
 
-import {useMediaQuery} from "@mantine/hooks";
+import {useDisclosure, useMediaQuery} from "@mantine/hooks";
 import {em, rem, Stack, UnstyledButton} from "@mantine/core";
 import {
     IconHistory,
@@ -49,13 +49,16 @@ const navLinks = [
 export const SideBarLinkContext
     = React.createContext<{
     active: number,
-    setActive: React.Dispatch<number>
+    setActive: React.Dispatch<number>,
+    opened: boolean,
 }>({
     active: 0,
-    setActive: () => null
+    setActive: () => null,
+    opened: false,
 });
 
 export default function SideBar() {
+    const [opened, { toggle }] = useDisclosure();
     const [active, setActive] = useState(0)
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const navButtons = navLinks.map((link: SideBarLink, index) => {
@@ -70,21 +73,26 @@ export default function SideBar() {
 
     return isMobile === false && (
         <>
-            <aside className={classes.sidebar}>
+            <aside
+                className={
+                    `${classes.sidebar} ${opened && classes.opened}`
+                }
+            >
                 <Stack
+                    ml={rem(16)}
                     justify="flex-start"
-                    align="center"
+                    align="flex-start"
                 >
                     <UnstyledButton
                         className={
                             `${classes.menuButton}`
                         }
-                        onClick={() => console.log('')}
+                        onClick={toggle}
                         mb={rem(16)}
                     >
                         <IconMenu2 {...iconProps} />
                     </UnstyledButton>
-                    <SideBarLinkContext.Provider value={{ active, setActive }}>
+                    <SideBarLinkContext.Provider value={{ active, setActive, opened }}>
                         {navButtons}
                     </SideBarLinkContext.Provider>
                 </Stack>

@@ -3,6 +3,12 @@
     flex-shrink: 0;
     width: rem(96px);
     height: 100vh;
+    transition: 150ms ease;
+    display: flex;
+}
+
+.opened {
+    width: rem(256px);
 }
 
 .menuButton {

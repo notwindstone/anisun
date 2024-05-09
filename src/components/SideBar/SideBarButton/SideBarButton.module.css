@@ -3,7 +3,7 @@
     height: rem(64px);
     border-radius: var(--mantine-radius-md);
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     transition: 150ms ease;
 
@@ -18,4 +18,8 @@
     @mixin hover {
         background: var(--mantine-color-default-hover);
     }
+}
+
+.expandedButton {
+    width: rem(224px);
 }
