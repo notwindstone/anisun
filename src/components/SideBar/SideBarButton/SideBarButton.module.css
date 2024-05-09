@@ -27,3 +27,10 @@
 .iconWrapper {
     min-width: rem(64px);
 }
+
+.chevron {
+}
+
+.chevronRotated {
+    transform: rotate(180deg) !important;
+}
