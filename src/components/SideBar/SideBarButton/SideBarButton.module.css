@@ -21,5 +21,9 @@
 }
 
 .expandedButton {
-    width: rem(224px);
+    width: rem(288px);
+}
+
+.iconWrapper {
+    min-width: rem(64px);
 }

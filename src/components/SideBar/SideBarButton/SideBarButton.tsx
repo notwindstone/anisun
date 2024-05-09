@@ -1,4 +1,4 @@
-import {Center, Tooltip, UnstyledButton} from "@mantine/core";
+import {Center, Text, Tooltip, UnstyledButton} from "@mantine/core";
 import classes from './SideBarButton.module.css';
 import {SideBarLink} from "@/types/SideBarLink";
 import {useContext} from "react";
@@ -26,13 +26,18 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
                     }
                     onClick={() => setActive(order)}
                 >
-                    <Center w={64} h={64}>
+                    <Center className={classes.iconWrapper} w={64} h={64}>
                         {
                             isActive
                                 ? link.activeIcon
                                 : link.icon
                         }
                     </Center>
+                    {
+                        opened && (
+                            <Text>{link.label}</Text>
+                        )
+                    }
                 </UnstyledButton>
             </Tooltip>
         </>

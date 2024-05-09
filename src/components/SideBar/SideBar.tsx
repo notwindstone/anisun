@@ -1,7 +1,7 @@
 "use client"
 
 import {useDisclosure, useMediaQuery} from "@mantine/hooks";
-import {em, rem, Stack, UnstyledButton} from "@mantine/core";
+import {em, Group, Image, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
 import {
     IconHistory,
     IconHome,
@@ -14,6 +14,8 @@ import classes from './SideBar.module.css';
 import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
 import React, {useState} from "react";
 import {SideBarLink} from "@/types/SideBarLink";
+import NextImage from "next/image";
+import globalVariables from "@/configs/globalVariables.json";
 
 const iconProps = {size: 32, stroke: 1.5}
 const activeIconProps = {size: 32, stroke: 2.5}
@@ -58,7 +60,7 @@ export const SideBarLinkContext
 });
 
 export default function SideBar() {
-    const [opened, { toggle }] = useDisclosure();
+    const [opened, { toggle }] = useDisclosure(false);
     const [active, setActive] = useState(0)
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const navButtons = navLinks.map((link: SideBarLink, index) => {
@@ -83,15 +85,48 @@ export default function SideBar() {
                     justify="flex-start"
                     align="flex-start"
                 >
-                    <UnstyledButton
-                        className={
-                            `${classes.menuButton}`
-                        }
-                        onClick={toggle}
+                    <Group
+                        align="center"
+                        gap={rem(8)}
+                        wrap="nowrap"
                         mb={rem(16)}
                     >
-                        <IconMenu2 {...iconProps} />
-                    </UnstyledButton>
+                        <UnstyledButton
+                            className={
+                                `${classes.menuButton}`
+                            }
+                            onClick={toggle}
+                        >
+                            <IconMenu2 {...iconProps} />
+                        </UnstyledButton>
+                        {
+                            opened && (
+                                <Group align="center" wrap="nowrap">
+                                    <Image
+                                        alt="Animeth website icon"
+                                        src="/favicon.png"
+                                        radius="xl"
+                                        w={32}
+                                        h={32}
+                                        component={NextImage}
+                                        width={32}
+                                        height={32}
+                                        placeholder="blur"
+                                        blurDataURL={globalVariables.imagePlaceholder}
+                                    />
+                                    <Text
+                                        inline
+                                        size={rem(32)}
+                                        fw={700}
+                                        variant="gradient"
+                                        gradient={{ from: 'violet', to: 'indigo', deg: 90 }}
+                                    >
+                                        ANIMETH
+                                    </Text>
+                                </Group>
+                            )
+                        }
+                    </Group>
                     <SideBarLinkContext.Provider value={{ active, setActive, opened }}>
                         {navButtons}
                     </SideBarLinkContext.Provider>
