@@ -1,14 +1,68 @@
-import {Center, Text, Tooltip, Transition, UnstyledButton} from "@mantine/core";
+import {Center, Group, Popover, rem, Text, Tooltip, Transition, UnstyledButton} from "@mantine/core";
 import classes from './SideBarButton.module.css';
 import {SideBarLink} from "@/types/SideBarLink";
 import {useContext} from "react";
 import {SideBarLinkContext} from "@/components/SideBar/SideBar";
+import {IconChevronRight} from "@tabler/icons-react";
 
 export default function SideBarButton({ link, order }: { link: SideBarLink, order: number }) {
     const { active, setActive, opened } = useContext(SideBarLinkContext)
     const isActive = active === order
+    const isPopover = link.content !== undefined
 
-    return (
+    const button = (
+        <UnstyledButton
+            className={
+                `
+                    ${classes.button} 
+                    ${isActive && classes.activeButton}
+                    ${opened && classes.expandedButton}
+                `
+            }
+            onClick={() => setActive(order)}
+        >
+            <Center className={classes.iconWrapper} w={64} h={64}>
+                {
+                    isActive
+                        ? link.activeIcon
+                        : link.icon
+                }
+            </Center>
+            <Transition
+                mounted={opened}
+                transition="fade-right"
+                duration={150}
+                timingFunction="ease"
+            >
+                {
+                    (styles) =>
+                        <Group pr={rem(16)} wrap="nowrap" w="100%" justify="space-between" align="center">
+                            <Text fw={500} size="lg" style={styles}>
+                                {link.label}
+                            </Text>
+                            {
+                                isPopover && (
+                                    <IconChevronRight className={classes.chevron} size={24} stroke={1.5} style={styles} />
+                                )
+                            }
+                        </Group>
+                }
+            </Transition>
+        </UnstyledButton>
+    )
+
+    return isPopover ? (
+        <>
+            <Popover width={200} position="right" shadow="md">
+                <Popover.Target>
+                    {button}
+                </Popover.Target>
+                <Popover.Dropdown>
+                    <Text size="xs">This is uncontrolled popover, it is opened when button is clicked</Text>
+                </Popover.Dropdown>
+            </Popover>
+        </>
+    ) : (
         <>
             <Tooltip
                 color="gray"
@@ -16,32 +70,7 @@ export default function SideBarButton({ link, order }: { link: SideBarLink, orde
                 label={link.label}
                 transitionProps={{ transition: 'fade-right' }}
             >
-                <UnstyledButton
-                    className={
-                        `
-                            ${classes.button} 
-                            ${isActive && classes.activeButton}
-                            ${opened && classes.expandedButton}
-                        `
-                    }
-                    onClick={() => setActive(order)}
-                >
-                    <Center className={classes.iconWrapper} w={64} h={64}>
-                        {
-                            isActive
-                                ? link.activeIcon
-                                : link.icon
-                        }
-                    </Center>
-                    <Transition
-                        mounted={opened}
-                        transition="fade-right"
-                        duration={150}
-                        timingFunction="ease"
-                    >
-                        {(styles) => <Text fw={500} size="lg" style={styles}>{link.label}</Text>}
-                    </Transition>
-                </UnstyledButton>
+                {button}
             </Tooltip>
         </>
     )
