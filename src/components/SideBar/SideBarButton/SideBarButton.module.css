@@ -56,3 +56,21 @@
 .closeButton {
     flex-shrink: 0;
 }
+
+.avatar {
+    cursor: pointer;
+    transition: 150ms ease;
+
+    @mixin hover {
+        filter: brightness(75%);
+    }
+}
+
+.popoverButton {
+    border-radius: var(--mantine-radius-xl);
+    transition: 150ms ease;
+
+    @mixin hover {
+        background: var(--mantine-color-default-hover);
+    }
+}

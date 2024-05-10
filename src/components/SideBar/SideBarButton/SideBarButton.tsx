@@ -1,5 +1,5 @@
 import {
-    Avatar,
+    Avatar, Button,
     Center,
     Group,
     Popover,
@@ -27,10 +27,14 @@ import useRipple from "use-ripple-hook";
 import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
+import Link from "next/link";
 
 export default function SideBarButton({ link }: { link: SideBarLink }) {
     const { user } = useUser();
-    const [ripple, event] = useRipple();
+    const [rippleFirst, eventFirst] = useRipple();
+    const [rippleSecond, eventSecond] = useRipple();
+    const [rippleThird, eventThird] = useRipple();
+    const [rippleFourth, eventFourth] = useRipple();
     const { active, setActive, opened } = useContext(SideBarLinkContext)
     const [expanded, setExpanded] = useState(false);
     const router = useRouter();
@@ -51,8 +55,11 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                 <>
                     <SignedIn>
                         <Stack p={rem(8)} gap={0}>
-                            <Group pb={rem(8)}>
+                            <Group pt={rem(8)} pb={rem(8)}>
                                 <Avatar
+                                    className={classes.avatar}
+                                    component={Link}
+                                    href={user?.imageUrl ?? '/blurred.png'}
                                     src={user?.imageUrl ?? '/blurred.png'}
                                     alt={`Аватар пользователя ${user?.username}`}
                                     size="lg"
@@ -62,6 +69,9 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 <Title c="white" order={4}>{user?.username}</Title>
                             </Group>
                             <UnstyledButton
+                                className={classes.popoverButton}
+                                ref={rippleFirst}
+                                onPointerDown={eventFirst}
                                 onClick={() => {
                                     if (!user) {
                                         return
@@ -77,8 +87,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                         return NProgress.done()
                                     }
                                 }}
-                                pt={rem(8)}
-                                pb={rem(8)}
+                                p={rem(8)}
                             >
                                 <Group align="center">
                                     <IconUserCircle color="white" stroke={1.5} />
@@ -86,11 +95,13 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 </Group>
                             </UnstyledButton>
                             <UnstyledButton
+                                className={classes.popoverButton}
+                                ref={rippleSecond}
+                                onPointerDown={eventSecond}
                                 onClick={() => {
                                     setExpanded(!expanded)
                                 }}
-                                pt={rem(8)}
-                                pb={rem(8)}
+                                p={rem(8)}
                             >
                                 <Group align="center">
                                     <IconSettings color="white" stroke={1.5} />
@@ -99,12 +110,15 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                             </UnstyledButton>
                             <SignOutButton>
                                 <UnstyledButton
+                                    className={classes.popoverButton}
+                                    ref={rippleThird}
+                                    onPointerDown={eventThird}
                                     onClick={() => {
                                         setExpanded(!expanded)
                                         NProgress.start()
                                         NProgress.done()
                                     }}
-                                    pt={rem(8)}
+                                    p={rem(8)}
                                 >
                                     <Group align="center">
                                         <IconLogout color="white" stroke={1.5} />
@@ -118,6 +132,9 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                         <Stack p={rem(8)} gap={0}>
                             <Title c="white" pb={rem(8)} order={2}>Аккаунт</Title>
                             <UnstyledButton
+                                className={classes.popoverButton}
+                                ref={rippleFirst}
+                                onPointerDown={eventFirst}
                                 onClick={() => {
                                     const signInRoute = "/sign-in"
                                     const signInURL = `/sign-in?redirect_url=${hostURL}${pathname}`
@@ -139,6 +156,9 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 </Group>
                             </UnstyledButton>
                             <UnstyledButton
+                                className={classes.popoverButton}
+                                ref={rippleSecond}
+                                onPointerDown={eventThird}
                                 onClick={() => {
                                     const signUpRoute = "/sign-up"
                                     const signUpURL = `/sign-up?redirect_url=${hostURL}${pathname}`
@@ -170,8 +190,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
 
     const button = (
         <UnstyledButton
-            ref={ripple}
-            onPointerDown={event}
+            ref={rippleFourth}
+            onPointerDown={eventFourth}
             className={
                 `
                     ${classes.button} 
