@@ -21,30 +21,51 @@
 ## ⚙️ Набор технологий
 
 * [Next.js](https://nextjs.org/) с использованием [TypeScript](https://www.typescriptlang.org/)
+
 * [Mantine UI](https://mantine.dev/) в качестве UI-кита с [PostCSS](https://postcss.org/)
+
 * [Drizzle ORM](https://orm.drizzle.team/) и [Neon Serverless DB](https://neon.tech/) для хранения данных
+
 * [Tanstack Query](https://tanstack.com/query/latest) и [axios](https://axios-http.com/ru/docs/intro) для получения данных с API
+
 * Слайдер аниме карточек на базе [Embla Carousel](https://www.embla-carousel.com) и [Mantine UI Carousel](https://mantine.dev/x/carousel/)
+
 * [Clerk Auth](https://clerk.com/) для авторизации
+
 * Плеер видео для [Anilibria API](https://github.com/anilibria/docs) на основе [Vidstack.js](https://www.vidstack.io/) и [HLS.js](https://github.com/video-dev/hls.js)
+
 * [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper) для получения видеоплеера Kodik по Shikimori ID
+
 * Система уведомлений на базе [Mantine UI Notifications](https://mantine.dev/x/notifications/)
+
 * Форматирование даты и времени с помощью [Day.js](https://day.js.org/)
+
 * Применение [CSS-модулей](https://nextjs.org/docs/app/building-your-application/styling/css-modules)
 
 ## ⭐️ Возможности
 
 * Просмотр аниме с субтитрами или озвучкой
+
 * Загрузка аниме с торрента или напрямую через сайт
+
 * Авторизация в аккаунт
+
 * Система комментариев с бесконечной вложенностью, как на реддите
+
 * Тёмная и светлая темы
+
+...ещё
 
 ## ✅ Список задач
 
+- [ ] Добавить возможность смены основного цвета сайта
+
 - [ ] Добавить возможность загрузки аниме с торрента или напрямую через сайт
+
 - [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
+
 - [ ] Прикрутить API от [SovetRomantica](https://github.com/sovetromantica/sr-api)
+
 - [ ] Сделать различные роли (администратора, участника) для аккаунтов
 
 ## ⬇️ Запуск
@@ -70,11 +91,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### Напрямую
 
 * [Telegram - @windst1](https://t.me/windst1)
+
 * Discord - @notwindstone
 
 ### Через наш чат или сервер
 
 * [Telegram - Клуб фанатов партии любителей пива](https://t.me/democracysucks)
+
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
 ## ❤️ Особая благодарность

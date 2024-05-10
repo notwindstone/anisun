@@ -70,6 +70,10 @@ export default function VideoEmbed({ id }: { id: string }) {
     const anilibriaData = data.anilibria
     const kodikData = data.kodik
 
+    if (!kodikData) {
+        setValue('Animeth')
+    }
+
     let segmentedControlData = []
     let anilibriaTitle, anilibriaPlayer, anilibriaPreview, hasAnilibriaPlayer, kodikPlayer
 

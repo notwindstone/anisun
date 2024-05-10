@@ -21,41 +21,116 @@
 ## ⚙️ Tech Stack
 
 * [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
+
 * [Mantine UI](https://mantine.dev/) and [PostCSS](https://postcss.org/) for UI
+
 * [Drizzle ORM](https://orm.drizzle.team/) and [Neon Serverless DB](https://neon.tech/) for database
-* [Tanstack Query](https://tanstack.com/query/latest) and [axios](https://axios-http.com/ru/docs/intro) for fetching data from APIs
+
+* [Tanstack Query](https://tanstack.com/query/latest) and [axios](https://axios-http.com/docs/intro) for fetching data from APIs
+
 * Slider for anime cards based on [Embla Carousel](https://www.embla-carousel.com) and [Mantine UI Carousel](https://mantine.dev/x/carousel/)
+
 * [Clerk Auth](https://clerk.com/) for auth
+
 * Video player for [Anilibria API](https://github.com/anilibria/docs) based on [Vidstack.js](https://www.vidstack.io/) and [HLS.js](https://github.com/video-dev/hls.js)
+
 * [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper) for fetching data from Kodik using Shikimori ID
+
 * Notifications system based on [Mantine UI Notifications](https://mantine.dev/x/notifications/)
+
 * Date formatting with [Day.js](https://day.js.org/)
+
 * [CSS-modules](https://nextjs.org/docs/app/building-your-application/styling/css-modules)
 
 ## ⭐ Features
 
 * Watch anime with subtitles or dubbing
+
 * Download anime using torrent or directly from website
+
 * Account authentication
+
 * Heavily nested comment system like on reddit
+
 * Dark and light themes
+
+...more
 
 ## ✅ To-Do List
 
 - [ ] Add possibility to change primary color of website
+
 - [ ] Add option to download anime using torrent or directly from website
+
 - [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
+
 - [ ] Add subtitles from [SovetRomantica API](https://github.com/sovetromantica/sr-api)
+
 - [ ] Add permission groups (administrator, member) to users
 
 ## ⬇️ Self-Hosting
 
 ### Local
 
-First, run the development server:
+```bash
+git clone https://github.com/windstone-aristotle-yellow/animeth
+```
+
+To run the example locally, you need to:
+
+1. Create a `.env.local` file in the root directory with values from `.env.example`
+
+2. Sign up for a Clerk account at https://clerk.com
+
+3. Go to the Clerk dashboard and create an application
+
+4. Go to **API Keys** in your sidebar and copy **Publishable key** (Example: `pk_test_qwertyuiop1234567890`)
+
+5. Paste your **Publishable key** to `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` in the `.env.local` file
+
+6. Go to **API Keys** in your sidebar and copy **Secret keys** (Example: `sk_test_qwertyuiop1234567890`)
+
+7. Paste your **Publishable key** to `CLERK_SECRET_KEY` in the `.env.local` file
+
+8. Sign up to Neon DB at https://neon.tech/ to access serverless Postgres by creating a project.
+
+9. Go to the Neon dashboard and copy **Connection string** (Example: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
+
+10. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
+
+11. (Optional) If you want to watch anime, then obtain Kodik token from 'http://kodik.cc/', otherwise Kodik player will not work
+
+`npm install` the required dependencies.
+`npm run dev` to launch the development server.
+
+
+What the `.env.local` file should look like after all the changes above:
+
+```text
+NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
+POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
+CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+KODIK_TOKEN='qwertyuiop1234567890'
+```
+
+If you want to run in development mode:
 
 ```bash
 npm run dev
+```
+
+If you want to build the application:
+
+```bash
+npm run build
+```
+```bash
+npm run start
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -71,11 +146,13 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 ### Directly
 
 * [Telegram - @windst1](https://t.me/windst1)
+
 * Discord - @notwindstone
 
 ### Through our Telegram chat or Discord server
 
 * [Telegram - Клуб фанатов партии любителей пива](https://t.me/democracysucks)
+
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
 ## ❤️ Credits
