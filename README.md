@@ -79,7 +79,7 @@
 git clone https://github.com/windstone-aristotle-yellow/animeth
 ```
 
-Чтобы запустить сайт, нужно:
+Чтобы запустить сайт:
 
 1. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
 
