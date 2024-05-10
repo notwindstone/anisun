@@ -54,6 +54,10 @@ export default function VideoEmbed({ id }: { id: string }) {
             }
         )
 
+        if (!process.env.KODIK_TOKEN) {
+            return { anilibria: anilibriaResponse, kodik: null }
+        }
+
         const kodikResponse = await kodikClient.search({
             shikimori_id: parseInt(id)
         }).then((response) => response.results.shift())
@@ -69,10 +73,6 @@ export default function VideoEmbed({ id }: { id: string }) {
 
     const anilibriaData = data.anilibria
     const kodikData = data.kodik
-
-    if (!kodikData) {
-        setValue('Animeth')
-    }
 
     let segmentedControlData = []
     let anilibriaTitle, anilibriaPlayer, anilibriaPreview, hasAnilibriaPlayer, kodikPlayer
