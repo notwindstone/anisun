@@ -1,6 +1,6 @@
 import {
     Avatar, Button,
-    Center,
+    Center, Flex,
     Group,
     Popover,
     rem,
@@ -24,10 +24,11 @@ import {
     IconUserCircle
 } from "@tabler/icons-react";
 import useRipple from "use-ripple-hook";
-import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
+import {SignedIn, SignedOut, SignOutButton, UserProfile, useUser} from "@clerk/nextjs";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
+import {useDisclosure} from "@mantine/hooks";
 
 export default function SideBarButton({ link }: { link: SideBarLink }) {
     const { user } = useUser();
@@ -35,7 +36,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
     const [rippleSecond, eventSecond] = useRipple();
     const [rippleThird, eventThird] = useRipple();
     const [rippleFourth, eventFourth] = useRipple();
-    const { active, setActive, opened } = useContext(SideBarLinkContext)
+    const { opened } = useContext(SideBarLinkContext)
+    const [settingsOpened, { open, close }] = useDisclosure(false);
     const [expanded, setExpanded] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
@@ -99,6 +101,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 ref={rippleSecond}
                                 onPointerDown={eventSecond}
                                 onClick={() => {
+                                    open()
                                     setExpanded(!expanded)
                                 }}
                                 p={rem(8)}
@@ -147,8 +150,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                         return NProgress.done()
                                     }
                                 }}
-                                pt={rem(8)}
-                                pb={rem(8)}
+                                p={rem(8)}
                             >
                                 <Group align="center">
                                     <IconLogin color="white" stroke={1.5}/>
@@ -171,7 +173,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                         return NProgress.done()
                                     }
                                 }}
-                                pt={rem(8)}
+                                p={rem(8)}
                             >
                                 <Group align="center">
                                     <IconCloudLockOpen color="white" stroke={1.5} />
@@ -182,10 +184,17 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                     </SignedOut>
                 </>
             )
-            break;
+            break
+        case "search":
+            content = (
+                <>
+
+                </>
+            )
+            break
         default:
             content = null
-            break;
+            break
     }
 
     const button = (
@@ -251,6 +260,14 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
 
     return isPopover ? (
         <>
+            {
+                settingsOpened && (
+                    <Flex gap={rem(32)} align="center" direction="column" className={classes.modal}>
+                        <Button className={classes.closeButton} onClick={close}>Закрыть</Button>
+                        <UserProfile />
+                    </Flex>
+                )
+            }
             <Popover
                 classNames={{
                     dropdown: classes.dropdown,
