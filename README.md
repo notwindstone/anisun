@@ -4,10 +4,10 @@
 
 # Animeth
 
-### Сайт для просмотра аниме
+### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
 <p align="center">
-<a href="">English</a> | Русский
+<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_english.md">English</a> | <strong>Русский</strong>
 </p>
 
 </div>
@@ -16,9 +16,9 @@
 [![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=flat&logo=telegram)](https://t.me/democracysucks)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/JhmkZDScfg)
 
-## Скриншоты
+## 📱 Скриншоты
 
-## Набор технологий
+## ⚙️ Набор технологий
 
 * [Next.js](https://nextjs.org/) с использованием [TypeScript](https://www.typescriptlang.org/)
 * [Mantine UI](https://mantine.dev/) в качестве UI-кита с [PostCSS](https://postcss.org/)
@@ -26,28 +26,28 @@
 * [Tanstack Query](https://tanstack.com/query/latest) и [axios](https://axios-http.com/ru/docs/intro) для получения данных с API
 * Слайдер аниме карточек на базе [Embla Carousel](https://www.embla-carousel.com) и [Mantine UI Carousel](https://mantine.dev/x/carousel/)
 * [Clerk Auth](https://clerk.com/) для авторизации
-* Кастомный плеер видео для [Anilibria API](https://github.com/anilibria/docs) на основе [Vidstack.js](https://www.vidstack.io/) и [HLS.js](https://github.com/video-dev/hls.js)
+* Плеер видео для [Anilibria API](https://github.com/anilibria/docs) на основе [Vidstack.js](https://www.vidstack.io/) и [HLS.js](https://github.com/video-dev/hls.js)
 * [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper) для получения видеоплеера Kodik по Shikimori ID
 * Система уведомлений на базе [Mantine UI Notifications](https://mantine.dev/x/notifications/)
 * Форматирование даты и времени с помощью [Day.js](https://day.js.org/)
 * Применение [CSS-модулей](https://nextjs.org/docs/app/building-your-application/styling/css-modules)
 
-## Возможности
+## ⭐️ Возможности
 
 * Просмотр аниме с субтитрами или озвучкой
 * Загрузка аниме с торрента или напрямую через сайт
-* Авторизация
-* Система комментариев с бесконечной вложенностью
+* Авторизация в аккаунт
+* Система комментариев с бесконечной вложенностью, как на реддите
 * Тёмная и светлая темы
 
-## Список задач
+## ✅ Список задач
 
 - [ ] Добавить возможность загрузки аниме с торрента или напрямую через сайт
 - [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 - [ ] Прикрутить API от [SovetRomantica](https://github.com/sovetromantica/sr-api)
 - [ ] Сделать различные роли (администратора, участника) для аккаунтов
 
-## Запуск
+## ⬇️ Запуск
 
 ### Локально
 
@@ -65,7 +65,7 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
-## Контакты
+## 💬 Контакты
 
 ### Напрямую
 
@@ -77,7 +77,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 * [Telegram - Клуб фанатов партии любителей пива](https://t.me/democracysucks)
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
-## Особая благодарность
+## ❤️ Особая благодарность
 
 * [zvshka](https://github.com/zvshka) за оказание помощи при создании проекта
 
@@ -85,6 +85,6 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 
 * [Sora](https://github.com/Khanhtran47/Sora) и [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Некоторые элементы дизайна были позаимствованы у них
 
-## Лицензия
+## 📜 Лицензия
 
 [![GitHub](https://img.shields.io/github/license/windstone-aristotle-yellow/Animeth?style=for-the-badge)](https://github.com/windstone-aristotle-yellow/Animeth/blob/main/LICENSE)
