@@ -3,6 +3,7 @@ module.exports = {
     KODIK_TOKEN: process.env.KODIK_TOKEN,
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: 'https',
