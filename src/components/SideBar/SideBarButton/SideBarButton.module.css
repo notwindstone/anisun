@@ -43,7 +43,7 @@
 }
 
 .modal {
-    padding: rem(96px) rem(32px);
+    padding: rem(32px) rem(32px) rem(48px);
     position: fixed;
     width: 100%;
     height: 100%;

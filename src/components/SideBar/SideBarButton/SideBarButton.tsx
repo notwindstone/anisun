@@ -260,14 +260,21 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
 
     return isPopover ? (
         <>
-            {
-                settingsOpened && (
-                    <Flex gap={rem(32)} align="center" direction="column" className={classes.modal}>
-                        <Button className={classes.closeButton} onClick={close}>Закрыть</Button>
-                        <UserProfile />
-                    </Flex>
-                )
-            }
+            <Transition
+                mounted={settingsOpened}
+                transition="fade-down"
+                duration={400}
+                timingFunction="ease"
+            >
+                {
+                    (styles) => (
+                        <Flex style={styles} gap={rem(32)} align="center" direction="column" className={classes.modal}>
+                            <Button style={styles} className={classes.closeButton} onClick={close}>Закрыть</Button>
+                            <UserProfile />
+                        </Flex>
+                    )
+                }
+            </Transition>
             <Popover
                 classNames={{
                     dropdown: classes.dropdown,
