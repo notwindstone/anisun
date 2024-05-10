@@ -153,7 +153,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 > [!IMPORTANT]  
 > Work in progress...
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
+Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
 
 ## 💬 Contact
 
