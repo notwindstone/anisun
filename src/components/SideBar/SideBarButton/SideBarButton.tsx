@@ -47,9 +47,17 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
     const isPopover = link.content !== undefined
 
     useEffect(() => {
+        router.push(pathname)
+
+        if (!user) {
+            return
+        }
+
         closeSignUp()
         closeSignIn()
-    }, [closeSignIn, closeSignUp, user]);
+        NProgress.start()
+        NProgress.done()
+    }, [user]);
 
     let content
 
