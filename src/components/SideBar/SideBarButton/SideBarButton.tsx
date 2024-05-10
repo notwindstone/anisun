@@ -13,7 +13,7 @@ import {
 } from "@mantine/core";
 import classes from './SideBarButton.module.css';
 import {SideBarLink} from "@/types/SideBarLink";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {SideBarLinkContext} from "@/components/SideBar/SideBar";
 import {
     IconChevronRight,
@@ -24,7 +24,7 @@ import {
     IconUserCircle
 } from "@tabler/icons-react";
 import useRipple from "use-ripple-hook";
-import {SignedIn, SignedOut, SignOutButton, UserProfile, useUser} from "@clerk/nextjs";
+import {SignedIn, SignedOut, SignIn, SignOutButton, SignUp, UserProfile, useUser} from "@clerk/nextjs";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
@@ -37,17 +37,19 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
     const [rippleThird, eventThird] = useRipple();
     const [rippleFourth, eventFourth] = useRipple();
     const { opened } = useContext(SideBarLinkContext)
-    const [settingsOpened, { open, close }] = useDisclosure(false);
+    const [settingsOpened, { open: openSettings, close: closeSettings }] = useDisclosure(false);
+    const [signInOpened, { open: openSignIn, close: closeSignIn }] = useDisclosure(false);
+    const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false);
     const [expanded, setExpanded] = useState(false);
     const router = useRouter();
     const pathname = usePathname();
     const isActive = link.pathname === pathname
     const isPopover = link.content !== undefined
-    const envType = process.env.NODE_ENV
-    const hostURL =
-        envType === 'production'
-            ? 'https://animeth.vercel.app'
-            : envType === 'development' ? 'http://localhost:3000' : 'https://animeth.vercel.app'
+
+    useEffect(() => {
+        closeSignUp()
+        closeSignIn()
+    }, [closeSignIn, closeSignUp, user]);
 
     let content
 
@@ -101,7 +103,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 ref={rippleSecond}
                                 onPointerDown={eventSecond}
                                 onClick={() => {
-                                    open()
+                                    openSettings()
                                     setExpanded(!expanded)
                                 }}
                                 p={rem(8)}
@@ -139,16 +141,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 ref={rippleFirst}
                                 onPointerDown={eventFirst}
                                 onClick={() => {
-                                    const signInRoute = "/sign-in"
-                                    const signInURL = `/sign-in?redirect_url=${hostURL}${pathname}`
-
                                     setExpanded(!expanded)
-                                    NProgress.start()
-                                    router.push(signInURL)
-
-                                    if (signInRoute === pathname) {
-                                        return NProgress.done()
-                                    }
+                                    openSignIn()
                                 }}
                                 p={rem(8)}
                             >
@@ -162,16 +156,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 ref={rippleSecond}
                                 onPointerDown={eventThird}
                                 onClick={() => {
-                                    const signUpRoute = "/sign-up"
-                                    const signUpURL = `/sign-up?redirect_url=${hostURL}${pathname}`
-
                                     setExpanded(!expanded)
-                                    NProgress.start()
-                                    router.push(signUpURL)
-
-                                    if (signUpRoute === pathname) {
-                                        return NProgress.done()
-                                    }
+                                    openSignUp()
                                 }}
                                 p={rem(8)}
                             >
@@ -269,8 +255,38 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                 {
                     (styles) => (
                         <Flex style={styles} gap={rem(32)} align="center" direction="column" className={classes.modal}>
-                            <Button style={styles} className={classes.closeButton} onClick={close}>Закрыть</Button>
+                            <Button style={styles} className={classes.closeButton} onClick={closeSettings}>Закрыть</Button>
                             <UserProfile />
+                        </Flex>
+                    )
+                }
+            </Transition>
+            <Transition
+                mounted={signInOpened}
+                transition="fade-down"
+                duration={400}
+                timingFunction="ease"
+            >
+                {
+                    (styles) => (
+                        <Flex style={styles} gap={rem(32)} align="center" direction="column" className={classes.modal}>
+                            <Button style={styles} className={classes.closeButton} onClick={closeSignIn}>Закрыть</Button>
+                            <SignIn routing="virtual" />
+                        </Flex>
+                    )
+                }
+            </Transition>
+            <Transition
+                mounted={signUpOpened}
+                transition="fade-down"
+                duration={400}
+                timingFunction="ease"
+            >
+                {
+                    (styles) => (
+                        <Flex style={styles} gap={rem(32)} align="center" direction="column" className={classes.modal}>
+                            <Button style={styles} className={classes.closeButton} onClick={closeSignUp}>Закрыть</Button>
+                            <SignUp routing="virtual" />
                         </Flex>
                     )
                 }
