@@ -7,7 +7,7 @@
 ### A web app for watching anime built with Next.js and Mantine UI
 
 <p align="center">
-<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">Русский</a>
+<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">Русский</a> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_tatar.md">Татарча</a>
 </p>
 
 </div>
