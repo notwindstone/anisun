@@ -54,7 +54,8 @@
 
 * Тёмная и светлая темы
 
-...ещё
+> [!IMPORTANT]  
+> В процессе заполнения...
 
 ## ✅ Список задач
 
@@ -72,19 +73,87 @@
 
 ### Локально
 
-First, run the development server:
+#### Подготовка
+
+```bash
+git clone https://github.com/windstone-aristotle-yellow/animeth
+```
+
+Чтобы запустить сайт, нужно:
+
+1. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
+
+2. Зарегистрируйтесь на https://clerk.com
+
+3. Зайдите в Панель управления (Dashboard) Clerk и создайте новое приложение
+
+4. Перейдите в пункт **API Keys** в левом меню и скопируйте **Publishable key** (Пример: `pk_test_qwertyuiop1234567890`)
+
+5. Вставьте **Publishable key** в строку `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` в файле `.env.local`
+
+6. Перейдите в пункт **API Keys** в левом меню и скопируйте **Secret keys** (Пример: `sk_test_qwertyuiop1234567890`)
+
+7. Вставьте **Publishable key** в строку `CLERK_SECRET_KEY` в файле `.env.local`
+
+8. Зарегистрируйтесь на https://neon.tech/ и создайте там новый проект
+
+9. Перейдите в Панель управления (Dashboard) Neon DB и скопируйте **Connection string** (Пример: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
+
+10. Вставьте **Connection string** в строку `NEON_DATABASE_URL` в файле `.env.local`
+
+11. (Опционально) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
+
+12. Запустите команду `npm install` для того, чтобы установить все зависимости
+
+13. Готово!
+
+> [!NOTE]
+> Вот так должен выглядеть файл `.env.local` после всех махинаций выше
+
+```text
+NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
+POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
+CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+KODIK_TOKEN='qwertyuiop1234567890'
+```
+
+#### Режим разработки
+
+Если вы хотите запустить сайт в режиме разработки
 
 ```bash
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### Режим продакшна
+
+> [!TIP]
+> Запускайте сайт в этом режиме, если не знаете, какой выбрать
+
+Если вы хотите запустить сайт в режиме продакшна
+
+```bash
+npm run build
+```
+```bash
+npm run start
+```
+
+#### Ссылка на сайт
+
+Откройте [http://localhost:3000](http://localhost:3000) в браузере, чтобы зайти на сайт
 
 ### Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+> [!IMPORTANT]  
+> В процессе заполнения...
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Пока что смотрите официальную документацию [Next.js deployment documentation](https://nextjs.org/docs/deployment)
 
 ## 💬 Контакты
 

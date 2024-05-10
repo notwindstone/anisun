@@ -12,7 +12,7 @@
 
 </div>
 
-****[![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
 [![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=flat&logo=telegram)](https://t.me/democracysucks)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/JhmkZDScfg)
 
@@ -54,7 +54,8 @@
 
 * Dark and light themes
 
-...more
+> [!IMPORTANT]  
+> Work in progress...
 
 ## ✅ To-Do List
 
@@ -80,7 +81,7 @@ git clone https://github.com/windstone-aristotle-yellow/animeth
 
 To run the example locally, you need to:
 
-1. Create a `.env.local` file in the root directory with values from `.env.example`
+1. Rename the `.env.example` file in the root directory to `.env.local`
 
 2. Sign up for a Clerk account at https://clerk.com
 
@@ -100,9 +101,9 @@ To run the example locally, you need to:
 
 10. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
 
-11. (Optional) If you want to watch anime in Kodik Player too, then obtain a token from http://kodik.cc/ Otherwise, only players based on the Anilibria API will work
+11. (Optional) If you want to watch anime in Kodik Player too, then obtain a token from http://kodik.cc/ (you need to contact them via email) Otherwise, only players based on the Anilibria API will work
 
-12. `npm install` to install the required dependencies
+12. Run `npm install` to install the required dependencies
 
 13. Done! Your web app is ready to start
 
@@ -131,6 +132,9 @@ npm run dev
 
 #### Production
 
+> [!TIP]
+> Run the application in production mode if you don't know which to choose
+
 If you want to run the application in production mode
 
 ```bash
@@ -148,8 +152,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 > [!IMPORTANT]  
 > Work in progress...
-> 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
 
 ## 💬 Contact
 
