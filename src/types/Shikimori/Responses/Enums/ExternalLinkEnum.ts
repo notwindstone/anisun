@@ -6,6 +6,7 @@ export enum ExternalLinkEnum {
     AniDB = "anime_db",
     WorldArt = "world_art",
     KinoPoisk = "kinopoisk",
+    KinoPoiskHD = "kinopoisk_hd",
     KageProject = "kage_project",
     SubsComRu = "subs_com_ru",
     Twitter = "twitter",
