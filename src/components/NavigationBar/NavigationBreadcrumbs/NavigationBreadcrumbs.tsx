@@ -4,10 +4,8 @@ import Link from "next/link";
 import {IconChevronRight, IconHome} from "@tabler/icons-react";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import {useEffect, useState} from "react";
 
 export default function NavigationBreadcrumbs() {
-    const [titleName, setTitleName] = useState(null)
     let titlePath: string | null
     const shikimori = client()
     const pathname = usePathname()
@@ -26,34 +24,47 @@ export default function NavigationBreadcrumbs() {
                 return null
             }
 
+            // titlePath format is "12345-word-word-word", sometimes with a letter in the beginning
             const shikimoriId = titlePath.split('-')[0].replace(/\D/g, '')
 
             return (await shikimori.animes.byId({ ids: shikimoriId })).animes
         }
     })
     const breadcrumbs = paths.map((path, index, array) => {
-        if (isTitlePath && array[array.length - 1] === 'titles') {
+        let translatedPath
+
+        switch (path) {
+            case "titles":
+                translatedPath = 'Аниме'
+                break
+            case "account":
+                translatedPath = 'Аккаунт'
+                break
+            case "trending":
+                translatedPath = 'Популярное'
+                break
+            case 'about':
+                translatedPath = 'О сайте'
+                break
+            default:
+                translatedPath = path
+                break
+        }
+
+        if (isTitlePath && array[index - 1] === 'titles') {
             return (
                 <Link key={path} href={path}>
-                    {titleName}
+                    {data?.[0].russian ?? data?.[0].name}
                 </Link>
             )
         }
 
         return (
             <Link key={path} href={path}>
-                {path}
+                {translatedPath}
             </Link>
         )
     })
-
-    useEffect(() => {
-        if (!data) {
-            return
-        }
-
-        setTitleName(data[0].name)
-    }, [data]);
 
     return (
         <Breadcrumbs separator={<IconChevronRight size={22} stroke={1.5} />}>
