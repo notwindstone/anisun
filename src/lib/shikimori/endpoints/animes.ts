@@ -2,6 +2,7 @@ import axios from "axios";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 import {options} from "@/lib/shikimori/options";
 import {AnimesType} from "@/types/Shikimori/Queries/AnimesType";
+import {ResponseType} from "@/types/Shikimori/Responses/Types/ResponseType";
 
 export const animes = () => {
     const byId = async ({ ids }: { ids: string }) => {
@@ -9,7 +10,7 @@ export const animes = () => {
 
         return await axios
             .request(params)
-            .then((response: { data: { data: { animes: AnimeType[] } } }) => response.data.data)
+            .then((response: ResponseType) => response.data.data)
     }
 
     const list = async ({ search, limit, status, year, order, page }: AnimesType) => {
@@ -24,7 +25,7 @@ export const animes = () => {
 
         return await axios
             .request(params)
-            .then((response: { data: { data: { animes: AnimeType[] } } }) => response.data.data)
+            .then((response: ResponseType) => response.data.data)
     }
 
     return {

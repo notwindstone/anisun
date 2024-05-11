@@ -148,7 +148,6 @@ export default function CommentList({ titleCode }: { titleCode: string }) {
         ) {
             return
         }
-        console.log(inViewport)
 
         setDelayed(true)
 
