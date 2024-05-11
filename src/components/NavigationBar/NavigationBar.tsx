@@ -17,31 +17,33 @@ export default function NavigationBar() {
 
     return isMobile === false && (
         <div className={classes.wrapper}>
-            <Group gap={rem(8)}>
-                <UnstyledButton
-                    ref={rippleFirst}
-                    onPointerDown={eventFirst}
-                    className={classes.button}
-                    onClick={() => {
-                        NProgress.start()
-                        router.back()
-                        NProgress.done()
-                    }}
-                >
-                    <IconChevronLeft size={32} stroke={1.5} />
-                </UnstyledButton>
-                <UnstyledButton
-                    ref={rippleSecond}
-                    onPointerDown={eventSecond}
-                    className={classes.button}
-                    onClick={() => {
-                        NProgress.start()
-                        router.forward()
-                        NProgress.done()
-                    }}
-                >
-                    <IconChevronRight size={32} stroke={1.5} />
-                </UnstyledButton>
+            <Group gap={rem(16)}>
+                <Group gap={rem(8)}>
+                    <UnstyledButton
+                        ref={rippleFirst}
+                        onPointerDown={eventFirst}
+                        className={classes.button}
+                        onClick={() => {
+                            NProgress.start()
+                            router.back()
+                            NProgress.done()
+                        }}
+                    >
+                        <IconChevronLeft size={32} stroke={1.5} />
+                    </UnstyledButton>
+                    <UnstyledButton
+                        ref={rippleSecond}
+                        onPointerDown={eventSecond}
+                        className={classes.button}
+                        onClick={() => {
+                            NProgress.start()
+                            router.forward()
+                            NProgress.done()
+                        }}
+                    >
+                        <IconChevronRight size={32} stroke={1.5} />
+                    </UnstyledButton>
+                </Group>
                 <NavigationBreadcrumbs />
             </Group>
         </div>
