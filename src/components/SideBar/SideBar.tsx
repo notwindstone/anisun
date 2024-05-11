@@ -49,12 +49,6 @@ const navLinks = [
         pathname: '/trending',
     },
     {
-        label: 'История',
-        icon: <IconHistory {...iconProps} />,
-        activeIcon: <IconHistory {...activeIconProps} />,
-        pathname: '/history',
-    },
-    {
         label: 'Настройки',
         icon: <IconSettings {...iconProps} />,
         activeIcon: <IconSettings {...activeIconProps} />,
