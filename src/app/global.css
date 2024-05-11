@@ -41,6 +41,9 @@
 }
 
 .app-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
     box-sizing: border-box;
     border-radius: rem(12px) 0 0 0;
     width: 100%;
@@ -48,4 +51,9 @@
     overflow-y: scroll;
     border-top: rem(1px) solid var(--mantine-color-default-border);
     box-shadow: 0 0 1px 1px var(--mantine-color-default-border);
+
+    @media (max-width: rem(750)) {
+        box-shadow: none;
+        border-top: none;
+    }
 }

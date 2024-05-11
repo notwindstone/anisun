@@ -14,6 +14,7 @@ import MobileModal from "@/components/MobileModal/MobileModal";
 import Main from "@/components/Main/Main";
 import './global.css'
 import SideBar from "@/components/SideBar/SideBar";
+import NavigationBar from "@/components/NavigationBar/NavigationBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,6 +64,7 @@ export default function RootLayout({
                             <Group gap={0} wrap="nowrap">
                                 <SideBar />
                                 <div className="app-wrapper">
+                                    <NavigationBar />
                                     <Main>
                                         {children}
                                     </Main>
