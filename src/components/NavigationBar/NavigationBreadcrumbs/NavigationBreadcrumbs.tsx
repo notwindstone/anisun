@@ -1,13 +1,15 @@
-import {Breadcrumbs} from "@mantine/core";
+import {Breadcrumbs, Loader} from "@mantine/core";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import {IconChevronRight, IconHome} from "@tabler/icons-react";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import translateRouteNames from "@/utils/translateRouteNames";
+import {useUser} from "@clerk/nextjs";
 
 export default function NavigationBreadcrumbs() {
     let titlePath: string | null
+    const { user } = useUser();
     const shikimori = client()
     const pathname = usePathname()
     const paths = pathname
@@ -38,6 +40,14 @@ export default function NavigationBreadcrumbs() {
             return (
                 <Link key={path} href={path}>
                     {data?.[0].russian ?? data?.[0].name}
+                </Link>
+            )
+        }
+
+        if (array[index - 1] === 'account') {
+            return (
+                <Link key={path} href={path}>
+                    {user?.username}
                 </Link>
             )
         }
