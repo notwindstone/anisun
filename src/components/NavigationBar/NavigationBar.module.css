@@ -1,0 +1,9 @@
+.wrapper {
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: rem(64px);
+    z-index: 99999;
+}
