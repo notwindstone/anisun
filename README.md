@@ -18,6 +18,11 @@
 
 ## 📱 Скриншоты
 
+<div>
+<img src="public/Screenshot_animeth_videoplayer1.jpg" width="48%">
+<img src="public/Screenshot_animeth_videoplayer2.jpg" width="48%">
+</div>
+
 ## ⚙️ Набор технологий
 
 * [Next.js](https://nextjs.org/) с использованием [TypeScript](https://www.typescriptlang.org/)
@@ -106,6 +111,8 @@ git clone https://github.com/windstone-aristotle-yellow/animeth
 
 13. Готово!
 
+</details>
+
 > [!NOTE]
 > Вот так должен выглядеть файл `.env.local` после всех махинаций выше
 
@@ -120,8 +127,6 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 KODIK_TOKEN='qwertyuiop1234567890'
 ```
-
-</details>
 
 #### Режим разработки
 
@@ -151,11 +156,11 @@ npm run start
 
 ### Vercel
 
-<details>
-<summary>Раскрыть шаги</summary>
-
 > [!IMPORTANT]  
 > В процессе заполнения...
+
+<details>
+<summary>Раскрыть шаги</summary>
 
 Пока что смотрите официальную документацию [Next.js deployment documentation](https://nextjs.org/docs/deployment)
 

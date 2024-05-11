@@ -18,6 +18,11 @@
 
 ## 📱 Screenshots
 
+<div>
+<img src="public/Screenshot_animeth_videoplayer1.jpg" width="48%">
+<img src="public/Screenshot_animeth_videoplayer2.jpg" width="48%">
+</div>
+
 ## ⚙️ Tech Stack
 
 * [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
@@ -108,6 +113,8 @@ To run the example locally, you need to:
 
 13. Done! Your web app is ready to start
 
+</details>
+
 > [!NOTE]
 > This is what the `.env.local` file should look like after all the changes above
 
@@ -122,8 +129,6 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 KODIK_TOKEN='qwertyuiop1234567890'
 ```
-
-</details>
 
 #### Development
 
@@ -153,11 +158,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Vercel
 
-<details>
-<summary>Expand steps</summary>
-
 > [!IMPORTANT]  
 > Work in progress...
+
+<details>
+<summary>Expand steps</summary>
 
 Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
 
