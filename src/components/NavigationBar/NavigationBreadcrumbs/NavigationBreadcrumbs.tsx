@@ -33,30 +33,32 @@ export default function NavigationBreadcrumbs() {
             return (await shikimori.animes.byId({ ids: shikimoriId })).animes
         }
     })
-    const breadcrumbs = paths.map((path, index, array) => {
-        const translatedPath = translateRouteNames(path)
-        const previousPath = array[index - 1]
+    const breadcrumbs = paths.map((breadcrumb, index, array) => {
+        const currentPathArray = array.slice(0, index + 1)
+        const currentPathname = currentPathArray.join('/')
+        const translatedBreadcrumb = translateRouteNames(breadcrumb)
+        const previousBreadcrumb = array[index - 1]
         const russianAnimeName = data?.[0].russian
         const originalAnimeName = data?.[0].name
-        let currentPath
+        let currentBreadcrumb
 
-        switch (previousPath) {
+        switch (previousBreadcrumb) {
             case "titles":
-                currentPath = russianAnimeName ?? originalAnimeName
+                currentBreadcrumb = russianAnimeName ?? originalAnimeName
                 break
             case "account":
-                currentPath = user?.username
+                currentBreadcrumb = user?.username
                 break
             default:
-                currentPath = translatedPath
+                currentBreadcrumb = translatedBreadcrumb
                 break
         }
 
         return (
-            <Link key={path} href={path}>
+            <Link key={breadcrumb} href={`/${currentPathname}`}>
                 {
-                    currentPath ?? (
-                        <Skeleton height={16} width={128} />
+                    currentBreadcrumb ?? (
+                        <Skeleton height={20} width={128} />
                     )
                 }
             </Link>
