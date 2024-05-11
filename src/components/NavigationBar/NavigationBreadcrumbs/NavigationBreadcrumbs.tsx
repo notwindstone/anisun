@@ -4,6 +4,7 @@ import Link from "next/link";
 import {IconChevronRight, IconHome} from "@tabler/icons-react";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
+import translateRouteNames from "@/utils/translateRouteNames";
 
 export default function NavigationBreadcrumbs() {
     let titlePath: string | null
@@ -31,25 +32,7 @@ export default function NavigationBreadcrumbs() {
         }
     })
     const breadcrumbs = paths.map((path, index, array) => {
-        let translatedPath
-
-        switch (path) {
-            case "titles":
-                translatedPath = 'Аниме'
-                break
-            case "account":
-                translatedPath = 'Аккаунт'
-                break
-            case "trending":
-                translatedPath = 'Популярное'
-                break
-            case 'about':
-                translatedPath = 'О сайте'
-                break
-            default:
-                translatedPath = path
-                break
-        }
+        const translatedPath = translateRouteNames(path)
 
         if (isTitlePath && array[index - 1] === 'titles') {
             return (
