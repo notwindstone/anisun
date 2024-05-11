@@ -1,15 +1,17 @@
 "use client"
 
-import {Group, rem, UnstyledButton} from "@mantine/core";
+import {em, Group, rem, UnstyledButton} from "@mantine/core";
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import classes from './NavigationBar.module.css';
 import NavigationBreadcrumbs from "@/components/NavigationBar/NavigationBreadcrumbs/NavigationBreadcrumbs";
+import {useMediaQuery} from "@mantine/hooks";
 
 export default function NavigationBar() {
+    const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const router = useRouter()
 
-    return (
+    return isMobile === false && (
         <div className={classes.wrapper}>
             <Group gap={rem(8)}>
                 <UnstyledButton
