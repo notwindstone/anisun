@@ -29,6 +29,7 @@ import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
 import {useDisclosure} from "@mantine/hooks";
+import SettingsButton from "@/components/SideBar/SettingsButton/SettingsButton";
 
 export default function SideBarButton({ link }: { link: SideBarLink }) {
     const { user } = useUser();
@@ -184,6 +185,11 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                 <>
 
                 </>
+            )
+            break
+        case "settings":
+            content = (
+                <SettingsButton />
             )
             break
         default:
