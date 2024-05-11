@@ -1,4 +1,4 @@
-import {Breadcrumbs, Loader} from "@mantine/core";
+import {Breadcrumbs, Loader, Skeleton} from "@mantine/core";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import {IconChevronRight, IconHome} from "@tabler/icons-react";
@@ -39,7 +39,9 @@ export default function NavigationBreadcrumbs() {
         if (isTitlePath && array[index - 1] === 'titles') {
             return (
                 <Link key={path} href={path}>
-                    {data?.[0].russian ?? data?.[0].name}
+                    {data?.[0].russian ?? data?.[0].name ?? (
+                        <Skeleton height={16} width={128} />
+                    )}
                 </Link>
             )
         }
@@ -47,7 +49,9 @@ export default function NavigationBreadcrumbs() {
         if (array[index - 1] === 'account') {
             return (
                 <Link key={path} href={path}>
-                    {user?.username}
+                    {user?.username ?? (
+                        <Skeleton height={16} width={96} />
+                    )}
                 </Link>
             )
         }
