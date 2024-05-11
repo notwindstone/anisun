@@ -4,9 +4,10 @@ import {Group, rem, UnstyledButton} from "@mantine/core";
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import classes from './NavigationBar.module.css';
+import NavigationBreadcrumbs from "@/components/NavigationBar/NavigationBreadcrumbs/NavigationBreadcrumbs";
 
 export default function NavigationBar() {
-    const router = useRouter();
+    const router = useRouter()
 
     return (
         <div className={classes.wrapper}>
@@ -29,6 +30,7 @@ export default function NavigationBar() {
                 >
                     Forward
                 </UnstyledButton>
+                <NavigationBreadcrumbs />
             </Group>
         </div>
     )
