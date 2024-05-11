@@ -183,6 +183,8 @@ npm run start
 
 * [Sora](https://github.com/Khanhtran47/Sora) и [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Некоторые элементы дизайна были позаимствованы у них
 
+* [Node-shikimori wrapper](https://github.com/Capster/node-shikimori). Некоторый код был позаимствован с этого враппера
+
 ## 📜 Лицензия
 
 [![GitHub](https://img.shields.io/github/license/windstone-aristotle-yellow/Animeth?style=for-the-badge)](https://github.com/windstone-aristotle-yellow/Animeth/blob/main/LICENSE)

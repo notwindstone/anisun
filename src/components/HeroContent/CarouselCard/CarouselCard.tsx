@@ -4,7 +4,7 @@ import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
 import NextImage from "next/image";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 import Link from "next/link";
-import globalVariables from '../../configs/globalVariables.json'
+import globalVariables from '../../../configs/globalVariables.json'
 
 export default function CarouselCard({ animeTitle }: { animeTitle: AnimeType }) {
     return (

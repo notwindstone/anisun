@@ -185,6 +185,8 @@ Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment)
 
 * [Sora](https://github.com/Khanhtran47/Sora) and [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Some of the UI designs are borrowed from them
 
+* [Node-shikimori wrapper](https://github.com/Capster/node-shikimori). Some of the codes are borrowed from them 
+
 ## 📜 License
 
 [![GitHub](https://img.shields.io/github/license/windstone-aristotle-yellow/Animeth?style=for-the-badge)](https://github.com/windstone-aristotle-yellow/Animeth/blob/main/LICENSE)

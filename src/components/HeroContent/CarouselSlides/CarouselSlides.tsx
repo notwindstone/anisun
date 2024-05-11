@@ -1,5 +1,5 @@
 import {Carousel} from "@mantine/carousel";
-import CarouselCard from "@/components/CarouselCard/CarouselCard";
+import CarouselCard from "@/components/HeroContent/CarouselCard/CarouselCard";
 import {Skeleton} from "@mantine/core";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 
