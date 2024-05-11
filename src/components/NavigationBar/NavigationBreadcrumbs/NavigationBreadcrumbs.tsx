@@ -21,7 +21,7 @@ export default function NavigationBreadcrumbs() {
     }
 
     const { data } = useQuery({
-        queryKey: ['breadcrumbs'],
+        queryKey: ['breadcrumbs', pathname],
         queryFn: async () => {
             if (!titlePath) {
                 return null
@@ -35,30 +35,30 @@ export default function NavigationBreadcrumbs() {
     })
     const breadcrumbs = paths.map((path, index, array) => {
         const translatedPath = translateRouteNames(path)
+        const previousPath = array[index - 1]
+        const russianAnimeName = data?.[0].russian
+        const originalAnimeName = data?.[0].name
+        let currentPath
 
-        if (isTitlePath && array[index - 1] === 'titles') {
-            return (
-                <Link key={path} href={path}>
-                    {data?.[0].russian ?? data?.[0].name ?? (
-                        <Skeleton height={16} width={128} />
-                    )}
-                </Link>
-            )
-        }
-
-        if (array[index - 1] === 'account') {
-            return (
-                <Link key={path} href={path}>
-                    {user?.username ?? (
-                        <Skeleton height={16} width={96} />
-                    )}
-                </Link>
-            )
+        switch (previousPath) {
+            case "titles":
+                currentPath = russianAnimeName ?? originalAnimeName
+                break
+            case "account":
+                currentPath = user?.username
+                break
+            default:
+                currentPath = translatedPath
+                break
         }
 
         return (
             <Link key={path} href={path}>
-                {translatedPath}
+                {
+                    currentPath ?? (
+                        <Skeleton height={16} width={128} />
+                    )
+                }
             </Link>
         )
     })
