@@ -11,7 +11,7 @@ import AnimeInfo from "@/components/AnimeInfo/AnimeInfo";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
-    const shikimoriId = params.code.split('-')[0]
+    const shikimoriId = params.code.split('-')[0].replace(/\D/g, '')
 
     const anime = (await shikimori.animes.byId({ ids: shikimoriId })).animes[0]
 

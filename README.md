@@ -18,9 +18,9 @@
 
 ## 📱 Скриншоты
 
-<div>
-<img src="public/Screenshot_animeth_videoplayer1.jpg" width="48%">
-<img src="public/Screenshot_animeth_videoplayer2.jpg" width="48%">
+<div align="center">
+<img src="public/Screenshot_animeth_videoplayer1.jpg" width="49%">
+<img src="public/Screenshot_animeth_videoplayer2.jpg" width="49%">
 </div>
 
 ## ⚙️ Набор технологий
