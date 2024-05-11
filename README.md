@@ -7,7 +7,7 @@
 ### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
 <p align="center">
-<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_english.md">English</a> | <strong>Русский</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_tatar.md">Татарча</a>
+<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_english.md">English</a> | <strong>Русский</strong>
 </p>
 
 </div>
@@ -59,8 +59,6 @@
 
 ## ✅ Список задач
 
-- [ ] Добавить возможность смены основного цвета сайта
-
 - [ ] Добавить возможность загрузки аниме с торрента или напрямую через сайт
 
 - [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
@@ -75,11 +73,12 @@
 
 #### Подготовка
 
+<details>
+<summary>Раскрыть шаги</summary>
+
 ```bash
 git clone https://github.com/windstone-aristotle-yellow/animeth
 ```
-
-Чтобы запустить сайт:
 
 1. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
 
@@ -122,6 +121,8 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 KODIK_TOKEN='qwertyuiop1234567890'
 ```
 
+</details>
+
 #### Режим разработки
 
 Если вы хотите запустить сайт в режиме разработки
@@ -150,10 +151,15 @@ npm run start
 
 ### Vercel
 
+<details>
+<summary>Раскрыть шаги</summary>
+
 > [!IMPORTANT]  
 > В процессе заполнения...
 
 Пока что смотрите официальную документацию [Next.js deployment documentation](https://nextjs.org/docs/deployment)
+
+</details>
 
 ## 💬 Контакты
 

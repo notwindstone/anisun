@@ -7,7 +7,7 @@
 ### A web app for watching anime built with Next.js and Mantine UI
 
 <p align="center">
-<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">Русский</a> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_tatar.md">Татарча</a>
+<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">Русский</a>
 </p>
 
 </div>
@@ -59,8 +59,6 @@
 
 ## ✅ To-Do List
 
-- [ ] Add possibility to change primary color of website
-
 - [ ] Add option to download anime using torrent or directly from website
 
 - [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
@@ -74,6 +72,9 @@
 ### Local
 
 #### Preparations
+
+<details>
+<summary>Expand steps</summary>
 
 ```bash
 git clone https://github.com/windstone-aristotle-yellow/animeth
@@ -122,6 +123,8 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 KODIK_TOKEN='qwertyuiop1234567890'
 ```
 
+</details>
+
 #### Development
 
 If you want to run the application in development mode
@@ -150,10 +153,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Vercel
 
+<details>
+<summary>Expand steps</summary>
+
 > [!IMPORTANT]  
 > Work in progress...
 
 Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
+
+</details>
 
 ## 💬 Contact
 
