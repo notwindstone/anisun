@@ -10,8 +10,6 @@
     right: 0;
     height: rem(64px);
     z-index: 31500;
-    background: #00000088;
-    backdrop-filter: blur(rem(10px));
     border-bottom: rem(1px) solid var(--mantine-color-default-border);
 }
 

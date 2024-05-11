@@ -5,6 +5,8 @@
     height: 100vh;
     transition: 150ms ease;
     display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .opened {
@@ -24,4 +26,9 @@
     @mixin hover {
         background: alpha(var(--mantine-color-default-hover), 0.5);
     }
+}
+
+.headingGroup {
+    user-select: none;
+    cursor: pointer;
 }

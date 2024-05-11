@@ -17,6 +17,8 @@ import {SideBarLink} from "@/types/SideBarLink";
 import NextImage from "next/image";
 import globalVariables from "@/configs/globalVariables.json";
 import useRipple from "use-ripple-hook";
+import {useRouter} from "next/navigation";
+import NProgress from "nprogress";
 
 const iconProps = {size: 32, stroke: 1.5}
 const activeIconProps = {size: 32, stroke: 2.5}
@@ -72,6 +74,7 @@ export const SideBarLinkContext
 });
 
 export default function SideBar() {
+    const router = useRouter()
     const [ripple, event] = useRipple();
     const [opened, { toggle }] = useDisclosure(false);
     const [active, setActive] = useState(0)
@@ -121,7 +124,18 @@ export default function SideBar() {
                         >
                             {
                                 (styles) => (
-                                    <Group gap={rem(16)} style={styles} align="center" wrap="nowrap">
+                                    <Group
+                                        className={classes.headingGroup}
+                                        gap={rem(16)}
+                                        style={styles}
+                                        align="center"
+                                        wrap="nowrap"
+                                        onClick={() => {
+                                            NProgress.start()
+                                            router.push('/')
+                                            NProgress.done()
+                                        }}
+                                    >
                                         <Image
                                             alt="Animeth website icon"
                                             src="/favicon.png"
