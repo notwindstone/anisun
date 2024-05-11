@@ -1,4 +1,8 @@
 .wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding-left: rem(16px);
     flex-shrink: 0;
     position: sticky;
     top: 0;
@@ -6,4 +10,22 @@
     right: 0;
     height: rem(64px);
     z-index: 31500;
+    background: #00000088;
+    backdrop-filter: blur(rem(10px));
+    border-bottom: rem(1px) solid var(--mantine-color-default-border);
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: rem(1px) solid var(--mantine-color-default-border);
+    height: rem(32px);
+    width: rem(32px);
+    border-radius: var(--mantine-radius-xl);
+    transition: 150ms ease;
+
+    @mixin hover {
+        background: alpha(var(--mantine-color-default-hover), 0.5);
+    }
 }
