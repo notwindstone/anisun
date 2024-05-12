@@ -4,10 +4,10 @@
 
 # Animeth
 
-### Сайт для просмотра аниме на основе Next.js и Mantine UI
+### A web app for watching anime built with Next.js and Mantine UI
 
 <p align="center">
-<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_english.md">English</a> | <strong>Русский</strong>
+<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_russian.md">Русский</a>
 </p>
 
 </div>
@@ -16,105 +16,105 @@
 [![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=flat&logo=telegram)](https://t.me/democracysucks)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/JhmkZDScfg)
 
-## 📱 Скриншоты
+## 📱 Screenshots
 
 <div align="center">
 <img src="public/Screenshot_animeth_videoplayer1.jpg" width="49%">
 <img src="public/Screenshot_animeth_videoplayer2.jpg" width="49%">
 </div>
 
-## ⚙️ Набор технологий
+## ⚙️ Tech Stack
 
-* [Next.js](https://nextjs.org/) с использованием [TypeScript](https://www.typescriptlang.org/)
+* [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
 
-* [Mantine UI](https://mantine.dev/) в качестве UI-кита с [PostCSS](https://postcss.org/)
+* [Mantine UI](https://mantine.dev/) and [PostCSS](https://postcss.org/) for UI
 
-* [Drizzle ORM](https://orm.drizzle.team/) и [Neon Serverless DB](https://neon.tech/) для хранения данных
+* [Drizzle ORM](https://orm.drizzle.team/) and [Neon Serverless DB](https://neon.tech/) for database
 
-* [Tanstack Query](https://tanstack.com/query/latest) и [axios](https://axios-http.com/ru/docs/intro) для получения данных с API
+* [Tanstack Query](https://tanstack.com/query/latest) and [axios](https://axios-http.com/docs/intro) for fetching data from APIs
 
-* Слайдер аниме карточек на базе [Embla Carousel](https://www.embla-carousel.com) и [Mantine UI Carousel](https://mantine.dev/x/carousel/)
+* Slider for anime cards based on [Embla Carousel](https://www.embla-carousel.com) and [Mantine UI Carousel](https://mantine.dev/x/carousel/)
 
-* [Clerk Auth](https://clerk.com/) для авторизации
+* [Clerk Auth](https://clerk.com/) for auth
 
-* Плеер видео для [Anilibria API](https://github.com/anilibria/docs) на основе [Vidstack.js](https://www.vidstack.io/) и [HLS.js](https://github.com/video-dev/hls.js)
+* Video player for [Anilibria API](https://github.com/anilibria/docs) based on [Vidstack.js](https://www.vidstack.io/) and [HLS.js](https://github.com/video-dev/hls.js)
 
-* [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper) для получения видеоплеера Kodik по Shikimori ID
+* [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper) for fetching data from Kodik using Shikimori ID
 
-* Система уведомлений на базе [Mantine UI Notifications](https://mantine.dev/x/notifications/)
+* Notifications system based on [Mantine UI Notifications](https://mantine.dev/x/notifications/)
 
-* Форматирование даты и времени с помощью [Day.js](https://day.js.org/)
+* Date formatting with [Day.js](https://day.js.org/)
 
-* Применение [CSS-модулей](https://nextjs.org/docs/app/building-your-application/styling/css-modules)
+* [CSS-modules](https://nextjs.org/docs/app/building-your-application/styling/css-modules)
 
-## ⭐️ Возможности
+## ⭐ Features
 
-* Просмотр аниме с субтитрами или озвучкой
+* Watch anime with subtitles or dubbing
 
-* Загрузка аниме с торрента или напрямую через сайт
+* Download anime using torrent or directly from website
 
-* Авторизация в аккаунт
+* Account authentication
 
-* Система комментариев с бесконечной вложенностью, как на реддите
+* Heavily nested comment system like on reddit
 
-* Тёмная и светлая темы
+* Dark and light themes
 
 > [!IMPORTANT]  
-> В процессе заполнения...
+> Work in progress...
 
-## ✅ Список задач
+## ✅ To-Do List
 
-- [ ] Добавить возможность загрузки аниме с торрента или напрямую через сайт
+- [ ] Add option to download anime using torrent or directly from website
 
-- [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
+- [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
-- [ ] Прикрутить API от [SovetRomantica](https://github.com/sovetromantica/sr-api)
+- [ ] Add subtitles from [SovetRomantica API](https://github.com/sovetromantica/sr-api)
 
-- [ ] Сделать различные роли (администратора, участника) для аккаунтов
+- [ ] Add permission groups (administrator, member) to users
 
-## ⬇️ Запуск
+## ⬇️ Self-Hosting
 
-### Локально
+### Local
 
-#### Подготовка
+#### Preparations
 
 <details>
-<summary>Раскрыть шаги</summary>
+<summary>Expand steps</summary>
 
 ```bash
 git clone https://github.com/windstone-aristotle-yellow/animeth
 ```
 
-1. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
+1. Rename the `.env.example` file in the root directory to `.env.local`
 
-2. Зарегистрируйтесь на https://clerk.com
+2. Sign up for a Clerk account at https://clerk.com
 
-3. Зайдите в Панель управления (Dashboard) Clerk и создайте новое приложение
+3. Go to the Clerk dashboard and create an application
 
-4. Перейдите в пункт **API Keys** в левом меню и скопируйте **Publishable key** (Пример: `pk_test_qwertyuiop1234567890`)
+4. Go to **API Keys** in your sidebar and copy **Publishable key** (Example: `pk_test_qwertyuiop1234567890`)
 
-5. Вставьте **Publishable key** в строку `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` в файле `.env.local`
+5. Paste your **Publishable key** to `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` in the `.env.local` file
 
-6. Перейдите в пункт **API Keys** в левом меню и скопируйте **Secret keys** (Пример: `sk_test_qwertyuiop1234567890`)
+6. Go to **API Keys** in your sidebar and copy **Secret keys** (Example: `sk_test_qwertyuiop1234567890`)
 
-7. Вставьте **Publishable key** в строку `CLERK_SECRET_KEY` в файле `.env.local`
+7. Paste your **Publishable key** to `CLERK_SECRET_KEY` in the `.env.local` file
 
-8. Зарегистрируйтесь на https://neon.tech/ и создайте там новый проект
+8. Sign up to Neon DB at https://neon.tech/ to access serverless Postgres by creating a project
 
-9. Перейдите в Панель управления (Dashboard) Neon DB и скопируйте **Connection string** (Пример: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
+9. Go to the Neon dashboard and copy **Connection string** (Example: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
 
-10. Вставьте **Connection string** в строку `NEON_DATABASE_URL` в файле `.env.local`
+10. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
 
-11. (Опционально) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
+11. (Optional) If you want to watch anime in Kodik Player too, then obtain a token from http://kodik.cc/ (you need to contact them via email) Otherwise, only players based on the Anilibria API will work
 
-12. Запустите команду `npm install` для того, чтобы установить все зависимости
+12. Run `npm install` to install the required dependencies
 
-13. Готово!
+13. Done! Your web app is ready to start
 
 </details>
 
 > [!NOTE]
-> Вот так должен выглядеть файл `.env.local` после всех махинаций выше
+> This is what the `.env.local` file should look like after all the changes above
 
 ```text
 NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
@@ -128,20 +128,20 @@ NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 KODIK_TOKEN='qwertyuiop1234567890'
 ```
 
-#### Режим разработки
+#### Development
 
-Если вы хотите запустить сайт в режиме разработки
+If you want to run the application in development mode
 
 ```bash
 npm run dev
 ```
 
-#### Режим продакшна
+#### Production
 
 > [!TIP]
-> Запускайте сайт в этом режиме, если не знаете, какой выбрать
+> Run the application in production mode if you don't know which to choose
 
-Если вы хотите запустить сайт в режиме продакшна
+If you want to run the application in production mode
 
 ```bash
 npm run build
@@ -150,46 +150,46 @@ npm run build
 npm run start
 ```
 
-#### Ссылка на сайт
+#### Website URL
 
-Откройте [http://localhost:3000](http://localhost:3000) в браузере, чтобы зайти на сайт
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ### Vercel
 
 > [!IMPORTANT]  
-> В процессе заполнения...
+> Work in progress...
 
 <details>
-<summary>Раскрыть шаги</summary>
+<summary>Expand steps</summary>
 
-Пока что смотрите официальную документацию [Next.js deployment documentation](https://nextjs.org/docs/deployment)
+Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
 
 </details>
 
-## 💬 Контакты
+## 💬 Contact
 
-### Напрямую
+### Directly
 
 * [Telegram - @windst1](https://t.me/windst1)
 
 * Discord - @notwindstone
 
-### Через наш чат или сервер
+### Through our Telegram chat or Discord server
 
 * [Telegram - Клуб фанатов партии любителей пива](https://t.me/democracysucks)
 
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
-## ❤️ Особая благодарность
+## ❤️ Credits
 
-* [zvshka](https://github.com/zvshka) за оказание помощи при создании проекта
+* [zvshka](https://github.com/zvshka) for his help with project
 
-* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs) и [Kodik](http://kodik.cc/) за их прекрасные API, без которых Animeth не смог бы работать
+* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs) and [Kodik](http://kodik.cc/) for their wonderful APIs, without which Animeth could not work
 
-* [Sora](https://github.com/Khanhtran47/Sora) и [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Некоторые элементы дизайна были позаимствованы у них
+* [Sora](https://github.com/Khanhtran47/Sora) and [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Some of the UI designs are borrowed from them
 
-* [Node-shikimori wrapper](https://github.com/Capster/node-shikimori). Некоторый код был позаимствован с этого враппера
+* [Node-shikimori wrapper](https://github.com/Capster/node-shikimori). Some of the codes are borrowed from them
 
-## 📜 Лицензия
+## 📜 License
 
 [![GitHub](https://img.shields.io/github/license/windstone-aristotle-yellow/Animeth?style=for-the-badge)](https://github.com/windstone-aristotle-yellow/Animeth/blob/main/LICENSE)

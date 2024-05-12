@@ -150,7 +150,7 @@ export default function VideoEmbed({ id }: { id: string }) {
     }
 
     const kodikDescription = 'К сожалению, в плеере Kodik нельзя отключить рекламу. Она встроена в плеер и не зависит от нашего сайта. Зато доступен широкий выбор озвучек!'
-    const animethDescription = 'В нашем плеере нет рекламы, а озвучка используется от AniLibria, однако её нельзя поменять или включить субтитры.'
+    const animethDescription = 'В нашем плеере озвучка используется только от AniLibria.'
 
     return (
         <>
