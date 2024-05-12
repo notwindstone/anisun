@@ -4,3 +4,17 @@
     border-radius: var(--mantine-radius-xl);
     padding: 0 rem(8px);
 }
+
+.breadcrumb {
+    display: grid;
+    place-content: center;
+    padding: 0 rem(8px);
+    height: rem(24px);
+    border-radius: var(--mantine-radius-xl);
+    transition: 150ms ease;
+
+    @mixin hover {
+        background: alpha(var(--mantine-color-default-hover), 0.5);
+        color: var(--animeth-text-contrast-color);
+    }
+}

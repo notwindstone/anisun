@@ -76,9 +76,11 @@ export default function NavigationBreadcrumbs() {
 
     return (
         <Breadcrumbs
+            separatorMargin={0}
             ref={ripple}
             classNames={{
                 root: classes.root,
+                breadcrumb: classes.breadcrumb,
             }}
             separator={<IconChevronRight size={22} stroke={1.5} />}
         >

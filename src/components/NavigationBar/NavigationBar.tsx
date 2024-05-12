@@ -1,6 +1,6 @@
 "use client"
 
-import {em, Group, rem, UnstyledButton} from "@mantine/core";
+import {Box, em, Group, rem, UnstyledButton} from "@mantine/core";
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import classes from './NavigationBar.module.css';
@@ -16,36 +16,40 @@ export default function NavigationBar() {
     const [rippleSecond, eventSecond] = useRipple();
 
     return isMobile === false && (
-        <div className={classes.wrapper}>
-            <Group gap={rem(16)}>
-                <Group gap={rem(8)}>
-                    <UnstyledButton
-                        ref={rippleFirst}
-                        onPointerDown={eventFirst}
-                        className={classes.button}
-                        onClick={() => {
-                            NProgress.start()
-                            router.back()
-                            NProgress.done()
-                        }}
-                    >
-                        <IconChevronLeft size={32} stroke={1.5} />
-                    </UnstyledButton>
-                    <UnstyledButton
-                        ref={rippleSecond}
-                        onPointerDown={eventSecond}
-                        className={classes.button}
-                        onClick={() => {
-                            NProgress.start()
-                            router.forward()
-                            NProgress.done()
-                        }}
-                    >
-                        <IconChevronRight size={32} stroke={1.5} />
-                    </UnstyledButton>
-                </Group>
-                <NavigationBreadcrumbs />
-            </Group>
-        </div>
+        <>
+            <div className={classes.wrapper}>
+                <Box className={classes.inner}>
+                    <Group gap={rem(16)}>
+                        <Group gap={rem(8)}>
+                            <UnstyledButton
+                                ref={rippleFirst}
+                                onPointerDown={eventFirst}
+                                className={classes.button}
+                                onClick={() => {
+                                    NProgress.start()
+                                    router.back()
+                                    NProgress.done()
+                                }}
+                            >
+                                <IconChevronLeft size={32} stroke={1.5}/>
+                            </UnstyledButton>
+                            <UnstyledButton
+                                ref={rippleSecond}
+                                onPointerDown={eventSecond}
+                                className={classes.button}
+                                onClick={() => {
+                                    NProgress.start()
+                                    router.forward()
+                                    NProgress.done()
+                                }}
+                            >
+                                <IconChevronRight size={32} stroke={1.5}/>
+                            </UnstyledButton>
+                        </Group>
+                        <NavigationBreadcrumbs/>
+                    </Group>
+                </Box>
+            </div>
+        </>
     )
 }

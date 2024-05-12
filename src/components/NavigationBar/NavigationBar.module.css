@@ -2,7 +2,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: rem(16px);
+    padding: rem(16px);
     flex-shrink: 0;
     position: sticky;
     top: 0;
@@ -10,7 +10,14 @@
     right: 0;
     height: rem(64px);
     z-index: 31500;
-    border-bottom: rem(1px) solid var(--mantine-color-default-border);
+}
+
+.inner {
+    width: 100%;
+    padding: rem(8px);
+    background: var(--animeth-background-color);
+    box-shadow: 0 0 rem(1px) 0 var(--mantine-color-default-border) inset, 0 0 rem(1px) 0 white;
+    border-radius: var(--mantine-radius-xl);
 }
 
 .button {
@@ -24,6 +31,7 @@
     box-shadow: 0 0 rem(1px) 0 var(--mantine-color-default-border) inset, 0 0 rem(1px) 0 white;
 
     @mixin hover {
+        color: var(--animeth-text-contrast-color);
         background: alpha(var(--mantine-color-default-hover), 0.5);
     }
 }
