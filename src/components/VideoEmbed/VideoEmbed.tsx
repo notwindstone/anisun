@@ -9,6 +9,12 @@ import { Client } from 'kodikwrapper';
 import {client} from "@/lib/shikimori/client";
 import classes from './VideoEmbed.module.css';
 import {IconInfoCircle} from "@tabler/icons-react";
+import {AdvancedSearchInterface} from "@/types/AniLibria/Queries/AdvancedSearchInterface";
+
+interface AnilibriaTitleProps extends AdvancedSearchInterface {
+    franchise: string;
+    russianName: string | null;
+}
 
 export default function VideoEmbed({ id }: { id: string }) {
     const shikimori = client()
@@ -21,7 +27,7 @@ export default function VideoEmbed({ id }: { id: string }) {
         queryFn: async () => fetchAnime(),
     });
 
-    async function getAnilibriaTitle({ franchise, russianName, year, duration, filter, limit }: { franchise: string | null, russianName: string, year: string | undefined }) {
+    async function getAnilibriaTitle({ franchise, russianName, year, duration, filter, limit }: AnilibriaTitleProps) {
         const anilibriaTitleFromFranchise = await anilibria.advancedSearch({ title: franchise, year: year, duration: duration, filter: filter, limit: limit })
 
         if (anilibriaTitleFromFranchise) {
@@ -43,8 +49,8 @@ export default function VideoEmbed({ id }: { id: string }) {
         })).animes[0]
 
         const shikimoriEnglishName = shikimoriAnime.name
-        const shikimoriRussianName = shikimoriAnime.russian ?? ''
-        const shikimoriYear = shikimoriAnime.airedOn?.year.toString() ?? ''
+        const shikimoriRussianName = shikimoriAnime.russian
+        const shikimoriYear = shikimoriAnime.airedOn?.year.toString()
         const shikimoriDuration = shikimoriAnime.duration
 
         const anilibriaResponse = await getAnilibriaTitle(
