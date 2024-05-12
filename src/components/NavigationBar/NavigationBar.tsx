@@ -9,11 +9,15 @@ import {useMediaQuery} from "@mantine/hooks";
 import {IconChevronLeft, IconChevronRight} from "@tabler/icons-react";
 import useRipple from "use-ripple-hook";
 
+const rippleColor = {
+    color: "var(--animeth-ripple-color)",
+}
+
 export default function NavigationBar() {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const router = useRouter()
-    const [rippleFirst, eventFirst] = useRipple();
-    const [rippleSecond, eventSecond] = useRipple();
+    const [rippleFirst, eventFirst] = useRipple(rippleColor);
+    const [rippleSecond, eventSecond] = useRipple(rippleColor);
 
     return isMobile === false && (
         <>

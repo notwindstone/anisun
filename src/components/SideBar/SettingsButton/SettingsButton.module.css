@@ -26,6 +26,7 @@
     }
 
     &:where([data-active]) {
+        color: var(--animeth-text-contrast-color);
         background: var(--mantine-color-default-hover);
 
         &:before {

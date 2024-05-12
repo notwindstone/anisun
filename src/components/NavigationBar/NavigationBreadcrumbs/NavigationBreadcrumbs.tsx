@@ -9,9 +9,12 @@ import {useUser} from "@clerk/nextjs";
 import classes from './NavigationBreadcrumbs.module.css';
 import useRipple from "use-ripple-hook";
 import React from "react";
+import {BreadcrumbType} from "@/types/BreadcrumbType";
 
-function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: { currentPathname?: string, currentBreadcrumb?: string | null, icon?: React.ReactNode }) {
-    const [ripple, event] = useRipple();
+function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType) {
+    const [ripple, event] = useRipple({
+        color: "var(--animeth-ripple-color)",
+    });
 
     return (
         <Text
@@ -57,6 +60,7 @@ export default function NavigationBreadcrumbs() {
             return (await shikimori.animes.byId({ ids: shikimoriId })).animes
         }
     })
+
     const breadcrumbs = paths.map((breadcrumb, index, array) => {
         const currentPathArray = array.slice(0, index + 1)
         const currentPathname = currentPathArray.join('/')

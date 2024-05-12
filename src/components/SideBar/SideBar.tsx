@@ -69,7 +69,9 @@ export const SideBarLinkContext
 
 export default function SideBar() {
     const router = useRouter()
-    const [ripple, event] = useRipple();
+    const [ripple, event] = useRipple({
+        color: "var(--animeth-ripple-color)",
+    });
     const [opened, { toggle }] = useDisclosure(false);
     const [active, setActive] = useState(0)
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);

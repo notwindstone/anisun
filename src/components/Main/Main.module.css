@@ -1,4 +1,5 @@
 .root {
+    padding-top: rem(24px);
     background: var(--animeth-background-color);
     z-index: 0;
 }

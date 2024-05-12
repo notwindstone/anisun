@@ -7,6 +7,7 @@
         --animeth-primary-color: #7b46af;
         --animeth-secondary-color: #e4d4f8;
         --animeth-accent-color: #7b45b0;
+        --animeth-ripple-color: #0000004D;
         /* Специфические цвета */
 
         --animeth-nav-button-color: #eccbe4;
@@ -28,6 +29,7 @@
         --animeth-primary-color: #a176ff;
         --animeth-secondary-color: #0d0a15;
         --animeth-accent-color: #a177ff;
+        --animeth-ripple-color: #FFFFFF4C;
         /* Специфические цвета */
 
         --animeth-nav-button-color: #eccbe4;
@@ -60,7 +62,6 @@
     border-left: rem(1px) solid var(--mantine-color-default-border);
 
     @media (max-width: rem(750)) {
-        box-shadow: none;
-        border-top: none;
+        border: none;
     }
 }

@@ -4,7 +4,7 @@ import {HeroContent} from "@/components/HeroContent/HeroContent";
 export default async function Home() {
     return (
         <div>
-            <Link href="/titles">Test</Link>
+
         </div>
     )
 }

@@ -2,19 +2,18 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding: rem(16px);
     flex-shrink: 0;
+    width: fit-content;
     position: sticky;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: rem(64px);
+    top: rem(16px);
+    left: rem(16px);
     z-index: 31500;
 }
 
 .inner {
     padding: rem(8px);
     background: var(--animeth-background-color);
+    backdrop-filter: blur(16px);
     border: rem(1px) solid var(--mantine-color-default-border);
     border-radius: var(--mantine-radius-xl);
 }
@@ -28,7 +27,7 @@
     border-radius: var(--mantine-radius-xl);
     transition: 150ms ease;
     border: rem(1px) solid var(--mantine-color-default-border);
-    
+
     @mixin hover {
         color: var(--animeth-text-contrast-color);
         background: alpha(var(--mantine-color-default-hover), 0.5);

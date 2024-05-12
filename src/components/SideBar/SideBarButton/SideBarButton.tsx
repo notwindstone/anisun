@@ -31,12 +31,16 @@ import Link from "next/link";
 import {useDisclosure} from "@mantine/hooks";
 import SettingsButton from "@/components/SideBar/SettingsButton/SettingsButton";
 
+const rippleColor = {
+    color: "var(--animeth-ripple-color)",
+}
+
 export default function SideBarButton({ link }: { link: SideBarLink }) {
     const { user } = useUser();
-    const [rippleFirst, eventFirst] = useRipple();
-    const [rippleSecond, eventSecond] = useRipple();
-    const [rippleThird, eventThird] = useRipple();
-    const [rippleFourth, eventFourth] = useRipple();
+    const [rippleFirst, eventFirst] = useRipple(rippleColor);
+    const [rippleSecond, eventSecond] = useRipple(rippleColor);
+    const [rippleThird, eventThird] = useRipple(rippleColor);
+    const [rippleFourth, eventFourth] = useRipple(rippleColor);
     const { opened } = useContext(SideBarLinkContext)
     const [settingsOpened, { open: openSettings, close: closeSettings }] = useDisclosure(false);
     const [signInOpened, { open: openSignIn, close: closeSignIn }] = useDisclosure(false);
@@ -79,7 +83,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 >
                                     {user?.username?.[0]}
                                 </Avatar>
-                                <Title c="white" order={4}>{user?.username}</Title>
+                                <Title className={classes.title} order={4}>{user?.username}</Title>
                             </Group>
                             <UnstyledButton
                                 className={classes.popoverButton}
@@ -103,8 +107,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 p={rem(8)}
                             >
                                 <Group align="center">
-                                    <IconUserCircle color="white" stroke={1.5} />
-                                    <Text c="white">Мой профиль</Text>
+                                    <IconUserCircle stroke={1.5} />
+                                    <Text className={classes.text}>Мой профиль</Text>
                                 </Group>
                             </UnstyledButton>
                             <UnstyledButton
@@ -118,8 +122,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 p={rem(8)}
                             >
                                 <Group align="center">
-                                    <IconSettings color="white" stroke={1.5} />
-                                    <Text c="white">Настройки</Text>
+                                    <IconSettings stroke={1.5} />
+                                    <Text className={classes.text}>Настройки</Text>
                                 </Group>
                             </UnstyledButton>
                             <SignOutButton>
@@ -135,8 +139,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                     p={rem(8)}
                                 >
                                     <Group align="center">
-                                        <IconLogout color="white" stroke={1.5} />
-                                        <Text c="white">Выйти</Text>
+                                        <IconLogout stroke={1.5} />
+                                        <Text className={classes.text}>Выйти</Text>
                                     </Group>
                                 </UnstyledButton>
                             </SignOutButton>
@@ -144,7 +148,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                     </SignedIn>
                     <SignedOut>
                         <Stack p={rem(8)} gap={0}>
-                            <Title c="white" pb={rem(8)} order={2}>Аккаунт</Title>
+                            <Title className={classes.title} pb={rem(8)} order={2}>Аккаунт</Title>
                             <UnstyledButton
                                 className={classes.popoverButton}
                                 ref={rippleFirst}
@@ -156,8 +160,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 p={rem(8)}
                             >
                                 <Group align="center">
-                                    <IconLogin color="white" stroke={1.5}/>
-                                    <Text c="white">Войти</Text>
+                                    <IconLogin stroke={1.5}/>
+                                    <Text className={classes.text}>Войти</Text>
                                 </Group>
                             </UnstyledButton>
                             <UnstyledButton
@@ -171,8 +175,8 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                                 p={rem(8)}
                             >
                                 <Group align="center">
-                                    <IconCloudLockOpen color="white" stroke={1.5} />
-                                    <Text c="white">Зарегистрироваться</Text>
+                                    <IconCloudLockOpen stroke={1.5} />
+                                    <Text className={classes.text}>Зарегистрироваться</Text>
                                 </Group>
                             </UnstyledButton>
                         </Stack>

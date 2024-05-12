@@ -13,7 +13,7 @@ export default function SettingsButton() {
 
     return (
         <Stack p={rem(8)} gap={rem(16)}>
-            <Title c="white" order={2}>Настройки</Title>
+            <Title order={2}>Настройки</Title>
             <Tabs
                 classNames={{
                     root: classes.root,
@@ -29,13 +29,13 @@ export default function SettingsButton() {
             >
                 <Tabs.List>
                     <Tabs.Tab ref={rippleGeneral} onPointerDown={eventGeneral} value={valueGeneral}>
-                        <Text c="white">Общие</Text>
+                        <Text>Общие</Text>
                     </Tabs.Tab>
-                    <Tabs.Tab ref={rippleAbout} onPointerDown={eventAbout} c="white" value={valueAbout}>
-                        <Text c="white">О сайте</Text>
+                    <Tabs.Tab ref={rippleAbout} onPointerDown={eventAbout} value={valueAbout}>
+                        <Text>О сайте</Text>
                     </Tabs.Tab>
                 </Tabs.List>
-                <Tabs.Panel c="white" value={valueGeneral}>
+                <Tabs.Panel value={valueGeneral}>
                     <Transition
                         mounted={activeTab === valueGeneral}
                         transition="fade"
@@ -45,7 +45,7 @@ export default function SettingsButton() {
                         {(styles) => <div style={styles}><ColorSchemeControl /></div>}
                     </Transition>
                 </Tabs.Panel>
-                <Tabs.Panel c="white" value={valueAbout}>
+                <Tabs.Panel value={valueAbout}>
                     <Transition
                         mounted={activeTab === valueAbout}
                         transition="fade"
