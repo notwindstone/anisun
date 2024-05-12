@@ -9,12 +9,7 @@ import { Client } from 'kodikwrapper';
 import {client} from "@/lib/shikimori/client";
 import classes from './VideoEmbed.module.css';
 import {IconInfoCircle} from "@tabler/icons-react";
-import {AdvancedSearchInterface} from "@/types/AniLibria/Queries/AdvancedSearchInterface";
-
-interface AnilibriaTitleProps extends AdvancedSearchInterface {
-    franchise: string;
-    russianName: string | null;
-}
+import {AdvancedSearchType} from "@/types/AniLibria/Queries/AdvancedSearchType";
 
 export default function VideoEmbed({ id }: { id: string }) {
     const shikimori = client()
@@ -27,17 +22,21 @@ export default function VideoEmbed({ id }: { id: string }) {
         queryFn: async () => fetchAnime(),
     });
 
-    async function getAnilibriaTitle({ franchise, russianName, year, duration, filter, limit }: AnilibriaTitleProps) {
-        const anilibriaTitleFromFranchise = await anilibria.advancedSearch({ title: franchise, year: year, duration: duration, filter: filter, limit: limit })
+    async function getAnilibriaTitle({ originalName, englishName, russianName, year, duration, filter, limit }: AdvancedSearchType) {
+        const anilibriaTitleFromFranchise = await anilibria.advancedSearch(
+            {
+                originalName: originalName,
+                englishName: englishName,
+                russianName: russianName,
+                year: year,
+                duration: duration,
+                filter: filter,
+                limit: limit
+            }
+        )
 
         if (anilibriaTitleFromFranchise) {
             return anilibriaTitleFromFranchise
-        }
-
-        const anilibriaTitleFromRussianName = await anilibria.advancedSearch({ title: russianName, year: year, duration: duration, filter: filter, limit: limit })
-
-        if (anilibriaTitleFromRussianName) {
-            return anilibriaTitleFromRussianName
         }
 
         return null
@@ -48,14 +47,16 @@ export default function VideoEmbed({ id }: { id: string }) {
             ids: id,
         })).animes[0]
 
-        const shikimoriEnglishName = shikimoriAnime.name
+        const shikimoriOriginalName = shikimoriAnime.name
+        const shikimoriEnglishName = shikimoriAnime.english
         const shikimoriRussianName = shikimoriAnime.russian
         const shikimoriYear = shikimoriAnime.airedOn?.year.toString()
         const shikimoriDuration = shikimoriAnime.duration
 
         const anilibriaResponse = await getAnilibriaTitle(
             {
-                franchise: shikimoriEnglishName,
+                originalName: shikimoriOriginalName,
+                englishName: shikimoriEnglishName,
                 russianName: shikimoriRussianName,
                 year: shikimoriYear,
                 duration: shikimoriDuration,
