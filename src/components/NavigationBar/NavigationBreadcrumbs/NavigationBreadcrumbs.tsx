@@ -1,4 +1,4 @@
-import {Breadcrumbs, Loader, Skeleton, Text} from "@mantine/core";
+import {Breadcrumbs, Skeleton, Text} from "@mantine/core";
 import {usePathname} from "next/navigation";
 import Link from "next/link";
 import {IconChevronRight, IconHome} from "@tabler/icons-react";
@@ -8,10 +8,31 @@ import translateRouteNames from "@/utils/translateRouteNames";
 import {useUser} from "@clerk/nextjs";
 import classes from './NavigationBreadcrumbs.module.css';
 import useRipple from "use-ripple-hook";
+import React from "react";
+
+function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: { currentPathname?: string, currentBreadcrumb?: string | null, icon?: React.ReactNode }) {
+    const [ripple, event] = useRipple();
+
+    return (
+        <Text
+            className={classes.breadcrumb}
+            ref={ripple}
+            size="sm"
+            component={Link}
+            href={`/${currentPathname}`}
+            onPointerDown={event}
+        >
+            {
+                icon ?? currentBreadcrumb ?? (
+                    <Skeleton height={20} width={128} />
+                )
+            }
+        </Text>
+    )
+}
 
 export default function NavigationBreadcrumbs() {
     let titlePath: string | null
-    const [ripple, event] = useRipple();
     const { user } = useUser();
     const shikimori = client()
     const pathname = usePathname()
@@ -58,39 +79,19 @@ export default function NavigationBreadcrumbs() {
         }
 
         return (
-            <Text
-                size="sm"
-                component={Link}
-                key={breadcrumb}
-                href={`/${currentPathname}`}
-                onPointerDown={event}
-            >
-                {
-                    currentBreadcrumb ?? (
-                        <Skeleton height={20} width={128} />
-                    )
-                }
-            </Text>
+            <Breadcrumb key={breadcrumb} currentBreadcrumb={currentBreadcrumb} currentPathname={currentPathname} />
         )
     })
 
     return (
         <Breadcrumbs
             separatorMargin={0}
-            ref={ripple}
             classNames={{
                 root: classes.root,
-                breadcrumb: classes.breadcrumb,
             }}
             separator={<IconChevronRight size={22} stroke={1.5} />}
         >
-            <Text
-                component={Link}
-                href='/'
-                onPointerDown={event}
-            >
-                <IconHome size={20} stroke={1.5} />
-            </Text>
+            <Breadcrumb currentPathname="/" icon={<IconHome size={20} stroke={1.5} />} />
             {breadcrumbs}
         </Breadcrumbs>
     )
