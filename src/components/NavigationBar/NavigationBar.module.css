@@ -13,10 +13,9 @@
 }
 
 .inner {
-    width: 100%;
     padding: rem(8px);
     background: var(--animeth-background-color);
-    box-shadow: 0 0 rem(1px) 0 var(--mantine-color-default-border) inset, 0 0 rem(1px) 0 white;
+    border: rem(1px) solid var(--mantine-color-default-border);
     border-radius: var(--mantine-radius-xl);
 }
 
@@ -28,8 +27,8 @@
     width: rem(32px);
     border-radius: var(--mantine-radius-xl);
     transition: 150ms ease;
-    box-shadow: 0 0 rem(1px) 0 var(--mantine-color-default-border) inset, 0 0 rem(1px) 0 white;
-
+    border: rem(1px) solid var(--mantine-color-default-border);
+    
     @mixin hover {
         color: var(--animeth-text-contrast-color);
         background: alpha(var(--mantine-color-default-hover), 0.5);

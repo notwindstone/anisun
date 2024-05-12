@@ -1,5 +1,5 @@
 .root {
-    box-shadow: 0 0 rem(1px) 0 var(--mantine-color-default-border) inset, 0 0 rem(1px) 0 white;
+    border: rem(1px) solid var(--mantine-color-default-border);
     height: rem(32px);
     border-radius: var(--mantine-radius-xl);
     padding: 0 rem(8px);

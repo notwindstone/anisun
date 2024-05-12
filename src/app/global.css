@@ -3,6 +3,7 @@
         /* Общие цвета */
         --animeth-text-color: #1c1b23;
         --animeth-background-color: #fff;
+        --animeth-sidebar-color: #f7f7fc;
         --animeth-primary-color: #7b46af;
         --animeth-secondary-color: #e4d4f8;
         --animeth-accent-color: #7b45b0;
@@ -23,6 +24,7 @@
         /* Общие цвета */
         --animeth-text-color: #ffffff;
         --animeth-background-color: #000;
+        --animeth-sidebar-color: #0d0d0d;
         --animeth-primary-color: #a176ff;
         --animeth-secondary-color: #0d0a15;
         --animeth-accent-color: #a177ff;
@@ -40,7 +42,12 @@
     }
 }
 
+.root-group {
+    background: var(--animeth-sidebar-color);
+}
+
 .app-wrapper {
+    background: var(--animeth-background-color);
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -50,7 +57,7 @@
     height: 100vh;
     overflow-y: scroll;
     border-top: rem(1px) solid var(--mantine-color-default-border);
-    box-shadow: 0 0 rem(1px) 0 var(--mantine-color-default-border) inset, 0 0 rem(1px) 0 white;
+    border-left: rem(1px) solid var(--mantine-color-default-border);
 
     @media (max-width: rem(750)) {
         box-shadow: none;

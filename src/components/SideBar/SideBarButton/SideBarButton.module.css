@@ -38,8 +38,8 @@
 
 .dropdown {
     border-radius: rem(12px);
-    background: #00000066;
-    backdrop-filter: blur(rem(10px));
+    background: alpha(var(--animeth-background-color), 0.6);
+    backdrop-filter: blur(rem(16px));
 }
 
 .modal {

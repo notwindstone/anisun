@@ -163,7 +163,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
                             <UnstyledButton
                                 className={classes.popoverButton}
                                 ref={rippleSecond}
-                                onPointerDown={eventThird}
+                                onPointerDown={eventSecond}
                                 onClick={() => {
                                     setExpanded(!expanded)
                                     openSignUp()
