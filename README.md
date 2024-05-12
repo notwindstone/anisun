@@ -23,6 +23,9 @@
 <img src="public/Screenshot_animeth_videoplayer2.jpg" width="49%">
 </div>
 
+> [!NOTE]  
+> Work in progress. More screenshots will be available soon.
+
 ## ⚙️ Tech Stack
 
 * [Next.js](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
@@ -59,7 +62,7 @@
 
 * Dark and light themes
 
-> [!IMPORTANT]  
+> [!NOTE]  
 > Work in progress...
 
 ## ✅ To-Do List
@@ -113,7 +116,7 @@ git clone https://github.com/windstone-aristotle-yellow/animeth
 
 </details>
 
-> [!NOTE]
+> [!IMPORTANT]
 > This is what the `.env.local` file should look like after all the changes above
 
 ```text
@@ -156,7 +159,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Vercel
 
-> [!IMPORTANT]  
+> [!NOTE]  
 > Work in progress...
 
 <details>
