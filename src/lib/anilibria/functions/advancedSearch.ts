@@ -12,7 +12,7 @@ export const advancedSearch = async ({ originalName, englishName, russianName, y
 
     return (
         await axios.get(
-        `${anilibriaHost}title/search/advanced?query=${namesCheck} and {type.length} == ${duration} and {season.year} == ${year}&filter=${filter}&limit=${limit}`
+        `${anilibriaHost}title/search/advanced?query=${namesCheck} and {type.length} in ${duration} and {season.year} == ${year}&filter=${filter}&limit=${limit}`
         )
     ).data.list[0]
 }

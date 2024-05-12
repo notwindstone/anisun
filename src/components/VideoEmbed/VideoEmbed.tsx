@@ -50,8 +50,9 @@ export default function VideoEmbed({ id }: { id: string }) {
         const shikimoriOriginalName = shikimoriAnime.name
         const shikimoriEnglishName = shikimoriAnime.english
         const shikimoriRussianName = shikimoriAnime.russian
-        const shikimoriYear = shikimoriAnime.airedOn?.year.toString()
-        const shikimoriDuration = shikimoriAnime.duration
+        const shikimoriYear = shikimoriAnime.airedOn?.year
+        const shikimoriDuration = shikimoriAnime.duration ?? 1
+        const approximateDuration = `(${shikimoriDuration - 1}, ${shikimoriDuration}, ${shikimoriDuration + 1})`
 
         const anilibriaResponse = await getAnilibriaTitle(
             {
@@ -59,7 +60,7 @@ export default function VideoEmbed({ id }: { id: string }) {
                 englishName: shikimoriEnglishName,
                 russianName: shikimoriRussianName,
                 year: shikimoriYear,
-                duration: shikimoriDuration,
+                duration: approximateDuration,
                 filter: 'names,player',
                 limit: 1,
             }
