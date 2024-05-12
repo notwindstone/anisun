@@ -23,6 +23,9 @@
 <img src="public/Screenshot_animeth_videoplayer2.jpg" width="49%">
 </div>
 
+> [!IMPORTANT]  
+> Сайт ещё не доделан. Другие скриншоты появятся позже.
+
 ## ⚙️ Набор технологий
 
 * [Next.js](https://nextjs.org/) с использованием [TypeScript](https://www.typescriptlang.org/)
@@ -59,7 +62,7 @@
 
 * Тёмная и светлая темы
 
-> [!IMPORTANT]  
+> [!NOTE]  
 > В процессе заполнения...
 
 ## ✅ Список задач
@@ -113,7 +116,7 @@ git clone https://github.com/windstone-aristotle-yellow/animeth
 
 </details>
 
-> [!NOTE]
+> [!IMPORTANT]
 > Вот так должен выглядеть файл `.env.local` после всех махинаций выше
 
 ```text
@@ -156,7 +159,7 @@ npm run start
 
 ### Vercel
 
-> [!IMPORTANT]  
+> [!NOTE]  
 > В процессе заполнения...
 
 <details>
