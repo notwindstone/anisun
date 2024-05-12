@@ -21,14 +21,14 @@ export default function VideoEmbed({ id }: { id: string }) {
         queryFn: async () => fetchAnime(),
     });
 
-    async function getAnilibriaTitle({ franchise, russianName, year }: { franchise: string | null, russianName: string, year: string | undefined }) {
-        const anilibriaTitleFromFranchise = await anilibria.search({ title: franchise, year: year })
+    async function getAnilibriaTitle({ franchise, russianName, year, duration, filter, limit }: { franchise: string | null, russianName: string, year: string | undefined }) {
+        const anilibriaTitleFromFranchise = await anilibria.advancedSearch({ title: franchise, year: year, duration: duration, filter: filter, limit: limit })
 
         if (anilibriaTitleFromFranchise) {
             return anilibriaTitleFromFranchise
         }
 
-        const anilibriaTitleFromRussianName = await anilibria.search({ title: russianName, year: year })
+        const anilibriaTitleFromRussianName = await anilibria.advancedSearch({ title: russianName, year: year, duration: duration, filter: filter, limit: limit })
 
         if (anilibriaTitleFromRussianName) {
             return anilibriaTitleFromRussianName
@@ -45,12 +45,16 @@ export default function VideoEmbed({ id }: { id: string }) {
         const shikimoriEnglishName = shikimoriAnime.name
         const shikimoriRussianName = shikimoriAnime.russian ?? ''
         const shikimoriYear = shikimoriAnime.airedOn?.year.toString() ?? ''
+        const shikimoriDuration = shikimoriAnime.duration
 
         const anilibriaResponse = await getAnilibriaTitle(
             {
                 franchise: shikimoriEnglishName,
                 russianName: shikimoriRussianName,
-                year: shikimoriYear
+                year: shikimoriYear,
+                duration: shikimoriDuration,
+                filter: 'names,player',
+                limit: 1,
             }
         )
 

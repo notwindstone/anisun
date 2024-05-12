@@ -78,7 +78,6 @@ export default function VideoPlayer({ title, player, preview }: VideoPlayerType)
                     }
                 }
                 viewType="video"
-                poster={preview}
                 ref={mediaPlayerRef}
             >
                 <MediaProvider />
