@@ -30,6 +30,7 @@ import {usePathname, useRouter} from "next/navigation";
 import Link from "next/link";
 import {useDisclosure} from "@mantine/hooks";
 import SettingsButton from "@/components/SideBar/SettingsButton/SettingsButton";
+import AccountButton from "@/components/SideBar/AccountButton/AccountButton";
 
 const rippleColor = {
     color: "var(--animeth-ripple-color)",
@@ -68,122 +69,7 @@ export default function SideBarButton({ link }: { link: SideBarLink }) {
 
     switch (link.content) {
         case "account":
-            content = (
-                <>
-                    <SignedIn>
-                        <Stack p={rem(8)} gap={0}>
-                            <Group pt={rem(8)} pb={rem(8)}>
-                                <Avatar
-                                    className={classes.avatar}
-                                    component={Link}
-                                    href={user?.imageUrl ?? '/blurred.png'}
-                                    src={user?.imageUrl ?? '/blurred.png'}
-                                    alt={`Аватар пользователя ${user?.username}`}
-                                    size="lg"
-                                >
-                                    {user?.username?.[0]}
-                                </Avatar>
-                                <Title className={classes.title} order={4}>{user?.username}</Title>
-                            </Group>
-                            <UnstyledButton
-                                className={classes.popoverButton}
-                                ref={rippleFirst}
-                                onPointerDown={eventFirst}
-                                onClick={() => {
-                                    if (!user) {
-                                        return
-                                    }
-
-                                    const accountURL = `/account/${user.id}`
-
-                                    setExpanded(!expanded)
-                                    NProgress.start()
-                                    router.push(accountURL)
-
-                                    if (accountURL === pathname) {
-                                        return NProgress.done()
-                                    }
-                                }}
-                                p={rem(8)}
-                            >
-                                <Group align="center">
-                                    <IconUserCircle stroke={1.5} />
-                                    <Text className={classes.text}>Мой профиль</Text>
-                                </Group>
-                            </UnstyledButton>
-                            <UnstyledButton
-                                className={classes.popoverButton}
-                                ref={rippleSecond}
-                                onPointerDown={eventSecond}
-                                onClick={() => {
-                                    openSettings()
-                                    setExpanded(!expanded)
-                                }}
-                                p={rem(8)}
-                            >
-                                <Group align="center">
-                                    <IconSettings stroke={1.5} />
-                                    <Text className={classes.text}>Настройки</Text>
-                                </Group>
-                            </UnstyledButton>
-                            <SignOutButton>
-                                <UnstyledButton
-                                    className={classes.popoverButton}
-                                    ref={rippleThird}
-                                    onPointerDown={eventThird}
-                                    onClick={() => {
-                                        setExpanded(!expanded)
-                                        NProgress.start()
-                                        NProgress.done()
-                                    }}
-                                    p={rem(8)}
-                                >
-                                    <Group align="center">
-                                        <IconLogout stroke={1.5} />
-                                        <Text className={classes.text}>Выйти</Text>
-                                    </Group>
-                                </UnstyledButton>
-                            </SignOutButton>
-                        </Stack>
-                    </SignedIn>
-                    <SignedOut>
-                        <Stack p={rem(8)} gap={0}>
-                            <Title className={classes.title} pb={rem(8)} order={2}>Аккаунт</Title>
-                            <UnstyledButton
-                                className={classes.popoverButton}
-                                ref={rippleFirst}
-                                onPointerDown={eventFirst}
-                                onClick={() => {
-                                    setExpanded(!expanded)
-                                    openSignIn()
-                                }}
-                                p={rem(8)}
-                            >
-                                <Group align="center">
-                                    <IconLogin stroke={1.5}/>
-                                    <Text className={classes.text}>Войти</Text>
-                                </Group>
-                            </UnstyledButton>
-                            <UnstyledButton
-                                className={classes.popoverButton}
-                                ref={rippleSecond}
-                                onPointerDown={eventSecond}
-                                onClick={() => {
-                                    setExpanded(!expanded)
-                                    openSignUp()
-                                }}
-                                p={rem(8)}
-                            >
-                                <Group align="center">
-                                    <IconCloudLockOpen stroke={1.5} />
-                                    <Text className={classes.text}>Зарегистрироваться</Text>
-                                </Group>
-                            </UnstyledButton>
-                        </Stack>
-                    </SignedOut>
-                </>
-            )
-            break
+            return <AccountButton link={link} />
         case "search":
             content = (
                 <>
