@@ -37,6 +37,8 @@ const rippleColor = {
 }
 
 export default function SideBarButton({ link }: { link: SideBarLink }) {
+
+
     const { user } = useUser();
     const [rippleFirst, eventFirst] = useRipple(rippleColor);
     const [rippleSecond, eventSecond] = useRipple(rippleColor);
