@@ -67,6 +67,8 @@
 
 ## ✅ To-Do List
 
+- [ ] Add the option to `.env` to use a database based on value
+
 - [ ] Add option to download anime using torrent or directly from website
 
 - [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
@@ -114,7 +116,7 @@ You can use Neon Serverless DB as a database. If you are going to use local Post
 
 3. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
 
-> Database configuration with: 2. local PostgreSQL
+> (Didn't test yet) Database configuration with: 2. local PostgreSQL
 
 You can use local PostgreSQL as a database. If you are going to use Neon Serverless database, then skip this configuration
 
