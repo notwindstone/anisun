@@ -2,11 +2,11 @@
     position: absolute;
     user-select: none;
     margin-right: 1rem;
-    outline: rem(2px) solid #00000000;
-    outline-offset: rem(-2px);
+    outline: rem(4px) solid #00000000;
+    outline-offset: rem(-3px);
 
     @mixin hover {
-        outline: rem(2px) solid var(--animeth-accent-color);
+        outline: rem(4px) solid var(--mantine-color-violet-4);
     }
 }
 

@@ -3,7 +3,7 @@
 }
 
 .list {
-    background: alpha(var(--mantine-color-default-hover), 0.5);
+    background: darken(var(--mantine-color-default-hover), 0.05);
     border-radius: var(--mantine-radius-md);
     padding: rem(4px);
 }
@@ -27,7 +27,7 @@
 
     &:where([data-active]) {
         color: var(--animeth-text-contrast-color);
-        background: var(--mantine-color-default-hover);
+        background: lighten(var(--mantine-color-default-hover), 0.1);
 
         &:before {
             background: var(--mantine-color-default-color);

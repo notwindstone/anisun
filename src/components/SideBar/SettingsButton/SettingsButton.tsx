@@ -6,8 +6,12 @@ import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeContr
 
 export default function SettingsButton() {
     const [activeTab, setActiveTab] = useState<string | null>('general');
-    const [rippleGeneral, eventGeneral] = useRipple();
-    const [rippleAbout, eventAbout] = useRipple();
+    const [rippleGeneral, eventGeneral] = useRipple({
+        color: "var(--animeth-ripple-color)",
+    });
+    const [rippleAbout, eventAbout] = useRipple({
+        color: "var(--animeth-ripple-color)",
+    });
     const valueGeneral = 'general'
     const valueAbout = 'about'
 

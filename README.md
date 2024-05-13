@@ -49,7 +49,7 @@
 
 ## ⭐ Features
 
-* Watch anime with subtitles or dubbing
+* Watch anime with subtitles or dubbing (only on Russian)
 
 * Download anime using torrent or directly from website
 

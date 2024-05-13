@@ -25,7 +25,7 @@
     transition: 150ms ease;
 
     @mixin hover {
-        background: alpha(var(--mantine-color-default-hover), 0.5);
+        background: darken(var(--mantine-color-default-hover), 0.05);
     }
 }
 
