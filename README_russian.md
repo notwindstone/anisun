@@ -67,6 +67,8 @@
 
 ## ✅ Список задач
 
+- [ ] Добавить возможность выбирать базу данных в `.env.local`
+
 - [ ] Добавить возможность загрузки аниме с торрента или напрямую через сайт
 
 - [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
@@ -84,35 +86,53 @@
 <details>
 <summary>Раскрыть шаги</summary>
 
-```bash
-git clone https://github.com/windstone-aristotle-yellow/animeth
-```
+> Клонирование репозитория
+> 
+1. Клонируйте этот репозиторий, введя `git clone https://github.com/windstone-aristotle-yellow/animeth`
 
-1. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
+2. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
 
-2. Зарегистрируйтесь на https://clerk.com
+> Настройка Clerk auth
 
-3. Зайдите в Панель управления (Dashboard) Clerk и создайте новое приложение
+1. Зарегистрируйтесь на https://clerk.com
 
-4. Перейдите в пункт **API Keys** в левом меню и скопируйте **Publishable key** (Пример: `pk_test_qwertyuiop1234567890`)
+2. Зайдите в Панель управления (Dashboard) Clerk и создайте новое приложение
 
-5. Вставьте **Publishable key** в строку `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` в файле `.env.local`
+3. Перейдите в пункт **API Keys** в левом меню и скопируйте **Publishable key** (Пример: `pk_test_qwertyuiop1234567890`)
 
-6. Перейдите в пункт **API Keys** в левом меню и скопируйте **Secret keys** (Пример: `sk_test_qwertyuiop1234567890`)
+4. Вставьте **Publishable key** в строку `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` в файле `.env.local`
 
-7. Вставьте **Publishable key** в строку `CLERK_SECRET_KEY` в файле `.env.local`
+5. Перейдите в пункт **API Keys** в левом меню и скопируйте **Secret keys** (Пример: `sk_test_qwertyuiop1234567890`)
 
-8. Зарегистрируйтесь на https://neon.tech/ и создайте там новый проект
+6. Вставьте **Publishable key** в строку `CLERK_SECRET_KEY` в файле `.env.local`
 
-9. Перейдите в Панель управления (Dashboard) Neon DB и скопируйте **Connection string** (Пример: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
+> Настройка базы данных: 1. Neon Serverless DB
 
-10. Вставьте **Connection string** в строку `NEON_DATABASE_URL` в файле `.env.local`
+Вы можете использовать Neon Serverless DB в качестве базы данных. Если вы собираетесь использовать локальный PostgreSQL, то перейдите к следующему этапу 
 
-11. (Опционально) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
+1. Зарегистрируйтесь на https://neon.tech/ и создайте там новый проект
 
-12. Запустите команду `npm install` для того, чтобы установить все зависимости
+2. Перейдите в Панель управления (Dashboard) Neon DB и скопируйте **Connection string** (Пример: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
 
-13. Готово!
+3. Вставьте **Connection string** в строку `NEON_DATABASE_URL` в файле `.env.local`
+
+> (Не протестировано) Настройка базы данных: 2. Локальный PostgreSQL
+
+Вы можете использовать локальный PostgreSQL в качестве базы данных. Если вы собираетесь использовать базу данных Neon Serverless, то перейдите к следующему этапу
+
+1. (Временно) Перейдите в `src/db/drizzle.ts` и уберите символы `//`, чтобы закомментировать код с конфигурацией Neon Serverless DB
+
+2. (Временно) Раскомментируйте строки кода с конфигурацией PostgreSQL DB
+
+3. Откройте файл `.env.local` и вставьте адрес базы данных в `POSTGRESQL_DATABASE_URL`
+
+> Последние штрихи
+
+1. (Опционально) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
+
+2. Запустите команду `npm install` для того, чтобы установить все зависимости
+
+3. Готово!
 
 </details>
 

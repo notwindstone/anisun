@@ -116,7 +116,7 @@ You can use Neon Serverless DB as a database. If you are going to use local Post
 
 3. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
 
-> (Didn't test yet) Database configuration with: 2. local PostgreSQL
+> (Didn't test yet) Database configuration with: 2. Local PostgreSQL
 
 You can use local PostgreSQL as a database. If you are going to use Neon Serverless database, then skip this configuration
 
@@ -124,7 +124,7 @@ You can use local PostgreSQL as a database. If you are going to use Neon Serverl
 
 2. (Temporary) Now uncomment out the PostgreSQL DB configuration code 
 
-3. Go to the `.env.local` file and paste your **Connection string** to `POSTGRESQL_DATABASE_URL`
+3. Go to the `.env.local` file and paste your connection string to `POSTGRESQL_DATABASE_URL`
 
 > Final steps
 
