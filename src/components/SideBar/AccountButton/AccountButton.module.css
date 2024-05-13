@@ -1,0 +1,81 @@
+.button {
+    z-index: 1000;
+    width: rem(64px);
+    height: rem(64px);
+    border-radius: var(--mantine-radius-md);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    transition: 150ms ease;
+
+    @mixin hover {
+        background: darken(var(--mantine-color-default-hover), 0.05);
+    }
+}
+
+.activeButton {
+    background: darken(var(--mantine-color-default-hover), 0.05);
+
+    @mixin hover {
+        background: darken(var(--mantine-color-default-hover), 0.05);
+    }
+}
+
+.expandedButton {
+    width: rem(288px);
+}
+
+.iconWrapper {
+    min-width: rem(64px);
+}
+
+.chevron {
+}
+
+.chevronRotated {
+    transform: rotate(180deg) !important;
+}
+
+.dropdown {
+    border-radius: rem(12px);
+    background: alpha(var(--animeth-background-color), 0.6);
+    backdrop-filter: blur(rem(16px));
+}
+
+.modal {
+    padding: rem(32px) rem(32px) rem(48px);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 32000;
+    background: #00000088;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.closeButton {
+    flex-shrink: 0;
+}
+
+.avatar {
+    cursor: pointer;
+    transition: 150ms ease;
+
+    @mixin hover {
+        filter: brightness(75%);
+    }
+}
+
+.popoverButton {
+    border-radius: var(--mantine-radius-xl);
+    transition: 150ms ease;
+
+    @mixin hover {
+        background: darken(var(--mantine-color-default-hover), 0.05);
+    }
+}
+
