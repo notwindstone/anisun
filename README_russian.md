@@ -196,3 +196,11 @@ npm run start
 ## 📜 Лицензия
 
 [![GitHub](https://img.shields.io/github/license/windstone-aristotle-yellow/Animeth?style=for-the-badge)](https://github.com/windstone-aristotle-yellow/Animeth/blob/main/LICENSE)
+
+## 🌐 Ресурсы
+
+* [Refactoring Hell](https://wiki.c2.com/?RefactoringHell)
+
+* [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+
+* [Realtime Colors](https://www.realtimecolors.com)
