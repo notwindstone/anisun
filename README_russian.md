@@ -137,11 +137,26 @@
 </details>
 
 > [!IMPORTANT]
-> Вот так должен выглядеть файл `.env.local` после всех махинаций выше
+> Вот так должен выглядеть файл `.env.local` после всех махинаций выше с конфигурацией базы данных Neon Serverless DB 
 
 ```text
 NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
+CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+KODIK_TOKEN='qwertyuiop1234567890'
+```
+
+> [!IMPORTANT]
+> Вот так должен выглядеть файл `.env.local` после всех махинаций выше с конфигурацией базы данных локального PostgreSQL
+
+```text
+NEON_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
+POSTGRESQL_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
 CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
@@ -221,6 +236,6 @@ npm run start
 
 * [Refactoring Hell](https://wiki.c2.com/?RefactoringHell)
 
-* [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+* [Соглашение о коммитах](https://www.conventionalcommits.org/ru/v1.0.0/)
 
 * [Realtime Colors](https://www.realtimecolors.com)
