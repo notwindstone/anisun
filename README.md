@@ -84,44 +84,77 @@
 <details>
 <summary>Expand steps</summary>
 
-```bash
-git clone https://github.com/windstone-aristotle-yellow/animeth
-```
+> Cloning the repository
 
-1. Rename the `.env.example` file in the root directory to `.env.local`
+1. Clone this repository by running `git clone https://github.com/windstone-aristotle-yellow/animeth`
 
-2. Sign up for a Clerk account at https://clerk.com
+2. Rename the `.env.example` file in the root directory to `.env.local`
 
-3. Go to the Clerk dashboard and create an application
+> Configuring Clerk auth
 
-4. Go to **API Keys** in your sidebar and copy **Publishable key** (Example: `pk_test_qwertyuiop1234567890`)
+1. Sign up for a Clerk account at https://clerk.com
 
-5. Paste your **Publishable key** to `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` in the `.env.local` file
+2. Go to the Clerk dashboard and create an application
 
-6. Go to **API Keys** in your sidebar and copy **Secret keys** (Example: `sk_test_qwertyuiop1234567890`)
+3. Go to **API Keys** in your sidebar and copy **Publishable key** (Example: `pk_test_qwertyuiop1234567890`)
 
-7. Paste your **Publishable key** to `CLERK_SECRET_KEY` in the `.env.local` file
+4. Paste your **Publishable key** to `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` in the `.env.local` file
 
-8. Sign up to Neon DB at https://neon.tech/ to access serverless Postgres by creating a project
+5. Go to **API Keys** in your sidebar and copy **Secret keys** (Example: `sk_test_qwertyuiop1234567890`)
 
-9. Go to the Neon dashboard and copy **Connection string** (Example: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
+6. Paste your **Publishable key** to `CLERK_SECRET_KEY` in the `.env.local` file
 
-10. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
+> Database configuration with: 1. Neon Serverless DB
 
-11. (Optional) If you want to watch anime in Kodik Player too, then obtain a token from http://kodik.cc/ (you need to contact them via email) Otherwise, only players based on the Anilibria API will work
+You can use Neon Serverless DB as a database. If you are going to use local PostgreSQL database, then skip this configuration
 
-12. Run `npm install` to install the required dependencies
+1. Sign up to Neon DB at https://neon.tech/ to access serverless Postgres by creating a project
 
-13. Done! Your web app is ready to start
+2. Go to the Neon dashboard and copy **Connection string** (Example: `postgres://postgres:adminadmin@0.0.0.0:5432/db?sslmode=require`)
+
+3. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
+
+> Database configuration with: 2. local PostgreSQL
+
+You can use local PostgreSQL as a database. If you are going to use Neon Serverless database, then skip this configuration
+
+1. (Temporary) Go to the `src/db/drizzle.ts` path and remove `//` symbols to comment out the Neon Serverless DB configuration code
+
+2. (Temporary) Now uncomment out the PostgreSQL DB configuration code 
+
+3. Go to the `.env.local` file and paste your **Connection string** to `POSTGRESQL_DATABASE_URL`
+
+> Final steps
+
+1. (Optional) If you want to watch anime in Kodik Player too, then obtain a token from http://kodik.cc/ (you need to contact them via email) Otherwise, only players based on the Anilibria API will work
+
+2. Run `npm install` to install the required dependencies
+
+3. Done! Your web app is ready to start
 
 </details>
 
 > [!IMPORTANT]
-> This is what the `.env.local` file should look like after all the changes above
+> This is what the `.env.local` file should look like with Neon Serverless DB configuration
 
 ```text
 NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
+CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
+KODIK_TOKEN='qwertyuiop1234567890'
+```
+
+> [!IMPORTANT]
+> This is what the `.env.local` file should look like with PostgreSQL DB configuration
+
+```text
+NEON_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
+POSTGRESQL_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
 CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
 NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
