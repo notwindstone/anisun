@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import {ColorSchemeScript, createTheme, Group, MantineProvider} from "@mantine/core";
+import {ColorSchemeScript, createTheme, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import NextTopLoader from "nextjs-toploader";
@@ -10,11 +10,7 @@ import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
-import MobileModal from "@/components/MobileModal/MobileModal";
-import Main from "@/components/Main/Main";
 import './global.css'
-import SideBar from "@/components/SideBar/SideBar";
-import NavigationBar from "@/components/NavigationBar/NavigationBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -60,17 +56,8 @@ export default function RootLayout({
                     />
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
-                            <Notifications zIndex={30000} limit={3} />
-                            <Group className="root-group" gap={0} wrap="nowrap">
-                                <SideBar />
-                                <div className="app-wrapper">
-                                    <NavigationBar />
-                                    <Main>
-                                        {children}
-                                    </Main>
-                                </div>
-                            </Group>
-                            <MobileModal />
+                            <Notifications zIndex={10000} limit={3} />
+                            {children}
                         </MantineProvider>
                     </TanstackQueryProviders>
                 </body>
