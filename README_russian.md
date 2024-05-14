@@ -26,7 +26,7 @@
 <img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
 </div>
 
-> [!IMPORTANT]  
+> [!NOTE]  
 > Сайт ещё не доделан. Другие скриншоты появятся позже.
 
 ## ⚙️ Набор технологий
