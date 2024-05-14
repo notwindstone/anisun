@@ -16,6 +16,9 @@
 [![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=flat&logo=telegram)](https://t.me/democracysucks)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/JhmkZDScfg)
 
+> [!IMPORTANT]
+> Сайт сейчас находится в процессе рефакторинга
+
 ## 📱 Скриншоты
 
 <div align="center">
