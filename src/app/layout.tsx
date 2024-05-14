@@ -5,7 +5,6 @@ import {ColorSchemeScript, createTheme, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import NextTopLoader from "nextjs-toploader";
-import TanstackQueryProviders from "@/utils/TanstackQueryProvider";
 import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
@@ -54,12 +53,10 @@ export default function RootLayout({
                       height={4}
                       zIndex={100000}
                     />
-                    <TanstackQueryProviders>
-                        <MantineProvider theme={theme} defaultColorScheme="dark">
-                            <Notifications zIndex={10000} limit={3} />
-                            {children}
-                        </MantineProvider>
-                    </TanstackQueryProviders>
+                    <MantineProvider theme={theme} defaultColorScheme="dark">
+                        <Notifications zIndex={10000} limit={3} />
+                        {children}
+                    </MantineProvider>
                 </body>
             </html>
         </ClerkProvider>
