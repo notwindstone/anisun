@@ -204,6 +204,13 @@ Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment)
 
 </details>
 
+### Termux
+
+Using andronix
+
+> [!NOTE]  
+> В процессе заполнения...
+
 ## 💬 Contact
 
 ### Directly
