@@ -1,7 +1,6 @@
 "use client"
 
 import {CustomThemeContext} from "@/utils/Contexts";
-import {useState} from "react";
 import {useLocalStorage} from "@mantine/hooks";
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 import BaseButton from "@/components/BaseButton/BaseButton";
