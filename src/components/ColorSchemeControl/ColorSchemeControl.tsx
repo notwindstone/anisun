@@ -1,4 +1,4 @@
-import {CheckIcon, ColorSwatch, MantineColor, rem} from "@mantine/core";
+import {CheckIcon, ColorSwatch, MantineColor} from "@mantine/core";
 import {useContext, useState} from "react";
 import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import classes from './ColorSchemeControl.module.css';
@@ -34,7 +34,7 @@ export default function ColorSchemeControl() {
             <ColorSwatch
                 key={color}
                 component="button"
-                color={color}
+                color={`var(--mantine-color-${color}-6)`}
                 onClick={() => setColor(color)}
                 className={classes.colorSwatch}
             >
