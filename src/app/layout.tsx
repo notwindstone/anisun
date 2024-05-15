@@ -19,7 +19,6 @@ const description = "Сайт для онлайн просмотра аниме 
 
 const theme = createTheme({
     defaultRadius: "xl",
-    primaryColor: 'violet',
 })
 
 export const metadata: Metadata = {
