@@ -6,6 +6,7 @@ import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeContr
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 import defaultTheme from '@/configs/defaultTheme.json';
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 
 export default function SideBar() {
     const [theme, setTheme] = useLocalStorage<ThemeType>({
@@ -18,6 +19,9 @@ export default function SideBar() {
 
     return (
         <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
+            <DecoratedButton>
+                Кастомная кнопка в сайдбаре (в контексте)
+            </DecoratedButton>
             <ThemeSchemeControl />
             <ColorSchemeControl />
         </CustomThemeContext.Provider>

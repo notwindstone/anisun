@@ -25,7 +25,7 @@ export default function DecoratedButton({ children, onClick, rippleColor, ...pro
                 }}
                 ref={rippleRef}
                 onPointerDown={rippleEvent}
-                onClick={() => setTheme({ color: "violet" })}
+                onClick={onClick}
             >
                 {children}
             </Button>
