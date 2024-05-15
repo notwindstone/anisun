@@ -1,18 +1,14 @@
 "use client"
 
-import {useLocalStorage} from "@mantine/hooks";
+import {useContext} from "react";
+import {CustomThemeContext} from "@/utils/Contexts";
 
 export default function BaseButton() {
-    const [value, setValue] = useLocalStorage({
-        key: 'settings',
-        defaultValue: {
-            color: "dark"
-        },
-    });
+    const { theme } = useContext(CustomThemeContext);
 
     return (
         <>
-            {value.color}
+            {theme.color}
         </>
     )
 }
