@@ -1,6 +1,5 @@
 import SideBar from "@/components/SideBar/SideBar";
-import {Button, Container} from "@mantine/core";
-import Card from "@/components/Carousel/Card/Card";
+import {Button} from "@mantine/core";
 
 export default async function Home() {
 
@@ -10,7 +9,7 @@ export default async function Home() {
             1234
             <Button>Кнопка вне контекста</Button>
             <SideBar />
-            <Card />
+
         </div>
     )
 }
