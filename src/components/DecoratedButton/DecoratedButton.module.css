@@ -2,6 +2,6 @@
     transition: 150ms ease;
 
     &:active {
-        transform: translateY(0) scale(98%) !important;
+        transform: translateY(0) scale(97%) !important;
     }
 }

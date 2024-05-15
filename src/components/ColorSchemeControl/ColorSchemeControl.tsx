@@ -1,34 +1,52 @@
-"use client"
+import {CheckIcon, ColorSwatch, MantineColor, rem} from "@mantine/core";
+import {useContext, useState} from "react";
+import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 
-import {ActionIcon, useComputedColorScheme, useMantineColorScheme} from "@mantine/core";
-import {IconSun, IconMoon} from "@tabler/icons-react";
-import cx from 'clsx';
-import classes from "./ColorSchemeControl.module.css";
-import {useContext} from "react";
-import {CustomThemeContext} from "@/utils/Contexts";
+const MANTINE_COLORS: MantineColor[] = [
+    "dark",
+    "gray",
+    "red",
+    "pink",
+    "grape",
+    "violet",
+    "indigo",
+    "blue",
+    "cyan",
+    "teal",
+    "green",
+    "lime",
+    "yellow",
+    "orange"
+]
+const COLOR_SWATCH_STYLES = { color: '#fff', cursor: 'pointer' }
+const CHECK_ICON_STYLES = { width: rem(12), height: rem(12) }
 
 export default function ColorSchemeControl() {
-    const { setTheme } = useContext(CustomThemeContext);
-    const { setColorScheme } = useMantineColorScheme();
-    const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
+    const { theme, setTheme } = useContext(CustomThemeContext);
+    const [checkedColor, setCheckedColor] = useState(theme.color);
+
+    function setColor(value: MantineColor) {
+        setCheckedColor(value)
+        setTheme({ color: value, breadcrumb: theme.breadcrumb })
+    }
+
+    const colorSwatches = MANTINE_COLORS.map((color) => {
+        return (
+            <ColorSwatch
+                key={color}
+                component="button"
+                color={color}
+                onClick={() => setColor(color)}
+                style={COLOR_SWATCH_STYLES}
+            >
+                {checkedColor === color && <CheckIcon style={CHECK_ICON_STYLES} />}
+            </ColorSwatch>
+        )
+    })
 
     return (
         <>
-            <ActionIcon
-                onClick={() => {
-                    setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
-                    setTheme({
-                        color: "red",
-                        breadcrumb: false
-                    })
-                }}
-                variant="light"
-                size="lg"
-                aria-label="Toggle color scheme"
-            >
-                <IconSun className={cx(classes.icon, classes.light)} stroke={1.5} />
-                <IconMoon className={cx(classes.icon, classes.dark)} stroke={1.5} />
-            </ActionIcon>
+            {colorSwatches}
         </>
     )
 }

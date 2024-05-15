@@ -1,7 +1,7 @@
 "use client"
 
 import {useContext} from "react";
-import {CustomThemeContext} from "@/utils/Contexts";
+import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import {Button} from "@mantine/core";
 import useRipple from "use-ripple-hook";
 import classes from './DecoratedButton.module.css';

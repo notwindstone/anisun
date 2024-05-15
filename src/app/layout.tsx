@@ -10,6 +10,7 @@ import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
 import './global.css'
+import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,10 +54,12 @@ export default function RootLayout({
                       height={4}
                       zIndex={100000}
                     />
-                    <MantineProvider theme={theme} defaultColorScheme="dark">
-                        <Notifications zIndex={10000} limit={3} />
-                        {children}
-                    </MantineProvider>
+                    <TanstackQueryProviders>
+                        <MantineProvider theme={theme} defaultColorScheme="dark">
+                            <Notifications zIndex={10000} limit={3} />
+                            {children}
+                        </MantineProvider>
+                    </TanstackQueryProviders>
                 </body>
             </html>
         </ClerkProvider>

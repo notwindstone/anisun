@@ -1,8 +1,8 @@
 "use client"
 
-import {CustomThemeContext} from "@/utils/Contexts";
+import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import {useLocalStorage} from "@mantine/hooks";
-import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
+import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 
@@ -17,11 +17,8 @@ export default function SideBar() {
 
     return (
         <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
-            <ColorSchemeControl />
-            <DecoratedButton
-            >
-                Сменить цвет
-            </DecoratedButton>
+            <ThemeSchemeControl />
+
         </CustomThemeContext.Provider>
     )
 }
