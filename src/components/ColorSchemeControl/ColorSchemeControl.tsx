@@ -1,6 +1,7 @@
 import {CheckIcon, ColorSwatch, MantineColor, rem} from "@mantine/core";
 import {useContext, useState} from "react";
 import {CustomThemeContext} from "@/utils/Contexts/Contexts";
+import classes from './ColorSchemeControl.module.css';
 
 const MANTINE_COLORS: MantineColor[] = [
     "dark",
@@ -18,8 +19,6 @@ const MANTINE_COLORS: MantineColor[] = [
     "yellow",
     "orange"
 ]
-const COLOR_SWATCH_STYLES = { color: '#fff', cursor: 'pointer' }
-const CHECK_ICON_STYLES = { width: rem(12), height: rem(12) }
 
 export default function ColorSchemeControl() {
     const { theme, setTheme } = useContext(CustomThemeContext);
@@ -37,9 +36,13 @@ export default function ColorSchemeControl() {
                 component="button"
                 color={color}
                 onClick={() => setColor(color)}
-                style={COLOR_SWATCH_STYLES}
+                className={classes.colorSwatch}
             >
-                {checkedColor === color && <CheckIcon style={CHECK_ICON_STYLES} />}
+                {
+                    checkedColor === color && (
+                        <CheckIcon className={classes.checkIcon} />
+                    )
+                }
             </ColorSwatch>
         )
     })

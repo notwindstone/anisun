@@ -1,0 +1,9 @@
+.colorSwatch {
+    color: #fff;
+    cursor: pointer;
+}
+
+.checkIcon {
+    width: rem(12px);
+    height: rem(12px);
+}
