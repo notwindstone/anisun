@@ -8,7 +8,7 @@ import classes from './DecoratedButton.module.css';
 import {DecoratedButtonInterface} from "@/types/DecoratedButton/DecoratedButton.interface";
 
 export default function DecoratedButton({ children, onClick, rippleColor, ...props }: DecoratedButtonInterface) {
-    const { theme, setTheme } = useContext(CustomThemeContext);
+    const { theme } = useContext(CustomThemeContext);
     const [rippleRef, rippleEvent] = useRipple({
         color: rippleColor ?? 'var(--animeth-ripple-color)'
     });

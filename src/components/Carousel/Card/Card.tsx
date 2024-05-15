@@ -1,5 +1,3 @@
-"use client"
-
 import {Badge, Flex, Image, Overlay, Paper, Title} from "@mantine/core";
 import classes from './Card.module.css'
 import NextImage from "next/image";
@@ -10,7 +8,7 @@ import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import defaultTheme from "@/configs/defaultTheme.json";
 
 export default function Card() {
-    const [theme, setTheme] = useLocalStorage<ThemeType>({
+    const [theme] = useLocalStorage<ThemeType>({
         key: 'settings',
         defaultValue: {
             color: defaultTheme.primaryColor,
