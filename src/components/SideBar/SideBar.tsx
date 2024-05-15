@@ -9,7 +9,8 @@ export default function SideBar() {
     const [theme, setTheme] = useLocalStorage({
         key: 'settings',
         defaultValue: {
-            color: "dark"
+            color: "violet",
+            breadcrumb: true
         },
     })
 

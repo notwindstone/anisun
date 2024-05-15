@@ -16,8 +16,10 @@ export default function ColorSchemeControl() {
         <>
             <ActionIcon
                 onClick={() => {
-                        setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
-                        setTheme({color: computedColorScheme === 'light' ? 'dark' : 'light'
+                    setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
+                    setTheme({
+                        color: "red",
+                        breadcrumb: false
                     })
                 }}
                 variant="light"

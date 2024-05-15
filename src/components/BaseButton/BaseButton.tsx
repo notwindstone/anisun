@@ -9,6 +9,7 @@ export default function BaseButton() {
     return (
         <>
             {theme.color}
+            {theme.breadcrumb}
         </>
     )
 }
