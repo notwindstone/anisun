@@ -1,8 +1,8 @@
 import {createContext} from "react";
-import {ThemeContextType} from "@/types/ThemeContext/ThemeContext.type";
+import {CustomThemeContextType} from "@/types/CustomThemeContext/CustomThemeContext.type";
 import defaultTheme from '@/configs/defaultTheme.json';
 
-export const CustomThemeContext = createContext<ThemeContextType>({
+export const CustomThemeContext = createContext<CustomThemeContextType>({
     theme: {
         color: defaultTheme.primaryColor,
         breadcrumb: defaultTheme.breadcrumb

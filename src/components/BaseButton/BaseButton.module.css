@@ -1,0 +1,13 @@
+.root {
+    transition: 150ms ease;
+
+    &:active {
+        transform: scale(95%);
+    }
+}
+
+.label, .inner {
+    &:active {
+        transform: none !important;
+    }
+}
