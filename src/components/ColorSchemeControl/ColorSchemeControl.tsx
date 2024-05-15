@@ -1,5 +1,5 @@
 import {CheckIcon, ColorSwatch, MantineColor} from "@mantine/core";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import classes from './ColorSchemeControl.module.css';
 
@@ -28,6 +28,10 @@ export default function ColorSchemeControl() {
         setCheckedColor(value)
         setTheme({ color: value, breadcrumb: theme.breadcrumb })
     }
+
+    useEffect(() => {
+        setCheckedColor(theme.color)
+    }, [theme]);
 
     const colorSwatches = MANTINE_COLORS.map((color) => {
         return (
