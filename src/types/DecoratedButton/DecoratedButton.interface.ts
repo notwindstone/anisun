@@ -1,8 +1,8 @@
 import React from "react";
 import {ButtonProps} from "@mantine/core";
 
-export type DecoratedButtonType = {
+export interface DecoratedButtonInterface extends ButtonProps {
     children?: React.ReactNode;
     onClick?: () => void;
-    props?: ButtonProps;
+    rippleColor?: string;
 }

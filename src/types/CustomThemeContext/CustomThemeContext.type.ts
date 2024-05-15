@@ -1,9 +1,6 @@
-import {MantineColor} from "@mantine/core";
+import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 
 export type CustomThemeContextType = {
-    theme: {
-        color?: MantineColor;
-        breadcrumb?: boolean;
-    };
-    setTheme: ({ color, breadcrumb }: { color?: MantineColor, breadcrumb?: boolean }) => void;
+    theme: ThemeType;
+    setTheme: ({ color, breadcrumb }: ThemeType) => void;
 }

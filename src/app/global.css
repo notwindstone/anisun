@@ -1,0 +1,9 @@
+:root {
+    @mixin light-root {
+        --animeth-ripple-color: #0000004D;
+    }
+
+    @mixin dark-root {
+        --animeth-ripple-color: #FFFFFF4C;
+    }
+}

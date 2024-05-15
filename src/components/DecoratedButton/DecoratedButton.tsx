@@ -4,12 +4,14 @@ import {useContext} from "react";
 import {CustomThemeContext} from "@/utils/Contexts";
 import {Button} from "@mantine/core";
 import useRipple from "use-ripple-hook";
-import classes from './BaseButton.module.css';
-import {DecoratedButtonType} from "@/types/DecoratedButton/DecoratedButton.type";
+import classes from './DecoratedButton.module.css';
+import {DecoratedButtonInterface} from "@/types/DecoratedButton/DecoratedButton.interface";
 
-export default function BaseButton({ children, onClick, ...props }: DecoratedButtonType) {
+export default function DecoratedButton({ children, onClick, rippleColor, ...props }: DecoratedButtonInterface) {
     const { theme, setTheme } = useContext(CustomThemeContext);
-    const [rippleRef, rippleEvent] = useRipple();
+    const [rippleRef, rippleEvent] = useRipple({
+        color: rippleColor ?? 'var(--animeth-ripple-color)'
+    });
 
     return (
         <>
@@ -23,7 +25,7 @@ export default function BaseButton({ children, onClick, ...props }: DecoratedBut
                 }}
                 ref={rippleRef}
                 onPointerDown={rippleEvent}
-                onClick={() => setTheme({ color: "dark" })}
+                onClick={() => setTheme({ color: "violet" })}
             >
                 {children}
             </Button>
