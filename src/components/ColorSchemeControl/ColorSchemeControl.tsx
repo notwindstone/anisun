@@ -4,6 +4,7 @@ import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import classes from './ColorSchemeControl.module.css';
 
 const MANTINE_COLORS: MantineColor[] = [
+    "black",
     "dark",
     "gray",
     "red",
@@ -34,11 +35,13 @@ export default function ColorSchemeControl() {
     }, [theme]);
 
     const colorSwatches = MANTINE_COLORS.map((color) => {
+        const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
+
         return (
             <ColorSwatch
                 key={color}
                 component="button"
-                color={`var(--mantine-color-${color}-6)`}
+                color={mantineColor}
                 onClick={() => setColor(color)}
                 className={classes.colorSwatch}
             >
