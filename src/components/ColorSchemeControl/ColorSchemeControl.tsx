@@ -1,4 +1,4 @@
-import {CheckIcon, ColorSwatch, MantineColor} from "@mantine/core";
+import {CheckIcon, ColorSwatch, MantineColor, Tooltip} from "@mantine/core";
 import {useContext, useEffect, useState} from "react";
 import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import classes from './ColorSchemeControl.module.css';
@@ -38,19 +38,25 @@ export default function ColorSchemeControl() {
         const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
 
         return (
-            <ColorSwatch
+            <Tooltip
                 key={color}
-                component="button"
-                color={mantineColor}
-                onClick={() => setColor(color)}
-                className={classes.colorSwatch}
+                label={color}
+                position="right"
+                transitionProps={{ transition: 'pop', duration: 300 }}
             >
-                {
-                    checkedColor === color && (
-                        <CheckIcon className={classes.checkIcon} />
-                    )
-                }
-            </ColorSwatch>
+                <ColorSwatch
+                    component="button"
+                    color={mantineColor}
+                    onClick={() => setColor(color)}
+                    className={classes.colorSwatch}
+                >
+                    {
+                        checkedColor === color && (
+                            <CheckIcon className={classes.checkIcon} />
+                        )
+                    }
+                </ColorSwatch>
+            </Tooltip>
         )
     })
 
