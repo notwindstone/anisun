@@ -11,6 +11,8 @@ import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
 import './global.css'
 import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
+import {readLocalStorageValue} from "@mantine/hooks";
+import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 
 const inter = Inter({ subsets: ["latin"] });
 
