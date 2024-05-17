@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> В данный момент приложение переписывается. Ссылка на ветку: https://github.com/windstone-aristotle-yellow/animeth/tree/refactor
+
 <div align="center">
 
 <img width="160" height="160" align="center" src="public/favicon.png">
