@@ -1,0 +1,1 @@
+export type SortType = "all" | "announced" | "ongoing" | "released" | string
