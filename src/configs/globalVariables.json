@@ -5,9 +5,9 @@
       "label": "Все",
       "value": "all"
     },
-    "announced": {
+    "anons": {
       "label": "Анонсированные",
-      "value": "announced"
+      "value": "anons"
     },
     "ongoing": {
       "label": "В работе",

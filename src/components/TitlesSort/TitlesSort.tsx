@@ -6,7 +6,7 @@ import {useContext} from "react";
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 
 const ALL_TITLES = sorting.all;
-const ANNOUNCED_TITLES = sorting.announced;
+const ANNOUNCED_TITLES = sorting.anons;
 const ONGOING_TITLES = sorting.ongoing;
 const RELEASED_TITLES = sorting.released
 

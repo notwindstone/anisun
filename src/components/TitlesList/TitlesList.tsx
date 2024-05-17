@@ -14,13 +14,15 @@ export default function TitlesList() {
     const [sortingType, setSortingType] = useState<SortType>(ALL_TITLES.value);
     const { data, status } = useQuery({
         queryFn: async () => {
-            return await fetch('https://api.anilibria.tv/v3/title/search?search=' + sortingType + '&filter=id,code')
+            const animeStatus = sortingType === "all" ? "" : `status=${sortingType}&`
+
+            return await fetch(`https://shikimori.one/api/animes?order=ranked&${animeStatus}limit=5`)
                 .then(response => response.json())
         },
         queryKey: ["titlesList", sortingType]
     })
 
-    const titles = data?.list.map((title: { id: number }) => {
+    const titles = data?.map((title: { id: number }) => {
         return (
             <TitleCard key={title.id} title={title} />
         )

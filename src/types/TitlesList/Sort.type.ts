@@ -1,1 +1,1 @@
-export type SortType = "all" | "announced" | "ongoing" | "released" | string
+export type SortType = "all" | "anons" | "ongoing" | "released" | string
