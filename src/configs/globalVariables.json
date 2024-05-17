@@ -16,6 +16,10 @@
     "released": {
       "label": "Завершённые",
       "value": "released"
+    },
+    "unknown": {
+      "label": "Неизвестно",
+      "value": "unknown"
     }
   }
 }

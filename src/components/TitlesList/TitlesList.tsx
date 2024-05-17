@@ -5,6 +5,7 @@ import {useState} from "react";
 import { sorting } from '@/configs/globalVariables.json';
 import TitlesSort from "@/components/TitlesSort/TitlesSort";
 import {SortType} from "@/types/TitlesList/Sort.type";
+import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 
 const ALL_TITLES = sorting.all;
 
@@ -14,7 +15,7 @@ export default function TitlesList() {
     return (
         <TitlesSortContext.Provider value={{ sortingType: sortingType, setSortingType: setSortingType }}>
             <TitlesSort />
-            {sortingType}
+            {translateAnimeStatus(sortingType)}
         </TitlesSortContext.Provider>
     )
 }
