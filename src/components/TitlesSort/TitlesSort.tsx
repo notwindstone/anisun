@@ -1,10 +1,11 @@
 import {useState} from "react";
 import {SegmentedControl} from "@mantine/core";
+import { sorting } from '@/configs/globalVariables.json';
 
-const ALL_TITLES = { label: 'Все', value: 'all' }
-const ANNOUNCED_TITLES = { label: 'Анонсированные', value: 'anons' }
-const ONGOING_TITLES = { label: 'В работе', value: 'ongoing' }
-const RELEASED_TITLES = { label: 'Завершённые', value: 'released' }
+const ALL_TITLES = sorting.all;
+const ANNOUNCED_TITLES = sorting.announced;
+const ONGOING_TITLES = sorting.ongoing;
+const RELEASED_TITLES = sorting.released
 
 export default function TitlesSort() {
     const [sortingType, setSortingType] = useState<string>(ALL_TITLES.value);
