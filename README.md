@@ -1,3 +1,6 @@
+> [!IMPORTANT]  
+> The application is currently being refactored. Link to the branch: https://github.com/windstone-aristotle-yellow/animeth/tree/refactor
+
 <div align="center">
 
 <img width="160" height="160" align="center" src="public/favicon.png">
