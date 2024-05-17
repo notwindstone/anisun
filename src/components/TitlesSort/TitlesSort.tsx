@@ -1,6 +1,9 @@
-import {useState} from "react";
+"use client"
+
 import {SegmentedControl} from "@mantine/core";
 import { sorting } from '@/configs/globalVariables.json';
+import {useContext} from "react";
+import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 
 const ALL_TITLES = sorting.all;
 const ANNOUNCED_TITLES = sorting.announced;
@@ -8,10 +11,11 @@ const ONGOING_TITLES = sorting.ongoing;
 const RELEASED_TITLES = sorting.released
 
 export default function TitlesSort() {
-    const [sortingType, setSortingType] = useState<string>(ALL_TITLES.value);
+    const { sortingType, setSortingType } = useContext(TitlesSortContext);
 
     return (
         <SegmentedControl
+            withItemsBorders={false}
             value={sortingType}
             onChange={setSortingType}
             data={[

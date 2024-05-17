@@ -1,6 +1,7 @@
 import {createContext} from "react";
 import {CustomThemeContextType} from "@/types/CustomThemeContext/CustomThemeContext.type";
 import defaultTheme from '@/configs/defaultTheme.json';
+import { sorting } from '@/configs/globalVariables.json';
 
 export const CustomThemeContext = createContext<CustomThemeContextType>({
     theme: {
@@ -8,4 +9,9 @@ export const CustomThemeContext = createContext<CustomThemeContextType>({
         breadcrumb: defaultTheme.breadcrumb
     },
     setTheme: () => {}
+})
+
+export const TitlesSortContext = createContext({
+    sortingType: sorting.all.value,
+    setSortingType: () => {}
 })
