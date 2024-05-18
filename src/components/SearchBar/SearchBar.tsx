@@ -26,6 +26,8 @@ export default function SearchBar() {
                 variant="unstyled"
                 maxDropdownHeight={800}
                 data={
+                    // "label" property actually exists
+                    // @ts-ignore
                     [{ label: ' ', value: 'fetching', disabled: true }]
                 }
                 onChange={(event) => {
