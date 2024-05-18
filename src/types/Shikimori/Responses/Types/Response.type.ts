@@ -1,4 +1,4 @@
-import {AnimeType} from "@/types/Shikimori/Responses/Anime.type";
+import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 
 export type ResponseType = {
     data: {

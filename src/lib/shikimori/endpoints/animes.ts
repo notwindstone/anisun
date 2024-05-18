@@ -2,7 +2,7 @@ import axios from "axios";
 import {options} from "@/lib/shikimori/options";
 import {AnimesType} from "@/types/Shikimori/Queries/Animes.type";
 import {OptionType} from "@/types/Shikimori/Queries/Option.type";
-import {ResponseType} from "@/types/Shikimori/Responses/Response.type";
+import {ResponseType} from "@/types/Shikimori/Responses/Types/Response.type";
 
 export const animes = () => {
     const byId = async ({ ids, filter }: { ids: string, filter?: OptionType[] }) => {
