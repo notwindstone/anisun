@@ -1,7 +1,7 @@
-import {SortType} from "@/types/TitlesList/Sort.type";
 import {Dispatch, SetStateAction} from "react";
+import {StatusType} from "@/types/Shikimori/General/Status.type";
 
 export type TitlesListType = {
-    sortingType: SortType;
-    setSortingType: Dispatch<SetStateAction<SortType>>;
+    sortingType: StatusType;
+    setSortingType: Dispatch<SetStateAction<StatusType>>;
 }

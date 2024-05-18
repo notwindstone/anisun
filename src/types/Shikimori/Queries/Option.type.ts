@@ -1,4 +1,5 @@
-export type Option = "id"
+export type OptionType
+    = "id"
     | "malId"
     | "name"
     | "russian"

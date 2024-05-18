@@ -1,4 +1,6 @@
-export const options = ({ ids, search, limit, status, year, order, page, filter }: any) => {
+import {AnimesType} from "@/types/Shikimori/Queries/Animes.type";
+
+export const options = ({ ids, search, limit, status, year, order, page, filter }: AnimesType) => {
     function userFilterOptions() {
         if (!filter) {
             return

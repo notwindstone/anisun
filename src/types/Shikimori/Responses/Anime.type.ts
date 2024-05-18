@@ -1,0 +1,47 @@
+import {StatusType} from "@/types/Shikimori/General/Status.type";
+
+export type AnimeType = {
+    airedOn: IncompleteDateType | null;
+    characterRoles: CharacterRoleType[];
+    createdAt: string;
+    description: string | null;
+    descriptionHtml: string | null;
+    descriptionSource: string | null;
+    duration: number | null;
+    english: string | null;
+    episodes: number;
+    episodesAired: number;
+    externalLinks: ExternalLinkType[];
+    fandubbers: string[];
+    fansubbers: string[];
+    franchise: string | null;
+    genres: GenreType[];
+    id: string;
+    isCensored: boolean | null;
+    japanese: string | null;
+    kind: AnimeKindEnum | null;
+    licenseNameRu: string | null;
+    licensors: string[];
+    malId: string | null;
+    name: string;
+    nextEpisodeAt: string | null;
+    personRoles: PersonRoleType[];
+    poster: PosterType | null;
+    rating: AnimeRatingEnum | null;
+    related: RelatedType[];
+    releasedOn: IncompleteDateType | null;
+    russian: string | null;
+    score: number | null;
+    scoresStats: ScoreStatType[];
+    screenshots: ScreenshotType[];
+    season: string | null;
+    status: StatusType | null;
+    statusesStats: StatusStatType[];
+    studios: StudioType[];
+    synonyms: string[];
+    topic: TopicType | null;
+    updatedAt: string;
+    url: string;
+    userRate: UserRateType | null;
+    videos: VideoType[];
+}
