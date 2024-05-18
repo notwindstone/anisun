@@ -16,7 +16,12 @@ export default function SearchBar() {
     return (
         <>
             <Autocomplete
-                comboboxProps={{ transitionProps: { transition: "fade-up" }, position: 'bottom' }}
+                comboboxProps={{
+                    transitionProps: {
+                        transition: "fade-up"
+                    },
+                    position: 'bottom'
+                }}
                 classNames={{
                     wrapper: classes.wrapper,
                     dropdown: classes.dropdown,

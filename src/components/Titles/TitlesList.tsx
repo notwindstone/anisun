@@ -16,7 +16,16 @@ export default function TitlesList() {
     const [sortingType, setSortingType] = useState<StatusType>(LATEST_TITLES.value);
     const { data, status } = useQuery({
         queryFn: async () => {
-            return (await shikimori.animes.list({ order: "ranked", status: sortingType, limit: 5, filter: ["id", "name"] })).animes
+            return (
+                await shikimori
+                    .animes
+                    .list({
+                        order: "ranked",
+                        status: sortingType,
+                        limit: 5,
+                        filter: ["id", "name"]
+                    })
+            ).animes
         },
         queryKey: ["titlesList", sortingType]
     })

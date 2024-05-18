@@ -5,6 +5,9 @@ import { variables } from '@/configs/variables';
 import {useContext} from "react";
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 import classes from './TitlesSort.module.css';
+import {useLocalStorage} from "@mantine/hooks";
+import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
+import defaultTheme from "@/configs/defaultTheme.json";
 
 const sorting = variables.sorting
 const LATEST_TITLES = sorting.latest;
@@ -14,9 +17,17 @@ const RELEASED_TITLES = sorting.released
 
 export default function TitlesSort() {
     const { sortingType, setSortingType } = useContext(TitlesSortContext);
+    const [theme] = useLocalStorage<ThemeType>({
+        key: 'settings',
+        defaultValue: {
+            color: defaultTheme.primaryColor,
+            breadcrumb: true
+        },
+    })
 
     return (
         <SegmentedControl
+            color={theme.color}
             classNames={{
                 root: classes.root
             }}
