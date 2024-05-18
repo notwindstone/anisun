@@ -1,21 +1,43 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {useInViewport} from "@mantine/hooks";
-import {BackgroundImage, Box, rem, Text, Title, Transition} from "@mantine/core";
+import {BackgroundImage, Box, Image, Paper, rem, Text, Title, Transition} from "@mantine/core";
+import Link from "next/link";
+import classes from './HeroCard.module.css';
+import {variables} from "@/configs/variables";
+import NextImage from "next/image";
 
 export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
     const { ref, inViewport } = useInViewport();
 
+    if (!animeTitle) {
+        return
+    }
+
     return (
         <div ref={ref}>
-            <BackgroundImage
-                style={{
-                    backgroundSize: inViewport ? rem(896) : rem(704),
-                    opacity: inViewport ? 1 : 0.5,
-                    transition: "1000ms ease",
-                    height: "100%",
-                }}
-                src="https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/images/bg-6.png"
+            <Paper
+                ref={ref}
+                component={Link}
+                href={`/titles/${animeTitle?.url?.replace('https://shikimori.one/animes/', '')}`}
+                className={classes.card}
+                radius={0}
             >
+                <Image
+                    style={{
+                        opacity: inViewport ? 1 : 0.5,
+                        transition: "1000ms ease",
+                    }}
+                    alt="Anime poster"
+                    src={animeTitle?.poster?.originalUrl}
+                    placeholder="blur"
+                    blurDataURL={variables.imagePlaceholder}
+                    component={NextImage}
+                    className={classes.poster}
+                    radius={0}
+                    fill
+                />
+            </Paper>
+
                 <Transition
                     mounted={inViewport}
                     transition="fade-left"
@@ -34,7 +56,6 @@ export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
                         )
                     }
                 </Transition>
-            </BackgroundImage>
         </div>
     )
 }

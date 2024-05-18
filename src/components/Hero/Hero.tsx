@@ -20,9 +20,14 @@ export default function Hero() {
                 .animes
                 .list({
                     limit: HERO_TITLES_LIMIT,
-                    filter: ["id", "name"]
+                    filter: [
+                        "id",
+                        "name",
+                        "url",
+                        "poster { id originalUrl mainUrl }"
+                    ]
                 })
-        ).animes
+        )
     }
 
     const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT })
@@ -32,7 +37,7 @@ export default function Hero() {
             <Carousel
                 slideSize="100%"
                 slideGap="md"
-                height={200}
+                height="40vh"
                 initialSlide={3}
                 loop
             >

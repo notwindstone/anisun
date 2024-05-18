@@ -24,6 +24,7 @@ export default function HeroSlides({ data, isPending, error, slidesLength }: Her
     return slidesLength.map((_slide, index) => {
         return (
             <Carousel.Slide
+                h="40vh"
                 key={index}
             >
                 <HeroCard animeTitle={data?.animes?.[index]} />
