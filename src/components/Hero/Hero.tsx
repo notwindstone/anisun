@@ -1,12 +1,32 @@
 "use client"
 
-import {useCallback, useEffect, useState} from "react";
-import {Carousel, Embla} from "@mantine/carousel";
-import {Progress} from "@mantine/core";
-import {useInViewport} from "@mantine/hooks";
+import {Carousel} from "@mantine/carousel";
 import HeroSlides from "@/components/Hero/HeroSlides/HeroSlides";
+import {useQuery} from "@tanstack/react-query";
+import {client} from "@/lib/shikimori/client";
+
+const HERO_TITLES_LIMIT = 7
 
 export default function Hero() {
+    const shikimori = client();
+    const { isPending, error, data } = useQuery({
+        queryKey: ['heroTitles'],
+        queryFn: getTitles
+    })
+
+    async function getTitles() {
+        return (
+            await shikimori
+                .animes
+                .list({
+                    limit: HERO_TITLES_LIMIT,
+                    filter: ["id", "name"]
+                })
+        ).animes
+    }
+
+    const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT })
+
     return (
         <>
             <Carousel
@@ -16,14 +36,12 @@ export default function Hero() {
                 initialSlide={3}
                 loop
             >
-                {
-                    [1,2,3,4,5].map((value, index, array) => {
-                        return (
-                            <HeroSlides key={value}>
-                            </HeroSlides>
-                        )
-                    })
-                }
+                <HeroSlides
+                    data={data}
+                    isPending={isPending}
+                    error={error}
+                    slidesLength={slidesLength}
+                />
             </Carousel>
         </>
     );
