@@ -2,7 +2,7 @@ import axios from "axios";
 import {options} from "@/lib/shikimori/options";
 
 export const animes = () => {
-    const byId = async ({ ids, filter }: { ids: string, filter: string[] }) => {
+    const byId = async ({ ids, filter }: { ids: string, filter?: string[] }) => {
         const params = options({ ids: ids, filter: filter })
 
         return await axios

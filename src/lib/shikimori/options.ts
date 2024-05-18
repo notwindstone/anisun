@@ -1,20 +1,21 @@
-const userFilterOptions = ({ filter }: { filter: string[] }) => {
-    let userFilter = ``
+export const options = ({ ids, search, limit, status, year, order, page, filter }: any) => {
+    function userFilterOptions() {
+        if (!filter) {
+            return
+        }
 
-    for (const option of filter) {
-        userFilter = `
-            ${userFilter}
-            ${option}
-        `
+        let filterOptions = ``
+
+        for (const option of filter) {
+            filterOptions = `${filterOptions}${option} `
+        }
+
+        return filterOptions
     }
 
-    console.log(userFilter)
 
-    return userFilter
-}
-
-export const options = ({ ids, search, limit, status, year, order, page, filter }: any) => {
     let query = ""
+    const userFilter = userFilterOptions()
 
     if (ids) {
         query = `${query}ids: "${ids}"`
@@ -185,7 +186,7 @@ export const options = ({ ids, search, limit, status, year, order, page, filter 
             query: `
                     {
                         animes(${query}) {
-                            ${filter ?? defaultFilter}
+                            ${userFilter ?? defaultFilter}
                         }
                     }
                 `
