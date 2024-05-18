@@ -1,3 +1,18 @@
+const userFilterOptions = ({ filter }: { filter: string[] }) => {
+    let userFilter = ``
+
+    for (const option of filter) {
+        userFilter = `
+            ${userFilter}
+            ${option}
+        `
+    }
+
+    console.log(userFilter)
+
+    return userFilter
+}
+
 export const options = ({ ids, search, limit, status, year, order, page, filter }: any) => {
     let query = ""
 

@@ -3,7 +3,7 @@ import {options} from "@/lib/shikimori/options";
 
 export const animes = () => {
     const byId = async ({ ids, filter }: { ids: string, filter: string[] }) => {
-        const params = options({ ids: ids })
+        const params = options({ ids: ids, filter: filter })
 
         return await axios
             .request(params)
@@ -18,6 +18,7 @@ export const animes = () => {
             year: year,
             order: order,
             page: page,
+            filter: filter,
         })
 
         return await axios
