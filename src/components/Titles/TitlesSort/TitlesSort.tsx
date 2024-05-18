@@ -4,6 +4,7 @@ import {SegmentedControl} from "@mantine/core";
 import { variables } from '@/configs/variables';
 import {useContext} from "react";
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
+import classes from './TitlesSort.module.css';
 
 const sorting = variables.sorting
 const LATEST_TITLES = sorting.latest;
@@ -16,6 +17,9 @@ export default function TitlesSort() {
 
     return (
         <SegmentedControl
+            classNames={{
+                root: classes.root
+            }}
             withItemsBorders={false}
             value={sortingType}
             // @ts-ignore

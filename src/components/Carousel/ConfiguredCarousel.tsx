@@ -1,7 +1,8 @@
 "use client"
 
-import Slides from "@/components/Carousel/Slides/Slides";
+import CarouselSlides from "@/components/Carousel/CarouselSlides/CarouselSlides";
 import {Carousel} from "@mantine/carousel";
+import classes from './ConfiguredCarousel.module.css';
 
 export default function ConfiguredCarousel() {
     return (
@@ -14,8 +15,8 @@ export default function ConfiguredCarousel() {
             loop
             dragFree
         >
-            <Slides
-                carouselSlides={[1, 2]}
+            <CarouselSlides
+                carouselSlides={[1, 2, 3, 4, 5, 6]}
                 error={null}
                 status={"success"}
                 data={{ animes: {} }}

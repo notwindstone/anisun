@@ -1,8 +1,8 @@
 import {Carousel} from "@mantine/carousel";
 import {Skeleton} from "@mantine/core";
-import Card from "@/components/Carousel/Card/Card";
+import CarouselCard from "@/components/Carousel/CarouselCard/CarouselCard";
 
-export default function Slides(
+export default function CarouselSlides(
     {
         status,
         carouselSlides,
@@ -22,7 +22,7 @@ export default function Slides(
                     (status === 'success' && data !== undefined)
                         ? (
                             <>
-                                <Card />
+                                <CarouselCard />
                             </>
                         ) : status === 'error' ? (
                             <>Error: {error?.message}</>

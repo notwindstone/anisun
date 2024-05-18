@@ -1,5 +1,5 @@
 import {Badge, Flex, Image, Overlay, Paper, Title} from "@mantine/core";
-import classes from './Card.module.css'
+import classes from './CarouselCard.module.css'
 import NextImage from "next/image";
 import Link from "next/link";
 import { variables } from '@/configs/variables';
@@ -7,7 +7,7 @@ import {useLocalStorage} from "@mantine/hooks";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import defaultTheme from "@/configs/defaultTheme.json";
 
-export default function Card() {
+export default function CarouselCard() {
     const [theme] = useLocalStorage<ThemeType>({
         key: 'settings',
         defaultValue: {

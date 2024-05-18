@@ -3,9 +3,9 @@
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 import {useState} from "react";
 import { variables } from '@/configs/variables';
-import TitlesSort from "@/components/TitlesSort/TitlesSort";
+import TitlesSort from "@/components/Titles/TitlesSort/TitlesSort";
 import {useQuery} from "@tanstack/react-query";
-import TitleCard from "@/components/TitleCard/TitleCard";
+import TitleCard from "@/components/Titles/TitleCard/TitleCard";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 
