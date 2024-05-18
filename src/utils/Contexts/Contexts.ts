@@ -1,7 +1,7 @@
 import {createContext} from "react";
 import {CustomThemeContextType} from "@/types/CustomThemeContext/CustomThemeContext.type";
 import defaultTheme from '@/configs/defaultTheme.json';
-import globalVariables from '@/configs/globalVariables.json';
+import { variables } from '@/configs/variables';
 import {TitlesListType} from "@/types/TitlesList/TitlesList.type";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 
@@ -13,7 +13,7 @@ export const CustomThemeContext = createContext<CustomThemeContextType>({
     setTheme: () => {}
 })
 
-const sortingValue: StatusType = globalVariables.sorting.all.value
+const sortingValue: StatusType = variables.sorting.latest.value
 
 export const TitlesSortContext = createContext<TitlesListType>({
     sortingType: sortingValue,

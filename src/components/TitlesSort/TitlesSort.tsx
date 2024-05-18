@@ -1,11 +1,12 @@
 "use client"
 
 import {SegmentedControl} from "@mantine/core";
-import { sorting } from '@/configs/globalVariables.json';
+import { variables } from '@/configs/variables';
 import {useContext} from "react";
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 
-const ALL_TITLES = sorting.all;
+const sorting = variables.sorting
+const LATEST_TITLES = sorting.latest;
 const ANNOUNCED_TITLES = sorting.anons;
 const ONGOING_TITLES = sorting.ongoing;
 const RELEASED_TITLES = sorting.released
@@ -17,9 +18,10 @@ export default function TitlesSort() {
         <SegmentedControl
             withItemsBorders={false}
             value={sortingType}
+            // @ts-ignore
             onChange={setSortingType}
             data={[
-                ALL_TITLES,
+                LATEST_TITLES,
                 ANNOUNCED_TITLES,
                 ONGOING_TITLES,
                 RELEASED_TITLES,

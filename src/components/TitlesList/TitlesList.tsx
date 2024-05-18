@@ -2,21 +2,21 @@
 
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 import {useState} from "react";
-import globalVariables from '@/configs/globalVariables.json';
+import { variables } from '@/configs/variables';
 import TitlesSort from "@/components/TitlesSort/TitlesSort";
 import {useQuery} from "@tanstack/react-query";
 import TitleCard from "@/components/TitleCard/TitleCard";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 
-const ALL_TITLES = globalVariables.sorting.all;
+const LATEST_TITLES = variables.sorting.latest;
 
 export default function TitlesList() {
     const shikimori = client();
-    const [sortingType, setSortingType] = useState<StatusType>(ALL_TITLES.value);
+    const [sortingType, setSortingType] = useState<StatusType>(LATEST_TITLES.value);
     const { data, status } = useQuery({
         queryFn: async () => {
-            return (await shikimori.animes.list({ order: "ranked", status: sortingType, limit: 5 })).animes
+            return (await shikimori.animes.list({ order: "ranked", status: sortingType, limit: 5, filter: ["id", "name"] })).animes
         },
         queryKey: ["titlesList", sortingType]
     })

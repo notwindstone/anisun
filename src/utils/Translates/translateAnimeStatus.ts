@@ -1,17 +1,19 @@
-import {SortType} from "@/types/TitlesList/Sort.type";
-import { sorting } from '@/configs/globalVariables.json';
+import { variables } from '@/configs/variables';
+import {StatusType} from "@/types/Shikimori/General/Status.type";
 
-export default function translateAnimeStatus(sortingType: SortType) {
+export default function translateAnimeStatus(sortingType: StatusType) {
+    const sorting = variables.sorting
+
     switch (sortingType) {
-        case "all":
-            return sorting.all.label
+        case "latest":
+            return sorting.latest.label
         case "ongoing":
             return sorting.ongoing.label
-        case "announced":
-            return sorting.announced.label
+        case "anons":
+            return sorting.anons.label
         case "released":
             return sorting.released.label
         default:
-            return sorting.unknown.label
+            return sorting.latest.label
     }
 }
