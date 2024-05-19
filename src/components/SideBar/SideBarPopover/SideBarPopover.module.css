@@ -1,0 +1,5 @@
+.dropdown {
+    border-radius: rem(12px);
+    background: alpha(var(--animeth-background-color), 0.5);
+    backdrop-filter: blur(rem(16px));
+}
