@@ -1,11 +1,11 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
-import {useDebouncedValue, useInViewport} from "@mantine/hooks";
+import {useDebouncedValue, useInterval, useInViewport, useTimeout} from "@mantine/hooks";
 import {
     AspectRatio,
     Box,
     Center,
     Container,
-    Image,
+    Image, MantineTransition,
     Overlay,
     Paper,
     rem,
@@ -18,9 +18,17 @@ import Link from "next/link";
 import classes from './HeroCard.module.css';
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
+import {useState} from "react";
+
+const TRANSITION_PROPS = {
+    transition: "fade-left",
+    duration: 1000,
+    timingFunction: "ease",
+}
 
 export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
     const { ref, inViewport } = useInViewport();
+    const [debouncedInViewport] = useDebouncedValue(inViewport, 200);
 
     return (
         <AspectRatio
@@ -50,7 +58,28 @@ export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
                 blur={inViewport ? 0 : 2}
                 className={classes.overlay}
             >
-
+                <Container fluid>
+                    <Transition
+                        mounted={inViewport}
+                        {...TRANSITION_PROPS}
+                    >
+                        {
+                            (styles) => (
+                                <Title style={styles}>{animeTitle?.name}</Title>
+                            )
+                        }
+                    </Transition>
+                    <Transition
+                        mounted={debouncedInViewport}
+                        {...TRANSITION_PROPS}
+                    >
+                        {
+                            (styles) => (
+                                <Text style={styles}>{animeTitle?.name}</Text>
+                            )
+                        }
+                    </Transition>
+                </Container>
             </Overlay>
         </AspectRatio>
     )
