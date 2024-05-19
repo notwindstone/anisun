@@ -8,6 +8,7 @@
     top: rem(16px);
     left: 50%;
     z-index: 10000;
+    transition: 150ms ease;
 }
 
 .inner {

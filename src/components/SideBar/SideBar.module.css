@@ -1,3 +1,15 @@
 .sidebar {
+    background: var(--animeth-sidebar-color);
+    padding-top: rem(16px);
+    flex-shrink: 0;
+    width: rem(96px);
+    height: 100vh;
+    transition: 150ms ease;
+    display: flex;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
 
+.opened {
+    width: rem(320px);
 }

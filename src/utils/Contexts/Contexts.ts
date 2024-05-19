@@ -22,5 +22,6 @@ export const TitlesSortContext = createContext<TitlesListType>({
 })
 
 export const SideBarContext = createContext<SideBarContextType>({
-    opened: false
+    opened: false,
+    toggle: () => {}
 })

@@ -6,13 +6,22 @@ import classes from './NavigationControl.module.css';
 import {Box, em, Group, rem} from "@mantine/core";
 import NavigationButton from "@/components/NavigationControl/NavigationButton/NavigationButton";
 import NavigationBreadcrumbs from "@/components/NavigationControl/NavigationBreadcrumbs/NavigationBreadcrumbs";
+import {useContext} from "react";
+import {SideBarContext} from "@/utils/Contexts/Contexts";
 
 export default function NavigationControl() {
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+    const { opened } = useContext(
+        SideBarContext
+    );const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
     return isMobile === false && (
         <>
-            <div className={classes.wrapper}>
+            <div
+                style={{
+                    left: opened ? rem(336) : rem(112)
+                }}
+                className={classes.wrapper}
+            >
                 <Box className={classes.inner}>
                     <Group gap={rem(16)}>
                         <Group gap={rem(8)}>

@@ -6,8 +6,10 @@ import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import defaultTheme from '@/configs/defaultTheme.json';
 import {em} from "@mantine/core";
 import classes from './SideBar.module.css';
+import SideBarBurger from "@/components/SideBar/SideBarBurger/SideBarBurger";
+import React from "react";
 
-export default function SideBar() {
+export default function SideBar({ children }: { children: React.ReactNode }) {
     const [opened, { toggle }] = useDisclosure(false);
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const [theme, setTheme] = useLocalStorage<ThemeType>({
@@ -20,11 +22,14 @@ export default function SideBar() {
 
     return isMobile === false && (
         <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
-            <SideBarContext.Provider value={{ opened: opened }}>
+            <SideBarContext.Provider value={{ opened: opened, toggle: toggle }}>
+                {children}
                 <aside
-                    className={classes.sidebar}
+                    className={
+                        `${classes.sidebar} ${opened && classes.opened}`
+                    }
                 >
-                    1234
+                    <SideBarBurger />
                 </aside>
             </SideBarContext.Provider>
         </CustomThemeContext.Provider>

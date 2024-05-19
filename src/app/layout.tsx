@@ -60,9 +60,10 @@ export default function RootLayout({
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={10000} limit={3} />
                             <Group className="root-group" gap={0} wrap="nowrap">
-                                <SideBar />
-                                <div className="app-wrapper">
+                                <SideBar>
                                     <NavigationControl />
+                                </SideBar>
+                                <div className="app-wrapper">
                                     <Main>
                                         {children}
                                     </Main>
