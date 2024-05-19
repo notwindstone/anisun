@@ -8,6 +8,7 @@ import {em, rem, Stack} from "@mantine/core";
 import classes from './SideBar.module.css';
 import SideBarBurger from "@/components/SideBar/SideBarBurger/SideBarBurger";
 import React from "react";
+import SideBarAccount from "@/components/SideBar/SideBarAccount/SideBarAccount";
 
 export default function SideBar({ children }: { children: React.ReactNode }) {
     const [opened, { toggle }] = useDisclosure(false);
@@ -36,7 +37,7 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
                     >
                         <SideBarBurger />
                         <SideBarBurger />
-                        <SideBarBurger />
+                        <SideBarAccount />
                     </Stack>
                 </aside>
             </SideBarContext.Provider>

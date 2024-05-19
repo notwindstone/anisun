@@ -1,4 +1,6 @@
+import {Dispatch, SetStateAction} from "react";
+
 export type SideBarPopoverContextType = {
     expanded: boolean;
-    setExpanded: () => void;
+    setExpanded: Dispatch<SetStateAction<boolean>>;
 }

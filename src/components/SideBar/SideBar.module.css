@@ -1,6 +1,6 @@
 .sidebar {
     background: var(--animeth-sidebar-color);
-    padding-top: rem(16px);
+    padding: rem(16px) 0;
     flex-shrink: 0;
     width: rem(96px);
     height: 100vh;
