@@ -1,9 +1,35 @@
 :root {
     @mixin light-root {
-        --animeth-ripple-color: #0000004D;
+        --animeth-background-color: #fff;
+        --animeth-ripple-color: #0000004d;
+        --animeth-sidebar-color: #fdfdfd;
     }
 
     @mixin dark-root {
-        --animeth-ripple-color: #FFFFFF4C;
+        --animeth-background-color: #000;
+        --animeth-ripple-color: #ffffff4c;
+        --animeth-sidebar-color: #080808;
+    }
+}
+
+.root-group {
+    background: var(--animeth-sidebar-color);
+}
+
+.app-wrapper {
+    background: var(--animeth-background-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    box-sizing: border-box;
+    border-radius: rem(12px) 0 0 0;
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    border-top: rem(1px) solid var(--mantine-color-default-border);
+    border-left: rem(1px) solid var(--mantine-color-default-border);
+
+    @media (max-width: rem(750)) {
+        border: none;
     }
 }

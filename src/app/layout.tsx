@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import {ColorSchemeScript, Container, createTheme, MantineProvider, rem} from "@mantine/core";
+import {ColorSchemeScript, Container, createTheme, Group, MantineProvider, rem} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import NextTopLoader from "nextjs-toploader";
@@ -14,6 +14,7 @@ import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
 import {readLocalStorageValue} from "@mantine/hooks";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import Main from "@/components/Main/Main";
+import SideBar from "@/components/SideBar/SideBar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -59,9 +60,15 @@ export default function RootLayout({
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={10000} limit={3} />
-                            <Main>
-                                {children}
-                            </Main>
+                            <Group className="root-group" gap={0} wrap="nowrap">
+                                <SideBar />
+                                <div className="app-wrapper">
+                                    <>Navigation bar</>
+                                    <Main>
+                                        {children}
+                                    </Main>
+                                </div>
+                            </Group>
                         </MantineProvider>
                     </TanstackQueryProviders>
                 </body>
