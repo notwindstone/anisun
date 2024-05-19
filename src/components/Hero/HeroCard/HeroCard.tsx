@@ -30,7 +30,7 @@ const TRANSITION_PROPS: TransitionStylesType = {
     timingFunction: "ease",
 }
 
-export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
+export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
     const { ref, inViewport } = useInViewport();
     const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 200);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);

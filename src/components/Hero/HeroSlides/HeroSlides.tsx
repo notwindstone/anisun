@@ -1,9 +1,9 @@
 import {Carousel} from "@mantine/carousel";
-import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response.interface";
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import {Skeleton, Text} from "@mantine/core";
+import {WrapperResponseInterface} from "@/types/Shikimori/Responses/Interfaces/WrapperResponse.interface";
 
-interface HeroResponseInterface extends ResponseInterface {
+interface HeroResponseInterface extends WrapperResponseInterface {
     status: "error" | "success" | "pending";
     error: Error | null;
     slidesLength: undefined[];
