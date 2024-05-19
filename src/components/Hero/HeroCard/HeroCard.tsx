@@ -19,8 +19,9 @@ import classes from './HeroCard.module.css';
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
 import {useState} from "react";
+import {TransitionStylesType} from "@/types/Transition/TransitionStyles.type";
 
-const TRANSITION_PROPS = {
+const TRANSITION_PROPS: TransitionStylesType = {
     transition: "fade-left",
     duration: 1000,
     timingFunction: "ease",
