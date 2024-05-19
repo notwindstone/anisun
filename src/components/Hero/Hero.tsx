@@ -9,7 +9,7 @@ const HERO_TITLES_LIMIT = 7
 
 export default function Hero() {
     const shikimori = client();
-    const { isPending, error, data } = useQuery({
+    const { status, error, data } = useQuery({
         queryKey: ['heroTitles'],
         queryFn: getTitles
     })
@@ -42,7 +42,7 @@ export default function Hero() {
             >
                 <HeroSlides
                     data={data}
-                    isPending={isPending}
+                    status={status}
                     error={error}
                     slidesLength={slidesLength}
                 />
