@@ -7,7 +7,7 @@
 ### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
 <p align="center">
-<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">English</a> | <strong>Русский</strong>
+<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/refactor/README.md">English</a> | <strong>Русский</strong>
 </p>
 
 </div>
