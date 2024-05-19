@@ -36,8 +36,6 @@ export default function Hero() {
         <>
             <Carousel
                 slideSize="100%"
-                slideGap="md"
-                height="40vh"
                 initialSlide={3}
                 loop
             >

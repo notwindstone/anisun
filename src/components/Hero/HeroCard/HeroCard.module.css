@@ -1,4 +1,13 @@
-.card {
+.wrapper {
+    height: 40vh;
     overflow: hidden;
-    height: 100%;
+    position: relative;
+}
+
+.poster {
+    transition: 1s ease;
+}
+
+.overlay {
+    transition: 1s ease;
 }
