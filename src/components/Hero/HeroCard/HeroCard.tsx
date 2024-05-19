@@ -1,6 +1,19 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {useDebouncedValue, useInViewport} from "@mantine/hooks";
-import {AspectRatio, Box, Center, Container, Image, Overlay, Paper, rem, Text, Title, Transition} from "@mantine/core";
+import {
+    AspectRatio,
+    Box,
+    Center,
+    Container,
+    Image,
+    Overlay,
+    Paper,
+    rem,
+    Skeleton,
+    Text,
+    Title,
+    Transition
+} from "@mantine/core";
 import Link from "next/link";
 import classes from './HeroCard.module.css';
 import {variables} from "@/configs/variables";
@@ -8,10 +21,6 @@ import NextImage from "next/image";
 
 export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
     const { ref, inViewport } = useInViewport();
-
-    if (!animeTitle) {
-        return
-    }
 
     return (
         <AspectRatio
@@ -32,6 +41,8 @@ export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
                 alt="Anime poster"
                 component={NextImage}
                 src={animeTitle?.poster?.originalUrl}
+                placeholder="blur"
+                blurDataURL={variables.imagePlaceholder}
                 fill
             />
             <Overlay

@@ -1,6 +1,7 @@
 import {Carousel} from "@mantine/carousel";
 import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response.interface";
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
+import {Skeleton} from "@mantine/core";
 
 interface HeroResponseInterface extends ResponseInterface {
     isPending: boolean;
@@ -9,12 +10,6 @@ interface HeroResponseInterface extends ResponseInterface {
 }
 
 export default function HeroSlides({ data, isPending, error, slidesLength }: HeroResponseInterface) {
-    if (isPending) {
-        return (
-            <>Loading...</>
-        )
-    }
-
     if (error) {
         return (
             <>Error: {error.message}</>
@@ -26,7 +21,13 @@ export default function HeroSlides({ data, isPending, error, slidesLength }: Her
             <Carousel.Slide
                 key={index}
             >
-                <HeroCard animeTitle={data?.animes?.[index]} />
+                {
+                    isPending ? (
+                        <Skeleton radius={0} w="100%" h="40vh" />
+                    ) : (
+                        <HeroCard animeTitle={data?.animes?.[index]} />
+                    )
+                }
             </Carousel.Slide>
         )
     })

@@ -19,6 +19,7 @@ export default function Hero() {
             await shikimori
                 .animes
                 .list({
+                    order: "ranked",
                     limit: HERO_TITLES_LIMIT,
                     filter: [
                         "id",
@@ -36,7 +37,7 @@ export default function Hero() {
         <>
             <Carousel
                 slideSize="100%"
-                initialSlide={3}
+                initialSlide={0}
                 loop
             >
                 <HeroSlides
