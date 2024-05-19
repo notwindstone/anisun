@@ -123,11 +123,9 @@
 
 Вы можете использовать локальный PostgreSQL в качестве базы данных. Если вы собираетесь использовать базу данных Neon Serverless, то перейдите к следующему этапу
 
-1. (Временно) Перейдите в `src/db/drizzle.ts` и уберите символы `//`, чтобы закомментировать код с конфигурацией Neon Serverless DB
+1. Откройте файл `.env.local` и вставьте адрес базы данных в `POSTGRESQL_DATABASE_URL`
 
-2. (Временно) Раскомментируйте строки кода с конфигурацией PostgreSQL DB
-
-3. Откройте файл `.env.local` и вставьте адрес базы данных в `POSTGRESQL_DATABASE_URL`
+2. Поменяйте значение у `DATABASE_TYPE` с `NEON` на `POSTGRESQL` в файле `.env.local`
 
 > Последние штрихи
 
@@ -143,6 +141,7 @@
 > Вот так должен выглядеть файл `.env.local` после всех махинаций выше с конфигурацией базы данных Neon Serverless DB 
 
 ```text
+DATABASE_TYPE='NEON'
 NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -158,6 +157,7 @@ KODIK_TOKEN='qwertyuiop1234567890'
 > Вот так должен выглядеть файл `.env.local` после всех махинаций выше с конфигурацией базы данных локального PostgreSQL
 
 ```text
+DATABASE_TYPE='POSTGRESQL'
 NEON_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -206,21 +206,23 @@ npm run start
 
 Затем перейдите по **Project** -> **Settings** -> **Environment Variables** и создайте следующие переменные с ключом и значением:
 
-1. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
+1. `DATABASE_TYPE` - `NEON`
 
-2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
+2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
 
-3. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
+3. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
 
-4. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
+4. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
 
-5. `CLERK_SECRET_KEY` - Ваш собственный **Secret key** с сайта https://clerk.com
+5. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
 
-6. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Ваш собственный **Publishable key** с сайта https://clerk.com
+6. `CLERK_SECRET_KEY` - Ваш собственный **Secret key** с сайта https://clerk.com
 
-7. `NEON_DATABASE_URL` - Ваш собственный **Connection string** с сайта https://neon.tech/
+7. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Ваш собственный **Publishable key** с сайта https://clerk.com
 
-8. (Необязательно) `KODIK_TOKEN` - Ваш собственный ключ с сайта http://kodik.cc/ (Вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме с Kodik Player'ом
+8. `NEON_DATABASE_URL` - Ваш собственный **Connection string** с сайта https://neon.tech/
+
+9. (Необязательно) `KODIK_TOKEN` - Ваш собственный ключ с сайта http://kodik.cc/ (Вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме с Kodik Player'ом
 
 </details>
 
