@@ -20,5 +20,9 @@ export const variables: VariablesType = {
             "label": "Завершённые",
             "value": "released"
         },
+    },
+    "iconProps": {
+        "size": 32,
+        "stroke": 1.5
     }
 }

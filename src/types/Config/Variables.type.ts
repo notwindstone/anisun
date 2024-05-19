@@ -19,5 +19,9 @@ export type VariablesType = {
             label: string;
             value: StatusType;
         };
+    };
+    iconProps: {
+        size: number;
+        stroke: number;
     }
 }
