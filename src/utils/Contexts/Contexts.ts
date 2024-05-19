@@ -4,6 +4,7 @@ import defaultTheme from '@/configs/defaultTheme.json';
 import { variables } from '@/configs/variables';
 import {TitlesListType} from "@/types/TitlesList/TitlesList.type";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
+import {SideBarContextType} from "@/types/SideBar/SideBarContext.type";
 
 export const CustomThemeContext = createContext<CustomThemeContextType>({
     theme: {
@@ -18,4 +19,8 @@ const sortingValue: StatusType = variables.sorting.latest.value
 export const TitlesSortContext = createContext<TitlesListType>({
     sortingType: sortingValue,
     setSortingType: () => {}
+})
+
+export const SideBarContext = createContext<SideBarContextType>({
+    opened: false
 })
