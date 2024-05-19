@@ -40,6 +40,7 @@ export default function Hero() {
     return (
         <>
             <Carousel
+                h={200}
                 slideSize="100%"
                 initialSlide={0}
                 loop

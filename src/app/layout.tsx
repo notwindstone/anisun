@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import {ColorSchemeScript, createTheme, MantineProvider} from "@mantine/core";
+import {ColorSchemeScript, Container, createTheme, MantineProvider, rem} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import NextTopLoader from "nextjs-toploader";
@@ -58,7 +58,12 @@ export default function RootLayout({
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={10000} limit={3} />
-                            {children}
+                            <Container
+                                p={0}
+                                size={rem(1920)}
+                            >
+                                {children}
+                            </Container>
                         </MantineProvider>
                     </TanstackQueryProviders>
                 </body>

@@ -21,7 +21,7 @@ export default function HeroSlides({ data, status, error, slidesLength }: HeroRe
                 break
             case "pending":
                 currentSlide = (
-                    <Skeleton radius={0} w="100%" h="40vh" />
+                    <Skeleton radius={0} w="100%" h={200} />
                 )
                 break
             case "error":

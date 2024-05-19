@@ -47,12 +47,6 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
             ratio={ 16 / 9 }
             className={classes.wrapper}
         >
-            <Center>
-                <Box
-                    p={rem(64)}
-                    ref={ref}
-                />
-            </Center>
             <Image
                 className={classes.poster}
                 style={{
@@ -71,11 +65,11 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
                 className={classes.overlay}
             >
                 <Container
-                    pt="10vh"
-                    pl="15vw"
-                    h="40vh"
+                    fluid
                 >
                     <Stack
+                        w="fit-content"
+                        ref={ref}
                         align="flex-start"
                         justify="flex-start"
                     >
