@@ -1,10 +1,10 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {useDebouncedValue, useInterval, useInViewport, useTimeout} from "@mantine/hooks";
 import {
-    AspectRatio,
+    AspectRatio, Badge,
     Box,
     Center,
-    Container,
+    Container, Group,
     Image, MantineTransition,
     Overlay,
     Paper,
@@ -20,6 +20,7 @@ import {variables} from "@/configs/variables";
 import NextImage from "next/image";
 import {useState} from "react";
 import {TransitionStylesType} from "@/types/Transition/TransitionStyles.type";
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 
 const TRANSITION_PROPS: TransitionStylesType = {
     transition: "fade-left",
@@ -29,7 +30,8 @@ const TRANSITION_PROPS: TransitionStylesType = {
 
 export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
     const { ref, inViewport } = useInViewport();
-    const [debouncedInViewport] = useDebouncedValue(inViewport, 200);
+    const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 200);
+    const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
 
     return (
         <AspectRatio
@@ -66,17 +68,55 @@ export default function HeroCard({ animeTitle }: { animeTitle: AnimeType }) {
                     >
                         {
                             (styles) => (
-                                <Title style={styles}>{animeTitle?.name}</Title>
+                                <Title style={styles}>
+                                    {animeTitle?.name}
+                                </Title>
                             )
                         }
                     </Transition>
                     <Transition
-                        mounted={debouncedInViewport}
+                        mounted={debouncedSlightlyInViewport}
                         {...TRANSITION_PROPS}
                     >
                         {
                             (styles) => (
-                                <Text style={styles}>{animeTitle?.name}</Text>
+                                <Group style={styles}>
+                                    <Badge>{animeTitle?.score}</Badge>
+                                    {
+                                        animeTitle?.genres.map((genre, index) => {
+                                            if (index >= 3) {
+                                                return
+                                            }
+
+                                            return (
+                                                <Badge
+                                                    variant="light"
+                                                    color="gray"
+                                                    key={
+                                                        `${animeTitle.id}_${genre.name}`
+                                                    }
+                                                >
+                                                    {genre.russian}
+                                                </Badge>
+                                            )
+                                        })
+                                    }
+                                </Group>
+                            )
+                        }
+                    </Transition>
+                    <Transition
+                        mounted={debouncedLongerInViewport}
+                        {...TRANSITION_PROPS}
+                    >
+                        {
+                            (styles) => (
+                                <DecoratedButton
+                                    radius="md"
+                                    style={styles}
+                                >
+                                    Перейти
+                                </DecoratedButton>
                             )
                         }
                     </Transition>

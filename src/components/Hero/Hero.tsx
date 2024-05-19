@@ -25,6 +25,8 @@ export default function Hero() {
                         "id",
                         "name",
                         "url",
+                        "score",
+                        "genres { id name russian kind }",
                         "poster { id originalUrl mainUrl }"
                     ]
                 })
