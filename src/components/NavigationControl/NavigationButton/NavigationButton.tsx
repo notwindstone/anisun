@@ -49,7 +49,7 @@ export default function NavigationButton({ type }: { type: "forward" | "back" })
         <UnstyledButton
             className={classes.button}
             ref={ripple}
-            onPointerUp={event}
+            onPointerDown={event}
             onClick={redirectUser}
         >
             {icon}

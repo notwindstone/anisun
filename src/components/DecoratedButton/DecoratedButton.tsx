@@ -31,7 +31,7 @@ export default function DecoratedButton({ children, onClick, rippleColor, ...pro
                     inner: classes.inner
                 }}
                 ref={rippleRef}
-                onPointerUp={rippleEvent}
+                onPointerDown={rippleEvent}
                 onClick={onClick}
             >
                 {children}

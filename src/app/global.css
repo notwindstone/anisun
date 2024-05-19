@@ -30,5 +30,6 @@
 
     @media (max-width: rem(750)) {
         border: none;
+        border-radius: 0;
     }
 }

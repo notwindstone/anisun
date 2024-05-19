@@ -1,7 +1,3 @@
 .root {
-    transition: 150ms ease;
-
-    &:active {
-        transform: translateY(0) scale(97%) !important;
-    }
+    transform: none;
 }

@@ -4,7 +4,7 @@ import {CustomThemeContext, SideBarContext} from "@/utils/Contexts/Contexts";
 import {useDisclosure, useLocalStorage, useMediaQuery} from "@mantine/hooks";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import defaultTheme from '@/configs/defaultTheme.json';
-import {em} from "@mantine/core";
+import {em, rem, Stack} from "@mantine/core";
 import classes from './SideBar.module.css';
 import SideBarBurger from "@/components/SideBar/SideBarBurger/SideBarBurger";
 import React from "react";
@@ -29,7 +29,15 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
                         `${classes.sidebar} ${opened && classes.opened}`
                     }
                 >
-                    <SideBarBurger />
+                    <Stack
+                        ml={rem(16)}
+                        justify="space-between"
+                        align="flex-start"
+                    >
+                        <SideBarBurger />
+                        <SideBarBurger />
+                        <SideBarBurger />
+                    </Stack>
                 </aside>
             </SideBarContext.Provider>
         </CustomThemeContext.Provider>
