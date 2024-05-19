@@ -1,4 +1,5 @@
 .wrapper {
+    user-select: none;
     height: 200px;
     overflow: hidden;
     position: relative;
