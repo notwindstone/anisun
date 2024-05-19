@@ -12,7 +12,7 @@
 
 .inner {
     padding: rem(8px);
-    background: alpha(var(--animeth-background-color), 0.1);
+    background: alpha(var(--animeth-background-color), 0.5);
     backdrop-filter: blur(rem(24px)) contrast(120%);
     border: rem(1px) solid var(--mantine-color-default-border);
     border-radius: var(--mantine-radius-xl);
