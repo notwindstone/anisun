@@ -1,5 +1,9 @@
+import {Popover} from "@mantine/core";
+
 export default function SideBarAccountDropdown() {
     return (
-        <>4324321</>
+        <Popover.Dropdown>
+            <div>Account Dropdown</div>
+        </Popover.Dropdown>
     )
 }

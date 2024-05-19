@@ -1,15 +1,11 @@
+import classes from "@/components/SideBar/SideBarAccount/SideBarAccount.module.css";
+import SideBarAccountTarget from "@/components/SideBar/SideBarAccount/SideBarAccountTarget/SideBarAccountTarget";
+import SideBarAccountDropdown from "@/components/SideBar/SideBarAccount/SideBarAccountDropdown/SideBarAccountDropdown";
 import {Popover} from "@mantine/core";
-import classes from './SideBarPopover.module.css';
 import React, {useContext} from "react";
 import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 
-export default function SideBarPopover({
-    button,
-    dropdown
-}: {
-    button: React.ReactNode,
-    dropdown: React.ReactNode
-}) {
+export default function SideBarPopover({ children }: { children: React.ReactNode }) {
     const { expanded, setExpanded } = useContext(
         SideBarPopoverContext
     );
@@ -24,12 +20,7 @@ export default function SideBarPopover({
             position="right"
             transitionProps={{ transition: 'fade-right', duration: 150 }}
         >
-            <Popover.Target>
-                {button}
-            </Popover.Target>
-            <Popover.Dropdown>
-                {dropdown}
-            </Popover.Dropdown>
+            {children}
         </Popover>
     )
 }

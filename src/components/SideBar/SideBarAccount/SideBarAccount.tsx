@@ -1,18 +1,20 @@
-import SideBarPopover from "@/components/SideBar/SideBarPopover/SideBarPopover";
 import SideBarAccountTarget from "@/components/SideBar/SideBarAccount/SideBarAccountTarget/SideBarAccountTarget";
 import SideBarAccountDropdown from "@/components/SideBar/SideBarAccount/SideBarAccountDropdown/SideBarAccountDropdown";
-import {useState} from "react";
+import React, {useState} from "react";
 import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
+import {Popover} from "@mantine/core";
+import classes from './SideBarAccount.module.css';
+import SideBarPopover from "@/components/SideBar/SideBarPopover/SideBarPopover";
 
 export default function SideBarAccount() {
     const [expanded, setExpanded] = useState(false)
 
     return (
         <SideBarPopoverContext.Provider value={{ expanded, setExpanded }}>
-            <SideBarPopover
-                button={<SideBarAccountTarget />}
-                dropdown={<SideBarAccountDropdown />}
-            />
+            <SideBarPopover>
+                <SideBarAccountTarget />
+                <SideBarAccountDropdown />
+            </SideBarPopover>
         </SideBarPopoverContext.Provider>
     )
 }
