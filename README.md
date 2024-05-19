@@ -197,13 +197,30 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Vercel
 
-> [!NOTE]  
-> Work in progress...
-
 <details>
 <summary>Expand steps</summary>
 
-Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
+Click the button
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fwindstone-aristotle-yellow%2Fanimeth)
+
+Navigate to **Project** -> **Settings** -> **Environment Variables** and then add values to the following keys:
+
+1. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
+
+2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
+
+3. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
+
+4. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
+
+5. `CLERK_SECRET_KEY` - your own **Secret key** from https://clerk.com
+
+6. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - your own **Publishable key** from https://clerk.com
+
+7. `NEON_DATABASE_URL` - your own **Connection string** from https://neon.tech/
+
+8. (Optional) `KODIK_TOKEN` - your own from http://kodik.cc/ (you need to contact them via email). This is needed only if you want to watch anime in Kodik Player too. Otherwise, only players based on the Anilibria API will work
 
 </details>
 
