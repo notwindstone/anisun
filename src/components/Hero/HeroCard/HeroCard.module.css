@@ -11,3 +11,7 @@
 .overlay {
     transition: 1s ease;
 }
+
+.title {
+    color: #ffffff;
+}
