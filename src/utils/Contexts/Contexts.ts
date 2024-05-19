@@ -5,6 +5,7 @@ import { variables } from '@/configs/variables';
 import {TitlesListType} from "@/types/TitlesList/TitlesList.type";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 import {SideBarContextType} from "@/types/SideBar/SideBarContext.type";
+import {SideBarPopoverContextType} from "@/types/SideBar/SideBarPopoverContext.type";
 
 export const CustomThemeContext = createContext<CustomThemeContextType>({
     theme: {
@@ -24,4 +25,9 @@ export const TitlesSortContext = createContext<TitlesListType>({
 export const SideBarContext = createContext<SideBarContextType>({
     opened: false,
     toggle: () => {}
+})
+
+export const SideBarPopoverContext = createContext<SideBarPopoverContextType>({
+    expanded: false,
+    setExpanded: () => {}
 })

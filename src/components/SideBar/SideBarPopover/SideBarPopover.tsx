@@ -1,6 +1,7 @@
 import {Popover} from "@mantine/core";
 import classes from './SideBarPopover.module.css';
-import React from "react";
+import React, {useContext} from "react";
+import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 
 export default function SideBarPopover({
     button,
@@ -9,7 +10,9 @@ export default function SideBarPopover({
     button: React.ReactNode,
     dropdown: React.ReactNode
 }) {
-
+    const { expanded, setExpanded } = useContext(
+        SideBarPopoverContext
+    );
 
     return (
         <Popover
