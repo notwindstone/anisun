@@ -8,7 +8,7 @@ import {useQuery} from "@tanstack/react-query";
 import TitleCard from "@/components/Titles/TitleCard/TitleCard";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
-import getKodikPlayer from "@/lib/kodik/actions";
+import getKodikPlayer from "@/lib/actions";
 
 const LATEST_TITLES = variables.sorting.latest;
 
@@ -17,11 +17,6 @@ export default function TitlesList() {
     const [sortingType, setSortingType] = useState<StatusType>(LATEST_TITLES.value);
     const { data, status } = useQuery({
         queryFn: async () => {
-            if (process.env.KODIK_TOKEN) {
-                const kodik = await getKodikPlayer({ shikimoriId: "52991" })
-                console.log(kodik)
-            }
-
             return (
                 await shikimori
                     .animes

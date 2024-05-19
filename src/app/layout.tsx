@@ -13,6 +13,7 @@ import './global.css'
 import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
 import {readLocalStorageValue} from "@mantine/hooks";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
+import Main from "@/components/Main/Main";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -58,12 +59,9 @@ export default function RootLayout({
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={10000} limit={3} />
-                            <Container
-                                p={0}
-                                size={rem(1920)}
-                            >
+                            <Main>
                                 {children}
-                            </Container>
+                            </Main>
                         </MantineProvider>
                     </TanstackQueryProviders>
                 </body>

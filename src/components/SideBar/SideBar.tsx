@@ -21,11 +21,7 @@ export default function SideBar() {
 
     return isMobile === false && (
         <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
-            <DecoratedButton>
-                Кастомная кнопка в сайдбаре (в контексте)
-            </DecoratedButton>
-            <ThemeSchemeControl />
-            <ColorSchemeControl />
+
         </CustomThemeContext.Provider>
     )
 }
