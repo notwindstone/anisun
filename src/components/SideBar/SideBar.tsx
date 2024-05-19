@@ -2,11 +2,8 @@
 
 import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import {useLocalStorage, useMediaQuery} from "@mantine/hooks";
-import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
-import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 import defaultTheme from '@/configs/defaultTheme.json';
-import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {em} from "@mantine/core";
 
 export default function SideBar() {

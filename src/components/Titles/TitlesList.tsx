@@ -8,7 +8,6 @@ import {useQuery} from "@tanstack/react-query";
 import TitleCard from "@/components/Titles/TitleCard/TitleCard";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
-import getKodikPlayer from "@/lib/actions";
 
 const LATEST_TITLES = variables.sorting.latest;
 
