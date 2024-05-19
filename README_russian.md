@@ -131,7 +131,7 @@
 
 > Последние штрихи
 
-1. (Опционально) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
+1. (Необязательно) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
 
 2. Запустите команду `npm install` для того, чтобы установить все зависимости
 
@@ -197,13 +197,30 @@ npm run start
 
 ### Vercel
 
-> [!NOTE]  
-> В процессе заполнения...
-
 <details>
 <summary>Раскрыть шаги</summary>
 
-Пока что смотрите официальную документацию [Next.js deployment documentation](https://nextjs.org/docs/deployment)
+Нажмите кнопку ниже:
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fwindstone-aristotle-yellow%2Fanimeth)
+
+Затем перейдите по **Project** -> **Settings** -> **Environment Variables** и создайте следующие переменные с ключом и значением:
+
+1. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
+
+2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
+
+3. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
+
+4. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
+
+5. `CLERK_SECRET_KEY` - Ваш собственный **Secret key** с сайта https://clerk.com
+
+6. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Ваш собственный **Publishable key** с сайта https://clerk.com
+
+7. `NEON_DATABASE_URL` - Ваш собственный **Connection string** с сайта https://neon.tech/
+
+8. (Необязательно) `KODIK_TOKEN` - Ваш собственный ключ с сайта http://kodik.cc/ (Вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме с Kodik Player'ом
 
 </details>
 
