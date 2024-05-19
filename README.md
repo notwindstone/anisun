@@ -123,11 +123,9 @@ You can use Neon Serverless DB as a database. If you are going to use local Post
 
 You can use local PostgreSQL as a database. If you are going to use Neon Serverless database, then skip this configuration
 
-1. (Temporary) Go to the `src/db/drizzle.ts` path and remove `//` symbols to comment out the Neon Serverless DB configuration code
+1. Go to the `.env.local` file and paste your connection string to `POSTGRESQL_DATABASE_URL`
 
-2. (Temporary) Now uncomment out the PostgreSQL DB configuration code 
-
-3. Go to the `.env.local` file and paste your connection string to `POSTGRESQL_DATABASE_URL`
+2. Change `DATABASE_TYPE` to `POSTGRESQL` in the `.env.local` file
 
 > Final steps
 
@@ -143,6 +141,7 @@ You can use local PostgreSQL as a database. If you are going to use Neon Serverl
 > This is what the `.env.local` file should look like with Neon Serverless DB configuration
 
 ```text
+DATABASE_TYPE='NEON'
 NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -158,6 +157,7 @@ KODIK_TOKEN='qwertyuiop1234567890'
 > This is what the `.env.local` file should look like with PostgreSQL DB configuration
 
 ```text
+DATABASE_TYPE='POSTGRESQL'
 NEON_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -206,21 +206,23 @@ Click the button
 
 Navigate to **Project** -> **Settings** -> **Environment Variables** and then add values to the following keys:
 
-1. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
+1. `DATABASE_TYPE` - `NEON`
 
-2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
+2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
 
-3. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
+3. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
 
-4. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
+4. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
 
-5. `CLERK_SECRET_KEY` - your own **Secret key** from https://clerk.com
+5. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
 
-6. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - your own **Publishable key** from https://clerk.com
+6. `CLERK_SECRET_KEY` - your own **Secret key** from https://clerk.com
 
-7. `NEON_DATABASE_URL` - your own **Connection string** from https://neon.tech/
+7. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - your own **Publishable key** from https://clerk.com
 
-8. (Optional) `KODIK_TOKEN` - your own from http://kodik.cc/ (you need to contact them via email). This is needed only if you want to watch anime in Kodik Player too. Otherwise, only players based on the Anilibria API will work
+8. `NEON_DATABASE_URL` - your own **Connection string** from https://neon.tech/
+
+9. (Optional) `KODIK_TOKEN` - your own from http://kodik.cc/ (you need to contact them via email). This is needed only if you want to watch anime in Kodik Player too. Otherwise, only players based on the Anilibria API will work
 
 </details>
 
