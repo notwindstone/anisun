@@ -1,0 +1,19 @@
+.wrapper {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-shrink: 0;
+    width: fit-content;
+    position: fixed;
+    top: rem(16px);
+    left: 50%;
+    z-index: 10000;
+}
+
+.inner {
+    padding: rem(8px);
+    background: alpha(var(--animeth-background-color), 0.1);
+    backdrop-filter: blur(rem(24px)) contrast(120%);
+    border: rem(1px) solid var(--mantine-color-default-border);
+    border-radius: var(--mantine-radius-xl);
+}

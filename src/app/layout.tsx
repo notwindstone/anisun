@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import {ColorSchemeScript, Container, createTheme, Group, MantineProvider, rem} from "@mantine/core";
+import {ColorSchemeScript, createTheme, Group, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import NextTopLoader from "nextjs-toploader";
@@ -11,10 +11,9 @@ import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
 import './global.css'
 import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
-import {readLocalStorageValue} from "@mantine/hooks";
-import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import Main from "@/components/Main/Main";
 import SideBar from "@/components/SideBar/SideBar";
+import NavigationControl from "@/components/NavigationControl/NavigationControl";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -63,7 +62,7 @@ export default function RootLayout({
                             <Group className="root-group" gap={0} wrap="nowrap">
                                 <SideBar />
                                 <div className="app-wrapper">
-                                    <>Navigation bar</>
+                                    <NavigationControl />
                                     <Main>
                                         {children}
                                     </Main>
