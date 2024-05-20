@@ -1,10 +1,34 @@
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
-import {Avatar, Box, Popover, rem, UnstyledButton} from "@mantine/core";
+import {Avatar, Box, Group, Popover, rem, Text, Transition, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, useUser} from "@clerk/nextjs";
-import {IconUserCircle} from "@tabler/icons-react";
+import {IconChevronRight, IconUserCircle} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
 import classes from './SideBarAccountTarget.module.css';
+
+function ExpandedInfo({
+    children,
+    mounted,
+}: {
+    children: React.ReactNode;
+    mounted: boolean;
+}) {
+    return (
+        <Transition
+            mounted={mounted}
+            transition="fade-right"
+            duration={150}
+            timingFunction="ease"
+        >
+            {
+                (styles) =>
+                    <Group style={styles} pr={rem(16)} wrap="nowrap" w="100%" justify="space-between" align="center">
+                        {children}
+                    </Group>
+            }
+        </Transition>
+    )
+}
 
 export default function SideBarAccountTarget() {
     const { user } = useUser();
@@ -22,7 +46,7 @@ export default function SideBarAccountTarget() {
     return (
         <Popover.Target>
             <Box
-                w={rem(64)}
+                w={opened ? rem(320) : rem(64)}
                 h={rem(64)}
                 p={rem(8)}
             >
@@ -46,6 +70,18 @@ export default function SideBarAccountTarget() {
                         <IconUserCircle size={48} stroke={1.5} />
                     </UnstyledButton>
                 </SignedOut>
+                <ExpandedInfo mounted={opened}>
+                    <Text fw={500} size="lg">
+                        Аккаунт
+                    </Text>
+                    <IconChevronRight
+                        className={
+                            `${classes.chevron} ${opened && classes.chevronRotated}`
+                        }
+                        size={24}
+                        stroke={1.5}
+                    />
+                </ExpandedInfo>
             </Box>
         </Popover.Target>
     )

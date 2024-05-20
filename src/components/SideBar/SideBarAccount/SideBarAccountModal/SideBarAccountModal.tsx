@@ -1,6 +1,9 @@
 import {Button, Flex, rem, Transition} from "@mantine/core";
 import React from "react";
 import classes from './SideBarAccountModal.module.css';
+import {useLocalStorage} from "@mantine/hooks";
+import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
+import defaultTheme from "@/configs/defaultTheme.json";
 
 export default function SideBarAccountModal({
     children,
@@ -11,6 +14,14 @@ export default function SideBarAccountModal({
     mounted: boolean;
     func: () => void;
 }) {
+    const [theme] = useLocalStorage<ThemeType>({
+        key: 'settings',
+        defaultValue: {
+            color: defaultTheme.primaryColor,
+            breadcrumb: true
+        },
+    })
+
     return (
         <Transition
             mounted={mounted}
@@ -22,6 +33,7 @@ export default function SideBarAccountModal({
                 (styles) => (
                     <Flex style={styles} gap={rem(32)} align="center" direction="column" className={classes.modal}>
                         <Button
+                            color={theme.color}
                             className={classes.closeButton}
                             onClick={func}
                         >
