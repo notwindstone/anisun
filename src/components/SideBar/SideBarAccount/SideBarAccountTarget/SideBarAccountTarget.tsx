@@ -1,5 +1,5 @@
 import {useContext} from "react";
-import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
+import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import {Avatar, Box, Popover, rem, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, useUser} from "@clerk/nextjs";
 import {IconUserCircle} from "@tabler/icons-react";
@@ -11,6 +11,9 @@ export default function SideBarAccountTarget() {
     const { setExpanded } = useContext(
         SideBarPopoverContext
     );
+    const { opened } = useContext(
+        SideBarContext
+    )
 
     function toggleDropdown() {
         setExpanded((expanded) => !expanded)
