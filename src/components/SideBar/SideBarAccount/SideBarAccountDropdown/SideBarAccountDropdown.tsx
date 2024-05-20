@@ -7,7 +7,7 @@ import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 import {useContext} from "react";
 import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
-import {IconUserCircle} from "@tabler/icons-react";
+import {IconCloudLockOpen, IconLogin, IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
 
 const RIPPLE_COLOR = {
     color: "var(--animeth-ripple-color)",
@@ -59,6 +59,27 @@ export default function SideBarAccountDropdown() {
         }
     }
 
+    function openSettings() {
+        // openSettings()
+        toggle()
+    }
+
+    function signOut() {
+        toggle()
+        NProgress.start()
+        NProgress.done()
+    }
+
+    function signIn() {
+        toggle()
+        // openSignIn()
+    }
+
+    function signUp() {
+        toggle()
+        // openSignUp()
+    }
+
     return (
         <Popover.Dropdown>
             <SignedIn>
@@ -76,17 +97,48 @@ export default function SideBarAccountDropdown() {
                         </Avatar>
                         <Title className={classes.title} order={4}>{user?.username}</Title>
                     </Group>
+
                     <DropdownButton func={pushToProfile}>
                         <IconUserCircle stroke={1.5} />
-                        <Text className={classes.text}>Мой профиль</Text>
+                        <Text className={classes.text}>
+                            Мой профиль
+                        </Text>
                     </DropdownButton>
 
+                    <DropdownButton func={openSettings}>
+                        <IconSettings stroke={1.5} />
+                        <Text className={classes.text}>
+                            Настройки
+                        </Text>
+                    </DropdownButton>
+
+                    <SignOutButton>
+                        <DropdownButton func={signOut}>
+                            <IconLogout stroke={1.5} />
+                            <Text className={classes.text}>
+                                Выйти
+                            </Text>
+                        </DropdownButton>
+                    </SignOutButton>
                 </Stack>
             </SignedIn>
             <SignedOut>
                 <Stack p={rem(8)} gap={0}>
                     <Title className={classes.title} pb={rem(8)} order={2}>Аккаунт</Title>
 
+                    <DropdownButton func={signIn}>
+                        <IconLogin stroke={1.5}/>
+                        <Text className={classes.text}>
+                            Войти
+                        </Text>
+                    </DropdownButton>
+
+                    <DropdownButton func={signUp}>
+                        <IconCloudLockOpen stroke={1.5} />
+                        <Text className={classes.text}>
+                            Зарегистрироваться
+                        </Text>
+                    </DropdownButton>
                 </Stack>
             </SignedOut>
         </Popover.Dropdown>
