@@ -5,7 +5,7 @@ import Link from "next/link";
 import useRipple from "use-ripple-hook";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import {IconCloudLockOpen, IconLogin, IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
 
@@ -13,7 +13,13 @@ const RIPPLE_COLOR = {
     color: "var(--animeth-ripple-color)",
 }
 
-function DropdownButton({ children, func }) {
+function DropdownButton({
+    children,
+    func
+}: {
+    children: React.ReactNode;
+    func: () => void;
+}) {
     const [ripple, event] = useRipple(RIPPLE_COLOR)
 
     return (
