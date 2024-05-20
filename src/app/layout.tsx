@@ -58,7 +58,7 @@ export default function RootLayout({
                     />
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
-                            <Notifications zIndex={10000} limit={3} />
+                            <Notifications zIndex={50000} limit={3} />
                             <Group className="root-group" gap={0} wrap="nowrap">
                                 <SideBar>
                                     <NavigationControl />

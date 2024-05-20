@@ -39,11 +39,11 @@ export default function SideBarAccountTarget() {
                 </SignedIn>
                 <SignedOut>
                     <UnstyledButton
-                        w={rem(32)}
-                        h={rem(32)}
+                        w={rem(48)}
+                        h={rem(48)}
                         onClick={toggleDropdown}
                     >
-                        <IconUserCircle {...variables.iconProps} />
+                        <IconUserCircle size={48} stroke={1.5} />
                     </UnstyledButton>
                 </SignedOut>
             </Box>

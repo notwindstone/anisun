@@ -5,7 +5,7 @@ import Link from "next/link";
 import useRipple from "use-ripple-hook";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
-import React, {useContext} from "react";
+import React, {useContext, useEffect} from "react";
 import {SideBarAccountPopoverContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import {IconCloudLockOpen, IconLogin, IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
@@ -71,20 +71,24 @@ export default function SideBarAccountDropdown() {
     }
 
     function signOut() {
-        toggle()
         NProgress.start()
         NProgress.done()
+        toggle()
     }
 
     function signIn() {
-        toggle()
         openSignIn()
+        toggle()
     }
 
     function signUp() {
-        toggle()
         openSignUp()
+        toggle()
     }
+
+    useEffect(() => {
+        console.log("wtf?")
+    }, [user]);
 
     return (
         <Popover.Dropdown>
@@ -119,12 +123,18 @@ export default function SideBarAccountDropdown() {
                     </DropdownButton>
 
                     <SignOutButton>
-                        <DropdownButton func={signOut}>
-                            <IconLogout stroke={1.5} />
-                            <Text className={classes.text}>
-                                Выйти
-                            </Text>
-                        </DropdownButton>
+                        <UnstyledButton
+                            className={classes.popoverButton}
+                            onClick={signOut}
+                            p={rem(8)}
+                        >
+                            <Group align="center">
+                                <IconLogout stroke={1.5} />
+                                <Text className={classes.text}>
+                                    Выйти
+                                </Text>
+                            </Group>
+                        </UnstyledButton>
                     </SignOutButton>
                 </Stack>
             </SignedIn>
