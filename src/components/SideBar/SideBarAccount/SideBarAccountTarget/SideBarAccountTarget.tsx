@@ -4,7 +4,7 @@ import {Avatar, Box, Popover, rem, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, useUser} from "@clerk/nextjs";
 import {IconUserCircle} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
-import Link from "next/link";
+import classes from './SideBarAccountTarget.module.css';
 
 export default function SideBarAccountTarget() {
     const { user } = useUser();
@@ -13,7 +13,7 @@ export default function SideBarAccountTarget() {
     );
     const { opened } = useContext(
         SideBarContext
-    )
+    );
 
     function toggleDropdown() {
         setExpanded((expanded) => !expanded)
@@ -24,14 +24,13 @@ export default function SideBarAccountTarget() {
             <Box
                 w={rem(64)}
                 h={rem(64)}
-                p={rem(16)}
+                p={rem(8)}
             >
                 <SignedIn>
                     <Avatar
+                        className={classes.avatar}
                         src={user?.imageUrl ?? '/blurred.png'}
-                        component={Link}
-                        href={user?.imageUrl ?? '/blurred.png'}
-                        size={rem(32)}
+                        size={rem(48)}
                         alt={`Аватар пользователя ${user?.username}`}
                         onClick={toggleDropdown}
                     >

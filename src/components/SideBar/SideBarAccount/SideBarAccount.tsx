@@ -1,17 +1,22 @@
 import SideBarAccountTarget from "@/components/SideBar/SideBarAccount/SideBarAccountTarget/SideBarAccountTarget";
 import SideBarAccountDropdown from "@/components/SideBar/SideBarAccount/SideBarAccountDropdown/SideBarAccountDropdown";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {SideBarAccountPopoverContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import SideBarPopover from "@/components/SideBar/SideBarPopover/SideBarPopover";
 import {useDisclosure} from "@mantine/hooks";
 import SideBarAccountModal from "@/components/SideBar/SideBarAccount/SideBarAccountModal/SideBarAccountModal";
-import {SignIn, SignUp, UserProfile} from "@clerk/nextjs";
+import {SignIn, SignUp, UserProfile, useUser} from "@clerk/nextjs";
+import {usePathname, useRouter} from "next/navigation";
+import NProgress from "nprogress";
 
 export default function SideBarAccount() {
+    const { user } = useUser();
     const [expanded, setExpanded] = useState(false)
     const [settingsOpened, { open: openSettings, close: closeSettings }] = useDisclosure(false);
     const [signInOpened, { open: openSignIn, close: closeSignIn }] = useDisclosure(false);
     const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false);
+    const router = useRouter();
+    const pathname = usePathname();
 
     const settingsModal = (
         <SideBarAccountModal
@@ -39,6 +44,19 @@ export default function SideBarAccount() {
             <SignUp routing="virtual" />
         </SideBarAccountModal>
     )
+
+    useEffect(() => {
+        router.push(pathname)
+
+        if (!user) {
+            return
+        }
+
+        closeSignUp()
+        closeSignIn()
+        NProgress.start()
+        NProgress.done()
+    }, [user]);
 
     return (
         <SideBarPopoverContext.Provider value={{ expanded, setExpanded }}>
