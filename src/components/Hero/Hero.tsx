@@ -4,6 +4,7 @@ import {Carousel} from "@mantine/carousel";
 import HeroSlides from "@/components/Hero/HeroSlides/HeroSlides";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
+import NProgress from "nprogress";
 
 const HERO_TITLES_LIMIT = 7
 

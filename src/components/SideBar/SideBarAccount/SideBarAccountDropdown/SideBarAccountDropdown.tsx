@@ -35,6 +35,7 @@ function DropdownButton({
 }
 
 export default function SideBarAccountDropdown() {
+    const [ripple, event] = useRipple(variables.rippleColor)
     const { setExpanded } = useContext(
         SideBarPopoverContext
     );
@@ -123,9 +124,12 @@ export default function SideBarAccountDropdown() {
                     </DropdownButton>
 
                     <SignOutButton>
+                        {/* It doesn't work with DropdownButton component какого-то хуя */}
                         <UnstyledButton
                             className={classes.popoverButton}
                             onClick={signOut}
+                            ref={ripple}
+                            onPointerDown={event}
                             p={rem(8)}
                         >
                             <Group align="center">
