@@ -24,5 +24,8 @@ export const variables: VariablesType = {
     "iconProps": {
         "size": 32,
         "stroke": 1.5
+    },
+    "rippleColor": {
+        "color": "var(--animeth-ripple-color)"
     }
 }

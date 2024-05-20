@@ -6,12 +6,9 @@ import useRipple from "use-ripple-hook";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 import React, {useContext} from "react";
-import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
+import {SideBarAccountPopoverContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import {IconCloudLockOpen, IconLogin, IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
-
-const RIPPLE_COLOR = {
-    color: "var(--animeth-ripple-color)",
-}
+import {variables} from "@/configs/variables";
 
 function DropdownButton({
     children,
@@ -20,7 +17,7 @@ function DropdownButton({
     children: React.ReactNode;
     func: () => void;
 }) {
-    const [ripple, event] = useRipple(RIPPLE_COLOR)
+    const [ripple, event] = useRipple(variables.rippleColor)
 
     return (
         <UnstyledButton
@@ -41,6 +38,9 @@ export default function SideBarAccountDropdown() {
     const { setExpanded } = useContext(
         SideBarPopoverContext
     );
+    const { openSettings, openSignIn, openSignUp } = useContext(
+        SideBarAccountPopoverContext
+    )
     const { user } = useUser();
     const pathname = usePathname()
     const router = useRouter()
@@ -66,7 +66,7 @@ export default function SideBarAccountDropdown() {
     }
 
     function toggleSettings() {
-        // openSettings()
+        openSettings()
         toggle()
     }
 
@@ -78,12 +78,12 @@ export default function SideBarAccountDropdown() {
 
     function signIn() {
         toggle()
-        // openSignIn()
+        openSignIn()
     }
 
     function signUp() {
         toggle()
-        // openSignUp()
+        openSignUp()
     }
 
     return (

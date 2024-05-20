@@ -7,6 +7,7 @@ import {DecoratedButtonInterface} from "@/types/DecoratedButton/DecoratedButton.
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import {useLocalStorage} from "@mantine/hooks";
 import defaultTheme from "@/configs/defaultTheme.json";
+import {variables} from "@/configs/variables";
 
 export default function DecoratedButton({ children, onClick, rippleColor, ...props }: DecoratedButtonInterface) {
     const [theme] = useLocalStorage<ThemeType>({
@@ -17,7 +18,7 @@ export default function DecoratedButton({ children, onClick, rippleColor, ...pro
         },
     })
     const [rippleRef, rippleEvent] = useRipple({
-        color: rippleColor ?? 'var(--animeth-ripple-color)'
+        color: rippleColor ?? variables.rippleColor.color
     });
 
     return (

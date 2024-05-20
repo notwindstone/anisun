@@ -4,10 +4,8 @@ import {UnstyledButton} from "@mantine/core";
 import classes from './NavigationButton.module.css';
 import {IconChevronLeft, IconChevronRight} from "@tabler/icons-react";
 import NProgress from "nprogress";
+import {variables} from "@/configs/variables";
 
-const RIPPLE_COLOR = {
-    color: "var(--animeth-ripple-color)",
-}
 const ICON_STYLES = {
     size: 32,
     stroke: 1.5,
@@ -15,7 +13,7 @@ const ICON_STYLES = {
 
 export default function NavigationButton({ type }: { type: "forward" | "back" }) {
     const router = useRouter()
-    const [ripple, event] = useRipple(RIPPLE_COLOR);
+    const [ripple, event] = useRipple(variables.rippleColor);
 
     let icon
 

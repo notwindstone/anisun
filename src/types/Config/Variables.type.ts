@@ -23,5 +23,8 @@ export type VariablesType = {
     iconProps: {
         size: number;
         stroke: number;
+    };
+    rippleColor: {
+        color: string;
     }
 }

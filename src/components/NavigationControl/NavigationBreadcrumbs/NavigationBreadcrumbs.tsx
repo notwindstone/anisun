@@ -10,11 +10,10 @@ import classes from './NavigationBreadcrumbs.module.css';
 import useRipple from "use-ripple-hook";
 import React from "react";
 import {BreadcrumbType} from "@/types/Breadcrumb/Breadcrumb.type";
+import {variables} from "@/configs/variables";
 
 function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType) {
-    const [ripple, event] = useRipple({
-        color: "var(--animeth-ripple-color)",
-    });
+    const [ripple, event] = useRipple(variables.rippleColor);
 
     return (
         <Text
