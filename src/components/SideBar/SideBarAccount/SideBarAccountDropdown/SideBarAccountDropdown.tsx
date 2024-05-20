@@ -59,7 +59,7 @@ export default function SideBarAccountDropdown() {
         }
     }
 
-    function openSettings() {
+    function toggleSettings() {
         // openSettings()
         toggle()
     }
@@ -105,7 +105,7 @@ export default function SideBarAccountDropdown() {
                         </Text>
                     </DropdownButton>
 
-                    <DropdownButton func={openSettings}>
+                    <DropdownButton func={toggleSettings}>
                         <IconSettings stroke={1.5} />
                         <Text className={classes.text}>
                             Настройки

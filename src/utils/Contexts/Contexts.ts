@@ -31,3 +31,15 @@ export const SideBarPopoverContext = createContext<SideBarPopoverContextType>({
     expanded: false,
     setExpanded: () => {}
 })
+
+export const SideBarAccountPopoverContext = createContext({
+    settingsOpened: false,
+    signInOpened: false,
+    signUpOpened: false,
+    openSettings: () => {},
+    openSignIn: () => {},
+    openSignUp: () => {},
+    closeSettings: () => {},
+    closeSignIn: () => {},
+    closeSignUp: () => {}
+})
