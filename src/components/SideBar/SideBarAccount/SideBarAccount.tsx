@@ -2,8 +2,6 @@ import SideBarAccountTarget from "@/components/SideBar/SideBarAccount/SideBarAcc
 import SideBarAccountDropdown from "@/components/SideBar/SideBarAccount/SideBarAccountDropdown/SideBarAccountDropdown";
 import React, {useState} from "react";
 import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
-import {Popover} from "@mantine/core";
-import classes from './SideBarAccount.module.css';
 import SideBarPopover from "@/components/SideBar/SideBarPopover/SideBarPopover";
 
 export default function SideBarAccount() {
