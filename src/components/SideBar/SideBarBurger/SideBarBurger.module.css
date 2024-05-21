@@ -2,3 +2,7 @@
     user-select: none;
     cursor: pointer;
 }
+
+.burgerWrapper {
+    z-index: 200;
+}

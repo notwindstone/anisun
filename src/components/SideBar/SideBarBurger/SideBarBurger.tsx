@@ -21,7 +21,7 @@ export default function SideBarBurger() {
             gap={0}
             wrap="nowrap"
         >
-            <Box p={rem(15)}>
+            <Box className={classes.burgerWrapper} p={rem(15)}>
                 <Burger
                     opened={opened}
                     onClick={toggle}
