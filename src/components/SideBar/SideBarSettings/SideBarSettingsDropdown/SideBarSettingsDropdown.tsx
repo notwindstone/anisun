@@ -1,9 +1,26 @@
-import {Anchor, Box, Group, Image, Popover, rem, SegmentedControl, Stack, Text, Transition} from "@mantine/core";
+import {
+    Anchor,
+    Box, Button,
+    Collapse,
+    Flex,
+    Group,
+    Image,
+    Popover,
+    rem,
+    SegmentedControl,
+    Stack,
+    Text,
+    Transition
+} from "@mantine/core";
 import classes from './SideBarSettingsDropdown.module.css';
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {useState} from "react";
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
+import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
+import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
+import {useDisclosure} from "@mantine/hooks";
+import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 
 const GENERAL = variables.settings.general
 const ABOUT = variables.settings.about
@@ -11,13 +28,14 @@ const ABOUT = variables.settings.about
 export default function SideBarSettingsDropdown() {
     const { theme } = useCustomTheme()
     const [section, setSection] = useState<string>(GENERAL.value)
+    const [opened, { toggle }] = useDisclosure(false);
 
     let content
 
     switch (section) {
         case "about":
             content = (
-                <Stack className={classes.stack} align="center">
+                <Stack align="center">
                     <Image
                         alt="Animeth website icon"
                         src="/favicon.png"
@@ -68,7 +86,18 @@ export default function SideBarSettingsDropdown() {
         case "general":
         default:
             content = (
-                <></>
+                <Stack>
+                    <ThemeSchemeControl />
+                    <Flex wrap="wrap">
+                        <ColorSchemeControl />
+                    </Flex>
+                    <Button color={theme.color} onClick={toggle}>
+                        Выбрать свой цвет
+                    </Button>
+                    <Collapse in={opened}>
+                        <ColorSchemePicker />
+                    </Collapse>
+                </Stack>
             )
             break
     }
