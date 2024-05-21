@@ -1,7 +1,10 @@
+"use client";
+
 import {CheckIcon, ColorSwatch, MantineColor, Tooltip} from "@mantine/core";
 import {useContext, useEffect, useState} from "react";
 import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import classes from './ColorSchemeControl.module.css';
+import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 
 const MANTINE_COLORS: MantineColor[] = [
     "black",

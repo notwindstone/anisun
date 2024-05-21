@@ -17,7 +17,6 @@ export default function SideBarButton({
 
     return (
         <Tooltip
-            color="dark"
             position="right"
             transitionProps={{ transition: 'fade-right' }}
             ref={ref}

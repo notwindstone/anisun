@@ -11,6 +11,8 @@ import React from "react";
 import SideBarAccount from "@/components/SideBar/SideBarAccount/SideBarAccount";
 import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
+import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 
 export default function SideBar({ children }: { children: React.ReactNode }) {
     const [opened, { toggle }] = useDisclosure(false);

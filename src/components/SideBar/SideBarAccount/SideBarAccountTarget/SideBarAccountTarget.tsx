@@ -86,20 +86,18 @@ export default function SideBarAccountTarget() {
                         </Box>
                     </SignedOut>
                     <ExpandedInfo mounted={opened}>
-                        {
-                            user?.username ? (
-                                <Stack gap={0} h={48}>
-                                    <Text className={classes.username} fw={500} size="lg">
-                                        {user.username}
-                                    </Text>
-                                    <Text size="sm">
-                                        Настройки
-                                    </Text>
-                                </Stack>
-                            ) : (
-                                <></>
-                            )
-                        }
+                        <Stack gap={0} h={48}>
+                            <Text
+                                className={classes.username}
+                                fw={500}
+                                size="lg"
+                            >
+                                {user?.username ?? "Аккаунт"}
+                            </Text>
+                            <Text size="sm">
+                                Настройки
+                            </Text>
+                        </Stack>
                         <IconChevronRight
                             className={
                                 `${classes.chevron} ${expanded && classes.chevronRotated}`
