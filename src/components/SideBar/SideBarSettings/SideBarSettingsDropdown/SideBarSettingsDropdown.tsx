@@ -119,7 +119,6 @@ export default function SideBarSettingsDropdown() {
     return (
         <Popover.Dropdown>
             <Group
-                className={classes.dropdown}
                 w={rem(428)}
                 wrap="nowrap"
                 p={rem(8)}

@@ -14,3 +14,7 @@
         background: lighten(var(--animeth-sidebar-color), 0.1)
     }
 }
+
+.iconWrapper {
+    flex-shrink: 0;
+}

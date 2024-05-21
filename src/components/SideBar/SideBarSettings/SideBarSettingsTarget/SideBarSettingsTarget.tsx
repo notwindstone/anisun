@@ -1,9 +1,11 @@
 import classes from './SideBarSettingsTarget.module.css';
-import {Popover, rem, UnstyledButton} from "@mantine/core";
+import {Box, Group, Popover, rem, Text, UnstyledButton} from "@mantine/core";
 import {useContext} from "react";
 import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import useRipple from "use-ripple-hook";
 import {variables} from "@/configs/variables";
+import {IconChevronRight, IconSettings} from "@tabler/icons-react";
+import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 
 export default function SideBarSettingsTarget() {
     const { expanded, setExpanded } = useContext(
@@ -32,7 +34,30 @@ export default function SideBarSettingsTarget() {
                 p={rem(8)}
                 onClick={toggleDropdown}
             >
-                1234
+                <Group wrap="nowrap">
+                    <Group
+                        className={classes.iconWrapper}
+                        wrap="nowrap"
+                        w={rem(48)}
+                        h={rem(48)}
+                        justify="center"
+                        align="center"
+                    >
+                        <IconSettings {...variables.iconProps} />
+                    </Group>
+                    <SideBarItemExpanded mounted={opened}>
+                        <Text size="lg" inline>
+                            Настройки
+                        </Text>
+                        <IconChevronRight
+                            className={
+                                `${classes.chevron} ${expanded && classes.chevronRotated}`
+                            }
+                            size={24}
+                            stroke={1.5}
+                        />
+                    </SideBarItemExpanded>
+                </Group>
             </UnstyledButton>
         </Popover.Target>
     )

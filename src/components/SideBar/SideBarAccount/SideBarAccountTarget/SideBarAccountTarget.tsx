@@ -1,42 +1,12 @@
 import React, {useContext} from "react";
 import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
-import {Avatar, Box, Group, Popover, rem, Stack, Text, Transition, UnstyledButton} from "@mantine/core";
+import {Avatar, Box, Group, Popover, rem, Stack, Text, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, useUser} from "@clerk/nextjs";
 import {IconChevronRight, IconUserCircle} from "@tabler/icons-react";
 import classes from './SideBarAccountTarget.module.css';
 import useRipple from "use-ripple-hook";
 import {variables} from "@/configs/variables";
-
-function ExpandedInfo({
-    children,
-    mounted,
-}: {
-    children: React.ReactNode;
-    mounted: boolean;
-}) {
-    return (
-        <Transition
-            mounted={mounted}
-            transition="fade-right"
-            duration={150}
-            timingFunction="ease"
-        >
-            {
-                (styles) =>
-                    <Group
-                        flex={1}
-                        style={styles}
-                        pr={rem(8)}
-                        wrap="nowrap"
-                        justify="space-between"
-                        align="center"
-                    >
-                        {children}
-                    </Group>
-            }
-        </Transition>
-    )
-}
+import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 
 export default function SideBarAccountTarget() {
     const { user } = useUser();
@@ -85,7 +55,7 @@ export default function SideBarAccountTarget() {
                             <IconUserCircle size={48} stroke={1.5} />
                         </Box>
                     </SignedOut>
-                    <ExpandedInfo mounted={opened}>
+                    <SideBarItemExpanded mounted={opened}>
                         <Stack gap={0} h={48}>
                             <Text
                                 className={classes.username}
@@ -105,7 +75,7 @@ export default function SideBarAccountTarget() {
                             size={24}
                             stroke={1.5}
                         />
-                    </ExpandedInfo>
+                    </SideBarItemExpanded>
                 </Group>
             </UnstyledButton>
         </Popover.Target>
