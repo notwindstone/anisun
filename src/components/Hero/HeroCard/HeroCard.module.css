@@ -16,3 +16,11 @@
 .title {
     color: #ffffff;
 }
+
+.centerBox {
+    width: rem(64px);
+    height: rem(240px);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}

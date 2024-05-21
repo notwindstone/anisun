@@ -42,6 +42,10 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
             ratio={ 16 / 9 }
             className={classes.wrapper}
         >
+            <Box
+                className={classes.centerBox}
+                ref={ref}
+            />
             <Image
                 className={classes.poster}
                 style={{
@@ -64,7 +68,6 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
                 >
                     <Stack
                         w="fit-content"
-                        ref={ref}
                         align="flex-start"
                         justify="flex-start"
                     >
@@ -99,7 +102,7 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
                                                 return (
                                                     <Badge
                                                         variant="light"
-                                                        color="gray"
+                                                        color="white"
                                                         key={
                                                             `${animeTitle.id}_${genre.name}`
                                                         }

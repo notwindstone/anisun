@@ -10,3 +10,7 @@
 .chevronRotated {
     transform: rotate(-180deg) !important;
 }
+
+.dropdown {
+    min-height: rem(288px);
+}

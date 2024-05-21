@@ -118,7 +118,14 @@ export default function SideBarSettingsDropdown() {
 
     return (
         <Popover.Dropdown>
-            <Group w={rem(428)} wrap="nowrap" p={rem(8)} align="flex-start" gap={rem(16)}>
+            <Group
+                className={classes.dropdown}
+                w={rem(428)}
+                wrap="nowrap"
+                p={rem(8)}
+                align="flex-start"
+                gap={rem(16)}
+            >
                 <SegmentedControl
                     orientation="vertical"
                     color={theme.color}
