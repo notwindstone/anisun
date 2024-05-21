@@ -2,3 +2,11 @@
     background: none;
     flex-shrink: 0;
 }
+
+.chevron {
+    transition: 150ms ease;
+}
+
+.chevronRotated {
+    transform: rotate(-180deg) !important;
+}

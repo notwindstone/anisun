@@ -1,6 +1,6 @@
 "use client";
 
-import {CheckIcon, ColorSwatch, MantineColor, Tooltip} from "@mantine/core";
+import {CheckIcon, ColorSwatch, MantineColor, rem, Tooltip} from "@mantine/core";
 import {useContext, useEffect, useState} from "react";
 import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import classes from './ColorSchemeControl.module.css';
@@ -52,6 +52,8 @@ export default function ColorSchemeControl() {
                     color={mantineColor}
                     onClick={() => setColor(color)}
                     className={classes.colorSwatch}
+                    w={rem(32)}
+                    h={rem(32)}
                 >
                     {
                         checkedColor === color && (

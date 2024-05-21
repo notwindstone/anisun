@@ -1,3 +1,7 @@
 .stack {
-    width: fit-content;
+    width: 100%;
+}
+
+.wrapper {
+    width: 100%;
 }

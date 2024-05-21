@@ -18,6 +18,9 @@ export default function ColorSchemePicker() {
         <>
             <Stack className={classes.stack}>
                 <ColorPicker
+                    classNames={{
+                        wrapper: classes.wrapper
+                    }}
                     value={color}
                     onChange={onChange}
                 />
@@ -25,10 +28,10 @@ export default function ColorSchemePicker() {
                     value={color}
                     onChange={onChange}
                     withPicker={false}
-                    variant="unstyled"
+                    variant="default"
                     placeholder="Введите цвет"
                 />
-                <DecoratedButton onClick={updateColor}>
+                <DecoratedButton variant="light" onClick={updateColor}>
                     Обновить
                 </DecoratedButton>
             </Stack>

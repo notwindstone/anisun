@@ -1,6 +1,6 @@
 import {
     Anchor,
-    Box, Button,
+    Button,
     Collapse,
     Flex,
     Group,
@@ -9,7 +9,7 @@ import {
     rem,
     SegmentedControl,
     Stack,
-    Text,
+    Text, Title,
     Transition
 } from "@mantine/core";
 import classes from './SideBarSettingsDropdown.module.css';
@@ -21,6 +21,7 @@ import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeContr
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 import {useDisclosure} from "@mantine/hooks";
 import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
+import {IconChevronDown} from "@tabler/icons-react";
 
 const GENERAL = variables.settings.general
 const ABOUT = variables.settings.about
@@ -87,11 +88,24 @@ export default function SideBarSettingsDropdown() {
         default:
             content = (
                 <Stack>
-                    <ThemeSchemeControl />
-                    <Flex wrap="wrap">
+                    <Title c="var(--animeth-text-contrast-color)">Тема</Title>
+                    <Flex gap={rem(8)} wrap="wrap">
                         <ColorSchemeControl />
+                        <ThemeSchemeControl />
                     </Flex>
-                    <Button color={theme.color} onClick={toggle}>
+                    <Button 
+                        variant="light" 
+                        color={theme.color} 
+                        onClick={toggle}
+                        rightSection={
+                            <IconChevronDown
+                                className={
+                                    `${classes.chevron} ${opened && classes.chevronRotated}`
+                                }
+                                size={20}
+                            />
+                        }
+                    >
                         Выбрать свой цвет
                     </Button>
                     <Collapse in={opened}>
@@ -104,7 +118,7 @@ export default function SideBarSettingsDropdown() {
 
     return (
         <Popover.Dropdown>
-            <Group w={rem(400)} wrap="nowrap" p={rem(8)} align="flex-start" gap={rem(16)}>
+            <Group w={rem(428)} wrap="nowrap" p={rem(8)} align="flex-start" gap={rem(16)}>
                 <SegmentedControl
                     orientation="vertical"
                     color={theme.color}
