@@ -1,4 +1,4 @@
-import {Popover, SegmentedControl, Stack} from "@mantine/core";
+import {Popover, rem, SegmentedControl, Stack} from "@mantine/core";
 import classes from './SideBarSettingsDropdown.module.css';
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {useState} from "react";

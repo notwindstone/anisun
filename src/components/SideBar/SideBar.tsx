@@ -21,18 +21,25 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 import {variables} from "@/configs/variables";
+import SideBarSettings from "@/components/SideBar/SideBarSettings/SideBarSettings";
 
 const SIDEBAR_BUTTONS = [
     {
-        label: 'Главная',
-        icon: <IconHome {...variables.iconProps} />,
-        link: '/',
+        key: 'main',
+        content: <></>
     },
     {
-        label: 'Поиск',
-        icon: <IconSearch {...variables.iconProps} />,
+        key: 'search',
+        content: <></>
     },
-    {},
+    {
+        key: 'trending',
+        content: <></>
+    },
+    {
+        key: 'settings',
+        content: <SideBarSettings />
+    },
 ]
 
 export default function SideBar({ children }: { children: React.ReactNode }) {
@@ -40,7 +47,13 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
     const { theme, setTheme } = useCustomTheme()
 
-    const buttons = {}
+    const buttons = SIDEBAR_BUTTONS.map((button) => {
+        return (
+            <React.Fragment key={button.key}>
+                {button.content}
+            </React.Fragment>
+        )
+    })
 
     return isMobile === false && (
         <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
@@ -57,11 +70,7 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
                         align="flex-start"
                     >
                         <SideBarBurger />
-                        <SideBarButton
-                            label="div"
-                        >
-                            <div>hello</div>
-                        </SideBarButton>
+                        {buttons}
                         <SideBarAccount />
                     </Stack>
                 </aside>
