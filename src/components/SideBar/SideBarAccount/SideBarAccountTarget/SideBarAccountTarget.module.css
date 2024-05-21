@@ -9,4 +9,12 @@
 .button {
     transition: 150ms ease;
     border-radius: var(--mantine-radius-xl);
+
+    @mixin hover {
+        background: lighten(var(--animeth-sidebar-color), 0.1)
+    }
+}
+
+.username {
+    color: var(--animeth-text-contrast-color);
 }

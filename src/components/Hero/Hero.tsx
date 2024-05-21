@@ -34,8 +34,6 @@ export default function Hero() {
         )
     }
 
-    console.log(data)
-
     const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT })
 
     return (

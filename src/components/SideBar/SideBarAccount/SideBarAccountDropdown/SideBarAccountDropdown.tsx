@@ -86,10 +86,6 @@ export default function SideBarAccountDropdown() {
         toggle()
     }
 
-    useEffect(() => {
-        console.log("wtf?")
-    }, [user]);
-
     return (
         <Popover.Dropdown>
             <SignedIn>

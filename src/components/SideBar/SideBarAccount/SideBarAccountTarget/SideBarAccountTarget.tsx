@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
 import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
-import {Avatar, Box, Group, Popover, rem, Text, Transition, UnstyledButton} from "@mantine/core";
+import {Avatar, Box, Group, Popover, rem, Stack, Text, Transition, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, useUser} from "@clerk/nextjs";
 import {IconChevronRight, IconUserCircle} from "@tabler/icons-react";
 import classes from './SideBarAccountTarget.module.css';
@@ -86,9 +86,20 @@ export default function SideBarAccountTarget() {
                         </Box>
                     </SignedOut>
                     <ExpandedInfo mounted={opened}>
-                        <Text fw={500} size="lg">
-                            Аккаунт
-                        </Text>
+                        {
+                            user?.username ? (
+                                <Stack gap={0} h={48}>
+                                    <Text className={classes.username} fw={500} size="lg">
+                                        {user.username}
+                                    </Text>
+                                    <Text size="sm">
+                                        Настройки
+                                    </Text>
+                                </Stack>
+                            ) : (
+                                <></>
+                            )
+                        }
                         <IconChevronRight
                             className={
                                 `${classes.chevron} ${expanded && classes.chevronRotated}`
