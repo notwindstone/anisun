@@ -4,6 +4,7 @@ import classes from './SideBarAccountModal.module.css';
 import {useLocalStorage} from "@mantine/hooks";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import defaultTheme from "@/configs/defaultTheme.json";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default function SideBarAccountModal({
     children,
@@ -14,13 +15,7 @@ export default function SideBarAccountModal({
     mounted: boolean;
     func: () => void;
 }) {
-    const [theme] = useLocalStorage<ThemeType>({
-        key: 'settings',
-        defaultValue: {
-            color: defaultTheme.primaryColor,
-            breadcrumb: true
-        },
-    })
+    const { theme } = useCustomTheme()
 
     return (
         <Transition

@@ -8,15 +8,10 @@ import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import {useLocalStorage} from "@mantine/hooks";
 import defaultTheme from "@/configs/defaultTheme.json";
 import {variables} from "@/configs/variables";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default function DecoratedButton({ children, onClick, rippleColor, ...props }: DecoratedButtonInterface) {
-    const [theme] = useLocalStorage<ThemeType>({
-        key: 'settings',
-        defaultValue: {
-            color: defaultTheme.primaryColor,
-            breadcrumb: true
-        },
-    })
+    const { theme } = useCustomTheme()
     const [rippleRef, rippleEvent] = useRipple({
         color: rippleColor ?? variables.rippleColor.color
     });

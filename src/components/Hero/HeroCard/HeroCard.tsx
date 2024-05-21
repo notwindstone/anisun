@@ -23,6 +23,7 @@ import {TransitionStylesType} from "@/types/Transition/TransitionStyles.type";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import defaultTheme from "@/configs/defaultTheme.json";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 const TRANSITION_PROPS: TransitionStylesType = {
     transition: "fade-left",
@@ -34,13 +35,7 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
     const { ref, inViewport } = useInViewport();
     const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 200);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
-    const [theme] = useLocalStorage<ThemeType>({
-        key: 'settings',
-        defaultValue: {
-            color: defaultTheme.primaryColor,
-            breadcrumb: true
-        },
-    })
+    const { theme } = useCustomTheme()
 
     return (
         <AspectRatio

@@ -10,19 +10,12 @@ import SideBarBurger from "@/components/SideBar/SideBarBurger/SideBarBurger";
 import React from "react";
 import SideBarAccount from "@/components/SideBar/SideBarAccount/SideBarAccount";
 import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default function SideBar({ children }: { children: React.ReactNode }) {
     const [opened, { toggle }] = useDisclosure(false);
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-    const [theme, setTheme] = useLocalStorage<ThemeType>({
-        key: 'settings',
-        defaultValue: {
-            color: defaultTheme.primaryColor,
-            breadcrumb: true
-        },
-    })
-
-
+    const { theme, setTheme } = useCustomTheme()
 
     return isMobile === false && (
         <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
