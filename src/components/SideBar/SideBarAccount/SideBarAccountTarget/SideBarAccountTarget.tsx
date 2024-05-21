@@ -94,7 +94,7 @@ export default function SideBarAccountTarget() {
                             >
                                 {user?.username ?? "Аккаунт"}
                             </Text>
-                            <Text size="sm">
+                            <Text size="sm" inline>
                                 Настройки
                             </Text>
                         </Stack>

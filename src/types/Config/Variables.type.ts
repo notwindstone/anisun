@@ -20,6 +20,16 @@ export type VariablesType = {
             value: StatusType;
         };
     };
+    settings: {
+        general: {
+            label: string;
+            value: "general";
+        };
+        about: {
+            label: string;
+            value: "about";
+        }
+    };
     iconProps: {
         size: number;
         stroke: number;

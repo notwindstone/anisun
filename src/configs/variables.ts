@@ -20,6 +20,16 @@ export const variables: VariablesType = {
             "value": "released"
         },
     },
+    "settings": {
+        "general": {
+            "label": "Общее",
+            "value": "general"
+        },
+        "about": {
+            "label": "О сайте",
+            "value": "about"
+        }
+    },
     "iconProps": {
         "size": 32,
         "stroke": 1.5
