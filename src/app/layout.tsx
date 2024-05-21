@@ -14,6 +14,7 @@ import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
 import Main from "@/components/Main/Main";
 import SideBar from "@/components/SideBar/SideBar";
 import NavigationControl from "@/components/NavigationControl/NavigationControl";
+import ThemedNextTopLoader from "@/components/ThemedNextTopLoader/ThemedNextTopLoader";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,12 +51,7 @@ export default function RootLayout({
                     <ColorSchemeScript/>
                 </head>
                 <body style={{ background: 'var(--animeth-background-color)' }} className={inter.className}>
-                    <NextTopLoader
-                      color="var(--animeth-accent-color)"
-                      showSpinner={false}
-                      height={4}
-                      zIndex={100000}
-                    />
+                    <ThemedNextTopLoader />
                     <TanstackQueryProviders>
                         <MantineProvider theme={theme} defaultColorScheme="dark">
                             <Notifications zIndex={50000} limit={3} />

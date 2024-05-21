@@ -4,7 +4,7 @@
         --animeth-ripple-color: #0000004d;
         --animeth-sidebar-color: #fdfdfd;
         --animeth-text-contrast-color: #000;
-        --animeth-accent-color: white;
+        --animeth-accent-color: #000;
     }
 
     @mixin dark-root {
@@ -12,7 +12,7 @@
         --animeth-ripple-color: #ffffff4c;
         --animeth-sidebar-color: #080808;
         --animeth-text-contrast-color: #fff;
-        --animeth-accent-color: white;
+        --animeth-accent-color: #fff;
     }
 }
 
