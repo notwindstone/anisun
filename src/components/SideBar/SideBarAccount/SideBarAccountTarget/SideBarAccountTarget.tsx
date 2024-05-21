@@ -3,8 +3,9 @@ import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import {Avatar, Box, Group, Popover, rem, Text, Transition, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, useUser} from "@clerk/nextjs";
 import {IconChevronRight, IconUserCircle} from "@tabler/icons-react";
-import {variables} from "@/configs/variables";
 import classes from './SideBarAccountTarget.module.css';
+import useRipple from "use-ripple-hook";
+import {variables} from "@/configs/variables";
 
 function ExpandedInfo({
     children,
@@ -22,7 +23,14 @@ function ExpandedInfo({
         >
             {
                 (styles) =>
-                    <Group style={styles} pr={rem(16)} wrap="nowrap" w="100%" justify="space-between" align="center">
+                    <Group
+                        flex={1}
+                        style={styles}
+                        pr={rem(8)}
+                        wrap="nowrap"
+                        justify="space-between"
+                        align="center"
+                    >
                         {children}
                     </Group>
             }
@@ -32,12 +40,16 @@ function ExpandedInfo({
 
 export default function SideBarAccountTarget() {
     const { user } = useUser();
-    const { setExpanded } = useContext(
+    const { expanded, setExpanded } = useContext(
         SideBarPopoverContext
     );
     const { opened } = useContext(
         SideBarContext
     );
+    const [ripple, event] = useRipple({
+        duration: 700,
+        ...variables.rippleColor
+    });
 
     function toggleDropdown() {
         setExpanded((expanded) => !expanded)
@@ -45,44 +57,48 @@ export default function SideBarAccountTarget() {
 
     return (
         <Popover.Target>
-            <Box
-                w={opened ? rem(320) : rem(64)}
+            <UnstyledButton
+                ref={ripple}
+                onPointerDown={event}
+                className={classes.button}
+                w={opened ? rem(288) : rem(64)}
                 h={rem(64)}
                 p={rem(8)}
+                onClick={toggleDropdown}
             >
-                <SignedIn>
-                    <Avatar
-                        className={classes.avatar}
-                        src={user?.imageUrl ?? '/blurred.png'}
-                        size={rem(48)}
-                        alt={`Аватар пользователя ${user?.username}`}
-                        onClick={toggleDropdown}
-                    >
-                        {user?.username?.[0]}
-                    </Avatar>
-                </SignedIn>
-                <SignedOut>
-                    <UnstyledButton
-                        w={rem(48)}
-                        h={rem(48)}
-                        onClick={toggleDropdown}
-                    >
-                        <IconUserCircle size={48} stroke={1.5} />
-                    </UnstyledButton>
-                </SignedOut>
-                <ExpandedInfo mounted={opened}>
-                    <Text fw={500} size="lg">
-                        Аккаунт
-                    </Text>
-                    <IconChevronRight
-                        className={
-                            `${classes.chevron} ${opened && classes.chevronRotated}`
-                        }
-                        size={24}
-                        stroke={1.5}
-                    />
-                </ExpandedInfo>
-            </Box>
+                <Group wrap="nowrap">
+                    <SignedIn>
+                        <Avatar
+                            className={classes.avatar}
+                            src={user?.imageUrl ?? '/blurred.png'}
+                            size={rem(48)}
+                            alt={`Аватар пользователя ${user?.username}`}
+                        >
+                            {user?.username?.[0]}
+                        </Avatar>
+                    </SignedIn>
+                    <SignedOut>
+                        <Box
+                            w={rem(48)}
+                            h={rem(48)}
+                        >
+                            <IconUserCircle size={48} stroke={1.5} />
+                        </Box>
+                    </SignedOut>
+                    <ExpandedInfo mounted={opened}>
+                        <Text fw={500} size="lg">
+                            Аккаунт
+                        </Text>
+                        <IconChevronRight
+                            className={
+                                `${classes.chevron} ${expanded && classes.chevronRotated}`
+                            }
+                            size={24}
+                            stroke={1.5}
+                        />
+                    </ExpandedInfo>
+                </Group>
+            </UnstyledButton>
         </Popover.Target>
     )
 }

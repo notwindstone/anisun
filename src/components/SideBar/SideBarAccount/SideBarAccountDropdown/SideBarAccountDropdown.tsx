@@ -1,7 +1,6 @@
-import {Avatar, Group, Popover, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
+import {Anchor, Avatar, Group, Popover, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
 import classes from './SideBarAccountDropdown.module.css';
-import Link from "next/link";
 import useRipple from "use-ripple-hook";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
@@ -98,8 +97,9 @@ export default function SideBarAccountDropdown() {
                     <Group pt={rem(8)} pb={rem(8)}>
                         <Avatar
                             className={classes.avatar}
-                            component={Link}
+                            component="a"
                             href={user?.imageUrl ?? '/blurred.png'}
+                            target="_blank"
                             src={user?.imageUrl ?? '/blurred.png'}
                             alt={`Аватар пользователя ${user?.username}`}
                             size="lg"

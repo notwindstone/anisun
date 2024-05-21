@@ -1,3 +1,12 @@
-.avatar {
-    cursor: pointer;
+.chevron {
+    transition: 150ms ease;
+}
+
+.chevronRotated {
+    transform: rotate(180deg) !important;
+}
+
+.button {
+    transition: 150ms ease;
+    border-radius: var(--mantine-radius-xl);
 }
