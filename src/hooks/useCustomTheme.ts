@@ -7,6 +7,7 @@ export default function useCustomTheme() {
         key: 'settings',
         defaultValue: {
             color: defaultTheme.primaryColor,
+            topLoaderColor: defaultTheme.topLoaderColor,
             breadcrumb: true
         },
     })
