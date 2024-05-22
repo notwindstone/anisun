@@ -4,8 +4,7 @@ import {
     Collapse,
     Flex,
     Group,
-    Image, MantineColor,
-    Popover,
+    Image, Popover,
     rem,
     SegmentedControl,
     Stack,
@@ -22,7 +21,6 @@ import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeContr
 import {useDisclosure} from "@mantine/hooks";
 import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 import {IconChevronDown} from "@tabler/icons-react";
-import {HEX} from "@/types/HEX/HEX";
 
 const GENERAL = variables.settings.general
 const ABOUT = variables.settings.about
@@ -42,7 +40,7 @@ export default function SideBarSettingsDropdown() {
         value: "topLoader",
     }
 
-    const [themingOption, setThemingOption] = useState<MantineColor | HEX>(WEBSITE_COLOR.value)
+    const [themingOption, setThemingOption] = useState(WEBSITE_COLOR.value)
 
     let content
 
@@ -113,7 +111,7 @@ export default function SideBarSettingsDropdown() {
                         ]}
                     />
                     <Flex gap={rem(8)} wrap="wrap">
-                        <ColorSchemeControl />
+                        <ColorSchemeControl option={themingOption} />
                         <ThemeSchemeControl />
                     </Flex>
                     <Button 
@@ -133,7 +131,7 @@ export default function SideBarSettingsDropdown() {
                         Выбрать свой цвет
                     </Button>
                     <Collapse in={opened}>
-                        <ColorSchemePicker />
+                        <ColorSchemePicker option={themingOption} />
                     </Collapse>
                 </Stack>
             )

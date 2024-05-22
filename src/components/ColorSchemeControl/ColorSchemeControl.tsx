@@ -6,18 +6,29 @@ import {CustomThemeContext} from "@/utils/Contexts/Contexts";
 import classes from './ColorSchemeControl.module.css';
 import {variables} from "@/configs/variables";
 
-export default function ColorSchemeControl() {
+export default function ColorSchemeControl({ option }: { option: string }) {
     const { theme, setTheme } = useContext(CustomThemeContext);
-    const [checkedColor, setCheckedColor] = useState(theme.color);
+    const optionColor = option === "website" ? theme.color : theme.topLoaderColor
+    const [checkedColor, setCheckedColor] = useState(optionColor);
 
     function setColor(value: MantineColor) {
         setCheckedColor(value)
-        setTheme({ color: value, breadcrumb: theme.breadcrumb })
+
+        switch (option) {
+            case "website":
+                setTheme({ ...theme, color: value })
+                break
+            case "topLoader":
+                setTheme({ ...theme, topLoaderColor: value })
+                break
+            default:
+                break
+        }
     }
 
     useEffect(() => {
-        setCheckedColor(theme.color)
-    }, [theme]);
+        setCheckedColor(optionColor)
+    }, [theme, option]);
 
     const colorSwatches = variables.mantineColors.map((color) => {
         const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`

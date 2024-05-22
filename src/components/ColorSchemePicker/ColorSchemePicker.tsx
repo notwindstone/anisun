@@ -6,7 +6,7 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import classes from './ColorSchemePicker.module.css';
 
-export default function ColorSchemePicker() {
+export default function ColorSchemePicker({ option }: { option: string }) {
     const { theme, setTheme } = useCustomTheme();
     const [color, onChange] = useState('#000000');
 
