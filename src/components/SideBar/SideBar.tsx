@@ -24,6 +24,7 @@ import {variables} from "@/configs/variables";
 import SideBarSettings from "@/components/SideBar/SideBarSettings/SideBarSettings";
 import SideBarHome from "@/components/SideBar/SideBarHome/SideBarHome";
 import SideBarTrending from "@/components/SideBar/SideBarTrending/SideBarTrending";
+import SideBarSearch from "@/components/SideBar/SideBarSearch/SideBarSearch";
 
 const SIDEBAR_BUTTONS = [
     {
@@ -36,7 +37,7 @@ const SIDEBAR_BUTTONS = [
     },
     {
         key: 'search',
-        content: <></>
+        content: <SideBarSearch />
     },
     {
         key: 'settings',

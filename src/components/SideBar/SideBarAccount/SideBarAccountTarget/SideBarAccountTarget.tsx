@@ -9,6 +9,8 @@ import {variables} from "@/configs/variables";
 import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 import {useHover} from "@mantine/hooks";
 
+const LABEL = "Аккаунт"
+
 export default function SideBarAccountTarget() {
     const { user } = useUser();
     const { expanded, setExpanded } = useContext(
@@ -33,7 +35,7 @@ export default function SideBarAccountTarget() {
                 position="right"
                 transitionProps={{ transition: 'fade-right' }}
                 ref={ref}
-                label="Аккаунт"
+                label={LABEL}
                 opened={hovered && !opened && !expanded}
             >
                 <UnstyledButton
@@ -71,7 +73,7 @@ export default function SideBarAccountTarget() {
                                     fw={500}
                                     size="lg"
                                 >
-                                    {user?.username ?? "Аккаунт"}
+                                    {user?.username ?? LABEL}
                                 </Text>
                                 <Text size="sm" inline>
                                     Настройки

@@ -1,16 +1,16 @@
-import classes from './SideBarSettingsTarget.module.css';
 import {Group, Popover, rem, Text, Tooltip, UnstyledButton} from "@mantine/core";
+import classes from "@/components/SideBar/SideBarSettings/SideBarSettingsTarget/SideBarSettingsTarget.module.css";
+import {IconChevronRight, IconSearch} from "@tabler/icons-react";
+import {variables} from "@/configs/variables";
+import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 import {useContext} from "react";
 import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import useRipple from "use-ripple-hook";
-import {variables} from "@/configs/variables";
-import {IconChevronRight, IconSettings} from "@tabler/icons-react";
-import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 import {useHover} from "@mantine/hooks";
 
-const LABEL = "Настройки"
+const LABEL = "Поиск"
 
-export default function SideBarSettingsTarget() {
+export default function SideBarSearchTarget() {
     const { expanded, setExpanded } = useContext(
         SideBarPopoverContext
     );
@@ -54,7 +54,7 @@ export default function SideBarSettingsTarget() {
                             justify="center"
                             align="center"
                         >
-                            <IconSettings {...variables.iconProps} />
+                            <IconSearch {...variables.iconProps} />
                         </Group>
                         <SideBarItemExpanded mounted={opened}>
                             <Text size="lg" inline>
