@@ -23,6 +23,7 @@ import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeContr
 import {variables} from "@/configs/variables";
 import SideBarSettings from "@/components/SideBar/SideBarSettings/SideBarSettings";
 import SideBarHome from "@/components/SideBar/SideBarHome/SideBarHome";
+import SideBarTrending from "@/components/SideBar/SideBarTrending/SideBarTrending";
 
 const SIDEBAR_BUTTONS = [
     {
@@ -31,7 +32,7 @@ const SIDEBAR_BUTTONS = [
     },
     {
         key: 'trending',
-        content: <></>
+        content: <SideBarTrending />
     },
     {
         key: 'search',
