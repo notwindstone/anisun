@@ -1,5 +1,5 @@
 import {Group, Popover, rem, Text, Tooltip, UnstyledButton} from "@mantine/core";
-import classes from "@/components/SideBar/SideBarSettings/SideBarSettingsTarget/SideBarSettingsTarget.module.css";
+import classes from "./SideBarSearchTarget.module.css";
 import {IconChevronRight, IconSearch} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
 import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";

@@ -1,9 +1,8 @@
 import SideBarPopover from "@/components/SideBar/SideBarPopover/SideBarPopover";
-import SideBarSettingsDropdown
-    from "@/components/SideBar/SideBarSettings/SideBarSettingsDropdown/SideBarSettingsDropdown";
 import {SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import React, {useState} from "react";
 import SideBarSearchTarget from "@/components/SideBar/SideBarSearch/SideBarSearchTarget/SideBarSearchTarget";
+import SideBarSearchDropdown from "@/components/SideBar/SideBarSearch/SideBarSearchDropdown/SideBarSearchDropdown";
 
 export default function SideBarSearch() {
     const [expanded, setExpanded] = useState(false)
@@ -12,7 +11,7 @@ export default function SideBarSearch() {
         <SideBarPopoverContext.Provider value={{ expanded, setExpanded }}>
             <SideBarPopover>
                 <SideBarSearchTarget />
-                <SideBarSettingsDropdown />
+                <SideBarSearchDropdown />
             </SideBarPopover>
         </SideBarPopoverContext.Provider>
     )
