@@ -36,5 +36,22 @@ export const variables: VariablesType = {
     },
     "rippleColor": {
         "color": "var(--animeth-ripple-color)",
-    }
+    },
+    "mantineColors": [
+        "black",
+        "dark",
+        "gray",
+        "red",
+        "pink",
+        "grape",
+        "violet",
+        "indigo",
+        "blue",
+        "cyan",
+        "teal",
+        "green",
+        "lime",
+        "yellow",
+        "orange"
+    ],
 }

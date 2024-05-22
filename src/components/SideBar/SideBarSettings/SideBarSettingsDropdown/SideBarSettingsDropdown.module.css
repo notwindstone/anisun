@@ -1,6 +1,7 @@
 .root {
     background: none;
     flex-shrink: 0;
+    border-radius: 0;
 }
 
 .chevron {

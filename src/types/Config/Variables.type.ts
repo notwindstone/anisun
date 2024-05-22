@@ -1,4 +1,5 @@
 import {StatusType} from "@/types/Shikimori/General/Status.type";
+import {MantineColor} from "@mantine/core";
 
 export type VariablesType = {
     imagePlaceholder: string;
@@ -36,5 +37,6 @@ export type VariablesType = {
     };
     rippleColor: {
         color: string;
-    }
+    };
+    mantineColors: MantineColor[];
 }
