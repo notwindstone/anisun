@@ -4,7 +4,7 @@ import {
     Collapse,
     Flex,
     Group,
-    Image,
+    Image, MantineColor,
     Popover,
     rem,
     SegmentedControl,
@@ -22,6 +22,7 @@ import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeContr
 import {useDisclosure} from "@mantine/hooks";
 import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 import {IconChevronDown} from "@tabler/icons-react";
+import {HEX} from "@/types/HEX/HEX";
 
 const GENERAL = variables.settings.general
 const ABOUT = variables.settings.about
@@ -31,6 +32,17 @@ export default function SideBarSettingsDropdown() {
     const { theme } = useCustomTheme()
     const [section, setSection] = useState<string>(GENERAL.value)
     const [opened, { toggle }] = useDisclosure(false);
+
+    const WEBSITE_COLOR = {
+        label: "Элементы сайта",
+        value: "website",
+    }
+    const NEXT_TOP_LOADER_COLOR = {
+        label: "Индикатор загрузчика",
+        value: "topLoader",
+    }
+
+    const [themingOption, setThemingOption] = useState<MantineColor | HEX>(WEBSITE_COLOR.value)
 
     let content
 
@@ -84,20 +96,36 @@ export default function SideBarSettingsDropdown() {
         default:
             content = (
                 <Stack>
-                    <Title c="var(--animeth-text-contrast-color)">Тема</Title>
+                    <Title c="var(--animeth-text-contrast-color)">
+                        Тема
+                    </Title>
+                    <SegmentedControl
+                        color={theme.color}
+                        classNames={{
+                            root: classes.root,
+                        }}
+                        withItemsBorders={false}
+                        value={themingOption}
+                        onChange={setThemingOption}
+                        data={[
+                            WEBSITE_COLOR,
+                            NEXT_TOP_LOADER_COLOR
+                        ]}
+                    />
                     <Flex gap={rem(8)} wrap="wrap">
                         <ColorSchemeControl />
                         <ThemeSchemeControl />
                     </Flex>
                     <Button 
                         variant="light" 
-                        color={theme.color} 
+                        color={theme.color}
                         onClick={toggle}
                         rightSection={
                             <IconChevronDown
-                                className={
-                                    `${classes.chevron} ${opened && classes.chevronRotated}`
-                                }
+                                className={`
+                                    ${classes.chevron} 
+                                    ${opened && classes.chevronRotated}
+                                `}
                                 size={20}
                             />
                         }
