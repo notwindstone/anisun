@@ -57,9 +57,9 @@ export default function ColorSchemePicker({ option }: { option: string }) {
                     variant="default"
                     placeholder="Введите цвет"
                 />
-                <Group wrap="nowrap" justify="space-between">
+                <Group grow wrap="nowrap" justify="space-between">
                     <DecoratedButton
-                        {...{ fullWidth: !isTopLoader }}
+                        className={classes.updateButton}
                         color={currentThemeColor}
                         variant="light"
                         onClick={updateColor}
@@ -69,6 +69,7 @@ export default function ColorSchemePicker({ option }: { option: string }) {
                     {
                         isTopLoader && (
                             <DecoratedButton
+                                className={classes.loaderButton}
                                 variant="light"
                                 onClick={showTopLoader}
                                 color={currentThemeColor}

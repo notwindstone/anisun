@@ -15,12 +15,12 @@ export default function SideBarBurger() {
     const title = opened ? 'Close navigation' : 'Open navigation';
 
     return (
-        // Burger's size is 34x34, that's why Box has padding of 15px and not 16px
         <Group
             align="center"
             gap={0}
             wrap="nowrap"
         >
+            {/* Burger's size is 34x34, that's why Box has padding of 15px and not 16px */}
             <Box className={classes.burgerWrapper} p={rem(15)}>
                 <Burger
                     opened={opened}

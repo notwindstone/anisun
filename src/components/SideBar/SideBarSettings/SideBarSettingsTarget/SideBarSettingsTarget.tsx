@@ -1,11 +1,12 @@
 import classes from './SideBarSettingsTarget.module.css';
-import {Box, Group, Popover, rem, Text, UnstyledButton} from "@mantine/core";
+import {Group, Popover, rem, Text, Tooltip, UnstyledButton} from "@mantine/core";
 import {useContext} from "react";
 import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import useRipple from "use-ripple-hook";
 import {variables} from "@/configs/variables";
 import {IconChevronRight, IconSettings} from "@tabler/icons-react";
 import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
+import {useHover} from "@mantine/hooks";
 
 export default function SideBarSettingsTarget() {
     const { expanded, setExpanded } = useContext(
@@ -18,6 +19,7 @@ export default function SideBarSettingsTarget() {
         duration: 700,
         ...variables.rippleColor
     });
+    const { hovered, ref } = useHover();
 
     function toggleDropdown() {
         setExpanded((expanded) => !expanded)
@@ -25,40 +27,48 @@ export default function SideBarSettingsTarget() {
 
     return (
         <Popover.Target>
-            <UnstyledButton
-                ref={ripple}
-                onPointerDown={event}
-                className={classes.button}
-                w={opened ? rem(288) : rem(64)}
-                h={rem(64)}
-                p={rem(8)}
-                onClick={toggleDropdown}
+            <Tooltip
+                position="right"
+                transitionProps={{ transition: 'fade-right' }}
+                ref={ref}
+                label="Настройки"
+                opened={hovered && !opened && !expanded}
             >
-                <Group wrap="nowrap">
-                    <Group
-                        className={classes.iconWrapper}
-                        wrap="nowrap"
-                        w={rem(48)}
-                        h={rem(48)}
-                        justify="center"
-                        align="center"
-                    >
-                        <IconSettings {...variables.iconProps} />
+                <UnstyledButton
+                    ref={ripple}
+                    onPointerDown={event}
+                    className={classes.button}
+                    w={opened ? rem(288) : rem(64)}
+                    h={rem(64)}
+                    p={rem(8)}
+                    onClick={toggleDropdown}
+                >
+                    <Group wrap="nowrap">
+                        <Group
+                            className={classes.iconWrapper}
+                            wrap="nowrap"
+                            w={rem(48)}
+                            h={rem(48)}
+                            justify="center"
+                            align="center"
+                        >
+                            <IconSettings {...variables.iconProps} />
+                        </Group>
+                        <SideBarItemExpanded mounted={opened}>
+                            <Text size="lg" inline>
+                                Настройки
+                            </Text>
+                            <IconChevronRight
+                                className={
+                                    `${classes.chevron} ${expanded && classes.chevronRotated}`
+                                }
+                                size={24}
+                                stroke={1.5}
+                            />
+                        </SideBarItemExpanded>
                     </Group>
-                    <SideBarItemExpanded mounted={opened}>
-                        <Text size="lg" inline>
-                            Настройки
-                        </Text>
-                        <IconChevronRight
-                            className={
-                                `${classes.chevron} ${expanded && classes.chevronRotated}`
-                            }
-                            size={24}
-                            stroke={1.5}
-                        />
-                    </SideBarItemExpanded>
-                </Group>
-            </UnstyledButton>
+                </UnstyledButton>
+            </Tooltip>
         </Popover.Target>
     )
 }

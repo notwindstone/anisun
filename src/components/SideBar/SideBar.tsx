@@ -22,18 +22,19 @@ import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeContr
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
 import {variables} from "@/configs/variables";
 import SideBarSettings from "@/components/SideBar/SideBarSettings/SideBarSettings";
+import SideBarHome from "@/components/SideBar/SideBarHome/SideBarHome";
 
 const SIDEBAR_BUTTONS = [
     {
         key: 'main',
+        content: <SideBarHome />
+    },
+    {
+        key: 'trending',
         content: <></>
     },
     {
         key: 'search',
-        content: <></>
-    },
-    {
-        key: 'trending',
         content: <></>
     },
     {
@@ -70,7 +71,9 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
                         align="flex-start"
                     >
                         <SideBarBurger />
-                        {buttons}
+                        <Stack>
+                            {buttons}
+                        </Stack>
                         <SideBarAccount />
                     </Stack>
                 </aside>

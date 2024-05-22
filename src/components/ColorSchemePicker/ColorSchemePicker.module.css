@@ -5,3 +5,7 @@
 .wrapper {
     width: 100%;
 }
+
+.loaderButton {
+    min-width: fit-content;
+}
