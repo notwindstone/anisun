@@ -6,27 +6,31 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import classes from './ColorSchemePicker.module.css';
 import NProgress from "nprogress";
+import {useDisclosure} from "@mantine/hooks";
 
 export default function ColorSchemePicker({ option }: { option: string }) {
     const { theme, setTheme } = useCustomTheme();
     const [color, onChange] = useState('#000000');
     const isTopLoader = option === "topLoader"
     const currentThemeColor = isTopLoader ? theme.topLoaderColor : theme.color
+    const [activated, { toggle }] = useDisclosure()
 
     function updateColor() {
         if (isTopLoader) {
-            setTheme({ ...theme, topLoaderColor: color })
+            return setTheme({...theme, topLoaderColor: color})
         }
-        else {
-            setTheme({ ...theme, color: color })
-        }
+
+        return setTheme({ ...theme, color: color })
     }
 
     function showTopLoader() {
-        NProgress.start()
-        setTimeout(() => {
-            NProgress.done()
-        }, 1000)
+        toggle()
+
+        if (activated) {
+            return NProgress.done()
+        }
+
+        return NProgress.start()
     }
 
     useEffect(() => {
@@ -69,7 +73,11 @@ export default function ColorSchemePicker({ option }: { option: string }) {
                                 onClick={showTopLoader}
                                 color={currentThemeColor}
                             >
-                                Показать загрузчик
+                                {
+                                    activated
+                                        ? "Скрыть загрузчик"
+                                        : "Показать загрузчик"
+                                }
                             </DecoratedButton>
                         )
                     }
