@@ -54,4 +54,18 @@ export const variables: VariablesType = {
         "yellow",
         "orange"
     ],
+    "websiteLinks": [
+        {
+            label: "GitHub",
+            href: "https://github.com/windstone-aristotle-yellow/animeth",
+        },
+        {
+            label: "Telegram",
+            href: "https://t.me/windst1",
+        },
+        {
+            label: "License",
+            href: "https://github.com/windstone-aristotle-yellow/animeth/blob/main/LICENSE",
+        },
+    ]
 }

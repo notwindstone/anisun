@@ -9,8 +9,8 @@ import {
     rem,
     SegmentedControl,
     Stack,
-    Text, Title,
-    Transition
+    Text,
+    Title,
 } from "@mantine/core";
 import classes from './SideBarSettingsDropdown.module.css';
 import useCustomTheme from "@/hooks/useCustomTheme";
@@ -25,6 +25,7 @@ import {IconChevronDown} from "@tabler/icons-react";
 
 const GENERAL = variables.settings.general
 const ABOUT = variables.settings.about
+const LINKS = variables.websiteLinks
 
 export default function SideBarSettingsDropdown() {
     const { theme } = useCustomTheme()
@@ -59,24 +60,19 @@ export default function SideBarSettingsDropdown() {
                         ANIMETH
                     </Text>
                     <Group>
-                        <Anchor
-                            href="https://github.com/windstone-aristotle-yellow/animeth"
-                            target="_blank"
-                        >
-                            GitHub
-                        </Anchor>
-                        <Anchor
-                            href="https://t.me/windst1"
-                            target="_blank"
-                        >
-                            Telegram
-                        </Anchor>
-                        <Anchor
-                            href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/LICENSE"
-                            target="_blank"
-                        >
-                            License
-                        </Anchor>
+                        {
+                            LINKS.map((link) => {
+                                return (
+                                    <Anchor
+                                        key={link.label}
+                                        href={link.href}
+                                        target="_blank"
+                                    >
+                                        {link.label}
+                                    </Anchor>
+                                )
+                            })
+                        }
                     </Group>
                     <Text ta="center">
                         Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.

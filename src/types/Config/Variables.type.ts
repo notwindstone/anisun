@@ -39,4 +39,8 @@ export type VariablesType = {
         color: string;
     };
     mantineColors: MantineColor[];
+    websiteLinks: {
+        label: string;
+        href: string;
+    }[];
 }
