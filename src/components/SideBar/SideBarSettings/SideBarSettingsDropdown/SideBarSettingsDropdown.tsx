@@ -27,22 +27,24 @@ const ABOUT = variables.settings.about
 const LINKS = variables.websiteLinks
 
 export default function SideBarSettingsDropdown() {
-    const { theme } = useCustomTheme()
-    const [section, setSection] = useState<string>(GENERAL.value)
+    const { theme } = useCustomTheme();
+    const [section, setSection] = useState<string>(GENERAL.value);
     const [opened, { toggle }] = useDisclosure(false);
 
     const WEBSITE_COLOR = {
         label: "Элементы сайта",
         value: "website",
-    }
+    };
     const NEXT_TOP_LOADER_COLOR = {
         label: "Индикатор загрузчика",
         value: "topLoader",
-    }
+    };
 
-    const [themingOption, setThemingOption] = useState(WEBSITE_COLOR.value)
+    const [themingOption, setThemingOption] = useState(WEBSITE_COLOR.value);
+    const isTopLoaderSection = themingOption === "topLoader";
+    const currentColor = isTopLoaderSection ? theme.topLoaderColor : theme.color;
 
-    let content
+    let content;
 
     switch (section) {
         case "about":
@@ -98,7 +100,7 @@ export default function SideBarSettingsDropdown() {
                         Тема
                     </Title>
                     <SegmentedControl
-                        color={theme.color}
+                        color={currentColor}
                         classNames={{
                             root: classes.root,
                         }}
@@ -112,11 +114,11 @@ export default function SideBarSettingsDropdown() {
                     />
                     <Flex gap={rem(8)} wrap="wrap">
                         <ColorSchemeControl option={themingOption} />
-                        <ThemeSchemeControl />
+                        <ThemeSchemeControl color={currentColor} />
                     </Flex>
                     <Button 
                         variant="light" 
-                        color={theme.color}
+                        color={currentColor}
                         onClick={toggle}
                         rightSection={
                             <IconChevronDown

@@ -1,21 +1,19 @@
 "use client"
 
-import {ActionIcon, useComputedColorScheme, useMantineColorScheme} from "@mantine/core";
+import {ActionIcon, MantineColor, useComputedColorScheme, useMantineColorScheme} from "@mantine/core";
 import {IconSun, IconMoon} from "@tabler/icons-react";
 import cx from 'clsx';
 import classes from "./ThemeSchemeControl.module.css";
-import {useContext} from "react";
-import {CustomThemeContext} from "@/utils/Contexts/Contexts";
+import {HEX} from "@/types/HEX/HEX";
 
-export default function ThemeSchemeControl() {
-    const { theme } = useContext(CustomThemeContext);
+export default function ThemeSchemeControl({ color }: { color?: MantineColor | HEX }) {
     const { setColorScheme } = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
 
     return (
         <>
             <ActionIcon
-                color={theme.color}
+                color={color}
                 onClick={() => {
                     setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
                 }}
