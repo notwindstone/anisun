@@ -19,8 +19,8 @@ export default function DecoratedButton({ children, onClick, rippleColor, ...pro
     return (
         <>
             <Button
-                {...props}
                 color={theme.color}
+                {...props}
                 classNames={{
                     root: classes.root,
                     label: classes.label,
