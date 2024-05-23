@@ -1,6 +1,8 @@
-import {Group, Popover, rem, SegmentedControl, Stack, Title} from "@mantine/core";
+import {Button, Popover, rem, Stack, Title} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import SearchBar from "@/components/SearchBar/SearchBar";
+import Link from "next/link";
+import {IconAdjustmentsHorizontal} from "@tabler/icons-react";
 
 export default function SideBarSearchDropdown() {
     const { theme } = useCustomTheme();
@@ -8,20 +10,22 @@ export default function SideBarSearchDropdown() {
     return (
         <Popover.Dropdown>
             <Stack
+                w={rem(428)}
                 p={rem(8)}
             >
                 <Title>
                     Поиск
                 </Title>
-                <Group
-                    w={rem(428)}
-                    wrap="nowrap"
-                    align="flex-start"
-                    gap={rem(16)}
-                    grow
+                <SearchBar />
+                <Button
+                    component={Link}
+                    href="/"
+                    variant="light"
+                    color={theme.color}
+                    leftSection={<IconAdjustmentsHorizontal />}
                 >
-                    <SearchBar />
-                </Group>
+                    Перейти к фильтрам
+                </Button>
             </Stack>
         </Popover.Dropdown>
     )
