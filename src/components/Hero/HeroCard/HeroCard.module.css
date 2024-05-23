@@ -1,8 +1,9 @@
 .wrapper {
     user-select: none;
-    height: 356px;
     overflow: hidden;
     position: relative;
+    transition: 150ms ease;
+    border-radius: 0 0 var(--mantine-radius-md) var(--mantine-radius-md);
 }
 
 .poster {
@@ -19,7 +20,6 @@
 
 .centerBox {
     width: rem(64px);
-    height: rem(240px);
     position: absolute;
     left: 50%;
     transform: translateX(-50%);

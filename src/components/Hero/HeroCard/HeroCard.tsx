@@ -31,18 +31,35 @@ const TRANSITION_PROPS: TransitionStylesType = {
     timingFunction: "ease",
 }
 
-export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
+export default function HeroCard({
+    animeTitle,
+    debouncedHeight
+}: {
+    animeTitle?: AnimeType,
+    debouncedHeight: number
+}) {
     const { ref, inViewport } = useInViewport();
-    const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 200);
+    const [debouncedNearNothingInViewport] = useDebouncedValue(inViewport, 100);
+    const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 250);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
     const { theme } = useCustomTheme()
 
+    if (animeTitle?.id === "11061") {
+        console.log(animeTitle?.name)
+    }
+
     return (
-        <AspectRatio
-            ratio={ 16 / 9 }
+        <Container
+            fluid
+            style={{
+                height: debouncedHeight
+            }}
             className={classes.wrapper}
         >
             <Box
+                style={{
+                    height: debouncedHeight
+                }}
                 className={classes.centerBox}
                 ref={ref}
             />
@@ -137,6 +154,6 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
                     </Stack>
                 </Container>
             </Overlay>
-        </AspectRatio>
+        </Container>
     )
 }
