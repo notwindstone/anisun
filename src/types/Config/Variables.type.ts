@@ -43,4 +43,16 @@ export type VariablesType = {
         label: string;
         href: string;
     }[];
+    kind: {
+        tv: string;
+        movie: string;
+        ova: string;
+        ona: string;
+        special: string;
+        tv_special: string;
+        music: string;
+        pv: string;
+        cm: string;
+        default: string;
+    };
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     Autocomplete,
     AutocompleteProps,
@@ -29,6 +29,7 @@ import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
 import {AnimeStatus} from "kodikwrapper";
 import {variables} from "@/configs/variables";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
+import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название аниме" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает так, как мне нужно, поэтому всё отлично

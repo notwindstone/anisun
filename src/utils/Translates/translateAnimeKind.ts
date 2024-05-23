@@ -1,40 +1,29 @@
 import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
+import {variables} from "@/configs/variables";
 
 export default function translateAnimeKind(shikimoriKind: AnimeKindEnum | string) {
-    let kind
+    const kind = variables.kind
 
     switch (shikimoriKind) {
         case 'tv':
-            kind = 'Сериал'
-            break
+            return kind.tv
         case 'movie':
-            kind = 'Фильм'
-            break
+            return kind.movie
         case 'ova':
-            kind = 'OVA'
-            break
+            return kind.ova
         case 'ona':
-            kind = 'ONA'
-            break
+            return kind.ona
         case 'special':
-            kind = 'Спецвыпуск'
-            break
+            return kind.special
         case 'tv_special':
-            kind = 'TV Спецвыпуск'
-            break
+            return kind.tv_special
         case 'music':
-            kind = 'Клип'
-            break
+            return kind.music
         case 'pv':
-            kind = 'Проморолик'
-            break
+            return kind.pv
         case 'cm':
-            kind = 'Реклама'
-            break
+            return kind.cm
         default:
-            kind = 'Неизвестно'
-            break
+            return kind.default
     }
-
-    return kind
 }

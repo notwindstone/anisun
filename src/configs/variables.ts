@@ -67,5 +67,17 @@ export const variables: VariablesType = {
             label: "License",
             href: "https://github.com/windstone-aristotle-yellow/animeth/blob/main/LICENSE",
         },
-    ]
+    ],
+    "kind": {
+        "tv": "Сериал",
+        "movie": "Фильм",
+        "ova": "OVA",
+        "ona": "ONA",
+        "special": "Спецвыпуск",
+        "tv_special": "TV Спецвыпуск",
+        "music": "Клип",
+        "pv": "Проморолик",
+        "cm": "Реклама",
+        "default": "Неизвестно",
+    }
 }
