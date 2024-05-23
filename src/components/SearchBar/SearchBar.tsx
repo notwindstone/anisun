@@ -31,6 +31,22 @@ import {variables} from "@/configs/variables";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
 
+const NOTHING = {
+    label: ' ',
+    value: 'nothing',
+    disabled: true
+};
+const FETCHING = {
+    label: ' ',
+    value: 'fetching',
+    disabled: true
+};
+const NO_VALUE = {
+    label: ' ',
+    value: 'noValue',
+    disabled: true
+};
+
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название аниме" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает так, как мне нужно, поэтому всё отлично
 const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]).filter(() => ({ value: ' ', label: ' ' }));
@@ -111,11 +127,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
     const [
         titles,
         setTitles
-    ] = useState<SearchBarDataType>([{
-        label: ' ',
-        value: 'noValue',
-        disabled: true
-    }]);
+    ] = useState<SearchBarDataType>([NO_VALUE]);
 
     const { data, isFetching } = useQuery({
         queryKey: ['titles', search],
@@ -126,7 +138,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
         const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length
 
         if (isOnlyWhiteSpace) {
-            return [{label: ' ', value: 'noValue', disabled: true}]
+            return [NO_VALUE]
         }
 
         const searchList = (await shikimori.animes.list({
@@ -143,7 +155,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
         })).animes
 
         if (searchList.length < 1) {
-            return [{label: ' ', value: 'nothing', disabled: true}];
+            return [NOTHING];
         }
 
         return searchList.map((title: AnimeType) => {
@@ -164,10 +176,12 @@ export default function SearchBar({ close }: { close?: () => void }) {
     }
 
     useEffect(() => {
-        // Не проблема, т.к. есть проверка на isFetching в <Autocomplete data={проверка} />
-        // @ts-ignore
-        setTitles(data)
-    }, [data]);
+        if (!data || isFetching) {
+            return setTitles([FETCHING])
+        }
+
+        return setTitles(data)
+    }, [data, isFetching]);
 
     return (
         <>
@@ -181,11 +195,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
                 }}
                 variant="unstyled"
                 maxDropdownHeight={height - height / 2}
-                data={
-                    isFetching
-                        ? [{ label: ' ', value: 'fetching', disabled: true }]
-                        : titles
-                }
+                data={titles}
                 onChange={(event) => {
                     setInput(event)
                 }}
