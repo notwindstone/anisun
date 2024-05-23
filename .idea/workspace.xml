@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7a772012-19d4-47f8-a1a4-f8d8dfe15dda" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/app/titles/[code]/loading.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/app/titles/[code]/page.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/utils/Misc/getShikimoriId.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavigationControl/NavigationBreadcrumbs/NavigationBreadcrumbs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigationControl/NavigationBreadcrumbs/NavigationBreadcrumbs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Titles/TitlesList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Titles/TitlesList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +63,7 @@
       <workItem from="1716457426479" duration="1425000" />
       <workItem from="1716459431873" duration="741000" />
       <workItem from="1716463754668" duration="12564000" />
-      <workItem from="1716478961309" duration="1038000" />
+      <workItem from="1716478961309" duration="1658000" />
     </task>
     <servers />
   </component>

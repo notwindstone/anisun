@@ -1,4 +1,4 @@
-import {Badge, Flex, Image, Overlay, Paper, Skeleton, Title} from "@mantine/core";
+import {Badge, Flex, Image, Overlay, Paper, Title} from "@mantine/core";
 import classes from './CarouselCard.module.css'
 import NextImage from "next/image";
 import Link from "next/link";
@@ -27,7 +27,7 @@ export default function CarouselCard({
     return (
         <Paper
             component={Link}
-            href={`/titles/`}
+            href={`/titles/${animeTitle?.url.replace('https://shikimori.one/animes/', '')}`}
             radius="xl"
             className={classes.card}
         >

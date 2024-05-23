@@ -11,6 +11,7 @@ import useRipple from "use-ripple-hook";
 import React from "react";
 import {BreadcrumbType} from "@/types/Breadcrumb/Breadcrumb.type";
 import {variables} from "@/configs/variables";
+import getShikimoriId from "@/utils/Misc/getShikimoriId";
 
 function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType) {
     const [ripple, event] = useRipple(variables.rippleColor);
@@ -53,8 +54,7 @@ export default function NavigationBreadcrumbs() {
                 return null
             }
 
-            // titlePath format is "12345-word-word-word", sometimes with a letter at the beginning
-            const shikimoriId = titlePath.split('-')[0].replace(/\D/g, '')
+            const shikimoriId = getShikimoriId(titlePath)
 
             return (await shikimori.animes.byId({ ids: shikimoriId })).animes
         }

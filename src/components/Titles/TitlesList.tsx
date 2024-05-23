@@ -28,6 +28,7 @@ export default function TitlesList() {
                         limit: TITLES_LENGTH,
                         filter: [
                             "id",
+                            "url",
                             "russian",
                             "status",
                             "score",
