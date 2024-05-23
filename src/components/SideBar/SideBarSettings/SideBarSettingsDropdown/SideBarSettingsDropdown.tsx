@@ -72,6 +72,7 @@ export default function SideBarSettingsDropdown() {
                                         key={link.label}
                                         href={link.href}
                                         target="_blank"
+                                        c={theme.color}
                                     >
                                         {link.label}
                                     </Anchor>
