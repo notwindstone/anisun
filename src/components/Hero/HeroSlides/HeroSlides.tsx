@@ -10,6 +10,7 @@ interface HeroResponseInterface extends WrapperResponseInterface {
 }
 
 export default function HeroSlides({ data, status, error, slidesLength }: HeroResponseInterface) {
+    console.log('HERO SLIDES REFRESH')
     return slidesLength.map((_slide, index) => {
         let currentSlide
 
