@@ -4,7 +4,7 @@
     overflow: hidden;
     position: relative;
     transition: 150ms ease;
-    border-radius: 0 0 var(--mantine-radius-md) var(--mantine-radius-md);
+    border-radius: 0 0 rem(12px) rem(12px);
 
     &:active {
         cursor: grabbing;

@@ -7,11 +7,14 @@ import {client} from "@/lib/shikimori/client";
 import {Container} from "@mantine/core";
 import {useViewportSize} from "@mantine/hooks";
 import classes from './Hero.module.css';
+import {useRef} from "react";
+import Autoplay from 'embla-carousel-autoplay';
 
 const HERO_TITLES_LIMIT = 7
 const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT })
 
 export default function Hero() {
+    const autoplay = useRef(Autoplay({ delay: 7000 }));
     const { width } = useViewportSize();
     const shikimori = client();
     const { status, error, data } = useQuery({
@@ -53,6 +56,10 @@ export default function Hero() {
                     slideSize="100%"
                     initialSlide={0}
                     loop
+                    withIndicators
+                    plugins={[autoplay.current]}
+                    onMouseEnter={autoplay.current.stop}
+                    onMouseLeave={autoplay.current.reset}
                 >
                     <HeroSlides
                         data={data}

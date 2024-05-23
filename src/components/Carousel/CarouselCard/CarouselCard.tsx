@@ -43,7 +43,11 @@ export default function CarouselCard({
                 <Badge className={classes.status} color="black">
                     {translateAnimeStatus(animeTitle?.status ?? "")}
                 </Badge>
-                <Badge className={classes.score} color={theme.color}>
+                <Badge
+                    autoContrast
+                    className={classes.score}
+                    color={theme.color}
+                >
                     {animeTitle?.score}
                 </Badge>
                 <Flex
@@ -52,7 +56,7 @@ export default function CarouselCard({
                     justify="flex-end"
                     gap="0.25rem"
                 >
-                    <Badge className={classes.episodes} color={theme.color}>
+                    <Badge autoContrast className={classes.episodes} color={theme.color}>
                         {animeTitle?.episodesAired} / {animeTitle?.episodes}
                     </Badge>
                     <Title className={classes.title} order={3} lineClamp={2}>

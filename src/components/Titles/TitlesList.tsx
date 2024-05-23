@@ -8,7 +8,7 @@ import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 import ConfiguredCarousel from "@/components/Carousel/ConfiguredCarousel";
-import {Group, rem} from "@mantine/core";
+import {Group, rem, Stack, Title} from "@mantine/core";
 
 const TITLES_LENGTH = 10
 const LATEST_TITLES = variables.sorting.latest;
@@ -43,9 +43,10 @@ export default function TitlesList() {
 
     return (
         <TitlesSortContext.Provider value={{ sortingType: sortingType, setSortingType: setSortingType }}>
-            <Group grow pl={rem(32)} pr={rem(32)}>
+            <Stack gap={rem(8)} align="stretch" pl={rem(32)} pr={rem(32)}>
                 <TitlesSort />
-            </Group>
+                <Title>Сейчас популярно</Title>
+            </Stack>
             <ConfiguredCarousel
                 data={data}
                 carouselSlides={carouselSlides}

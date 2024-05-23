@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="7a772012-19d4-47f8-a1a4-f8d8dfe15dda" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Carousel/CarouselSlides/CarouselSlides.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/CarouselSlides/CarouselSlides.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Hero/Hero.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hero/Hero.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Hero/HeroCard/HeroCard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hero/HeroCard/HeroCard.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Main/Main.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Main/Main.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/NavigationControl/NavigationControl.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/NavigationControl/NavigationControl.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Titles/TitlesList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Titles/TitlesList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,6 +49,11 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\asule\OneDrive\Рабочий стол\Coding\Frontend\Projects\17th-21st-projects__anilibria-player\animeth\public" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -55,7 +64,8 @@
       <updated>1716457424395</updated>
       <workItem from="1716457426479" duration="1425000" />
       <workItem from="1716459431873" duration="741000" />
-      <workItem from="1716463754668" duration="10322000" />
+      <workItem from="1716463754668" duration="12564000" />
+      <workItem from="1716478961309" duration="590000" />
     </task>
     <servers />
   </component>
