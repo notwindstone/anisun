@@ -5,7 +5,7 @@ import { variables } from '@/configs/variables';
 import {useContext} from "react";
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 import classes from './TitlesSort.module.css';
-import {useLocalStorage} from "@mantine/hooks";
+import {useLocalStorage, useViewportSize} from "@mantine/hooks";
 import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
 import defaultTheme from "@/configs/defaultTheme.json";
 import useCustomTheme from "@/hooks/useCustomTheme";
@@ -17,11 +17,25 @@ const ONGOING_TITLES = sorting.ongoing;
 const RELEASED_TITLES = sorting.released
 
 export default function TitlesSort() {
+    const { width: viewportWidth } = useViewportSize();
     const { sortingType, setSortingType } = useContext(TitlesSortContext);
     const { theme } = useCustomTheme()
 
+    let size
+
+    if (viewportWidth < 880) {
+        size = "sm"
+    } else if (viewportWidth < 1088) {
+        size = "md"
+    } else if (viewportWidth < 1312) {
+        size = "lg"
+    } else {
+        size = "xl"
+    }
+
     return (
         <SegmentedControl
+            size={size}
             autoContrast
             color={theme.color}
             classNames={{

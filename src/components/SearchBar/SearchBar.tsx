@@ -7,7 +7,7 @@ import {
     CloseButton,
     ComboboxItem,
     Flex, FloatingPosition,
-    Image,
+    Image, MantineSize,
     OptionsFilter,
     Skeleton,
     Stack,
@@ -118,7 +118,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     );
 };
 
-export default function SearchBar({ position }: { position?: FloatingPosition }) {
+export default function SearchBar({ position, size }: { position?: FloatingPosition, size: MantineSize }) {
     const { theme } = useCustomTheme();
     const { height } = useViewportSize();
     const shikimori = client();
@@ -226,6 +226,7 @@ export default function SearchBar({ position }: { position?: FloatingPosition })
                 }}
                 renderOption={renderAutocompleteOption}
                 filter={optionsFilter}
+                size={size}
             />
         </>
     );

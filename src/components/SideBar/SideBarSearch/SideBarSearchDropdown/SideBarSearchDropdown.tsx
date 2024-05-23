@@ -16,7 +16,7 @@ export default function SideBarSearchDropdown() {
                 <Title>
                     Поиск
                 </Title>
-                <SearchBar />
+                <SearchBar size="md" />
                 <Button
                     component={Link}
                     href="/"

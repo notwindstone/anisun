@@ -1,9 +1,14 @@
 .wrapper {
+    cursor: grab;
     user-select: none;
     overflow: hidden;
     position: relative;
     transition: 150ms ease;
     border-radius: 0 0 var(--mantine-radius-md) var(--mantine-radius-md);
+
+    &:active {
+        cursor: grabbing;
+    }
 }
 
 .infoWrapper {

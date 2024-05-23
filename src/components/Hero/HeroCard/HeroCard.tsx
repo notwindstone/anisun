@@ -7,8 +7,7 @@ import {
     Group,
     Image,
     Overlay, rem,
-    Stack,
-    Title,
+    Stack, Title,
     Transition
 } from "@mantine/core";
 import classes from './HeroCard.module.css';
@@ -178,6 +177,7 @@ export default function HeroCard({
         [
             debouncedHeight,
             ref,
+            size,
             responsiveFontScale,
             width,
             animeTitle?.poster?.originalUrl,
