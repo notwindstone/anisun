@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="b751d3db-6907-4916-aac7-121d88089fb6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideBar/SideBarSearch/SideBarSearchDropdown/SideBarSearchDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/SideBarSearch/SideBarSearchDropdown/SideBarSearchDropdown.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +52,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716439908841</updated>
-      <workItem from="1716439911745" duration="2610000" />
+      <workItem from="1716439911745" duration="6716000" />
     </task>
     <servers />
   </component>
@@ -72,7 +75,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/src/components/SearchBar/SearchBar.tsx</url>
-          <line>37</line>
+          <line>38</line>
           <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="1" />
         </line-breakpoint>

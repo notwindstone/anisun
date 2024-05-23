@@ -6,7 +6,7 @@ import {
     AutocompleteProps,
     CloseButton,
     ComboboxItem,
-    Flex,
+    Flex, FloatingPosition,
     Image,
     OptionsFilter,
     Skeleton,
@@ -14,7 +14,7 @@ import {
     Text,
     Title,
 } from '@mantine/core';
-import {useDebouncedValue, useViewportSize} from '@mantine/hooks';
+import {useDebouncedValue, useDisclosure, useViewportSize} from '@mantine/hooks';
 import {useRouter} from 'next/navigation';
 import {useQuery} from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
@@ -30,6 +30,7 @@ import {AnimeStatus} from "kodikwrapper";
 import {variables} from "@/configs/variables";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 const NOTHING = {
     label: ' ',
@@ -117,12 +118,14 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     );
 };
 
-export default function SearchBar({ close }: { close?: () => void }) {
+export default function SearchBar({ position }: { position?: FloatingPosition }) {
+    const { theme } = useCustomTheme();
     const { height } = useViewportSize();
     const shikimori = client();
     const router = useRouter();
     const [input, setInput] = useState('')
     const [search] = useDebouncedValue(input, 300);
+    const [focused, { open, close }] = useDisclosure(false);
 
     const [
         titles,
@@ -186,14 +189,18 @@ export default function SearchBar({ close }: { close?: () => void }) {
     return (
         <>
             <Autocomplete
-                comboboxProps={{ transitionProps: { transition: "fade-up" }, position: 'top' }}
+                comboboxProps={{ transitionProps: { transition: "fade-up" }, position: position ?? "top" }}
                 classNames={{
-                    wrapper: classes.wrapper,
                     dropdown: classes.dropdown,
+                    options: classes.options,
                     option: classes.option,
-                    input: classes.input
                 }}
-                variant="unstyled"
+                styles={{
+                    input: {
+                        borderColor: focused ? theme.color : "var(--mantine-color-default-border)"
+                    }
+                }}
+                variant="default"
                 maxDropdownHeight={height - height / 2}
                 data={titles}
                 onChange={(event) => {
@@ -201,7 +208,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
                 }}
                 placeholder="Поиск"
                 leftSection={
-                    <IconSearch className={classes.icon} size="1rem" />
+                    <IconSearch size="1rem" />
                 }
                 value={input}
                 rightSectionPointerEvents="auto"
@@ -211,9 +218,9 @@ export default function SearchBar({ close }: { close?: () => void }) {
                         setInput('')
                     }} />
                 }
+                onDropdownOpen={open}
+                onDropdownClose={close}
                 onOptionSubmit={(option) => {
-                    // Если функция close существует, то она вызывается
-                    close && close()
                     NProgress.start()
                     router.push(`/titles/${option.split('--')[0]}`);
                 }}
