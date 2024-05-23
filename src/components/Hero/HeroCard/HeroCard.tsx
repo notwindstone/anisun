@@ -89,6 +89,7 @@ export default function HeroCard({
                     className={classes.overlay}
                 >
                     <Container
+                        pl={rem(96)}
                         className={classes.infoWrapper}
                         fluid
                         h="100%"
@@ -97,7 +98,7 @@ export default function HeroCard({
                             w="fit-content"
                             align="flex-start"
                             justify="flex-start"
-                            h="50%"
+                            h="45%"
                         >
                             <Transition
                                 mounted={debouncedInViewport}
