@@ -21,6 +21,7 @@ import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeContr
 import {useDisclosure} from "@mantine/hooks";
 import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 import {IconChevronDown} from "@tabler/icons-react";
+import GradientTitle from "@/components/GradientTitle/GradientTitle";
 
 const GENERAL = variables.settings.general
 const ABOUT = variables.settings.about
@@ -62,15 +63,7 @@ export default function SideBarSettingsDropdown() {
                         placeholder="blur"
                         blurDataURL={variables.imagePlaceholder}
                     />
-                    <Text
-                        inline
-                        size={rem(32)}
-                        fw={700}
-                        variant="gradient"
-                        gradient={{ from: 'violet', to: 'indigo', deg: 90 }}
-                    >
-                        ANIMETH
-                    </Text>
+                    <GradientTitle />
                     <Group>
                         {
                             LINKS.map((link) => {

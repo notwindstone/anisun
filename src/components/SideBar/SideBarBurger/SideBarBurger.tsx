@@ -6,6 +6,7 @@ import NProgress from "nprogress";
 import NextImage from "next/image";
 import {useRouter} from "next/navigation";
 import {variables} from "@/configs/variables";
+import GradientTitle from "@/components/GradientTitle/GradientTitle";
 
 export default function SideBarBurger() {
     const { opened, toggle } = useContext(
@@ -60,15 +61,7 @@ export default function SideBarBurger() {
                                 placeholder="blur"
                                 blurDataURL={variables.imagePlaceholder}
                             />
-                            <Text
-                                inline
-                                size={rem(32)}
-                                fw={700}
-                                variant="gradient"
-                                gradient={{ from: 'violet', to: 'indigo', deg: 90 }}
-                            >
-                                ANIMETH
-                            </Text>
+                            <GradientTitle />
                         </Group>
                     )
                 }
