@@ -4,7 +4,6 @@ import {Carousel} from "@mantine/carousel";
 import HeroSlides from "@/components/Hero/HeroSlides/HeroSlides";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import classes from './Hero.module.css';
 import {Container} from "@mantine/core";
 import {useDebouncedValue, useElementSize} from "@mantine/hooks";
 import {useMemo} from "react";
@@ -14,15 +13,19 @@ console.log("test")
 const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT })
 
 export default function Hero() {
-    const { ref, width, height } = useElementSize();
+    const { ref, width } = useElementSize();
+    const [debouncedWidth] = useDebouncedValue(width, 150)
     const shikimori = client();
     const { status, error, data } = useQuery({
         queryKey: ['heroTitles'],
         queryFn: getTitles
     })
+    // 16 / 9
+    const aspectRatioHeight = debouncedWidth * 0.5625
+
     const memoizedCarousel = useMemo(
         () => <Carousel
-            h={356}
+            h={aspectRatioHeight}
             slideSize="100%"
             initialSlide={0}
             loop
@@ -34,7 +37,7 @@ export default function Hero() {
                 slidesLength={slidesLength}
             />
         </Carousel>,
-        []
+        [data, status, error, aspectRatioHeight]
     )
 
     async function getTitles() {
@@ -58,7 +61,7 @@ export default function Hero() {
 
     return (
         <>
-            <Container p={0} ref={ref}>
+            <Container h={aspectRatioHeight} p={0} ref={ref}>
                 {memoizedCarousel}
             </Container>
         </>
