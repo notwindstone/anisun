@@ -2,12 +2,9 @@
     position: absolute;
     user-select: none;
     margin-right: 1rem;
-    outline: rem(4px) solid #00000000;
     outline-offset: rem(-3px);
-
-    @mixin hover {
-        outline: rem(4px) solid var(--mantine-color-violet-4);
-    }
+    outline-style: solid;
+    outline-width: rem(4px);
 }
 
 .card {

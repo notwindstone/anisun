@@ -2,9 +2,21 @@
 
 import CarouselSlides from "@/components/Carousel/CarouselSlides/CarouselSlides";
 import {Carousel} from "@mantine/carousel";
-import classes from './ConfiguredCarousel.module.css';
+import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 
-export default function ConfiguredCarousel() {
+export default function ConfiguredCarousel(
+    {
+        status,
+        carouselSlides,
+        error,
+        data
+    } : {
+        status: "success" | "error" | "pending";
+        carouselSlides: undefined[];
+        error: Error | null;
+        data?: AnimeType[];
+    }
+) {
     return (
         <Carousel
             slideSize={225}
@@ -16,10 +28,10 @@ export default function ConfiguredCarousel() {
             dragFree
         >
             <CarouselSlides
-                carouselSlides={[1, 2, 3, 4, 5, 6]}
-                error={null}
-                status={"success"}
-                data={{ animes: {} }}
+                carouselSlides={carouselSlides}
+                error={error}
+                status={status}
+                data={data}
             />
         </Carousel>
     )

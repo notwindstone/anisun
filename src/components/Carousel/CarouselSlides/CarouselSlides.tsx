@@ -1,6 +1,7 @@
 import {Carousel} from "@mantine/carousel";
 import {Skeleton} from "@mantine/core";
 import CarouselCard from "@/components/Carousel/CarouselCard/CarouselCard";
+import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 
 export default function CarouselSlides(
     {
@@ -10,9 +11,9 @@ export default function CarouselSlides(
         data
     } : {
         status: "success" | "error" | "pending";
-        carouselSlides: unknown[];
+        carouselSlides: undefined[];
         error: Error | null;
-        data: { animes: {  } } | undefined;
+        data?: AnimeType[];
     }
 ) {
     return carouselSlides.map((_slide, index) => {
@@ -22,7 +23,7 @@ export default function CarouselSlides(
                     (status === 'success' && data !== undefined)
                         ? (
                             <>
-                                <CarouselCard />
+                                <CarouselCard animeTitle={data?.[index]} status={status} />
                             </>
                         ) : status === 'error' ? (
                             <>Error: {error?.message}</>
