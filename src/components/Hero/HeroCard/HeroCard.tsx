@@ -1,28 +1,22 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
-import {useDebouncedValue, useInterval, useInViewport, useLocalStorage, useTimeout} from "@mantine/hooks";
+import {useDebouncedValue, useInViewport} from "@mantine/hooks";
 import {
-    AspectRatio, Badge,
+    Badge,
     Box,
-    Center,
-    Container, Flex, Group,
-    Image, MantineTransition,
+    Container,
+    Group,
+    Image,
     Overlay,
-    Paper,
-    rem,
-    Skeleton, Stack,
-    Text,
+    Stack,
     Title,
     Transition
 } from "@mantine/core";
-import Link from "next/link";
 import classes from './HeroCard.module.css';
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
-import {useState} from "react";
+import {useMemo} from "react";
 import {TransitionStylesType} from "@/types/Transition/TransitionStyles.type";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
-import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
-import defaultTheme from "@/configs/defaultTheme.json";
 import useCustomTheme from "@/hooks/useCustomTheme";
 
 const TRANSITION_PROPS: TransitionStylesType = {
@@ -39,121 +33,140 @@ export default function HeroCard({
     debouncedHeight: number
 }) {
     const { ref, inViewport } = useInViewport();
-    const [debouncedNearNothingInViewport] = useDebouncedValue(inViewport, 100);
+    const [debouncedInViewport] = useDebouncedValue(inViewport, 100);
     const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 250);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
     const { theme } = useCustomTheme()
+    const width = (debouncedHeight) / 0.42
 
-    if (animeTitle?.id === "11061") {
-        console.log(animeTitle?.name)
-    }
-
-    return (
-        <Container
-            fluid
-            style={{
-                height: debouncedHeight
-            }}
-            className={classes.wrapper}
-        >
-            <Box
+    const heroCard = useMemo(
+        () => (
+            <Container
+                w={width}
+                maw={2160}
                 style={{
                     height: debouncedHeight
                 }}
-                className={classes.centerBox}
-                ref={ref}
-            />
-            <Image
-                className={classes.poster}
-                style={{
-                    scale: inViewport ? 1 : 1.2,
-                }}
-                alt="Anime poster"
-                component={NextImage}
-                src={animeTitle?.poster?.originalUrl}
-                placeholder="blur"
-                blurDataURL={variables.imagePlaceholder}
-                fill
-            />
-            <Overlay
-                backgroundOpacity={inViewport ? 0.5 : 0.8}
-                blur={inViewport ? 0 : 2}
-                className={classes.overlay}
+                className={classes.wrapper}
             >
-                <Container
-                    fluid
+                <Box
+                    style={{
+                        height: debouncedHeight
+                    }}
+                    className={classes.centerBox}
+                    ref={ref}
+                />
+                <Image
+                    className={classes.poster}
+                    style={{
+                        scale: debouncedInViewport ? 1 : 1.2,
+                    }}
+                    alt="Anime poster"
+                    component={NextImage}
+                    src={animeTitle?.poster?.originalUrl}
+                    placeholder="blur"
+                    blurDataURL={variables.imagePlaceholder}
+                    fill
+                />
+                <Overlay
+                    backgroundOpacity={debouncedInViewport ? 0.5 : 0.8}
+                    blur={debouncedInViewport ? 0 : 2}
+                    className={classes.overlay}
                 >
-                    <Stack
-                        w="fit-content"
-                        align="flex-start"
-                        justify="flex-start"
+                    <Container
+                        fluid
                     >
-                        <Transition
-                            mounted={inViewport}
-                            {...TRANSITION_PROPS}
+                        <Stack
+                            w="fit-content"
+                            align="flex-start"
+                            justify="flex-start"
                         >
-                            {
-                                (styles) => (
-                                    <Title className={classes.title} style={styles}>
-                                        {animeTitle?.name}
-                                    </Title>
-                                )
-                            }
-                        </Transition>
-                        <Transition
-                            mounted={debouncedSlightlyInViewport}
-                            {...TRANSITION_PROPS}
-                        >
-                            {
-                                (styles) => (
-                                    <Group style={styles}>
-                                        <Badge
-                                            autoContrast
-                                            color={theme.color}
-                                        >
-                                            {animeTitle?.score}
-                                        </Badge>
-                                        {
-                                            animeTitle?.genres.map((genre, index) => {
-                                                if (index >= 3) {
-                                                    return
-                                                }
+                            <Transition
+                                mounted={debouncedInViewport}
+                                {...TRANSITION_PROPS}
+                            >
+                                {
+                                    (styles) => (
+                                        <Title className={classes.title} style={styles}>
+                                            {animeTitle?.name}
+                                        </Title>
+                                    )
+                                }
+                            </Transition>
+                            <Transition
+                                mounted={debouncedSlightlyInViewport}
+                                {...TRANSITION_PROPS}
+                            >
+                                {
+                                    (styles) => (
+                                        <Group style={styles}>
+                                            <Badge
+                                                autoContrast
+                                                color={theme.color}
+                                            >
+                                                {animeTitle?.score}
+                                            </Badge>
+                                            {
+                                                animeTitle?.genres.map((genre, index) => {
+                                                    if (index >= 3) {
+                                                        return
+                                                    }
 
-                                                return (
-                                                    <Badge
-                                                        variant="light"
-                                                        color="white"
-                                                        key={
-                                                            `${animeTitle.id}_${genre.name}`
-                                                        }
-                                                    >
-                                                        {genre.russian}
-                                                    </Badge>
-                                                )
-                                            })
-                                        }
-                                    </Group>
-                                )
-                            }
-                        </Transition>
-                        <Transition
-                            mounted={debouncedLongerInViewport}
-                            {...TRANSITION_PROPS}
-                        >
-                            {
-                                (styles) => (
-                                    <DecoratedButton
-                                        radius="md"
-                                        style={styles}
-                                    >
-                                        Перейти
-                                    </DecoratedButton>
-                                )
-                            }
-                        </Transition>
-                    </Stack>
-                </Container>
-            </Overlay>
-        </Container>
+                                                    return (
+                                                        <Badge
+                                                            variant="light"
+                                                            color="white"
+                                                            key={
+                                                                `${animeTitle?.id}_${genre.name}`
+                                                            }
+                                                        >
+                                                            {genre.russian}
+                                                        </Badge>
+                                                    )
+                                                })
+                                            }
+                                        </Group>
+                                    )
+                                }
+                            </Transition>
+                            <Transition
+                                mounted={debouncedLongerInViewport}
+                                {...TRANSITION_PROPS}
+                            >
+                                {
+                                    (styles) => (
+                                        <DecoratedButton
+                                            radius="md"
+                                            style={styles}
+                                        >
+                                            Перейти
+                                        </DecoratedButton>
+                                    )
+                                }
+                            </Transition>
+                        </Stack>
+                    </Container>
+                </Overlay>
+            </Container>
+        ),
+        [
+            debouncedHeight,
+            ref,
+            animeTitle?.poster?.originalUrl,
+            animeTitle?.name,
+            animeTitle?.score,
+            animeTitle?.genres,
+            animeTitle?.id,
+            debouncedInViewport,
+            debouncedSlightlyInViewport,
+            debouncedLongerInViewport,
+            theme.color
+        ]
+    )
+
+    return (
+        <>
+            {heroCard}
+        </>
     )
 }
