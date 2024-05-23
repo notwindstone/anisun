@@ -1,12 +1,12 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
-import {useDebouncedValue, useInViewport} from "@mantine/hooks";
+import {useDebouncedValue, useInViewport, useViewportSize} from "@mantine/hooks";
 import {
     Badge,
     Box,
     Container,
     Group,
     Image,
-    Overlay,
+    Overlay, rem,
     Stack,
     Title,
     Transition
@@ -32,12 +32,27 @@ export default function HeroCard({
     animeTitle?: AnimeType,
     debouncedHeight: number
 }) {
+    const { width: viewportWidth } = useViewportSize();
     const { ref, inViewport } = useInViewport();
     const [debouncedInViewport] = useDebouncedValue(inViewport, 100);
     const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 250);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
     const { theme } = useCustomTheme()
     const width = (debouncedHeight) / 0.42
+    const responsiveFontScale
+        = viewportWidth > 1600 ? 1.8 : viewportWidth / 1000
+
+    let size
+
+    if (viewportWidth < 880) {
+        size = "sm"
+    } else if (viewportWidth < 1088) {
+        size = "md"
+    } else if (viewportWidth < 1312) {
+        size = "lg"
+    } else {
+        size = "xl"
+    }
 
     const heroCard = useMemo(
         () => (
@@ -74,12 +89,15 @@ export default function HeroCard({
                     className={classes.overlay}
                 >
                     <Container
+                        className={classes.infoWrapper}
                         fluid
+                        h="100%"
                     >
                         <Stack
                             w="fit-content"
                             align="flex-start"
                             justify="flex-start"
+                            h="50%"
                         >
                             <Transition
                                 mounted={debouncedInViewport}
@@ -87,7 +105,11 @@ export default function HeroCard({
                             >
                                 {
                                     (styles) => (
-                                        <Title className={classes.title} style={styles}>
+                                        <Title
+                                            size={36 * responsiveFontScale}
+                                            className={classes.title}
+                                            style={styles}
+                                        >
                                             {animeTitle?.name}
                                         </Title>
                                     )
@@ -101,6 +123,7 @@ export default function HeroCard({
                                     (styles) => (
                                         <Group style={styles}>
                                             <Badge
+                                                size={size}
                                                 autoContrast
                                                 color={theme.color}
                                             >
@@ -114,6 +137,7 @@ export default function HeroCard({
 
                                                     return (
                                                         <Badge
+                                                            size={size}
                                                             variant="light"
                                                             color="white"
                                                             key={
@@ -136,6 +160,7 @@ export default function HeroCard({
                                 {
                                     (styles) => (
                                         <DecoratedButton
+                                            size={size}
                                             radius="md"
                                             style={styles}
                                         >
@@ -152,6 +177,8 @@ export default function HeroCard({
         [
             debouncedHeight,
             ref,
+            responsiveFontScale,
+            width,
             animeTitle?.poster?.originalUrl,
             animeTitle?.name,
             animeTitle?.score,

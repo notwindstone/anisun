@@ -6,6 +6,11 @@
     border-radius: 0 0 var(--mantine-radius-md) var(--mantine-radius-md);
 }
 
+.infoWrapper {
+    display: flex;
+    align-items: center;
+}
+
 .poster {
     transition: 1s ease;
 }
