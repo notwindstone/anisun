@@ -4,7 +4,6 @@ import React from "react";
 import {ColorSchemeScript, createTheme, Group, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
-import NextTopLoader from "nextjs-toploader";
 import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";

@@ -14,7 +14,7 @@ import {
     Text,
     Title,
 } from '@mantine/core';
-import {useDebouncedValue} from '@mantine/hooks';
+import {useDebouncedValue, useViewportSize} from '@mantine/hooks';
 import {useRouter} from 'next/navigation';
 import {useQuery} from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
@@ -102,6 +102,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
 };
 
 export default function SearchBar({ close }: { close?: () => void }) {
+    const { height } = useViewportSize();
     const shikimori = client();
     const router = useRouter();
     const [input, setInput] = useState('')
@@ -130,7 +131,15 @@ export default function SearchBar({ close }: { close?: () => void }) {
 
         const searchList = (await shikimori.animes.list({
             search: keyInput,
-            limit: 10
+            limit: 10,
+            filter: [
+                "name",
+                "url",
+                "poster { id originalUrl mainUrl }",
+                "russian",
+                "kind",
+                "status"
+            ]
         })).animes
 
         if (searchList.length < 1) {
@@ -163,7 +172,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
     return (
         <>
             <Autocomplete
-                comboboxProps={{ transitionProps: { transition: "fade-up" }, position: 'bottom' }}
+                comboboxProps={{ transitionProps: { transition: "fade-up" }, position: 'top' }}
                 classNames={{
                     wrapper: classes.wrapper,
                     dropdown: classes.dropdown,
@@ -171,7 +180,7 @@ export default function SearchBar({ close }: { close?: () => void }) {
                     input: classes.input
                 }}
                 variant="unstyled"
-                maxDropdownHeight={800}
+                maxDropdownHeight={height - height / 2}
                 data={
                     isFetching
                         ? [{ label: ' ', value: 'fetching', disabled: true }]

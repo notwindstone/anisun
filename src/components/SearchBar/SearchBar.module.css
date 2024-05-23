@@ -1,0 +1,71 @@
+.wrapper {
+    /* пиздец */
+    --local-search-bar-border-radius: rem(16px);
+
+    background: var(--animeth-background-color);
+    outline: rem(2px) solid #00000000;
+    outline-offset: rem(-2px);
+    width: 100%;
+    min-width: rem(384px);
+    border-radius: var(--local-search-bar-border-radius);
+    transition: 200ms ease;
+
+    @media (max-width: rem(750)) {
+        min-width: unset;
+    }
+
+    &:focus-within {
+        outline: rem(2px) solid var(--mantine-color-violet-filled);
+    }
+}
+
+.icon {
+    color: var(--mantine-color-violet-light-color);
+}
+
+.input {
+    &::placeholder {
+        color: var(--mantine-color-violet-light-color);
+    }
+}
+
+.dropdown {
+    /* пиздец */
+    --local-search-bar-border-radius: rem(16px);
+
+    outline: rem(2px) solid var(--mantine-color-violet-filled);
+    outline-offset: rem(-2px);
+    z-index: 30000 !important;
+    border-radius: var(--local-search-bar-border-radius);
+    background: var(--animeth-background-color);
+}
+
+.option {
+    border-radius: var(--mantine-radius-md) var(--mantine-radius-md) var(--local-search-bar-border-radius) var(--local-search-bar-border-radius);
+
+    @mixin hover {
+        background: alpha(var(--animeth-accent-color), 0.2)
+    }
+
+    &:where([data-combobox-disabled]) {
+        opacity: unset;
+        cursor: default;
+
+        @mixin hover {
+            background: unset;
+        }
+    }
+}
+
+.poster {
+    width: 6rem;
+}
+
+.fetchingWrapper {
+    width: 100%;
+    height: 8rem;
+}
+
+.stack {
+    width: 100%;
+}

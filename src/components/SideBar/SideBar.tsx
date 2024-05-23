@@ -1,26 +1,13 @@
 "use client"
 
 import {CustomThemeContext, SideBarContext} from "@/utils/Contexts/Contexts";
-import {useDisclosure, useLocalStorage, useMediaQuery} from "@mantine/hooks";
-import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
-import defaultTheme from '@/configs/defaultTheme.json';
+import {useDisclosure, useMediaQuery} from "@mantine/hooks";
 import {em, rem, Stack} from "@mantine/core";
-import {
-    IconHome,
-    IconSearch,
-    IconSettings,
-    IconTrendingUp,
-    IconUserCircle,
-} from "@tabler/icons-react";
 import classes from './SideBar.module.css';
 import SideBarBurger from "@/components/SideBar/SideBarBurger/SideBarBurger";
 import React from "react";
 import SideBarAccount from "@/components/SideBar/SideBarAccount/SideBarAccount";
-import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
 import useCustomTheme from "@/hooks/useCustomTheme";
-import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
-import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
-import {variables} from "@/configs/variables";
 import SideBarSettings from "@/components/SideBar/SideBarSettings/SideBarSettings";
 import SideBarHome from "@/components/SideBar/SideBarHome/SideBarHome";
 import SideBarTrending from "@/components/SideBar/SideBarTrending/SideBarTrending";

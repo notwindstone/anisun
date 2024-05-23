@@ -5,12 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b751d3db-6907-4916-aac7-121d88089fb6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/types/SearchBar/SearchBarData.type.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SearchBar/SearchBar.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/configs/variables.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/configs/variables.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/types/Config/Variables.type.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/types/Config/Variables.type.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Translates/translateAnimeKind.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Translates/translateAnimeKind.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideBar/SideBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/SideBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideBar/SideBarSearch/SideBarSearchDropdown/SideBarSearchDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/SideBarSearch/SideBarSearchDropdown/SideBarSearchDropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/configs/sideBarLinks.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +56,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716439908841</updated>
-      <workItem from="1716439911745" duration="1546000" />
+      <workItem from="1716439911745" duration="2122000" />
     </task>
     <servers />
   </component>
