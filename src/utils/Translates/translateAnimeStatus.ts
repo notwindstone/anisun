@@ -1,7 +1,7 @@
 import { variables } from '@/configs/variables';
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 
-export default function translateAnimeStatus(sortingType: StatusType) {
+export default function translateAnimeStatus(sortingType: StatusType | string) {
     const sorting = variables.sorting
 
     switch (sortingType) {
