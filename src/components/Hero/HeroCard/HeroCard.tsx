@@ -91,8 +91,11 @@ export default function HeroCard({ animeTitle }: { animeTitle?: AnimeType }) {
                                 (styles) => (
                                     <Group style={styles}>
                                         <Badge
+                                            autoContrast
                                             color={theme.color}
-                                        >{animeTitle?.score}</Badge>
+                                        >
+                                            {animeTitle?.score}
+                                        </Badge>
                                         {
                                             animeTitle?.genres.map((genre, index) => {
                                                 if (index >= 3) {

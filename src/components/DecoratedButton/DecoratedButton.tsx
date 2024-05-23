@@ -19,6 +19,7 @@ export default function DecoratedButton({ children, onClick, rippleColor, ...pro
     return (
         <>
             <Button
+                autoContrast
                 color={theme.color}
                 {...props}
                 classNames={{

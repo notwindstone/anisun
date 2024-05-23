@@ -6,7 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="b751d3db-6907-4916-aac7-121d88089fb6" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ColorSchemePicker/ColorSchemePicker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ColorSchemePicker/ColorSchemePicker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DecoratedButton/DecoratedButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DecoratedButton/DecoratedButton.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Hero/HeroCard/HeroCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Hero/HeroCard/HeroCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/SideBar/SideBarAccount/SideBarAccountModal/SideBarAccountModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/SideBarAccount/SideBarAccountModal/SideBarAccountModal.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/SideBar/SideBarSettings/SideBarSettingsDropdown/SideBarSettingsDropdown.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/SideBar/SideBarSettings/SideBarSettingsDropdown/SideBarSettingsDropdown.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Titles/TitlesSort/TitlesSort.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Titles/TitlesSort/TitlesSort.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +54,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1716439908841</updated>
-      <workItem from="1716439911745" duration="8383000" />
+      <workItem from="1716439911745" duration="8775000" />
     </task>
     <servers />
   </component>

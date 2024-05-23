@@ -94,6 +94,7 @@ export default function SideBarSettingsDropdown() {
                         Тема
                     </Title>
                     <SegmentedControl
+                        autoContrast
                         color={currentColor}
                         classNames={{
                             root: classes.root,
@@ -144,6 +145,7 @@ export default function SideBarSettingsDropdown() {
                 gap={rem(16)}
             >
                 <SegmentedControl
+                    autoContrast
                     orientation="vertical"
                     color={theme.color}
                     classNames={{

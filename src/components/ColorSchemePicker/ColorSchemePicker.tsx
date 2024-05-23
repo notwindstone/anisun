@@ -58,14 +58,6 @@ export default function ColorSchemePicker({ option }: { option: string }) {
                     placeholder="Введите цвет"
                 />
                 <Group grow wrap="nowrap" justify="space-between">
-                    <DecoratedButton
-                        className={classes.updateButton}
-                        color={currentThemeColor}
-                        variant="light"
-                        onClick={updateColor}
-                    >
-                        Обновить
-                    </DecoratedButton>
                     {
                         isTopLoader && (
                             <DecoratedButton
@@ -82,6 +74,14 @@ export default function ColorSchemePicker({ option }: { option: string }) {
                             </DecoratedButton>
                         )
                     }
+                    <DecoratedButton
+                        className={classes.updateButton}
+                        color={currentThemeColor}
+                        variant="light"
+                        onClick={updateColor}
+                    >
+                        Обновить
+                    </DecoratedButton>
                 </Group>
             </Stack>
         </>

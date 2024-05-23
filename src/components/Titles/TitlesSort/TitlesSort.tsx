@@ -22,6 +22,7 @@ export default function TitlesSort() {
 
     return (
         <SegmentedControl
+            autoContrast
             color={theme.color}
             classNames={{
                 root: classes.root

@@ -28,6 +28,7 @@ export default function SideBarAccountModal({
                 (styles) => (
                     <Flex style={styles} gap={rem(32)} align="center" direction="column" className={classes.modal}>
                         <Button
+                            autoContrast
                             color={theme.color}
                             className={classes.closeButton}
                             onClick={func}
