@@ -126,6 +126,12 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
     const [input, setInput] = useState('')
     const [search] = useDebouncedValue(input, 300);
     const [focused, { open, close }] = useDisclosure(false);
+    const color = theme.topLoaderColor
+    // It can be MantineColor or HEX code
+    // @ts-ignore
+    const isMantineColor = variables.mantineColors.includes(color)
+    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
+    const calculatedColor = isMantineColor ? mantineColor : color
 
     const [
         titles,
@@ -197,7 +203,7 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
                 }}
                 styles={{
                     input: {
-                        borderColor: focused ? theme.color : "var(--mantine-color-default-border)"
+                        borderColor: focused ? calculatedColor : "var(--mantine-color-default-border)"
                     }
                 }}
                 variant="default"
