@@ -6,10 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="7a772012-19d4-47f8-a1a4-f8d8dfe15dda" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/CarouselCard/CarouselCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Carousel/CarouselSlides/CarouselSlides.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/CarouselSlides/CarouselSlides.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Carousel/ConfiguredCarousel.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Carousel/ConfiguredCarousel.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/Titles/TitlesList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Titles/TitlesList.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -56,7 +55,7 @@
       <updated>1716457424395</updated>
       <workItem from="1716457426479" duration="1425000" />
       <workItem from="1716459431873" duration="741000" />
-      <workItem from="1716463754668" duration="9601000" />
+      <workItem from="1716463754668" duration="10322000" />
     </task>
     <servers />
   </component>

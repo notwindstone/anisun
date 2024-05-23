@@ -1,4 +1,4 @@
-import {Badge, Flex, Image, Overlay, Paper, Title} from "@mantine/core";
+import {Badge, Flex, Image, Overlay, Paper, Skeleton, Title} from "@mantine/core";
 import classes from './CarouselCard.module.css'
 import NextImage from "next/image";
 import Link from "next/link";
@@ -6,13 +6,12 @@ import { variables } from '@/configs/variables';
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {useHover} from "@mantine/hooks";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
+import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 
 export default function CarouselCard({
     animeTitle,
-    status
 }: {
     animeTitle?: AnimeType;
-    status: "success" | "error" | "pending";
 }) {
     const { theme } = useCustomTheme()
     const { hovered, ref } = useHover();
@@ -22,7 +21,7 @@ export default function CarouselCard({
     const isMantineColor = variables.mantineColors.includes(color)
     const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
     const calculatedColor = isMantineColor ? mantineColor : color
-    console.log(animeTitle)
+
     return (
         <Paper
             component={Link}
@@ -41,8 +40,12 @@ export default function CarouselCard({
                         : "#00000000"
                 }}
             >
-                <Badge className={classes.status} color="black">В работе</Badge>
-                <Badge className={classes.score} color={theme.color}>8.95</Badge>
+                <Badge className={classes.status} color="black">
+                    {translateAnimeStatus(animeTitle?.status ?? "")}
+                </Badge>
+                <Badge className={classes.score} color={theme.color}>
+                    {animeTitle?.score}
+                </Badge>
                 <Flex
                     className={classes.info}
                     direction="column"
@@ -50,14 +53,16 @@ export default function CarouselCard({
                     gap="0.25rem"
                 >
                     <Badge className={classes.episodes} color={theme.color}>
-                        7 / 25
+                        {animeTitle?.episodesAired} / {animeTitle?.episodes}
                     </Badge>
-                    <Title className={classes.title} order={3} lineClamp={2}>Волчица и Пряности</Title>
+                    <Title className={classes.title} order={3} lineClamp={2}>
+                        {animeTitle?.russian}
+                    </Title>
                 </Flex>
             </Overlay>
             <Image
                 alt="Anime poster"
-                src="/blurred.png"
+                src={animeTitle?.poster?.originalUrl}
                 placeholder="blur"
                 blurDataURL={variables.imagePlaceholder}
                 width={300}

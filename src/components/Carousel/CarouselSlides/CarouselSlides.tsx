@@ -23,7 +23,7 @@ export default function CarouselSlides(
                     (status === 'success' && data !== undefined)
                         ? (
                             <>
-                                <CarouselCard animeTitle={data?.[index]} status={status} />
+                                <CarouselCard animeTitle={data?.[index]} />
                             </>
                         ) : status === 'error' ? (
                             <>Error: {error?.message}</>
