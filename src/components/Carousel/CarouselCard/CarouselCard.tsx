@@ -21,6 +21,8 @@ export default function CarouselCard({
     const isMantineColor = variables.mantineColors.includes(color)
     const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
     const calculatedColor = isMantineColor ? mantineColor : color
+    const animeStatus = animeTitle?.status ?? ""
+    const isAnnounced = animeStatus === 'anons'
 
     return (
         <Paper
@@ -41,25 +43,37 @@ export default function CarouselCard({
                 }}
             >
                 <Badge className={classes.status} color="black">
-                    {translateAnimeStatus(animeTitle?.status ?? "")}
+                    {translateAnimeStatus(animeStatus)}
                 </Badge>
-                <Badge
-                    autoContrast
-                    className={classes.score}
-                    color={theme.color}
-                >
-                    {animeTitle?.score}
-                </Badge>
+                {
+                    !isAnnounced && (
+                        <Badge
+                            autoContrast
+                            className={classes.score}
+                            color={theme.color}
+                        >
+                            {animeTitle?.score}
+                        </Badge>
+                    )
+                }
                 <Flex
                     className={classes.info}
                     direction="column"
                     justify="flex-end"
                     gap="0.25rem"
                 >
-                    <Badge autoContrast className={classes.episodes} color={theme.color}>
-                        {animeTitle?.episodesAired} / {animeTitle?.episodes}
-                    </Badge>
-                    <Title className={classes.title} order={3} lineClamp={2}>
+                    {
+                        !isAnnounced && (
+                            <Badge autoContrast className={classes.episodes} color={theme.color}>
+                                {animeTitle?.episodesAired} / {animeTitle?.episodes}
+                            </Badge>
+                        )
+                    }
+                    <Title
+                        className={classes.title}
+                        order={3}
+                        lineClamp={isAnnounced ? 3 : 2}
+                    >
                         {animeTitle?.russian}
                     </Title>
                 </Flex>
