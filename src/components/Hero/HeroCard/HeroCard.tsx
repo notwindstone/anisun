@@ -57,16 +57,12 @@ export default function HeroCard({
         () => (
             <Container
                 w={width}
+                h={debouncedHeight}
                 maw={2160}
-                style={{
-                    height: debouncedHeight
-                }}
                 className={classes.wrapper}
             >
                 <Box
-                    style={{
-                        height: debouncedHeight
-                    }}
+                    h={debouncedHeight}
                     className={classes.centerBox}
                     ref={ref}
                 />

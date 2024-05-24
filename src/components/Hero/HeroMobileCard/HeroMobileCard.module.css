@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    align-items: flex-end;
+    transition: 150ms ease;
+}
+
+.imageWrapper {
+    flex: 1;
+    user-select: none;
+    position: relative;
+    transition: 150ms ease;
+    border-radius: 0 0 rem(12px) rem(12px);
+}
+
+.centerBox {
+    width: rem(64px);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.poster {
+    transition: 300ms ease;
+}

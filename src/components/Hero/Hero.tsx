@@ -76,7 +76,7 @@ export default function Hero() {
                         status={status}
                         error={error}
                         slidesLength={slidesLength}
-                        debouncedHeight={aspectRatioHeight}
+                        debouncedHeight={mobileHeight}
                     />
                 </Carousel>
             </Container>
