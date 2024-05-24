@@ -1,9 +1,11 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
-import {Box, Container, Image, rem} from "@mantine/core";
+import {Badge, Box, Container, Group, Image, Overlay, rem, Stack, Title, Transition} from "@mantine/core";
 import {useInViewport} from "@mantine/hooks";
 import classes from "./HeroMobileCard.module.css";
 import NextImage from "next/image";
 import {variables} from "@/configs/variables";
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default function HeroMobileCard({
     animeTitle,
@@ -13,6 +15,7 @@ export default function HeroMobileCard({
     debouncedHeight: number
 }) {
     const { ref, inViewport } = useInViewport();
+    const { theme } = useCustomTheme();
 
     return (
         <Container
@@ -29,14 +32,14 @@ export default function HeroMobileCard({
             />
             <Container
                 fluid
+                style={{
+                    transform: inViewport ? 'translateY(-32px)' : 'translateY(0)'
+                }}
                 h={debouncedHeight - 64}
                 className={classes.imageWrapper}
             >
                 <Image
                     className={classes.poster}
-                    style={{
-                        transform: inViewport ? 'translateY(-32px)' : 'translateY(0)'
-                    }}
                     alt="Anime poster"
                     component={NextImage}
                     src={animeTitle?.poster?.originalUrl}
@@ -44,6 +47,57 @@ export default function HeroMobileCard({
                     blurDataURL={variables.imagePlaceholder}
                     fill
                 />
+                <Overlay
+                    backgroundOpacity={0.5}
+                    className={classes.overlay}
+                >
+                    <Stack
+                        p={rem(32)}
+                        w="100%"
+                        h="100%"
+                        align="flex-start"
+                        justify="flex-end"
+                    >
+                        <Title
+                            className={classes.title}
+                            lineClamp={2}
+                        >
+                            {animeTitle?.name}
+                        </Title>
+                        <Group
+                            w="100%"
+                            justify="flex-start"
+                        >
+                            <Badge
+                                size="lg"
+                                autoContrast
+                                color={theme.color}
+                            >
+                                {animeTitle?.score}
+                            </Badge>
+                            {
+                                animeTitle?.genres.map((genre, index) => {
+                                    if (index >= 3) {
+                                        return;
+                                    }
+
+                                    return (
+                                        <Badge
+                                            size="lg"
+                                            variant="light"
+                                            color="white"
+                                            key={
+                                                `${animeTitle?.id}_${genre.name}`
+                                            }
+                                        >
+                                            {genre.russian}
+                                        </Badge>
+                                    );
+                                })
+                            }
+                        </Group>
+                    </Stack>
+                </Overlay>
             </Container>
 
         </Container>

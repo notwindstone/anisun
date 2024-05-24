@@ -33,8 +33,8 @@ export default function Hero() {
     });
     // Around 21 / 9
     const aspectRatioHeight = (width - 96) * 0.42;
-    // Around 4 / 5
-    const mobileHeight = width * 1.25;
+    // Around 5 / 6
+    const mobileHeight = width * 1.2;
 
     async function getTitles() {
         return (
@@ -64,6 +64,9 @@ export default function Hero() {
                 {...CAROUSEL_CONTAINER_PROPS}
             >
                 <Carousel
+                    classNames={{
+                        indicators: classes.indicators
+                    }}
                     h={mobileHeight}
                     plugins={[autoplay.current]}
                     onMouseEnter={autoplay.current.stop}

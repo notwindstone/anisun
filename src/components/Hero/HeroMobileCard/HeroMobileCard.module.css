@@ -8,8 +8,9 @@
     flex: 1;
     user-select: none;
     position: relative;
-    transition: 150ms ease;
-    border-radius: 0 0 rem(12px) rem(12px);
+    transition: 400ms ease;
+    overflow: hidden;
+    border-radius: rem(32px);
 }
 
 .centerBox {
@@ -20,5 +21,13 @@
 }
 
 .poster {
-    transition: 300ms ease;
+    transition: 400ms ease;
+}
+
+.overlay {
+    transition: 400ms ease;
+}
+
+.title {
+    color: var(--animeth-text-contrast-color);
 }
