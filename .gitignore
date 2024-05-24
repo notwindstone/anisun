@@ -20,7 +20,7 @@
 /build
 
 # misc
-.idea
+/.idea/
 .DS_Store
 *.pem
 
