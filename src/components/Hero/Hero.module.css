@@ -1,3 +1,18 @@
 .wrapper {
     transition: 150ms ease;
+
+    @media screen and (max-width: rem(750px)) {
+        display: none;
+    }
+}
+
+.mobileWrapper {
+    display: none;
+    transition: 150ms ease;
+}
+
+@media screen and (max-width: rem(750px)) {
+    .mobileWrapper {
+        display: block;
+    }
 }

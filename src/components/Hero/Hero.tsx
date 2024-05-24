@@ -47,6 +47,14 @@ export default function Hero() {
         <>
             <Container
                 fluid
+                h={356}
+                p={0}
+                className={classes.mobileWrapper}
+            >
+                1234
+            </Container>
+            <Container
+                fluid
                 h={aspectRatioHeight}
                 p={0}
                 className={classes.wrapper}
