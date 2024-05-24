@@ -32,6 +32,6 @@ export default function CarouselSlides(
                         )
                 }
             </Carousel.Slide>
-        )
-    })
+        );
+    });
 }

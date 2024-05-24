@@ -8,7 +8,7 @@ import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 import ConfiguredCarousel from "@/components/Carousel/ConfiguredCarousel";
-import {Group, rem, Stack, Title} from "@mantine/core";
+import {rem, Stack, Title} from "@mantine/core";
 
 const TITLES_LENGTH = 10
 const LATEST_TITLES = variables.sorting.latest;

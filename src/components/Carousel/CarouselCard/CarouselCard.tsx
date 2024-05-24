@@ -1,5 +1,5 @@
 import {Badge, Flex, Image, Overlay, Paper, Title} from "@mantine/core";
-import classes from './CarouselCard.module.css'
+import classes from './CarouselCard.module.css';
 import NextImage from "next/image";
 import Link from "next/link";
 import { variables } from '@/configs/variables';
@@ -13,16 +13,16 @@ export default function CarouselCard({
 }: {
     animeTitle?: AnimeType;
 }) {
-    const { theme } = useCustomTheme()
+    const { theme } = useCustomTheme();
     const { hovered, ref } = useHover();
-    const color = theme.color
+    const color = theme.color;
     // It can be MantineColor or HEX code
     // @ts-ignore
-    const isMantineColor = variables.mantineColors.includes(color)
-    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
-    const calculatedColor = isMantineColor ? mantineColor : color
-    const animeStatus = animeTitle?.status ?? ""
-    const isAnnounced = animeStatus === 'anons'
+    const isMantineColor = variables.mantineColors.includes(color);
+    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
+    const calculatedColor = isMantineColor ? mantineColor : color;
+    const animeStatus = animeTitle?.status ?? "";
+    const isAnnounced = animeStatus === 'anons';
 
     return (
         <Paper

@@ -8,7 +8,7 @@ import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
 import {ruRU} from "@clerk/localizations";
-import './global.css'
+import './global.css';
 import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
 import Main from "@/components/Main/Main";
 import SideBar from "@/components/SideBar/SideBar";
@@ -17,12 +17,12 @@ import ThemedNextTopLoader from "@/components/ThemedNextTopLoader/ThemedNextTopL
 
 const inter = Inter({ subsets: ["latin"] });
 
-const title = 'Главная'
-const description = "Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Плеер сделан на AniLibria API и Kodik, а поиск аниме через Shikimori API."
+const title = 'Главная';
+const description = "Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Плеер сделан на AniLibria API и Kodik, а поиск аниме через Shikimori API.";
 
 const theme = createTheme({
     defaultRadius: "xl",
-})
+});
 
 export const metadata: Metadata = {
     icons: {

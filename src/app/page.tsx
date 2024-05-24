@@ -22,5 +22,5 @@ export default async function Home() {
                 </Stack>
             </Container>
         </div>
-    )
+    );
 }
