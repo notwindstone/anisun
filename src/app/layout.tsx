@@ -68,6 +68,7 @@ export default function RootLayout({
                             </Group>
                         </MantineProvider>
                     </TanstackQueryProviders>
+                    <SpeedInsights />
                 </body>
             </html>
         </ClerkProvider>
