@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {ActionIcon, MantineColor, useComputedColorScheme, useMantineColorScheme} from "@mantine/core";
 import {IconSun, IconMoon} from "@tabler/icons-react";
@@ -15,7 +15,7 @@ export default function ThemeSchemeControl({ color }: { color?: MantineColor | H
             <ActionIcon
                 color={color}
                 onClick={() => {
-                    setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light')
+                    setColorScheme(computedColorScheme === 'light' ? 'dark' : 'light');
                 }}
                 variant="light"
                 size="lg"
@@ -25,5 +25,5 @@ export default function ThemeSchemeControl({ color }: { color?: MantineColor | H
                 <IconMoon className={cx(classes.icon, classes.dark)} stroke={1.5} />
             </ActionIcon>
         </>
-    )
+    );
 }

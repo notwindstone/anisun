@@ -31,60 +31,60 @@ function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType
                 )
             }
         </Text>
-    )
+    );
 }
 
 export default function NavigationBreadcrumbs() {
-    let titlePath: string | null
+    let titlePath: string | null;
     const { user } = useUser();
-    const shikimori = client()
-    const pathname = usePathname()
+    const shikimori = client();
+    const pathname = usePathname();
     const paths = pathname
         .split('/')
-        .filter((path) => path)
-    const isTitlePath = paths.length > 1 && paths[paths.length - 2] === 'titles'
+        .filter((path) => path);
+    const isTitlePath = paths.length > 1 && paths[paths.length - 2] === 'titles';
     if (isTitlePath) {
-        titlePath = paths[paths.length - 1]
+        titlePath = paths[paths.length - 1];
     }
 
     const { data } = useQuery({
         queryKey: ['breadcrumbs', pathname],
         queryFn: async () => {
             if (!titlePath) {
-                return null
+                return null;
             }
 
-            const shikimoriId = getShikimoriId(titlePath)
+            const shikimoriId = getShikimoriId(titlePath);
 
-            return (await shikimori.animes.byId({ ids: shikimoriId })).animes
+            return (await shikimori.animes.byId({ ids: shikimoriId })).animes;
         }
-    })
+    });
 
     const breadcrumbs = paths.map((breadcrumb, index, array) => {
-        const currentPathArray = array.slice(0, index + 1)
-        const currentPathname = currentPathArray.join('/')
-        const translatedBreadcrumb = translateRouteNames(breadcrumb)
-        const previousBreadcrumb = array[index - 1]
-        const russianAnimeName = data?.[0].russian
-        const originalAnimeName = data?.[0].name
-        let currentBreadcrumb
+        const currentPathArray = array.slice(0, index + 1);
+        const currentPathname = currentPathArray.join('/');
+        const translatedBreadcrumb = translateRouteNames(breadcrumb);
+        const previousBreadcrumb = array[index - 1];
+        const russianAnimeName = data?.[0].russian;
+        const originalAnimeName = data?.[0].name;
+        let currentBreadcrumb;
 
         switch (previousBreadcrumb) {
             case "titles":
-                currentBreadcrumb = russianAnimeName ?? originalAnimeName
-                break
+                currentBreadcrumb = russianAnimeName ?? originalAnimeName;
+                break;
             case "account":
-                currentBreadcrumb = user?.username
-                break
+                currentBreadcrumb = user?.username;
+                break;
             default:
-                currentBreadcrumb = translatedBreadcrumb
-                break
+                currentBreadcrumb = translatedBreadcrumb;
+                break;
         }
 
         return (
             <Breadcrumb key={breadcrumb} currentBreadcrumb={currentBreadcrumb} currentPathname={currentPathname} />
-        )
-    })
+        );
+    });
 
     return (
         <Breadcrumbs
@@ -97,5 +97,5 @@ export default function NavigationBreadcrumbs() {
             <Breadcrumb currentPathname="/" icon={<IconHome size={20} stroke={1.5} />} />
             {breadcrumbs}
         </Breadcrumbs>
-    )
+    );
 }

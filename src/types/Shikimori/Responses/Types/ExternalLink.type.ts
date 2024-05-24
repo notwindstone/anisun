@@ -6,4 +6,4 @@ export type ExternalLinkType = {
     url: string;
     createdAt: string | null;
     updatedAt: string | null;
-}
+};

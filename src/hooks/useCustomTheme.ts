@@ -10,7 +10,7 @@ export default function useCustomTheme() {
             topLoaderColor: defaultTheme.topLoaderColor,
             breadcrumb: true
         },
-    })
+    });
 
     return { theme, setTheme };
 }

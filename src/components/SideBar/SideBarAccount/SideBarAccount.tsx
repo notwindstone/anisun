@@ -11,7 +11,7 @@ import NProgress from "nprogress";
 
 export default function SideBarAccount() {
     const { user } = useUser();
-    const [expanded, setExpanded] = useState(false)
+    const [expanded, setExpanded] = useState(false);
     const [settingsOpened, { open: openSettings, close: closeSettings }] = useDisclosure(false);
     const [signInOpened, { open: openSignIn, close: closeSignIn }] = useDisclosure(false);
     const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false);
@@ -25,7 +25,7 @@ export default function SideBarAccount() {
         >
             <UserProfile />
         </SideBarAccountModal>
-    )
+    );
 
     const signInModal = (
         <SideBarAccountModal
@@ -34,7 +34,7 @@ export default function SideBarAccount() {
         >
             <SignIn routing="virtual" />
         </SideBarAccountModal>
-    )
+    );
 
     const signUpModal = (
         <SideBarAccountModal
@@ -43,19 +43,19 @@ export default function SideBarAccount() {
         >
             <SignUp routing="virtual" />
         </SideBarAccountModal>
-    )
+    );
 
     useEffect(() => {
-        router.push(pathname)
+        router.push(pathname);
 
         if (!user) {
-            return
+            return;
         }
 
-        closeSignUp()
-        closeSignIn()
-        NProgress.start()
-        NProgress.done()
+        closeSignUp();
+        closeSignIn();
+        NProgress.start();
+        NProgress.done();
     }, [user]);
 
     return (
@@ -82,5 +82,5 @@ export default function SideBarAccount() {
                 </SideBarPopover>
             </SideBarAccountPopoverContext.Provider>
         </SideBarPopoverContext.Provider>
-    )
+    );
 }

@@ -6,7 +6,7 @@ import SideBarSettingsDropdown
     from "@/components/SideBar/SideBarSettings/SideBarSettingsDropdown/SideBarSettingsDropdown";
 
 export default function SideBarSettings() {
-    const [expanded, setExpanded] = useState(false)
+    const [expanded, setExpanded] = useState(false);
 
     return (
         <SideBarPopoverContext.Provider value={{ expanded, setExpanded }}>
@@ -15,5 +15,5 @@ export default function SideBarSettings() {
                 <SideBarSettingsDropdown />
             </SideBarPopover>
         </SideBarPopoverContext.Provider>
-    )
+    );
 }

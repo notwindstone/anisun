@@ -9,4 +9,4 @@ export type TopicType = {
     type: string;
     updatedAt: string;
     url: string;
-}
+};

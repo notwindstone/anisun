@@ -15,4 +15,4 @@ export const comments = pgTable("comments", {
     message: text("message").notNull(),
     isDeleted: boolean("isDeleted").default(false).notNull(),
     isEdited: boolean("isEdited").default(false).notNull(),
-})
+});

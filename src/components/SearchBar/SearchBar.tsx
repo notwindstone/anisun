@@ -21,7 +21,7 @@ import {IconSearch} from '@tabler/icons-react';
 import classes from './SearchBar.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 import NProgress from 'nprogress';
-import NextImage from 'next/image'
+import NextImage from 'next/image';
 import {client} from "@/lib/shikimori/client";
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
@@ -55,14 +55,14 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    const nonTranslatedKind: AnimeKindEnum | string = optionData[3]
-    const nonTranslatedStatus: AnimeStatus | string = optionData[4]
+    const nonTranslatedKind: AnimeKindEnum | string = optionData[3];
+    const nonTranslatedStatus: AnimeStatus | string = optionData[4];
 
-    const posterSourceURL = optionData[1]
-    const russianName = optionData[2]
-    const kind = translateAnimeKind(nonTranslatedKind)
-    const status = translateAnimeStatus(nonTranslatedStatus)
-    const englishName = optionData[5]
+    const posterSourceURL = optionData[1];
+    const russianName = optionData[2];
+    const kind = translateAnimeKind(nonTranslatedKind);
+    const status = translateAnimeStatus(nonTranslatedStatus);
+    const englishName = optionData[5];
 
     switch (option.value) {
         case 'nothing':
@@ -78,7 +78,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     <Image className={classes.poster} alt="Anime character" radius="md" src={searchAutocomplete.noValue.image} />
                     <Title order={3}>{searchAutocomplete.noValue.label}</Title>
                 </Stack>
-            )
+            );
         case 'fetching':
             return (
                 <Flex align="center" gap="md">
@@ -91,7 +91,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                         <Skeleton height={24} width={208} radius="xl" />
                     </div>
                 </Flex>
-            )
+            );
     }
 
     return (
@@ -123,15 +123,15 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
     const { height } = useViewportSize();
     const shikimori = client();
     const router = useRouter();
-    const [input, setInput] = useState('')
+    const [input, setInput] = useState('');
     const [search] = useDebouncedValue(input, 300);
     const [focused, { open, close }] = useDisclosure(false);
-    const color = theme.topLoaderColor
+    const color = theme.topLoaderColor;
     // It can be MantineColor or HEX code
     // @ts-ignore
-    const isMantineColor = variables.mantineColors.includes(color)
-    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
-    const calculatedColor = isMantineColor ? mantineColor : color
+    const isMantineColor = variables.mantineColors.includes(color);
+    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
+    const calculatedColor = isMantineColor ? mantineColor : color;
 
     const [
         titles,
@@ -144,10 +144,10 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
     });
 
     async function fetchTitles(keyInput: string) {
-        const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length
+        const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length;
 
         if (isOnlyWhiteSpace) {
-            return [NO_VALUE]
+            return [NO_VALUE];
         }
 
         const searchList = (await shikimori.animes.list({
@@ -161,35 +161,35 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
                 "kind",
                 "status"
             ]
-        })).animes
+        })).animes;
 
         if (searchList.length < 1) {
             return [NOTHING];
         }
 
         return searchList.map((title: AnimeType) => {
-            const titleCode = title.url.replace('https://shikimori.one/animes/', '')
-            const posterSourceURL = title.poster?.mainUrl ?? '/missing-image.png'
-            const originalName = title.name
-            const russianName = title.russian ?? originalName
-            const animeKind = title.kind
-            const animeStatus = title.status
+            const titleCode = title.url.replace('https://shikimori.one/animes/', '');
+            const posterSourceURL = title.poster?.mainUrl ?? '/missing-image.png';
+            const originalName = title.name;
+            const russianName = title.russian ?? originalName;
+            const animeKind = title.kind;
+            const animeStatus = title.status;
 
             return (
                 {
                     value: `${titleCode}--${posterSourceURL}--${russianName}--${animeKind}--${animeStatus}--${originalName}`,
                     label: `${russianName} / ${originalName}`,
                 }
-            )
+            );
         });
     }
 
     useEffect(() => {
         if (!data || isFetching) {
-            return setTitles([FETCHING])
+            return setTitles([FETCHING]);
         }
 
-        return setTitles(data)
+        return setTitles(data);
     }, [data, isFetching]);
 
     return (
@@ -210,7 +210,7 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
                 maxDropdownHeight={height - height / 2}
                 data={titles}
                 onChange={(event) => {
-                    setInput(event)
+                    setInput(event);
                 }}
                 placeholder="Поиск"
                 leftSection={
@@ -221,13 +221,13 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
                 rightSection={
                     search
                     && <CloseButton onClick={() => {
-                        setInput('')
+                        setInput('');
                     }} />
                 }
                 onDropdownOpen={open}
                 onDropdownClose={close}
                 onOptionSubmit={(option) => {
-                    NProgress.start()
+                    NProgress.start();
                     router.push(`/titles/${option.split('--')[0]}`);
                 }}
                 renderOption={renderAutocompleteOption}

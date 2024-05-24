@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 import {useState} from "react";
@@ -10,9 +10,9 @@ import {StatusType} from "@/types/Shikimori/General/Status.type";
 import ConfiguredCarousel from "@/components/Carousel/ConfiguredCarousel";
 import {rem, Stack, Title} from "@mantine/core";
 
-const TITLES_LENGTH = 10
+const TITLES_LENGTH = 10;
 const LATEST_TITLES = variables.sorting.latest;
-const carouselSlides: undefined[] = Array.from({ length: TITLES_LENGTH })
+const carouselSlides: undefined[] = Array.from({ length: TITLES_LENGTH });
 
 export default function TitlesList() {
     const shikimori = client();
@@ -37,10 +37,10 @@ export default function TitlesList() {
                             "episodesAired"
                         ]
                     })
-            ).animes
+            ).animes;
         },
         queryKey: ["titlesList", sortingType]
-    })
+    });
 
     return (
         <TitlesSortContext.Provider value={{ sortingType: sortingType, setSortingType: setSortingType }}>
@@ -55,5 +55,5 @@ export default function TitlesList() {
                 status={status}
             />
         </TitlesSortContext.Provider>
-    )
+    );
 }

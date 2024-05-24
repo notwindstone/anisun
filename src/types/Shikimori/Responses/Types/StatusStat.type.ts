@@ -3,4 +3,4 @@ import {UserRateStatusType} from "@/types/Shikimori/Responses/Types/UserRateStat
 export type StatusStatType = {
     status: UserRateStatusType;
     count: number;
-}
+};

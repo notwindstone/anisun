@@ -3,4 +3,4 @@ export type IncompleteDateType = {
     month: number;
     day: number;
     date: string;
-}
+};

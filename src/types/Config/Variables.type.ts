@@ -55,4 +55,4 @@ export type VariablesType = {
         cm: string;
         default: string;
     };
-}
+};

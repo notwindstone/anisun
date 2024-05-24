@@ -8,7 +8,7 @@ import {SideBarContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import useRipple from "use-ripple-hook";
 import {useHover} from "@mantine/hooks";
 
-const LABEL = "Поиск"
+const LABEL = "Поиск";
 
 export default function SideBarSearchTarget() {
     const { expanded, setExpanded } = useContext(
@@ -24,7 +24,7 @@ export default function SideBarSearchTarget() {
     const { hovered, ref } = useHover();
 
     function toggleDropdown() {
-        setExpanded((expanded) => !expanded)
+        setExpanded((expanded) => !expanded);
     }
 
     return (
@@ -72,5 +72,5 @@ export default function SideBarSearchTarget() {
                 </UnstyledButton>
             </Tooltip>
         </Popover.Target>
-    )
+    );
 }

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import CarouselSlides from "@/components/Carousel/CarouselSlides/CarouselSlides";
 import {Carousel} from "@mantine/carousel";
@@ -34,5 +34,5 @@ export default function ConfiguredCarousel(
                 data={data}
             />
         </Carousel>
-    )
+    );
 }

@@ -8,4 +8,4 @@ export type SideBarAccountPopoverContextType = {
     closeSettings: () => void,
     closeSignIn: () => void,
     closeSignUp: () => void
-}
+};

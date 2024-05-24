@@ -1,36 +1,34 @@
-"use client"
+"use client";
 
 import {SegmentedControl} from "@mantine/core";
 import { variables } from '@/configs/variables';
 import {useContext} from "react";
 import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 import classes from './TitlesSort.module.css';
-import {useLocalStorage, useViewportSize} from "@mantine/hooks";
-import {ThemeType} from "@/types/CustomThemeContext/Theme.type";
-import defaultTheme from "@/configs/defaultTheme.json";
+import {useViewportSize} from "@mantine/hooks";
 import useCustomTheme from "@/hooks/useCustomTheme";
 
-const sorting = variables.sorting
+const sorting = variables.sorting;
 const LATEST_TITLES = sorting.latest;
 const ANNOUNCED_TITLES = sorting.anons;
 const ONGOING_TITLES = sorting.ongoing;
-const RELEASED_TITLES = sorting.released
+const RELEASED_TITLES = sorting.released;
 
 export default function TitlesSort() {
     const { width: viewportWidth } = useViewportSize();
     const { sortingType, setSortingType } = useContext(TitlesSortContext);
-    const { theme } = useCustomTheme()
+    const { theme } = useCustomTheme();
 
-    let size
+    let size;
 
     if (viewportWidth < 880) {
-        size = "sm"
+        size = "sm";
     } else if (viewportWidth < 1088) {
-        size = "md"
+        size = "md";
     } else if (viewportWidth < 1312) {
-        size = "lg"
+        size = "lg";
     } else {
-        size = "xl"
+        size = "xl";
     }
 
     return (

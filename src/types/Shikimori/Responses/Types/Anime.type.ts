@@ -60,4 +60,4 @@ export type AnimeType = {
     url: string;
     userRate: UserRateType | null;
     videos: VideoType[];
-}
+};

@@ -22,7 +22,7 @@ const TRANSITION_PROPS: TransitionStylesType = {
     transition: "fade-left",
     duration: 1000,
     timingFunction: "ease",
-}
+};
 
 export default function HeroCard({
     animeTitle,
@@ -36,21 +36,21 @@ export default function HeroCard({
     const [debouncedInViewport] = useDebouncedValue(inViewport, 100);
     const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 250);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
-    const { theme } = useCustomTheme()
-    const width = (debouncedHeight) / 0.42
+    const { theme } = useCustomTheme();
+    const width = (debouncedHeight) / 0.42;
     const responsiveFontScale
-        = viewportWidth > 1600 ? 1.8 : viewportWidth / 1000
+        = viewportWidth > 1600 ? 1.8 : viewportWidth / 1000;
 
-    let size
+    let size;
 
     if (viewportWidth < 880) {
-        size = "sm"
+        size = "sm";
     } else if (viewportWidth < 1088) {
-        size = "md"
+        size = "md";
     } else if (viewportWidth < 1312) {
-        size = "lg"
+        size = "lg";
     } else {
-        size = "xl"
+        size = "xl";
     }
 
     const heroCard = useMemo(
@@ -132,7 +132,7 @@ export default function HeroCard({
                                             {
                                                 animeTitle?.genres.map((genre, index) => {
                                                     if (index >= 3) {
-                                                        return
+                                                        return;
                                                     }
 
                                                     return (
@@ -146,7 +146,7 @@ export default function HeroCard({
                                                         >
                                                             {genre.russian}
                                                         </Badge>
-                                                    )
+                                                    );
                                                 })
                                             }
                                         </Group>
@@ -190,11 +190,11 @@ export default function HeroCard({
             debouncedLongerInViewport,
             theme.color
         ]
-    )
+    );
 
     return (
         <>
             {heroCard}
         </>
-    )
+    );
 }

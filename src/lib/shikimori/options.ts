@@ -3,48 +3,48 @@ import {AnimesType} from "@/types/Shikimori/Queries/Animes.type";
 export const options = ({ ids, search, limit, status, year, order, page, filter }: AnimesType) => {
     function userFilterOptions() {
         if (!filter) {
-            return
+            return;
         }
 
-        let filterOptions = ``
+        let filterOptions = ``;
 
         for (const option of filter) {
-            filterOptions = `${filterOptions}${option} `
+            filterOptions = `${filterOptions}${option} `;
         }
 
-        return filterOptions
+        return filterOptions;
     }
 
 
-    let query = ""
-    const userFilter = userFilterOptions()
+    let query = "";
+    const userFilter = userFilterOptions();
 
     if (ids) {
-        query = `${query}ids: "${ids}"`
+        query = `${query}ids: "${ids}"`;
     }
 
     if (search) {
-        query = `${query}search: "${search}", `
+        query = `${query}search: "${search}", `;
     }
 
     if (limit) {
-        query = `${query}limit: ${limit}, `
+        query = `${query}limit: ${limit}, `;
     }
 
     if (status) {
-        query = `${query}status: "${status}", `
+        query = `${query}status: "${status}", `;
     }
 
     if (year) {
-        query = `${query}season: "${year}", `
+        query = `${query}season: "${year}", `;
     }
 
     if (order) {
-        query = `${query}order: ${order}, `
+        query = `${query}order: ${order}, `;
     }
 
     if (page) {
-        query = `${query}page: ${page}, `
+        query = `${query}page: ${page}, `;
     }
 
     const defaultFilter = `
@@ -175,7 +175,7 @@ export const options = ({ ids, search, limit, status, year, order, page, filter 
         description
         descriptionHtml
         descriptionSource
-    `
+    `;
 
     return {
         method: 'POST',
@@ -193,5 +193,5 @@ export const options = ({ ids, search, limit, status, year, order, page, filter 
                     }
                 `
         }
-    }
-}
+    };
+};

@@ -80,4 +80,4 @@ export const variables: VariablesType = {
         "cm": "Реклама",
         "default": "Неизвестно",
     }
-}
+};

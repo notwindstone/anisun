@@ -8,7 +8,7 @@ import {IconChevronRight, IconSettings} from "@tabler/icons-react";
 import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 import {useHover} from "@mantine/hooks";
 
-const LABEL = "Настройки"
+const LABEL = "Настройки";
 
 export default function SideBarSettingsTarget() {
     const { expanded, setExpanded } = useContext(
@@ -24,7 +24,7 @@ export default function SideBarSettingsTarget() {
     const { hovered, ref } = useHover();
 
     function toggleDropdown() {
-        setExpanded((expanded) => !expanded)
+        setExpanded((expanded) => !expanded);
     }
 
     return (
@@ -72,5 +72,5 @@ export default function SideBarSettingsTarget() {
                 </UnstyledButton>
             </Tooltip>
         </Popover.Target>
-    )
+    );
 }

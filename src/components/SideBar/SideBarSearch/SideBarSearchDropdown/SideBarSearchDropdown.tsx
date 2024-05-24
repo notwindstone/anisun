@@ -28,5 +28,5 @@ export default function SideBarSearchDropdown() {
                 </Button>
             </Stack>
         </Popover.Dropdown>
-    )
+    );
 }

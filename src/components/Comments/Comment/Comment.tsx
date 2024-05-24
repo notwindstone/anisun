@@ -1,4 +1,4 @@
-import {Avatar, Flex, Group, Paper, Stack, Text, TypographyStylesProvider} from "@mantine/core";
+import {Avatar, Flex, Group, Stack, Text} from "@mantine/core";
 import classes from './Comment.module.css';
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ export default function Comment() {
         avatar: "/blurred.png",
         username: "windstone",
         userid: "1234",
-    }
+    };
 
     return (
         <Flex className={classes.root}>
@@ -33,5 +33,5 @@ export default function Comment() {
                 </Flex>
             </Stack>
         </Flex>
-    )
+    );
 }

@@ -11,4 +11,4 @@ export type AnimesType = {
     order?: OrderType;
     page?: number;
     filter?: OptionType[];
-}
+};

@@ -9,7 +9,7 @@ import {variables} from "@/configs/variables";
 import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 import {useHover} from "@mantine/hooks";
 
-const LABEL = "Аккаунт"
+const LABEL = "Аккаунт";
 
 export default function SideBarAccountTarget() {
     const { user } = useUser();
@@ -26,7 +26,7 @@ export default function SideBarAccountTarget() {
     const { hovered, ref } = useHover();
 
     function toggleDropdown() {
-        setExpanded((expanded) => !expanded)
+        setExpanded((expanded) => !expanded);
     }
 
     return (
@@ -91,5 +91,5 @@ export default function SideBarAccountTarget() {
                 </UnstyledButton>
             </Tooltip>
         </Popover.Target>
-    )
+    );
 }

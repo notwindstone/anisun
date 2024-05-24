@@ -18,24 +18,24 @@ export default function HeroSlides({
     debouncedHeight
 }: HeroResponseInterface) {
     return slidesLength.map((_slide, index) => {
-        let currentSlide
+        let currentSlide;
 
         switch (status) {
             case "success":
                 currentSlide = (
                     <HeroCard animeTitle={data?.animes?.[index]} debouncedHeight={debouncedHeight} />
-                )
-                break
+                );
+                break;
             case "pending":
                 currentSlide = (
                     <Skeleton radius={0} w="100%" h={debouncedHeight} />
-                )
-                break
+                );
+                break;
             case "error":
             default:
                 currentSlide = (
                     <Text>Ошибка: {error?.message}</Text>
-                )
+                );
         }
 
         return (
@@ -44,6 +44,6 @@ export default function HeroSlides({
             >
                 {currentSlide}
             </Carousel.Slide>
-        )
-    })
+        );
+    });
 }

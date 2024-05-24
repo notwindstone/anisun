@@ -16,24 +16,24 @@ export const CustomThemeContext = createContext<CustomThemeContextType>({
         breadcrumb: defaultTheme.breadcrumb
     },
     setTheme: () => {}
-})
+});
 
-const sortingValue: StatusType = variables.sorting.latest.value
+const sortingValue: StatusType = variables.sorting.latest.value;
 
 export const TitlesSortContext = createContext<TitlesListType>({
     sortingType: sortingValue,
     setSortingType: () => {}
-})
+});
 
 export const SideBarContext = createContext<SideBarContextType>({
     opened: false,
     toggle: () => {}
-})
+});
 
 export const SideBarPopoverContext = createContext<SideBarPopoverContextType>({
     expanded: false,
     setExpanded: () => {}
-})
+});
 
 export const SideBarAccountPopoverContext = createContext<SideBarAccountPopoverContextType>({
     settingsOpened: false,
@@ -45,4 +45,4 @@ export const SideBarAccountPopoverContext = createContext<SideBarAccountPopoverC
     closeSettings: () => {},
     closeSignIn: () => {},
     closeSignUp: () => {}
-})
+});

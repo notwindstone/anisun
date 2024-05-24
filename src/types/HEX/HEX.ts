@@ -13,4 +13,4 @@
  * export type HEX = `#${CodeAny}`
  */
 
-export type HEX = `#${string}`
+export type HEX = `#${string}`;

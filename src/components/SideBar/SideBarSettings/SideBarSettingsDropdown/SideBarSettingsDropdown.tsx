@@ -23,9 +23,9 @@ import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker"
 import {IconChevronDown} from "@tabler/icons-react";
 import GradientTitle from "@/components/GradientTitle/GradientTitle";
 
-const GENERAL = variables.settings.general
-const ABOUT = variables.settings.about
-const LINKS = variables.websiteLinks
+const GENERAL = variables.settings.general;
+const ABOUT = variables.settings.about;
+const LINKS = variables.websiteLinks;
 
 export default function SideBarSettingsDropdown() {
     const { theme } = useCustomTheme();
@@ -76,7 +76,7 @@ export default function SideBarSettingsDropdown() {
                                     >
                                         {link.label}
                                     </Anchor>
-                                )
+                                );
                             })
                         }
                     </Group>
@@ -84,8 +84,8 @@ export default function SideBarSettingsDropdown() {
                         Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.
                     </Text>
                 </Stack>
-            )
-            break
+            );
+            break;
         case "general":
         default:
             content = (
@@ -131,8 +131,8 @@ export default function SideBarSettingsDropdown() {
                         <ColorSchemePicker option={themingOption} />
                     </Collapse>
                 </Stack>
-            )
-            break
+            );
+            break;
     }
 
     return (
@@ -162,5 +162,5 @@ export default function SideBarSettingsDropdown() {
                 {content}
             </Group>
         </Popover.Dropdown>
-    )
+    );
 }

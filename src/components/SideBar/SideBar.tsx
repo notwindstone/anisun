@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {CustomThemeContext, SideBarContext} from "@/utils/Contexts/Contexts";
 import {useDisclosure, useMediaQuery} from "@mantine/hooks";
@@ -30,20 +30,20 @@ const SIDEBAR_BUTTONS = [
         key: 'settings',
         content: <SideBarSettings />
     },
-]
+];
 
 export default function SideBar({ children }: { children: React.ReactNode }) {
     const [opened, { toggle }] = useDisclosure(false);
     const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-    const { theme, setTheme } = useCustomTheme()
+    const { theme, setTheme } = useCustomTheme();
 
     const buttons = SIDEBAR_BUTTONS.map((button) => {
         return (
             <React.Fragment key={button.key}>
                 {button.content}
             </React.Fragment>
-        )
-    })
+        );
+    });
 
     return isMobile === false && (
         <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
@@ -68,5 +68,5 @@ export default function SideBar({ children }: { children: React.ReactNode }) {
                 </aside>
             </SideBarContext.Provider>
         </CustomThemeContext.Provider>
-    )
+    );
 }

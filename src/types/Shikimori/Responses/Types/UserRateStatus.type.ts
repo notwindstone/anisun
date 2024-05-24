@@ -4,4 +4,4 @@ export type UserRateStatusType
     | "rewatching"
     | "completed"
     | "on_hold"
-    | "dropped"
+    | "dropped";

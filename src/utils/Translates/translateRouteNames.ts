@@ -1,23 +1,23 @@
 export default function translateRouteNames(path: string) {
-    let translatedPath
+    let translatedPath;
 
     switch (path) {
         case "titles":
-            translatedPath = 'Аниме'
-            break
+            translatedPath = 'Аниме';
+            break;
         case "account":
-            translatedPath = 'Аккаунт'
-            break
+            translatedPath = 'Аккаунт';
+            break;
         case "trending":
-            translatedPath = 'Популярное'
-            break
+            translatedPath = 'Популярное';
+            break;
         case 'about':
-            translatedPath = 'О сайте'
-            break
+            translatedPath = 'О сайте';
+            break;
         default:
-            translatedPath = path
-            break
+            translatedPath = path;
+            break;
     }
 
-    return translatedPath
+    return translatedPath;
 }

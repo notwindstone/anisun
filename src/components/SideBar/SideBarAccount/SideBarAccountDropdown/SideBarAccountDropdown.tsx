@@ -1,10 +1,10 @@
-import {Anchor, Avatar, Group, Popover, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
+import {Avatar, Group, Popover, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
 import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
 import classes from './SideBarAccountDropdown.module.css';
 import useRipple from "use-ripple-hook";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
-import React, {useContext, useEffect} from "react";
+import React, {useContext} from "react";
 import {SideBarAccountPopoverContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import {IconCloudLockOpen, IconLogin, IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
@@ -16,7 +16,7 @@ function DropdownButton({
     children: React.ReactNode;
     func: () => void;
 }) {
-    const [ripple, event] = useRipple(variables.rippleColor)
+    const [ripple, event] = useRipple(variables.rippleColor);
 
     return (
         <UnstyledButton
@@ -30,60 +30,60 @@ function DropdownButton({
                 {children}
             </Group>
         </UnstyledButton>
-    )
+    );
 }
 
 export default function SideBarAccountDropdown() {
-    const [ripple, event] = useRipple(variables.rippleColor)
+    const [ripple, event] = useRipple(variables.rippleColor);
     const { setExpanded } = useContext(
         SideBarPopoverContext
     );
     const { openSettings, openSignIn, openSignUp } = useContext(
         SideBarAccountPopoverContext
-    )
+    );
     const { user } = useUser();
-    const pathname = usePathname()
-    const router = useRouter()
+    const pathname = usePathname();
+    const router = useRouter();
 
     function toggle() {
-        setExpanded((expanded) => !expanded)
+        setExpanded((expanded) => !expanded);
     }
 
     function pushToProfile() {
         if (!user) {
-            return
+            return;
         }
 
-        const accountURL = `/account/${user.id}`
+        const accountURL = `/account/${user.id}`;
 
-        toggle()
-        NProgress.start()
-        router.push(accountURL)
+        toggle();
+        NProgress.start();
+        router.push(accountURL);
 
         if (accountURL === pathname) {
-            return NProgress.done()
+            return NProgress.done();
         }
     }
 
     function toggleSettings() {
-        openSettings()
-        toggle()
+        openSettings();
+        toggle();
     }
 
     function signOut() {
-        NProgress.start()
-        NProgress.done()
-        toggle()
+        NProgress.start();
+        NProgress.done();
+        toggle();
     }
 
     function signIn() {
-        openSignIn()
-        toggle()
+        openSignIn();
+        toggle();
     }
 
     function signUp() {
-        openSignUp()
-        toggle()
+        openSignUp();
+        toggle();
     }
 
     return (
@@ -158,5 +158,5 @@ export default function SideBarAccountDropdown() {
                 </Stack>
             </SignedOut>
         </Popover.Dropdown>
-    )
+    );
 }

@@ -4,4 +4,4 @@ export type TransitionStylesType = {
     transition: MantineTransition;
     duration: number;
     timingFunction: string;
-}
+};

@@ -8,30 +8,30 @@ import {variables} from "@/configs/variables";
 
 export default function ColorSchemeControl({ option }: { option: string }) {
     const { theme, setTheme } = useContext(CustomThemeContext);
-    const optionColor = option === "website" ? theme.color : theme.topLoaderColor
+    const optionColor = option === "website" ? theme.color : theme.topLoaderColor;
     const [checkedColor, setCheckedColor] = useState(optionColor);
 
     function setColor(value: MantineColor) {
-        setCheckedColor(value)
+        setCheckedColor(value);
 
         switch (option) {
             case "website":
-                setTheme({ ...theme, color: value })
-                break
+                setTheme({ ...theme, color: value });
+                break;
             case "topLoader":
-                setTheme({ ...theme, topLoaderColor: value })
-                break
+                setTheme({ ...theme, topLoaderColor: value });
+                break;
             default:
-                break
+                break;
         }
     }
 
     useEffect(() => {
-        setCheckedColor(optionColor)
+        setCheckedColor(optionColor);
     }, [theme, option]);
 
     const colorSwatches = variables.mantineColors.map((color) => {
-        const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`
+        const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
 
         return (
             <Tooltip
@@ -55,12 +55,12 @@ export default function ColorSchemeControl({ option }: { option: string }) {
                     }
                 </ColorSwatch>
             </Tooltip>
-        )
-    })
+        );
+    });
 
     return (
         <>
             {colorSwatches}
         </>
-    )
+    );
 }

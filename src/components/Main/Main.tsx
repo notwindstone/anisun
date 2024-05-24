@@ -10,5 +10,5 @@ export default function Main({ children }: { children: React.ReactNode }) {
         >
             {children}
         </Container>
-    )
+    );
 }

@@ -1,1 +1,1 @@
-export type StatusType = "anons" | "ongoing" | "released" | "latest"
+export type StatusType = "anons" | "ongoing" | "released" | "latest";

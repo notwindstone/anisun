@@ -5,4 +5,4 @@ export type GenreType = {
     name: string;
     russian: string;
     kind: GenreKindEnum;
-}
+};

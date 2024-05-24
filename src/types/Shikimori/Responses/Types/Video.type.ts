@@ -5,4 +5,4 @@ export type VideoType = {
     kind: string;
     playerUrl: string;
     imageUrl: string;
-}
+};

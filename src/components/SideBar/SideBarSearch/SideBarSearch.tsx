@@ -5,7 +5,7 @@ import SideBarSearchTarget from "@/components/SideBar/SideBarSearch/SideBarSearc
 import SideBarSearchDropdown from "@/components/SideBar/SideBarSearch/SideBarSearchDropdown/SideBarSearchDropdown";
 
 export default function SideBarSearch() {
-    const [expanded, setExpanded] = useState(false)
+    const [expanded, setExpanded] = useState(false);
 
     return (
         <SideBarPopoverContext.Provider value={{ expanded, setExpanded }}>
@@ -14,5 +14,5 @@ export default function SideBarSearch() {
                 <SideBarSearchDropdown />
             </SideBarPopover>
         </SideBarPopoverContext.Provider>
-    )
+    );
 }

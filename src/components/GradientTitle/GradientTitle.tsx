@@ -2,7 +2,7 @@ import {rem, Text} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {variables} from "@/configs/variables";
 
-const colors = variables.mantineColors
+const colors = variables.mantineColors;
 
 export default function GradientTitle() {
     let nextColor;
@@ -13,9 +13,9 @@ export default function GradientTitle() {
 
     if (mantineColorIndex !== -1) {
         nextColor
-            = colors[mantineColorIndex + 1] ?? colors[mantineColorIndex - 1]
+            = colors[mantineColorIndex + 1] ?? colors[mantineColorIndex - 1];
     } else {
-        nextColor = color
+        nextColor = color;
     }
 
     return (
@@ -28,5 +28,5 @@ export default function GradientTitle() {
         >
             ANIMETH
         </Text>
-    )
+    );
 }

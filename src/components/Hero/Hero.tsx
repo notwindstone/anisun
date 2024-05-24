@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import {Carousel} from "@mantine/carousel";
 import HeroSlides from "@/components/Hero/HeroSlides/HeroSlides";
@@ -10,8 +10,8 @@ import classes from './Hero.module.css';
 import {useRef} from "react";
 import Autoplay from 'embla-carousel-autoplay';
 
-const HERO_TITLES_LIMIT = 7
-const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT })
+const HERO_TITLES_LIMIT = 7;
+const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT });
 
 export default function Hero() {
     const autoplay = useRef(Autoplay({ delay: 7000 }));
@@ -20,9 +20,9 @@ export default function Hero() {
     const { status, error, data } = useQuery({
         queryKey: ['heroTitles'],
         queryFn: getTitles
-    })
+    });
     // Around 21 / 9
-    const aspectRatioHeight = (width - 96) * 0.42
+    const aspectRatioHeight = (width - 96) * 0.42;
 
     async function getTitles() {
         return (
@@ -40,7 +40,7 @@ export default function Hero() {
                         "poster { id originalUrl mainUrl }"
                     ]
                 })
-        )
+        );
     }
 
     return (

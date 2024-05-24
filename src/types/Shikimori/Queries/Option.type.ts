@@ -38,4 +38,4 @@ export type OptionType
     | "statusesStats { status count }"
     | "description"
     | "descriptionHtml"
-    | "descriptionSource"
+    | "descriptionSource";

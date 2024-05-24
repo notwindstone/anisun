@@ -10,4 +10,4 @@ export type RelatedType = {
     } | null;
     relationRu: string;
     relationEn: string;
-}
+};

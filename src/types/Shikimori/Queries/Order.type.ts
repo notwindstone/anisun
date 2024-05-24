@@ -10,4 +10,4 @@ export type OrderType
     | "status"
     | "random"
     | "created_at"
-    | "created_at_desc"
+    | "created_at_desc";

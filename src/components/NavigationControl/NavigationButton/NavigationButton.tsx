@@ -9,38 +9,38 @@ import {variables} from "@/configs/variables";
 const ICON_STYLES = {
     size: 32,
     stroke: 1.5,
-}
+};
 
 export default function NavigationButton({ type }: { type: "forward" | "back" }) {
-    const router = useRouter()
+    const router = useRouter();
     const [ripple, event] = useRipple(variables.rippleColor);
 
-    let icon
+    let icon;
 
     switch (type) {
         case "back":
             icon = (
                 <IconChevronLeft {...ICON_STYLES} />
-            )
-            break
+            );
+            break;
         case "forward":
             icon = (
                 <IconChevronRight {...ICON_STYLES} />
-            )
-            break
+            );
+            break;
         default:
             icon = (
                 <IconChevronLeft {...ICON_STYLES} />
-            )
-            break
+            );
+            break;
     }
 
     function redirectUser() {
-        NProgress.start()
+        NProgress.start();
 
-        type === "back" ? router.back() : router.forward()
+        type === "back" ? router.back() : router.forward();
 
-        NProgress.done()
+        NProgress.done();
     }
 
     return (
@@ -52,5 +52,5 @@ export default function NavigationButton({ type }: { type: "forward" | "back" })
         >
             {icon}
         </UnstyledButton>
-    )
+    );
 }

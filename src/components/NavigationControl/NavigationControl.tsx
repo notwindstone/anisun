@@ -1,7 +1,6 @@
-"use client"
+"use client";
 
 import {useMediaQuery} from "@mantine/hooks";
-import {useRouter} from "next/navigation";
 import classes from './NavigationControl.module.css';
 import {Box, em, Group, rem} from "@mantine/core";
 import NavigationButton from "@/components/NavigationControl/NavigationButton/NavigationButton";
@@ -12,7 +11,8 @@ import {SideBarContext} from "@/utils/Contexts/Contexts";
 export default function NavigationControl() {
     const { opened } = useContext(
         SideBarContext
-    );const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+    );
+    const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
 
     return isMobile === false && (
         <>
@@ -33,5 +33,5 @@ export default function NavigationControl() {
                 </Box>
             </div>
         </>
-    )
+    );
 }

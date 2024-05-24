@@ -1,4 +1,4 @@
-import {Box, Burger, Group, Image, rem, Text, Transition} from "@mantine/core";
+import {Box, Burger, Group, Image, rem, Transition} from "@mantine/core";
 import {useContext} from "react";
 import {SideBarContext} from "@/utils/Contexts/Contexts";
 import classes from './SideBarBurger.module.css';
@@ -44,9 +44,9 @@ export default function SideBarBurger() {
                             align="center"
                             wrap="nowrap"
                             onClick={() => {
-                                NProgress.start()
-                                router.push('/')
-                                NProgress.done()
+                                NProgress.start();
+                                router.push('/');
+                                NProgress.done();
                             }}
                         >
                             <Image

@@ -9,4 +9,4 @@ export type CharacterRoleType = {
             id: string;
         }
     }
-}
+};

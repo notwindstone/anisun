@@ -4,4 +4,4 @@ import {StatusType} from "@/types/Shikimori/General/Status.type";
 export type TitlesListType = {
     sortingType: StatusType;
     setSortingType: Dispatch<SetStateAction<StatusType>>;
-}
+};

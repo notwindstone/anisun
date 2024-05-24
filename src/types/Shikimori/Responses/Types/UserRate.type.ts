@@ -13,4 +13,4 @@ export type UserRateType = {
     text: string | null;
     updatedAt: string;
     volumes: number;
-}
+};

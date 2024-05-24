@@ -7,4 +7,4 @@ export type PersonRoleType = {
         name: string;
         poster: string | null;
     }
-}
+};

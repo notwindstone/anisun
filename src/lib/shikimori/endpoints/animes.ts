@@ -6,12 +6,12 @@ import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response
 
 export const animes = () => {
     const byId = async ({ ids, filter }: { ids: string, filter?: OptionType[] }) => {
-        const params = options({ ids: ids, filter: filter })
+        const params = options({ ids: ids, filter: filter });
 
         return await axios
             .request(params)
-            .then((response: ResponseInterface) => response.data.data)
-    }
+            .then((response: ResponseInterface) => response.data.data);
+    };
 
     const list = async ({ search, limit, status, year, order, page, filter }: AnimesType) => {
         const params = options({
@@ -22,15 +22,15 @@ export const animes = () => {
             order: order,
             page: page,
             filter: filter,
-        })
+        });
 
         return await axios
             .request(params)
-            .then((response: ResponseInterface) => response.data.data)
-    }
+            .then((response: ResponseInterface) => response.data.data);
+    };
 
     return {
         byId,
         list,
-    }
-}
+    };
+};

@@ -3,4 +3,4 @@ export type ScreenshotType = {
     originalUrl: string;
     x166Url: string;
     x332Url: string;
-}
+};

@@ -5,4 +5,4 @@ export type ThemeType = {
     color?: MantineColor | HEX;
     topLoaderColor?: MantineColor | HEX;
     breadcrumb?: boolean;
-}
+};

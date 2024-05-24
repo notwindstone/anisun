@@ -27,12 +27,12 @@ export default function SideBarButton({
 
     function redirect() {
         if (redirectLink !== undefined) {
-            NProgress.start()
-            router.push(redirectLink)
+            NProgress.start();
+            router.push(redirectLink);
         }
 
         if (pathname === redirectLink) {
-            return NProgress.done()
+            return NProgress.done();
         }
     }
 
@@ -75,5 +75,5 @@ export default function SideBarButton({
                 </Group>
             </UnstyledButton>
         </Tooltip>
-    )
+    );
 }
