@@ -56,6 +56,7 @@ export default function SideBarAccount() {
         closeSignIn();
         NProgress.start();
         NProgress.done();
+        // eslint-disable-next-line
     }, [user]);
 
     return (

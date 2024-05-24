@@ -38,7 +38,7 @@ export default function ColorSchemePicker({ option }: { option: string }) {
             // @ts-ignore
             isTopLoader ? theme.topLoaderColor : theme.color
         );
-    }, [option]);
+    }, [isTopLoader, option, theme.color, theme.topLoaderColor]);
 
     return (
         <>

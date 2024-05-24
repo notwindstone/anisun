@@ -28,7 +28,7 @@ export default function ColorSchemeControl({ option }: { option: string }) {
 
     useEffect(() => {
         setCheckedColor(optionColor);
-    }, [theme, option]);
+    }, [theme, option, optionColor]);
 
     const colorSwatches = variables.mantineColors.map((color) => {
         const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
