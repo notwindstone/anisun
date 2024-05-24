@@ -1,10 +1,9 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
-import {Badge, Box, Container, Group, Image, Overlay, rem, Stack, Title, Transition} from "@mantine/core";
+import {Badge, Box, Container, Group, Image, Overlay, rem, Stack, Title} from "@mantine/core";
 import {useInViewport} from "@mantine/hooks";
 import classes from "./HeroMobileCard.module.css";
 import NextImage from "next/image";
 import {variables} from "@/configs/variables";
-import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default function HeroMobileCard({
