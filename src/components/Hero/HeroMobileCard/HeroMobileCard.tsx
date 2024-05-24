@@ -1,6 +1,6 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
-import {Badge, Box, Container, Group, Image, Overlay, rem, Stack, Title} from "@mantine/core";
-import {useInViewport} from "@mantine/hooks";
+import {Badge, Box, Container, Group, Image, MantineSize, Overlay, rem, Stack, Title, TitleOrder} from "@mantine/core";
+import {useInViewport, useViewportSize} from "@mantine/hooks";
 import classes from "./HeroMobileCard.module.css";
 import NextImage from "next/image";
 import {variables} from "@/configs/variables";
@@ -13,8 +13,26 @@ export default function HeroMobileCard({
     animeTitle?: AnimeType,
     debouncedHeight: number
 }) {
+    const { width: viewportWidth } = useViewportSize();
     const { ref, inViewport } = useInViewport();
     const { theme } = useCustomTheme();
+
+    let size: MantineSize;
+    let order: TitleOrder;
+
+    if (viewportWidth < 300) {
+        size = "xs";
+        order = 4;
+    } else if (viewportWidth < 450) {
+        size = "sm";
+        order = 3;
+    } else if (viewportWidth < 600) {
+        size = "md";
+        order = 2;
+    } else {
+        size = "lg";
+        order = 1;
+    }
 
     return (
         <Container
@@ -59,6 +77,7 @@ export default function HeroMobileCard({
                     >
                         <Title
                             className={classes.title}
+                            order={order}
                             lineClamp={2}
                         >
                             {animeTitle?.name}
@@ -68,7 +87,7 @@ export default function HeroMobileCard({
                             justify="flex-start"
                         >
                             <Badge
-                                size="lg"
+                                size={size}
                                 autoContrast
                                 color={theme.color}
                             >
@@ -82,7 +101,7 @@ export default function HeroMobileCard({
 
                                     return (
                                         <Badge
-                                            size="lg"
+                                            size={size}
                                             variant="light"
                                             color="white"
                                             key={
