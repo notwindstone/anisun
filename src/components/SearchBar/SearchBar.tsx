@@ -126,7 +126,7 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
     const [input, setInput] = useState('');
     const [search] = useDebouncedValue(input, 300);
     const [focused, { open, close }] = useDisclosure(false);
-    const color = theme.topLoaderColor;
+    const color = theme.color;
     // It can be MantineColor or HEX code
     // @ts-ignore
     const isMantineColor = variables.mantineColors.includes(color);
