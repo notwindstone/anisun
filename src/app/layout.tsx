@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: title,
     description: description,
     openGraph: {
-        images: "/favicon.png",
+        images: "/banner.png",
         siteName: 'Animeth',
         type: "website",
         title: title,
