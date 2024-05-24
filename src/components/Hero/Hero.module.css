@@ -20,3 +20,13 @@
 .indicators {
     bottom: rem(-16px);
 }
+
+.control {
+    width: rem(48px);
+    height: rem(48px);
+
+    @media screen and (max-width: rem(350px)) {
+        width: rem(32px);
+        height: rem(32px);
+    }
+}

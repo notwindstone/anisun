@@ -68,7 +68,8 @@ export default function Hero() {
                     >
                         <Carousel
                             classNames={{
-                                indicators: classes.indicators
+                                indicators: classes.indicators,
+                                control: classes.control
                             }}
                             h={mobileHeight}
                             plugins={[autoplay.current]}
@@ -93,6 +94,9 @@ export default function Hero() {
                         {...CAROUSEL_CONTAINER_PROPS}
                     >
                         <Carousel
+                            classNames={{
+                                control: classes.control
+                            }}
                             h={aspectRatioHeight}
                             plugins={[autoplay.current]}
                             onMouseEnter={autoplay.current.stop}
