@@ -5,6 +5,7 @@ import classes from "./HeroMobileCard.module.css";
 import NextImage from "next/image";
 import {variables} from "@/configs/variables";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import Link from "next/link";
 
 export default function HeroMobileCard({
     animeTitle,
@@ -47,8 +48,9 @@ export default function HeroMobileCard({
                 className={classes.centerBox}
                 ref={ref}
             />
-            <Container
-                fluid
+            <Box
+                component={Link}
+                href={`/titles/${animeTitle?.url.replace('https://shikimori.one/animes/', '')}`}
                 style={{
                     transform: inViewport ? 'translateY(-32px)' : 'translateY(0)'
                 }}
@@ -116,8 +118,7 @@ export default function HeroMobileCard({
                         </Group>
                     </Stack>
                 </Overlay>
-            </Container>
-
+            </Box>
         </Container>
     );
 }
