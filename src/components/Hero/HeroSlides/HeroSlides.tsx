@@ -2,12 +2,14 @@ import {Carousel} from "@mantine/carousel";
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import {Skeleton, Text} from "@mantine/core";
 import {WrapperResponseInterface} from "@/types/Shikimori/Responses/Interfaces/WrapperResponse.interface";
+import HeroMobileCard from "@/components/Hero/HeroMobileCard/HeroMobileCard";
 
 interface HeroResponseInterface extends WrapperResponseInterface {
     status: "error" | "success" | "pending";
     error: Error | null;
     slidesLength: undefined[];
     debouncedHeight: number;
+    isMobile?: boolean;
 }
 
 export default function HeroSlides({
@@ -15,14 +17,17 @@ export default function HeroSlides({
     status,
     error,
     slidesLength,
-    debouncedHeight
+    debouncedHeight,
+    isMobile
 }: HeroResponseInterface) {
     return slidesLength.map((_slide, index) => {
         let currentSlide;
 
         switch (status) {
             case "success":
-                currentSlide = (
+                currentSlide = isMobile ? (
+                    <HeroMobileCard animeTitle={data?.animes?.[index]} debouncedHeight={debouncedHeight} />
+                ) : (
                     <HeroCard animeTitle={data?.animes?.[index]} debouncedHeight={debouncedHeight} />
                 );
                 break;
