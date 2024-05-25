@@ -17,6 +17,8 @@ import {useMemo} from "react";
 import {TransitionStylesType} from "@/types/Transition/TransitionStyles.type";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {useRouter} from "next/navigation";
+import NProgress from "nprogress";
 
 const TRANSITION_PROPS: TransitionStylesType = {
     transition: "fade-left",
@@ -40,6 +42,7 @@ export default function HeroCard({
     const width = (debouncedHeight) / 0.42;
     const responsiveFontScale
         = viewportWidth > 1600 ? 1.8 : viewportWidth / 1000;
+    const router = useRouter();
 
     let size;
 
@@ -51,6 +54,11 @@ export default function HeroCard({
         size = "lg";
     } else {
         size = "xl";
+    }
+
+    function redirectUser() {
+        router.push(`/titles/${animeTitle?.url.replace('https://shikimori.one/animes/', '')}`);
+        NProgress.start();
     }
 
     return useMemo(
@@ -156,6 +164,7 @@ export default function HeroCard({
                                 {
                                     (styles) => (
                                         <DecoratedButton
+                                            onClick={redirectUser}
                                             size={size}
                                             radius="md"
                                             style={styles}
