@@ -8,13 +8,13 @@ import classes from './VideoPlayer.module.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
 import {Button, Text} from "@mantine/core";
 import {VideoPlayerType} from "@/types/VideoPlayerType";
-import makeHLSMasterPlaylist from "@/utils/makeHLSMasterPlaylist";
+import createHLSMasterPlaylist from "@/utils/Misc/createHLSMasterPlaylist";
 
 function changeEpisode({ player }: VideoPlayerType, episode: number) {
     const host = `https://${player.host}`;
     const source = player.list[episode].hls;
 
-    return makeHLSMasterPlaylist({ host, source });
+    return createHLSMasterPlaylist({ host, source });
 }
 
 export default function VideoPlayer({ title, player }: VideoPlayerType) {
