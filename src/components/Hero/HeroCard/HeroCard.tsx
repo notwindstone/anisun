@@ -13,7 +13,7 @@ import {
 import classes from './HeroCard.module.css';
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
-import {useMemo} from "react";
+import {useCallback, useMemo} from "react";
 import {TransitionStylesType} from "@/types/Transition/TransitionStyles.type";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import useCustomTheme from "@/hooks/useCustomTheme";
@@ -56,10 +56,10 @@ export default function HeroCard({
         size = "xl";
     }
 
-    function redirectUser() {
+    const redirect = useCallback(function redirectUser() {
         router.push(`/titles/${animeTitle?.url.replace('https://shikimori.one/animes/', '')}`);
         NProgress.start();
-    }
+    }, [animeTitle?.url, router]);
 
     return useMemo(
         () => (
@@ -164,7 +164,7 @@ export default function HeroCard({
                                 {
                                     (styles) => (
                                         <DecoratedButton
-                                            onClick={redirectUser}
+                                            onClick={redirect}
                                             size={size}
                                             radius="md"
                                             style={styles}
@@ -180,6 +180,7 @@ export default function HeroCard({
             </Container>
         ),
         [
+            redirect,
             debouncedHeight,
             ref,
             size,
