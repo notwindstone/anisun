@@ -22,8 +22,8 @@
 }
 
 .control {
-    width: rem(48px);
-    height: rem(48px);
+    width: rem(40px);
+    height: rem(40px);
 
     @media screen and (max-width: rem(350px)) {
         width: rem(32px);
