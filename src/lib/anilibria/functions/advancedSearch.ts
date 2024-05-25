@@ -1,6 +1,6 @@
 import axios from "axios";
 import {host} from "@/lib/anilibria/functions/host";
-import {AdvancedSearchType} from "@/types/AniLibria/Queries/AdvancedSearchType";
+import {AdvancedSearchType} from "@/types/Anilibria/Queries/AdvancedSearchType";
 
 const anilibriaHost = host.api();
 
