@@ -5,6 +5,7 @@ import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/l
 import {useRef, useState} from 'react';
 import videoPlayerTranslation from '@/configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
+import './VideoPlayer.global.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
 import {Button, Text} from "@mantine/core";
 import {VideoPlayerType} from "@/types/Video/VideoPlayer.type";
