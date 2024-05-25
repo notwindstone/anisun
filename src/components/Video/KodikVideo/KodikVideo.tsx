@@ -32,14 +32,12 @@ export default function KodikVideo({ id }: { id: string }) {
     }
 
     return (
-        <div className={classes.wrapper}>
+        <AspectRatio ratio={16 / 9}>
             <iframe
                 className={classes.frame}
                 src={data?.link}
-                width="610"
-                height="370"
                 allow="autoplay *; fullscreen *"
             />
-        </div>
+        </AspectRatio>
     );
 }
