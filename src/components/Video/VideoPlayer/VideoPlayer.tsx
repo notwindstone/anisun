@@ -79,7 +79,7 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
                     }
                 }
                 className={classes.player}
-                title={title}
+                title={title ?? 'Anime title'}
                 aspect-ratio={16 / 9}
                 src={
                     {

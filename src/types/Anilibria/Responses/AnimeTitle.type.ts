@@ -1,5 +1,9 @@
-export type VideoPlayerType = {
-    title?: string | null;
+export type AnimeTitleType = {
+    names: {
+        ru: string | null;
+        en: string;
+        alternative: string | null;
+    };
     player: {
         host: string;
         list: {
@@ -10,5 +14,5 @@ export type VideoPlayerType = {
                 sd?: string;
             }
         }[]
-    };
+    }
 };

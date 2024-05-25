@@ -50,6 +50,7 @@ export default function Page({ params }: { params: { code: string } }) {
     return (
         <>
             <Group
+                align="flex-start"
                 pt={rem(82)}
                 gap={rem(16)}
             >

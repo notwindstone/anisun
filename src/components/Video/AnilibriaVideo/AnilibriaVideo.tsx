@@ -2,6 +2,7 @@ import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
 import VideoPlayer from "@/components/Video/VideoPlayer/VideoPlayer";
+import {AspectRatio, Skeleton} from "@mantine/core";
 
 export default function AnilibriaVideo({ id }: { id: string }) {
     const shikimori = client();
@@ -36,12 +37,30 @@ export default function AnilibriaVideo({ id }: { id: string }) {
     }
 
     if (isPending) {
-        return <>Loading...</>;
+        return (
+            <AspectRatio ratio={16 / 9}>
+                <Skeleton
+                    height="100%"
+                    width="100%"
+                    radius="md"
+                />
+            </AspectRatio>
+        );
+    }
+
+    if (error) {
+        return <>Ошибка: {error.message}</>;
+    }
+
+    const player = data?.player;
+
+    if (player?.list?.[1]?.episode === undefined || player?.list?.[1]?.hls === undefined) {
+        return <>К сожалению, онлайн просмотр через наш плеер для данного аниме не доступен. Попробуйте выбрать другой!</>;
     }
 
     return (
         <>
-            <VideoPlayer title={data.names.ru} player={data.player} />
+            <VideoPlayer title={data.names.ru} player={player} />
         </>
     );
 }
