@@ -2,6 +2,7 @@ import {Group, rem, Stack} from "@mantine/core";
 import getShikimoriId from "@/utils/Misc/getShikimoriId";
 import {client} from "@/lib/shikimori/client";
 import {Metadata} from "next";
+import Video from "@/components/Video/Video";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
@@ -32,12 +33,12 @@ export async function generateMetadata({ params }: { params: { code: string } })
     }
 
     return {
-        title: anime.russian,
-        description: anime.description,
+        title: anime.russian ?? anime.name ?? placeholderTitle,
+        description: anime.description ?? placeholderDescription,
         openGraph: {
             siteName: 'Animeth',
             type: "website",
-            title: anime.russian ?? placeholderTitle,
+            title: anime.russian ?? anime.name ?? placeholderTitle,
             description: anime.description ?? placeholderDescription,
         }
     };
@@ -49,12 +50,13 @@ export default function Page({ params }: { params: { code: string } }) {
     return (
         <>
             <Group
+                pt={rem(82)}
                 gap={rem(16)}
             >
                 <Stack
                     flex={2}
                 >
-                    <div>1</div>
+                    <Video id={shikimoriId} />
                 </Stack>
                 <Stack flex={1}>
                     <div>2</div>
