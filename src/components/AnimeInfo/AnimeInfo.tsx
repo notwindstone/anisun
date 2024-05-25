@@ -2,12 +2,14 @@
 
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
-import {Group, Skeleton, Stack, Text, Title} from "@mantine/core";
+import {Group, Stack, Text, Title} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {IconDownload, IconShare3} from "@tabler/icons-react";
+import {useClipboard} from "@mantine/hooks";
 
 export default function AnimeInfo({ id }: { id: string }) {
+    const clipboard = useClipboard();
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'info', id],
@@ -18,6 +20,11 @@ export default function AnimeInfo({ id }: { id: string }) {
         return (await shikimori.animes.byId({
             ids: id,
         })).animes[0];
+    }
+
+    function copyLink() {
+        clipboard.copy('Test');
+
     }
 
     if (isPending) {
@@ -57,7 +64,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                 <Group>
                     <DecoratedButton
                         leftSection={<IconShare3 />}
-                        onClick={() => {}}
+                        onClick={copyLink}
                     >
                         Поделиться
                     </DecoratedButton>

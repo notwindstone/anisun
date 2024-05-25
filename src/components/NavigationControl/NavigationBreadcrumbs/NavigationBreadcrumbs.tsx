@@ -56,7 +56,17 @@ export default function NavigationBreadcrumbs() {
 
             const shikimoriId = getShikimoriId(titlePath);
 
-            return (await shikimori.animes.byId({ ids: shikimoriId })).animes;
+            return (
+                await shikimori
+                    .animes
+                    .byId({
+                        ids: shikimoriId,
+                        filter: [
+                            'name',
+                            'russian'
+                        ],
+                    })
+            ).animes;
         }
     });
 

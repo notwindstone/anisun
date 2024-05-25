@@ -13,7 +13,12 @@ export async function generateMetadata({ params }: { params: { code: string } })
         await shikimori
             .animes
             .byId({
-                ids: shikimoriId
+                ids: shikimoriId,
+                filter: [
+                    'name',
+                    'russian',
+                    'description'
+                ],
             })
     ).animes[0];
 
