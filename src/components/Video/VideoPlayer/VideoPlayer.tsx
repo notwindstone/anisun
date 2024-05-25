@@ -7,7 +7,7 @@ import videoPlayerTranslation from '../../configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
 import {Button, Text} from "@mantine/core";
-import {VideoPlayerType} from "@/types/VideoPlayerType";
+import {VideoPlayerType} from "@/types/Video/VideoPlayer.type";
 import createHLSMasterPlaylist from "@/utils/Misc/createHLSMasterPlaylist";
 
 function changeEpisode({ player }: VideoPlayerType, episode: number) {

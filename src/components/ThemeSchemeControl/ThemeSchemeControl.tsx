@@ -4,9 +4,9 @@ import {ActionIcon, MantineColor, useComputedColorScheme, useMantineColorScheme}
 import {IconSun, IconMoon} from "@tabler/icons-react";
 import cx from 'clsx';
 import classes from "./ThemeSchemeControl.module.css";
-import {HEX} from "@/types/HEX/HEX";
+import {HEXType} from "@/types/HEX/HEX.type";
 
-export default function ThemeSchemeControl({ color }: { color?: MantineColor | HEX }) {
+export default function ThemeSchemeControl({ color }: { color?: MantineColor | HEXType }) {
     const { setColorScheme } = useMantineColorScheme();
     const computedColorScheme = useComputedColorScheme('light', { getInitialValueInEffect: true });
 

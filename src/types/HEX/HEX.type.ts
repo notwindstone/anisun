@@ -10,7 +10,7 @@
  * type CodeWithAlpha = `${CodeDefault}${Part}`;
  * type CodeAny = CodeShort | CodeDefault | CodeWithAlpha
  *
- * export type HEX = `#${CodeAny}`
+ * export type HEXType = `#${CodeAny}`
  */
 
-export type HEX = `#${string}`;
+export type HEXType = `#${string}`;

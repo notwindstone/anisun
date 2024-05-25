@@ -1,4 +1,4 @@
-import {VideoPlaylistType} from "@/types/VideoPlaylistType";
+import {VideoPlaylistType} from "@/types/Video/VideoPlaylist.type";
 
 export default function createHLSMasterPlaylist({ host, source }: { host: string, source: VideoPlaylistType }) {
     const dataHLS: VideoPlaylistType = {

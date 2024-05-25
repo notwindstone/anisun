@@ -1,8 +1,8 @@
 import {MantineColor} from "@mantine/core";
-import {HEX} from "@/types/HEX/HEX";
+import {HEXType} from "@/types/HEX/HEX.type";
 
 export type ThemeType = {
-    color?: MantineColor | HEX;
-    topLoaderColor?: MantineColor | HEX;
+    color?: MantineColor | HEXType;
+    topLoaderColor?: MantineColor | HEXType;
     breadcrumb?: boolean;
 };

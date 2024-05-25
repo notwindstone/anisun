@@ -8,7 +8,7 @@ import {variables} from "@/configs/variables";
 export default function ThemedNextTopLoader() {
     const { theme } = useCustomTheme();
     const color = theme.topLoaderColor;
-    // It can be MantineColor or HEX code
+    // It can be MantineColor or HEXType code
     // @ts-ignore
     const isMantineColor = variables.mantineColors.includes(color);
     const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
