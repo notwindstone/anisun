@@ -1,6 +1,7 @@
 import {client} from "@/lib/shikimori/client";
 import {useState} from "react";
 import {useQuery} from "@tanstack/react-query";
+import {anilibria} from "@/lib/anilibria/anilibria";
 
 export default function AnilibriaVideo({ id }: { id: string }) {
     const shikimori = client();
