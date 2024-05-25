@@ -3,7 +3,7 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import {variables} from "@/configs/variables";
 import {Badge, Flex, Image, Overlay, Paper, Title} from "@mantine/core";
 import Link from "next/link";
-import classes from "@/components/Carousel/CarouselCard/CarouselCard.module.css";
+import classes from "./CarouselMobileCard.module.css";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import NextImage from "next/image";
 
