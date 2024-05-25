@@ -68,55 +68,53 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
     }
 
     return (
-        <div className={classes.wrapper}>
-            <MediaPlayer
-                onControlsChange={
-                    (isControlsShown) => {
-                        if (!isControlsShown) {
-                            setHideMenu('hidden');
-                        } else {
-                            setHideMenu('');
-                        }
+        <MediaPlayer
+            onControlsChange={
+                (isControlsShown) => {
+                    if (!isControlsShown) {
+                        setHideMenu('hidden');
+                    } else {
+                        setHideMenu('');
                     }
                 }
-                className={classes.player}
-                title={title ?? 'Anime title'}
-                aspect-ratio={16 / 9}
-                src={
+            }
+            className={classes.player}
+            title={title ?? 'Anime title'}
+            aspect-ratio={16 / 9}
+            src={
+                {
+                    src: episodeSource,
+                    type: 'application/x-mpegurl',
+                }
+            }
+            viewType="video"
+            ref={mediaPlayerRef}
+        >
+            <MediaProvider />
+            <DefaultVideoLayout icons={defaultLayoutIcons} translations={videoPlayerTranslation}>
+                <Menu.Root className={`${classes.playlist} ${classes[hideMenu]} vds-menu`}>
+                    <Menu.Button className={`${classes.playlistButton} vds - menu - button vds-button`} aria-label="Chapter Switch">
+                        <PlaylistIcon className={classes.playlistIcon} />
+                    </Menu.Button>
+                    <Menu.Items className="vds-menu-items" placement="bottom start" offset={0}>
+                        <Menu.RadioGroup>
+                            {episodesList}
+                        </Menu.RadioGroup>
+                    </Menu.Items>
+                    <Text fw={700} className={classes.currentEpisodeMarker}>{currentEpisode} серия</Text>
                     {
-                        src: episodeSource,
-                        type: 'application/x-mpegurl',
+                        started && isLastTenSeconds && hasNextEpisode
+                            ? (
+                                <div className={classes.nextEpisode}>
+                                    <Button variant="transparent" className={classes.nextEpisodeButton} onClick={setNextEpisode}>Дальше</Button>
+                                </div>
+                            )
+                            : (
+                                <div className={classes.nextEpisode} />
+                            )
                     }
-                }
-                viewType="video"
-                ref={mediaPlayerRef}
-            >
-                <MediaProvider />
-                <DefaultVideoLayout icons={defaultLayoutIcons} translations={videoPlayerTranslation}>
-                    <Menu.Root className={`${classes.playlist} ${classes[hideMenu]} vds-menu`}>
-                        <Menu.Button className={`${classes.playlistButton} vds - menu - button vds-button`} aria-label="Chapter Switch">
-                            <PlaylistIcon className={classes.playlistIcon} />
-                        </Menu.Button>
-                        <Menu.Items className="vds-menu-items" placement="bottom start" offset={0}>
-                            <Menu.RadioGroup>
-                                {episodesList}
-                            </Menu.RadioGroup>
-                        </Menu.Items>
-                        <Text fw={700} className={classes.currentEpisodeMarker}>{currentEpisode} серия</Text>
-                        {
-                            started && isLastTenSeconds && hasNextEpisode
-                                ? (
-                                    <div className={classes.nextEpisode}>
-                                        <Button variant="transparent" className={classes.nextEpisodeButton} onClick={setNextEpisode}>Дальше</Button>
-                                    </div>
-                                )
-                                : (
-                                    <div className={classes.nextEpisode} />
-                                )
-                        }
-                    </Menu.Root>
-                </DefaultVideoLayout>
-            </MediaPlayer>
-        </div>
+                </Menu.Root>
+            </DefaultVideoLayout>
+        </MediaPlayer>
     );
 }

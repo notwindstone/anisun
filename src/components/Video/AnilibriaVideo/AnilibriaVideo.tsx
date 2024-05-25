@@ -59,8 +59,8 @@ export default function AnilibriaVideo({ id }: { id: string }) {
     }
 
     return (
-        <>
+        <AspectRatio ratio={16 / 9}>
             <VideoPlayer title={data.names.ru} player={player} />
-        </>
+        </AspectRatio>
     );
 }

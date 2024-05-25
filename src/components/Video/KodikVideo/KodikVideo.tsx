@@ -13,8 +13,6 @@ export default function KodikVideo({ id }: { id: string }) {
         return await getKodikPlayer({ shikimoriId: id });
     }
 
-    console.log(data);
-
     if (isPending) {
         return (
             <AspectRatio ratio={16 / 9}>
