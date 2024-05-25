@@ -4,11 +4,12 @@ import {Carousel} from "@mantine/carousel";
 import HeroSlides from "@/components/Hero/HeroSlides/HeroSlides";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import {Container, em} from "@mantine/core";
-import {useMediaQuery, useViewportSize} from "@mantine/hooks";
+import {Container} from "@mantine/core";
+import {useViewportSize} from "@mantine/hooks";
 import classes from './Hero.module.css';
 import {useRef} from "react";
 import Autoplay from 'embla-carousel-autoplay';
+import useMobileScreen from "@/hooks/useMobileScreen";
 
 const CAROUSEL_PROPS = {
     slideSize: "100%",
@@ -25,7 +26,7 @@ const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT });
 
 export default function Hero() {
     const autoplay = useRef(Autoplay({ delay: 7000 }));
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+    const { isMobile } = useMobileScreen();
     const { width } = useViewportSize();
     const shikimori = client();
     const { status, error, data } = useQuery({

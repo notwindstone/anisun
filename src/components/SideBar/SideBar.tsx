@@ -1,8 +1,8 @@
 "use client";
 
 import {CustomThemeContext, SideBarContext} from "@/utils/Contexts/Contexts";
-import {useDisclosure, useMediaQuery} from "@mantine/hooks";
-import {em, rem, Stack} from "@mantine/core";
+import {useDisclosure} from "@mantine/hooks";
+import {rem, Stack} from "@mantine/core";
 import classes from './SideBar.module.css';
 import SideBarBurger from "@/components/SideBar/SideBarBurger/SideBarBurger";
 import React from "react";
@@ -12,6 +12,7 @@ import SideBarSettings from "@/components/SideBar/SideBarSettings/SideBarSetting
 import SideBarHome from "@/components/SideBar/SideBarHome/SideBarHome";
 import SideBarTrending from "@/components/SideBar/SideBarTrending/SideBarTrending";
 import SideBarSearch from "@/components/SideBar/SideBarSearch/SideBarSearch";
+import useMobileScreen from "@/hooks/useMobileScreen";
 
 const SIDEBAR_BUTTONS = [
     {
@@ -34,7 +35,7 @@ const SIDEBAR_BUTTONS = [
 
 export default function SideBar({ children }: { children: React.ReactNode }) {
     const [opened, { toggle }] = useDisclosure(false);
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
+    const { isMobile } = useMobileScreen();
     const { theme, setTheme } = useCustomTheme();
 
     const buttons = SIDEBAR_BUTTONS.map((button) => {
