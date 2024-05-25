@@ -30,8 +30,8 @@ export default function AnimeInfo({ id }: { id: string }) {
                 <Skeleton height={24} visible={isPending}>
                     <Text lineClamp={1}>
                         {
-                            data?.studios.map((studio) => {
-                                return studio.name;
+                            data?.studios.map((studio, index) => {
+                                return `${index ? ', ' : ''}${studio.name}`;
                             })
                         }
                     </Text>

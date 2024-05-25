@@ -30,7 +30,7 @@ export default function AnilibriaVideo({ id }: { id: string }) {
         const shikimoriDuration = shikimoriAnime.duration ?? 1;
         const approximateDuration = `(${shikimoriDuration - 1}, ${shikimoriDuration}, ${shikimoriDuration + 1})`;
 
-        return await anilibria.advancedSearch(
+        const anilibriaData = await anilibria.advancedSearch(
             {
                 originalName: shikimoriOriginalName,
                 englishName: shikimoriEnglishName,
@@ -41,6 +41,12 @@ export default function AnilibriaVideo({ id }: { id: string }) {
                 limit: 1,
             }
         );
+
+        if (!anilibriaData) {
+            return null;
+        }
+
+        return anilibriaData;
     }
 
     if (isPending) {
@@ -56,18 +62,18 @@ export default function AnilibriaVideo({ id }: { id: string }) {
     }
 
     if (error) {
-        return <>Ошибка: {error.message}</>;
+        return <>Что-то пошло не так... Попробуйте перезапустить сайт. Ошибка: {error.message}</>;
     }
 
     const player = data?.player;
 
     if (player?.list?.[1]?.episode === undefined || player?.list?.[1]?.hls === undefined) {
-        return <>К сожалению, онлайн просмотр через наш плеер для данного аниме не доступен. Попробуйте выбрать другой!</>;
+        return <>К сожалению, онлайн просмотр данного аниме через наш плеер не доступен. Попробуйте выбрать другой!</>;
     }
 
     return (
         <AspectRatio ratio={16 / 9}>
-            <VideoPlayer title={data.names.ru} player={player} />
+            <VideoPlayer title={data?.names.ru} player={player} />
         </AspectRatio>
     );
 }
