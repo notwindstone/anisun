@@ -52,6 +52,8 @@ export default function Page({ params }: { params: { code: string } }) {
             <Group
                 align="flex-start"
                 pt={rem(82)}
+                pl={rem(16)}
+                pr={rem(16)}
                 gap={rem(16)}
             >
                 <Stack

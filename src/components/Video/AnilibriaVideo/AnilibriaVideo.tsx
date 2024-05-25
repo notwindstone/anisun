@@ -7,7 +7,7 @@ import {AspectRatio, Skeleton} from "@mantine/core";
 export default function AnilibriaVideo({ id }: { id: string }) {
     const shikimori = client();
     const { data, isPending, error } = useQuery({
-        queryKey: ['anime', id],
+        queryKey: ['anime', 'anilibria', id],
         queryFn: async () => getAnilibriaData(),
     });
 
