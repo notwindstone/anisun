@@ -35,6 +35,10 @@ export default function AnilibriaVideo({ id }: { id: string }) {
         );
     }
 
+    if (isPending) {
+        return <>Loading...</>;
+    }
+
     return (
         <>
             <VideoPlayer title={data.names.ru} player={data.player} />

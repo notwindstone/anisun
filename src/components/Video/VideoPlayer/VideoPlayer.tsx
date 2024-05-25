@@ -3,12 +3,13 @@ import '@vidstack/react/player/styles/default/layouts/video.css';
 import {MediaPlayer, MediaPlayerInstance, MediaProvider, Menu, useMediaStore} from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
 import {useRef, useState} from 'react';
-import videoPlayerTranslation from '../../configs/videoPlayerTranslation.json';
+import videoPlayerTranslation from '@/configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
 import {Button, Text} from "@mantine/core";
 import {VideoPlayerType} from "@/types/Video/VideoPlayer.type";
 import createHLSMasterPlaylist from "@/utils/Misc/createHLSMasterPlaylist";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 function changeEpisode({ player }: VideoPlayerType, episode: number) {
     const host = `https://${player.host}`;
@@ -18,6 +19,7 @@ function changeEpisode({ player }: VideoPlayerType, episode: number) {
 }
 
 export default function VideoPlayer({ title, player }: VideoPlayerType) {
+    const { theme } = useCustomTheme();
     const mediaPlayerRef = useRef<MediaPlayerInstance>(null);
     const { started, currentTime, duration } = useMediaStore(mediaPlayerRef);
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
@@ -29,17 +31,24 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
 
     const episodesList = episodesAmount.map((_value, index) => {
             const episodeIndex = index + 1;
+            const style =  currentEpisode === episodeIndex ?{
+                color: 'var(--animeth-text-contrast-color)',
+                textShadow: '0px 0px 4px black',
+                background: theme.color,
+            } : {
+                color: 'var(--animeth-text-contrast-color)',
+                background: 'none',
+            };
 
             return (
                 <Menu.Radio
-                    className={
-                        currentEpisode === episodeIndex ? classes.currentEpisodeButton : undefined
-                    }
+                    style={style}
                     key={episodeIndex}
-                    onClick={() => {
-                        setCurrentEpisode(episodeIndex);
-                        setEpisodeSource(changeEpisode({ player }, episodeIndex));
-                    }
+                    onClick={
+                        () => {
+                            setCurrentEpisode(episodeIndex);
+                            setEpisodeSource(changeEpisode({ player }, episodeIndex));
+                        }
                     }
                 >
                     Серия {episodeIndex}
@@ -60,13 +69,14 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
     return (
         <div className={classes.wrapper}>
             <MediaPlayer
-                onControlsChange={(isControlsShown) => {
-                    if (!isControlsShown) {
-                        setHideMenu('hidden');
-                    } else {
-                        setHideMenu('');
+                onControlsChange={
+                    (isControlsShown) => {
+                        if (!isControlsShown) {
+                            setHideMenu('hidden');
+                        } else {
+                            setHideMenu('');
+                        }
                     }
-                }
                 }
                 className={classes.player}
                 title={title}

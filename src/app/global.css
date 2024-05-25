@@ -4,6 +4,7 @@
         --animeth-ripple-color: #0000004d;
         --animeth-sidebar-color: #fdfdfd;
         --animeth-text-contrast-color: #000;
+        --animeth-text-contrast-reversed-color: #fff;
         --animeth-accent-color: #000;
     }
 
@@ -12,6 +13,7 @@
         --animeth-ripple-color: #ffffff4c;
         --animeth-sidebar-color: #080808;
         --animeth-text-contrast-color: #fff;
+        --animeth-text-contrast-reversed-color: #000;
         --animeth-accent-color: #fff;
     }
 }
