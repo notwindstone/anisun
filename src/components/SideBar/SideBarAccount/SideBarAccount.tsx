@@ -6,7 +6,6 @@ import SideBarPopover from "@/components/SideBar/SideBarPopover/SideBarPopover";
 import {useDisclosure} from "@mantine/hooks";
 import SideBarAccountModal from "@/components/SideBar/SideBarAccount/SideBarAccountModal/SideBarAccountModal";
 import {SignIn, SignUp, UserProfile, useUser} from "@clerk/nextjs";
-import {usePathname, useRouter} from "next/navigation";
 import NProgress from "nprogress";
 
 export default function SideBarAccount() {
@@ -15,8 +14,6 @@ export default function SideBarAccount() {
     const [settingsOpened, { open: openSettings, close: closeSettings }] = useDisclosure(false);
     const [signInOpened, { open: openSignIn, close: closeSignIn }] = useDisclosure(false);
     const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false);
-    const router = useRouter();
-    const pathname = usePathname();
 
     const settingsModal = (
         <SideBarAccountModal
@@ -46,8 +43,6 @@ export default function SideBarAccount() {
     );
 
     useEffect(() => {
-        router.push(pathname);
-
         if (!user) {
             return;
         }
