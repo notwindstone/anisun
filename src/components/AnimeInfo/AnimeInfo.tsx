@@ -5,15 +5,18 @@ import {useQuery} from "@tanstack/react-query";
 import {Group, Stack, Text, Title} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
-import {IconDownload, IconShare3} from "@tabler/icons-react";
+import {IconShare3} from "@tabler/icons-react";
 import {useClipboard} from "@mantine/hooks";
+import {usePathname} from "next/navigation";
+import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
 
 export default function AnimeInfo({ id }: { id: string }) {
-    const clipboard = useClipboard();
+    const pathname = usePathname();
+    const clipboard = useClipboard({ timeout: 1000 });
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'info', id],
-        queryFn: () => getShikimoriInfo(),
+        queryFn: async () => getShikimoriInfo(),
     });
 
     async function getShikimoriInfo() {
@@ -23,7 +26,7 @@ export default function AnimeInfo({ id }: { id: string }) {
     }
 
     function copyLink() {
-        clipboard.copy('Test');
+        clipboard.copy(`https://animeth.vercel.app${pathname}`);
 
     }
 
@@ -63,17 +66,14 @@ export default function AnimeInfo({ id }: { id: string }) {
                 </Stack>
                 <Group>
                     <DecoratedButton
-                        leftSection={<IconShare3 />}
+                        leftSection={!clipboard.copied && <IconShare3 />}
                         onClick={copyLink}
                     >
-                        Поделиться
+                        {
+                            clipboard.copied ? "Скопировано" : "Поделиться"
+                        }
                     </DecoratedButton>
-                    <DecoratedButton
-                        leftSection={<IconDownload />}
-                        onClick={() => {}}
-                    >
-                        Скачать
-                    </DecoratedButton>
+                    <AnimeInfoDownloadVideo id={id} />
                 </Group>
             </Group>
         </Stack>
