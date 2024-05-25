@@ -1,7 +1,7 @@
 import {client} from "@/lib/shikimori/client";
-import {useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
+import VideoPlayer from "@/components/Video/VideoPlayer/VideoPlayer";
 
 export default function AnilibriaVideo({ id }: { id: string }) {
     const shikimori = client();
@@ -15,12 +15,12 @@ export default function AnilibriaVideo({ id }: { id: string }) {
             ids: id,
         })).animes[0];
 
-        const shikimoriOriginalName = shikimoriAnime.name
-        const shikimoriEnglishName = shikimoriAnime.english
-        const shikimoriRussianName = shikimoriAnime.russian
-        const shikimoriYear = shikimoriAnime.airedOn?.year
-        const shikimoriDuration = shikimoriAnime.duration ?? 1
-        const approximateDuration = `(${shikimoriDuration - 1}, ${shikimoriDuration}, ${shikimoriDuration + 1})`
+        const shikimoriOriginalName = shikimoriAnime.name;
+        const shikimoriEnglishName = shikimoriAnime.english;
+        const shikimoriRussianName = shikimoriAnime.russian;
+        const shikimoriYear = shikimoriAnime.airedOn?.year;
+        const shikimoriDuration = shikimoriAnime.duration ?? 1;
+        const approximateDuration = `(${shikimoriDuration - 1}, ${shikimoriDuration}, ${shikimoriDuration + 1})`;
 
         return await anilibria.advancedSearch(
             {
@@ -35,9 +35,9 @@ export default function AnilibriaVideo({ id }: { id: string }) {
         );
     }
 
-    console.log(data)
-
     return (
-        <></>
+        <>
+            <VideoPlayer title={data.names.ru} player={data.player} />
+        </>
     );
 }

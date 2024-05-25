@@ -5,5 +5,5 @@ export type AdvancedSearchType = {
     year?: number;
     duration?: string;
     filter?: string;
-    limit?: number
+    limit?: number;
 };
