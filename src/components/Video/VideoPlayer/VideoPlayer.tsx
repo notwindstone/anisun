@@ -32,11 +32,11 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
     const episodesList = episodesAmount.map((_value, index) => {
             const episodeIndex = index + 1;
             const style =  currentEpisode === episodeIndex ?{
-                color: 'var(--animeth-text-contrast-color)',
+                color: '#fff',
                 textShadow: '0px 0px 4px black',
                 background: theme.color,
             } : {
-                color: 'var(--animeth-text-contrast-color)',
+                color: '#fff',
                 background: 'none',
             };
 
