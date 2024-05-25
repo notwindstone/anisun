@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/speed-insights": "1.0.11",
     "@clerk/localizations": "^1.28.0",
     "@clerk/nextjs": "^4.29.10",
     "@mantine/carousel": "^7.9.1",
