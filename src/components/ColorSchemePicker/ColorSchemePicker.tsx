@@ -51,6 +51,9 @@ export default function ColorSchemePicker({ option }: { option: string }) {
                     onChange={onChange}
                 />
                 <ColorInput
+                    classNames={{
+                        input: classes.input
+                    }}
                     value={color}
                     onChange={onChange}
                     withPicker={false}

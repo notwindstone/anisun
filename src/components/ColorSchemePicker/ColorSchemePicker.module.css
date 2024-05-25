@@ -9,3 +9,9 @@
 .loaderButton {
     min-width: fit-content;
 }
+
+.input {
+    &:focus-within {
+        border-color: var(--animeth-text-contrast-color);
+    }
+}
