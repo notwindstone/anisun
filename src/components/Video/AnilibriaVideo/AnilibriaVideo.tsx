@@ -14,6 +14,13 @@ export default function AnilibriaVideo({ id }: { id: string }) {
     async function getAnilibriaData() {
         const shikimoriAnime = (await shikimori.animes.byId({
             ids: id,
+            filter: [
+                "name",
+                "english",
+                "russian",
+                "airedOn { year month day date }",
+                "duration"
+            ],
         })).animes[0];
 
         const shikimoriOriginalName = shikimoriAnime.name;
