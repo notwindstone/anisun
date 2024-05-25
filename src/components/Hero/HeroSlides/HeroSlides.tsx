@@ -1,6 +1,6 @@
 import {Carousel} from "@mantine/carousel";
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
-import {Skeleton, Text} from "@mantine/core";
+import {Flex, rem, Skeleton, Text} from "@mantine/core";
 import {WrapperResponseInterface} from "@/types/Shikimori/Responses/Interfaces/WrapperResponse.interface";
 import HeroMobileCard from "@/components/Hero/HeroMobileCard/HeroMobileCard";
 
@@ -32,7 +32,16 @@ export default function HeroSlides({
                 );
                 break;
             case "pending":
-                currentSlide = (
+                currentSlide = isMobile ? (
+                    <Flex
+                        h={debouncedHeight}
+                        pl={rem(64)}
+                        pr={rem(64)}
+                        align="flex-end"
+                    >
+                        <Skeleton radius={32} h={debouncedHeight - 64} />
+                    </Flex>
+                ) : (
                     <Skeleton radius={0} w="100%" h={debouncedHeight} />
                 );
                 break;
