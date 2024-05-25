@@ -2,9 +2,6 @@
     position: absolute;
     user-select: none;
     margin-right: 1rem;
-    outline-offset: rem(-3px);
-    outline-style: solid;
-    outline-width: rem(4px);
 }
 
 .card {

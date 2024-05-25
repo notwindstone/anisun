@@ -53,7 +53,7 @@ export default function HeroCard({
         size = "xl";
     }
 
-    const heroCard = useMemo(
+    return useMemo(
         () => (
             <Container
                 w={width}
@@ -186,11 +186,5 @@ export default function HeroCard({
             debouncedLongerInViewport,
             theme.color
         ]
-    );
-
-    return (
-        <>
-            {heroCard}
-        </>
     );
 }

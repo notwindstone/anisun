@@ -2,6 +2,8 @@ import {Carousel} from "@mantine/carousel";
 import {Skeleton} from "@mantine/core";
 import CarouselCard from "@/components/Carousel/CarouselCard/CarouselCard";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
+import useMobileScreen from "@/hooks/useMobileScreen";
+import CarouselMobileCard from "@/components/Carousel/CarouselMobileCard/CarouselMobileCard";
 
 export default function CarouselSlides(
     {
@@ -16,6 +18,8 @@ export default function CarouselSlides(
         data?: AnimeType[];
     }
 ) {
+    const { isMobile } = useMobileScreen();
+
     return carouselSlides.map((_slide, index) => {
         return (
             <Carousel.Slide key={index}>
@@ -23,7 +27,13 @@ export default function CarouselSlides(
                     (status === 'success' && data !== undefined)
                         ? (
                             <>
-                                <CarouselCard animeTitle={data?.[index]} />
+                                {
+                                    isMobile ? (
+                                        <CarouselMobileCard animeTitle={data?.[index]} />
+                                    ) : (
+                                        <CarouselCard animeTitle={data?.[index]} />
+                                    )
+                                }
                             </>
                         ) : status === 'error' ? (
                             <>Error: {error?.message}</>
