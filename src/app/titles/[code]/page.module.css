@@ -1,0 +1,7 @@
+.group {
+    padding-top: rem(82px);
+
+    @media screen and (max-width: rem(750px)) {
+        padding-top: rem(16px);
+    }
+}

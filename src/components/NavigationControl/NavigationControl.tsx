@@ -23,8 +23,8 @@ export default function NavigationControl() {
                 className={classes.wrapper}
             >
                 <Box className={classes.inner}>
-                    <Group gap={rem(16)}>
-                        <Group gap={rem(8)}>
+                    <Group wrap="nowrap" gap={rem(16)}>
+                        <Group wrap="nowrap" gap={rem(8)}>
                             <NavigationButton type="back" />
                             <NavigationButton type="forward" />
                         </Group>

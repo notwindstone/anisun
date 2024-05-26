@@ -1,4 +1,4 @@
-import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
+import {ActionIcon, AspectRatio, Popover, rem, Skeleton, Stack} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
 import classes from './SovetRomantica.module.css';
@@ -52,7 +52,15 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
     }
 
     if (isPending) {
-        return <>Loading</>;
+        return (
+            <AspectRatio ratio={16 / 9}>
+                <Skeleton
+                    height="100%"
+                    width="100%"
+                    radius="md"
+                />
+            </AspectRatio>
+        );
     }
 
     if (error) {

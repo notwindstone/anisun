@@ -31,21 +31,6 @@ export default function Video({ id }: { id: string }) {
                     <SovetRomanticaVideo id={id} />
                 )
             }
-            <Alert
-                radius="md"
-                variant="light"
-                color="gray"
-                title="Информация о плеере"
-                icon={<IconInfoCircle />}
-            >
-                {
-                    player === KODIK_PLAYER
-                        ? KODIK_DESCRIPTION
-                        : player === ANILIBRIA_PLAYER
-                            ? ANILIBRIA_DESCRIPTION
-                            : SOVETROMANTICA_DESCRIPTION
-                }
-            </Alert>
             <SegmentedControl
                 classNames={{
                     root: classes.root
@@ -62,6 +47,21 @@ export default function Video({ id }: { id: string }) {
                     { label: 'SovetRomantica', value: SOVETROMANTICA_PLAYER }
                 ]}
             />
+            <Alert
+                radius="md"
+                variant="light"
+                color="gray"
+                title="Информация о плеере"
+                icon={<IconInfoCircle />}
+            >
+                {
+                    player === KODIK_PLAYER
+                        ? KODIK_DESCRIPTION
+                        : player === ANILIBRIA_PLAYER
+                            ? ANILIBRIA_DESCRIPTION
+                            : SOVETROMANTICA_DESCRIPTION
+                }
+            </Alert>
         </Stack>
     );
 }

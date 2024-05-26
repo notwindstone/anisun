@@ -4,6 +4,7 @@ import {client} from "@/lib/shikimori/client";
 import {Metadata} from "next";
 import Video from "@/components/Video/Video";
 import AnimeInfo from "@/components/AnimeInfo/AnimeInfo";
+import classes from './page.module.css';
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
@@ -56,8 +57,8 @@ export default function Page({ params }: { params: { code: string } }) {
     return (
         <>
             <Group
+                className={classes.group}
                 align="flex-start"
-                pt={rem(82)}
                 pl={rem(16)}
                 pr={rem(16)}
                 gap={rem(16)}
