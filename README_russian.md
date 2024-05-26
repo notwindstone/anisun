@@ -76,7 +76,7 @@
 
 - [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
-- [ ] Прикрутить API от [SovetRomantica](https://github.com/sovetromantica/sr-api)
+- [ ] Прикрутить API от [SovetRomanticaVideo](https://github.com/sovetromantica/sr-api)
 
 - [ ] Сделать различные роли (администратора, участника) для аккаунтов
 

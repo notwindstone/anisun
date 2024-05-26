@@ -76,7 +76,7 @@
 
 - [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
-- [ ] Add subtitles from [SovetRomantica API](https://github.com/sovetromantica/sr-api)
+- [ ] Add subtitles from [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
 
 - [ ] Add permission groups (administrator, member) to users
 
