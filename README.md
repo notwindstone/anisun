@@ -70,13 +70,13 @@
 
 ## ✅ To-Do List
 
-- [ ] Add the option to `.env` to use a database based on value
+- [x] Add the option to `.env` to use a database based on value
 
 - [ ] Add option to download anime using torrent or directly from website
 
 - [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
-- [ ] Add subtitles from [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
+- [x] Add subtitles from [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
 
 - [ ] Add permission groups (administrator, member) to users
 
