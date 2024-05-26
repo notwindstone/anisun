@@ -1,6 +1,5 @@
 import useCustomTheme from "@/hooks/useCustomTheme";
-import {UnstyledButton} from "@mantine/core";
-import classes from './SovetRomanticaVideoButton.module.css';
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 
 export default function SovetRomanticaVideoButton({
     isActive,
@@ -14,13 +13,15 @@ export default function SovetRomanticaVideoButton({
     const { theme } = useCustomTheme();
 
     return (
-        <UnstyledButton
+        <DecoratedButton
+            autoContrast={isActive && true}
+            radius="md"
             style={{
                 background: isActive ? theme.color : "none"
             }}
             onClick={changeEpisode}
         >
             Серия {episodeCount}
-        </UnstyledButton>
+        </DecoratedButton>
     );
 }

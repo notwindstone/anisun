@@ -1,4 +1,4 @@
-import {ActionIcon, AspectRatio, Popover, Stack} from "@mantine/core";
+import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
 import classes from './SovetRomantica.module.css';
@@ -96,8 +96,8 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
                         <IconMenu2 className={classes.playlistIcon} />
                     </ActionIcon>
                 </Popover.Target>
-                <Popover.Dropdown>
-                    <Stack>
+                <Popover.Dropdown p={rem(8)}>
+                    <Stack gap={rem(8)}>
                         {buttons}
                     </Stack>
                 </Popover.Dropdown>
