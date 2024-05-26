@@ -2,10 +2,13 @@ import {IconDownload} from "@tabler/icons-react";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
-import {rem, Skeleton} from "@mantine/core";
+import {Popover, rem, Skeleton} from "@mantine/core";
 import getShikimoriDataForAnilibriaQuery from "@/utils/Misc/getShikimoriDataForAnilibriaQuery";
+import {useState} from "react";
+import {AnimeTitleDownloadType} from "@/types/Anilibria/Responses/AnimeTitleDownload.type";
 
 export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
+    const [opened, setOpened] = useState(false);
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'download', id],
         queryFn: async () => getDownloadLinks(),
@@ -20,7 +23,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
             approximateDuration,
         } = await getShikimoriDataForAnilibriaQuery({ id });
 
-        const anilibriaData = await anilibria.advancedSearch(
+        const anilibriaData: AnimeTitleDownloadType | undefined = await anilibria.advancedSearch(
             {
                 originalName: shikimoriOriginalName,
                 englishName: shikimoriEnglishName,
@@ -39,6 +42,10 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
         return anilibriaData;
     }
 
+    function togglePopover() {
+        setOpened((o) => !o);
+    }
+
     if (isPending) {
         return <Skeleton radius="xl" width={rem(126)} height={rem(36)} />;
     }
@@ -48,11 +55,22 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
     }
 
     return (
-        <DecoratedButton
-            leftSection={<IconDownload size={24} stroke={1.5} />}
-            onClick={() => console.log(data, isPending, error)}
-        >
-            Скачать
-        </DecoratedButton>
+        <>
+            <Popover radius="md" opened={opened} onChange={setOpened}>
+                <Popover.Target>
+                    <div>
+                        <DecoratedButton
+                            leftSection={<IconDownload size={24} stroke={1.5} />}
+                            onClick={togglePopover}
+                        >
+                            Скачать
+                        </DecoratedButton>
+                    </div>
+                </Popover.Target>
+                <Popover.Dropdown>
+                    {data?.toString()}
+                </Popover.Dropdown>
+            </Popover>
+        </>
     );
 }

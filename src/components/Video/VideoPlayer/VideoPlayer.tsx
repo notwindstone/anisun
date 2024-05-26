@@ -34,6 +34,7 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
             const episodeIndex = index + 1;
             const style =  currentEpisode === episodeIndex ?{
                 color: '#fff',
+                fontWeight: 600,
                 textShadow: '0px 0px 4px black',
                 background: theme.color,
             } : {
