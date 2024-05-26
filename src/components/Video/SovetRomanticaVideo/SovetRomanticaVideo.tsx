@@ -1,16 +1,27 @@
-import {AspectRatio} from "@mantine/core";
+import {ActionIcon, AspectRatio} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
 import classes from './SovetRomantica.module.css';
+import {AnimeInfoType} from "@/types/SovetRomantica/Responses/AnimeInfo.type";
+import {EpisodesType} from "@/types/SovetRomantica/Responses/Episodes.type";
+import {client} from "@/lib/shikimori/client";
+import {IconMenu2} from "@tabler/icons-react";
 
 export default function SovetRomanticaVideo({ id }: { id: string }) {
+    const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'sovetromantica', id],
         queryFn: async () => getSovetRomanticaEpisodes(),
     });
 
     async function getSovetRomanticaEpisodes() {
-        const animeInfo = await sovetromantica.search({ name: "Shuumatsu train doko e iku" });
+        const shikimoriName = (await shikimori.animes.byId({
+            ids: id,
+            filter: [
+                'name'
+            ],
+        }))?.animes?.[0]?.name;
+        const animeInfo: AnimeInfoType = await sovetromantica.search({ name: shikimoriName });
         const animeShikimoriId = animeInfo?.[0]?.anime_shikimori.toString();
 
         if (id !== animeShikimoriId) {
@@ -18,10 +29,14 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
         }
 
         const animeId = animeInfo?.[0]?.anime_id;
-        return await sovetromantica.episodes({ id: animeId });
-    }
+        const episodes: EpisodesType = await sovetromantica.episodes({ id: animeId });
 
-    console.log(data);
+        if (episodes.length === 0) {
+            return null;
+        }
+
+        return episodes;
+    }
 
     if (isPending) {
         return <>Loading</>;
@@ -32,7 +47,14 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
     }
 
     return (
-        <AspectRatio ratio={16 / 9}>
+        <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
+            <ActionIcon
+                variant="light"
+                radius="md"
+                className={classes.switchEpisodes}
+            >
+                <IconMenu2 className={classes.playlistIcon} />
+            </ActionIcon>
             <iframe
                 className={classes.frame}
                 src={data?.[0]?.embed}

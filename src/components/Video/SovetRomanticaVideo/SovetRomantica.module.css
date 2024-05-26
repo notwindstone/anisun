@@ -4,3 +4,24 @@
     border: none;
     border-radius: var(--mantine-radius-md);
 }
+
+.switchEpisodes {
+    background: rgb(0 0 0 / 0.2);
+    width: rem(32px);
+    height: rem(32px);
+    position: absolute;
+    top: rem(8px);
+    right: rem(8px);
+
+    &:hover, &:active {
+        background: rgb(0 0 0 / 0.3);
+    }
+}
+
+.aspectRatio {
+    position: relative;
+}
+
+.playlistIcon {
+    color: #fff;
+}

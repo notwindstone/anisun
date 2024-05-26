@@ -49,7 +49,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
 
     return (
         <DecoratedButton
-            leftSection={<IconDownload />}
+            leftSection={<IconDownload size={24} stroke={1.5} />}
             onClick={() => console.log(data, isPending, error)}
         >
             Скачать

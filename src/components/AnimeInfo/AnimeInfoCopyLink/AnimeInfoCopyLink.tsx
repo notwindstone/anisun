@@ -13,7 +13,7 @@ export default function AnimeInfoCopyLink() {
 
     return (
         <DecoratedButton
-            leftSection={!clipboard.copied && <IconShare3 />}
+            leftSection={!clipboard.copied && <IconShare3 size={24} stroke={1.5} />}
             onClick={copyLink}
         >
             {
