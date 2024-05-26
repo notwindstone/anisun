@@ -1,0 +1,105 @@
+.aspectRatio {
+    border-radius: var(--mantine-radius-md);
+    background: var(--mantine-color-dark-filled);
+}
+
+.group {
+    gap: rem(16px);
+
+    @media screen and (max-width: rem(900px)) {
+        gap: rem(12px);
+    }
+
+    @media screen and (max-width: rem(600px)) {
+        gap: rem(8px);
+    }
+
+    @media screen and (max-width: rem(450px)) {
+        gap: rem(4px);
+    }
+}
+
+.icon {
+    width: 100%;
+    height: 100%;
+    color: #ccc;
+}
+
+.iconWrapper {
+    width: rem(64px);
+    height: rem(64px);
+
+    @media screen and (max-width: rem(900px)) {
+        width: rem(48px);
+        height: rem(48px);
+    }
+
+    @media screen and (max-width: rem(600px)) {
+        width: rem(36px);
+        height: rem(36px);
+    }
+
+    @media screen and (max-width: rem(450px)) {
+        width: rem(24px);
+        height: rem(24px);
+    }
+}
+
+.stack {
+    gap: rem(8px);
+
+    @media screen and (max-width: rem(900px)) {
+        gap: rem(4px);
+    }
+
+    @media screen and (max-width: rem(600px)) {
+        gap: rem(2px);
+    }
+
+    @media screen and (max-width: rem(450px)) {
+        gap: 0;
+    }
+}
+
+.title {
+    font-size: rem(28px);
+    line-height: rem(28px);
+    font-weight: 500;
+    color: #ccc;
+
+    @media screen and (max-width: rem(900px)) {
+        font-size: rem(20px);
+        line-height: rem(20px);
+    }
+
+    @media screen and (max-width: rem(600px)) {
+        font-size: rem(16px);
+        line-height: rem(16px);
+    }
+
+    @media screen and (max-width: rem(450px)) {
+        font-size: rem(12px);
+        line-height: rem(12px);
+    }
+}
+
+.subtitle {
+    font-size: rem(20px);
+    line-height: rem(20px);
+    color: darken(#ccc, 0.2);
+
+    @media screen and (max-width: rem(900px)) {
+        font-size: rem(16px);
+        line-height: rem(16px);
+    }
+
+    @media screen and (max-width: rem(600px)) {
+        font-size: rem(12px);
+        line-height: rem(12px);
+    }
+
+    @media screen and (max-width: rem(450px)) {
+        font-size: rem(8px);
+        line-height: rem(8px);
+    }
+}

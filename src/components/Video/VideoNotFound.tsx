@@ -1,17 +1,20 @@
-import {AspectRatio, Center, Group, rem, Stack, Text} from "@mantine/core";
+import {AspectRatio, Box, Center, Group, Stack, Text} from "@mantine/core";
 import {IconAlertCircle} from "@tabler/icons-react";
+import classes from './VideoNotFound.module.css';
 
 export default function VideoNotFound() {
     return (
-        <AspectRatio ratio={16 / 9}>
+        <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
             <Center w="100%" h="100%">
-                <Group>
-                    <IconAlertCircle size={rem(64)} />
-                    <Stack gap={rem(8)}>
-                        <Text fw={500} c="white" size={rem(28)}>
+                <Group className={classes.group}>
+                    <Box className={classes.iconWrapper}>
+                        <IconAlertCircle className={classes.icon} />
+                    </Box>
+                    <Stack className={classes.stack}>
+                        <Text className={classes.title}>
                             Видео недоступно
                         </Text>
-                        <Text size={rem(18)}>
+                        <Text className={classes.subtitle}>
                             Попробуйте выбрать другой плеер
                         </Text>
                     </Stack>

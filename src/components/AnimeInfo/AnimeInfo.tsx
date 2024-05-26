@@ -57,7 +57,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                 </Stack>
                 <Group>
                     <AnimeInfoCopyLink />
-                    <Suspense fallback={<p>Loading feed...</p>}>
+                    <Suspense fallback={<p>Loading button...</p>}>
                         <AnimeInfoDownloadVideo id={id} />
                     </Suspense>
                 </Group>
