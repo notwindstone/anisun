@@ -1,8 +1,12 @@
 "use client";
 
-import {AspectRatio, Group, rem, Skeleton, Stack} from "@mantine/core";
+import {AspectRatio, Container, Group, Image, rem, Skeleton, Stack, Text} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
+import {variables} from "@/configs/variables";
+import NextImage from "next/image";
+import classes from './Recommendations.module.css';
+import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
 
 export default function Recommendations({ id }: { id: string } ) {
     const shikimori = client();
@@ -45,12 +49,34 @@ export default function Recommendations({ id }: { id: string } ) {
     if (!data) {
         return;
     }
-
     return data?.map((anime) => {
         return (
-            <div key={anime.id}>
-                {anime.name}
-            </div>
+            <Group onClick={() => console.log("test")} key={anime.id} align="flex-start" grow>
+                <AspectRatio ratio={16 / 9}>
+                    <Container fluid className={classes.container}>
+                        <Image
+                            alt="Anime preview"
+                            src={`https://shikimori.one${anime?.image.original}`}
+                            placeholder="blur"
+                            blurDataURL={variables.imagePlaceholder}
+                            fill
+                            component={NextImage}
+                            radius="md"
+                        />
+                    </Container>
+                </AspectRatio>
+                <Stack h="100%" justify="flex-start" gap={0}>
+                    <Text lineClamp={2}>
+                        {anime?.russian ?? anime.name}
+                    </Text>
+                    <Text lineClamp={1}>
+                        {translateAnimeKind(anime.kind)}
+                    </Text>
+                    <Text lineClamp={1}>
+                        {anime.aired_on}
+                    </Text>
+                </Stack>
+            </Group>
         );
     });
 }

@@ -65,7 +65,7 @@ export default function Page({ params }: { params: { code: string } }) {
                 gap={rem(16)}
             >
                 <Stack
-                    flex={6}
+                    flex={5}
                 >
                     <Video id={shikimoriId} />
                     <AnimeInfo id={shikimoriId} />
