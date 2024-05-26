@@ -1,4 +1,4 @@
-import {ActionIcon, AspectRatio} from "@mantine/core";
+import {ActionIcon, AspectRatio, Popover, Stack, UnstyledButton} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
 import classes from './SovetRomantica.module.css';
@@ -6,8 +6,10 @@ import {AnimeInfoType} from "@/types/SovetRomantica/Responses/AnimeInfo.type";
 import {EpisodesType} from "@/types/SovetRomantica/Responses/Episodes.type";
 import {client} from "@/lib/shikimori/client";
 import {IconMenu2} from "@tabler/icons-react";
+import {useState} from "react";
 
 export default function SovetRomanticaVideo({ id }: { id: string }) {
+    const [opened, setOpened] = useState(false);
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'sovetromantica', id],
@@ -38,6 +40,10 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
         return episodes;
     }
 
+    function togglePopover() {
+        setOpened((o) => !o);
+    }
+
     if (isPending) {
         return <>Loading</>;
     }
@@ -46,15 +52,44 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
         return <>Error: {error.message}</>;
     }
 
+    const buttons = data?.map((episode) => {
+        return (
+            <UnstyledButton>
+                Серия {episode.episode_count}
+            </UnstyledButton>
+        );
+    });
+
+    console.log(buttons);
+
     return (
         <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
-            <ActionIcon
-                variant="light"
+            <Popover
+                classNames={{
+                    dropdown: classes.dropdown
+                }}
+                position="bottom-end"
+                transitionProps={{ transition: "scale-y" }}
+                opened={opened}
+                onChange={setOpened}
                 radius="md"
-                className={classes.switchEpisodes}
             >
-                <IconMenu2 className={classes.playlistIcon} />
-            </ActionIcon>
+                <Popover.Target>
+                    <ActionIcon
+                        onClick={togglePopover}
+                        variant="light"
+                        radius="md"
+                        className={classes.switchEpisodes}
+                    >
+                        <IconMenu2 className={classes.playlistIcon} />
+                    </ActionIcon>
+                </Popover.Target>
+                <Popover.Dropdown>
+                    <Stack>
+                        {buttons}
+                    </Stack>
+                </Popover.Dropdown>
+            </Popover>
             <iframe
                 className={classes.frame}
                 src={data?.[0]?.embed}
