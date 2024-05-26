@@ -6,6 +6,7 @@ import {Group, Stack, Text, Title} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
 import AnimeInfoCopyLink from "@/components/AnimeInfo/AnimeInfoCopyLink/AnimeInfoCopyLink";
+import {Suspense} from "react";
 
 export default function AnimeInfo({ id }: { id: string }) {
     const shikimori = client();
@@ -56,7 +57,9 @@ export default function AnimeInfo({ id }: { id: string }) {
                 </Stack>
                 <Group>
                     <AnimeInfoCopyLink />
-                    <AnimeInfoDownloadVideo id={id} />
+                    <Suspense fallback={<p>Loading feed...</p>}>
+                        <AnimeInfoDownloadVideo id={id} />
+                    </Suspense>
                 </Group>
             </Group>
         </Stack>

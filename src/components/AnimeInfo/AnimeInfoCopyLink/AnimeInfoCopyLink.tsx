@@ -13,11 +13,11 @@ export default function AnimeInfoCopyLink() {
 
     return (
         <DecoratedButton
-            leftSection={!clipboard.copied && <IconShare3 size={24} stroke={1.5} />}
+            leftSection={!clipboard.copied && <IconShare3 size={18} stroke={1.5} />}
             onClick={copyLink}
         >
             {
-                clipboard.copied ? "Скопировано" : "Поделиться"
+                clipboard.copied ? "Скопировано!" : "Поделиться"
             }
         </DecoratedButton>
     );

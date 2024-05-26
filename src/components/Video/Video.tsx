@@ -14,7 +14,7 @@ const KODIK_PLAYER = "kodik";
 const SOVETROMANTICA_PLAYER = "sovetromantica";
 const KODIK_DESCRIPTION = 'К сожалению, в плеере Kodik нельзя отключить рекламу. Она встроена в плеер и не зависит от нашего сайта. Зато доступен широкий выбор озвучек!';
 const ANILIBRIA_DESCRIPTION = 'В нашем плеере отсутствует реклама, но озвучка используется только от AniLibria.';
-const SOVETROMANTICA_DESCRIPTION = "";
+const SOVETROMANTICA_DESCRIPTION = 'В плеере от SovetRomantica используются только субтитры.';
 
 export default function Video({ id }: { id: string }) {
     const { theme } = useCustomTheme();
