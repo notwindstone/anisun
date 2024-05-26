@@ -67,6 +67,10 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
         return <>Error: {error.message}</>;
     }
 
+    data?.sort(function compare(current, next) {
+        return (current.episode_count ?? 0) - (next.episode_count ?? 1);
+    });
+
     const buttons = data?.map((episode) => {
         const isActive
             = embedSrc === episode.embed
