@@ -1,4 +1,4 @@
-import {ActionIcon, AspectRatio, Popover, Stack, UnstyledButton} from "@mantine/core";
+import {ActionIcon, AspectRatio, Popover, Stack} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
 import classes from './SovetRomantica.module.css';
@@ -7,6 +7,8 @@ import {EpisodesType} from "@/types/SovetRomantica/Responses/Episodes.type";
 import {client} from "@/lib/shikimori/client";
 import {IconMenu2} from "@tabler/icons-react";
 import {useState} from "react";
+import SovetRomanticaVideoButton
+    from "@/components/Video/SovetRomanticaVideo/SovetRomanticaVideoButton/SovetRomanticaVideoButton";
 
 export default function SovetRomanticaVideo({ id }: { id: string }) {
     const [opened, setOpened] = useState(false);
@@ -15,6 +17,7 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
         queryKey: ['anime', 'sovetromantica', id],
         queryFn: async () => getSovetRomanticaEpisodes(),
     });
+    const [embedSrc, setEmbedSrc] = useState(data?.[0]?.embed);
 
     async function getSovetRomanticaEpisodes() {
         const shikimoriName = (await shikimori.animes.byId({
@@ -44,6 +47,10 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
         setOpened((o) => !o);
     }
 
+    function changeEpisode(episodeSrc?: string) {
+        setEmbedSrc(episodeSrc);
+    }
+
     if (isPending) {
         return <>Loading</>;
     }
@@ -53,14 +60,17 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
     }
 
     const buttons = data?.map((episode) => {
+        const isActive = embedSrc === episode.embed || data?.[0]?.embed === episode.embed;
+
         return (
-            <UnstyledButton>
-                Серия {episode.episode_count}
-            </UnstyledButton>
+            <SovetRomanticaVideoButton
+                key={episode.episode_id}
+                isActive={isActive}
+                changeEpisode={() => changeEpisode(episode.embed)}
+                episodeCount={episode.episode_count}
+            />
         );
     });
-
-    console.log(buttons);
 
     return (
         <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
@@ -92,7 +102,7 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
             </Popover>
             <iframe
                 className={classes.frame}
-                src={data?.[0]?.embed}
+                src={embedSrc ?? data?.[0]?.embed}
                 allow="autoplay *; fullscreen *"
             />
         </AspectRatio>
