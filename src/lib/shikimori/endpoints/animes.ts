@@ -29,8 +29,15 @@ export const animes = () => {
             .then((response: ResponseInterface) => response.data.data);
     };
 
+    const similar = async ({ id }: { id: string })=> {
+        return await axios
+            .get(`https://shikimori.one/api/animes/${id}/similar`)
+            .then((response) => response.data);
+    };
+
     return {
         byId,
         list,
+        similar,
     };
 };

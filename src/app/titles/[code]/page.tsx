@@ -5,6 +5,7 @@ import {Metadata} from "next";
 import Video from "@/components/Video/Video";
 import AnimeInfo from "@/components/AnimeInfo/AnimeInfo";
 import classes from './page.module.css';
+import Recommendations from "@/components/Recommendations/Recommendations";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
@@ -70,7 +71,7 @@ export default function Page({ params }: { params: { code: string } }) {
                     <AnimeInfo id={shikimoriId} />
                 </Stack>
                 <Stack flex={2}>
-                    <div>2</div>
+                    <Recommendations id={shikimoriId} />
                 </Stack>
             </Group>
         </>
