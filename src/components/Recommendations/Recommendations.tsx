@@ -49,9 +49,18 @@ export default function Recommendations({ id }: { id: string } ) {
     if (!data) {
         return;
     }
-    return data?.map((anime) => {
+
+    // TODO: remove this line tomorrow (or today for you now)
+    // eslint-disable-next-line
+    return data?.map((anime: any) => {
         return (
-            <Group onClick={() => console.log("test")} key={anime.id} align="flex-start" grow>
+            <Group
+                onClick={() => console.log('')}
+                className={classes.group}
+                key={anime.id}
+                align="flex-start"
+                grow
+            >
                 <AspectRatio ratio={16 / 9}>
                     <Container fluid className={classes.container}>
                         <Image
@@ -65,14 +74,14 @@ export default function Recommendations({ id }: { id: string } ) {
                         />
                     </Container>
                 </AspectRatio>
-                <Stack h="100%" justify="flex-start" gap={0}>
-                    <Text lineClamp={2}>
+                <Stack className={classes.stack} h="100%" justify="flex-start" gap={0}>
+                    <Text className={classes.title} lineClamp={2}>
                         {anime?.russian ?? anime.name}
                     </Text>
-                    <Text lineClamp={1}>
+                    <Text className={classes.text} lineClamp={1}>
                         {translateAnimeKind(anime.kind)}
                     </Text>
-                    <Text lineClamp={1}>
+                    <Text className={classes.text} lineClamp={1}>
                         {anime.aired_on}
                     </Text>
                 </Stack>

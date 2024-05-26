@@ -10,7 +10,7 @@
             to bottom,
             light-dark(
                 darken(var(--animeth-background-color), 0.2),
-                lighten(var(--animeth-background-color), 0.2)
+                lighten(var(--animeth-background-color), 0.1)
             ) 0%,
             var(--animeth-background-color) 100%
         );
