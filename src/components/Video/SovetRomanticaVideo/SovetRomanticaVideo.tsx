@@ -60,7 +60,9 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
     }
 
     const buttons = data?.map((episode) => {
-        const isActive = embedSrc === episode.embed || data?.[0]?.embed === episode.embed;
+        const isActive
+            = embedSrc === episode.embed
+            || (embedSrc === undefined && data?.[0]?.embed === episode.embed);
 
         return (
             <SovetRomanticaVideoButton
