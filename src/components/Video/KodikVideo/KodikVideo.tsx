@@ -2,6 +2,7 @@ import {useQuery} from "@tanstack/react-query";
 import {AspectRatio, Skeleton} from "@mantine/core";
 import {getKodikPlayer} from "@/lib/actions";
 import classes from './KodikVideo.module.css';
+import VideoNotFound from "@/components/Video/VideoNotFound";
 
 export default function KodikVideo({ id }: { id: string }) {
     const { data, isPending, error } = useQuery({
@@ -10,7 +11,13 @@ export default function KodikVideo({ id }: { id: string }) {
     });
 
     async function getKodikData() {
-        return await getKodikPlayer({ shikimoriId: id });
+        const kodikData = await getKodikPlayer({ shikimoriId: id });
+
+        if (!kodikData) {
+            return null;
+        }
+
+        return kodikData;
     }
 
     if (isPending) {
@@ -27,6 +34,10 @@ export default function KodikVideo({ id }: { id: string }) {
 
     if (error) {
         return <>Ошибка: {error.message}</>;
+    }
+
+    if (!isPending && !data) {
+        return <VideoNotFound />;
     }
 
     return (

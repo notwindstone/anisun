@@ -9,6 +9,7 @@ import {IconMenu2} from "@tabler/icons-react";
 import {useState} from "react";
 import SovetRomanticaVideoButton
     from "@/components/Video/SovetRomanticaVideo/SovetRomanticaVideoButton/SovetRomanticaVideoButton";
+import VideoNotFound from "@/components/Video/VideoNotFound";
 
 export default function SovetRomanticaVideo({ id }: { id: string }) {
     const [opened, setOpened] = useState(false);
@@ -27,6 +28,14 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
             ],
         }))?.animes?.[0]?.name;
         const animeInfo: AnimeInfoType = await sovetromantica.search({ name: shikimoriName });
+
+        // SovetRomantica always sends responses with status 200
+        // with real status code being located in the response body
+        // @ts-ignore
+        if (animeInfo?.code === 503) {
+            return null;
+        }
+
         const animeShikimoriId = animeInfo?.[0]?.anime_shikimori.toString();
 
         if (id !== animeShikimoriId) {
@@ -65,6 +74,10 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
 
     if (error) {
         return <>Error: {error.message}</>;
+    }
+
+    if (!isPending && !data) {
+        return <VideoNotFound />;
     }
 
     data?.sort(function compare(current, next) {
