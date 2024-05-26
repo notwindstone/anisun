@@ -4,15 +4,10 @@ import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
 import {Group, Stack, Text, Title} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
-import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
-import {IconShare3} from "@tabler/icons-react";
-import {useClipboard} from "@mantine/hooks";
-import {usePathname} from "next/navigation";
 import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
+import AnimeInfoCopyLink from "@/components/AnimeInfo/AnimeInfoCopyLink/AnimeInfoCopyLink";
 
 export default function AnimeInfo({ id }: { id: string }) {
-    const pathname = usePathname();
-    const clipboard = useClipboard({ timeout: 1000 });
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'info', id],
@@ -23,11 +18,6 @@ export default function AnimeInfo({ id }: { id: string }) {
         return (await shikimori.animes.byId({
             ids: id,
         })).animes[0];
-    }
-
-    function copyLink() {
-        clipboard.copy(`https://animeth.vercel.app${pathname}`);
-
     }
 
     if (isPending) {
@@ -65,14 +55,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                     </Text>
                 </Stack>
                 <Group>
-                    <DecoratedButton
-                        leftSection={!clipboard.copied && <IconShare3 />}
-                        onClick={copyLink}
-                    >
-                        {
-                            clipboard.copied ? "Скопировано" : "Поделиться"
-                        }
-                    </DecoratedButton>
+                    <AnimeInfoCopyLink />
                     <AnimeInfoDownloadVideo id={id} />
                 </Group>
             </Group>
