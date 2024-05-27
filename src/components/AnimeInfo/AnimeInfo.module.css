@@ -28,15 +28,14 @@
 }
 
 .description {
-    display: flex;
-    justify-content: space-between;
+    align-items: flex-start;
     padding: rem(16px);
-    height: rem(96px);
+    height: rem(112px);
     width: 100%;
     border-radius: var(--mantine-radius-md);
     background: light-dark(#f3f3f4, #141516);
-    overflow: hidden;
     transition: 150ms ease;
+    overflow: hidden;
     cursor: pointer;
 }
 
@@ -50,4 +49,15 @@
     font-size: rem(16);
     line-height: rem(16);
     color: var(--animeth-text-contrast-color);
+}
+
+.heading {
+    color: var(--animeth-text-contrast-color);
+}
+
+.statsText {
+    color: var(--animeth-text-contrast-color);
+    font-size: rem(16px);
+    line-height: rem(16px);
+    font-weight: 600;
 }

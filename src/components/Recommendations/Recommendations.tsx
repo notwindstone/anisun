@@ -71,12 +71,11 @@ export default function Recommendations({ id }: { id: string } ) {
         const translatedStatus = translateAnimeStatus({ sortingType: anime.status, singular: true, lowerCase: true });
 
         return (
-            <div className={classes.recommendationWrapper}>
+            <div key={anime.id} className={classes.recommendationWrapper}>
                 <RecommendationsShareButton url={anime.url} />
                 <Group
                     onClick={redirectUser}
                     className={classes.group}
-                    key={anime.id}
                     align="flex-start"
                 >
                     <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>

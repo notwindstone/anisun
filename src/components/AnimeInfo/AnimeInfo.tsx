@@ -2,13 +2,16 @@
 
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
-import {Container, Divider, Group, Image, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
+import {Divider, Group, Image, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
 import AnimeInfoCopyLink from "@/components/AnimeInfo/AnimeInfoCopyLink/AnimeInfoCopyLink";
 import {Suspense} from "react";
 import Link from "next/link";
 import {useDisclosure} from "@mantine/hooks";
+import React from "react";
+import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
+import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
 
 export default function AnimeInfo({ id }: { id: string }) {
     const [opened, { open, close }] = useDisclosure(false);
@@ -38,6 +41,15 @@ export default function AnimeInfo({ id }: { id: string }) {
         return <></>;
     }
 
+    const nextEpisodeAt
+        = data?.nextEpisodeAt ? `Следующий эпизод: ${data.nextEpisodeAt} • ` : "";
+    const airedOn
+        = data?.airedOn?.date ? `${data.airedOn.date} • ` : "";
+    const animeStatus
+        = data?.status ? `${translateAnimeStatus({ sortingType: data?.status })} • ` : "";
+    const animeKind
+        = data?.kind ? `${translateAnimeKind(data?.kind)}` : "";
+
     return (
         <Stack gap={rem(8)} className={classes.stack}>
             <Title
@@ -65,7 +77,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                             {
                                 data?.genres.map((genre, index) => {
                                     return (
-                                        <>
+                                        <React.Fragment key={genre.id}>
                                             <span className={classes.span}>
                                                 {index ? ', ' : ''}
                                             </span>
@@ -75,7 +87,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                                             >
                                                 {genre.name}
                                             </Link>
-                                        </>
+                                        </React.Fragment>
                                     );
                                 })
                             }
@@ -84,17 +96,17 @@ export default function AnimeInfo({ id }: { id: string }) {
                             {
                                 data?.studios.map((studio, index) => {
                                     return (
-                                        <>
-                                        <span className={classes.span}>
-                                            {index ? ', ' : ''}
-                                        </span>
+                                        <React.Fragment key={studio.id}>
+                                            <span className={classes.span}>
+                                                {index ? ', ' : ''}
+                                            </span>
                                             <Link
                                                 className={classes.link}
                                                 href={`/titles?studio=${studio.name}`}
                                             >
                                                 {studio.name}
                                             </Link>
-                                        </>
+                                        </React.Fragment>
                                     );
                                 })
                             }
@@ -109,34 +121,74 @@ export default function AnimeInfo({ id }: { id: string }) {
                 </Group>
             </Group>
             <Divider />
-            <Container
+            <Group
                 onClick={descriptionOpen}
                 className={`
                     ${classes.description} ${opened && classes.expandedDescription}
                 `}
             >
-                <Stack>
-
-                </Stack>
-                <Stack
-                    w="fit-content"
-                    h="100%"
-                    align="flex-end"
-                    justify="flex-end"
-                >
+                <Stack gap={rem(8)}>
+                    <Text className={classes.statsText}>
+                        {`${nextEpisodeAt}${airedOn}${animeStatus}${animeKind}`}
+                    </Text>
                     {
-                        opened ? (
-                            <UnstyledButton className={classes.button} onClick={close}>
-                                Свернуть
-                            </UnstyledButton>
-                        ) : (
-                            <UnstyledButton className={classes.button} onClick={open}>
-                                Ещё
-                            </UnstyledButton>
+                        data?.description && (
+                            <>
+                                <Title className={classes.heading} pt={rem(8)} order={4}>ОПИСАНИЕ</Title>
+                                <Text>{data.description}</Text>
+                            </>
                         )
                     }
+                    <Title className={classes.heading} order={4}>ИНФОРМАЦИЯ</Title>
+                    {
+                        (data?.episodes && data?.episodesAired) && (
+                            <Text>
+                                Эпизоды: {data.episodes} / {data.episodesAired}
+                            </Text>
+                        )
+                    }
+                    {
+                        data?.duration && (
+                            <Text>
+                                Длительность эпизода: {data.duration}
+                            </Text>
+                        )
+                    }
+                    {
+                        data?.rating && (
+                            <Text>
+                                Рейтинг: {data.rating}
+                            </Text>
+                        )
+                    }
+                    {
+                        data?.japanese && (
+                            <Text>
+                                Японское название: {data.japanese}
+                            </Text>
+                        )
+                    }
+                    {
+                        data?.english && (
+                            <Text>
+                                Английское название: {data.english}
+                            </Text>
+                        )
+                    }
+                    {
+                        data?.synonyms?.length > 0 && (
+                            <Text>
+                                Другие названия: {data.synonyms.map((synonym) => (
+                                    <span>{synonym}</span>
+                            ))}
+                            </Text>
+                        )
+                    }
+                    <UnstyledButton className={classes.button} onClick={close}>
+                        Свернуть
+                    </UnstyledButton>
                 </Stack>
-            </Container>
+            </Group>
         </Stack>
     );
 }
