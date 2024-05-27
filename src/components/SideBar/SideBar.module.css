@@ -6,7 +6,7 @@
     height: 100vh;
     transition: 150ms ease;
     display: flex;
-    overflow-y: scroll;
+    overflow-y: auto;
     overflow-x: hidden;
 }
 
