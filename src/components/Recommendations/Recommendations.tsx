@@ -29,15 +29,19 @@ export default function Recommendations({ id }: { id: string } ) {
     if (isPending) {
         return mockVideos.map((_mockVideo, index) => {
             return (
-                <Group align="flex-start" grow key={index}>
-                    <AspectRatio ratio={16 / 9}>
+                <Group
+                    className={classes.group}
+                    key={index}
+                    align="flex-start"
+                >
+                    <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
                         <Skeleton
                             radius="md"
                             width="100%"
                             height="100%"
                         />
                     </AspectRatio>
-                    <Stack h="100%" justify="flex-start" gap={rem(8)}>
+                    <Stack className={classes.stack} h="100%" justify="flex-start">
                         <Skeleton width="80%" height={rem(20)} />
                         <Skeleton width="60%" height={rem(12)} />
                         <Skeleton width="60%" height={rem(12)} />
@@ -64,55 +68,57 @@ export default function Recommendations({ id }: { id: string } ) {
         }
 
         return (
-            <Group
-                onClick={redirectUser}
-                className={classes.group}
-                key={anime.id}
-                align="flex-start"
-            >
-                <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
-                    <Container fluid className={classes.container}>
-                        <Image
-                            alt="Anime preview"
-                            src={`https://shikimori.one${anime?.image.original}`}
-                            placeholder="blur"
-                            blurDataURL={variables.imagePlaceholder}
-                            fill
-                            component={NextImage}
-                            radius="md"
-                        />
-                        <Badge
-                            size="xs"
-                            autoContrast
-                            color="black"
-                            className={classes.scoreBadge}
-                        >
-                            {anime.score}
-                        </Badge>
-                        <Badge
-                            size="xs"
-                            autoContrast
-                            color="black"
-                            className={classes.episodesBadge}
-                        >
-                            {anime.episodes_aired} / {anime.episodes}
-                        </Badge>
-                    </Container>
-                </AspectRatio>
-                <Stack className={classes.stack} h="100%" justify="flex-start" gap={0}>
-                    <RecommendationsShareButton url={anime.url} />
-                    <Text className={classes.title} lineClamp={2}>
-                        {anime?.russian ?? anime.name}
-                        {anime?.russian && ` - ${anime.name}`}
-                    </Text>
-                    <Text className={classes.text} lineClamp={1}>
-                        {translateAnimeKind(anime.kind)}
-                    </Text>
-                    <Text className={classes.text} lineClamp={1}>
-                        {anime.aired_on}
-                    </Text>
-                </Stack>
-            </Group>
+            <div className={classes.recommendationWrapper}>
+                <RecommendationsShareButton url={anime.url} />
+                <Group
+                    onClick={redirectUser}
+                    className={classes.group}
+                    key={anime.id}
+                    align="flex-start"
+                >
+                    <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
+                        <Container fluid className={classes.container}>
+                            <Image
+                                alt="Anime preview"
+                                src={`https://shikimori.one${anime?.image.original}`}
+                                placeholder="blur"
+                                blurDataURL={variables.imagePlaceholder}
+                                fill
+                                component={NextImage}
+                                radius="md"
+                            />
+                            <Badge
+                                size="xs"
+                                autoContrast
+                                color="black"
+                                className={classes.scoreBadge}
+                            >
+                                {anime.score}
+                            </Badge>
+                            <Badge
+                                size="xs"
+                                autoContrast
+                                color="black"
+                                className={classes.episodesBadge}
+                            >
+                                {anime.episodes_aired} / {anime.episodes}
+                            </Badge>
+                        </Container>
+                    </AspectRatio>
+                    <Stack className={classes.stack} h="100%" justify="flex-start">
+                        <Text className={classes.title} lineClamp={2}>
+                            {anime?.russian ?? anime.name}
+                            {anime?.russian && ` - ${anime.name}`}
+                        </Text>
+                        <Text className={classes.text} lineClamp={1}>
+                            {translateAnimeKind(anime.kind)}
+                        </Text>
+                        <Text className={classes.text} lineClamp={1}>
+                            {anime.aired_on}
+                        </Text>
+                    </Stack>
+                </Group>
+            </div>
         );
     });
 }

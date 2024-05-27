@@ -1,3 +1,13 @@
+.recommendationWrapper {
+    position: relative;
+
+    @mixin hover {
+        .menuButton {
+            opacity: 1;
+        }
+    }
+}
+
 .aspectRatio {
     flex: 3;
     flex-shrink: 0;
@@ -46,25 +56,14 @@
     padding: rem(4px);
     gap: rem(8px);
     cursor: pointer;
-
-    @mixin hover {
-        .menuButton {
-            opacity: 1;
-        }
-    }
 }
 
 .stack {
-    position: relative;
     flex: 4;
     gap: rem(4px);
 
     @media screen and (max-width: rem(900px)) {
         gap: rem(2px);
-    }
-
-    @media screen and (max-width: rem(600px)) {
-        gap: 0;
     }
 }
 
@@ -74,9 +73,19 @@
     font-weight: 500;
     font-size: rem(14px);
     line-height: rem(20px);
+    
+    @media screen and (max-width: rem(450px)) {
+        font-size: rem(10px);
+        line-height: rem(16px);
+    }
 }
 
 .text {
     font-size: rem(12px);
     line-height: rem(18px);
+
+    @media screen and (max-width: rem(450px)) {
+        font-size: rem(8px);
+        line-height: rem(14px);
+    }
 }
