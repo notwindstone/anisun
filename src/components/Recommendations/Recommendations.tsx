@@ -12,6 +12,7 @@ import RecommendationsShareButton
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
+import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 
 export default function Recommendations({ id }: { id: string } ) {
     const router = useRouter();
@@ -110,10 +111,14 @@ export default function Recommendations({ id }: { id: string } ) {
                             {anime?.russian && ` - ${anime.name}`}
                         </Text>
                         <Text className={classes.text} lineClamp={1}>
-                            {translateAnimeKind(anime.kind)}
+                            {`${
+                                translateAnimeKind(anime.kind)
+                            }, ${
+                                translateAnimeStatus({ sortingType: anime.status, singular: true, lowerCase: true })
+                            }`}
                         </Text>
                         <Text className={classes.text} lineClamp={1}>
-                            {anime.aired_on}
+                            {anime.aired_on.split('-')?.[0]}
                         </Text>
                     </Stack>
                 </Group>

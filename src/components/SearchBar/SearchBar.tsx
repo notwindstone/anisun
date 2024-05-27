@@ -61,7 +61,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     const posterSourceURL = optionData[1];
     const russianName = optionData[2];
     const kind = translateAnimeKind(nonTranslatedKind);
-    const status = translateAnimeStatus(nonTranslatedStatus);
+    const status = translateAnimeStatus({ sortingType: nonTranslatedStatus });
     const englishName = optionData[5];
 
     switch (option.value) {

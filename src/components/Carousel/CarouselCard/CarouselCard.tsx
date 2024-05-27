@@ -43,7 +43,7 @@ export default function CarouselCard({
                 }}
             >
                 <Badge className={classes.status} color="black">
-                    {translateAnimeStatus(animeStatus)}
+                    {translateAnimeStatus({ sortingType: animeStatus })}
                 </Badge>
                 {
                     !isAnnounced && (

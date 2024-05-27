@@ -1,4 +1,5 @@
 import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
+import {StatusType} from "@/types/Shikimori/General/Status.type";
 
 export type OldAnimeType = {
     aired_on: string;
@@ -16,6 +17,6 @@ export type OldAnimeType = {
     released_on: string;
     russian?: string;
     score: string;
-    status: string;
+    status: StatusType;
     url: string;
 };
