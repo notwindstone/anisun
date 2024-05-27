@@ -71,14 +71,28 @@ export default function Recommendations({ id }: { id: string } ) {
                             component={NextImage}
                             radius="md"
                         />
-                        <Badge className={classes.episodesBadge}>
-                            {anime.episodes} / {anime.episodes_aired}
+                        <Badge
+                            size="xs"
+                            autoContrast
+                            color="black"
+                            className={classes.scoreBadge}
+                        >
+                            {anime.score}
+                        </Badge>
+                        <Badge
+                            size="xs"
+                            autoContrast
+                            color="black"
+                            className={classes.episodesBadge}
+                        >
+                            {anime.episodes_aired} / {anime.episodes}
                         </Badge>
                     </Container>
                 </AspectRatio>
                 <Stack className={classes.stack} h="100%" justify="flex-start" gap={0}>
                     <Text className={classes.title} lineClamp={2}>
                         {anime?.russian ?? anime.name}
+                        {anime?.russian && ` - ${anime.name}`}
                     </Text>
                     <Text className={classes.text} lineClamp={1}>
                         {translateAnimeKind(anime.kind)}

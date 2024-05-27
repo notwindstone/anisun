@@ -60,8 +60,6 @@ export default function Page({ params }: { params: { code: string } }) {
             <Group
                 className={classes.group}
                 align="flex-start"
-                pl={rem(16)}
-                pr={rem(16)}
                 gap={rem(16)}
             >
                 <Stack className={classes.primary} flex={1}>

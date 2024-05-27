@@ -1,6 +1,10 @@
 .aspectRatio {
     border-radius: var(--mantine-radius-md);
     background: var(--mantine-color-dark-filled);
+
+    @media screen and (max-width: rem(750px)) {
+        border-radius: 0;
+    }
 }
 
 .group {

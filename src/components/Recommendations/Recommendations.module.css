@@ -1,6 +1,7 @@
 .aspectRatio {
     flex: 3;
     flex-shrink: 0;
+    max-width: rem(168px);
 }
 
 .container {
@@ -37,8 +38,16 @@
     line-height: rem(18px);
 }
 
-.episodesBadge {
+.episodesBadge, .scoreBadge {
     position: absolute;
+}
+
+.episodesBadge {
     bottom: rem(4px);
     right: rem(4px);
+}
+
+.scoreBadge {
+    bottom: rem(4px);
+    left: rem(4px);
 }
