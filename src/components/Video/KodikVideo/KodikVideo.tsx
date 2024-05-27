@@ -1,8 +1,9 @@
 import {useQuery} from "@tanstack/react-query";
-import {AspectRatio, Skeleton} from "@mantine/core";
+import {AspectRatio} from "@mantine/core";
 import {getKodikPlayer} from "@/lib/actions";
 import classes from './KodikVideo.module.css';
-import VideoNotFound from "@/components/Video/VideoNotFound";
+import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
+import VideoSkeleton from "@/components/Video/VideoSkeleton/VideoSkeleton";
 
 export default function KodikVideo({ id }: { id: string }) {
     const { data, isPending, error } = useQuery({
@@ -22,13 +23,7 @@ export default function KodikVideo({ id }: { id: string }) {
 
     if (isPending) {
         return (
-            <AspectRatio ratio={16 / 9}>
-                <Skeleton
-                    height="100%"
-                    width="100%"
-                    radius="md"
-                />
-            </AspectRatio>
+            <VideoSkeleton />
         );
     }
 

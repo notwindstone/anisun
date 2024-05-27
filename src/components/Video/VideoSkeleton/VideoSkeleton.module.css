@@ -1,0 +1,7 @@
+.skeleton {
+    border-radius: var(--mantine-radius-md);
+
+    @media screen and (max-width: rem(750px)) {
+        border-radius: 0;
+    }
+}

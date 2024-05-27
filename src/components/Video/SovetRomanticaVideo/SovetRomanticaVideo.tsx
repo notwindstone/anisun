@@ -1,4 +1,4 @@
-import {ActionIcon, AspectRatio, Popover, rem, Skeleton, Stack} from "@mantine/core";
+import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
 import classes from './SovetRomantica.module.css';
@@ -9,7 +9,8 @@ import {IconMenu2} from "@tabler/icons-react";
 import {useState} from "react";
 import SovetRomanticaVideoButton
     from "@/components/Video/SovetRomanticaVideo/SovetRomanticaVideoButton/SovetRomanticaVideoButton";
-import VideoNotFound from "@/components/Video/VideoNotFound";
+import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
+import VideoSkeleton from "@/components/Video/VideoSkeleton/VideoSkeleton";
 
 export default function SovetRomanticaVideo({ id }: { id: string }) {
     const [opened, setOpened] = useState(false);
@@ -62,13 +63,7 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
 
     if (isPending) {
         return (
-            <AspectRatio ratio={16 / 9}>
-                <Skeleton
-                    height="100%"
-                    width="100%"
-                    radius="md"
-                />
-            </AspectRatio>
+            <VideoSkeleton />
         );
     }
 
