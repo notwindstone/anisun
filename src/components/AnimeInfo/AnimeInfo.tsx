@@ -2,24 +2,32 @@
 
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
-import {Group, Image, rem, Stack, Text, Title} from "@mantine/core";
+import {Container, Divider, Group, Image, rem, Stack, Text, Title, UnstyledButton} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
 import AnimeInfoCopyLink from "@/components/AnimeInfo/AnimeInfoCopyLink/AnimeInfoCopyLink";
 import {Suspense} from "react";
 import Link from "next/link";
+import {useDisclosure} from "@mantine/hooks";
 
 export default function AnimeInfo({ id }: { id: string }) {
+    const [opened, { open, close }] = useDisclosure(false);
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'info', id],
         queryFn: async () => getShikimoriInfo(),
     });
-
+    console.log(data)
     async function getShikimoriInfo() {
         return (await shikimori.animes.byId({
             ids: id,
         })).animes[0];
+    }
+
+    function descriptionOpen() {
+        if (!opened) {
+            open();
+        }
     }
 
     if (isPending) {
@@ -31,7 +39,7 @@ export default function AnimeInfo({ id }: { id: string }) {
     }
 
     return (
-        <Stack className={classes.stack}>
+        <Stack gap={rem(8)} className={classes.stack}>
             <Title
                 className={classes.title}
                 order={2}
@@ -68,7 +76,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                                                 {genre.name}
                                             </Link>
                                         </>
-                                    )
+                                    );
                                 })
                             }
                         </Text>
@@ -100,6 +108,35 @@ export default function AnimeInfo({ id }: { id: string }) {
                     </Suspense>
                 </Group>
             </Group>
+            <Divider />
+            <Container
+                onClick={descriptionOpen}
+                className={`
+                    ${classes.description} ${opened && classes.expandedDescription}
+                `}
+            >
+                <Stack>
+
+                </Stack>
+                <Stack
+                    w="fit-content"
+                    h="100%"
+                    align="flex-end"
+                    justify="flex-end"
+                >
+                    {
+                        opened ? (
+                            <UnstyledButton className={classes.button} onClick={close}>
+                                Свернуть
+                            </UnstyledButton>
+                        ) : (
+                            <UnstyledButton className={classes.button} onClick={open}>
+                                Ещё
+                            </UnstyledButton>
+                        )
+                    }
+                </Stack>
+            </Container>
         </Stack>
     );
 }

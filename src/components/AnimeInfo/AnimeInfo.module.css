@@ -26,3 +26,28 @@
         color: var(--animeth-text-contrast-color);
     }
 }
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    padding: rem(16px);
+    height: rem(96px);
+    width: 100%;
+    border-radius: var(--mantine-radius-md);
+    background: light-dark(#f3f3f4, #141516);
+    overflow: hidden;
+    transition: 150ms ease;
+    cursor: pointer;
+}
+
+.expandedDescription {
+    height: fit-content;
+    cursor: auto;
+}
+
+.button {
+    font-weight: 500;
+    font-size: rem(16);
+    line-height: rem(16);
+    color: var(--animeth-text-contrast-color);
+}

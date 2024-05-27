@@ -67,6 +67,9 @@ export default function Recommendations({ id }: { id: string } ) {
             router.push(`/titles/${anime.url.replace('/animes/', '')}`);
         }
 
+        const translatedKind = translateAnimeKind(anime.kind);
+        const translatedStatus = translateAnimeStatus({ sortingType: anime.status, singular: true, lowerCase: true });
+
         return (
             <div className={classes.recommendationWrapper}>
                 <RecommendationsShareButton url={anime.url} />
@@ -111,11 +114,7 @@ export default function Recommendations({ id }: { id: string } ) {
                             {anime?.russian && ` - ${anime.name}`}
                         </Text>
                         <Text className={classes.text} lineClamp={1}>
-                            {`${
-                                translateAnimeKind(anime.kind)
-                            }, ${
-                                translateAnimeStatus({ sortingType: anime.status, singular: true, lowerCase: true })
-                            }`}
+                            {`${translatedKind}, ${translatedStatus}`}
                         </Text>
                         <Text className={classes.text} lineClamp={1}>
                             {anime.aired_on.split('-')?.[0]}
