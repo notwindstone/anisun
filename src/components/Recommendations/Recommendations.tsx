@@ -11,6 +11,7 @@ import RecommendationsShareButton
     from "@/components/Recommendations/RecommendationsShareButton/RecommendationsShareButton";
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
+import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
 
 export default function Recommendations({ id }: { id: string } ) {
     const router = useRouter();
@@ -58,10 +59,8 @@ export default function Recommendations({ id }: { id: string } ) {
     if (!data) {
         return;
     }
-    console.log(data);
-    // TODO: remove this line tomorrow (or today for you now)
-    // eslint-disable-next-line
-    return data?.map((anime: any) => {
+
+    return data?.map((anime: OldAnimeType) => {
         function redirectUser() {
             NProgress.start();
             router.push(`/titles/${anime.url.replace('/animes/', '')}`);
