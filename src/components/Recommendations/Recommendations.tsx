@@ -9,8 +9,11 @@ import classes from './Recommendations.module.css';
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
 import RecommendationsShareButton
     from "@/components/Recommendations/RecommendationsShareButton/RecommendationsShareButton";
+import {useRouter} from "next/navigation";
+import NProgress from "nprogress";
 
 export default function Recommendations({ id }: { id: string } ) {
+    const router = useRouter();
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['recommendations', id],
@@ -55,9 +58,14 @@ export default function Recommendations({ id }: { id: string } ) {
     // TODO: remove this line tomorrow (or today for you now)
     // eslint-disable-next-line
     return data?.map((anime: any) => {
+        function redirectUser() {
+            NProgress.start();
+            router.push(`/titles/${anime.url.replace('/animes/', '')}`);
+        }
+
         return (
             <Group
-                onClick={() => console.log('')}
+                onClick={redirectUser}
                 className={classes.group}
                 key={anime.id}
                 align="flex-start"
