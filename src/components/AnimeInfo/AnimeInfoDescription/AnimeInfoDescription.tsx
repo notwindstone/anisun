@@ -22,6 +22,8 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
         }
     }
 
+    console.log(data);
+
     const nextEpisodeAt
         = data?.nextEpisodeAt ? `Следующий эпизод: ${data.nextEpisodeAt} • ` : "";
     const airedOn
@@ -47,6 +49,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         <>
                             <Title className={classes.heading} pt={rem(8)} order={4}>ОПИСАНИЕ</Title>
                             <Text
+                                {...opened ? null : { lineClamp: 1 }}
                                 dangerouslySetInnerHTML={{ __html: cleanDescription }}
                             />
                         </>
@@ -92,11 +95,30 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     data?.synonyms?.length > 0 && (
                         <Text>
                             Другие названия: {data.synonyms.map((synonym) => (
-                            <span>{synonym}</span>
-                        ))}
+                                <span key={synonym}>{synonym}</span>
+                            ))}
                         </Text>
                     )
                 }
+                {
+                    data?.fandubbers?.length > 0 && (
+                        <Text>
+                            Фанатский дубляж: {data.fandubbers.map((fandub, index) => (
+                                <span key={fandub}>{index ? ', ' : ''}{fandub}</span>
+                            ))}
+                        </Text>
+                    )
+                }
+                {
+                    data?.fansubbers?.length > 0 && (
+                        <Text>
+                            Фанатские субтитры: {data.fansubbers.map((fansub, index) => (
+                                <span key={fansub}>{index ? ', ' : ''}{fansub}</span>
+                            ))}
+                        </Text>
+                    )
+                }
+
                 <UnstyledButton className={classes.button} onClick={close}>
                     Свернуть
                 </UnstyledButton>

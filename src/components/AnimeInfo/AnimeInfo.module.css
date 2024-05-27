@@ -30,7 +30,7 @@
 .description {
     align-items: flex-start;
     padding: rem(16px);
-    height: rem(112px);
+    height: rem(120px);
     width: 100%;
     border-radius: var(--mantine-radius-md);
     background: light-dark(#f3f3f4, #141516);
