@@ -1,7 +1,20 @@
 .group {
+    flex-wrap: nowrap;
     padding-top: rem(82px);
+
+    @media screen and (max-width: rem(1024px)) {
+        flex-direction: column;
+    }
 
     @media screen and (max-width: rem(750px)) {
         padding-top: rem(16px);
     }
+}
+
+.primary {
+    min-width: 55vw;
+}
+
+.similar {
+    width: rem(400px);
 }

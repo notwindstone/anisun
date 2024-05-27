@@ -1,6 +1,6 @@
 "use client";
 
-import {AspectRatio, Container, Group, Image, rem, Skeleton, Stack, Text} from "@mantine/core";
+import {AspectRatio, Badge, Container, Group, Image, rem, Skeleton, Stack, Text} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {variables} from "@/configs/variables";
@@ -49,7 +49,7 @@ export default function Recommendations({ id }: { id: string } ) {
     if (!data) {
         return;
     }
-
+    console.log(data);
     // TODO: remove this line tomorrow (or today for you now)
     // eslint-disable-next-line
     return data?.map((anime: any) => {
@@ -59,9 +59,8 @@ export default function Recommendations({ id }: { id: string } ) {
                 className={classes.group}
                 key={anime.id}
                 align="flex-start"
-                grow
             >
-                <AspectRatio ratio={16 / 9}>
+                <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
                     <Container fluid className={classes.container}>
                         <Image
                             alt="Anime preview"
@@ -72,6 +71,9 @@ export default function Recommendations({ id }: { id: string } ) {
                             component={NextImage}
                             radius="md"
                         />
+                        <Badge className={classes.episodesBadge}>
+                            {anime.episodes} / {anime.episodes_aired}
+                        </Badge>
                     </Container>
                 </AspectRatio>
                 <Stack className={classes.stack} h="100%" justify="flex-start" gap={0}>

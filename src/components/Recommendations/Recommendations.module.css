@@ -1,4 +1,10 @@
+.aspectRatio {
+    flex: 3;
+    flex-shrink: 0;
+}
+
 .container {
+    padding: 0;
     position: relative;
 }
 
@@ -7,6 +13,7 @@
 }
 
 .stack {
+    flex: 4;
     gap: rem(4px);
 
     @media screen and (max-width: rem(900px)) {
@@ -21,32 +28,17 @@
 .title {
     color: var(--animeth-text-contrast-color);
     font-weight: 500;
-    font-size: rem(20px);
-    line-height: rem(22px);
-
-    @media screen and (max-width: rem(1200px)) {
-        font-size: rem(16px);
-        line-height: rem(18px);
-    }
-
-    @media screen and (max-width: rem(1000px)) {
-        font-size: rem(12px);
-        line-height: rem(14px);
-
-    }
+    font-size: rem(14px);
+    line-height: rem(20px);
 }
 
 .text {
-    font-size: rem(16px);
-    line-height: rem(16px);
+    font-size: rem(12px);
+    line-height: rem(18px);
+}
 
-    @media screen and (max-width: rem(1200px)) {
-        font-size: rem(12px);
-        line-height: rem(12px);
-    }
-
-    @media screen and (max-width: rem(1000px)) {
-        font-size: rem(8px);
-        line-height: rem(8px);
-    }
+.episodesBadge {
+    position: absolute;
+    bottom: rem(4px);
+    right: rem(4px);
 }

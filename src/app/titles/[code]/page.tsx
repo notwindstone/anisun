@@ -64,13 +64,11 @@ export default function Page({ params }: { params: { code: string } }) {
                 pr={rem(16)}
                 gap={rem(16)}
             >
-                <Stack
-                    flex={5}
-                >
+                <Stack className={classes.primary} flex={1}>
                     <Video id={shikimoriId} />
                     <AnimeInfo id={shikimoriId} />
                 </Stack>
-                <Stack flex={2}>
+                <Stack className={classes.similar}>
                     <Recommendations id={shikimoriId} />
                 </Stack>
             </Group>
