@@ -1,6 +1,7 @@
 .group {
     flex-wrap: nowrap;
     padding-top: rem(82px);
+    padding-bottom: rem(16px);
     padding-left: rem(16px);
     padding-right: rem(16px);
 
