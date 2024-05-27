@@ -7,6 +7,8 @@ import {variables} from "@/configs/variables";
 import NextImage from "next/image";
 import classes from './Recommendations.module.css';
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
+import RecommendationsShareButton
+    from "@/components/Recommendations/RecommendationsShareButton/RecommendationsShareButton";
 
 export default function Recommendations({ id }: { id: string } ) {
     const shikimori = client();
@@ -90,6 +92,7 @@ export default function Recommendations({ id }: { id: string } ) {
                     </Container>
                 </AspectRatio>
                 <Stack className={classes.stack} h="100%" justify="flex-start" gap={0}>
+                    <RecommendationsShareButton url={anime.url} />
                     <Text className={classes.title} lineClamp={2}>
                         {anime?.russian ?? anime.name}
                         {anime?.russian && ` - ${anime.name}`}

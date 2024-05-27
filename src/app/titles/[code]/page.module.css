@@ -1,9 +1,6 @@
 .group {
     flex-wrap: nowrap;
-    padding-top: rem(82px);
-    padding-bottom: rem(16px);
-    padding-left: rem(16px);
-    padding-right: rem(16px);
+    padding: rem(82px) rem(16px) rem(16px);
 
     @media screen and (max-width: rem(1024px)) {
         flex-direction: column;

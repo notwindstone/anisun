@@ -9,11 +9,53 @@
     position: relative;
 }
 
+.episodesBadge, .scoreBadge, .menuButton {
+    position: absolute;
+}
+
+.episodesBadge {
+    bottom: rem(4px);
+    right: rem(4px);
+}
+
+.scoreBadge {
+    bottom: rem(4px);
+    left: rem(4px);
+}
+
+.menuButton {
+    transition: 150ms ease;
+    display: grid;
+    place-content: center;
+    width: rem(32px);
+    height: rem(32px);
+    top: 0;
+    right: 0;
+    opacity: 0;
+    border-radius: var(--mantine-radius-md);
+
+    @mixin hover {
+        background: var(--mantine-color-default-hover);
+    }
+}
+
 .group {
+    user-select: none;
+    transition: 150ms ease;
+    border-radius: var(--mantine-radius-md);
+    padding: rem(4px);
     gap: rem(8px);
+    cursor: pointer;
+
+    @mixin hover {
+        .menuButton {
+            opacity: 1;
+        }
+    }
 }
 
 .stack {
+    position: relative;
     flex: 4;
     gap: rem(4px);
 
@@ -27,6 +69,7 @@
 }
 
 .title {
+    text-wrap: balance;
     color: var(--animeth-text-contrast-color);
     font-weight: 500;
     font-size: rem(14px);
@@ -36,18 +79,4 @@
 .text {
     font-size: rem(12px);
     line-height: rem(18px);
-}
-
-.episodesBadge, .scoreBadge {
-    position: absolute;
-}
-
-.episodesBadge {
-    bottom: rem(4px);
-    right: rem(4px);
-}
-
-.scoreBadge {
-    bottom: rem(4px);
-    left: rem(4px);
 }
