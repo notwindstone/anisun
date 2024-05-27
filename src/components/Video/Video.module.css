@@ -1,3 +1,35 @@
+.placeholder {
+    display: none;
+
+    @media screen and (max-width: rem(750px)) {
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.playerInner {
+    @media screen and (max-width: rem(750px)) {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 99;
+    }
+}
+
 .root {
     background: none;
+
+    @media screen and (max-width: rem(750px)) {
+        padding-left: rem(16px);
+        padding-right: rem(16px);
+    }
+}
+
+.alert {
+    @media screen and (max-width: rem(750px)) {
+        margin-left: rem(16px);
+        margin-right: rem(16px);
+    }
 }

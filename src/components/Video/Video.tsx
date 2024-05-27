@@ -2,7 +2,7 @@
 
 import AnilibriaVideo from "@/components/Video/AnilibriaVideo/AnilibriaVideo";
 import {useState} from "react";
-import {Alert, rem, SegmentedControl, Stack} from "@mantine/core";
+import {Alert, AspectRatio, rem, SegmentedControl, Stack} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './Video.module.css';
 import KodikVideo from "@/components/Video/KodikVideo/KodikVideo";
@@ -22,15 +22,20 @@ export default function Video({ id }: { id: string }) {
 
     return (
         <Stack p={0} gap={rem(8)}>
-            {
-                player === KODIK_PLAYER ? (
-                    <KodikVideo id={id} />
-                ) : player === ANILIBRIA_PLAYER ? (
-                    <AnilibriaVideo id={id} />
-                ) : (
-                    <SovetRomanticaVideo id={id} />
-                )
-            }
+            <AspectRatio ratio={16 / 9}>
+                <div className={classes.placeholder} />
+                <div className={classes.playerInner}>
+                    {
+                        player === KODIK_PLAYER ? (
+                            <KodikVideo id={id} />
+                        ) : player === ANILIBRIA_PLAYER ? (
+                            <AnilibriaVideo id={id} />
+                        ) : (
+                            <SovetRomanticaVideo id={id} />
+                        )
+                    }
+                </div>
+            </AspectRatio>
             <SegmentedControl
                 classNames={{
                     root: classes.root
@@ -48,6 +53,7 @@ export default function Video({ id }: { id: string }) {
                 ]}
             />
             <Alert
+                className={classes.alert}
                 radius="md"
                 variant="light"
                 color="gray"

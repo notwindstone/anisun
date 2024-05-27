@@ -28,9 +28,9 @@ export default function AnimeInfo({ id }: { id: string }) {
     if (error) {
         return <></>;
     }
-    console.log(data);
+
     return (
-        <Stack>
+        <Stack className={classes.stack}>
             <Title
                 className={classes.title}
                 order={2}
