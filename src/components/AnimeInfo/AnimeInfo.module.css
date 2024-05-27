@@ -8,3 +8,21 @@
 .title {
     color: var(--animeth-text-contrast-color);
 }
+
+.span {
+    user-select: none;
+}
+
+.studioLogo {
+    background: #fff;
+}
+
+.link {
+    text-decoration: none;
+    color: inherit;
+    transition: 150ms ease;
+
+    @mixin hover {
+        color: var(--animeth-text-contrast-color);
+    }
+}
