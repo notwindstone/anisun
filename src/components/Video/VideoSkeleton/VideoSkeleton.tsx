@@ -3,9 +3,9 @@ import classes from './VideoSkeleton.module.css';
 
 export default function VideoSkeleton() {
     return (
-        <AspectRatio ratio={16 / 9}>
+        <AspectRatio className={classes.borderRadius} ratio={16 / 9}>
             <Skeleton
-                className={classes.skeleton}
+                className={classes.borderRadius}
                 height="100%"
                 width="100%"
             />
