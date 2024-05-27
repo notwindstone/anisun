@@ -14,6 +14,7 @@
     transition: 150ms ease;
     overflow: hidden;
     text-wrap: nowrap;
+    color: #fff;
 
     @mixin hover {
         background: darken(var(--mantine-color-default-hover), 0.05);

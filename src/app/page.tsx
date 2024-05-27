@@ -5,7 +5,7 @@ import {Box, Container, rem, Stack} from "@mantine/core";
 
 export default async function Home() {
     return (
-        <div>
+        <div className="home-wrapper">
             <Hero />
             <Container
                 pt={rem(32)}

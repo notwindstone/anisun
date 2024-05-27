@@ -7,6 +7,7 @@
     border-radius: var(--mantine-radius-xl);
     transition: 150ms ease;
     border: rem(2px) solid var(--mantine-color-default-border);
+    color: #fff;
 
     @mixin hover {
         color: var(--animeth-text-contrast-color);
