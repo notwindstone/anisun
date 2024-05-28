@@ -6,25 +6,25 @@ export default function translateAnimeStatus(
         sortingType,
         singular,
         lowerCase,
+        alternate,
     }: {
         sortingType: StatusType | string;
         singular?: boolean;
         lowerCase?: boolean;
+        alternate?: boolean
     }
 ) {
     const sorting = variables.sorting;
     const singularAnons = "Анонсированный";
     const singularReleased = "Завершённый";
+    const alternateAnons = "Анонс на";
+    const alternateReleased = "Вышло";
+    const alternateOngoing = "Онгоинг с";
 
     let translatedStatus;
 
     switch (sortingType) {
         case "latest":
-            if (singular) {
-                translatedStatus = singularAnons;
-                break;
-            }
-
             translatedStatus = sorting.latest.label;
             break;
         case "ongoing":
@@ -33,11 +33,21 @@ export default function translateAnimeStatus(
                 break;
             }
 
+            if (alternate) {
+                translatedStatus = alternateOngoing;
+                break;
+            }
+
             translatedStatus = sorting.ongoing.label;
             break;
         case "anons":
             if (singular) {
-                translatedStatus = sorting.anons.label;
+                translatedStatus = singularAnons;
+                break;
+            }
+
+            if (alternate) {
+                translatedStatus = alternateAnons;
                 break;
             }
 
@@ -46,6 +56,11 @@ export default function translateAnimeStatus(
         case "released":
             if (singular) {
                 translatedStatus = singularReleased;
+                break;
+            }
+
+            if (alternate) {
+                translatedStatus = alternateReleased;
                 break;
             }
 

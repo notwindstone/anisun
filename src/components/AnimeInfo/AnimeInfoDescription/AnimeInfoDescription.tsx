@@ -19,6 +19,8 @@ import DOMPurify from "isomorphic-dompurify";
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
 import Link from "next/link";
+import {formatNextEpisodeDate} from "@/utils/Misc/formatNextEpisodeDate";
+import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const [opened, { open, close }] = useDisclosure(false);
@@ -46,14 +48,16 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
         }
     }
 
-    console.log(data);
-
     const nextEpisodeAt
-        = data?.nextEpisodeAt ? `Следующий эпизод: ${data.nextEpisodeAt} • ` : "";
+        = data?.nextEpisodeAt ? `Следующий эпизод ${formatNextEpisodeDate(data.nextEpisodeAt)} • ` : "";
     const airedOn
-        = data?.airedOn?.date ? `${data.airedOn.date} • ` : "";
-    const animeStatus
-        = data?.status ? `${translateAnimeStatus({ sortingType: data?.status })} • ` : "";
+        = (data?.airedOn?.date && data?.status)
+        ? (
+            `${translateAnimeStatus({ 
+                sortingType: data.status, 
+                alternate: true,
+            })} ${formatAiredOnDate(data.airedOn.date)} • `
+        ) : "";
     const animeKind
         = data?.kind ? `${translateAnimeKind(data?.kind)}` : "";
 
@@ -80,8 +84,11 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
             >
                 <Stack w="100%" gap={rem(8)}>
                     <Group wrap="nowrap" justify="space-between">
-                        <Text lineClamp={1} className={classes.statsText}>
-                            {`${nextEpisodeAt}${airedOn}${animeStatus}${animeKind}`}
+                        <Text
+                            lineClamp={opened ? 4 : 1}
+                            className={classes.statsText}
+                        >
+                            {`${nextEpisodeAt}${airedOn}${animeKind}`}
                         </Text>
                         {
                             !opened && (
