@@ -21,6 +21,10 @@
 html {
     overflow: hidden;
     overscroll-behavior: none;
+
+    @media screen and (max-width: rem(750px)) {
+        overflow-y: auto;
+    }
 }
 
 .root-group {
@@ -40,6 +44,8 @@ html {
     @media (max-width: rem(750)) {
         border: none;
         border-radius: 0;
+        height: auto;
+        overflow-y: auto;
     }
 }
 
