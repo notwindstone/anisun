@@ -145,7 +145,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         )
                     }
                     {
-                        data?.duration && (
+                        !!data?.duration && (
                             <Text>
                                 Длительность эпизода: {data.duration} мин.
                             </Text>

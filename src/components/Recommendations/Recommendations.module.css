@@ -78,6 +78,15 @@
     @mixin hover {
         background: var(--mantine-color-default-hover);
     }
+
+    @media screen and (max-width: rem(750px)) {
+        opacity: 1;
+        top: auto;
+        bottom: rem(12px);
+        right: rem(12px);
+        transform: scale(1.5);
+        color: var(--animeth-text-contrast-color);
+    }
 }
 
 .group {
