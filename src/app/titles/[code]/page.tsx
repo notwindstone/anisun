@@ -66,9 +66,7 @@ export default function Page({ params }: { params: { code: string } }) {
                     <Video id={shikimoriId} />
                     <AnimeInfo id={shikimoriId} />
                 </Stack>
-                <Stack gap={rem(8)} className={classes.similar}>
-                    <Recommendations id={shikimoriId} />
-                </Stack>
+                <Recommendations id={shikimoriId} />
             </Group>
         </>
     );

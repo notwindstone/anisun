@@ -1,3 +1,16 @@
+.similar {
+    width: rem(400px);
+
+    @media screen and (max-width: rem(1024px)) {
+        width: 100%;
+    }
+
+    @media screen and (max-width: rem(750px)) {
+        padding-left: rem(16px);
+        padding-right: rem(16px);
+    }
+}
+
 .recommendationWrapper {
     position: relative;
 

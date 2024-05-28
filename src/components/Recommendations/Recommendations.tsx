@@ -29,39 +29,45 @@ export default function Recommendations({ id }: { id: string } ) {
     const mockVideos = Array.from({ length: 17 });
 
     if (isPending) {
-        return mockVideos.map((_mockVideo, index) => {
-            return (
-                <Group
-                    className={classes.group}
-                    key={index}
-                    align="flex-start"
-                >
-                    <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
-                        <Skeleton
-                            radius="md"
-                            width="100%"
-                            height="100%"
-                        />
-                    </AspectRatio>
-                    <Stack className={classes.stack} h="100%" justify="flex-start">
-                        <Skeleton width="80%" height={rem(20)} />
-                        <Skeleton width="60%" height={rem(12)} />
-                        <Skeleton width="60%" height={rem(12)} />
-                    </Stack>
-                </Group>
-            );
-        });
+        return (
+            <Stack gap={rem(8)} className={classes.similar}>
+                {
+                    mockVideos.map((_mockVideo, index) => {
+                        return (
+                            <Group
+                                className={classes.group}
+                                key={index}
+                                align="flex-start"
+                            >
+                                <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
+                                    <Skeleton
+                                        radius="md"
+                                        width="100%"
+                                        height="100%"
+                                    />
+                                </AspectRatio>
+                                <Stack className={classes.stack} h="100%" justify="flex-start">
+                                    <Skeleton width="80%" height={rem(20)} />
+                                    <Skeleton width="60%" height={rem(12)} />
+                                    <Skeleton width="60%" height={rem(12)} />
+                                </Stack>
+                            </Group>
+                        );
+                    })
+                }
+            </Stack>
+        );
     }
 
     if (error) {
         return <>Error: {error.message}</>;
     }
 
-    if (!data) {
+    if (!data || data.length === 0) {
         return;
     }
 
-    return data?.map((anime: OldAnimeType) => {
+    const recommendationVideos = data?.map((anime: OldAnimeType) => {
         function redirectUser() {
             NProgress.start();
             router.push(`/titles/${anime.url.replace('/animes/', '')}`);
@@ -123,4 +129,10 @@ export default function Recommendations({ id }: { id: string } ) {
             </div>
         );
     });
+
+    return (
+        <Stack gap={rem(8)} className={classes.similar}>
+            {recommendationVideos}
+        </Stack>
+    );
 }
