@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";

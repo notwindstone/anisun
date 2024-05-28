@@ -1,47 +1,26 @@
 :root {
     @mixin light-root {
-        /* Общие цвета */
-        --animeth-text-color: #1c1b23;
         --animeth-background-color: #fff;
-        --animeth-sidebar-color: #f7f7fc;
-        --animeth-primary-color: #7b46af;
-        --animeth-secondary-color: #e4d4f8;
-        --animeth-accent-color: #7b45b0;
-        --animeth-ripple-color: #0000004D;
-        /* Специфические цвета */
-
-        --animeth-nav-button-color: #eccbe4;
-        --animeth-footer-color: #f4f3f4;
-        --animeth-border-color: #e5e5e5;
+        --animeth-ripple-color: #0000004d;
+        --animeth-sidebar-color: #fdfdfd;
         --animeth-text-contrast-color: #000;
         --animeth-text-contrast-reversed-color: #fff;
-        --animeth-button-text-color: #fff;
-        --animeth-button-background-hover-color: #532154;
-        --animeth-block-background-color: #f7f4f7;
-        --animeth-focused-block-background-color: #e3e1e3;
+        --animeth-accent-color: #000;
     }
 
     @mixin dark-root {
-        /* Общие цвета */
-        --animeth-text-color: #ffffff;
         --animeth-background-color: #000;
-        --animeth-sidebar-color: #0d0d0d;
-        --animeth-primary-color: #a176ff;
-        --animeth-secondary-color: #0d0a15;
-        --animeth-accent-color: #a177ff;
-        --animeth-ripple-color: #FFFFFF4C;
-        /* Специфические цвета */
-
-        --animeth-nav-button-color: #eccbe4;
-        --animeth-footer-color: #0c0b0c;
-        --animeth-border-color: #1a1a1a;
+        --animeth-ripple-color: #ffffff4c;
+        --animeth-sidebar-color: #080808;
         --animeth-text-contrast-color: #fff;
         --animeth-text-contrast-reversed-color: #000;
-        --animeth-button-text-color: #000;
-        --animeth-button-background-hover-color: #e0b9db;
-        --animeth-block-background-color: #0b080b;
-        --animeth-focused-block-background-color: #1a141a;
+        --animeth-accent-color: #fff;
     }
+}
+
+html {
+    overflow: hidden;
+    overscroll-behavior: none;
 }
 
 .root-group {
@@ -50,9 +29,6 @@
 
 .app-wrapper {
     background: var(--animeth-background-color);
-    display: flex;
-    flex-direction: column;
-    gap: 0;
     box-sizing: border-box;
     border-radius: rem(12px) 0 0 0;
     width: 100%;
@@ -63,5 +39,23 @@
 
     @media (max-width: rem(750)) {
         border: none;
+        border-radius: 0;
     }
+}
+
+.home-wrapper {
+    --local-background-svg-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23111' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
+    --local-background-svg-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='30' viewBox='0 0 1000 120'%3E%3Cg fill='none' stroke='%23f0f0f0' stroke-width='10' %3E%3Cpath d='M-500 75c0 0 125-30 250-30S0 75 0 75s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 45c0 0 125-30 250-30S0 45 0 45s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 105c0 0 125-30 250-30S0 105 0 105s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 15c0 0 125-30 250-30S0 15 0 15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500-15c0 0 125-30 250-30S0-15 0-15s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3Cpath d='M-500 135c0 0 125-30 250-30S0 135 0 135s125 30 250 30s250-30 250-30s125-30 250-30s250 30 250 30s125 30 250 30s250-30 250-30'/%3E%3C/g%3E%3C/svg%3E");
+
+    background: light-dark(
+            var(--local-background-svg-light),
+            var(--local-background-svg-dark)
+    ), linear-gradient(
+            to bottom,
+            light-dark(
+                    darken(var(--animeth-background-color), 0.2),
+                    lighten(var(--animeth-background-color), 0.1)
+            ) 0%,
+            var(--animeth-background-color) 100%
+    );
 }

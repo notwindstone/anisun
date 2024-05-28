@@ -1,117 +1,117 @@
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
 import {ActionIcon, Text} from "@mantine/core";
 import {useState} from "react";
-import {notify} from "@/utils/notify/notify";
+import {notify} from "@/utils/Notifications/notify";
 import {comments} from "@/lib/comments/comments";
 import {useUser} from "@clerk/nextjs";
 
 export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
-    const [delayed, setDelayed] = useState(false)
+    const [delayed, setDelayed] = useState(false);
 
-    const isUser = isLoaded && isSignedIn
+    const isUser = isLoaded && isSignedIn;
 
-    likes = likes ?? []
-    dislikes = dislikes ?? []
+    likes = likes ?? [];
+    dislikes = dislikes ?? [];
 
-    const isLiked = likes.includes(user?.id)
-    const isDisliked = dislikes.includes(user?.id)
+    const isLiked = likes.includes(user?.id);
+    const isDisliked = dislikes.includes(user?.id);
 
     const handleChecks = () => {
         if (delayed) {
-            notify.delay()
+            notify.delay();
 
-            return false
+            return false;
         }
 
         if (!isUser || !user) {
-            notify.notAuthenticated()
+            notify.notAuthenticated();
 
-            return false
+            return false;
         }
 
-        return true
-    }
+        return true;
+    };
 
     const handleLike = async () => {
         if (!handleChecks()) {
-            return
+            return;
         }
 
-        setDelayed(true)
+        setDelayed(true);
 
         if (isDisliked) {
-            handleDislike().then()
+            handleDislike().then();
         }
 
         if (isLiked) {
             const mutatedCommentLikes = likes.filter((userid) => {
-                return userid !== user?.id
-            })
+                return userid !== user?.id;
+            });
 
-            sendVotes({ newLikes: mutatedCommentLikes })
+            sendVotes({ newLikes: mutatedCommentLikes });
 
             // @ts-ignore
-            await comments.like(uuid, mutatedCommentLikes)
+            await comments.like(uuid, mutatedCommentLikes);
 
             return setTimeout(() => {
-                setDelayed(false)
-            }, 500)
+                setDelayed(false);
+            }, 500);
         }
 
-        const mutatedCommentLikes = [...likes]
+        const mutatedCommentLikes = [...likes];
 
-        mutatedCommentLikes.push(user?.id)
+        mutatedCommentLikes.push(user?.id);
 
-        sendVotes({ newLikes: mutatedCommentLikes })
+        sendVotes({ newLikes: mutatedCommentLikes });
 
         // @ts-ignore
-        await comments.like(uuid, mutatedCommentLikes)
+        await comments.like(uuid, mutatedCommentLikes);
 
         return setTimeout(() => {
-            setDelayed(false)
-        }, 500)
-    }
+            setDelayed(false);
+        }, 500);
+    };
 
     const handleDislike = async () => {
         if (!handleChecks()) {
-            return
+            return;
         }
 
-        setDelayed(true)
+        setDelayed(true);
 
         if (isLiked) {
-            handleLike().then()
+            handleLike().then();
         }
 
         if (isDisliked) {
             const mutatedCommentDislikes = dislikes.filter((userid) => {
-                return userid !== user?.id
-            })
+                return userid !== user?.id;
+            });
 
-            sendVotes({ newDislikes: mutatedCommentDislikes })
+            sendVotes({ newDislikes: mutatedCommentDislikes });
 
             // @ts-ignore
-            await comments.dislike(uuid, mutatedCommentDislikes)
+            await comments.dislike(uuid, mutatedCommentDislikes);
 
             return setTimeout(() => {
-                setDelayed(false)
-            }, 500)
+                setDelayed(false);
+            }, 500);
         }
 
-        const mutatedCommentDislikes = [...dislikes]
+        const mutatedCommentDislikes = [...dislikes];
 
-        mutatedCommentDislikes.push(user?.id)
+        mutatedCommentDislikes.push(user?.id);
 
-        sendVotes({ newDislikes: mutatedCommentDislikes })
+        sendVotes({ newDislikes: mutatedCommentDislikes });
 
         // @ts-ignore
-        await comments.dislike(uuid, mutatedCommentDislikes)
+        await comments.dislike(uuid, mutatedCommentDislikes);
 
         return setTimeout(() => {
-            setDelayed(false)
-        }, 500)
-    }
+            setDelayed(false);
+        }, 500);
+    };
 
     return (
         <>
@@ -141,5 +141,5 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
 
             <Text>{dislikes?.length}</Text>
         </>
-    )
+    );
 }

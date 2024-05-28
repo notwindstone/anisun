@@ -1,0 +1,32 @@
+.wrapper {
+    transition: 150ms ease;
+
+    @media screen and (max-width: rem(750px)) {
+        display: none;
+    }
+}
+
+.mobileWrapper {
+    display: none;
+    transition: 150ms ease;
+}
+
+@media screen and (max-width: rem(750px)) {
+    .mobileWrapper {
+        display: block;
+    }
+}
+
+.indicators {
+    bottom: rem(-16px);
+}
+
+.control {
+    width: rem(40px);
+    height: rem(40px);
+
+    @media screen and (max-width: rem(350px)) {
+        width: rem(32px);
+        height: rem(32px);
+    }
+}

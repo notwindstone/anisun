@@ -1,0 +1,39 @@
+.overlay {
+    position: absolute;
+    user-select: none;
+    margin-right: 1rem;
+}
+
+.card {
+    @mixin hover {
+        .poster {
+            filter: brightness(75%);
+        }
+    }
+}
+
+.info {
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+.status {
+    position: absolute;
+    top: rem(16px);
+    left: rem(16px);
+}
+
+.score {
+    position: absolute;
+    top: rem(16px);
+    right: rem(16px);
+}
+
+.title {
+    color: var(--mantine-color-white)
+}
+
+.poster, .overlay {
+    transition: 200ms ease;
+}

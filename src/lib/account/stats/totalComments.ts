@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
@@ -9,7 +9,7 @@ export const totalComments = async ({ userid }: { userid: string }) => {
         await db
             .select()
             .from(comments)
-            .where(eq(comments.userid, userid))
+            .where(eq(comments.userid, userid));
 
     return { data: data.length };
 };

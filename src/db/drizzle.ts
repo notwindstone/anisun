@@ -1,18 +1,27 @@
-// /*
 import { Pool } from '@neondatabase/serverless';
-import { drizzle } from 'drizzle-orm/neon-serverless';
-
-const pool = new Pool({ connectionString: process.env.NEON_DATABASE_URL });
-
-const db = drizzle(pool);
-// */
-
-/*
+import {drizzle as drizzleNeon, NeonDatabase} from 'drizzle-orm/neon-serverless';
 import postgres from "postgres";
-import {drizzle} from "drizzle-orm/postgres-js";
+import {drizzle as drizzlePostgres, PostgresJsDatabase} from "drizzle-orm/postgres-js";
 
-const queryClient = postgres(process.env.POSTGRESQL_DATABASE_URL!);
-const db = drizzle(queryClient);
-*/
+const dbType = process.env.DATABASE_TYPE!;
+let db: NeonDatabase | PostgresJsDatabase;
 
-export default db
+switch (dbType.toLowerCase()) {
+    case "neon": {
+        const pool = new Pool({connectionString: process.env.NEON_DATABASE_URL});
+        db = drizzleNeon(pool);
+        break;
+    }
+    case "postgresql": {
+        const queryClient = postgres(process.env.POSTGRESQL_DATABASE_URL!);
+        db = drizzlePostgres(queryClient);
+        break;
+    }
+    default: {
+        const pool = new Pool({connectionString: process.env.NEON_DATABASE_URL});
+        db = drizzleNeon(pool);
+        break;
+    }
+}
+
+export default db;

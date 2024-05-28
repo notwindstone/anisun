@@ -1,6 +1,6 @@
 import {useState} from "react";
 import {useUser} from "@clerk/nextjs";
-import {notify} from "@/utils/notify/notify";
+import {notify} from "@/utils/Notifications/notify";
 import {useDisclosure} from "@mantine/hooks";
 import {ActionIcon, Button, Flex, Modal, Text} from "@mantine/core";
 import {IconArrowBack, IconX} from "@tabler/icons-react";
@@ -8,55 +8,55 @@ import {comments} from "@/lib/comments/comments";
 
 export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: { uuid: string, userid: string, isInitiallyDeleted: boolean, sendDelete: (isDeleted: boolean) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
-    const [delayed, setDelayed] = useState(false)
-    const [isDeleted, { toggle }] = useDisclosure(isInitiallyDeleted)
+    const [delayed, setDelayed] = useState(false);
+    const [isDeleted, { toggle }] = useDisclosure(isInitiallyDeleted);
     const [opened, { open, close }] = useDisclosure(false);
 
-    const isUser = isLoaded && isSignedIn
+    const isUser = isLoaded && isSignedIn;
 
     if (!isUser || userid !== user?.id) {
-        return
+        return;
     }
 
     const handleChecks = () => {
         if (delayed) {
-            notify.delay()
+            notify.delay();
 
-            return false
+            return false;
         }
 
         if (!isUser || !user) {
-            notify.notAuthenticated()
+            notify.notAuthenticated();
 
-            return false
+            return false;
         }
 
-        return true
-    }
+        return true;
+    };
 
     const handleDelete = async () => {
         if (!handleChecks()) {
-            return
+            return;
         }
 
-        setDelayed(true)
-        toggle()
-        close()
+        setDelayed(true);
+        toggle();
+        close();
 
         // Почему-то функциям передаётся неизменённый isDeleted
-        sendDelete(!isDeleted)
+        sendDelete(!isDeleted);
 
-        await comments.remove(uuid, !isDeleted)
+        await comments.remove(uuid, !isDeleted);
 
         return setTimeout(() => {
-            setDelayed(false)
-        }, 500)
-    }
+            setDelayed(false);
+        }, 500);
+    };
 
-    const modalTitle = isDeleted ? "Восстановление комментария" : "Удаление комментария"
+    const modalTitle = isDeleted ? "Восстановление комментария" : "Удаление комментария";
     const modalDescription = isDeleted
         ? "Вы уверены, что хотите восстановить комментарий? Ваш комментарий вновь станет доступным всем."
-        : "Вы уверены, что хотите удалить комментарий? Вы сможете восстановить его позже."
+        : "Вы уверены, что хотите удалить комментарий? Вы сможете восстановить его позже.";
 
     return (
         <>
@@ -84,5 +84,5 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
                 }
             </ActionIcon>
         </>
-    )
+    );
 }

@@ -5,22 +5,22 @@ import {IconEdit} from "@tabler/icons-react";
 
 export function EditComment({ userid, sendEdit }: { userid: string, sendEdit: (isEditing: boolean) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
-    const [isEditing, { toggle }] = useDisclosure(false)
+    const [isEditing, { toggle }] = useDisclosure(false);
 
-    const isUser = isLoaded && isSignedIn
+    const isUser = isLoaded && isSignedIn;
 
     if (!isUser || userid !== user?.id) {
-        return
+        return;
     }
 
     const handleEdit = () => {
-        toggle()
-        sendEdit(!isEditing)
-    }
+        toggle();
+        sendEdit(!isEditing);
+    };
 
     return (
         <ActionIcon variant="default" onClick={() => handleEdit()}>
             <IconEdit />
         </ActionIcon>
-    )
+    );
 }

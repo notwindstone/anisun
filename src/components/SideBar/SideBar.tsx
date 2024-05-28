@@ -1,168 +1,73 @@
-"use client"
+"use client";
 
-import {useDisclosure, useMediaQuery} from "@mantine/hooks";
-import {em, Group, Image, rem, Stack, Text, Transition, UnstyledButton} from "@mantine/core";
-import {
-    IconHistory,
-    IconHome,
-    IconHomeFilled, IconMenu2,
-    IconSearch,
-    IconSettings,
-    IconTrendingUp, IconUserCircle,
-} from "@tabler/icons-react";
+import {CustomThemeContext, SideBarContext} from "@/utils/Contexts/Contexts";
+import {useDisclosure} from "@mantine/hooks";
+import {rem, Stack} from "@mantine/core";
 import classes from './SideBar.module.css';
-import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
-import React, {useState} from "react";
-import {SideBarLink} from "@/types/SideBarLink";
-import NextImage from "next/image";
-import globalVariables from "@/configs/globalVariables.json";
-import useRipple from "use-ripple-hook";
-import {useRouter} from "next/navigation";
-import NProgress from "nprogress";
+import SideBarBurger from "@/components/SideBar/SideBarBurger/SideBarBurger";
+import React from "react";
+import SideBarAccount from "@/components/SideBar/SideBarAccount/SideBarAccount";
+import useCustomTheme from "@/hooks/useCustomTheme";
+import SideBarSettings from "@/components/SideBar/SideBarSettings/SideBarSettings";
+import SideBarHome from "@/components/SideBar/SideBarHome/SideBarHome";
+import SideBarTrending from "@/components/SideBar/SideBarTrending/SideBarTrending";
+import SideBarSearch from "@/components/SideBar/SideBarSearch/SideBarSearch";
+import useMobileScreen from "@/hooks/useMobileScreen";
 
-const iconProps = {size: 32, stroke: 1.5}
-const activeIconProps = {size: 32, stroke: 2.5}
-
-const navLinks = [
+const SIDEBAR_BUTTONS = [
     {
-        label: 'Главная',
-        icon: <IconHome {...iconProps} />,
-        activeIcon: <IconHomeFilled {...activeIconProps} />,
-        pathname: '/',
+        key: 'main',
+        content: <SideBarHome />
     },
     {
-        label: 'Аккаунт',
-        icon: <IconUserCircle {...iconProps} />,
-        activeIcon: <IconUserCircle {...activeIconProps} />,
-        content: "account",
+        key: 'trending',
+        content: <SideBarTrending />
     },
     {
-        label: 'Поиск',
-        icon: <IconSearch {...iconProps} />,
-        activeIcon: <IconSearch {...activeIconProps} />,
-        content: "search",
+        key: 'search',
+        content: <SideBarSearch />
     },
     {
-        label: 'Популярное',
-        icon: <IconTrendingUp {...iconProps} />,
-        activeIcon: <IconTrendingUp {...activeIconProps} />,
-        pathname: '/trending',
+        key: 'settings',
+        content: <SideBarSettings />
     },
-    {
-        label: 'Настройки',
-        icon: <IconSettings {...iconProps} />,
-        activeIcon: <IconSettings {...activeIconProps} />,
-        content: "settings",
-    }
-]
+];
 
-export const SideBarLinkContext
-    = React.createContext<{
-    active: number,
-    setActive: React.Dispatch<number>,
-    opened: boolean,
-}>({
-    active: 0,
-    setActive: () => null,
-    opened: false,
-});
-
-export default function SideBar() {
-    const router = useRouter()
-    const [ripple, event] = useRipple({
-        color: "var(--animeth-ripple-color)",
-    });
+export default function SideBar({ children }: { children: React.ReactNode }) {
     const [opened, { toggle }] = useDisclosure(false);
-    const [active, setActive] = useState(0)
-    const isMobile = useMediaQuery(`(max-width: ${em(750)})`);
-    const navButtons = navLinks.map((link: SideBarLink) => {
+    const { isMobile } = useMobileScreen();
+    const { theme, setTheme } = useCustomTheme();
+
+    const buttons = SIDEBAR_BUTTONS.map((button) => {
         return (
-            <SideBarButton
-                key={link.label}
-                link={link}
-            />
-        )
-    })
+            <React.Fragment key={button.key}>
+                {button.content}
+            </React.Fragment>
+        );
+    });
 
     return isMobile === false && (
-        <>
-            <aside
-                className={
-                    `${classes.sidebar} ${opened && classes.opened}`
-                }
-            >
-                <Stack
-                    ml={rem(16)}
-                    justify="flex-start"
-                    align="flex-start"
+        <CustomThemeContext.Provider value={{ theme: theme, setTheme: setTheme }}>
+            <SideBarContext.Provider value={{ opened: opened, toggle: toggle }}>
+                {children}
+                <aside
+                    className={
+                        `${classes.sidebar} ${opened && classes.opened}`
+                    }
                 >
-                    <Group
-                        align="center"
-                        gap={0}
-                        wrap="nowrap"
-                        mb={rem(16)}
+                    <Stack
+                        ml={rem(16)}
+                        justify="space-between"
+                        align="flex-start"
                     >
-                        <UnstyledButton
-                            ref={ripple}
-                            onPointerDown={event}
-                            className={
-                                `${classes.menuButton}`
-                            }
-                            onClick={toggle}
-                        >
-                            <IconMenu2 {...iconProps} />
-                        </UnstyledButton>
-                        <Transition
-                            mounted={opened}
-                            transition="fade-right"
-                            duration={150}
-                            timingFunction="ease"
-                        >
-                            {
-                                (styles) => (
-                                    <Group
-                                        className={classes.headingGroup}
-                                        gap={rem(16)}
-                                        style={styles}
-                                        align="center"
-                                        wrap="nowrap"
-                                        onClick={() => {
-                                            NProgress.start()
-                                            router.push('/')
-                                            NProgress.done()
-                                        }}
-                                    >
-                                        <Image
-                                            alt="Animeth website icon"
-                                            src="/favicon.png"
-                                            radius="xl"
-                                            w={32}
-                                            h={32}
-                                            component={NextImage}
-                                            width={32}
-                                            height={32}
-                                            placeholder="blur"
-                                            blurDataURL={globalVariables.imagePlaceholder}
-                                        />
-                                        <Text
-                                            inline
-                                            size={rem(32)}
-                                            fw={700}
-                                            variant="gradient"
-                                            gradient={{ from: 'violet', to: 'indigo', deg: 90 }}
-                                        >
-                                            ANIMETH
-                                        </Text>
-                                    </Group>
-                                )
-                            }
-                        </Transition>
-                    </Group>
-                    <SideBarLinkContext.Provider value={{ active, setActive, opened }}>
-                        {navButtons}
-                    </SideBarLinkContext.Provider>
-                </Stack>
-            </aside>
-        </>
-    )
+                        <SideBarBurger />
+                        <Stack>
+                            {buttons}
+                        </Stack>
+                        <SideBarAccount />
+                    </Stack>
+                </aside>
+            </SideBarContext.Provider>
+        </CustomThemeContext.Provider>
+    );
 }

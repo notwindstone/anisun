@@ -1,0 +1,74 @@
+.player {
+    --video-border: none;
+    --video-border-radius: var(--mantine-radius-md);
+    --media-menu-bg: rgba(0, 0, 0, 0.7);
+    --media-menu-item-border-radius: var(--mantine-radius-md);
+
+    @media screen and (max-width: rem(750px)) {
+        border-radius: 0 !important;
+    }
+}
+
+.playlist {
+    width: 100%;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    @media (max-width: $mantine-breakpoint-sm) {
+        justify-content: flex-start;
+    }
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.playlistButton {
+    margin: rem(6px) rem(50px) rem(6px) rem(6px);
+    z-index: 99;
+
+    @media (max-width: $mantine-breakpoint-sm) {
+        margin: rem(6px);
+    }
+
+    &:hover, &:active {
+        background: rgb(255 255 255 / 0.2);
+    }
+}
+
+.playlistIcon {
+    color: #fff;
+}
+
+.currentEpisodeMarker {
+    color: #fff;
+    z-index: 99;
+}
+
+.nextEpisode {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: rem(96px);
+    height: rem(52px);
+
+    @media (max-width: $mantine-breakpoint-sm) {
+        width: fit-content;
+    }
+}
+
+.nextEpisodeButton {
+    padding: 0 rem(8px);
+    margin: 0 rem(8px);
+    color: #fff;
+    z-index: 99;
+
+    &:active, &:hover {
+        color: #fff;
+        background: rgb(255 255 255 / 0.2);
+    }
+}

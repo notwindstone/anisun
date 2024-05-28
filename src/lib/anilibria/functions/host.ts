@@ -5,9 +5,9 @@ export const host = {
         return anilibriaHosts.api;
     },
     player: function () {
-        return anilibriaHosts.player
+        return anilibriaHosts.player;
     },
     storage: function () {
-        return anilibriaHosts.storage
+        return anilibriaHosts.storage;
     }
-}
+};

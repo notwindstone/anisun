@@ -10,20 +10,23 @@
 ### A web app for watching anime built with Next.js and Mantine UI
 
 <p align="center">
-<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_russian.md">Русский</a>
+<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/refactor/README_russian.md">Русский</a>
 </p>
 
 </div>
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
-[![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=flat&logo=telegram)](https://t.me/democracysucks)
-[![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/JhmkZDScfg)
+[![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
+[![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=for-the-badge&logo=telegram)](https://t.me/democracysucks)
+[![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
+
+> [!IMPORTANT]
+> The web app is currently being refactored
 
 ## 📱 Screenshots
 
 <div align="center">
-<img src="public/Screenshot_animeth_videoplayer1.jpg" width="49%">
-<img src="public/Screenshot_animeth_videoplayer2.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_videoplayer1.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
 </div>
 
 > [!NOTE]  
@@ -70,13 +73,13 @@
 
 ## ✅ To-Do List
 
-- [ ] Add the option to `.env` to use a database based on value
+- [x] Add the option to `.env` to use a database based on value
 
 - [ ] Add option to download anime using torrent or directly from website
 
 - [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
-- [ ] Add subtitles from [SovetRomantica API](https://github.com/sovetromantica/sr-api)
+- [x] Add subtitles from [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
 
 - [ ] Add permission groups (administrator, member) to users
 
@@ -123,11 +126,9 @@ You can use Neon Serverless DB as a database. If you are going to use local Post
 
 You can use local PostgreSQL as a database. If you are going to use Neon Serverless database, then skip this configuration
 
-1. (Temporary) Go to the `src/db/drizzle.ts` path and remove `//` symbols to comment out the Neon Serverless DB configuration code
+1. Go to the `.env.local` file and paste your connection string to `POSTGRESQL_DATABASE_URL`
 
-2. (Temporary) Now uncomment out the PostgreSQL DB configuration code 
-
-3. Go to the `.env.local` file and paste your connection string to `POSTGRESQL_DATABASE_URL`
+2. Change `DATABASE_TYPE` to `POSTGRESQL` in the `.env.local` file
 
 > Final steps
 
@@ -143,6 +144,7 @@ You can use local PostgreSQL as a database. If you are going to use Neon Serverl
 > This is what the `.env.local` file should look like with Neon Serverless DB configuration
 
 ```text
+DATABASE_TYPE='NEON'
 NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -158,6 +160,7 @@ KODIK_TOKEN='qwertyuiop1234567890'
 > This is what the `.env.local` file should look like with PostgreSQL DB configuration
 
 ```text
+DATABASE_TYPE='POSTGRESQL'
 NEON_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -197,15 +200,41 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Vercel
 
-> [!NOTE]  
-> Work in progress...
-
 <details>
 <summary>Expand steps</summary>
 
-Check out [Next.js deployment documentation](https://nextjs.org/docs/deployment) for now
+Click the button
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fwindstone-aristotle-yellow%2Fanimeth)
+
+Navigate to **Project** -> **Settings** -> **Environment Variables** and then add values to the following keys:
+
+1. `DATABASE_TYPE` - `NEON`
+
+2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
+
+3. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
+
+4. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
+
+5. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
+
+6. `CLERK_SECRET_KEY` - your own **Secret key** from https://clerk.com
+
+7. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - your own **Publishable key** from https://clerk.com
+
+8. `NEON_DATABASE_URL` - your own **Connection string** from https://neon.tech/
+
+9. (Optional) `KODIK_TOKEN` - your own from http://kodik.cc/ (you need to contact them via email). This is needed only if you want to watch anime in Kodik Player too. Otherwise, only players based on the Anilibria API will work
 
 </details>
+
+### Termux
+
+Using andronix
+
+> [!NOTE]  
+> В процессе заполнения...
 
 ## 💬 Contact
 

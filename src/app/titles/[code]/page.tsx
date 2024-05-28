@@ -1,22 +1,31 @@
-import {Metadata} from "next";
-
-export const dynamic = 'force-dynamic'; // static by default, unless reading the request
-
-import React from 'react';
-import VideoEmbed from "@/components/VideoEmbed/VideoEmbed";
-import Link from "next/link";
-import CommentList from "@/components/Comments/CommentList/CommentList";
+import {Group, rem, Stack} from "@mantine/core";
+import getShikimoriId from "@/utils/Misc/getShikimoriId";
 import {client} from "@/lib/shikimori/client";
+import {Metadata} from "next";
+import Video from "@/components/Video/Video";
 import AnimeInfo from "@/components/AnimeInfo/AnimeInfo";
+import classes from './page.module.css';
+import Recommendations from "@/components/Recommendations/Recommendations";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
-    const shikimoriId = params.code.split('-')[0].replace(/\D/g, '')
+    const shikimoriId = getShikimoriId(params.code);
 
-    const anime = (await shikimori.animes.byId({ ids: shikimoriId })).animes[0]
+    const anime = (
+        await shikimori
+            .animes
+            .byId({
+                ids: shikimoriId,
+                filter: [
+                    'name',
+                    'russian',
+                    'description'
+                ],
+            })
+    )?.animes[0];
 
-    const placeholderTitle = 'Просмотр аниме на Animeth'
-    const placeholderDescription = 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере'
+    const placeholderTitle = 'Просмотр аниме - Animeth';
+    const placeholderDescription = 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере';
 
     if (!anime) {
         return {
@@ -28,33 +37,37 @@ export async function generateMetadata({ params }: { params: { code: string } })
                 title: placeholderTitle,
                 description: placeholderDescription,
             }
-        }
+        };
     }
 
     return {
-        title: anime.russian,
-        description: anime.description,
+        title: anime.russian ?? anime.name ?? placeholderTitle,
+        description: anime.description ?? placeholderDescription,
         openGraph: {
             siteName: 'Animeth',
             type: "website",
-            title: anime.russian ?? placeholderTitle,
+            title: anime.russian ?? anime.name ?? placeholderTitle,
             description: anime.description ?? placeholderDescription,
         }
-    }
+    };
 }
 
-export default async function Page({ params }: { params: { code: string } }) {
-    const shikimoriId = params.code.split('-')[0].replace(/\D/g, '')
+export default function Page({ params }: { params: { code: string } }) {
+    const shikimoriId = getShikimoriId(params.code);
 
     return (
         <>
-            <Link href="/titles">Вернуться</Link>
-            <div>{params.code}</div>
-            <AnimeInfo shikimoriId={shikimoriId} />
-            <VideoEmbed
-                id={shikimoriId}
-            />
-            <CommentList titleCode={params.code} />
+            <Group
+                className={classes.group}
+                align="flex-start"
+                gap={rem(16)}
+            >
+                <Stack className={classes.primary} flex={1}>
+                    <Video id={shikimoriId} />
+                    <AnimeInfo id={shikimoriId} titleCode={params.code} />
+                </Stack>
+                <Recommendations id={shikimoriId} />
+            </Group>
         </>
     );
 }

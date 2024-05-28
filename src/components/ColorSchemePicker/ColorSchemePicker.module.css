@@ -1,0 +1,17 @@
+.stack {
+    width: 100%;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.loaderButton {
+    min-width: fit-content;
+}
+
+.input {
+    &:focus-within {
+        border-color: var(--animeth-text-contrast-color);
+    }
+}

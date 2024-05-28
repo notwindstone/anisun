@@ -1,9 +1,15 @@
-import {HeroContent} from "@/components/HeroContent/HeroContent";
+import {Metadata} from "next";
 
-export default async function Page() {
+export const metadata: Metadata = {
+    title: 'Популярное - Animeth',
+    description: 'Страница с популярными тайтлами',
+};
+
+
+export default function Page() {
     return (
         <>
-            <HeroContent />
+
         </>
     );
 }

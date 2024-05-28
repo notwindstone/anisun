@@ -1,14 +1,5 @@
 import {text, json, pgTable, boolean} from "drizzle-orm/pg-core";
 
-export const user = pgTable("user", {
-    userid: text("userid").primaryKey(),
-    username: text("username"),
-    email: text("email").notNull(),
-    avatar: text("avatar").notNull(),
-    createdAt: text("createdAt").notNull(),
-    isVerified: boolean("isVerified").default(false).notNull(),
-});
-
 export const comments = pgTable("comments", {
     uuid: text("uuid").primaryKey(),
     parentuuid: text("parentuuid"),
@@ -24,4 +15,4 @@ export const comments = pgTable("comments", {
     message: text("message").notNull(),
     isDeleted: boolean("isDeleted").default(false).notNull(),
     isEdited: boolean("isEdited").default(false).notNull(),
-})
+});

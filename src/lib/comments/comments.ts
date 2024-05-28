@@ -14,4 +14,4 @@ export const comments = {
     remove: remove,
     like: like,
     dislike: dislike,
-}
+};

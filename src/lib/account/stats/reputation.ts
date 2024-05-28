@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
@@ -9,16 +9,16 @@ export const reputation = async ({ userid }: { userid: string }) => {
         await db
             .select()
             .from(comments)
-            .where(eq(comments.userid, userid))
+            .where(eq(comments.userid, userid));
 
-    let likes = 0
-    let dislikes = 0
+    let likes = 0;
+    let dislikes = 0;
 
     for (const comment of commentsData) {
-        likes = likes + (comment.likes?.length ?? 0)
-        dislikes = dislikes + (comment.dislikes?.length ?? 0)
+        likes = likes + (comment.likes?.length ?? 0);
+        dislikes = dislikes + (comment.dislikes?.length ?? 0);
     }
 
-    const reputation = likes - dislikes
+    const reputation = likes - dislikes;
     return { data: reputation };
 };

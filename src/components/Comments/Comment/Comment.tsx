@@ -1,32 +1,32 @@
-import {CommentType} from "@/types/CommentType";
 import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, Textarea, UnstyledButton} from "@mantine/core";
 import {ChildCommentList} from "@/components/Comments/ChildCommentList/ChildCommentList";
 import classes from "./Comment.module.css";
 import Link from "next/link";
-import {makeDate} from "@/utils/makeDate";
-import {makeWordEnding} from "@/utils/makeWordEnding";
+import {makeDate} from "@/utils/Misc/makeDate";
+import {makeWordEnding} from "@/utils/Misc/makeWordEnding";
 import {useDisclosure} from "@mantine/hooks";
 import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {MutatedDataType} from "@/types/MutatedDataType";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {DeleteComment} from "@/components/Comments/DeleteComment/DeleteComment";
 import {IconCheck} from "@tabler/icons-react";
 import {useRef, useState} from "react";
 import {EditComment} from "@/components/Comments/EditComment/EditComment";
-import {notify} from "@/utils/notify/notify";
+import {notify} from "@/utils/Notifications/notify";
 import {comments} from "@/lib/comments/comments";
-import {MutationCommentType, MutationInputType} from "@/types/MutationInputType";
+import {CommentType} from "@/types/Comments/Comment.type";
+import {MutatedDataType} from "@/types/Comments/MutatedData.type";
+import {MutationCommentType, MutationInputType } from "@/types/Comments/MutationInput.type";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
-    const [editDelayed, setEditDelayed] = useState(false)
-    const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false)
-    const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false)
-    const [isEditing, setIsEditing] = useState(false)
+    const [editDelayed, setEditDelayed] = useState(false);
+    const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false);
+    const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false);
+    const [isEditing, setIsEditing] = useState(false);
     const ref = useRef<HTMLTextAreaElement>(null);
 
     function handleNewVotes({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) {
-        const mutationQueryKey = isChild ? comment.parentuuid : comment.title
+        const mutationQueryKey = isChild ? comment.parentuuid : comment.title;
 
         mutation.mutate({
             uuid: comment.uuid,
@@ -34,43 +34,43 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
             dislikes: newDislikes,
             mutationQueryKey: mutationQueryKey,
             isChild: isChild,
-        })
+        });
     }
 
     function handleNewComment(newComment: CommentType) {
-        const mutationQueryKey = newComment.parentuuid
+        const mutationQueryKey = newComment.parentuuid;
 
         // @ts-ignore
-        mutation.mutate({ mutationQueryKey, newComment: newComment })
+        mutation.mutate({ mutationQueryKey, newComment: newComment });
     }
 
     function handleDelete(isDeleted: boolean) {
-        const mutationQueryKey = isChild ? comment.parentuuid : comment.title
+        const mutationQueryKey = isChild ? comment.parentuuid : comment.title;
 
         mutation.mutate({
             uuid: comment.uuid,
             mutationQueryKey: mutationQueryKey,
             isDeleted: isDeleted,
             isChild: isChild,
-        })
+        });
     }
 
     function handleStateEdit(isEditingState: boolean) {
         const isEditingSynced =
-            isEditingState === isEditing ? !isEditingState : isEditingState
-        setIsEditing(isEditingSynced)
+            isEditingState === isEditing ? !isEditingState : isEditingState;
+        setIsEditing(isEditingSynced);
     }
 
     async function handleMessageEdit({ uuid, message }: { uuid: string, message?: string }) {
-        const mutationQueryKey = isChild ? comment.parentuuid : comment.title
+        const mutationQueryKey = isChild ? comment.parentuuid : comment.title;
 
-        message = message ?? ''
+        message = message ?? '';
 
         if (!handleChecks(message)) {
-            return
+            return;
         }
 
-        setEditDelayed(true)
+        setEditDelayed(true);
 
         mutation.mutate({
             uuid: uuid,
@@ -78,58 +78,58 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
             message: message,
             mutationQueryKey: mutationQueryKey,
             isChild: isChild,
-        })
+        });
 
-        setIsEditing(false)
+        setIsEditing(false);
 
-        await comments.edit(uuid, message)
+        await comments.edit(uuid, message);
 
-        return setEditDelayed(false)
+        return setEditDelayed(false);
     }
 
     function handleChecks(message: string) {
         if (editDelayed) {
-            notify.delay()
+            notify.delay();
 
-            return false
+            return false;
         }
 
         if (message.length < 2 || message.length > 2000) {
-            notify.incorrectInput()
+            notify.incorrectInput();
 
-            return false
+            return false;
         }
 
-        return true
+        return true;
     }
 
     function handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes }: MutationCommentType) {
         if (isEdited) {
-            mutatingComment.message = message ?? ''
-            mutatingComment.isEdited = isEdited
+            mutatingComment.message = message ?? '';
+            mutatingComment.isEdited = isEdited;
         }
 
         if (isDeleted !== undefined) {
-            mutatingComment.isDeleted = isDeleted
+            mutatingComment.isDeleted = isDeleted;
         }
 
         if (likes) {
-            mutatingComment.likes = likes
+            mutatingComment.likes = likes;
         }
 
         if (dislikes) {
-            mutatingComment.dislikes = dislikes
+            mutatingComment.dislikes = dislikes;
         }
 
-        return mutatingComment
+        return mutatingComment;
     }
 
-    const children = comment.children ? comment.children[0].count : 0
+    const children = comment.children ? comment.children[0].count : 0;
 
-    let hasOneChild = children === 1
-    const hasMoreThanOneChild = children > 1
+    const hasOneChild = children === 1;
+    const hasMoreThanOneChild = children > 1;
 
-    const queryClient = useQueryClient()
+    const queryClient = useQueryClient();
 
     const mutation = useMutation({
         // @ts-ignore
@@ -146,60 +146,60 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 message,
             }: MutationInputType
         ) => {
-            const mutatedData: MutatedDataType | { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', mutationQueryKey])
+            const mutatedData: MutatedDataType | { data: CommentType[] | null | undefined } | undefined = queryClient.getQueryData(['comments', mutationQueryKey]);
 
             if (newComment) {
                 if (!mutatedData) {
-                    comment.children = [{ count: 1 }]
+                    comment.children = [{ count: 1 }];
 
-                    return { data: { data: [newComment] }, mutationQueryKey: mutationQueryKey }
+                    return { data: { data: [newComment] }, mutationQueryKey: mutationQueryKey };
                 }
 
                 // @ts-ignore
-                mutatedData.data.unshift(newComment)
+                mutatedData.data.unshift(newComment);
 
-                return { data: mutatedData, mutationQueryKey: mutationQueryKey }
+                return { data: mutatedData, mutationQueryKey: mutationQueryKey };
             }
 
             if (!mutatedData) {
-                return
+                return;
             }
 
             if (isChild) {
                 // @ts-ignore
-                const mutatedCommentsData = mutatedData.data
+                const mutatedCommentsData = mutatedData.data;
 
                 if (!mutatedCommentsData) {
-                    return
+                    return;
                 }
 
                 let mutatingComment = mutatedCommentsData.find(
                     (currentComment: CommentType) => currentComment.uuid === uuid
-                )
+                );
 
                 if (!mutatingComment) {
-                    return
+                    return;
                 }
 
-                mutatingComment = handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes })
+                mutatingComment = handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes });
 
-                return { data: mutatedData, mutationQueryKey: mutationQueryKey }
+                return { data: mutatedData, mutationQueryKey: mutationQueryKey };
             }
 
             // @ts-ignore
             for (const pages of mutatedData.pages) {
                 let mutatingComment = pages.data.find(
                     (currentComment: CommentType) => currentComment.uuid === uuid
-                )
+                );
 
                 if (!mutatingComment) {
-                    continue
+                    continue;
                 }
 
-                mutatingComment = handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes })
+                mutatingComment = handleMutation({ mutatingComment, message, isEdited, isDeleted, likes, dislikes });
             }
 
-            return { data: mutatedData, mutationQueryKey: mutationQueryKey }
+            return { data: mutatedData, mutationQueryKey: mutationQueryKey };
         },
 
         onSuccess: (newData: { data: MutatedDataType, mutationQueryKey: string }) => {
@@ -208,9 +208,9 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                     oldData
                         ? newData.data
                         : oldData
-            )
+            );
         }
-    })
+    });
 
     return (
         <div>
@@ -232,11 +232,11 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                         <Text>{makeDate(comment.createdAt)}</Text>
                         {
                             comment.isEdited && !comment.isDeleted
-                                && <Text className={classes.edited}>(изменено)</Text>
+                            && <Text className={classes.edited}>(изменено)</Text>
                         }
                         {
                             !comment.isDeleted
-                                && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />
+                            && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />
                         }
                         <DeleteComment uuid={comment.uuid} userid={comment.userid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
                     </Group>
@@ -310,5 +310,5 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                         : null
             }
         </div>
-    )
+    );
 }

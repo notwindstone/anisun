@@ -1,0 +1,13 @@
+.root {
+    background: none;
+    flex-shrink: 0;
+    border-radius: 0;
+}
+
+.chevron {
+    transition: 150ms ease;
+}
+
+.chevronRotated {
+    transform: rotate(-180deg) !important;
+}

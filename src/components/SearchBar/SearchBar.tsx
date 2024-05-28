@@ -1,33 +1,52 @@
 'use client';
 
-import {Dispatch, SetStateAction, useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import {
     Autocomplete,
     AutocompleteProps,
     CloseButton,
     ComboboxItem,
-    Flex,
-    Image,
+    Flex, FloatingPosition,
+    Image, MantineSize,
     OptionsFilter,
     Skeleton,
     Stack,
     Text,
     Title,
 } from '@mantine/core';
-import {useDebouncedValue} from '@mantine/hooks';
+import {useDebouncedValue, useDisclosure, useViewportSize} from '@mantine/hooks';
 import {useRouter} from 'next/navigation';
 import {useQuery} from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
 import classes from './SearchBar.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
 import NProgress from 'nprogress';
-import NextImage from 'next/image'
-import translateShikimoriStatus from "@/utils/translateShikimoriStatus";
+import NextImage from 'next/image';
 import {client} from "@/lib/shikimori/client";
-import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
-import globalVariables from '../../configs/globalVariables.json'
-import translateShikimoriKind from "@/utils/translateShikimoriKind";
-import {SearchBarDataType} from "@/types/SearchBarDataType";
+import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
+import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
+import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
+import {AnimeStatus} from "kodikwrapper";
+import {variables} from "@/configs/variables";
+import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
+import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
+import useCustomTheme from "@/hooks/useCustomTheme";
+
+const NOTHING = {
+    label: ' ',
+    value: 'nothing',
+    disabled: true
+};
+const FETCHING = {
+    label: ' ',
+    value: 'fetching',
+    disabled: true
+};
+const NO_VALUE = {
+    label: ' ',
+    value: 'noValue',
+    disabled: true
+};
 
 // Фильтр полученных пунктов и вывод "Ничего не найдено" или "Введите название аниме" в зависимости от значения
 // Я не понял, как работает optionsFilter в Mantine, но он работает так, как мне нужно, поэтому всё отлично
@@ -36,11 +55,14 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    const posterSourceURL = optionData[1]
-    const russianName = optionData[2]
-    let kind = translateShikimoriKind(optionData[3])
-    let status = translateShikimoriStatus(optionData[4])
-    const englishName = optionData[5]
+    const nonTranslatedKind: AnimeKindEnum | string = optionData[3];
+    const nonTranslatedStatus: AnimeStatus | string = optionData[4];
+
+    const posterSourceURL = optionData[1];
+    const russianName = optionData[2];
+    const kind = translateAnimeKind(nonTranslatedKind);
+    const status = translateAnimeStatus({ sortingType: nonTranslatedStatus });
+    const englishName = optionData[5];
 
     switch (option.value) {
         case 'nothing':
@@ -56,7 +78,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     <Image className={classes.poster} alt="Anime character" radius="md" src={searchAutocomplete.noValue.image} />
                     <Title order={3}>{searchAutocomplete.noValue.label}</Title>
                 </Stack>
-            )
+            );
         case 'fetching':
             return (
                 <Flex align="center" gap="md">
@@ -69,7 +91,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                         <Skeleton height={24} width={208} radius="xl" />
                     </div>
                 </Flex>
-            )
+            );
     }
 
     return (
@@ -79,7 +101,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     alt="Anime poster"
                     src={posterSourceURL}
                     placeholder="blur"
-                    blurDataURL={globalVariables.imagePlaceholder}
+                    blurDataURL={variables.imagePlaceholder}
                     width={96}
                     height={128}
                     component={NextImage}
@@ -96,26 +118,25 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     );
 };
 
-export default function SearchBar({ close }: { close?: () => void }) {
+export default function SearchBar({ position, size }: { position?: FloatingPosition, size: MantineSize }) {
+    const { theme } = useCustomTheme();
+    const { height } = useViewportSize();
     const shikimori = client();
     const router = useRouter();
-    const [input, setInput] = useState('')
+    const [input, setInput] = useState('');
     const [search] = useDebouncedValue(input, 300);
-
-    // TypeScript is insane (это пиздец ебаный, в смысле type boolean is not assignable to type true
-    // сука он вообще нахуй? или это я дебил и не понимаю чего-то тут
+    const [focused, { open, close }] = useDisclosure(false);
+    const color = theme.color;
+    // It can be MantineColor or HEXType code
     // @ts-ignore
+    const isMantineColor = variables.mantineColors.includes(color);
+    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
+    const calculatedColor = isMantineColor ? mantineColor : color;
+
     const [
         titles,
         setTitles
-    ]: [
-        titles: SearchBarDataType,
-        setTitles: Dispatch<SetStateAction<SearchBarDataType>>
-    ] = useState([{
-        label: ' ',
-        value: 'noValue',
-        disabled: true
-    }]);
+    ] = useState<SearchBarDataType>([NO_VALUE]);
 
     const { data, isFetching } = useQuery({
         queryKey: ['titles', search],
@@ -123,84 +144,95 @@ export default function SearchBar({ close }: { close?: () => void }) {
     });
 
     async function fetchTitles(keyInput: string) {
-        const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length
+        const isOnlyWhiteSpace = !keyInput.replace(/\s/g, '').length;
 
         if (isOnlyWhiteSpace) {
-            return [{label: ' ', value: 'noValue', disabled: true}]
+            return [NO_VALUE];
         }
-        
+
         const searchList = (await shikimori.animes.list({
             search: keyInput,
-            limit: 10
-        })).animes
+            limit: 10,
+            filter: [
+                "name",
+                "url",
+                "poster { id originalUrl mainUrl }",
+                "russian",
+                "kind",
+                "status"
+            ]
+        })).animes;
 
         if (searchList.length < 1) {
-            return [{label: ' ', value: 'nothing', disabled: true}];
+            return [NOTHING];
         }
 
         return searchList.map((title: AnimeType) => {
-            const titleCode = title.url.replace('https://shikimori.one/animes/', '')
-            const posterSourceURL = title.poster?.mainUrl ?? '/missing-image.png'
-            const originalName = title.name
-            const russianName = title.russian ?? originalName
-            const animeKind = title.kind
-            const animeStatus = title.status
+            const titleCode = title.url.replace('https://shikimori.one/animes/', '');
+            const posterSourceURL = title.poster?.mainUrl ?? '/missing-image.png';
+            const originalName = title.name;
+            const russianName = title.russian ?? originalName;
+            const animeKind = title.kind;
+            const animeStatus = title.status;
 
             return (
                 {
                     value: `${titleCode}--${posterSourceURL}--${russianName}--${animeKind}--${animeStatus}--${originalName}`,
                     label: `${russianName} / ${originalName}`,
                 }
-            )
+            );
         });
     }
 
     useEffect(() => {
-        // Не проблема, т.к. есть проверка на isFetching в <Autocomplete data={проверка} />
-        // @ts-ignore
-        setTitles(data)
-    }, [data]);
+        if (!data || isFetching) {
+            return setTitles([FETCHING]);
+        }
+
+        return setTitles(data);
+    }, [data, isFetching]);
 
     return (
         <>
             <Autocomplete
-                comboboxProps={{ transitionProps: { transition: "fade-up" }, position: 'bottom' }}
+                comboboxProps={{ transitionProps: { transition: "fade-up" }, position: position ?? "top" }}
                 classNames={{
-                    wrapper: classes.wrapper,
                     dropdown: classes.dropdown,
+                    options: classes.options,
                     option: classes.option,
-                    input: classes.input
                 }}
-                variant="unstyled"
-                maxDropdownHeight={800}
-                data={
-                    isFetching
-                        ? [{ label: ' ', value: 'fetching', disabled: true }]
-                        : titles
-                }
+                styles={{
+                    input: {
+                        borderColor: focused ? calculatedColor : "var(--mantine-color-default-border)"
+                    }
+                }}
+                variant="default"
+                maxDropdownHeight={height - height / 2}
+                data={titles}
                 onChange={(event) => {
-                    setInput(event)
+                    setInput(event);
                 }}
                 placeholder="Поиск"
                 leftSection={
-                    <IconSearch className={classes.icon} size="1rem" />
+                    <IconSearch size="1rem" />
                 }
                 value={input}
                 rightSectionPointerEvents="auto"
                 rightSection={
                     search
-                        && <CloseButton onClick={() => {
-                            setInput('')
-                        }} />
+                    && <CloseButton onClick={() => {
+                        setInput('');
+                    }} />
                 }
+                onDropdownOpen={open}
+                onDropdownClose={close}
                 onOptionSubmit={(option) => {
-                    // Если функция close существует, то она вызывается
-                    close && close()
-                    NProgress.start()
+                    NProgress.start();
                     router.push(`/titles/${option.split('--')[0]}`);
                 }}
                 renderOption={renderAutocompleteOption}
                 filter={optionsFilter}
+                size={size}
             />
         </>
     );

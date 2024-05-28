@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import db from "@/db/drizzle";
 import {comments} from "@/db/schema";
@@ -12,23 +12,23 @@ export const getChildren = async ({ uuid }: { uuid: string }) => {
             .where(
                 eq(comments.parentuuid, uuid),
             )
-            .orderBy(asc(comments.createdAt))
+            .orderBy(asc(comments.createdAt));
 
     if (parentComments.length === 0) {
-        return { data: null }
+        return { data: null };
     }
 
-    let data = []
+    const data = [];
 
     for (const comment of parentComments) {
         const children =
             await db
                 .select({ count: count() })
                 .from(comments)
-                .where(eq(comments.parentuuid, comment.uuid))
+                .where(eq(comments.parentuuid, comment.uuid));
 
-        data.push({ ...comment, children: children })
+        data.push({ ...comment, children: children });
     }
 
     return { data: data };
-}
+};

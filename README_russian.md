@@ -10,23 +10,26 @@
 ### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
 <p align="center">
-<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">English</a> | <strong>Русский</strong>
+<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/refactor/README.md">English</a> | <strong>Русский</strong>
 </p>
 
 </div>
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=flat&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
-[![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=flat&logo=telegram)](https://t.me/democracysucks)
-[![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=flat)](https://discord.gg/JhmkZDScfg)
+[![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
+[![Telegram Channel](https://img.shields.io/badge/Telegram-КФПЛП-blue?style=for-the-badge&logo=telegram)](https://t.me/democracysucks)
+[![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
+
+> [!IMPORTANT]
+> Сайт сейчас находится в процессе рефакторинга
 
 ## 📱 Скриншоты
 
 <div align="center">
-<img src="public/Screenshot_animeth_videoplayer1.jpg" width="49%">
-<img src="public/Screenshot_animeth_videoplayer2.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_videoplayer1.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
 </div>
 
-> [!IMPORTANT]  
+> [!NOTE]  
 > Сайт ещё не доделан. Другие скриншоты появятся позже.
 
 ## ⚙️ Набор технологий
@@ -70,13 +73,13 @@
 
 ## ✅ Список задач
 
-- [ ] Добавить возможность выбирать базу данных в `.env.local`
+- [x] Добавить возможность выбирать базу данных в `.env.local`
 
 - [ ] Добавить возможность загрузки аниме с торрента или напрямую через сайт
 
 - [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
-- [ ] Прикрутить API от [SovetRomantica](https://github.com/sovetromantica/sr-api)
+- [x] Прикрутить API от [SovetRomanticaVideo](https://github.com/sovetromantica/sr-api)
 
 - [ ] Сделать различные роли (администратора, участника) для аккаунтов
 
@@ -121,17 +124,15 @@
 
 > (Не протестировано) Настройка базы данных: 2. Локальный PostgreSQL
 
-Вы можете использовать локальный PostgreSQL в качестве базы данных. Если вы собираетесь использовать базу данных Neon Serverless, то перейдите к следующему этапу
+Вы можете использовать локальный PostgreSQL в качестве базы данных. Если вы собираетесь использовать базу данных Neon Serverless, то пропустите этот этап
 
-1. (Временно) Перейдите в `src/db/drizzle.ts` и уберите символы `//`, чтобы закомментировать код с конфигурацией Neon Serverless DB
+1. Откройте файл `.env.local` и вставьте адрес базы данных в `POSTGRESQL_DATABASE_URL`
 
-2. (Временно) Раскомментируйте строки кода с конфигурацией PostgreSQL DB
-
-3. Откройте файл `.env.local` и вставьте адрес базы данных в `POSTGRESQL_DATABASE_URL`
+2. Поменяйте значение у `DATABASE_TYPE` с `NEON` на `POSTGRESQL` в файле `.env.local`
 
 > Последние штрихи
 
-1. (Опционально) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
+1. (Необязательно) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
 
 2. Запустите команду `npm install` для того, чтобы установить все зависимости
 
@@ -143,6 +144,7 @@
 > Вот так должен выглядеть файл `.env.local` после всех махинаций выше с конфигурацией базы данных Neon Serverless DB 
 
 ```text
+DATABASE_TYPE='NEON'
 NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -158,6 +160,7 @@ KODIK_TOKEN='qwertyuiop1234567890'
 > Вот так должен выглядеть файл `.env.local` после всех махинаций выше с конфигурацией базы данных локального PostgreSQL
 
 ```text
+DATABASE_TYPE='POSTGRESQL'
 NEON_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
@@ -197,15 +200,41 @@ npm run start
 
 ### Vercel
 
-> [!NOTE]  
-> В процессе заполнения...
-
 <details>
 <summary>Раскрыть шаги</summary>
 
-Пока что смотрите официальную документацию [Next.js deployment documentation](https://nextjs.org/docs/deployment)
+Нажмите кнопку ниже:
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fwindstone-aristotle-yellow%2Fanimeth)
+
+Затем перейдите по **Project** -> **Settings** -> **Environment Variables** и создайте следующие переменные с ключом и значением:
+
+1. `DATABASE_TYPE` - `NEON`
+
+2. `NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL` - `/`
+
+3. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
+
+4. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
+
+5. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
+
+6. `CLERK_SECRET_KEY` - Ваш собственный **Secret key** с сайта https://clerk.com
+
+7. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Ваш собственный **Publishable key** с сайта https://clerk.com
+
+8. `NEON_DATABASE_URL` - Ваш собственный **Connection string** с сайта https://neon.tech/
+
+9. (Необязательно) `KODIK_TOKEN` - Ваш собственный ключ с сайта http://kodik.cc/ (Вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме с Kodik Player'ом
 
 </details>
+
+### Termux
+
+Через andronix
+
+> [!NOTE]  
+> В процессе заполнения...
 
 ## 💬 Контакты
 

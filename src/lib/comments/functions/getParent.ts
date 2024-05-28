@@ -1,4 +1,4 @@
-"use server"
+"use server";
 
 import db from "@/db/drizzle";
 import { comments } from "@/db/schema";
@@ -9,7 +9,7 @@ export const getParent = async ({ title, nextCursor = 0 }: { title: string, next
         await db
             .select({ count: count() })
             .from(comments)
-            .where(eq(comments.title, title))
+            .where(eq(comments.title, title));
 
     const originComments =
         await db
@@ -26,19 +26,19 @@ export const getParent = async ({ title, nextCursor = 0 }: { title: string, next
             .offset(nextCursor);
 
     if (originComments.length === 0) {
-        return { total: countAllComments, data: null, nextCursor: nextCursor + 16 }
+        return { total: countAllComments, data: null, nextCursor: nextCursor + 16 };
     }
 
-    let data = []
+    const data = [];
 
     for (const comment of originComments) {
         const children =
             await db
                 .select({ count: count() })
                 .from(comments)
-                .where(eq(comments.parentuuid, comment.uuid))
+                .where(eq(comments.parentuuid, comment.uuid));
 
-        data.push({ ...comment, children: children })
+        data.push({ ...comment, children: children });
     }
 
     return { total: countAllComments, data: data, nextCursor: nextCursor + 16 };

@@ -1,24 +1,9 @@
-.icon {
-    width: 22px;
-    height: 22px;
+.colorSwatch {
+    color: #fff;
+    cursor: pointer;
 }
 
-.dark {
-    @mixin dark {
-        display: none;
-    }
-
-    @mixin light {
-        display: block;
-    }
-}
-
-.light {
-    @mixin light {
-        display: none;
-    }
-
-    @mixin dark {
-        display: block;
-    }
+.checkIcon {
+    width: rem(12px);
+    height: rem(12px);
 }

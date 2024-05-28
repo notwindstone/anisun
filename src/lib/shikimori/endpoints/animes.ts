@@ -1,19 +1,19 @@
 import axios from "axios";
-import {AnimeType} from "@/types/Shikimori/Responses/Types/AnimeType";
 import {options} from "@/lib/shikimori/options";
-import {AnimesType} from "@/types/Shikimori/Queries/AnimesType";
-import {ResponseType} from "@/types/Shikimori/Responses/Types/ResponseType";
+import {AnimesType} from "@/types/Shikimori/Queries/Animes.type";
+import {OptionType} from "@/types/Shikimori/Queries/Option.type";
+import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response.interface";
 
 export const animes = () => {
-    const byId = async ({ ids }: { ids: string }) => {
-        const params = options({ ids: ids })
+    const byId = async ({ ids, filter }: { ids: string, filter?: OptionType[] }) => {
+        const params = options({ ids: ids, filter: filter });
 
         return await axios
             .request(params)
-            .then((response: ResponseType) => response.data.data)
-    }
+            .then((response: ResponseInterface) => response.data.data);
+    };
 
-    const list = async ({ search, limit, status, year, order, page }: AnimesType) => {
+    const list = async ({ search, limit, status, year, order, page, filter }: AnimesType) => {
         const params = options({
             search: search,
             limit: limit,
@@ -21,15 +21,23 @@ export const animes = () => {
             year: year,
             order: order,
             page: page,
-        })
+            filter: filter,
+        });
 
         return await axios
             .request(params)
-            .then((response: ResponseType) => response.data.data)
-    }
+            .then((response: ResponseInterface) => response.data.data);
+    };
+
+    const similar = async ({ id }: { id: string })=> {
+        return await axios
+            .get(`https://shikimori.one/api/animes/${id}/similar`)
+            .then((response) => response.data);
+    };
 
     return {
         byId,
         list,
-    }
-}
+        similar,
+    };
+};
