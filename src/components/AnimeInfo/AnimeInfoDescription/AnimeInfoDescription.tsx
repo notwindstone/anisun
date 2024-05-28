@@ -118,7 +118,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                             <Overlay
                                 onClick={zoomImage}
                                 gradient={
-                                    opened ? "#00000000" : "linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 30%)"
+                                    opened ? "#00000000" : "linear-gradient(to bottom, alpha(light-dark(#f3f3f4, #141516), 0.5) 0%, alpha(light-dark(#f3f3f4, #141516), 1) 30%)"
                                 }
                                 className={`${classes.imageOverlay} ${opened && classes.imageOverlayZoom}`}
                             />
