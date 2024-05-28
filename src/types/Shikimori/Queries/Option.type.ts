@@ -31,7 +31,7 @@ export type OptionType
     | "externalLinks { id kind url createdAt updatedAt }"
     | "personRoles { id rolesRu rolesEn person { id name poster { id } } }"
     | "characterRoles { id rolesRu rolesEn character { id name poster { id } } }"
-    | "related { id anime { id name } manga { id name } relationRu relationEn }"
+    | "related { id anime { id name poster { id mainUrl originalUrl } } manga { id name poster { id mainUrl originalUrl } } relationRu relationEn }"
     | "videos { id url name kind playerUrl imageUrl }"
     | "screenshots { id originalUrl x166Url x332Url }"
     | "scoresStats { score count }"

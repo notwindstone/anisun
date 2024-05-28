@@ -52,6 +52,7 @@
 }
 
 .heading {
+    text-transform: uppercase;
     color: var(--animeth-text-contrast-color);
 }
 
@@ -89,4 +90,8 @@
     position: absolute;
     inset: 0;
     padding: rem(32px);
+}
+
+.relationSubtitle {
+    font-size: rem(14px);
 }

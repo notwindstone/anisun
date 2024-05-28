@@ -1,12 +1,9 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import classes from "@/components/AnimeInfo/AnimeInfo.module.css";
 import {
-    AspectRatio,
-    Box, Center,
-    Container,
+    Box, Container,
     Group,
     Image,
-    Modal,
     Overlay,
     rem,
     Stack,
@@ -90,7 +87,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         {
                             cleanDescription && data?.description && (
                                 <Stack gap={rem(8)}>
-                                    <Title className={classes.heading} pt={rem(8)} order={4}>ОПИСАНИЕ</Title>
+                                    <Title className={classes.heading} pt={rem(8)} order={4}>Описание</Title>
                                     <Text
                                         {...opened ? null : { lineClamp: 1 }}
                                         dangerouslySetInnerHTML={{ __html: cleanDescription }}
@@ -120,11 +117,11 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                             />
                         </Container>
                     </Group>
-                    <Title className={classes.heading} order={4}>ИНФОРМАЦИЯ</Title>
+                    <Title className={classes.heading} order={4}>Информация</Title>
                     {
-                        (data?.episodes && data?.episodesAired) && (
+                        (data?.episodesAired && data?.episodes) && (
                             <Text>
-                                Эпизоды: {data.episodes} / {data.episodesAired}
+                                Эпизоды: {data.episodesAired} / {data.episodes}
                             </Text>
                         )
                     }
@@ -160,8 +157,8 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         data?.synonyms?.length > 0 && (
                             <Text>
                                 Другие названия: {data.synonyms.map((synonym) => (
-                                <span key={synonym}>{synonym}</span>
-                            ))}
+                                    <span key={synonym}>{synonym}</span>
+                                ))}
                             </Text>
                         )
                     }
@@ -169,8 +166,8 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         data?.fandubbers?.length > 0 && (
                             <Text>
                                 Фанатский дубляж: {data.fandubbers.map((fandub, index) => (
-                                <span key={fandub}>{index ? ', ' : ''}{fandub}</span>
-                            ))}
+                                    <span key={fandub}>{index ? ', ' : ''}{fandub}</span>
+                                ))}
                             </Text>
                         )
                     }
@@ -178,14 +175,45 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         data?.fansubbers?.length > 0 && (
                             <Text>
                                 Фанатские субтитры: {data.fansubbers.map((fansub, index) => (
-                                <span key={fansub}>{index ? ', ' : ''}{fansub}</span>
-                            ))}
+                                    <span key={fansub}>{index ? ', ' : ''}{fansub}</span>
+                                ))}
                             </Text>
                         )
                     }
                     {
                         data?.related?.length > 0 && (
-                            <></>
+                            <>
+                                <Title className={classes.heading} order={4}>Связанное</Title>
+                                <Group>
+                                    {
+                                        data.related.map((relation) => {
+                                            console.log(relation);
+
+                                            return (
+                                                <Group align="flex-start" key={relation.id}>
+                                                    <Image
+                                                        radius="md"
+                                                        alt={relation.relationRu}
+                                                        h={rem(48)}
+                                                        w="auto"
+                                                        src={relation.anime?.poster?.mainUrl ?? relation.manga?.poster?.mainUrl}
+                                                    />
+                                                    <Stack gap={0} justify="flex-start">
+                                                        <Text className={classes.title} lineClamp={1}>
+                                                            {relation.anime?.name ?? relation.manga?.name}
+                                                        </Text>
+                                                        <Text className={classes.relationSubtitle} lineClamp={1}>
+                                                            {relation.relationRu}
+                                                        </Text>
+                                                        <Text lineClamp={1}></Text>
+                                                    </Stack>
+                                                </Group>
+                                            );
+                                        })
+                                    }
+                                </Group>
+
+                            </>
                         )
                     }
                     {
@@ -203,7 +231,6 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                             <></>
                         )
                     }
-
                     <UnstyledButton className={classes.button} onClick={close}>
                         Свернуть
                     </UnstyledButton>

@@ -138,10 +138,12 @@ export const options = ({ ids, search, limit, status, year, order, page, filter 
             anime {
                 id
                 name
+                poster { id mainUrl originalUrl }
             }
             manga {
                 id
                 name
+                poster { id mainUrl originalUrl }
             }
             relationRu
             relationEn
