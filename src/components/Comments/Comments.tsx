@@ -1,10 +1,10 @@
 import {useInfiniteQuery, useMutation, useQueryClient} from "@tanstack/react-query";
 import {comments} from "@/lib/comments/comments";
-import {CommentType} from "@/types/CommentType";
+import {CommentType} from "@/types/Comments/Comment.type";
 import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
-import {MutatedDataType} from "@/types/MutatedDataType";
-import CommentSkeleton from "@/components/Skeletons/CommentSkeleton/CommentSkeleton";
+import {MutatedDataType} from "@/types/Comments/MutatedData.type";
+import CommentSkeleton from "@/components/Comments/CommentSkeleton/CommentSkeleton";
 import {Box, Center, Skeleton, Space, Text} from "@mantine/core";
 import {useEffect, useState} from "react";
 import {makeWordEnding} from "@/utils/Misc/makeWordEnding";

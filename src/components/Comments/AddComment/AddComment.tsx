@@ -3,7 +3,7 @@ import {Avatar, Button, Flex, Group, Paper, Skeleton, Space, Text, Textarea} fro
 import {notify} from "@/utils/Notifications/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
-import {CommentType} from "@/types/CommentType";
+import {CommentType} from "@/types/Comments/Comment.type";
 import {useUser} from "@clerk/nextjs";
 import classes from './AddComment.module.css';
 

@@ -12,7 +12,7 @@ import React from "react";
 import AnimeInfoDescription from "@/components/AnimeInfo/AnimeInfoDescription/AnimeInfoDescription";
 import Comments from "@/components/Comments/Comments";
 
-export default function AnimeInfo({ id }: { id: string }) {
+export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: string }) {
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'info', id],
@@ -107,7 +107,7 @@ export default function AnimeInfo({ id }: { id: string }) {
             <Suspense fallback={<p>Loading...</p>}>
                 <AnimeInfoDescription data={data} />
             </Suspense>
-            <Comments />
+            <Comments titleCode={titleCode} />
         </Stack>
     );
 }

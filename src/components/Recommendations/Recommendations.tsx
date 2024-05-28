@@ -13,6 +13,7 @@ import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
+import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
 
 export default function Recommendations({ id }: { id: string } ) {
     const router = useRouter();
@@ -122,7 +123,7 @@ export default function Recommendations({ id }: { id: string } ) {
                             {`${translatedKind}, ${translatedStatus}`}
                         </Text>
                         <Text className={classes.text} lineClamp={1}>
-                            {anime.aired_on.split('-')?.[0]}
+                            {formatAiredOnDate(anime.aired_on)}
                         </Text>
                     </Stack>
                 </Group>

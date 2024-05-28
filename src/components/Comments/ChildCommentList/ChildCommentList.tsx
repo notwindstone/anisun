@@ -1,9 +1,9 @@
 import {useQuery} from "@tanstack/react-query";
 import {comments} from "@/lib/comments/comments";
-import {CommentType} from "@/types/CommentType";
+import {CommentType} from "@/types/Comments/Comment.type";
 import {Comment} from "@/components/Comments/Comment/Comment";
 import classes from './ChildCommentList.module.css';
-import CommentSkeleton from "@//";
+import CommentSkeleton from "@/components/Comments/CommentSkeleton/CommentSkeleton";
 import {nanoid} from "nanoid";
 
 export function ChildCommentList({ uuid, childComments }: { uuid: string, childComments: number }) {

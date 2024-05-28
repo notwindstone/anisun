@@ -1,4 +1,3 @@
-import {CommentType} from "@/types/CommentType";
 import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, Textarea, UnstyledButton} from "@mantine/core";
 import {ChildCommentList} from "@/components/Comments/ChildCommentList/ChildCommentList";
 import classes from "./Comment.module.css";
@@ -8,7 +7,6 @@ import {makeWordEnding} from "@/utils/Misc/makeWordEnding";
 import {useDisclosure} from "@mantine/hooks";
 import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
-import {MutatedDataType} from "@/types/MutatedDataType";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {DeleteComment} from "@/components/Comments/DeleteComment/DeleteComment";
 import {IconCheck} from "@tabler/icons-react";
@@ -16,7 +14,9 @@ import {useRef, useState} from "react";
 import {EditComment} from "@/components/Comments/EditComment/EditComment";
 import {notify} from "@/utils/Notifications/notify";
 import {comments} from "@/lib/comments/comments";
-import {MutationCommentType, MutationInputType} from "@/types/MutationInputType";
+import {CommentType} from "@/types/Comments/Comment.type";
+import {MutatedDataType} from "@/types/Comments/MutatedData.type";
+import {MutationCommentType, MutationInputType } from "@/types/Comments/MutationInput.type";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
     const [editDelayed, setEditDelayed] = useState(false);
