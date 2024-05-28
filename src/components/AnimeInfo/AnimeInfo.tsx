@@ -29,7 +29,7 @@ export default function AnimeInfo({ id }: { id: string }) {
     }
 
     if (error) {
-        return <></>;
+        return <>Error...</>;
     }
 
     return (

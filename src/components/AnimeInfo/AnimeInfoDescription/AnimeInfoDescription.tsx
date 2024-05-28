@@ -84,6 +84,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         justify="space-between"
                         align="flex-start"
                         wrap="nowrap"
+                        className={classes.descriptionGroup}
                     >
                         {
                             cleanDescription && data?.description && (
@@ -232,6 +233,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                                         href={video.url}
                                                     >
                                                         <Image
+                                                            radius="md"
                                                             alt={video.kind}
                                                             src={`https:${video.imageUrl}`}
                                                             h={128}
@@ -244,11 +246,6 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                     }
                                 </Group>
                             </>
-                        )
-                    }
-                    {
-                        data?.externalLinks?.length > 0 && (
-                            <></>
                         )
                     }
                     <UnstyledButton className={classes.button} onClick={close}>

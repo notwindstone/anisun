@@ -39,9 +39,17 @@
     cursor: pointer;
 }
 
+.descriptionGroup {
+    @media screen and (max-width: rem(750px)) {
+        flex-wrap: wrap;
+    }
+}
+
 .expandedDescription {
     height: fit-content;
     cursor: auto;
+
+
 }
 
 .button {
