@@ -77,4 +77,16 @@
     width: rem(225px);
     height: rem(317px);
     border-radius: var(--mantine-radius-md);
+    cursor: zoom-in;
+}
+
+.imageModal {
+    display: grid;
+    place-content: center;
+    cursor: zoom-out;
+    z-index: 99999;
+    background: #0008;
+    position: absolute;
+    inset: 0;
+    padding: rem(32px);
 }
