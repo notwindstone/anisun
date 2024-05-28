@@ -1,16 +1,16 @@
 .root {
-    background: var(--animeth-block-background-color);
+    background: var(--animeth-background-color);
     padding: rem(16px);
-    border: rem(2px) solid var(--animeth-block-background-color);
+    border: rem(2px) solid var(--mantine-color-default-border);
     transition: 0.15s ease;
 
     @mixin hover {
-        border: rem(2px) solid var(--animeth-secondary-color);
+        border: rem(2px) solid var(--animeth-sidebar-color);
     }
 
     &:focus-within {
         @mixin hover {
-            border: rem(2px) solid var(--animeth-primary-color);
+            border: rem(2px) solid #fff;
         }
 
         background: var(--animeth-focused-block-background-color);

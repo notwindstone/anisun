@@ -8,7 +8,7 @@ import CommentSkeleton from "@/components/Comments/CommentSkeleton/CommentSkelet
 import {Box, Center, Skeleton, Space, Text} from "@mantine/core";
 import {useEffect, useState} from "react";
 import {makeWordEnding} from "@/utils/Misc/makeWordEnding";
-import classes from './CommentList.module.css';
+import classes from './Comments.module.css';
 import {useInViewport} from "@mantine/hooks";
 
 export default function Comments({ titleCode }: { titleCode: string }) {
