@@ -19,7 +19,7 @@ export default function SideBarSearchDropdown() {
                 <SearchBar size="md" />
                 <Button
                     component={Link}
-                    href="/"
+                    href="/titles"
                     variant="light"
                     color={theme.color}
                     leftSection={<IconAdjustmentsHorizontal />}

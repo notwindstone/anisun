@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
             })
     )?.animes[0];
 
-    const placeholderTitle = 'Просмотр аниме на Animeth';
+    const placeholderTitle = 'Просмотр аниме - Animeth';
     const placeholderDescription = 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере';
 
     if (!anime) {

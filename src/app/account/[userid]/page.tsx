@@ -3,6 +3,12 @@ import {Text} from "@mantine/core";
 import {clerkClient} from "@clerk/nextjs";
 import Account from "@/components/Account/Account";
 import Link from "next/link";
+import {Metadata} from "next";
+
+export const metadata: Metadata = {
+    title: 'Аккаунт - Animeth',
+    description: 'Страница с профилем пользователя',
+};
 
 export default async function Page({ params }: { params: { userid: string } }) {
     const user = await clerkClient.users.getUser(params.userid);
