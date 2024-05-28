@@ -1,0 +1,62 @@
+.root {
+    background: var(--animeth-block-background-color);
+    padding: rem(16px);
+    border: rem(2px) solid var(--animeth-block-background-color);
+    transition: 0.15s ease;
+
+    @mixin hover {
+        border: rem(2px) solid var(--animeth-secondary-color);
+    }
+
+    &:focus-within {
+        @mixin hover {
+            border: rem(2px) solid var(--animeth-primary-color);
+        }
+
+        background: var(--animeth-focused-block-background-color);
+        border: rem(2px) solid var(--animeth-primary-color);
+    }
+}
+
+.username {
+    color: var(--animeth-text-contrast-color);
+}
+
+.submit {
+    color: var(--animeth-button-text-color);
+    background: var(--animeth-primary-color);
+    transition: 0.1s ease;
+
+    @mixin hover {
+        transform: translateY(rem(-2px));
+        color: var(--animeth-button-text-color);
+        background: var(--animeth-button-background-hover-color);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    @media (max-width: $mantine-breakpoint-xs) {
+        &:active {
+            transform: translateY(rem(-2px));
+        }
+    }
+}
+
+.avatar {
+    border: rem(2px) solid var(--animeth-primary-color);
+}
+
+.wrapper {
+    /* Сброс дефолтных стилей <TextArea /> компонента из Mantine */
+    --input-bd: none !important;
+    --input-bd-focus: none !important;
+    --input-bg: none !important;
+}
+
+.input {
+    margin: 0;
+    padding: 0;
+    background: none;
+}

@@ -1,0 +1,1 @@
+The code in this folder was written at a time when I didn't know what React contexts were. And I'm lazy to rewrite it
