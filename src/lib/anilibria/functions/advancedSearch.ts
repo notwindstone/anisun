@@ -6,9 +6,13 @@ import {AnimeTitleType} from "@/types/Anilibria/Responses/AnimeTitle.type";
 const anilibriaHost = host.api();
 
 export const advancedSearch = async ({ originalName, englishName, russianName, year, duration, filter, limit }: AdvancedSearchType) => {
-    const originalCheck = `{code} ~= "${originalName}" or {names.en} ~= "${originalName}" or {names.ru} ~= "${originalName}"`;
-    const englishCheck = `{code} ~= "${englishName}" or {names.en} ~= "${englishName}" or {names.ru} ~= "${englishName}"`;
-    const russianCheck = `{code} ~= "${russianName}" or {names.en} ~= "${russianName}" or {names.ru} ~= "${russianName}"`;
+    const cleanOriginalName = originalName?.replace(/['"]+/g, '');
+    const cleanEnglishName = englishName?.replace(/['"]+/g, '');
+    const cleanRussianName = russianName?.replace(/['"]+/g, '');
+
+    const originalCheck = `{code} ~= "${cleanOriginalName}" or {names.en} ~= "${cleanOriginalName}" or {names.ru} ~= "${cleanOriginalName}"`;
+    const englishCheck = `{code} ~= "${cleanEnglishName}" or {names.en} ~= "${cleanEnglishName}" or {names.ru} ~= "${cleanEnglishName}"`;
+    const russianCheck = `{code} ~= "${cleanRussianName}" or {names.en} ~= "${cleanRussianName}" or {names.ru} ~= "${cleanRussianName}"`;
     const namesCheck = `(${originalCheck} or ${englishCheck} or ${russianCheck})`;
 
     const animeTitle: AnimeTitleType = (
