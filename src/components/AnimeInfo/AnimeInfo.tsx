@@ -10,6 +10,7 @@ import {Suspense} from "react";
 import Link from "next/link";
 import React from "react";
 import AnimeInfoDescription from "@/components/AnimeInfo/AnimeInfoDescription/AnimeInfoDescription";
+import Comments from "@/components/Comments/Comments";
 
 export default function AnimeInfo({ id }: { id: string }) {
     const shikimori = client();
@@ -41,8 +42,8 @@ export default function AnimeInfo({ id }: { id: string }) {
             >
                 {data?.russian} - {data?.name}
             </Title>
-            <Group justify="space-between">
-                <Group gap={rem(8)}>
+            <Group className={classes.infoGroup} wrap="nowrap" justify="space-between">
+                <Group wrap="nowrap" gap={rem(8)}>
                     <Link
                         href={`/titles?studio=${data?.studios?.[0]?.name}`}
                     >
@@ -55,7 +56,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                         />
                     </Link>
                     <Stack gap={0}>
-                        <Text fw={600}>
+                        <Text lineClamp={1} fw={600}>
                             {
                                 data?.genres.map((genre, index) => {
                                     return (
@@ -95,7 +96,7 @@ export default function AnimeInfo({ id }: { id: string }) {
                         </Text>
                     </Stack>
                 </Group>
-                <Group>
+                <Group wrap="nowrap">
                     <AnimeInfoCopyLink />
                     <Suspense fallback={<p>Loading button...</p>}>
                         <AnimeInfoDownloadVideo id={id} />
@@ -106,6 +107,7 @@ export default function AnimeInfo({ id }: { id: string }) {
             <Suspense fallback={<p>Loading...</p>}>
                 <AnimeInfoDescription data={data} />
             </Suspense>
+            <Comments />
         </Stack>
     );
 }

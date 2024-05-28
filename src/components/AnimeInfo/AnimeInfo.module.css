@@ -48,8 +48,12 @@
 .expandedDescription {
     height: fit-content;
     cursor: auto;
+}
 
-
+.infoGroup {
+    @media screen and (max-width: rem(750px)) {
+        flex-wrap: wrap;
+    }
 }
 
 .button {
