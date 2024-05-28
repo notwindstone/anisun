@@ -18,6 +18,7 @@ import {useDisclosure} from "@mantine/hooks";
 import DOMPurify from "isomorphic-dompurify";
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
+import Link from "next/link";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const [opened, { open, close }] = useDisclosure(false);
@@ -119,7 +120,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     </Group>
                     <Title className={classes.heading} order={4}>Информация</Title>
                     {
-                        (data?.episodesAired && data?.episodes) && (
+                        (data?.episodesAired && data?.episodes) > 0 && (
                             <Text>
                                 Эпизоды: {data.episodesAired} / {data.episodes}
                             </Text>
@@ -187,8 +188,6 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                 <Group>
                                     {
                                         data.related.map((relation) => {
-                                            console.log(relation);
-
                                             return (
                                                 <Group align="flex-start" key={relation.id}>
                                                     <Image
@@ -212,18 +211,39 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                         })
                                     }
                                 </Group>
-
                             </>
                         )
                     }
                     {
-                        data?.screenshots?.length > 0 && (
-                            <></>
-                        )
-                    }
-                    {
                         data?.videos?.length > 0 && (
-                            <></>
+                            <>
+                                <Title className={classes.heading} order={4}>Видео</Title>
+                                <Group className={classes.videosGroup}>
+                                    {
+                                        data.videos.map((video, index) => {
+                                            if (index > 3) {
+                                                return;
+                                            }
+
+                                            return (
+                                                <React.Fragment key={video.id}>
+                                                    <Link
+                                                        target="_blank"
+                                                        href={video.url}
+                                                    >
+                                                        <Image
+                                                            alt={video.kind}
+                                                            src={`https:${video.imageUrl}`}
+                                                            h={128}
+                                                            w="auto"
+                                                        />
+                                                    </Link>
+                                                </React.Fragment>
+                                            );
+                                        })
+                                    }
+                                </Group>
+                            </>
                         )
                     }
                     {

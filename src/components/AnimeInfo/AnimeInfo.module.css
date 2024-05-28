@@ -95,3 +95,9 @@
 .relationSubtitle {
     font-size: rem(14px);
 }
+
+.videosGroup {
+    @media screen and (max-width: rem(750px)) {
+        justify-content: space-between;
+    }
+}
