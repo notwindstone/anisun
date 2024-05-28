@@ -90,6 +90,9 @@
     width: rem(225px);
     height: rem(317px);
     border-radius: var(--mantine-radius-md);
+}
+
+.imageOverlayZoom {
     cursor: zoom-in;
 }
 

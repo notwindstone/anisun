@@ -14,7 +14,7 @@ import {
 import React from "react";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
-import {useDisclosure} from "@mantine/hooks";
+import {useDisclosure, useHotkeys} from "@mantine/hooks";
 import DOMPurify from "isomorphic-dompurify";
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
@@ -23,6 +23,10 @@ import Link from "next/link";
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const [opened, { open, close }] = useDisclosure(false);
     const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
+
+    useHotkeys([
+        ['escape', closeModal]
+    ]);
 
     let cleanDescription;
 
@@ -33,6 +37,12 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     function descriptionOpen() {
         if (!opened) {
             open();
+        }
+    }
+
+    function zoomImage() {
+        if (opened) {
+            openModal();
         }
     }
 
@@ -99,11 +109,11 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         }
                         <Container className={classes.imageWrapper}>
                             <Overlay
-                                onClick={openModal}
+                                onClick={zoomImage}
                                 gradient={
                                     opened ? "#00000000" : "linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 1) 30%)"
                                 }
-                                className={classes.imageOverlay}
+                                className={`${classes.imageOverlay} ${opened && classes.imageOverlayZoom}`}
                             />
                             <Image
                                 alt="Anime poster"
