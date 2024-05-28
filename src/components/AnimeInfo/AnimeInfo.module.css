@@ -55,9 +55,26 @@
     color: var(--animeth-text-contrast-color);
 }
 
-.statsText {
+.expandText {
+    min-width: fit-content;
+}
+
+.statsText, .expandText {
     color: var(--animeth-text-contrast-color);
     font-size: rem(16px);
     line-height: rem(16px);
     font-weight: 600;
+}
+
+.imageWrapper {
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.imageOverlay {
+    z-index: 50;
+    width: rem(225px);
+    height: rem(317px);
+    border-radius: var(--mantine-radius-md);
 }
