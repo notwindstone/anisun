@@ -1,6 +1,3 @@
-> [!IMPORTANT]  
-> В данный момент приложение переписывается. Ссылка на ветку: https://github.com/windstone-aristotle-yellow/animeth/tree/refactor
-
 <div align="center">
 
 <img width="160" height="160" align="center" src="public/favicon.png">
@@ -10,7 +7,7 @@
 ### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
 <p align="center">
-<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/refactor/README.md">English</a> | <strong>Русский</strong>
+<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">English</a> | <strong>Русский</strong>
 </p>
 
 </div>
@@ -20,7 +17,7 @@
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
 
 > [!IMPORTANT]
-> Сайт сейчас находится в процессе рефакторинга
+> Сайт сейчас находится в процессе разработки
 
 ## 📱 Скриншоты
 
@@ -75,11 +72,17 @@
 
 - [x] Добавить возможность выбирать базу данных в `.env.local`
 
-- [ ] Добавить возможность загрузки аниме с торрента или напрямую через сайт
-
-- [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
+- [x] Добавить возможность загрузки аниме с торрента или напрямую через сайт
 
 - [x] Прикрутить API от [SovetRomanticaVideo](https://github.com/sovetromantica/sr-api)
+
+- [ ] Доделать страницу с поиском и фильтрами аниме
+
+- [ ] Доделать комментарии
+
+- [ ] Доделать страницу с популярными аниме
+
+- [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
 - [ ] Сделать различные роли (администратора, участника) для аккаунтов
 
@@ -254,7 +257,7 @@ npm run start
 
 * [zvshka](https://github.com/zvshka) за оказание помощи при создании проекта
 
-* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs) и [Kodik](http://kodik.cc/) за их прекрасные API, без которых Animeth не смог бы работать
+* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) и [SovetRomantica](https://sovetromantica.com/) за их прекрасные API, без которых Animeth не смог бы работать
 
 * [Sora](https://github.com/Khanhtran47/Sora) и [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Некоторые элементы дизайна были позаимствованы у них
 

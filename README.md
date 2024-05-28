@@ -1,6 +1,3 @@
-> [!IMPORTANT]  
-> The application is currently being refactored. Link to the branch: https://github.com/windstone-aristotle-yellow/animeth/tree/refactor
-
 <div align="center">
 
 <img width="160" height="160" align="center" src="public/favicon.png">
@@ -10,7 +7,7 @@
 ### A web app for watching anime built with Next.js and Mantine UI
 
 <p align="center">
-<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/refactor/README_russian.md">Русский</a>
+<strong>English</strong> | <a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README_russian.md">Русский</a>
 </p>
 
 </div>
@@ -20,7 +17,7 @@
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
 
 > [!IMPORTANT]
-> The web app is currently being refactored
+> The web app is currently in development
 
 ## 📱 Screenshots
 
@@ -75,11 +72,17 @@
 
 - [x] Add the option to `.env` to use a database based on value
 
-- [ ] Add option to download anime using torrent or directly from website
-
-- [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
+- [x] Add option to download anime using torrent or directly from website
 
 - [x] Add subtitles from [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
+
+- [ ] Complete the page with anime search and filters
+
+- [ ] Finish comments
+
+- [ ] Complete the page with popular animes
+
+- [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
 
 - [ ] Add permission groups (administrator, member) to users
 
@@ -234,7 +237,7 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 Using andronix
 
 > [!NOTE]  
-> В процессе заполнения...
+> Work in progress...
 
 ## 💬 Contact
 
@@ -254,7 +257,7 @@ Using andronix
 
 * [zvshka](https://github.com/zvshka) for his help with project
 
-* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs) and [Kodik](http://kodik.cc/) for their wonderful APIs, without which Animeth could not work
+* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) and [SovetRomantica](https://sovetromantica.com/) for their wonderful APIs, without which Animeth could not work
 
 * [Sora](https://github.com/Khanhtran47/Sora) and [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Some of the UI designs are borrowed from them
 
