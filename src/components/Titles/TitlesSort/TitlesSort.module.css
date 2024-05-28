@@ -1,4 +1,5 @@
 .root {
+    border-radius: 0;
     background: none;
     flex-wrap: wrap;
 }
