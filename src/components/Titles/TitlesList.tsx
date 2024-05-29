@@ -37,7 +37,7 @@ export default function TitlesList() {
                             "episodesAired"
                         ]
                     })
-            )?.animes;
+            ).animes;
         },
         queryKey: ["titlesList", sortingType]
     });
