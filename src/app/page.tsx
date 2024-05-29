@@ -7,20 +7,19 @@ export default async function Home() {
     return (
         <div>
             <Hero />
-            <Container
+            <Box
                 pt={rem(32)}
                 pl={0}
                 pr={0}
                 pb={rem(32)}
-                size={1200}
             >
                 <Stack gap={rem(16)} p={0}>
-                    <Box pl={rem(32)} pr={rem(32)}>
+                    <Container pl={rem(32)} pr={rem(32)} pt={0} pb={0} size={1200}>
                         <SearchBar position="bottom" size="xl" />
-                    </Box>
+                    </Container>
                     <TitlesList />
                 </Stack>
-            </Container>
+            </Box>
         </div>
     );
 }
