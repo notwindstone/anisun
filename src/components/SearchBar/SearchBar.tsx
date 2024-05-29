@@ -214,7 +214,7 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
                 }}
                 placeholder="Поиск"
                 leftSection={
-                    <IconSearch size="1rem" />
+                    <IconSearch size={24} />
                 }
                 value={input}
                 rightSectionPointerEvents="auto"

@@ -48,11 +48,3 @@ html {
         overflow-y: auto;
     }
 }
-
-.home-searchbar {
-    display: none;
-
-    @media (max-width: rem(750)) {
-        display: block;
-    }
-}
