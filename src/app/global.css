@@ -49,6 +49,10 @@ html {
     }
 }
 
-.home-wrapper {
-    background: var(--animeth-background-color);
+.home-searchbar {
+    display: none;
+
+    @media (max-width: rem(750)) {
+        display: block;
+    }
 }

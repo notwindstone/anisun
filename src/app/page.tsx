@@ -15,7 +15,7 @@ export default async function Home() {
                 size={1920}
             >
                 <Stack gap={rem(16)} p={0}>
-                    <Box pl={rem(32)} pr={rem(32)}>
+                    <Box className="home-searchbar" pl={rem(32)} pr={rem(32)}>
                         <SearchBar position="bottom" size="xl" />
                     </Box>
                     <TitlesList />
