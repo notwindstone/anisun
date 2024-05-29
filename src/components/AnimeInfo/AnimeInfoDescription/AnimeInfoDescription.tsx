@@ -238,11 +238,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                 <Title className={classes.heading} order={4}>Видео</Title>
                                 <Group className={classes.videosGroup}>
                                     {
-                                        data.videos.map((video, index) => {
-                                            if (index > 3) {
-                                                return;
-                                            }
-
+                                        data.videos.map((video) => {
                                             return (
                                                 <React.Fragment key={video.id}>
                                                     <Link

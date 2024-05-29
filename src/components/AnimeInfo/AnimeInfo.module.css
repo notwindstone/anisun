@@ -112,7 +112,6 @@
 }
 
 .videosGroup {
-    @media screen and (max-width: rem(750px)) {
-        justify-content: space-between;
-    }
+    flex-wrap: nowrap;
+    overflow-x: auto;
 }
