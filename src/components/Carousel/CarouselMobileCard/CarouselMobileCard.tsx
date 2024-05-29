@@ -29,7 +29,7 @@ export default function CarouselMobileCard({
                 className={classes.overlay}
             >
                 <Badge className={classes.status} color="black">
-                    {translateAnimeStatus({ sortingType: animeStatus })}
+                    {translateAnimeStatus({ sortingType: animeStatus, singular: true })}
                 </Badge>
                 {
                     !isAnnounced && (

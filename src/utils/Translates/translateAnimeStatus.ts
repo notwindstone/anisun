@@ -6,73 +6,58 @@ export default function translateAnimeStatus(
         sortingType,
         singular,
         lowerCase,
-        alternate,
+        withPrepositions,
     }: {
         sortingType: StatusType | string;
         singular?: boolean;
         lowerCase?: boolean;
-        alternate?: boolean
+        withPrepositions?: boolean
     }
 ) {
-    const sorting = variables.sorting;
-    const singularAnons = "Анонсированный";
-    const singularReleased = "Завершённый";
-    const alternateAnons = "Анонс на";
-    const alternateReleased = "Вышло";
-    const alternateOngoing = "Онгоинг с";
-
     let translatedStatus;
 
     switch (sortingType) {
-        case "latest":
-            translatedStatus = sorting.latest.label;
-            break;
         case "ongoing":
             if (singular) {
-                translatedStatus = sorting.ongoing.label;
+                translatedStatus = variables.sortingAlternateTranslations.ongoing.singular;
                 break;
             }
 
-            if (alternate) {
-                translatedStatus = alternateOngoing;
+            if (withPrepositions) {
+                translatedStatus = variables.sortingAlternateTranslations.ongoing.withPrepositions;
                 break;
             }
 
-            translatedStatus = sorting.ongoing.label;
+            translatedStatus = variables.sorting.ongoing.label;
             break;
         case "anons":
             if (singular) {
-                translatedStatus = singularAnons;
+                translatedStatus = variables.sortingAlternateTranslations.anons.singular;
                 break;
             }
 
-            if (alternate) {
-                translatedStatus = alternateAnons;
+            if (withPrepositions) {
+                translatedStatus = variables.sortingAlternateTranslations.anons.withPrepositions;
                 break;
             }
 
-            translatedStatus = sorting.anons.label;
+            translatedStatus = variables.sorting.anons.label;
             break;
         case "released":
             if (singular) {
-                translatedStatus = singularReleased;
+                translatedStatus = variables.sortingAlternateTranslations.released.singular;
                 break;
             }
 
-            if (alternate) {
-                translatedStatus = alternateReleased;
+            if (withPrepositions) {
+                translatedStatus = variables.sortingAlternateTranslations.released.withPrepositions;
                 break;
             }
 
-            translatedStatus = sorting.released.label;
+            translatedStatus = variables.sorting.released.label;
             break;
         default:
-            if (singular) {
-                translatedStatus = sorting.latest.label;
-                break;
-            }
-
-            translatedStatus = sorting.latest.label;
+            translatedStatus = variables.sorting.latest.label;
             break;
     }
 

@@ -21,6 +21,20 @@ export type VariablesType = {
             value: StatusType;
         };
     };
+    sortingAlternateTranslations: {
+        anons: {
+            singular: string;
+            withPrepositions: string;
+        },
+        ongoing: {
+            singular: string;
+            withPrepositions: string;
+        },
+        released: {
+            singular: string;
+            withPrepositions: string;
+        },
+    };
     settings: {
         general: {
             label: string;

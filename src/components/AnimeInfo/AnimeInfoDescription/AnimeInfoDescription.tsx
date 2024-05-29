@@ -55,7 +55,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
         ? (
             `${translateAnimeStatus({ 
                 sortingType: data.status, 
-                alternate: true,
+                withPrepositions: true,
             })} ${formatAiredOnDate(data.airedOn.date)} • `
         ) : "";
     const animeKind

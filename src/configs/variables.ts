@@ -12,12 +12,26 @@ export const variables: VariablesType = {
             "value": "anons"
         },
         "ongoing": {
-            "label": "В работе",
+            "label": "Выпускаются",
             "value": "ongoing"
         },
         "released": {
             "label": "Завершённые",
             "value": "released"
+        },
+    },
+    "sortingAlternateTranslations": {
+        "anons": {
+            "singular": "Анонсированный",
+            "withPrepositions": "Анонс на",
+        },
+        "ongoing": {
+            "singular": "Выпускается",
+            "withPrepositions": "Выпускается с",
+        },
+        "released": {
+            "singular": "Завершённый",
+            "withPrepositions": "Вышло",
         },
     },
     "settings": {
