@@ -70,6 +70,7 @@ export default function Hero() {
                         <Carousel
                             classNames={{
                                 indicators: classes.indicators,
+                                indicator: classes.indicator,
                                 control: classes.control
                             }}
                             h={mobileHeight}

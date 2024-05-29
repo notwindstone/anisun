@@ -21,6 +21,12 @@
     bottom: rem(-16px);
 }
 
+.indicator {
+    @media screen and (max-width: rem(750px)) {
+        background: var(--animeth-text-contrast-color);
+    }
+}
+
 .control {
     width: rem(40px);
     height: rem(40px);
