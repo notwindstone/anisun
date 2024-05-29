@@ -175,8 +175,8 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.synonyms?.length > 0 && (
                             <Text>
-                                Другие названия: {data.synonyms.map((synonym) => (
-                                    <span key={synonym}>{synonym}</span>
+                                Другие названия: {data.synonyms.map((synonym, index) => (
+                                    <span key={synonym}>{index ? ', ' : ''}{synonym}</span>
                                 ))}
                             </Text>
                         )
