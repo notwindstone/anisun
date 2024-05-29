@@ -6,6 +6,7 @@ import Link from "next/link";
 import classes from "./CarouselMobileCard.module.css";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import NextImage from "next/image";
+import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 
 export default function CarouselMobileCard({
     animeTitle,
@@ -15,6 +16,7 @@ export default function CarouselMobileCard({
     const { theme } = useCustomTheme();
     const animeStatus = animeTitle?.status ?? "";
     const isAnnounced = animeStatus === 'anons';
+    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
 
     return (
         <Paper
@@ -34,9 +36,8 @@ export default function CarouselMobileCard({
                 {
                     !isAnnounced && (
                         <Badge
-                            autoContrast
                             className={classes.score}
-                            color={theme.color}
+                            color={scoreBadgeColor}
                         >
                             {animeTitle?.score}
                         </Badge>

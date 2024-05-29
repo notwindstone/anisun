@@ -16,9 +16,9 @@ import NextImage from "next/image";
 import {useCallback, useMemo} from "react";
 import {TransitionStylesType} from "@/types/Transition/TransitionStyles.type";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
-import useCustomTheme from "@/hooks/useCustomTheme";
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
+import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 
 const TRANSITION_PROPS: TransitionStylesType = {
     transition: "fade-left",
@@ -38,7 +38,6 @@ export default function HeroCard({
     const [debouncedInViewport] = useDebouncedValue(inViewport, 100);
     const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 250);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
-    const { theme } = useCustomTheme();
     const width = (debouncedHeight) / 0.42;
     const responsiveFontScale
         = viewportWidth > 1600 ? 1.8 : viewportWidth / 1000;
@@ -55,6 +54,8 @@ export default function HeroCard({
     } else {
         size = "xl";
     }
+
+    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
 
     const redirect = useCallback(function redirectUser() {
         router.push(`/titles/${animeTitle?.url.replace('https://shikimori.one/animes/', '')}`);
@@ -128,8 +129,7 @@ export default function HeroCard({
                                         <Group style={styles}>
                                             <Badge
                                                 size={size}
-                                                autoContrast
-                                                color={theme.color}
+                                                color={scoreBadgeColor}
                                             >
                                                 {animeTitle?.score}
                                             </Badge>
@@ -189,12 +189,12 @@ export default function HeroCard({
             animeTitle?.poster?.originalUrl,
             animeTitle?.name,
             animeTitle?.score,
+            scoreBadgeColor,
             animeTitle?.genres,
             animeTitle?.id,
             debouncedInViewport,
             debouncedSlightlyInViewport,
             debouncedLongerInViewport,
-            theme.color
         ]
     );
 }

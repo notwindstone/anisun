@@ -7,6 +7,7 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import {useHover} from "@mantine/hooks";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
+import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 
 export default function CarouselCard({
     animeTitle,
@@ -23,6 +24,8 @@ export default function CarouselCard({
     const calculatedColor = isMantineColor ? mantineColor : color;
     const animeStatus = animeTitle?.status ?? "";
     const isAnnounced = animeStatus === 'anons';
+    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
+
 
     return (
         <Paper
@@ -48,9 +51,8 @@ export default function CarouselCard({
                 {
                     !isAnnounced && (
                         <Badge
-                            autoContrast
                             className={classes.score}
-                            color={theme.color}
+                            color={scoreBadgeColor}
                         >
                             {animeTitle?.score}
                         </Badge>

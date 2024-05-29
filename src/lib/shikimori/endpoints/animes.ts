@@ -11,7 +11,7 @@ export const animes = () => {
         return await axios
             .request(params)
             .then((response: ResponseInterface) => response.data.data)
-            .catch((error) => console.log(error));
+            .catch(() => undefined);
     };
 
     const list = async ({ search, limit, status, year, order, page, filter }: AnimesType) => {
@@ -28,14 +28,14 @@ export const animes = () => {
         return await axios
             .request(params)
             .then((response: ResponseInterface) => response.data.data)
-            .catch((error) => console.log(error));
+            .catch(() => undefined);
     };
 
     const similar = async ({ id }: { id: string })=> {
         return await axios
             .get(`https://shikimori.one/api/animes/${id}/similar`)
             .then((response) => response.data)
-            .catch((error) => console.log(error));
+            .catch(() => undefined);
     };
 
     return {

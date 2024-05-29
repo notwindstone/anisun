@@ -44,7 +44,7 @@ export default function SideBarAccountTarget() {
                     className={classes.button}
                     w={opened ? rem(288) : rem(64)}
                     h={rem(64)}
-                    p={rem(8)}
+                    p={rem(16)}
                     onClick={toggleDropdown}
                 >
                     <Group wrap="nowrap">
@@ -52,7 +52,7 @@ export default function SideBarAccountTarget() {
                             <Avatar
                                 className={classes.avatar}
                                 src={user?.imageUrl ?? '/blurred.png'}
-                                size={rem(48)}
+                                size={rem(32)}
                                 alt={`Аватар пользователя ${user?.username}`}
                             >
                                 {user?.username?.[0]}
@@ -60,10 +60,10 @@ export default function SideBarAccountTarget() {
                         </SignedIn>
                         <SignedOut>
                             <Box
-                                w={rem(48)}
-                                h={rem(48)}
+                                w={rem(32)}
+                                h={rem(32)}
                             >
-                                <IconUserCircle size={48} stroke={1.5} />
+                                <IconUserCircle size={32} stroke={1.5} />
                             </Box>
                         </SignedOut>
                         <SideBarItemExpanded mounted={opened}>
