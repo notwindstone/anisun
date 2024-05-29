@@ -48,6 +48,15 @@ export const variables: VariablesType = {
         "size": 32,
         "stroke": 1.5
     },
+    "rating": {
+        "none": "неизвестно",
+        "g": "G",
+        "pg": "PG",
+        "pg_13": "PG-13",
+        "r": "R-17",
+        "r_plus": "R+",
+        "rx": "Rx",
+    },
     "rippleColor": {
         "color": "var(--animeth-ripple-color)",
     },

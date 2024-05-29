@@ -161,7 +161,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.rating && (
                             <Text>
-                                Возрастной рейтинг: {data.rating}
+                                Возрастной рейтинг: {variables.rating[data.rating]}
                             </Text>
                         )
                     }

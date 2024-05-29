@@ -49,6 +49,15 @@ export type VariablesType = {
         size: number;
         stroke: number;
     };
+    rating: {
+        none: string;
+        g: string;
+        pg: string;
+        pg_13: string;
+        r: string;
+        r_plus: string;
+        rx: string;
+    };
     rippleColor: {
         color: string;
     };
