@@ -67,16 +67,12 @@ export default function SideBarAccountTarget() {
                             </Box>
                         </SignedOut>
                         <SideBarItemExpanded mounted={opened}>
-                            <Stack gap={0} h={48}>
+                            <Stack gap={0}>
                                 <Text
-                                    className={classes.username}
-                                    fw={500}
                                     size="lg"
+                                    inline
                                 >
                                     {user?.username ?? LABEL}
-                                </Text>
-                                <Text size="sm" inline>
-                                    Настройки
                                 </Text>
                             </Stack>
                             <IconChevronRight
