@@ -138,6 +138,13 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     </Group>
                     <Title className={classes.heading} order={4}>Информация</Title>
                     {
+                        !!data?.score && (
+                            <Text>
+                                Оценка: {data.score}
+                            </Text>
+                        )
+                    }
+                    {
                         (data?.episodesAired && data?.episodes) > 0 && (
                             <Text>
                                 Эпизоды: {data.episodesAired} / {data.episodes}
@@ -154,7 +161,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.rating && (
                             <Text>
-                                Рейтинг: {data.rating}
+                                Возрастной рейтинг: {data.rating}
                             </Text>
                         )
                     }
