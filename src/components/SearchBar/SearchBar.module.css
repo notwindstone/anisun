@@ -38,3 +38,11 @@
 .stack {
     width: 100%;
 }
+
+.link {
+    text-decoration: none !important;
+}
+
+.text {
+    color: var(--mantine-color-default-color);
+}

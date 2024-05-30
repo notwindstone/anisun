@@ -20,7 +20,6 @@ import {useQuery} from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
 import classes from './SearchBar.module.css';
 import searchAutocomplete from './../../configs/searchAutocomplete.json';
-import NProgress from 'nprogress';
 import NextImage from 'next/image';
 import {client} from "@/lib/shikimori/client";
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
@@ -31,6 +30,7 @@ import {variables} from "@/configs/variables";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import Link from "next/link";
 
 const NOTHING = {
     label: ' ',
@@ -95,7 +95,13 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
     }
 
     return (
-        <Flex align="center" gap="md">
+        <Flex
+            component={Link}
+            className={classes.link}
+            href={`/titles/${optionData[0]}`}
+            align="center"
+            gap="md"
+        >
             <div>
                 <Image
                     alt="Anime poster"
@@ -110,22 +116,42 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                 />
             </div>
             <div>
-                <Title lineClamp={2} order={3}>{russianName}</Title>
-                <Text lineClamp={2} size="lg" opacity={0.8}>{kind}</Text>
-                <Text lineClamp={2} size="md" opacity={0.5}>{status}{englishName ? `, ${englishName}` : []}</Text>
+                <Title
+                    className={classes.text}
+                    lineClamp={2}
+                    order={3}
+                >
+                    {russianName}
+                </Title>
+                <Text
+                    className={classes.text}
+                    lineClamp={2}
+                    size="lg"
+                    opacity={0.8}
+                >
+                    {kind}
+                </Text>
+                <Text
+                    className={classes.text}
+                    lineClamp={2}
+                    size="md"
+                    opacity={0.5}
+                >
+                    {status}{englishName ? (`, ${englishName}`) : []}
+                </Text>
             </div>
         </Flex>
     );
 };
 
-export default function SearchBar({ position, size }: { position?: FloatingPosition, size: MantineSize }) {
-    const { theme } = useCustomTheme();
-    const { height } = useViewportSize();
+export default function SearchBar({position, size}: { position?: FloatingPosition, size: MantineSize }) {
+    const {theme} = useCustomTheme();
+    const {height} = useViewportSize();
     const shikimori = client();
-    const router = useRouter();
+    useRouter();
     const [input, setInput] = useState('');
     const [search] = useDebouncedValue(input, 300);
-    const [focused, { open, close }] = useDisclosure(false);
+    const [focused, {open, close}] = useDisclosure(false);
     const color = theme.color;
     // It can be MantineColor or HEXType code
     // @ts-ignore
@@ -226,10 +252,6 @@ export default function SearchBar({ position, size }: { position?: FloatingPosit
                 }
                 onDropdownOpen={open}
                 onDropdownClose={close}
-                onOptionSubmit={(option) => {
-                    NProgress.start();
-                    router.push(`/titles/${option.split('--')[0]}`);
-                }}
                 renderOption={renderAutocompleteOption}
                 filter={optionsFilter}
                 size={size}
