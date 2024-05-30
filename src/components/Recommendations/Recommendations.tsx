@@ -183,7 +183,12 @@ export default function Recommendations({ id }: { id: string } ) {
     const recommendationVideos = data?.map((anime: AnimeType | OldAnimeType) => {
         function redirectUser() {
             NProgress.start();
-            router.push(`/titles/${anime.url.replace('/animes/', '')}`);
+
+            if (anime?.poster) {
+                return router.push(`/titles/${anime?.url.replace('https://shikimori.one/animes/', '')}`);
+            }
+
+            return router.push(`/titles/${anime.url.replace('/animes/', '')}`);
         }
 
         const translatedKind = translateAnimeKind(anime.kind ?? '');
