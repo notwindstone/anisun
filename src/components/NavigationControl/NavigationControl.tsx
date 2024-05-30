@@ -27,6 +27,7 @@ export default function NavigationControl() {
                         <Group wrap="nowrap" gap={rem(8)}>
                             <NavigationButton type="back" />
                             <NavigationButton type="forward" />
+                            <NavigationButton type="refresh" />
                         </Group>
                         <NavigationBreadcrumbs />
                     </Group>
