@@ -1,8 +1,6 @@
 "use server";
 
-import Link from 'next/link';
 import type {Metadata} from "next";
-import SearchBar from "@/components/SearchBar/SearchBar";
 import {Container} from "@mantine/core";
 import classes from './page.module.css';
 import SearchInput from "@/components/SearchInput/SearchInput";
