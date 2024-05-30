@@ -27,7 +27,7 @@ export default function Recommendations({ id }: { id: string } ) {
         return await shikimori.animes.similar({ id });
     }
 
-    const mockVideos = Array.from({ length: 17 });
+    const mockVideos = Array.from({ length: 8 });
 
     if (isPending) {
         return (
