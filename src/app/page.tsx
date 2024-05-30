@@ -14,7 +14,14 @@ export default async function Home() {
                 pb={rem(32)}
             >
                 <Stack gap={rem(16)} p={0}>
-                    <Container fluid pl={rem(32)} pr={rem(32)} pt={0} pb={0} size={1200}>
+                    <Container
+                        w="100%"
+                        pl={rem(32)}
+                        pr={rem(32)}
+                        pt={0}
+                        pb={0}
+                        size={1024}
+                    >
                         <SearchBar position="bottom" size="xl" />
                     </Container>
                     <TitlesList />

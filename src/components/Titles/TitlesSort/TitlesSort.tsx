@@ -33,6 +33,7 @@ export default function TitlesSort() {
 
     return (
         <SegmentedControl
+            p={0}
             size={size}
             autoContrast
             color={theme.color}

@@ -44,7 +44,7 @@ export default function TitlesList() {
 
     return (
         <TitlesSortContext.Provider value={{ sortingType: sortingType, setSortingType: setSortingType }}>
-            <Container fluid p={0} size={1200}>
+            <Container w="100%" p={0} size={1024}>
                 <Stack gap={rem(8)} align="stretch" pl={rem(32)} pr={rem(32)}>
                     <TitlesSort />
                     <Title>Сейчас популярно</Title>
