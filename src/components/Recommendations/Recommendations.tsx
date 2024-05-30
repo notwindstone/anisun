@@ -1,7 +1,7 @@
 "use client";
 
-import {AspectRatio, Badge, Container, Group, Image, rem, Skeleton, Stack, Text} from "@mantine/core";
-import {useQuery} from "@tanstack/react-query";
+import {AspectRatio, Badge, Container, Group, Image, rem, SegmentedControl, Skeleton, Stack, Text} from "@mantine/core";
+import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
@@ -14,12 +14,20 @@ import NProgress from "nprogress";
 import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
+import {useState} from "react";
 
 export default function Recommendations({ id }: { id: string } ) {
+    const ALL = "Все";
+    const segmentedControlData = [ALL, '142'];
+
+    const queryClient = useQueryClient();
+    const queryData = queryClient.getQueryData(['anime', 'info', id]);
+
     const router = useRouter();
     const shikimori = client();
+    const [filter, setFilter] = useState(ALL);
     const { data, isPending, error } = useQuery({
-        queryKey: ['recommendations', id],
+        queryKey: ['recommendations', id, filter],
         queryFn: async () => getSimilarAnimes(),
     });
 
@@ -64,7 +72,7 @@ export default function Recommendations({ id }: { id: string } ) {
         return <>Error: {error.message}</>;
     }
 
-    if (!data || data.length === 0) {
+    if (!data || data === "Retry later" || data.length === 0) {
         return;
     }
 
@@ -131,8 +139,21 @@ export default function Recommendations({ id }: { id: string } ) {
         );
     });
 
+
     return (
         <Stack gap={rem(8)} className={classes.similar}>
+            <div className={classes.segmentedControlWrapper}>
+                <SegmentedControl
+                    classNames={{
+                        root: classes.segmentedControlRoot,
+                        indicator: classes.segmentedControlIndicator,
+                        label: classes.segmentedControlLabel
+                    }}
+                    radius="md"
+                    withItemsBorders={false}
+                    data={segmentedControlData}
+                />
+            </div>
             {recommendationVideos}
         </Stack>
     );

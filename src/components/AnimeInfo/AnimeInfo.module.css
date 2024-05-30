@@ -102,7 +102,7 @@
     cursor: zoom-out;
     z-index: 99999;
     background: #0008;
-    position: absolute;
+    position: fixed;
     inset: 0;
     padding: rem(32px);
 }

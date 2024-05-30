@@ -74,6 +74,7 @@
     right: 0;
     opacity: 0;
     border-radius: var(--mantine-radius-md);
+    background: var(--animeth-background-color);
 
     @mixin hover {
         background: var(--mantine-color-default-hover);
@@ -132,4 +133,20 @@
         font-size: rem(16px);
         line-height: rem(22px);
     }
+}
+
+.segmentedControlWrapper {
+    overflow-x: auto;
+}
+
+.segmentedControlRoot {
+    background: none;
+}
+
+.segmentedControlIndicator {
+    background: var(--animeth-text-contrast-color);
+}
+
+.segmentedControlLabel:where([data-active]) {
+    color: var(--animeth-background-color);;
 }
