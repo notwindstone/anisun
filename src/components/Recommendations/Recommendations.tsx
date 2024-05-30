@@ -176,8 +176,30 @@ export default function Recommendations({ id }: { id: string } ) {
         );
     }
 
-    if (!data || data === "Retry later" || data.length === 0) {
+    if (!data || data === "Retry later") {
         return;
+    }
+
+    if (!data.length) {
+        return (
+            <Stack gap={rem(8)} className={classes.similar}>
+                <div className={classes.segmentedControlWrapper}>
+                    <SegmentedControl
+                        value={filter}
+                        onChange={setFilter}
+                        classNames={{
+                            root: classes.segmentedControlRoot,
+                            indicator: classes.segmentedControlIndicator,
+                            label: classes.segmentedControlLabel
+                        }}
+                        radius="md"
+                        withItemsBorders={false}
+                        data={segmentedControlData}
+                    />
+                </div>
+                <Text>К сожалению, ничего не найдено. Попробуйте выбрать другой фильтр</Text>
+            </Stack>
+        );
     }
 
     const recommendationVideos = data?.map((anime: AnimeType | OldAnimeType) => {
