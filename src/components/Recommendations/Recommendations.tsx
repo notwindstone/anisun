@@ -183,7 +183,7 @@ export default function Recommendations({ id }: { id: string } ) {
     const recommendationVideos = data?.map((anime: AnimeType | OldAnimeType) => {
         // It does exist on AnimeType, but doesn't on OldAnimeType
         // @ts-ignore
-        const isNewType = anime?.poster
+        const isNewType = anime?.poster;
 
         function redirectUser() {
             NProgress.start();
