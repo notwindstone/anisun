@@ -4,8 +4,8 @@ import {useInViewport, useViewportSize} from "@mantine/hooks";
 import classes from "./HeroMobileCard.module.css";
 import NextImage from "next/image";
 import {variables} from "@/configs/variables";
-import useCustomTheme from "@/hooks/useCustomTheme";
 import Link from "next/link";
+import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 
 export default function HeroMobileCard({
     animeTitle,
@@ -16,7 +16,6 @@ export default function HeroMobileCard({
 }) {
     const { width: viewportWidth } = useViewportSize();
     const { ref, inViewport } = useInViewport();
-    const { theme } = useCustomTheme();
 
     let size: MantineSize;
     let order: TitleOrder;
@@ -34,6 +33,8 @@ export default function HeroMobileCard({
         size = "lg";
         order = 1;
     }
+
+    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
 
     return (
         <Container
@@ -91,7 +92,7 @@ export default function HeroMobileCard({
                             <Badge
                                 size={size}
                                 autoContrast
-                                color={theme.color}
+                                color={scoreBadgeColor}
                             >
                                 {animeTitle?.score}
                             </Badge>
