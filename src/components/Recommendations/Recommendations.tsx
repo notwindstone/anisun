@@ -1,24 +1,24 @@
 "use client";
 
-import {AspectRatio, Badge, Container, Group, Image, rem, SegmentedControl, Skeleton, Stack, Text} from "@mantine/core";
+import {AspectRatio, Group, rem, SegmentedControl, Skeleton, Stack, Text} from "@mantine/core";
 import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import {variables} from "@/configs/variables";
-import NextImage from "next/image";
 import classes from './Recommendations.module.css';
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
-import RecommendationsShareButton
-    from "@/components/Recommendations/RecommendationsShareButton/RecommendationsShareButton";
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
-import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
 import {useEffect, useState} from "react";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
+import {useInterval} from "@mantine/hooks";
+import RecommendationsOldAnimeData
+    from "@/components/Recommendations/RecommendationsOldAnimeData/RecommendationsOldAnimeData";
+import RecommendationsNewAnimeData
+    from "@/components/Recommendations/RecommendationsNewAnimeData/RecommendationsNewAnimeData";
 
 export default function Recommendations({ id }: { id: string } ) {
-    const ALL = { label: "Все", value: "all" };
+    const ALL = { label: "Похожие", value: "all" };
     const [segmentedControlData, setSegmentedControlData] = useState([ALL]);
     const router = useRouter();
     const shikimori = client();
@@ -29,6 +29,20 @@ export default function Recommendations({ id }: { id: string } ) {
     });
     const queryClient = useQueryClient();
     const queryData: AnimeType | undefined = queryClient.getQueryData(['anime', 'info', id]);
+    const [seconds, setSeconds] = useState(0);
+    const interval = useInterval(() => setSeconds((s) => s + 1), 1000);
+
+    // queryClient.getQueryData does not subscribe to queries data
+    // And I'm too tired of this project to implement a better solution for this lol
+    useEffect(() => {
+        if (queryData) {
+            return interval.stop();
+        }
+
+        interval.start();
+        return interval.stop;
+    // eslint-disable-next-line
+    }, [seconds]);
 
     useEffect(() => {
         if (segmentedControlData[1]) {
@@ -60,10 +74,44 @@ export default function Recommendations({ id }: { id: string } ) {
         }
 
         if (filter.includes("studio")) {
-            return console.log('studio');
+            const studioId = filter.split('-')[1];
+
+            return (await shikimori
+                .animes
+                .list({
+                    limit: 16,
+                    studio: studioId,
+                    filter: [
+                        "id",
+                        "name",
+                        "russian",
+                        "url",
+                        "poster { id originalUrl mainUrl }",
+                        "score",
+                        "episodesAired",
+                        "episodes",
+                        "airedOn { year month day date }",
+                    ],
+                })).animes;
         }
 
-        console.log("genre");
+        return (await shikimori
+            .animes
+            .list({
+                limit: 16,
+                genre: filter,
+                filter: [
+                    "id",
+                    "name",
+                    "russian",
+                    "url",
+                    "poster { id originalUrl mainUrl }",
+                    "score",
+                    "episodesAired",
+                    "episodes",
+                    "airedOn { year month day date }",
+                ],
+            })).animes;
     }
 
     const mockVideos = Array.from({ length: 8 });
@@ -72,7 +120,7 @@ export default function Recommendations({ id }: { id: string } ) {
         return (
             <Stack gap={rem(8)} className={classes.similar}>
                 <div className={classes.segmentedControlWrapper}>
-                    <Skeleton radius="md" h={32} w={64} />
+                    <Skeleton radius="md" h={32} w={48} />
                 </div>
                 {
                     mockVideos.map((_mockVideo, index) => {
@@ -103,73 +151,64 @@ export default function Recommendations({ id }: { id: string } ) {
     }
 
     if (error) {
-        return <>Error: {error.message}</>;
+        return (
+            <Stack gap={rem(8)} className={classes.similar}>
+                <div className={classes.segmentedControlWrapper}>
+                    <SegmentedControl
+                        value={filter}
+                        onChange={setFilter}
+                        classNames={{
+                            root: classes.segmentedControlRoot,
+                            indicator: classes.segmentedControlIndicator,
+                            label: classes.segmentedControlLabel
+                        }}
+                        radius="md"
+                        withItemsBorders={false}
+                        data={segmentedControlData}
+                    />
+                </div>
+                <Text>Error: {error.message}</Text>
+            </Stack>
+        );
     }
 
     if (!data || data === "Retry later" || data.length === 0) {
         return;
     }
 
-    const recommendationVideos = data?.map((anime: OldAnimeType) => {
+    const recommendationVideos = data?.map((anime: AnimeType | OldAnimeType) => {
         function redirectUser() {
             NProgress.start();
             router.push(`/titles/${anime.url.replace('/animes/', '')}`);
         }
 
-        const translatedKind = translateAnimeKind(anime.kind);
-        const translatedStatus = translateAnimeStatus({sortingType: anime.status, singular: true, lowerCase: true });
+        const translatedKind = translateAnimeKind(anime.kind ?? '');
+        const translatedStatus = translateAnimeStatus({sortingType: anime.status ?? '', singular: true, lowerCase: true });
+
+        // It does exist on AnimeType, but it doesn't on OldAnimeType
+        // @ts-ignore
+        if (anime?.poster) {
+            return (
+                <RecommendationsNewAnimeData
+                    key={anime.id}
+                    // @ts-ignore
+                    anime={anime}
+                    redirectUser={redirectUser}
+                    translatedKind={translatedKind}
+                    translatedStatus={translatedStatus}
+                />
+            );
+        }
 
         return (
-            <div key={anime.id} className={classes.recommendationWrapper}>
-                <RecommendationsShareButton url={anime.url} />
-                <Group
-                    onClick={redirectUser}
-                    className={classes.group}
-                    align="flex-start"
-                >
-                    <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
-                        <Container fluid className={classes.container}>
-                            <Image
-                                alt="Anime preview"
-                                src={`https://shikimori.one${anime?.image.original}`}
-                                placeholder="blur"
-                                blurDataURL={variables.imagePlaceholder}
-                                fill
-                                component={NextImage}
-                                radius="md"
-                            />
-                            <Badge
-                                size="xs"
-                                autoContrast
-                                color="black"
-                                className={classes.scoreBadge}
-                            >
-                                {anime.score}
-                            </Badge>
-                            <Badge
-                                size="xs"
-                                autoContrast
-                                color="black"
-                                className={classes.episodesBadge}
-                            >
-                                {anime.episodes_aired} / {anime.episodes}
-                            </Badge>
-                        </Container>
-                    </AspectRatio>
-                    <Stack className={classes.stack} h="100%" justify="flex-start">
-                        <Text className={classes.title} lineClamp={2}>
-                            {anime?.russian ?? anime.name}
-                            {anime?.russian && ` - ${anime.name}`}
-                        </Text>
-                        <Text className={classes.text} lineClamp={1}>
-                            {`${translatedKind}, ${translatedStatus}`}
-                        </Text>
-                        <Text className={classes.text} lineClamp={1}>
-                            {formatAiredOnDate(anime.aired_on)}
-                        </Text>
-                    </Stack>
-                </Group>
-            </div>
+            <RecommendationsOldAnimeData
+                key={anime.id}
+                // @ts-ignore
+                anime={anime}
+                redirectUser={redirectUser}
+                translatedKind={translatedKind}
+                translatedStatus={translatedStatus}
+            />
         );
     });
 

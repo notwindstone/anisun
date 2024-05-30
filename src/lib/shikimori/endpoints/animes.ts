@@ -18,11 +18,13 @@ export const animes = () => {
             });
     };
 
-    const list = async ({ search, limit, status, year, order, page, filter }: AnimesType) => {
+    const list = async ({ search, limit, genre, status, studio, year, order, page, filter }: AnimesType) => {
         const params = options({
             search: search,
             limit: limit,
+            genre: genre,
             status: status,
+            studio: studio,
             year: year,
             order: order,
             page: page,

@@ -139,6 +139,10 @@
     overflow-x: auto;
     max-width: rem(320px);
     padding-bottom: rem(4px);
+
+    @media screen and (max-width: rem(750px)) {
+        max-width: 100%;
+    }
 }
 
 .segmentedControlRoot {

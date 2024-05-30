@@ -1,6 +1,6 @@
 import {AnimesType} from "@/types/Shikimori/Queries/Animes.type";
 
-export const options = ({ ids, search, limit, status, year, order, page, filter }: AnimesType) => {
+export const options = ({ ids, search, limit, genre, status, studio, year, order, page, filter }: AnimesType) => {
     function userFilterOptions() {
         if (!filter) {
             return;
@@ -31,8 +31,16 @@ export const options = ({ ids, search, limit, status, year, order, page, filter 
         query = `${query}limit: ${limit}, `;
     }
 
+    if (genre) {
+        query = `${query}genre: "${genre}"`;
+    }
+
     if (status) {
         query = `${query}status: "${status}", `;
+    }
+
+    if (studio) {
+        query = `${query}studio: "${studio}", `;
     }
 
     if (year) {

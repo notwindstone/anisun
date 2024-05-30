@@ -6,7 +6,9 @@ export type AnimesType = {
     ids?: string;
     search?: string;
     limit?: number;
+    genre?: string;
     status?: StatusType;
+    studio?: string;
     year?: string;
     order?: OrderType;
     page?: number;
