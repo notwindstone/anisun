@@ -38,29 +38,33 @@
     position: relative;
 }
 
-.episodesBadge, .scoreBadge, .menuButton {
+.scoreBadgeWrapper, .episodesBadgeWrapper, .menuButton {
     position: absolute;
 }
 
-.episodesBadge {
+.scoreBadgeWrapper, .episodesBadgeWrapper {
+    display: flex;
+}
+
+.episodesBadgeWrapper {
     bottom: rem(4px);
     right: rem(4px);
 
     @media screen and (max-width: rem(750px)) {
-        transform: scale(1.5);
         bottom: rem(8px);
-        right: rem(16px);
+        right: rem(8px);
+        transform: scale(1.5) translateX(-8px) translateY(-4px);
     }
 }
 
-.scoreBadge {
+.scoreBadgeWrapper {
     bottom: rem(4px);
     left: rem(4px);
 
     @media screen and (max-width: rem(750px)) {
-        transform: scale(1.5);
         bottom: rem(8px);
-        left: rem(16px);
+        left: rem(8px);
+        transform: scale(1.5) translateX(8px) translateY(-4px);
     }
 }
 

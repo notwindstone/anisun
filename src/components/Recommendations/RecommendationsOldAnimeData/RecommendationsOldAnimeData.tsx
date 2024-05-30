@@ -37,22 +37,26 @@ export default function RecommendationsOldAnimeData({
                             component={NextImage}
                             radius="md"
                         />
-                        <Badge
-                            size="xs"
-                            autoContrast
-                            color="black"
-                            className={classes.scoreBadge}
-                        >
-                            {anime.score}
-                        </Badge>
-                        <Badge
-                            size="xs"
-                            autoContrast
-                            color="black"
-                            className={classes.episodesBadge}
-                        >
-                            {anime.episodes_aired} / {anime.episodes}
-                        </Badge>
+                        <div className={classes.scoreBadgeWrapper}>
+                            <Badge
+                                size="xs"
+                                autoContrast
+                                color="black"
+                                className={classes.scoreBadge}
+                            >
+                                {anime.score}
+                            </Badge>
+                        </div>
+                        <div className={classes.episodesBadgeWrapper}>
+                            <Badge
+                                size="xs"
+                                autoContrast
+                                color="black"
+                                className={classes.episodesBadge}
+                            >
+                                {anime.episodes_aired} / {anime.episodes}
+                            </Badge>
+                        </div>
                     </Container>
                 </AspectRatio>
                 <Stack className={classes.stack} h="100%" justify="flex-start">
