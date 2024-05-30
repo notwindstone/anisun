@@ -86,9 +86,9 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                         <Skeleton width={96} height={128} radius="md" />
                     </div>
                     <div>
-                        <Skeleton height={24} width={208} radius="xl" mb="xs" />
-                        <Skeleton height={24} width={208} radius="xl" mb="xs" />
-                        <Skeleton height={24} width={208} radius="xl" />
+                        <Skeleton height={24} width={128} radius="xl" mb="xs" />
+                        <Skeleton height={24} width={128} radius="xl" mb="xs" />
+                        <Skeleton height={24} width={128} radius="xl" />
                     </div>
                 </Flex>
             );
