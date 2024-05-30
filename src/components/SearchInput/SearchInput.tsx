@@ -20,8 +20,12 @@ export default function SearchInput() {
     const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
     const calculatedColor = isMantineColor ? mantineColor : color;
 
+    console.log(search);
+
     return (
         <TextInput
+            value={input}
+            onChange={(event) => setInput(event.currentTarget.value)}
             size={isMobile ? "md" : "xl"}
             ref={ref}
             styles={{
