@@ -9,7 +9,7 @@ import MobileModalMenu from "@/components/MobileNavbar/MobileNavbarMenu/MobileNa
 import useMobileScreen from "@/hooks/useMobileScreen";
 
 export default function MobileNavbar() {
-    const isMobile = useMobileScreen();
+    const { isMobile } = useMobileScreen();
     const pinned = useHeadroom({ fixedAt: 120 });
 
     return isMobile && (

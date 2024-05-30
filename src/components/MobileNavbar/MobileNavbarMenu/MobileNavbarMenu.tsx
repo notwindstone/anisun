@@ -3,6 +3,7 @@ import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {Center, Drawer, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
 import {IconMenu2} from "@tabler/icons-react";
 import ColorSchemeControl from "@/components/ColorSchemeControl/ColorSchemeControl";
+import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 
 export default function MobileNavbarMenu() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -21,6 +22,7 @@ export default function MobileNavbarMenu() {
                 zIndex={29999}
             >
                 <ColorSchemeControl option="website" />
+                <ColorSchemePicker option="website" />
                 1234
             </Drawer>
             <Center flex={1}>
