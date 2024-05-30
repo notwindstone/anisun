@@ -1,5 +1,4 @@
 .drawer {
-    border-top: rem(1px) solid var(--animeth-block-background-color);
     background: var(--animeth-background-color);
     border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) 0 0;
 }
@@ -15,10 +14,9 @@
 }
 
 .root {
-    border-top: rem(1px) solid var(--animeth-block-background-color);
     width: 100%;
     height: 100%;
-    background: var(--animeth-background-color);
+    background: var(--animeth-sidebar-color);
     border-radius: var(--mantine-radius-xl) var(--mantine-radius-xl) 0 0;
 }
 
@@ -28,31 +26,25 @@
     align-content: center;
     flex-direction: column;
     gap: rem(4px);
-
-    @mixin hover {
-        .button {
-            background: light-dark(
-                    lighten(var(--animeth-secondary-color), 0.4),
-                    darken(var(--animeth-primary-color), 0.8)
-            );
-        }
-    }
 }
 
 .button {
     width: rem(92px);
     height: rem(32px);
-    background: var(--animeth-secondary-color);
+    background: light-dark(
+        darken(var(--mantine-color-default-hover), 0.025),
+        alpha(var(--mantine-color-default-hover), 0.35)
+    );
     transition: 200ms ease;
 }
 
 .icon {
-    color: var(--animeth-primary-color)
+    color: var(--animeth-text-contrast-color)
 }
 
 .text {
     text-align: center;
-    color: var(--animeth-text-color);
+    color: var(--animeth-text-contrast-color);
 }
 
 .segmentedControlRoot {
