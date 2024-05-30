@@ -181,10 +181,14 @@ export default function Recommendations({ id }: { id: string } ) {
     }
 
     const recommendationVideos = data?.map((anime: AnimeType | OldAnimeType) => {
+        // It does exist on AnimeType, but doesn't on OldAnimeType
+        // @ts-ignore
+        const isNewType = anime?.poster
+
         function redirectUser() {
             NProgress.start();
 
-            if (anime?.poster) {
+            if (isNewType) {
                 return router.push(`/titles/${anime?.url.replace('https://shikimori.one/animes/', '')}`);
             }
 
@@ -194,9 +198,7 @@ export default function Recommendations({ id }: { id: string } ) {
         const translatedKind = translateAnimeKind(anime.kind ?? '');
         const translatedStatus = translateAnimeStatus({sortingType: anime.status ?? '', singular: true, lowerCase: true });
 
-        // It does exist on AnimeType, but it doesn't on OldAnimeType
-        // @ts-ignore
-        if (anime?.poster) {
+        if (isNewType) {
             return (
                 <RecommendationsNewAnimeData
                     key={anime.id}
