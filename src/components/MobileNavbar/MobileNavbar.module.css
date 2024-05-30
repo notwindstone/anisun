@@ -54,3 +54,18 @@
     text-align: center;
     color: var(--animeth-text-color);
 }
+
+.segmentedControlRoot {
+    padding: 0;
+    background: none;
+    flex-shrink: 0;
+    border-radius: 0;
+}
+
+.chevron {
+    transition: 150ms ease;
+}
+
+.chevronRotated {
+    transform: rotate(-180deg) !important;
+}
