@@ -27,7 +27,12 @@
 }
 
 .poster {
-    width: 6rem;
+    width: rem(96px);
+
+    @media screen and (max-width: rem(500px)) {
+        width: rem(80px);
+        height: rem(112px);
+    }
 }
 
 .fetchingWrapper {
@@ -45,4 +50,29 @@
 
 .text {
     color: var(--mantine-color-default-color);
+}
+
+.title {
+    @media screen and (max-width: rem(500px)) {
+        font-size: rem(18px);
+    }
+}
+
+.subtitle {
+    @media screen and (max-width: rem(500px)) {
+        font-size: rem(14px);
+    }
+}
+
+.description {
+    @media screen and (max-width: rem(500px)) {
+        font-size: rem(12px);
+    }
+}
+
+.textSkeleton {
+    @media screen and (max-width: rem(500px)) {
+        width: rem(96px);
+        height: rem(16px);
+    }
 }

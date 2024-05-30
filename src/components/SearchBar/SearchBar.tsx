@@ -15,7 +15,6 @@ import {
     Title,
 } from '@mantine/core';
 import {useDebouncedValue, useDisclosure, useViewportSize} from '@mantine/hooks';
-import {useRouter} from 'next/navigation';
 import {useQuery} from '@tanstack/react-query';
 import {IconSearch} from '@tabler/icons-react';
 import classes from './SearchBar.module.css';
@@ -31,6 +30,7 @@ import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import Link from "next/link";
+import useMobileScreen from "@/hooks/useMobileScreen";
 
 const NOTHING = {
     label: ' ',
@@ -83,12 +83,12 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             return (
                 <Flex align="center" gap="md">
                     <div>
-                        <Skeleton width={96} height={128} radius="md" />
+                        <Skeleton className={classes.poster} height={128} radius="md" />
                     </div>
                     <div>
-                        <Skeleton height={24} width={128} radius="xl" mb="xs" />
-                        <Skeleton height={24} width={128} radius="xl" mb="xs" />
-                        <Skeleton height={24} width={128} radius="xl" />
+                        <Skeleton className={classes.textSkeleton} height={24} width={128} radius="xl" mb="xs" />
+                        <Skeleton className={classes.textSkeleton} height={24} width={128} radius="xl" mb="xs" />
+                        <Skeleton className={classes.textSkeleton} height={24} width={128} radius="xl" />
                     </div>
                 </Flex>
             );
@@ -117,14 +117,14 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
             </div>
             <div>
                 <Title
-                    className={classes.text}
+                    className={`${classes.text} ${classes.title}`}
                     lineClamp={2}
                     order={3}
                 >
                     {russianName}
                 </Title>
                 <Text
-                    className={classes.text}
+                    className={`${classes.text} ${classes.subtitle}`}
                     lineClamp={2}
                     size="lg"
                     opacity={0.8}
@@ -132,7 +132,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     {kind}
                 </Text>
                 <Text
-                    className={classes.text}
+                    className={`${classes.text} ${classes.description}`}
                     lineClamp={2}
                     size="md"
                     opacity={0.5}
@@ -147,8 +147,8 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
 export default function SearchBar({position, size}: { position?: FloatingPosition, size: MantineSize }) {
     const {theme} = useCustomTheme();
     const {height} = useViewportSize();
+    const { isMobile } = useMobileScreen();
     const shikimori = client();
-    useRouter();
     const [input, setInput] = useState('');
     const [search] = useDebouncedValue(input, 300);
     const [focused, {open, close}] = useDisclosure(false);
@@ -254,7 +254,7 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
                 onDropdownClose={close}
                 renderOption={renderAutocompleteOption}
                 filter={optionsFilter}
-                size={size}
+                size={isMobile ? "md" : size}
             />
         </>
     );
