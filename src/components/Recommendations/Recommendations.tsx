@@ -14,25 +14,56 @@ import NProgress from "nprogress";
 import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 
 export default function Recommendations({ id }: { id: string } ) {
-    const ALL = "Все";
-    const segmentedControlData = [ALL, '142'];
-
-    const queryClient = useQueryClient();
-    const queryData = queryClient.getQueryData(['anime', 'info', id]);
-
+    const ALL = { label: "Все", value: "all" };
+    const [segmentedControlData, setSegmentedControlData] = useState([ALL]);
     const router = useRouter();
     const shikimori = client();
-    const [filter, setFilter] = useState(ALL);
+    const [filter, setFilter] = useState(ALL.value);
     const { data, isPending, error } = useQuery({
         queryKey: ['recommendations', id, filter],
         queryFn: async () => getSimilarAnimes(),
     });
+    const queryClient = useQueryClient();
+    const queryData: AnimeType | undefined = queryClient.getQueryData(['anime', 'info', id]);
+
+    useEffect(() => {
+        if (segmentedControlData[1]) {
+            return;
+        }
+
+        if (!queryData) {
+            return;
+        }
+
+        queryData.studios?.forEach((studio) => {
+            const dataArray = segmentedControlData;
+            dataArray.push({ label: `Студия: ${studio.name}`, value: `studio-${studio.id}` });
+
+            return setSegmentedControlData(dataArray);
+        });
+
+        queryData.genres?.forEach((genre) => {
+            const dataArray = segmentedControlData;
+            dataArray.push({ label: genre.russian, value: genre.id });
+
+            return setSegmentedControlData(dataArray);
+        });
+    }, [queryData, segmentedControlData]);
 
     async function getSimilarAnimes() {
-        return await shikimori.animes.similar({ id });
+        if (filter === ALL.value) {
+            return await shikimori.animes.similar({ id });
+        }
+
+        if (filter.includes("studio")) {
+            return console.log('studio');
+        }
+
+        console.log("genre");
     }
 
     const mockVideos = Array.from({ length: 8 });
@@ -40,6 +71,9 @@ export default function Recommendations({ id }: { id: string } ) {
     if (isPending) {
         return (
             <Stack gap={rem(8)} className={classes.similar}>
+                <div className={classes.segmentedControlWrapper}>
+                    <Skeleton radius="md" h={32} w={64} />
+                </div>
                 {
                     mockVideos.map((_mockVideo, index) => {
                         return (
@@ -56,9 +90,9 @@ export default function Recommendations({ id }: { id: string } ) {
                                     />
                                 </AspectRatio>
                                 <Stack className={classes.stack} h="100%" justify="flex-start">
-                                    <Skeleton width="80%" height={rem(20)} />
-                                    <Skeleton width="60%" height={rem(12)} />
-                                    <Skeleton width="60%" height={rem(12)} />
+                                    <Skeleton width="80%" height={rem(20)}/>
+                                    <Skeleton width="60%" height={rem(12)}/>
+                                    <Skeleton width="60%" height={rem(12)}/>
                                 </Stack>
                             </Group>
                         );
@@ -83,7 +117,7 @@ export default function Recommendations({ id }: { id: string } ) {
         }
 
         const translatedKind = translateAnimeKind(anime.kind);
-        const translatedStatus = translateAnimeStatus({ sortingType: anime.status, singular: true, lowerCase: true });
+        const translatedStatus = translateAnimeStatus({sortingType: anime.status, singular: true, lowerCase: true });
 
         return (
             <div key={anime.id} className={classes.recommendationWrapper}>
@@ -139,11 +173,12 @@ export default function Recommendations({ id }: { id: string } ) {
         );
     });
 
-
     return (
         <Stack gap={rem(8)} className={classes.similar}>
             <div className={classes.segmentedControlWrapper}>
                 <SegmentedControl
+                    value={filter}
+                    onChange={setFilter}
                     classNames={{
                         root: classes.segmentedControlRoot,
                         indicator: classes.segmentedControlIndicator,

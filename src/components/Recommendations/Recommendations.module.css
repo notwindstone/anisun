@@ -137,6 +137,8 @@
 
 .segmentedControlWrapper {
     overflow-x: auto;
+    max-width: rem(320px);
+    padding-bottom: rem(4px);
 }
 
 .segmentedControlRoot {
