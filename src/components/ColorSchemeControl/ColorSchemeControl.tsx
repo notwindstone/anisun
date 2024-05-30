@@ -1,13 +1,13 @@
 "use client";
 
 import {CheckIcon, ColorSwatch, MantineColor, rem, Tooltip} from "@mantine/core";
-import {useContext, useEffect, useState} from "react";
-import {CustomThemeContext} from "@/utils/Contexts/Contexts";
+import {useEffect, useState} from "react";
 import classes from './ColorSchemeControl.module.css';
 import {variables} from "@/configs/variables";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default function ColorSchemeControl({ option }: { option: string }) {
-    const { theme, setTheme } = useContext(CustomThemeContext);
+    const { theme, setTheme } = useCustomTheme();
     const optionColor = option === "website" ? theme.color : theme.topLoaderColor;
     const [checkedColor, setCheckedColor] = useState(optionColor);
 

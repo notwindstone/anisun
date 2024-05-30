@@ -14,6 +14,7 @@ import Main from "@/components/Main/Main";
 import SideBar from "@/components/SideBar/SideBar";
 import NavigationControl from "@/components/NavigationControl/NavigationControl";
 import ThemedNextTopLoader from "@/components/ThemedNextTopLoader/ThemedNextTopLoader";
+import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -65,6 +66,7 @@ export default function RootLayout({
                                     </Main>
                                 </div>
                             </Group>
+                            <MobileNavbar />
                         </MantineProvider>
                     </TanstackQueryProviders>
                 </body>
