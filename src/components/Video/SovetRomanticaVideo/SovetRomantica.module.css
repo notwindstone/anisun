@@ -42,6 +42,10 @@
     }
 
     @media screen and (max-width: rem(550px)) {
+        max-height: rem(192px);
+    }
+
+    @media screen and (max-width: rem(400px)) {
         max-height: rem(128px);
     }
 }
