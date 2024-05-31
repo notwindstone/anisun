@@ -65,7 +65,6 @@ export default function TrendingGrid() {
                     Популярное
                 </Title>
                 <Pagination
-                    siblings={3}
                     radius="md"
                     autoContrast
                     color={theme.color}
@@ -103,7 +102,6 @@ export default function TrendingGrid() {
                     )
                 }
                 <Pagination
-                    siblings={3}
                     radius="md"
                     autoContrast
                     color={theme.color}

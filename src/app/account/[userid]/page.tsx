@@ -26,8 +26,6 @@ export default async function Page({ params }: { params: { userid: string } }) {
 
     return (
         <>
-            <Link href="/">Return</Link>
-            <Text>{params.userid}</Text>
             <Account user={userObject} />
         </>
     );

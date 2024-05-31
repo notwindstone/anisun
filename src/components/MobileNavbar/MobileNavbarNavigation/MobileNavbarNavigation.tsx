@@ -63,7 +63,7 @@ export default function MobileNavbarNavigation() {
                                     {
                                         NAV_LINKS.map((link) => {
                                             return (
-                                                <MobileNavbarLink func={link.func} label={link.label}>
+                                                <MobileNavbarLink key={link.label} func={link.func} label={link.label}>
                                                     {link.icon}
                                                 </MobileNavbarLink>
                                             );

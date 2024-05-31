@@ -24,10 +24,12 @@ export default function Account({ user }: { user: UserResource }) {
         queryFn: getAccountStats,
     });
 
-    const lastSignedIn = dayjs(user.lastSignInAt).format('D MMMM YYYY в H:mm');
-
     const tooltipAvatarInfo = (
-        <Flex align="center" direction="column" className={classes.tooltipMenu}>
+        <Flex
+            align="center"
+            direction="column"
+            className={classes.tooltipMenu}
+        >
             <Image
                 radius="md"
                 src={user.imageUrl}
@@ -37,14 +39,19 @@ export default function Account({ user }: { user: UserResource }) {
             />
             <Stack className={classes.tooltipInfo} align="center" gap={0}>
                 <Title order={2}>{user.username ?? 'unknown username'}</Title>
-                <Text>Последний вход: {lastSignedIn}</Text>
             </Stack>
         </Flex>
     );
 
     return (
         <>
-            <Tooltip color="black" openDelay={500} label={tooltipAvatarInfo} position="top-start">
+            <Tooltip
+                radius="md"
+                color="black"
+                openDelay={500}
+                label={tooltipAvatarInfo}
+                position="top-start"
+            >
                 <Avatar
                     src={user.imageUrl}
                     alt={user.username ?? 'unknown username'}
@@ -61,12 +68,11 @@ export default function Account({ user }: { user: UserResource }) {
                 </Avatar>
             </Tooltip>
             <Title>{user.username}</Title>
-            <Text>Последний вход: {lastSignedIn}
-            </Text>
 
-            <Text>Дата создания аккаунта: {
-                dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
-            }
+            <Text>
+                Дата создания аккаунта: {
+                    dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
+                }
             </Text>
 
             <Skeleton visible={isPending} width={256} height={24}>

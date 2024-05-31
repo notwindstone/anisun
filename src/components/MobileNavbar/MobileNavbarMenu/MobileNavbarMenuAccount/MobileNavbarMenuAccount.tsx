@@ -93,7 +93,7 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
                         {
                             NAV_LINKS.map((navLink) => {
                                 return (
-                                    <MobileNavbarLink func={navLink.func} label={navLink.label}>
+                                    <MobileNavbarLink key={navLink.label} func={navLink.func} label={navLink.label}>
                                         {navLink.icon}
                                     </MobileNavbarLink>
                                 );

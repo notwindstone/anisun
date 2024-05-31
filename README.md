@@ -80,7 +80,7 @@
 
 - [ ] Finish comments
 
-- [ ] Complete the page with popular animes
+- [x] Complete the page with popular animes
 
 ## ⬇️ Self-Hosting
 
@@ -252,6 +252,8 @@ Using andronix
 ## ❤️ Credits
 
 * [zvshka](https://github.com/zvshka) for his help with project
+* 
+* cdn83nwwiwcyps615adalqk9k8esedzi (discord account) for his help with UI
 
 * [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) and [SovetRomantica](https://sovetromantica.com/) for their wonderful APIs, without which Animeth could not work
 
