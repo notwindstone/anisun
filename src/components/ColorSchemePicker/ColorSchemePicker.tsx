@@ -1,14 +1,14 @@
 "use client";
 
 import {ColorInput, ColorPicker, Group, Stack} from "@mantine/core";
-import {useEffect, useState} from "react";
+import {RefObject, useEffect, useState} from "react";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import classes from './ColorSchemePicker.module.css';
 import NProgress from "nprogress";
 import {useDisclosure} from "@mantine/hooks";
 
-export default function ColorSchemePicker({ option }: { option: string }) {
+export default function ColorSchemePicker({ option, customRef }: { option: string, customRef?: RefObject<HTMLDivElement> }) {
     const { theme, setTheme } = useCustomTheme();
     const [color, onChange] = useState('#000000');
     const isTopLoader = option === "topLoader";
@@ -43,13 +43,15 @@ export default function ColorSchemePicker({ option }: { option: string }) {
     return (
         <>
             <Stack className={classes.stack}>
-                <ColorPicker
-                    classNames={{
-                        wrapper: classes.wrapper
-                    }}
-                    value={color}
-                    onChange={onChange}
-                />
+                <div ref={customRef}>
+                    <ColorPicker
+                        classNames={{
+                            wrapper: classes.wrapper
+                        }}
+                        value={color}
+                        onChange={onChange}
+                    />
+                </div>
                 <ColorInput
                     classNames={{
                         input: classes.input

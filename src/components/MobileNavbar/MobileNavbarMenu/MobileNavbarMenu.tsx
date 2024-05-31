@@ -1,4 +1,4 @@
-import {useDisclosure} from "@mantine/hooks";
+import {useDisclosure, useMove} from "@mantine/hooks";
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {
     Anchor, Button,
@@ -35,7 +35,8 @@ export default function MobileNavbarMenu() {
     const [opened, { open, close }] = useDisclosure(false);
     const [colorPickerExpanded, { toggle: togglePicker }] = useDisclosure(false);
     const [section, setSection] = useState<string>(GENERAL.value);
-
+    const { ref, active } = useMove(() => {});
+    console.log(active);
     const WEBSITE_COLOR = {
         label: "Элементы сайта",
         value: "website",
@@ -133,7 +134,7 @@ export default function MobileNavbarMenu() {
                         Выбрать свой цвет
                     </Button>
                     <Collapse in={colorPickerExpanded}>
-                        <ColorSchemePicker option={themingOption} />
+                        <ColorSchemePicker customRef={ref} option={themingOption} />
                     </Collapse>
                 </Stack>
             );
@@ -150,28 +151,31 @@ export default function MobileNavbarMenu() {
             <Sheet
                 isOpen={opened}
                 onClose={close}
+                disableDrag={active}
             >
                 <Sheet.Container>
                     <Sheet.Header className={classes.drawerHeader} />
                     <Sheet.Content className={classes.drawerBody}>
-                        <Stack align="center" gap={rem(8)}>
-                            <SegmentedControl
-                                autoContrast
-                                color={theme.color}
-                                classNames={{
-                                    root: classes.segmentedControlRoot,
-                                }}
-                                withItemsBorders={false}
-                                value={section}
-                                onChange={setSection}
-                                data={[
-                                    GENERAL,
-                                    ABOUT,
-                                    ACCOUNT
-                                ]}
-                            />
-                            {content}
-                        </Stack>
+                        <Sheet.Scroller>
+                            <Stack align="center" gap={rem(8)}>
+                                <SegmentedControl
+                                    autoContrast
+                                    color={theme.color}
+                                    classNames={{
+                                        root: classes.segmentedControlRoot,
+                                    }}
+                                    withItemsBorders={false}
+                                    value={section}
+                                    onChange={setSection}
+                                    data={[
+                                        GENERAL,
+                                        ABOUT,
+                                        ACCOUNT
+                                    ]}
+                                />
+                                {content}
+                            </Stack>
+                        </Sheet.Scroller>
                     </Sheet.Content>
                 </Sheet.Container>
                 <Sheet.Backdrop />
