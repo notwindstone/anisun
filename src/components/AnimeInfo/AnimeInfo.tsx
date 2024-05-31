@@ -6,13 +6,17 @@ import {Divider, Group, Image, rem, Stack, Text, Title} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
 import AnimeInfoCopyLink from "@/components/AnimeInfo/AnimeInfoCopyLink/AnimeInfoCopyLink";
-import {Suspense} from "react";
+import {Suspense, useState} from "react";
 import Link from "next/link";
 import React from "react";
 import AnimeInfoDescription from "@/components/AnimeInfo/AnimeInfoDescription/AnimeInfoDescription";
 import Comments from "@/components/Comments/Comments";
+import useMobileScreen from "@/hooks/useMobileScreen";
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 
 export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: string }) {
+    const [commentsExpanded, setCommentsExpanded] = useState(false);
+    const { isTablet } = useMobileScreen();
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'info', id],
@@ -107,7 +111,28 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
             <Suspense fallback={<p>Loading...</p>}>
                 <AnimeInfoDescription data={data} />
             </Suspense>
-            <Comments titleCode={titleCode} />
+            {
+                isTablet && (
+                    <>
+                        <DecoratedButton
+                            mt={rem(8)}
+                            ml={rem(4)}
+                            mr={rem(4)}
+                            radius="md"
+                            onClick={() => setCommentsExpanded((expanded) => !expanded)}
+                        >
+                            Раскрыть комментарии
+                        </DecoratedButton>
+                    </>
+                )
+            }
+            {
+                (!isTablet || commentsExpanded) && (
+                    <>
+                        <Comments titleCode={titleCode} />
+                    </>
+                )
+            }
         </Stack>
     );
 }

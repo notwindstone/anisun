@@ -1,6 +1,6 @@
 .root {
     width: 100%;
-    height: rem(160px);
+    height: rem(128px);
     gap: rem(16px);
     padding: rem(16px);
 }
