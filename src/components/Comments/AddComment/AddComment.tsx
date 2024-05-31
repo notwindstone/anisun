@@ -1,5 +1,5 @@
 import {useRef, useState} from "react";
-import {Avatar, Flex, Group, Paper, Skeleton, Space, Text, Textarea} from "@mantine/core";
+import {Flex, Paper, Textarea} from "@mantine/core";
 import {notify} from "@/utils/Notifications/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
