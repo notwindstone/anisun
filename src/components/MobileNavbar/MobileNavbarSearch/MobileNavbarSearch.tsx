@@ -11,7 +11,10 @@ export default function MobileNavbarSearch() {
     function redirectUser() {
         NProgress.start();
         router.push("/titles");
-        NProgress.done();
+
+        if (pathname === "/titles") {
+            NProgress.done();
+        }
     }
 
     return (
