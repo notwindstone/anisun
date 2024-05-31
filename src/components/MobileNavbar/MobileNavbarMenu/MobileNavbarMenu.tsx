@@ -24,6 +24,8 @@ import NextImage from "next/image";
 import GradientTitle from "@/components/GradientTitle/GradientTitle";
 import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
 import {Sheet} from "react-modal-sheet";
+import MobileNavbarMenuAccount
+    from "@/components/MobileNavbar/MobileNavbarMenu/MobileNavbarMenuAccount/MobileNavbarMenuAccount";
 
 const GENERAL = variables.settings.general;
 const ABOUT = variables.settings.about;
@@ -36,7 +38,7 @@ export default function MobileNavbarMenu() {
     const [colorPickerExpanded, { toggle: togglePicker }] = useDisclosure(false);
     const [section, setSection] = useState<string>(GENERAL.value);
     const { ref, active } = useMove(() => {});
-    console.log(active);
+
     const WEBSITE_COLOR = {
         label: "Элементы сайта",
         value: "website",
@@ -141,7 +143,7 @@ export default function MobileNavbarMenu() {
             break;
         case "account":
             content = (
-                <></>
+                <MobileNavbarMenuAccount close={close} />
             );
             break;
     }

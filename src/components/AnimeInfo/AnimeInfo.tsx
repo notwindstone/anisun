@@ -45,7 +45,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
             <Group className={classes.infoGroup} wrap="nowrap" justify="space-between">
                 <Group wrap="nowrap" gap={rem(8)}>
                     <Link
-                        href={`/titles?studio=${data?.studios?.[0]?.name}`}
+                        href={`/titles?studio=${data?.studios?.[0]?.id}`}
                     >
                         <Image
                             radius="xs"
@@ -66,7 +66,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                                             </span>
                                             <Link
                                                 className={classes.link}
-                                                href={`/titles?studio=${genre.name}`}
+                                                href={`/titles?genre=${genre.id}`}
                                             >
                                                 {genre.name}
                                             </Link>
@@ -85,7 +85,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                                             </span>
                                             <Link
                                                 className={classes.link}
-                                                href={`/titles?studio=${studio.name}`}
+                                                href={`/titles?studio=${studio.id}`}
                                             >
                                                 {studio.name}
                                             </Link>
