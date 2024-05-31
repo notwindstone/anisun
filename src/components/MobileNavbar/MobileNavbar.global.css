@@ -1,0 +1,15 @@
+.react-modal-sheet-backdrop {
+    /* custom styles */
+}
+.react-modal-sheet-container {
+    background: var(--animeth-background-color) !important;
+}
+.react-modal-sheet-header {
+    /* custom styles */
+}
+.react-modal-sheet-drag-indicator {
+    /* custom styles */
+}
+.react-modal-sheet-content {
+    /* custom styles */
+}

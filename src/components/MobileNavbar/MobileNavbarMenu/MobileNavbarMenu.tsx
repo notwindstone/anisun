@@ -3,7 +3,7 @@ import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {
     Anchor, Button,
     Center, Collapse,
-    Drawer, Flex,
+    Flex,
     Group,
     Image,
     rem,
@@ -23,6 +23,7 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import NextImage from "next/image";
 import GradientTitle from "@/components/GradientTitle/GradientTitle";
 import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeControl";
+import {Sheet} from "react-modal-sheet";
 
 const GENERAL = variables.settings.general;
 const ABOUT = variables.settings.about;
@@ -146,36 +147,35 @@ export default function MobileNavbarMenu() {
 
     return (
         <>
-            <Drawer
-                position="bottom"
-                size="80vh"
-                opened={opened}
+            <Sheet
+                isOpen={opened}
                 onClose={close}
-                classNames={{
-                    content: classes.drawer,
-                    header: classes.drawer
-                }}
-                zIndex={29999}
             >
-                <Stack align="center" gap={rem(8)}>
-                    <SegmentedControl
-                        autoContrast
-                        color={theme.color}
-                        classNames={{
-                            root: classes.segmentedControlRoot,
-                        }}
-                        withItemsBorders={false}
-                        value={section}
-                        onChange={setSection}
-                        data={[
-                            GENERAL,
-                            ABOUT,
-                            ACCOUNT
-                        ]}
-                    />
-                    {content}
-                </Stack>
-            </Drawer>
+                <Sheet.Container>
+                    <Sheet.Header className={classes.drawerHeader} />
+                    <Sheet.Content className={classes.drawerBody}>
+                        <Stack align="center" gap={rem(8)}>
+                            <SegmentedControl
+                                autoContrast
+                                color={theme.color}
+                                classNames={{
+                                    root: classes.segmentedControlRoot,
+                                }}
+                                withItemsBorders={false}
+                                value={section}
+                                onChange={setSection}
+                                data={[
+                                    GENERAL,
+                                    ABOUT,
+                                    ACCOUNT
+                                ]}
+                            />
+                            {content}
+                        </Stack>
+                    </Sheet.Content>
+                </Sheet.Container>
+                <Sheet.Backdrop />
+            </Sheet>
             <Center flex={1}>
                 <UnstyledButton onClick={open} className={classes.buttonWrapper}>
                     <ThemeIcon className={classes.button}>

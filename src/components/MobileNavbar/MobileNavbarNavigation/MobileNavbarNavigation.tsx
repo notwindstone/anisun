@@ -1,5 +1,5 @@
 import {IconBrandSafari} from "@tabler/icons-react";
-import {Center, Drawer, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
+import {Center, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {useDisclosure} from "@mantine/hooks";
 import {usePathname} from "next/navigation";
@@ -11,10 +11,16 @@ export default function MobileNavbarNavigation() {
 
     return (
         <>
-            <Sheet isOpen={opened} onClose={close}>
+            <Sheet
+                isOpen={opened}
+                onClose={close}
+                detent="content-height"
+            >
                 <Sheet.Container>
                     <Sheet.Header />
-                    <Sheet.Content>{/* Your sheet content goes here */}</Sheet.Content>
+                    <Sheet.Content>
+
+                    </Sheet.Content>
                 </Sheet.Container>
                 <Sheet.Backdrop />
             </Sheet>
