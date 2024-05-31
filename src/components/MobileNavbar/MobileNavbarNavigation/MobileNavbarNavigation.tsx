@@ -19,7 +19,9 @@ export default function MobileNavbarNavigation() {
                 <Sheet.Container>
                     <Sheet.Header />
                     <Sheet.Content>
+                        <Sheet.Scroller>
 
+                        </Sheet.Scroller>
                     </Sheet.Content>
                 </Sheet.Container>
                 <Sheet.Backdrop />

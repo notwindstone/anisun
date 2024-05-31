@@ -8,40 +8,12 @@ import {MobileNavbarModalsContext} from "@/utils/Contexts/Contexts";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './MobileNavbarMenuAccount.module.css';
 import {usePathname, useRouter} from "next/navigation";
+import MobileNavbarLink from "@/components/MobileNavbar/MobileNavbarLink/MobileNavbarLink";
 
 const ICON_STYLES = {
     size: 16,
     stroke: 1.5
 };
-
-function MobileNavbarLink({
-    func,
-    label,
-    children
-}: {
-    func: () => void;
-    label: string;
-    children: React.ReactNode;
-}) {
-    const { theme } = useCustomTheme();
-
-    return (
-        <NavLink
-            className={classes.navLink}
-            onClick={func}
-            label={label}
-            leftSection={
-                <ThemeIcon
-                    color={theme?.color}
-                    radius="md"
-                    variant="light"
-                >
-                    {children}
-                </ThemeIcon>
-            }
-        />
-    );
-}
 
 export default function MobileNavbarMenuAccount({ close }: { close: () => void }) {
     const { theme } = useCustomTheme();

@@ -12,6 +12,7 @@ import {SignIn, SignUp, UserProfile, useUser} from "@clerk/nextjs";
 import AccountModal from "@/components/AccountModal/AccountModal";
 import React, {useEffect} from "react";
 import NProgress from "nprogress";
+import './MobileNavbar.global.css';
 
 export default function MobileNavbar() {
     const { isMobile } = useMobileScreen();

@@ -1,7 +1,6 @@
 import {IconSearch} from "@tabler/icons-react";
 import {Center, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
-import '@/components/MobileNavbar/MobileNavbar.global.css';
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
 
