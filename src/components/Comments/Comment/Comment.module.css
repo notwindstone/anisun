@@ -6,6 +6,7 @@
 }
 
 .stack {
+    width: 100%;
     max-width: calc(100% - rem(64px));
 }
 
@@ -18,11 +19,23 @@
 }
 
 .collapse {
-    margin-left: rem(32px);
+    margin-left: rem(88px);
+    color: var(--animeth-text-contrast-color);
+    background: var(--animeth-sidebar-color);
+    border-radius: var(--mantine-radius-md);
+    padding: rem(8px);
+    font-size: rem(16px);
+    line-height: rem(16px);
 }
 
 .message {
     white-space: pre-wrap;
     overflow-wrap: break-word;
     max-width: 100%;
+}
+
+.textArea {
+    background: var(--animeth-sidebar-color);
+    padding: rem(8px) rem(16px);
+    border-radius: var(--mantine-radius-md);
 }

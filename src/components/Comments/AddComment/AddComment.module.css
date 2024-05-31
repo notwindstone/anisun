@@ -1,9 +1,8 @@
 .root {
     padding: rem(16px);
     transition: 0.15s ease;
-
-    @mixin hover {
-    }
+    background: var(--animeth-sidebar-color);
+    border-radius: var(--mantine-radius-md);
 
     &:focus-within {
         @mixin hover {
@@ -12,26 +11,8 @@
 }
 
 .username {
-}
-
-.submit {
-    transition: 0.1s ease;
-
-    @mixin hover {
-    }
-
-    &:active {
-        transform: translateY(0);
-    }
-
-    @media (max-width: $mantine-breakpoint-xs) {
-        &:active {
-            transform: translateY(rem(-2px));
-        }
-    }
-}
-
-.avatar {
+    font-size: rem(18px);
+    font-weight: 500;
 }
 
 .wrapper {

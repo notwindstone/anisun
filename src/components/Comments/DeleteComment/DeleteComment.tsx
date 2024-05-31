@@ -5,6 +5,7 @@ import {useDisclosure} from "@mantine/hooks";
 import {ActionIcon, Button, Flex, Modal, Text} from "@mantine/core";
 import {IconArrowBack, IconX} from "@tabler/icons-react";
 import {comments} from "@/lib/comments/comments";
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 
 export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: { uuid: string, userid: string, isInitiallyDeleted: boolean, sendDelete: (isDeleted: boolean) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -68,7 +69,7 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
                     gap="1rem"
                 >
                     <Button variant="default" onClick={close}>Нет</Button>
-                    <Button onClick={() => handleDelete()}>Да</Button>
+                    <DecoratedButton onClick={() => handleDelete()}>Да</DecoratedButton>
                 </Flex>
             </Modal>
             <ActionIcon variant="default" onClick={open}>
@@ -76,10 +77,10 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
 
                     isDeleted
                         ? (
-                            <IconArrowBack />
+                            <IconArrowBack size={20} stroke={1.5} />
                         )
                         : (
-                            <IconX />
+                            <IconX size={20} stroke={1.5} />
                         )
                 }
             </ActionIcon>

@@ -5,7 +5,7 @@ import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/Comments/MutatedData.type";
 import CommentSkeleton from "@/components/Comments/CommentSkeleton/CommentSkeleton";
-import {Box, Center, Skeleton, Space, Text} from "@mantine/core";
+import {Box, Center, rem, Skeleton, Text, Title} from "@mantine/core";
 import {useEffect, useState} from "react";
 import {makeWordEnding} from "@/utils/Misc/makeWordEnding";
 import classes from './Comments.module.css';
@@ -139,10 +139,10 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
     useEffect(() => {
         if (
-            status === 'pending' ||
-            isFetchingNextPage ||
-            delayed ||
-            !inViewport
+            status === 'pending'
+            || isFetchingNextPage
+            || delayed
+            || !inViewport
         ) {
             return;
         }
@@ -161,34 +161,23 @@ export default function Comments({ titleCode }: { titleCode: string }) {
         <Box className={classes.wrapper}>
             {   status === 'pending'
                 ? (
-                    <Skeleton w={144} h={24}></Skeleton>
+                    <Skeleton w={144} h={32}></Skeleton>
                 ) : (
-                    <Text>
+                    <Title
+                        p={rem(16)}
+                        order={3}
+                        c="var(--animeth-text-contrast-color)"
+                    >
                         {totalCount} {makeWordEnding({ replies: totalCount, wordTypes: ['комментарий', 'комментария', 'комментариев'] })}
-                    </Text>
+                    </Title>
                 )
             }
             <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
             {commentSection}
-            <Center ref={ref} bg="black" h={256}>
-                <Text c="white">Прокрутите ниже, чтобы загрузить контент</Text>
-            </Center>
             {
                 isFetchingNextPage
                     ? <CommentSkeleton />
-                    : <div className={classes.commentPlaceholder} />
-            }
-            {
-                totalCount > 0
-                && <AddComment title={titleCode} parentUUID={null} sendComment={handleNewComment} />
-            }
-            <Space h="xl" />
-            {
-                !isFetchingNextPage
-                && status !== 'pending'
-                && (
-                    <Text>Похоже, что больше комментариев нет</Text>
-                )
+                    : <Center ref={ref} bg="var(--animeth-background-color)" h={160} />
             }
         </Box>
     );

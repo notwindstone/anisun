@@ -20,7 +20,7 @@ export function EditComment({ userid, sendEdit }: { userid: string, sendEdit: (i
 
     return (
         <ActionIcon variant="default" onClick={() => handleEdit()}>
-            <IconEdit />
+            <IconEdit size={20} stroke={1.5} />
         </ActionIcon>
     );
 }

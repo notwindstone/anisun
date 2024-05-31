@@ -1,13 +1,15 @@
 import {IconCaretDownFilled, IconCaretUpFilled} from "@tabler/icons-react";
-import {ActionIcon, Text} from "@mantine/core";
+import {ActionIcon, Group, rem, Text} from "@mantine/core";
 import {useState} from "react";
 import {notify} from "@/utils/Notifications/notify";
 import {comments} from "@/lib/comments/comments";
 import {useUser} from "@clerk/nextjs";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false);
+    const { theme } = useCustomTheme();
 
     const isUser = isLoaded && isSignedIn;
 
@@ -115,31 +117,34 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
 
     return (
         <>
-            <ActionIcon
-                variant={
-                    isLiked
-                        ? "filled"
-                        : "default"
-                }
-                onClick={handleLike}
-            >
-                <IconCaretUpFilled />
-            </ActionIcon>
-
-            <Text>{likes?.length}</Text>
-
-            <ActionIcon
-                variant={
-                    isDisliked
-                        ? "filled"
-                        : "default"
-                }
-                onClick={handleDislike}
-            >
-                <IconCaretDownFilled />
-            </ActionIcon>
-
-            <Text>{dislikes?.length}</Text>
+            <Group gap={rem(16)}>
+                <ActionIcon
+                    autoContrast
+                    color={theme.color}
+                    variant={
+                        isLiked
+                            ? "filled"
+                            : "default"
+                    }
+                    onClick={handleLike}
+                >
+                    <IconCaretUpFilled size={20} stroke={1.5} />
+                </ActionIcon>
+                <Text>{likes?.length}</Text>
+                <ActionIcon
+                    autoContrast
+                    color={theme.color}
+                    variant={
+                        isDisliked
+                            ? "filled"
+                            : "default"
+                    }
+                    onClick={handleDislike}
+                >
+                    <IconCaretDownFilled size={20} stroke={1.5} />
+                </ActionIcon>
+                <Text>{dislikes?.length}</Text>
+            </Group>
         </>
     );
 }

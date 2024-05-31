@@ -1,11 +1,12 @@
 import {useRef, useState} from "react";
-import {Avatar, Button, Flex, Group, Paper, Skeleton, Space, Text, Textarea} from "@mantine/core";
+import {Avatar, Flex, Group, Paper, Skeleton, Space, Text, Textarea} from "@mantine/core";
 import {notify} from "@/utils/Notifications/notify";
 import {nanoid} from "nanoid";
 import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/Comments/Comment.type";
 import {useUser} from "@clerk/nextjs";
 import classes from './AddComment.module.css';
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 
 export function AddComment({ title, parentUUID, sendComment }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -85,22 +86,6 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
 
     return (
         <Paper className={classes.root}>
-            {
-                isUser
-                    ? (
-                        <Group>
-                            <Avatar size={40} className={classes.avatar} src={user?.imageUrl} />
-                            <Text className={classes.username}>{user?.username}</Text>
-                        </Group>
-                    ) : (
-                        <Group>
-                            <Skeleton w={40} h={40} circle />
-                            <Skeleton h={20} w={128} />
-                        </Group>
-                    )
-
-            }
-            <Space h="md" />
             <Textarea
                 classNames={{
                     wrapper: classes.wrapper,
@@ -117,15 +102,14 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                 minRows={2}
             />
             <Flex justify="flex-end">
-                <Button
+                <DecoratedButton
                     className={classes.submit}
-                    type="button"
                     onClick={handleSubmit}
                     variant="filled"
                     disabled={!isUser}
                 >
                     Ответить
-                </Button>
+                </DecoratedButton>
             </Flex>
         </Paper>
     );

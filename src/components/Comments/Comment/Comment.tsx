@@ -17,8 +17,11 @@ import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/Comments/Comment.type";
 import {MutatedDataType} from "@/types/Comments/MutatedData.type";
 import {MutationCommentType, MutationInputType } from "@/types/Comments/MutationInput.type";
+import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
+    const { theme } = useCustomTheme();
     const [editDelayed, setEditDelayed] = useState(false);
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false);
     const [isToggledReply, { toggle: toggleReply }] = useDisclosure(false);
@@ -225,22 +228,26 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                     {comment.username[0]}
                 </Avatar>
                 <Stack className={classes.stack}>
-                    <Group>
-                        <Link href={`/account/${comment.userid}`}>
-                            <Text>{comment.username}</Text>
-                        </Link>
-                        <Text>{makeDate(comment.createdAt)}</Text>
-                        {
-                            comment.isEdited && !comment.isDeleted
-                            && <Text className={classes.edited}>(изменено)</Text>
-                        }
-                        {
-                            !comment.isDeleted
-                            && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />
-                        }
-                        <DeleteComment uuid={comment.uuid} userid={comment.userid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
+                    <Group justify="space-between">
+                        <Group>
+                            <Link href={`/account/${comment.userid}`}>
+                                <Text>{comment.username}</Text>
+                            </Link>
+                            <Text>{makeDate(comment.createdAt)}</Text>
+                            {
+                                comment.isEdited && !comment.isDeleted
+                                && <Text className={classes.edited}>(изменено)</Text>
+                            }
+                        </Group>
+                        <Group>
+                            {
+                                !comment.isDeleted
+                                && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />
+                            }
+                            <DeleteComment uuid={comment.uuid} userid={comment.userid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
+                        </Group>
                     </Group>
-                    <Group>
+                    <Group align="flex-start">
                         {
                             comment.isDeleted
                                 ? (
@@ -251,6 +258,9 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                         ? (
                                             <>
                                                 <Textarea
+                                                    className={classes.textArea}
+                                                    variant="unstyled"
+                                                    radius="md"
                                                     ref={ref}
                                                     defaultValue={comment.message}
                                                     placeholder="Изменить комментарий..."
@@ -258,8 +268,13 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                                     required
                                                     minRows={2}
                                                 />
-                                                <ActionIcon variant="light" onClick={() => handleMessageEdit({ uuid: comment.uuid, message: ref.current?.value })}>
-                                                    <IconCheck />
+                                                <ActionIcon
+                                                    radius="md"
+                                                    color={theme.color}
+                                                    variant="light"
+                                                    onClick={() => handleMessageEdit({ uuid: comment.uuid, message: ref.current?.value })}
+                                                >
+                                                    <IconCheck size={20} stroke={1.5} />
                                                 </ActionIcon>
                                             </>
                                         )
@@ -269,14 +284,18 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                 )
                         }
                     </Group>
-                    <Group>
-                        <VoteComment
-                            uuid={comment.uuid}
-                            likes={comment.likes}
-                            dislikes={comment.dislikes}
-                            sendVotes={handleNewVotes}
-                        />
-                        <Button onClick={toggleReply}>Ответить</Button>
+                    <Group justify="space-between">
+                        <Group>
+                            <VoteComment
+                                uuid={comment.uuid}
+                                likes={comment.likes}
+                                dislikes={comment.dislikes}
+                                sendVotes={handleNewVotes}
+                            />
+                        </Group>
+                        <DecoratedButton onClick={toggleReply}>
+                            Ответить
+                        </DecoratedButton>
                     </Group>
                 </Stack>
             </Flex>
