@@ -15,8 +15,14 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
     const scoreBadgeColor = getScoreBadgeColor({ score: anime?.score });
 
     return (
-        <>
-            <AspectRatio className={classes.aspectRatio} ratio={ 3 / 4 }>
+        <Box
+            component={Link}
+            href={`/titles/${anime?.url.replace('https://shikimori.one/animes/', '')}`}
+        >
+            <AspectRatio
+                className={classes.aspectRatio}
+                ratio={ 3 / 4 }
+            >
                 <Overlay
                     backgroundOpacity={0.4}
                     radius="md"
@@ -58,8 +64,6 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
                     </Flex>
                 </Overlay>
                 <Box
-                    component={Link}
-                    href={`/titles/${anime?.url.replace('https://shikimori.one/animes/', '')}`}
                     className={classes.imageWrapper}
                     w="100%"
                     h="100%"
@@ -76,6 +80,6 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
                     />
                 </Box>
             </AspectRatio>
-        </>
+        </Box>
     );
 }
