@@ -5,6 +5,7 @@ import classes from './NavigationButton.module.css';
 import {IconChevronLeft, IconChevronRight, IconReload} from "@tabler/icons-react";
 import NProgress from "nprogress";
 import {variables} from "@/configs/variables";
+import {useQueryClient} from "@tanstack/react-query";
 
 const ICON_STYLES = {
     size: 32,
@@ -18,6 +19,7 @@ const REFRESH_ICON_STYLES = {
 export default function NavigationButton({ type }: { type: "forward" | "back" | "refresh" }) {
     const router = useRouter();
     const [ripple, event] = useRipple(variables.rippleColor);
+    const queryClient = useQueryClient();
 
     let icon;
 
@@ -44,6 +46,11 @@ export default function NavigationButton({ type }: { type: "forward" | "back" | 
             break;
     }
 
+    function reloadPage() {
+        router.refresh();
+        queryClient.clear();
+    }
+
     function redirectUser() {
         NProgress.start();
 
@@ -51,7 +58,7 @@ export default function NavigationButton({ type }: { type: "forward" | "back" | 
             ? router.back()
             : type === "forward"
                 ? router.forward()
-                : router.refresh();
+                : reloadPage();
 
         NProgress.done();
     }

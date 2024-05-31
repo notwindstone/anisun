@@ -39,3 +39,9 @@
     padding: rem(8px) rem(16px);
     border-radius: var(--mantine-radius-md);
 }
+
+.link {
+    text-decoration: none;
+    color: var(--animeth-text-contrast-color);
+    font-weight: 500;
+}

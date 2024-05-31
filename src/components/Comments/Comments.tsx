@@ -5,7 +5,7 @@ import {Comment} from "@/components/Comments/Comment/Comment";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {MutatedDataType} from "@/types/Comments/MutatedData.type";
 import CommentSkeleton from "@/components/Comments/CommentSkeleton/CommentSkeleton";
-import {Box, Center, rem, Skeleton, Text, Title} from "@mantine/core";
+import {Box, Center, rem, Skeleton, Title} from "@mantine/core";
 import {useEffect, useState} from "react";
 import {makeWordEnding} from "@/utils/Misc/makeWordEnding";
 import classes from './Comments.module.css';

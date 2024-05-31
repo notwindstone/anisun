@@ -1,4 +1,4 @@
-import {ActionIcon, Avatar, Button, Flex, Group, Stack, Text, Textarea, UnstyledButton} from "@mantine/core";
+import {ActionIcon, Avatar, Flex, Group, rem, Stack, Text, Textarea, UnstyledButton} from "@mantine/core";
 import {ChildCommentList} from "@/components/Comments/ChildCommentList/ChildCommentList";
 import classes from "./Comment.module.css";
 import Link from "next/link";
@@ -229,8 +229,8 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                 </Avatar>
                 <Stack className={classes.stack}>
                     <Group justify="space-between">
-                        <Group>
-                            <Link href={`/account/${comment.userid}`}>
+                        <Group gap={rem(8)}>
+                            <Link className={classes.link} href={`/account/${comment.userid}`}>
                                 <Text>{comment.username}</Text>
                             </Link>
                             <Text>{makeDate(comment.createdAt)}</Text>
@@ -293,7 +293,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                 sendVotes={handleNewVotes}
                             />
                         </Group>
-                        <DecoratedButton onClick={toggleReply}>
+                        <DecoratedButton variant="light" onClick={toggleReply}>
                             Ответить
                         </DecoratedButton>
                     </Group>
