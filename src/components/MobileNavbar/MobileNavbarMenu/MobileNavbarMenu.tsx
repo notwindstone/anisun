@@ -160,7 +160,7 @@ export default function MobileNavbarMenu() {
                     <Sheet.Header className={classes.drawerHeader} />
                     <Sheet.Content className={classes.drawerBody}>
                         <Sheet.Scroller>
-                            <Stack pb={rem(32)} align="center" gap={rem(8)}>
+                            <Stack pb={rem(16)} align="center" gap={rem(8)}>
                                 <SegmentedControl
                                     pb={rem(16)}
                                     autoContrast

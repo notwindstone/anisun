@@ -17,7 +17,7 @@ export default function MobileNavbarLink({
 
     return (
         <NavLink
-            h={64}
+            h={48}
             classNames={{
                 root: classes.root,
                 label: classes.label

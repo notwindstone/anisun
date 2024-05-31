@@ -88,21 +88,23 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
                     <Title order={2} pb={rem(8)}>
                         {user?.username ?? "Аккаунт"}
                     </Title>
-                    <Divider w="100%" />
-                    {
-                        NAV_LINKS.map((navLink) => {
-                            return (
-                                <MobileNavbarLink func={navLink.func} label={navLink.label}>
-                                    {navLink.icon}
-                                </MobileNavbarLink>
-                            );
-                        })
-                    }
-                    <Divider w="100%" />
+                    <Divider my={rem(16)} w="100%" />
+                    <Stack w="100%">
+                        {
+                            NAV_LINKS.map((navLink) => {
+                                return (
+                                    <MobileNavbarLink func={navLink.func} label={navLink.label}>
+                                        {navLink.icon}
+                                    </MobileNavbarLink>
+                                );
+                            })
+                        }
+                    </Stack>
+                    <Divider my={rem(16)} w="100%" />
                     <SignOutButton>
                         {/* It doesn't work with <MobileNavbarLink /> component somehow */}
                         <NavLink
-                            h={64}
+                            h={48}
                             classNames={{
                                 root: classes.root,
                                 label: classes.label

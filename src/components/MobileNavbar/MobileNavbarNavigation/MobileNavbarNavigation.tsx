@@ -1,5 +1,5 @@
-import {IconBrandSafari, IconSettings, IconUserCircle} from "@tabler/icons-react";
-import {Center, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
+import {IconBrandSafari, IconHome, IconTrendingUp} from "@tabler/icons-react";
+import {Box, Center, Divider, rem, Stack, Text, ThemeIcon, Title, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {useDisclosure} from "@mantine/hooks";
 import {usePathname, useRouter} from "next/navigation";
@@ -21,20 +21,24 @@ export default function MobileNavbarNavigation() {
     function redirect(link: string) {
         NProgress.start();
         router.push(link);
-        NProgress.done();
+
+        if (link === pathname) {
+            NProgress.done();
+        }
     }
 
     const NAV_LINKS = [
         {
-            label: "Мой профиль",
-            func: () => redirect(''),
-            icon: <IconUserCircle {...ICON_STYLES} />,
+            label: "Главная",
+            func: () => redirect('/'),
+            icon: <IconHome {...ICON_STYLES} />,
         },
         {
-            label: "Настройки",
-            func: () => redirect(''),
-            icon: <IconSettings {...ICON_STYLES} />
-        }
+            label: "Популярное",
+            func: () => redirect('/trending'),
+            icon: <IconTrendingUp {...ICON_STYLES} />
+        },
+
     ];
 
     return (
@@ -48,15 +52,25 @@ export default function MobileNavbarNavigation() {
                     <Sheet.Header />
                     <Sheet.Content>
                         <Sheet.Scroller>
-                            {
-                                NAV_LINKS.map((link) => {
-                                    return (
-                                        <MobileNavbarLink func={link.func} label={link.label}>
-                                            {link.icon}
-                                        </MobileNavbarLink>
-                                    );
-                                })
-                            }
+                            <Box pb={rem(16)}>
+                                <Title
+                                    c="var(--animeth-text-contrast-color)"
+                                >
+                                    Навигация
+                                </Title>
+                                <Divider my={rem(16)} w="100%" />
+                                <Stack gap={rem(16)}>
+                                    {
+                                        NAV_LINKS.map((link) => {
+                                            return (
+                                                <MobileNavbarLink func={link.func} label={link.label}>
+                                                    {link.icon}
+                                                </MobileNavbarLink>
+                                            );
+                                        })
+                                    }
+                                </Stack>
+                            </Box>
                         </Sheet.Scroller>
                     </Sheet.Content>
                 </Sheet.Container>
