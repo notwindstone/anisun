@@ -12,5 +12,7 @@ export type AnimesType = {
     year?: string;
     order?: OrderType;
     page?: number;
+    kind?: string;
+    score?: string;
     filter?: OptionType[];
 };

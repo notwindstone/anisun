@@ -2,15 +2,17 @@
 
 import useCustomTheme from "@/hooks/useCustomTheme";
 import useMobileScreen from "@/hooks/useMobileScreen";
-import {useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {useDebouncedValue, useFocusWithin} from "@mantine/hooks";
 import {variables} from "@/configs/variables";
 import {TextInput} from "@mantine/core";
+import {AdvancedSearchContext} from "@/utils/Contexts/Contexts";
 
 export default function SearchInput() {
+    const { setSearchInput } = useContext(AdvancedSearchContext);
+    const [input, setInput] = useState('');
     const { theme } = useCustomTheme();
     const { isMobile } = useMobileScreen();
-    const [input, setInput] = useState('');
     const [search] = useDebouncedValue(input, 300);
     const { ref, focused } = useFocusWithin();
     const color = theme.color;
@@ -20,7 +22,9 @@ export default function SearchInput() {
     const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
     const calculatedColor = isMantineColor ? mantineColor : color;
 
-    console.log(search);
+    useEffect(() => {
+        setSearchInput(search);
+    }, [search, setSearchInput]);
 
     return (
         <TextInput

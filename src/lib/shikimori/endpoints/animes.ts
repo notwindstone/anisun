@@ -18,7 +18,7 @@ export const animes = () => {
             });
     };
 
-    const list = async ({ search, limit, genre, status, studio, year, order, page, filter }: AnimesType) => {
+    const list = async ({ search, limit, genre, status, studio, year, order, page, filter, score, kind }: AnimesType) => {
         const params = options({
             search: search,
             limit: limit,
@@ -29,6 +29,8 @@ export const animes = () => {
             order: order,
             page: page,
             filter: filter,
+            score: score,
+            kind: kind,
         });
 
         return await axios

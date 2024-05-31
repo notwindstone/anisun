@@ -9,6 +9,7 @@ import {SideBarPopoverContextType} from "@/types/SideBar/SideBarPopoverContext.t
 import {
     SideBarAccountPopoverContextType
 } from "@/types/SideBar/SideBarAccountPopoverContext.type";
+import {AdvancedSearchContextType} from "@/types/AdvancedSearch/AdvancedSearchContext.type";
 
 export const CustomThemeContext = createContext<CustomThemeContextType>({
     theme: {
@@ -57,4 +58,9 @@ export const MobileNavbarModalsContext = createContext<SideBarAccountPopoverCont
     closeSettings: () => {},
     closeSignIn: () => {},
     closeSignUp: () => {}
+});
+
+export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
+    searchInput: "",
+    setSearchInput: () => {},
 });
