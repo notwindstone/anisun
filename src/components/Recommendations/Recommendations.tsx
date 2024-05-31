@@ -182,7 +182,7 @@ export default function Recommendations({ id }: { id: string } ) {
 
     if (!data.length) {
         return (
-            <Stack gap={rem(8)} className={classes.similar}>
+            <Stack pb={rem(112)} gap={rem(8)} className={classes.similar}>
                 <div className={classes.segmentedControlWrapper}>
                     <SegmentedControl
                         value={filter}

@@ -43,6 +43,10 @@ export type VariablesType = {
         about: {
             label: string;
             value: "about";
+        };
+        account: {
+            label: string;
+            value: "account";
         }
     };
     iconProps: {

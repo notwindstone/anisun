@@ -26,6 +26,7 @@ import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeContr
 
 const GENERAL = variables.settings.general;
 const ABOUT = variables.settings.about;
+const ACCOUNT = variables.settings.account;
 const LINKS = variables.websiteLinks;
 
 export default function MobileNavbarMenu() {
@@ -89,7 +90,6 @@ export default function MobileNavbarMenu() {
             );
             break;
         case "general":
-        default:
             content = (
                 <Stack>
                     <Title c="var(--animeth-text-contrast-color)">
@@ -137,6 +137,11 @@ export default function MobileNavbarMenu() {
                 </Stack>
             );
             break;
+        case "account":
+            content = (
+                <></>
+            );
+            break;
     }
 
     return (
@@ -164,7 +169,8 @@ export default function MobileNavbarMenu() {
                         onChange={setSection}
                         data={[
                             GENERAL,
-                            ABOUT
+                            ABOUT,
+                            ACCOUNT
                         ]}
                     />
                     {content}

@@ -42,7 +42,11 @@ export const variables: VariablesType = {
         "about": {
             "label": "О сайте",
             "value": "about"
-        }
+        },
+        "account": {
+            "label": "Аккаунт",
+            "value": "account"
+        },
     },
     "iconProps": {
         "size": 32,

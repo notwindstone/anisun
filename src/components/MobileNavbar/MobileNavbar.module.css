@@ -31,11 +31,15 @@
 .button {
     width: rem(92px);
     height: rem(32px);
-    background: light-dark(
-        darken(var(--mantine-color-default-hover), 0.025),
-        alpha(var(--mantine-color-default-hover), 0.35)
-    );
+    background: none;
     transition: 200ms ease;
+}
+
+.activeButton {
+    background: light-dark(
+            darken(var(--mantine-color-default-hover), 0.025),
+            alpha(var(--mantine-color-default-hover), 0.35)
+    );
 }
 
 .icon {
