@@ -8,9 +8,10 @@ import MobileNavbarSearch from "@/components/MobileNavbar/MobileNavbarSearch/Mob
 import MobileModalMenu from "@/components/MobileNavbar/MobileNavbarMenu/MobileNavbarMenu";
 import useMobileScreen from "@/hooks/useMobileScreen";
 import {MobileNavbarModalsContext} from "@/utils/Contexts/Contexts";
-import {SignIn, SignUp, UserProfile} from "@clerk/nextjs";
+import {SignIn, SignUp, UserProfile, useUser} from "@clerk/nextjs";
 import AccountModal from "@/components/AccountModal/AccountModal";
-import React from "react";
+import React, {useEffect} from "react";
+import NProgress from "nprogress";
 
 export default function MobileNavbar() {
     const { isMobile } = useMobileScreen();
@@ -18,6 +19,19 @@ export default function MobileNavbar() {
     const [settingsOpened, { open: openSettings, close: closeSettings }] = useDisclosure(false);
     const [signInOpened, { open: openSignIn, close: closeSignIn }] = useDisclosure(false);
     const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false);
+    const { user } = useUser();
+
+    useEffect(() => {
+        if (!user) {
+            return;
+        }
+
+        closeSignUp();
+        closeSignIn();
+        NProgress.start();
+        NProgress.done();
+        // eslint-disable-next-line
+    }, [user]);
 
     const settingsModal = (
         <AccountModal

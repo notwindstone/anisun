@@ -1,16 +1,72 @@
-import {Avatar, Box, Group, rem, Stack} from "@mantine/core";
+import {Avatar, Box, Divider, NavLink, rem, Stack, ThemeIcon, Title} from "@mantine/core";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
-import {IconUserCircle} from "@tabler/icons-react";
+import {IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
 import NProgress from "nprogress";
-import {useContext} from "react";
+import React, {useContext} from "react";
 import {MobileNavbarModalsContext} from "@/utils/Contexts/Contexts";
+import useCustomTheme from "@/hooks/useCustomTheme";
+import classes from './MobileNavbarMenuAccount.module.css';
+import {usePathname, useRouter} from "next/navigation";
+
+const ICON_STYLES = {
+    size: 16,
+    stroke: 1.5
+};
+
+function MobileNavbarLink({
+    func,
+    label,
+    children
+}: {
+    func: () => void;
+    label: string;
+    children: React.ReactNode;
+}) {
+    const { theme } = useCustomTheme();
+
+    return (
+        <NavLink
+            className={classes.navLink}
+            onClick={func}
+            label={label}
+            leftSection={
+                <ThemeIcon
+                    color={theme?.color}
+                    radius="md"
+                    variant="light"
+                >
+                    {children}
+                </ThemeIcon>
+            }
+        />
+    );
+}
 
 export default function MobileNavbarMenuAccount({ close }: { close: () => void }) {
+    const { theme } = useCustomTheme();
     const { user } = useUser();
     const { openSettings, openSignIn, openSignUp } = useContext(
         MobileNavbarModalsContext
     );
+    const router = useRouter();
+    const pathname = usePathname();
+
+    function pushToProfile() {
+        if (!user) {
+            return;
+        }
+
+        const accountURL = `/account/${user.id}`;
+
+        close();
+        NProgress.start();
+        router.push(accountURL);
+
+        if (accountURL === pathname) {
+            return NProgress.done();
+        }
+    }
 
     function toggleSettings() {
         openSettings();
@@ -33,46 +89,79 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
         close();
     }
 
+    const NAV_LINKS = [
+        {
+            label: "Мой профиль",
+            func: pushToProfile,
+            icon: <IconUserCircle {...ICON_STYLES} />,
+        },
+        {
+            label: "Настройки",
+            func: toggleSettings,
+            icon: <IconSettings {...ICON_STYLES} />
+        }
+    ];
+
     return (
         <>
-            <Stack w="100%" align="center" justify="space-between">
-                <Stack align="center" gap={rem(8)}>
-                    <SignedIn>
-                        <Avatar
-                            src={user?.imageUrl ?? '/blurred.png'}
-                            size={rem(64)}
-                            alt={`Аватар пользователя ${user?.username}`}
-                        >
-                            {user?.username?.[0]}
-                        </Avatar>
-                        <DecoratedButton onClick={toggleSettings}>
-                            Открыть настройки
-                        </DecoratedButton>
-                    </SignedIn>
-                    <SignedOut>
-                        <Box
-                            w={rem(64)}
-                            h={rem(64)}
-                        >
-                            <IconUserCircle size={64} stroke={1.5} />
-                        </Box>
-                        <Group>
-                            <DecoratedButton onClick={signIn}>
-                                Войти
-                            </DecoratedButton>
-                            <DecoratedButton onClick={signUp}>
-                                Зарегистрироваться
-                            </DecoratedButton>
-                        </Group>
-                    </SignedOut>
-                </Stack>
+            <Stack w="90%" align="center" gap={rem(8)}>
                 <SignedIn>
+                    <Avatar
+                        src={user?.imageUrl ?? '/blurred.png'}
+                        size={rem(64)}
+                        alt={`Аватар пользователя ${user?.username}`}
+                    >
+                        {user?.username?.[0]}
+                    </Avatar>
+                    <Title order={2} pb={rem(8)}>
+                        {user?.username ?? "Аккаунт"}
+                    </Title>
+                    <Divider w="100%" />
+                    {
+                        NAV_LINKS.map((navLink) => {
+                            return (
+                                <MobileNavbarLink func={navLink.func} label={navLink.label}>
+                                    {navLink.icon}
+                                </MobileNavbarLink>
+                            );
+                        })
+                    }
+                    <Divider w="100%" />
                     <SignOutButton>
-                        <DecoratedButton onClick={signOut} color="red">
-                            Выйти
-                        </DecoratedButton>
+                        {/* It doesn't work with <MobileNavbarLink /> component somehow */}
+                        <NavLink
+                            className={classes.navLink}
+                            onClick={signOut}
+                            label="Выйти"
+                            leftSection={
+                                <ThemeIcon
+                                    color={theme.color}
+                                    radius="md"
+                                    variant="light"
+                                >
+                                    <IconLogout {...ICON_STYLES} />
+                                </ThemeIcon>
+                            }
+                        />
                     </SignOutButton>
                 </SignedIn>
+                <SignedOut>
+                    <Box
+                        w={rem(64)}
+                        h={rem(64)}
+                    >
+                        <IconUserCircle size={64} stroke={1.5} />
+                    </Box>
+                    <Title order={2}>Аккаунт</Title>
+                    <Stack pt={rem(16)} gap={rem(8)}>
+                        <DecoratedButton onClick={signIn}>
+                            Войти
+                        </DecoratedButton>
+                        <DecoratedButton onClick={signUp}>
+                            Зарегистрироваться
+                        </DecoratedButton>
+                    </Stack>
+                </SignedOut>
             </Stack>
         </>
     );

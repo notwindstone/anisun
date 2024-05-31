@@ -154,13 +154,15 @@ export default function MobileNavbarMenu() {
                 isOpen={opened}
                 onClose={close}
                 disableDrag={active}
+                detent="content-height"
             >
                 <Sheet.Container>
                     <Sheet.Header className={classes.drawerHeader} />
                     <Sheet.Content className={classes.drawerBody}>
                         <Sheet.Scroller>
-                            <Stack align="center" gap={rem(8)}>
+                            <Stack pb={rem(32)} align="center" gap={rem(8)}>
                                 <SegmentedControl
+                                    pb={rem(16)}
                                     autoContrast
                                     color={theme.color}
                                     classNames={{
