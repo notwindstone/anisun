@@ -1,13 +1,41 @@
-import {IconBrandSafari} from "@tabler/icons-react";
+import {IconBrandSafari, IconSettings, IconUserCircle} from "@tabler/icons-react";
 import {Center, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {useDisclosure} from "@mantine/hooks";
-import {usePathname} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {Sheet} from "react-modal-sheet";
+import React from "react";
+import NProgress from "nprogress";
+import MobileNavbarLink from "@/components/MobileNavbar/MobileNavbarLink/MobileNavbarLink";
+
+const ICON_STYLES = {
+    size: 32,
+    stroke: 1.5
+};
 
 export default function MobileNavbarNavigation() {
     const [opened, { open, close }] = useDisclosure(false);
     const pathname = usePathname();
+    const router = useRouter();
+
+    function redirect(link: string) {
+        NProgress.start();
+        router.push(link);
+        NProgress.done();
+    }
+
+    const NAV_LINKS = [
+        {
+            label: "Мой профиль",
+            func: () => redirect(''),
+            icon: <IconUserCircle {...ICON_STYLES} />,
+        },
+        {
+            label: "Настройки",
+            func: () => redirect(''),
+            icon: <IconSettings {...ICON_STYLES} />
+        }
+    ];
 
     return (
         <>
@@ -20,7 +48,15 @@ export default function MobileNavbarNavigation() {
                     <Sheet.Header />
                     <Sheet.Content>
                         <Sheet.Scroller>
-
+                            {
+                                NAV_LINKS.map((link) => {
+                                    return (
+                                        <MobileNavbarLink func={link.func} label={link.label}>
+                                            {link.icon}
+                                        </MobileNavbarLink>
+                                    );
+                                })
+                            }
                         </Sheet.Scroller>
                     </Sheet.Content>
                 </Sheet.Container>

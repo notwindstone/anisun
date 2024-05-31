@@ -2,7 +2,7 @@ import React from "react";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {NavLink, ThemeIcon} from "@mantine/core";
 import classes
-    from "@/components/MobileNavbar/MobileNavbarMenu/MobileNavbarMenuAccount/MobileNavbarMenuAccount.module.css";
+    from "./MobileNavbarLink.module.css";
 
 export default function MobileNavbarLink({
     func,
@@ -17,11 +17,16 @@ export default function MobileNavbarLink({
 
     return (
         <NavLink
-            className={classes.navLink}
+            h={64}
+            classNames={{
+                root: classes.root,
+                label: classes.label
+            }}
             onClick={func}
             label={label}
             leftSection={
                 <ThemeIcon
+                    size={48}
                     color={theme?.color}
                     radius="md"
                     variant="light"

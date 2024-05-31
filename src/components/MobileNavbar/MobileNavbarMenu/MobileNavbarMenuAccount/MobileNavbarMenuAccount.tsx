@@ -11,7 +11,7 @@ import {usePathname, useRouter} from "next/navigation";
 import MobileNavbarLink from "@/components/MobileNavbar/MobileNavbarLink/MobileNavbarLink";
 
 const ICON_STYLES = {
-    size: 16,
+    size: 32,
     stroke: 1.5
 };
 
@@ -102,11 +102,16 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
                     <SignOutButton>
                         {/* It doesn't work with <MobileNavbarLink /> component somehow */}
                         <NavLink
-                            className={classes.navLink}
+                            h={64}
+                            classNames={{
+                                root: classes.root,
+                                label: classes.label
+                            }}
                             onClick={signOut}
                             label="Выйти"
                             leftSection={
                                 <ThemeIcon
+                                    size={48}
                                     color={theme.color}
                                     radius="md"
                                     variant="light"
