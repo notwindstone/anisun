@@ -1,0 +1,36 @@
+.aspectRatio {
+    position: relative;
+    cursor: pointer;
+}
+
+.imageWrapper {
+    display: flex;
+    position: relative;
+}
+
+.overlay {
+    position: absolute;
+    user-select: none;
+}
+
+.info {
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+}
+
+.status {
+    position: absolute;
+    top: rem(16px);
+    left: rem(16px);
+}
+
+.score {
+    position: absolute;
+    top: rem(16px);
+    right: rem(16px);
+}
+
+.title {
+    color: var(--mantine-color-white)
+}
