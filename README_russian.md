@@ -78,7 +78,7 @@
 
 - [ ] Доделать страницу с поиском и фильтрами аниме
 
-- [ ] Доделать комментарии
+- [x] Доделать комментарии
 
 - [x] Доделать страницу с популярными аниме
 
@@ -253,7 +253,7 @@ npm run start
 
 * [zvshka](https://github.com/zvshka) за оказание помощи при создании проекта
 
-* cdn83nwwiwcyps615adalqk9k8esedzi (discord account) за оказание помощи в дизайне сайта
+* cos (discord аккаунт) за оказание помощи в дизайне сайта
 
 * [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) и [SovetRomantica](https://sovetromantica.com/) за их прекрасные API, без которых Animeth не смог бы работать
 
