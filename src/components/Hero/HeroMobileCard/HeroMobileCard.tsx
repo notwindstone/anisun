@@ -91,7 +91,6 @@ export default function HeroMobileCard({
                         >
                             <Badge
                                 size={size}
-                                autoContrast
                                 color={scoreBadgeColor}
                             >
                                 {animeTitle?.score}
