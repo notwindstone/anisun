@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import {SideBarAccountPopoverContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import SideBarPopover from "@/components/SideBar/SideBarPopover/SideBarPopover";
 import {useDisclosure} from "@mantine/hooks";
-import SideBarAccountModal from "@/components/SideBar/SideBarAccount/SideBarAccountModal/SideBarAccountModal";
+import AccountModal from "@/components/AccountModal/AccountModal";
 import {SignIn, SignUp, UserProfile, useUser} from "@clerk/nextjs";
 import NProgress from "nprogress";
 
@@ -16,30 +16,30 @@ export default function SideBarAccount() {
     const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false);
 
     const settingsModal = (
-        <SideBarAccountModal
+        <AccountModal
             mounted={settingsOpened}
             func={closeSettings}
         >
             <UserProfile />
-        </SideBarAccountModal>
+        </AccountModal>
     );
 
     const signInModal = (
-        <SideBarAccountModal
+        <AccountModal
             mounted={signInOpened}
             func={closeSignIn}
         >
             <SignIn routing="virtual" />
-        </SideBarAccountModal>
+        </AccountModal>
     );
 
     const signUpModal = (
-        <SideBarAccountModal
+        <AccountModal
             mounted={signUpOpened}
             func={closeSignUp}
         >
             <SignUp routing="virtual" />
-        </SideBarAccountModal>
+        </AccountModal>
     );
 
     useEffect(() => {

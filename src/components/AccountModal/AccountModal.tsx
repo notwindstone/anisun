@@ -1,9 +1,9 @@
 import {Button, Flex, rem, Transition} from "@mantine/core";
 import React from "react";
-import classes from './SideBarAccountModal.module.css';
+import classes from './AccountModal.module.css';
 import useCustomTheme from "@/hooks/useCustomTheme";
 
-export default function SideBarAccountModal({
+export default function AccountModal({
     children,
     mounted,
     func,

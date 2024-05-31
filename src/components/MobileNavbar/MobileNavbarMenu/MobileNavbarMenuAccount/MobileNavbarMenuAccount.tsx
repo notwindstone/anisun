@@ -3,9 +3,19 @@ import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {SignedIn, SignedOut, SignOutButton, useUser} from "@clerk/nextjs";
 import {IconUserCircle} from "@tabler/icons-react";
 import NProgress from "nprogress";
+import {useContext} from "react";
+import {MobileNavbarModalsContext} from "@/utils/Contexts/Contexts";
 
 export default function MobileNavbarMenuAccount({ close }: { close: () => void }) {
     const { user } = useUser();
+    const { openSettings, openSignIn, openSignUp } = useContext(
+        MobileNavbarModalsContext
+    );
+
+    function toggleSettings() {
+        openSettings();
+        close();
+    }
 
     function signOut() {
         NProgress.start();
@@ -35,6 +45,9 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
                         >
                             {user?.username?.[0]}
                         </Avatar>
+                        <DecoratedButton onClick={toggleSettings}>
+                            Открыть настройки
+                        </DecoratedButton>
                     </SignedIn>
                     <SignedOut>
                         <Box

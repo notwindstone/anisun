@@ -47,6 +47,14 @@ export const SideBarAccountPopoverContext = createContext<SideBarAccountPopoverC
     closeSignUp: () => {}
 });
 
-export const MobileNavbarModalsContext = createContext({
-
+export const MobileNavbarModalsContext = createContext<SideBarAccountPopoverContextType>({
+    settingsOpened: false,
+    signInOpened: false,
+    signUpOpened: false,
+    openSettings: () => {},
+    openSignIn: () => {},
+    openSignUp: () => {},
+    closeSettings: () => {},
+    closeSignIn: () => {},
+    closeSignUp: () => {}
 });

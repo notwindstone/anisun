@@ -1,31 +1,80 @@
 'use client';
 
-import {useHeadroom} from "@mantine/hooks";
+import {useDisclosure, useHeadroom} from "@mantine/hooks";
 import {Flex, rem} from "@mantine/core";
 import classes from './MobileNavbar.module.css';
 import MobileModalNavigation from "@/components/MobileNavbar/MobileNavbarNavigation/MobileNavbarNavigation";
 import MobileNavbarSearch from "@/components/MobileNavbar/MobileNavbarSearch/MobileNavbarSearch";
 import MobileModalMenu from "@/components/MobileNavbar/MobileNavbarMenu/MobileNavbarMenu";
 import useMobileScreen from "@/hooks/useMobileScreen";
+import {MobileNavbarModalsContext} from "@/utils/Contexts/Contexts";
+import {SignIn, SignUp, UserProfile} from "@clerk/nextjs";
+import AccountModal from "@/components/AccountModal/AccountModal";
+import React from "react";
 
 export default function MobileNavbar() {
     const { isMobile } = useMobileScreen();
     const pinned = useHeadroom({ fixedAt: 120 });
+    const [settingsOpened, { open: openSettings, close: closeSettings }] = useDisclosure(false);
+    const [signInOpened, { open: openSignIn, close: closeSignIn }] = useDisclosure(false);
+    const [signUpOpened, { open: openSignUp, close: closeSignUp }] = useDisclosure(false);
+
+    const settingsModal = (
+        <AccountModal
+            mounted={settingsOpened}
+            func={closeSettings}
+        >
+            <UserProfile />
+        </AccountModal>
+    );
+
+    const signInModal = (
+        <AccountModal
+            mounted={signInOpened}
+            func={closeSignIn}
+        >
+            <SignIn routing="virtual" />
+        </AccountModal>
+    );
+
+    const signUpModal = (
+        <AccountModal
+            mounted={signUpOpened}
+            func={closeSignUp}
+        >
+            <SignUp routing="virtual" />
+        </AccountModal>
+    );
 
     return isMobile && (
-        <div
-            className={classes.wrapper}
-            style={{ transform: `translate3d(0, ${pinned ? 0 : rem(128)}, 0)` }}
-        >
-            <Flex
-                className={classes.root}
-                justify="space-between"
-                align="center"
+        <MobileNavbarModalsContext.Provider value={{
+            settingsOpened,
+            signInOpened,
+            signUpOpened,
+            openSettings,
+            openSignIn,
+            openSignUp,
+            closeSettings,
+            closeSignIn,
+            closeSignUp,
+        }}>
+            {settingsModal}
+            {signInModal}
+            {signUpModal}
+            <div
+                className={classes.wrapper}
+                style={{transform: `translate3d(0, ${pinned ? 0 : rem(128)}, 0)`}}
             >
-                <MobileModalNavigation />
-                <MobileNavbarSearch />
-                <MobileModalMenu />
-            </Flex>
-        </div>
+                <Flex
+                    className={classes.root}
+                    justify="space-between"
+                    align="center"
+                >
+                    <MobileModalNavigation/>
+                    <MobileNavbarSearch/>
+                    <MobileModalMenu/>
+                </Flex>
+            </div>
+        </MobileNavbarModalsContext.Provider>
     );
 }
