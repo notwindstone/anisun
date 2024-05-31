@@ -6,7 +6,6 @@ import {client} from "@/lib/shikimori/client";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import NProgress from "nprogress";
 import useCustomTheme from "@/hooks/useCustomTheme";
-import classes from './TrendingGrid.module.css';
 import TrendingCard from "@/components/TrendingGrid/TrendingCard/TrendingCard";
 
 const TOTAL_PAGES = 500;
