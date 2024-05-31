@@ -1,12 +1,14 @@
 "use client";
 
-import {Grid, Title} from "@mantine/core";
+import {Grid, Pagination, Title} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import {useSearchParams} from "next/navigation";
+import {useRouter, useSearchParams} from "next/navigation";
+import NProgress from "nprogress";
 
 export default function TrendingGrid() {
     const searchParams = useSearchParams();
+    const router = useRouter();
     const unsafePageParam = parseInt(searchParams.get('page') ?? '1');
     const isSafeNumber = unsafePageParam > 0 && !Number.isNaN(unsafePageParam);
     const page = isSafeNumber ? unsafePageParam : 1;
@@ -35,12 +37,18 @@ export default function TrendingGrid() {
         },
         queryKey: ["trending"]
     });
-    console.log(data);
+
+    function pushToNextPage(nextPage: number) {
+        NProgress.start();
+        router.push(`/trending?page=${nextPage}`);
+    }
+
     return (
         <>
             <Title c="var(--animeth-text-contrast-color)">
                 Популярное
             </Title>
+            <Pagination value={page} onChange={pushToNextPage} total={10} />
             <Grid>
 
             </Grid>

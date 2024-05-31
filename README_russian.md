@@ -82,10 +82,6 @@
 
 - [ ] Доделать страницу с популярными аниме
 
-- [ ] Локализовать сайт с помощью [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
-
-- [ ] Сделать различные роли (администратора, участника) для аккаунтов
-
 ## ⬇️ Запуск
 
 ### Локально

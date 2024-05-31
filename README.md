@@ -82,10 +82,6 @@
 
 - [ ] Complete the page with popular animes
 
-- [ ] Localize website with [Internationalization (i18n) Routing](https://nextjs.org/docs/pages/building-your-application/routing/internationalization)
-
-- [ ] Add permission groups (administrator, member) to users
-
 ## ⬇️ Self-Hosting
 
 ### Local
