@@ -3,6 +3,7 @@ import {Center, Drawer, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/cor
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {useDisclosure} from "@mantine/hooks";
 import {usePathname} from "next/navigation";
+import {Sheet} from "react-modal-sheet";
 
 export default function MobileNavbarNavigation() {
     const [opened, { open, close }] = useDisclosure(false);
@@ -10,19 +11,13 @@ export default function MobileNavbarNavigation() {
 
     return (
         <>
-            <Drawer
-                position="bottom"
-                size="60vh"
-                opened={opened}
-                onClose={close}
-                classNames={{
-                    content: classes.drawer,
-                    header: classes.drawer
-                }}
-                zIndex={29999}
-            >
-                MobileModalMenu
-            </Drawer>
+            <Sheet isOpen={opened} onClose={close}>
+                <Sheet.Container>
+                    <Sheet.Header />
+                    <Sheet.Content>{/* Your sheet content goes here */}</Sheet.Content>
+                </Sheet.Container>
+                <Sheet.Backdrop />
+            </Sheet>
             <Center flex={1}>
                 <UnstyledButton onClick={open} className={classes.buttonWrapper}>
                     <ThemeIcon className={`${classes.button} ${pathname === "/" && classes.activeButton}`}>
