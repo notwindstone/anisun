@@ -3,7 +3,7 @@
 import type {Metadata} from "next";
 import {Container} from "@mantine/core";
 import classes from './page.module.css';
-import SearchInput from "@/components/SearchInput/SearchInput";
+import AdvancedSearch from "@/components/AdvancedSearch/AdvancedSearch";
 
 export async function generateMetadata(): Promise<Metadata> {
     const title = 'Поиск аниме';
@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
     return (
         <Container className={classes.container} size={1200}>
-            <SearchInput />
+            <AdvancedSearch />
         </Container>
     );
 }
