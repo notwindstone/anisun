@@ -257,9 +257,9 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 ## ❤️ Credits
 
-* [zvshka](https://github.com/zvshka) for his help with project
+* [zvshka](https://github.com/zvshka) for his help with the project
 
-* cos (discord account) for his help with UI
+* cos (discord account) for his help with the UI
 
 * [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) and [SovetRomantica](https://sovetromantica.com/) for their wonderful APIs, without which Animeth could not work
 
