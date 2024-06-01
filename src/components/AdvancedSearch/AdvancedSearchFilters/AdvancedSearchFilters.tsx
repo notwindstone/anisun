@@ -5,7 +5,8 @@ import {client} from "@/lib/shikimori/client";
 import {useEffect, useState} from "react";
 import {GenreType} from "@/types/Shikimori/Responses/Types/Genre.type";
 import {AdvancedSearchFiltersType} from "@/types/AdvancedSearch/AdvancedSearchFilters.type";
-import OrderFilter from "@/components/Filters/OrderFilter";
+import OrderFilter from "@/components/Filters/OrderFilter/OrderFilter";
+import KindFilter from "@/components/Filters/KindFilter/KindFilter";
 
 export default function AdvancedSearchFilters() {
     const [selectData, setSelectData] = useState<AdvancedSearchFiltersType[] | undefined>();
@@ -76,6 +77,7 @@ export default function AdvancedSearchFilters() {
                 data={selectData}
             />
             <OrderFilter />
+            <KindFilter />
         </>
     );
 }

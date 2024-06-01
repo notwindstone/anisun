@@ -1,6 +1,7 @@
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 import {MantineColor} from "@mantine/core";
 import {OrderType} from "@/types/Shikimori/Queries/Order.type";
+import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
 
 export type VariablesType = {
     imagePlaceholder: string;
@@ -87,6 +88,10 @@ export type VariablesType = {
         order: {
             label: string;
             value: OrderType;
+        }[];
+        kind: {
+            label: string;
+            value: AnimeKindEnum | string;
         }[];
     };
 };

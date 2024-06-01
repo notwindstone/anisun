@@ -77,14 +77,9 @@ export default function AdvancedSearch() {
                 setSearchInput: setInput
             }}
         >
-            <Flex className={classes.wrapper}>
+            <Flex direction="column" className={classes.wrapper}>
                 <SearchInput />
                 <AdvancedSearchFilters />
-                {
-                    data && (
-                        <TrendingCard anime={data[0]} />
-                    )
-                }
             </Flex>
         </AdvancedSearchContext.Provider>
     );
