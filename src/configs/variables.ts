@@ -232,5 +232,111 @@ export const variables: VariablesType = {
                 "value": "fall",
             },
         ],
+        "rating": [
+            {
+                "label": "Отсутствует",
+                "value": "none",
+            },
+            {
+                "label": "G",
+                "value": "g",
+            },
+            {
+                "label": "PG",
+                "value": "pg",
+            },
+            {
+                "label": "PG_13",
+                "value": "pg_13",
+            },
+            {
+                "label": "R-17",
+                "value": "r",
+            },
+            {
+                "label": "R+",
+                "value": "r_plus",
+            },
+            {
+                "label": "Rx",
+                "value": "rx",
+            },
+        ],
+        /* У shikimori нельзя получать информацию о всех студиях с помощью API.
+         * Можно только спарсить страницу https://shikimori.one/studios, но
+         * я не знаю как + мне лень, поэтому вручную вбил данные студий
+         * которые часто мелькают в интернете (и ещё Studio Bind, потому что
+         * реинкарнация безработного это база (кроме первой части второго сезона))
+         */
+        "studio": [
+            {
+                "label": "Studio Bind",
+                "value": "1993",
+            },
+            {
+                "label": "Bones",
+                "value": "4",
+            },
+            {
+                "label": "MAPPA",
+                "value": "569",
+            },
+            {
+                "label": "Ufotable",
+                "value": "43",
+            },
+            {
+                "label": "Production I.G",
+                "value": "10",
+            },
+            {
+                "label": "J.C.Staff",
+                "value": "7",
+            },
+            {
+                "label": "Wit Studio",
+                "value": "858",
+            },
+            {
+                "label": "Studio Ghibli",
+                "value": "21",
+            },
+            {
+                "label": "Studio Pierrot",
+                "value": "1",
+            },
+            {
+                "label": "Sunrise",
+                "value": "14",
+            },
+            {
+                "label": "White Fox",
+                "value": "314",
+            },
+            {
+                "label": "Madhouse",
+                "value": "11",
+            },
+            {
+                "label": "Kyoto Animation",
+                "value": "2",
+            },
+            {
+                "label": "Toei Animation",
+                "value": "18",
+            },
+            {
+                "label": "Trigger",
+                "value": "803",
+            },
+            {
+                "label": "Shaft",
+                "value": "44",
+            },
+            {
+                "label": "CloverWorks",
+                "value": "1835",
+            },
+        ],
     }
 };

@@ -6,6 +6,8 @@ import SeasonFilter from "@/components/Filters/SeasonFilter/SeasonFilter";
 import ScoreFilter from "@/components/Filters/ScoreFilter/ScoreFilter";
 import DurationFilter from "@/components/Filters/DurationFilter/DurationFilter";
 import GenreFilter from "@/components/Filters/GenreFilter/GenreFilter";
+import RatingFilter from "@/components/Filters/RatingFilter/RatingFilter";
+import StudioFilter from "@/components/Filters/StudioFilter/StudioFilter";
 
 export default function AdvancedSearchFilters() {
     return (
@@ -18,6 +20,8 @@ export default function AdvancedSearchFilters() {
             <SeasonFilter />
             <ScoreFilter />
             <DurationFilter />
+            <RatingFilter />
+            <StudioFilter />
         </>
     );
 }

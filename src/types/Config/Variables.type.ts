@@ -3,6 +3,7 @@ import {MantineColor} from "@mantine/core";
 import {OrderType} from "@/types/Shikimori/Queries/Order.type";
 import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
 import {SeasonType} from "@/types/Shikimori/General/Season.type";
+import {AnimeRatingEnum} from "@/types/Shikimori/Responses/Enums/AnimeRating.enum";
 
 export type VariablesType = {
     imagePlaceholder: string;
@@ -97,6 +98,14 @@ export type VariablesType = {
         season: {
             label: string;
             value: SeasonType;
+        }[];
+        rating: {
+            label: string;
+            value: AnimeRatingEnum | string;
+        }[];
+        studio: {
+            label: string;
+            value: string;
         }[];
     };
 };
