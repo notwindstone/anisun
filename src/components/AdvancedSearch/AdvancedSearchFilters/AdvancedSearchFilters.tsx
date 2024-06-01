@@ -7,6 +7,7 @@ import {GenreType} from "@/types/Shikimori/Responses/Types/Genre.type";
 import {AdvancedSearchFiltersType} from "@/types/AdvancedSearch/AdvancedSearchFilters.type";
 import OrderFilter from "@/components/Filters/OrderFilter/OrderFilter";
 import KindFilter from "@/components/Filters/KindFilter/KindFilter";
+import LimitFilter from "@/components/Filters/LimitFilter/LimitFilter";
 
 export default function AdvancedSearchFilters() {
     const [selectData, setSelectData] = useState<AdvancedSearchFiltersType[] | undefined>();
@@ -78,6 +79,7 @@ export default function AdvancedSearchFilters() {
             />
             <OrderFilter />
             <KindFilter />
+            <LimitFilter />
         </>
     );
 }
