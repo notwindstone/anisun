@@ -55,9 +55,9 @@
 
 ## ⭐ Features
 
-* Watch anime with subtitles or dubbing (only on Russian language)
+* Watch anime with subtitles or dubbing (only on Russian language in  Kodik, SovetRomantica and Anilibria players)
 
-* Download anime using torrent or directly from website
+* Download anime using torrent or directly from website (.m3u8)
 
 * Account authentication
 
@@ -230,10 +230,16 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 ### Termux
 
-Using andronix
+<details>
+<summary>Expand steps</summary>
 
-> [!NOTE]  
-> Work in progress...
+1. Install any PRoot Linux distro using an Andronix, for example
+
+2. Install Node.js, NPM, and Git
+
+3. Follow the next steps from the [local installation](#local) paragraph
+
+</details>
 
 ## 💬 Contact
 
@@ -252,7 +258,7 @@ Using andronix
 ## ❤️ Credits
 
 * [zvshka](https://github.com/zvshka) for his help with project
-* 
+
 * cos (discord account) for his help with UI
 
 * [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) and [SovetRomantica](https://sovetromantica.com/) for their wonderful APIs, without which Animeth could not work
