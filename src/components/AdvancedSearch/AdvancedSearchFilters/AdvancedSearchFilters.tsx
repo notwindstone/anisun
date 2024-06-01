@@ -8,6 +8,7 @@ import DurationFilter from "@/components/Filters/DurationFilter/DurationFilter";
 import GenreFilter from "@/components/Filters/GenreFilter/GenreFilter";
 import RatingFilter from "@/components/Filters/RatingFilter/RatingFilter";
 import StudioFilter from "@/components/Filters/StudioFilter/StudioFilter";
+import CensoredFilter from "@/components/Filters/CensoredFilter/CensoredFilter";
 
 export default function AdvancedSearchFilters() {
     return (
@@ -22,6 +23,7 @@ export default function AdvancedSearchFilters() {
             <DurationFilter />
             <RatingFilter />
             <StudioFilter />
+            <CensoredFilter />
         </>
     );
 }
