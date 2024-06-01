@@ -7,6 +7,7 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import NProgress from "nprogress";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import TrendingCard from "@/components/TrendingGrid/TrendingCard/TrendingCard";
+import classes from './TrendingGrid.module.css';
 
 const TOTAL_PAGES = 500;
 const LIMIT = 32;
@@ -65,6 +66,7 @@ export default function TrendingGrid() {
                     Популярное
                 </Title>
                 <Pagination
+                    className={classes.pagination}
                     radius="md"
                     autoContrast
                     color={theme.color}
@@ -102,6 +104,7 @@ export default function TrendingGrid() {
                     )
                 }
                 <Pagination
+                    className={classes.pagination}
                     radius="md"
                     autoContrast
                     color={theme.color}
