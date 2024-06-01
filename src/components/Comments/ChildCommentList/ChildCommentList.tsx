@@ -6,7 +6,15 @@ import classes from './ChildCommentList.module.css';
 import CommentSkeleton from "@/components/Comments/CommentSkeleton/CommentSkeleton";
 import {nanoid} from "nanoid";
 
-export function ChildCommentList({ uuid, childComments }: { uuid: string, childComments: number }) {
+export function ChildCommentList({
+    uuid,
+    childComments,
+    level
+}: {
+    uuid: string,
+    childComments: number,
+    level: number,
+}) {
     const {
         data,
         error,
@@ -36,13 +44,15 @@ export function ChildCommentList({ uuid, childComments }: { uuid: string, childC
     ) : (
         commentGroup.map((comment) => {
             return (
-                <Comment key={comment.uuid} comment={comment} isChild />
+                <Comment key={comment.uuid} comment={comment} isChild level={level + 1} />
             );
         })
     );
 
+    const isHeavilyNested = level % 7 === 0;
+
     return (
-        <div className={classes.comments}>
+        <div className={`${classes.comments} ${isHeavilyNested && classes.heavilyNestedComments}`}>
             {childCommentSection}
         </div>
     );

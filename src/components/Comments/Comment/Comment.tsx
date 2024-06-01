@@ -20,7 +20,15 @@ import {MutationCommentType, MutationInputType } from "@/types/Comments/Mutation
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import useCustomTheme from "@/hooks/useCustomTheme";
 
-export function Comment({ comment, isChild }: { comment: CommentType, isChild?: boolean }) {
+export function Comment({
+    comment,
+    isChild,
+    level,
+}: {
+    comment: CommentType,
+    isChild?: boolean,
+    level: number,
+}) {
     const { theme } = useCustomTheme();
     const [editDelayed, setEditDelayed] = useState(false);
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false);
@@ -97,7 +105,7 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
             return false;
         }
 
-        if (message.length < 2 || message.length > 2000) {
+        if (message.length < 1 || message.length > 2000) {
             notify.incorrectInput();
 
             return false;
@@ -314,7 +322,29 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                  * */
                 hasOneChild
                     ? (
-                        <ChildCommentList uuid={comment.uuid} childComments={children} />
+                        <>
+                            {
+                                level === 1 && (
+                                    <UnstyledButton
+                                        className={classes.collapse}
+                                        onClick={toggleChild}
+                                    >
+                                        {
+                                            isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding({ replies: children, wordTypes: ['ответ', 'ответа', 'ответов'] })}`
+                                        }
+                                    </UnstyledButton>
+                                )
+                            }
+                            {
+                                (isExpandedChild || level !== 1) && (
+                                    <ChildCommentList
+                                        uuid={comment.uuid}
+                                        childComments={children}
+                                        level={level}
+                                    />
+                                )
+                            }
+                        </>
                     )
                     : hasMoreThanOneChild
                         ? (
@@ -327,7 +357,15 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                         isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding({ replies: children, wordTypes: ['ответ', 'ответа', 'ответов'] })}`
                                     }
                                 </UnstyledButton>
-                                {isExpandedChild && (<ChildCommentList uuid={comment.uuid} childComments={children} />)}
+                                {
+                                    isExpandedChild && (
+                                        <ChildCommentList
+                                            uuid={comment.uuid}
+                                            childComments={children}
+                                            level={level}
+                                        />
+                                    )
+                                }
                             </>
                         )
                         : null

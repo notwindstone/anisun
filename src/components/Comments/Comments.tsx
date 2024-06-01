@@ -111,7 +111,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
 
                     return commentGroup.map((comment) => {
                         return (
-                            <Comment key={comment.uuid} comment={comment} />
+                            <Comment key={comment.uuid} comment={comment} level={1} />
                         );
                     });
                 })

@@ -26,7 +26,7 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
 
         const message = ref.current?.value ?? "";
 
-        if (message.length < 2 || message.length > 2000) {
+        if (message.length < 1 || message.length > 2000) {
             return notify.incorrectInput();
         }
 

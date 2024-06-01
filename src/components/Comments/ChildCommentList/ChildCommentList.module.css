@@ -1,3 +1,8 @@
 .comments {
     margin-left: rem(32px);
 }
+
+.heavilyNestedComments {
+    margin-left: rem(-160px);
+    border-left: rem(1px) solid alpha(var(--mantine-color-default-border), 0.5);
+}
