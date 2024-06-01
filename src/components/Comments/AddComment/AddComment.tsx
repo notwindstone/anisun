@@ -108,7 +108,7 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                     variant="filled"
                     disabled={!isUser}
                 >
-                    Ответить
+                    Написать
                 </DecoratedButton>
             </Flex>
         </Paper>

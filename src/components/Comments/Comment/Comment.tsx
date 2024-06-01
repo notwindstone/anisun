@@ -293,7 +293,11 @@ export function Comment({ comment, isChild }: { comment: CommentType, isChild?: 
                                 sendVotes={handleNewVotes}
                             />
                         </Group>
-                        <DecoratedButton variant="light" onClick={toggleReply}>
+                        <DecoratedButton
+                            color="var(--animeth-text-contrast-color)"
+                            variant="transparent"
+                            onClick={toggleReply}
+                        >
                             Ответить
                         </DecoratedButton>
                     </Group>

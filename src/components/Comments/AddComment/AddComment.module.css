@@ -20,6 +20,7 @@
     --input-bd: none !important;
     --input-bd-focus: none !important;
     --input-bg: none !important;
+    --input-radius: none !important;
 }
 
 .input {
