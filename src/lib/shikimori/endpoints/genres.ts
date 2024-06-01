@@ -1,8 +1,8 @@
 import {options} from "@/lib/shikimori/options";
 import axios from "axios";
-import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response.interface";
 import {OptionType} from "@/types/Shikimori/Queries/Option.type";
 import {GenresType} from "@/types/Shikimori/Queries/Genres.type";
+import {GenresResponseInterface} from "@/types/Shikimori/Responses/Interfaces/GenresResponse.interface";
 
 export const genres = () => {
     const filters: OptionType[] = [
@@ -21,7 +21,7 @@ export const genres = () => {
 
         return await axios
             .request(params)
-            .then((response: ResponseInterface) => response.data.data)
+            .then((response: GenresResponseInterface) => response.data.data)
             .catch(() => {
                 return {
                     genres: []

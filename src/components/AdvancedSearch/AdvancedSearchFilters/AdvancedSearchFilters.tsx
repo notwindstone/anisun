@@ -1,4 +1,4 @@
-import {Select} from "@mantine/core";
+import {MultiSelect} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {useRouter} from "next/navigation";
 import {client} from "@/lib/shikimori/client";
@@ -23,8 +23,8 @@ export default function AdvancedSearchFilters() {
             })).genres;
     }
     console.log(data);
-    function selectGenre(genre: string | null) {
-        router.push("/titles?genre=" + genre);
+    function selectGenre(genres: string[] | null) {
+        router.push("/titles?genre=" + genres);
     }
 
     useEffect(() => {
@@ -68,8 +68,8 @@ export default function AdvancedSearchFilters() {
 
     return (
         <>
-            <Select
-                onChange={(genre) => selectGenre(genre)}
+            <MultiSelect
+                onChange={(genres) => selectGenre(genres)}
                 radius="md"
                 placeholder="Жанр"
                 data={selectData}

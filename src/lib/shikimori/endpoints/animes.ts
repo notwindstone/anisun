@@ -2,7 +2,7 @@ import axios from "axios";
 import {options} from "@/lib/shikimori/options";
 import {AnimesType} from "@/types/Shikimori/Queries/Animes.type";
 import {OptionType} from "@/types/Shikimori/Queries/Option.type";
-import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response.interface";
+import {AnimesResponseInterface} from "@/types/Shikimori/Responses/Interfaces/AnimesResponse.interface";
 
 export const animes = () => {
     const byId = async ({ ids, filter }: { ids: string, filter?: OptionType[] }) => {
@@ -14,7 +14,7 @@ export const animes = () => {
 
         return await axios
             .request(params)
-            .then((response: ResponseInterface) => response.data.data)
+            .then((response: AnimesResponseInterface) => response.data.data)
             .catch(() => {
                 return {
                     animes: []
@@ -40,7 +40,7 @@ export const animes = () => {
 
         return await axios
             .request(params)
-            .then((response: ResponseInterface) => response.data.data)
+            .then((response: AnimesResponseInterface) => response.data.data)
             .catch(() => {
                 return {
                     animes: []

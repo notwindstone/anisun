@@ -1,6 +1,6 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 
-export interface ResponseInterface {
+export interface AnimesResponseInterface {
     data: {
         data: {
             animes: AnimeType[]
