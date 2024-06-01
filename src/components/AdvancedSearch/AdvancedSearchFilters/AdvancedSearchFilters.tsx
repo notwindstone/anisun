@@ -27,9 +27,10 @@ export default function AdvancedSearchFilters() {
             .genres
             .all({
                 entryType: "Anime"
+            // @ts-ignore
             })).genres;
     }
-    console.log(data);
+    console.log(data, isPending, error);
     function selectGenre(genres: string[] | null) {
         router.push("/titles?genre=" + genres);
     }

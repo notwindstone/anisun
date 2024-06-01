@@ -11,7 +11,6 @@ import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {OrderType} from "@/types/Shikimori/Queries/Order.type";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
-import TrendingCard from "@/components/TrendingGrid/TrendingCard/TrendingCard";
 
 const LIMIT = 32;
 
@@ -42,7 +41,7 @@ export default function AdvancedSearch() {
         ],
         queryFn: getShikimoriData,
     });
-
+    console.log(isPending, error);
     async function getShikimoriData() {
         return (await shikimori
             .animes
