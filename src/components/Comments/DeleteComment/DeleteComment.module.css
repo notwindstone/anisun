@@ -1,0 +1,21 @@
+.iconWrapper {
+    @media screen and (max-width: rem(750px)) {
+        --ai-size: rem(24px) !important;
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        --ai-size: rem(20px) !important;
+    }
+}
+
+.icon {
+    @media screen and (max-width: rem(750px)) {
+        width: rem(16px);
+        height: rem(16px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        width: rem(14px);
+        height: rem(14px);
+    }
+}

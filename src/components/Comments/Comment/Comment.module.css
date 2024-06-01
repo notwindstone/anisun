@@ -3,19 +3,47 @@
     width: 100%;
     gap: rem(16px);
     padding: rem(16px);
+
+    @media screen and (max-width: rem(750px)) {
+        min-height: rem(144px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        min-height: rem(128px);
+    }
 }
 
 .stack {
     width: 100%;
     max-width: calc(100% - rem(64px));
+
+    @media screen and (max-width: rem(750px)) {
+        gap: rem(8px);
+    }
 }
 
 .deleted {
-    color: gray
+    color: gray;
+
+    @media screen and (max-width: rem(750px)) {
+        font-size: rem(14px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        font-size: rem(12px);
+    }
 }
 
 .edited {
-    color: gray
+    color: gray;
+
+    @media screen and (max-width: rem(750px)) {
+        font-size: rem(14px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        font-size: rem(12px);
+    }
 }
 
 .collapse {
@@ -26,12 +54,30 @@
     padding: rem(8px);
     font-size: rem(16px);
     line-height: rem(16px);
+
+    @media screen and (max-width: rem(750px)) {
+        margin-left: rem(72px);
+        font-size: rem(14px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        margin-left: rem(64px);
+        font-size: rem(12px);
+    }
 }
 
 .message {
     white-space: pre-wrap;
     overflow-wrap: break-word;
     max-width: 100%;
+
+    @media screen and (max-width: rem(750px)) {
+        font-size: rem(14px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        font-size: rem(12px);
+    }
 }
 
 .textArea {
@@ -44,4 +90,30 @@
     text-decoration: none;
     color: var(--animeth-text-contrast-color);
     font-weight: 500;
+}
+
+.avatar {
+    @media screen and (max-width: rem(750px)) {
+        --avatar-size: calc(3rem * var(--mantine-scale)) !important;
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        --avatar-size: calc(2.5rem * var(--mantine-scale)) !important;
+    }
+}
+
+.commentText {
+    @media screen and (max-width: rem(750px)) {
+        font-size: rem(14px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        font-size: rem(12px);
+    }
+}
+
+.commentGroup {
+    @media screen and (max-width: rem(750px)) {
+        gap: rem(8px);
+    }
 }

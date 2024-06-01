@@ -227,6 +227,9 @@ export function Comment({
         <div>
             <Flex className={classes.root}>
                 <Avatar
+                    classNames={{
+                        root: classes.avatar
+                    }}
                     src={comment.avatar}
                     alt={comment.username}
                     size={64}
@@ -236,18 +239,22 @@ export function Comment({
                     {comment.username[0]}
                 </Avatar>
                 <Stack className={classes.stack}>
-                    <Group justify="space-between">
+                    <Group className={classes.commentGroup} justify="space-between">
                         <Group gap={rem(8)}>
                             <Link className={classes.link} href={`/account/${comment.userid}`}>
-                                <Text>{comment.username}</Text>
+                                <Text className={classes.commentText}>
+                                    {comment.username}
+                                </Text>
                             </Link>
-                            <Text>{makeDate(comment.createdAt)}</Text>
+                            <Text className={classes.commentText}>
+                                {makeDate(comment.createdAt)}
+                            </Text>
                             {
                                 comment.isEdited && !comment.isDeleted
                                 && <Text className={classes.edited}>(изменено)</Text>
                             }
                         </Group>
-                        <Group>
+                        <Group className={classes.commentGroup}>
                             {
                                 !comment.isDeleted
                                 && <EditComment userid={comment.userid} sendEdit={handleStateEdit} />

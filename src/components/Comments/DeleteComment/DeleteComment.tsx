@@ -6,6 +6,7 @@ import {ActionIcon, Button, Flex, Modal, Text} from "@mantine/core";
 import {IconArrowBack, IconX} from "@tabler/icons-react";
 import {comments} from "@/lib/comments/comments";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
+import classes from './DeleteComment.module.css';
 
 export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: { uuid: string, userid: string, isInitiallyDeleted: boolean, sendDelete: (isDeleted: boolean) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -72,15 +73,22 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
                     <DecoratedButton onClick={() => handleDelete()}>Да</DecoratedButton>
                 </Flex>
             </Modal>
-            <ActionIcon variant="default" onClick={open}>
+            <ActionIcon
+                classNames={{
+                    root: classes.iconWrapper,
+                    icon: classes.iconWrapper,
+                }}
+                variant="default"
+                onClick={open}
+            >
                 {
 
                     isDeleted
                         ? (
-                            <IconArrowBack size={20} stroke={1.5} />
+                            <IconArrowBack className={classes.icon} size={20} stroke={1.5} />
                         )
                         : (
-                            <IconX size={20} stroke={1.5} />
+                            <IconX className={classes.icon} size={20} stroke={1.5} />
                         )
                 }
             </ActionIcon>

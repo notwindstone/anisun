@@ -5,6 +5,7 @@ import {notify} from "@/utils/Notifications/notify";
 import {comments} from "@/lib/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import classes from './VoteComment.module.css';
 
 export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) => void }) {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -117,8 +118,12 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
 
     return (
         <>
-            <Group gap={rem(16)}>
+            <Group className={classes.group} gap={rem(16)}>
                 <ActionIcon
+                    classNames={{
+                        root: classes.iconWrapper,
+                        icon: classes.iconWrapper,
+                    }}
                     autoContrast
                     color={theme.color}
                     variant={
@@ -128,10 +133,16 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
                     }
                     onClick={handleLike}
                 >
-                    <IconCaretUpFilled size={20} stroke={1.5} />
+                    <IconCaretUpFilled className={classes.icon} size={20} stroke={1.5} />
                 </ActionIcon>
-                <Text>{likes?.length}</Text>
+                <Text className={classes.text}>
+                    {likes?.length}
+                </Text>
                 <ActionIcon
+                    classNames={{
+                        root: classes.iconWrapper,
+                        icon: classes.iconWrapper,
+                    }}
                     autoContrast
                     color={theme.color}
                     variant={
@@ -141,9 +152,11 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
                     }
                     onClick={handleDislike}
                 >
-                    <IconCaretDownFilled size={20} stroke={1.5} />
+                    <IconCaretDownFilled className={classes.icon} size={20} stroke={1.5} />
                 </ActionIcon>
-                <Text>{dislikes?.length}</Text>
+                <Text className={classes.text}>
+                    {dislikes?.length}
+                </Text>
             </Group>
         </>
     );

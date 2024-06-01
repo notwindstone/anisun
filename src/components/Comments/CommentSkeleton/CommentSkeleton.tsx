@@ -4,7 +4,7 @@ import classes from './CommentSkeleton.module.css';
 export default function CommentSkeleton() {
     return (
         <Flex className={classes.root}>
-            <Skeleton height={64} circle visible />
+            <Skeleton className={classes.avatar} height={64} circle visible />
             <Stack className={classes.content}>
                 <Flex className={classes.info}>
                     <Skeleton className={classes.skeleton} radius="xl" height={20} width={160} />
