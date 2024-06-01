@@ -1,4 +1,6 @@
 import {AnimesType} from "@/types/Shikimori/Queries/Animes.type";
+import {GenresType} from "@/types/Shikimori/Queries/Genres.type";
+import {QueriesType} from "@/types/Shikimori/Queries/Queries.type";
 
 export const options = ({
     ids,
@@ -13,7 +15,8 @@ export const options = ({
     filter,
     score,
     kind,
-}: AnimesType) => {
+    queryType
+}: AnimesType & GenresType & QueriesType) => {
     function userFilterOptions() {
         if (!filter) {
             return;
@@ -73,6 +76,20 @@ export const options = ({
 
     if (score) {
         query = `${query}score: ${score}`;
+    }
+
+    let endpoint;
+
+    switch (queryType) {
+        case "animes":
+            endpoint = "animes";
+            break;
+        case "genres":
+            endpoint = "genres";
+            break;
+        default:
+            endpoint = "animes";
+            break;
     }
 
     const defaultFilter = `
@@ -217,7 +234,7 @@ export const options = ({
         data: {
             query: `
                     {
-                        animes(${query}) {
+                        ${endpoint}(${query}) {
                             ${userFilter ?? defaultFilter}
                         }
                     }

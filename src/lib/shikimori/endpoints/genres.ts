@@ -12,7 +12,10 @@ export const genres = () => {
     ];
 
     const all = async () => {
-        const params = options({ filter: filters });
+        const params = options({
+            filter: filters,
+            queryType: "genres",
+        });
 
         return await axios
             .request(params)

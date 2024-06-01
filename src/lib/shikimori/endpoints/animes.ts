@@ -6,7 +6,11 @@ import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response
 
 export const animes = () => {
     const byId = async ({ ids, filter }: { ids: string, filter?: OptionType[] }) => {
-        const params = options({ ids: ids, filter: filter });
+        const params = options({
+            ids: ids,
+            filter: filter,
+            queryType: "animes",
+        });
 
         return await axios
             .request(params)
@@ -31,6 +35,7 @@ export const animes = () => {
             filter: filter,
             score: score,
             kind: kind,
+            queryType: "animes",
         });
 
         return await axios

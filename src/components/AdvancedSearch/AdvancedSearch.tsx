@@ -11,6 +11,7 @@ import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {OrderType} from "@/types/Shikimori/Queries/Order.type";
 import {StatusType} from "@/types/Shikimori/General/Status.type";
+import TrendingCard from "@/components/TrendingGrid/TrendingCard/TrendingCard";
 
 const LIMIT = 32;
 
@@ -19,7 +20,6 @@ export default function AdvancedSearch() {
     const searchParams = useSearchParams();
     const studio = searchParams.get('studio') ?? '';
     const genre = searchParams.get('genre') ?? '';
-    const name = searchParams.get('name') ?? '';
     const season = searchParams.get('season') ?? '';
     // @ts-ignore
     const order: OrderType = searchParams.get('order') ?? '';
@@ -33,7 +33,7 @@ export default function AdvancedSearch() {
             'advancedSearch',
             studio,
             genre,
-            name,
+            input,
             season,
             order,
             kind,
@@ -47,7 +47,7 @@ export default function AdvancedSearch() {
         return (await shikimori
             .animes
             .list({
-                search: name,
+                search: input,
                 studio: studio,
                 genre: genre,
                 year: season,
@@ -56,10 +56,20 @@ export default function AdvancedSearch() {
                 status: status,
                 score: score,
                 limit: LIMIT,
+                filter: [
+                    "id",
+                    "url",
+                    "russian",
+                    "status",
+                    "score",
+                    "poster { id originalUrl mainUrl }",
+                    "episodes",
+                    "episodesAired"
+                ]
             })
         ).animes;
     }
-
+    console.log(data);
     return (
         <AdvancedSearchContext.Provider
             value={{
@@ -70,6 +80,11 @@ export default function AdvancedSearch() {
             <Flex className={classes.wrapper}>
                 <SearchInput />
                 <AdvancedSearchFilters />
+                {
+                    data && (
+                        <TrendingCard anime={data[0]} />
+                    )
+                }
             </Flex>
         </AdvancedSearchContext.Provider>
     );
