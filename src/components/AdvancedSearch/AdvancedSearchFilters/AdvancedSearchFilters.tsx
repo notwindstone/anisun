@@ -8,6 +8,7 @@ import {AdvancedSearchFiltersType} from "@/types/AdvancedSearch/AdvancedSearchFi
 import OrderFilter from "@/components/Filters/OrderFilter/OrderFilter";
 import KindFilter from "@/components/Filters/KindFilter/KindFilter";
 import LimitFilter from "@/components/Filters/LimitFilter/LimitFilter";
+import StatusFilter from "@/components/Filters/StatusFilter/StatusFilter";
 
 export default function AdvancedSearchFilters() {
     const [selectData, setSelectData] = useState<AdvancedSearchFiltersType[] | undefined>();
@@ -80,6 +81,7 @@ export default function AdvancedSearchFilters() {
             <OrderFilter />
             <KindFilter />
             <LimitFilter />
+            <StatusFilter />
         </>
     );
 }
