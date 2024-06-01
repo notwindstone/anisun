@@ -106,5 +106,49 @@ export const variables: VariablesType = {
         "pv": "Проморолик",
         "cm": "Реклама",
         "default": "Неизвестно",
+    },
+    "filters": {
+        "order": [
+            {
+                "label": "Айди (по возрастанию)",
+                "value": "id"
+            },
+            {
+                "label": "Айди (по убыванию)",
+                "value": "id_desc"
+            },
+            {
+                "label": "Рейтинг",
+                "value": "ranked"
+            },
+            {
+                "label": "Тип",
+                "value": "kind"
+            },
+            {
+                "label": "Популярность",
+                "value": "popularity"
+            },
+            {
+                "label": "Название",
+                "value": "name"
+            },
+            {
+                "label": "Дата выхода",
+                "value": "aired_on"
+            },
+            {
+                "label": "Кол-во эпизодов",
+                "value": "episodes"
+            },
+            {
+                "label": "Статус",
+                "value": "status"
+            },
+            {
+                "label": "Случайно",
+                "value": "random"
+            },
+        ],
     }
 };

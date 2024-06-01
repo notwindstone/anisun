@@ -1,5 +1,6 @@
 import {StatusType} from "@/types/Shikimori/General/Status.type";
 import {MantineColor} from "@mantine/core";
+import {OrderType} from "@/types/Shikimori/Queries/Order.type";
 
 export type VariablesType = {
     imagePlaceholder: string;
@@ -81,5 +82,11 @@ export type VariablesType = {
         pv: string;
         cm: string;
         default: string;
+    };
+    filters: {
+        order: {
+            label: string;
+            value: OrderType;
+        }[];
     };
 };
