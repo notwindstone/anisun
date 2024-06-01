@@ -5,6 +5,7 @@ import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 export default function DurationFilter() {
     const { durations, setDurations } = useContext(AdvancedSearchFiltersContext);
 
+    console.log("durations");
     return (
         <MultiSelect
             value={durations}

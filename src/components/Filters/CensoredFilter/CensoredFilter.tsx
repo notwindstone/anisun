@@ -1,12 +1,15 @@
 import {Switch} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
-import {useContext} from "react";
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
-export default function CensoredFilter() {
+export default function CensoredFilter({
+    censored,
+    toggleCensored
+}: {
+    censored: boolean;
+    toggleCensored: () => void;
+}) {
     const { theme } = useCustomTheme();
-    const { censored, toggleCensored } = useContext(AdvancedSearchFiltersContext);
-
+    console.log("test");
     return (
         <>
             <Switch
