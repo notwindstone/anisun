@@ -67,6 +67,7 @@ export default function SeasonFilter() {
                 isYearsRanged ? (
                     <>
                         <RangeSlider
+                            minRange={1}
                             marks={[
                                 { value: 1920, label: '1920' },
                                 { value: 1930, label: '1930' },
