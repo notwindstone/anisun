@@ -214,5 +214,23 @@ export const variables: VariablesType = {
                 "value": "cm",
             },
         ],
+        "season": [
+            {
+                "label": "Зима",
+                "value": "winter",
+            },
+            {
+                "label": "Весна",
+                "value": "spring",
+            },
+            {
+                "label": "Лето",
+                "value": "summer",
+            },
+            {
+                "label": "Осень",
+                "value": "fall",
+            },
+        ],
     }
 };

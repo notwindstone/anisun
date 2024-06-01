@@ -2,6 +2,7 @@ import {StatusType} from "@/types/Shikimori/General/Status.type";
 import {MantineColor} from "@mantine/core";
 import {OrderType} from "@/types/Shikimori/Queries/Order.type";
 import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
+import {SeasonType} from "@/types/Shikimori/General/Season.type";
 
 export type VariablesType = {
     imagePlaceholder: string;
@@ -92,6 +93,10 @@ export type VariablesType = {
         kind: {
             label: string;
             value: AnimeKindEnum | string;
+        }[];
+        season: {
+            label: string;
+            value: SeasonType;
         }[];
     };
 };
