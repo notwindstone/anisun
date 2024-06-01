@@ -66,7 +66,9 @@ export default function TrendingGrid() {
                     Популярное
                 </Title>
                 <Pagination
-                    className={classes.pagination}
+                    classNames={{
+                        control: classes.control
+                    }}
                     radius="md"
                     autoContrast
                     color={theme.color}
@@ -104,7 +106,9 @@ export default function TrendingGrid() {
                     )
                 }
                 <Pagination
-                    className={classes.pagination}
+                    classNames={{
+                        control: classes.control
+                    }}
                     radius="md"
                     autoContrast
                     color={theme.color}

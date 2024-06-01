@@ -55,6 +55,7 @@
     font-size: rem(16px);
     line-height: rem(16px);
 
+
     @media screen and (max-width: rem(750px)) {
         margin-left: rem(72px);
         font-size: rem(14px);

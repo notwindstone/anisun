@@ -116,13 +116,20 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
         }, 500);
     };
 
+    const likedIconWrapperClasses = isLiked
+        ? classes.iconWrapper
+        : `${classes.iconWrapper} ${classes.iconWrapperNotActive}`;
+    const dislikedIconWrapperClasses = isDisliked
+        ? classes.iconWrapper
+        : `${classes.iconWrapper} ${classes.iconWrapperNotActive}`;
+
     return (
         <>
             <Group className={classes.group} gap={rem(16)}>
                 <ActionIcon
                     classNames={{
-                        root: classes.iconWrapper,
-                        icon: classes.iconWrapper,
+                        root: likedIconWrapperClasses,
+                        icon: likedIconWrapperClasses,
                     }}
                     autoContrast
                     color={theme.color}
@@ -140,8 +147,8 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
                 </Text>
                 <ActionIcon
                     classNames={{
-                        root: classes.iconWrapper,
-                        icon: classes.iconWrapper,
+                        root: dislikedIconWrapperClasses,
+                        icon: dislikedIconWrapperClasses,
                     }}
                     autoContrast
                     color={theme.color}

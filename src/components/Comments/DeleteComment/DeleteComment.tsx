@@ -62,14 +62,25 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
 
     return (
         <>
-            <Modal opened={opened} onClose={close} title={modalTitle} centered>
+            <Modal
+                classNames={{
+                    content: classes.modal,
+                    header: classes.modal
+                }}
+                opened={opened}
+                onClose={close}
+                title={modalTitle}
+                centered
+            >
                 <Text>{modalDescription}</Text>
                 <Flex
                     mt="1rem"
                     justify="flex-end"
                     gap="1rem"
                 >
-                    <Button variant="default" onClick={close}>Нет</Button>
+                    <Button className={classes.button} variant="default" onClick={close}>
+                        Нет
+                    </Button>
                     <DecoratedButton onClick={() => handleDelete()}>Да</DecoratedButton>
                 </Flex>
             </Modal>
