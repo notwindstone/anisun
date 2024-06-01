@@ -18,6 +18,11 @@ export default function RecommendationsNewAnimeData({
     translatedKind: string;
     translatedStatus: string;
 }) {
+    const isReleased = anime?.status === 'released';
+    const episodesBadge = isReleased
+        ? `${anime?.episodes} / ${anime?.episodes}`
+        : `${anime?.episodesAired} / ${anime?.episodes}`;
+
     return (
         <div className={classes.recommendationWrapper}>
             <RecommendationsShareButton url={anime?.url.replace('https://shikimori.one/animes/', '')}/>
@@ -54,7 +59,7 @@ export default function RecommendationsNewAnimeData({
                                 color="black"
                                 className={classes.episodesBadge}
                             >
-                                {anime.episodesAired} / {anime.episodes}
+                                {episodesBadge}
                             </Badge>
                         </div>
                     </Container>

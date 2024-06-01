@@ -12,7 +12,11 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
     const { theme } = useCustomTheme();
     const animeStatus = anime?.status ?? "";
     const isAnnounced = animeStatus === 'anons';
+    const isReleased = animeStatus === 'released';
     const scoreBadgeColor = getScoreBadgeColor({ score: anime?.score });
+    const episodesBadge = isReleased
+        ? `${anime?.episodes} / ${anime?.episodes}`
+        : `${anime?.episodesAired} / ${anime?.episodes}`;
 
     return (
         <Box
@@ -50,7 +54,7 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
                         {
                             !isAnnounced && (
                                 <Badge autoContrast className={classes.episodes} color={theme.color}>
-                                    {anime?.episodesAired} / {anime?.episodes}
+                                    {episodesBadge}
                                 </Badge>
                             )
                         }

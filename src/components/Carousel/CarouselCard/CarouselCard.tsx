@@ -24,8 +24,11 @@ export default function CarouselCard({
     const calculatedColor = isMantineColor ? mantineColor : color;
     const animeStatus = animeTitle?.status ?? "";
     const isAnnounced = animeStatus === 'anons';
+    const isReleased = animeStatus === 'released';
     const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
-
+    const episodesBadge = isReleased
+        ? `${animeTitle?.episodes} / ${animeTitle?.episodes}`
+        : `${animeTitle?.episodesAired} / ${animeTitle?.episodes}`;
 
     return (
         <Paper
@@ -67,7 +70,7 @@ export default function CarouselCard({
                     {
                         !isAnnounced && (
                             <Badge autoContrast className={classes.episodes} color={theme.color}>
-                                {animeTitle?.episodesAired} / {animeTitle?.episodes}
+                                {episodesBadge}
                             </Badge>
                         )
                     }

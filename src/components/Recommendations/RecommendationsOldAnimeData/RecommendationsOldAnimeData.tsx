@@ -18,6 +18,11 @@ export default function RecommendationsOldAnimeData({
     translatedKind: string;
     translatedStatus: string;
 }) {
+    const isReleased = anime?.status === 'released';
+    const episodesBadge = isReleased
+        ? `${anime?.episodes} / ${anime?.episodes}`
+        : `${anime?.episodes_aired} / ${anime?.episodes}`;
+
     return (
         <div className={classes.recommendationWrapper}>
             <RecommendationsShareButton url={anime.url}/>
@@ -54,7 +59,7 @@ export default function RecommendationsOldAnimeData({
                                 color="black"
                                 className={classes.episodesBadge}
                             >
-                                {anime.episodes_aired} / {anime.episodes}
+                                {episodesBadge}
                             </Badge>
                         </div>
                     </Container>
