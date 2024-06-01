@@ -10,6 +10,7 @@ import {
     SideBarAccountPopoverContextType
 } from "@/types/SideBar/SideBarAccountPopoverContext.type";
 import {AdvancedSearchContextType} from "@/types/AdvancedSearch/AdvancedSearchContext.type";
+import {AdvancedSearchFiltersContextType} from "@/types/AdvancedSearch/AdvancedSearchFiltersContext.type";
 
 export const CustomThemeContext = createContext<CustomThemeContextType>({
     theme: {
@@ -63,4 +64,37 @@ export const MobileNavbarModalsContext = createContext<SideBarAccountPopoverCont
 export const AdvancedSearchContext = createContext<AdvancedSearchContextType>({
     searchInput: "",
     setSearchInput: () => {},
+});
+
+export const AdvancedSearchFiltersContext = createContext<AdvancedSearchFiltersContextType>({
+    censored: false,
+    toggleCensored: () => {},
+    durations: [],
+    setDurations: () => {},
+    demographicGenresValue: [],
+    setDemographicGenresValue: () => {},
+    genreGenresValue: [],
+    setGenreGenresValue: () => {},
+    themeGenresValue: [],
+    setThemeGenresValue: () => {},
+    kinds: [],
+    setKinds: () => {},
+    limit: 16,
+    setLimit: () => {},
+    order: variables.sorting.latest.value,
+    setOrder: () => {},
+    ratings: [],
+    setRatings: () => {},
+    score: 7,
+    setScore: () => {},
+    year: 2024,
+    setYear: () => {},
+    rangedYears: [2020, 2024],
+    setRangedYears: () => {},
+    yearsRanged: false,
+    toggleYearsRanged: () => {},
+    statuses: [],
+    setStatuses: () => {},
+    studio: null,
+    setStudio: () => {},
 });
