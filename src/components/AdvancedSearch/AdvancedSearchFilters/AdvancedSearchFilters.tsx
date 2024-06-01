@@ -11,6 +11,7 @@ import LimitFilter from "@/components/Filters/LimitFilter/LimitFilter";
 import StatusFilter from "@/components/Filters/StatusFilter/StatusFilter";
 import SeasonFilter from "@/components/Filters/SeasonFilter/SeasonFilter";
 import ScoreFilter from "@/components/Filters/ScoreFilter/ScoreFilter";
+import DurationFilter from "@/components/Filters/DurationFilter/DurationFilter";
 
 export default function AdvancedSearchFilters() {
     const [selectData, setSelectData] = useState<AdvancedSearchFiltersType[] | undefined>();
@@ -86,6 +87,7 @@ export default function AdvancedSearchFilters() {
             <StatusFilter />
             <SeasonFilter />
             <ScoreFilter />
+            <DurationFilter />
         </>
     );
 }
