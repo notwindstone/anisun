@@ -1,9 +1,10 @@
-import {useState} from "react";
+import {useContext} from "react";
 import {Select} from "@mantine/core";
 import {variables} from "@/configs/variables";
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function StudioFilter() {
-    const [studio, setStudio] = useState<string | null>('');
+    const { studio, setStudio } = useContext(AdvancedSearchFiltersContext);
 
     return (
         <>

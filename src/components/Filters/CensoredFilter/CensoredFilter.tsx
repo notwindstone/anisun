@@ -1,10 +1,11 @@
 import {Switch} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
-import {useDisclosure} from "@mantine/hooks";
+import {useContext} from "react";
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function CensoredFilter() {
     const { theme } = useCustomTheme();
-    const [censored, { toggle }] = useDisclosure(false);
+    const { censored, toggleCensored } = useContext(AdvancedSearchFiltersContext);
 
     return (
         <>
@@ -12,7 +13,7 @@ export default function CensoredFilter() {
                 label="Включить цензуру"
                 color={theme.color}
                 checked={censored}
-                onChange={toggle}
+                onChange={toggleCensored}
             />
         </>
     );

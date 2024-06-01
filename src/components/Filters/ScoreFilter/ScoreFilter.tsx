@@ -1,10 +1,11 @@
 import useCustomTheme from "@/hooks/useCustomTheme";
-import {useState} from "react";
+import {useContext} from "react";
 import {Slider} from "@mantine/core";
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function ScoreFilter() {
     const { theme } = useCustomTheme();
-    const [score, setScore] = useState(7);
+    const { score, setScore } = useContext(AdvancedSearchFiltersContext);
 
     return (
         <Slider

@@ -1,9 +1,10 @@
 import {MultiSelect} from "@mantine/core";
-import {useState} from "react";
+import {useContext} from "react";
 import {variables} from "@/configs/variables";
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function RatingFilter() {
-    const [ratings, setRatings] = useState<string[]>();
+    const { ratings, setRatings } = useContext(AdvancedSearchFiltersContext);
 
     return (
         <>

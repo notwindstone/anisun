@@ -1,9 +1,10 @@
 import {MultiSelect} from "@mantine/core";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {variables} from "@/configs/variables";
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function StatusFilter() {
-    const [statuses, setStatuses] = useState<string[]>([]);
+    const { statuses, setStatuses } = useContext(AdvancedSearchFiltersContext);
     const statusesArray = Object.values(variables.sorting);
 
     return (

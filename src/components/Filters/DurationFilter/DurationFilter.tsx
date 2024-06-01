@@ -1,8 +1,9 @@
 import {MultiSelect} from "@mantine/core";
-import {useState} from "react";
+import {useContext} from "react";
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function DurationFilter() {
-    const [durations, setDurations] = useState<string[]>([]);
+    const { durations, setDurations } = useContext(AdvancedSearchFiltersContext);
 
     return (
         <MultiSelect

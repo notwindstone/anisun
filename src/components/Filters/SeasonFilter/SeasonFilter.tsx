@@ -1,9 +1,9 @@
 import {Group, MultiSelect, NumberInput, RangeSlider, Slider, Switch} from "@mantine/core";
-import {useState} from "react";
+import {useContext} from "react";
 import {variables} from "@/configs/variables";
-import {useDisclosure} from "@mantine/hooks";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './SeasonFilter.module.css';
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 const FIRST_ANIME_AIRED_ON = 1917;
 const EARLIER_YEAR = 2000;
@@ -22,12 +22,19 @@ const SMALL_RANGE_MARKS = [
 ];
 
 export default function SeasonFilter() {
-    const [yearStart, setYearStart] = useState(FIRST_ANIME_AIRED_ON);
     const currentYear = new Date().getFullYear();
-    const [rangedYears, setRangedYears] = useState<[number, number]>([yearStart, currentYear]);
-    const [year, setYear] = useState(currentYear);
-    const [seasons, setSeasons] = useState<string[]>([]);
-    const [isYearsRanged, { toggle }] = useDisclosure(false);
+    const {
+        year,
+        setYear,
+        rangedYears,
+        setRangedYears,
+        yearStart,
+        setYearStart,
+        yearsRanged,
+        toggleYearsRanged,
+        seasons,
+        setSeasons,
+    } = useContext(AdvancedSearchFiltersContext);
     const { theme } = useCustomTheme();
 
     function setYearWithChecks({ year, toValue }: { year: number | string, toValue: string }) {
@@ -66,8 +73,8 @@ export default function SeasonFilter() {
                 <Switch
                     label="Выбрать промежутком"
                     color={theme.color}
-                    checked={isYearsRanged}
-                    onChange={toggle}
+                    checked={yearsRanged}
+                    onChange={toggleYearsRanged}
                 />
                 <Switch
                     label={`Начать промежуток с ${EARLIER_YEAR} года`}
@@ -77,7 +84,7 @@ export default function SeasonFilter() {
                 />
             </Group>
             {
-                isYearsRanged ? (
+                yearsRanged ? (
                     <>
                         <RangeSlider
                             minRange={1}

@@ -1,17 +1,23 @@
 import {MultiSelect, Skeleton} from "@mantine/core";
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {AdvancedSearchFiltersType} from "@/types/AdvancedSearch/AdvancedSearchFilters.type";
 import {GenreType} from "@/types/Shikimori/Responses/Types/Genre.type";
+import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function GenreFilter() {
     const [demographicGenresData, setDemographicGenres] = useState<AdvancedSearchFiltersType>();
     const [genreGenresData, setGenreGenres] = useState<AdvancedSearchFiltersType>();
     const [themeGenresData, setThemeGenres] = useState<AdvancedSearchFiltersType>();
-    const [demographicGenresValue, setDemographicGenresValue] = useState<string[]>([]);
-    const [genreGenresValue, setGenreGenresValue] = useState<string[]>([]);
-    const [themeGenresValue, setThemeGenresValue] = useState<string[]>([]);
+    const {
+        demographicGenresValue,
+        setDemographicGenresValue,
+        genreGenresValue,
+        setGenreGenresValue,
+        themeGenresValue,
+        setThemeGenresValue,
+    } = useContext(AdvancedSearchFiltersContext);
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['genres'],
