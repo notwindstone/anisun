@@ -53,7 +53,7 @@ export default function AdvancedSearchFiltersChildren() {
     const MemoizedGenreFilter = memo(
         GenreFilter,
     );
-    const MemoizedCensoredFilter = useMemo(() =>
+    const memoizedCensoredFilter = useMemo(() =>
             <CensoredFilter censored={censored} toggleCensored={toggleCensored} />,
         [censored, toggleCensored]
     );
@@ -70,7 +70,7 @@ export default function AdvancedSearchFiltersChildren() {
             <DurationFilter />
             <RatingFilter />
             <StudioFilter />
-            {MemoizedCensoredFilter}
+            {memoizedCensoredFilter}
         </>
     );
 }
