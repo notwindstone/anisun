@@ -2,6 +2,7 @@ import {options} from "@/lib/shikimori/options";
 import axios from "axios";
 import {ResponseInterface} from "@/types/Shikimori/Responses/Interfaces/Response.interface";
 import {OptionType} from "@/types/Shikimori/Queries/Option.type";
+import {GenresType} from "@/types/Shikimori/Queries/Genres.type";
 
 export const genres = () => {
     const filters: OptionType[] = [
@@ -11,10 +12,11 @@ export const genres = () => {
         "russian",
     ];
 
-    const all = async () => {
+    const all = async ({ entryType }: GenresType) => {
         const params = options({
             filter: filters,
             queryType: "genres",
+            entryType: entryType,
         });
 
         return await axios

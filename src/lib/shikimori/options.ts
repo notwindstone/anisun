@@ -15,7 +15,8 @@ export const options = ({
     filter,
     score,
     kind,
-    queryType
+    queryType,
+    entryType,
 }: AnimesType & GenresType & QueriesType) => {
     function userFilterOptions() {
         if (!filter) {
@@ -76,6 +77,10 @@ export const options = ({
 
     if (score) {
         query = `${query}score: ${score}`;
+    }
+
+    if (entryType) {
+        query = `${query}entryType: ${entryType}`;
     }
 
     let endpoint;

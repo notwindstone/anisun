@@ -1,8 +1,10 @@
 import {Select} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {useRouter} from "next/navigation";
+import {client} from "@/lib/shikimori/client";
 
 export default function AdvancedSearchFilters() {
+    const shikimori = client();
     const router = useRouter();
     const { data, isPending, error } = useQuery({
         queryKey: ['genres'],
@@ -10,9 +12,13 @@ export default function AdvancedSearchFilters() {
     });
 
     async function getGenres() {
-
+        return await shikimori
+            .genres
+            .all({
+                entryType: "Anime"
+            });
     }
-
+    console.log(data);
     function selectGenre(genre: string | null) {
         router.push("/titles?genre=" + genre);
     }
