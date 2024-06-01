@@ -5,11 +5,11 @@
     padding: rem(16px);
 
     @media screen and (max-width: rem(750px)) {
-        height: rem(144px);
+        height: rem(112px);
     }
 
     @media screen and (max-width: rem(500px)) {
-        height: rem(128px);
+        height: rem(96px);
     }
 }
 

@@ -1,0 +1,12 @@
+.center {
+    height: rem(128px);
+    background: var(--animeth-background-color);
+
+    @media screen and (max-width: rem(750px)) {
+        height: rem(112px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        height: rem(96px);
+    }
+}

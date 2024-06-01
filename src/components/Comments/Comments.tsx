@@ -177,7 +177,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
             {
                 isFetchingNextPage
                     ? <CommentSkeleton />
-                    : <Center ref={ref} bg="var(--animeth-background-color)" h={128} />
+                    : <Center ref={ref} className={classes.center} />
             }
         </Box>
     );
