@@ -1,7 +1,6 @@
-import {MultiSelect} from "@mantine/core";
+import {MultiSelect, Skeleton} from "@mantine/core";
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
-import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {AdvancedSearchFiltersType} from "@/types/AdvancedSearch/AdvancedSearchFilters.type";
 import {GenreType} from "@/types/Shikimori/Responses/Types/Genre.type";
@@ -10,7 +9,9 @@ export default function GenreFilter() {
     const [demographicGenresData, setDemographicGenres] = useState<AdvancedSearchFiltersType>();
     const [genreGenresData, setGenreGenres] = useState<AdvancedSearchFiltersType>();
     const [themeGenresData, setThemeGenres] = useState<AdvancedSearchFiltersType>();
-    const router = useRouter();
+    const [demographicGenresValue, setDemographicGenresValue] = useState<string[]>([]);
+    const [genreGenresValue, setGenreGenresValue] = useState<string[]>([]);
+    const [themeGenresValue, setThemeGenresValue] = useState<string[]>([]);
     const shikimori = client();
     const { data, isPending, error } = useQuery({
         queryKey: ['genres'],
@@ -24,10 +25,6 @@ export default function GenreFilter() {
                 entryType: "Anime"
                 // @ts-ignore
             })).genres;
-    }
-
-    function selectGenre(genres: string[] | null) {
-        router.push("/titles?genre=" + genres);
     }
 
     useEffect(() => {
@@ -64,24 +61,41 @@ export default function GenreFilter() {
         setThemeGenres(themeGenres);
     }, [data]);
 
-    console.log(data, isPending, error);
+    if (isPending) {
+        return (
+            <>
+                <Skeleton radius="md" w="100%" h={36} />
+                <Skeleton radius="md" w="100%" h={36} />
+                <Skeleton radius="md" w="100%" h={36} />
+            </>
+        );
+    }
+
+    if (error) {
+        return (
+            <>Ошибка: {error.message}</>
+        );
+    }
 
     return (
         <>
             <MultiSelect
-                onChange={(genres) => selectGenre(genres)}
+                value={demographicGenresValue}
+                onChange={setDemographicGenresValue}
                 radius="md"
                 placeholder="Аудитория"
                 data={demographicGenresData}
             />
             <MultiSelect
-                onChange={(genres) => selectGenre(genres)}
+                value={genreGenresValue}
+                onChange={setGenreGenresValue}
                 radius="md"
                 placeholder="Жанры"
                 data={genreGenresData}
             />
             <MultiSelect
-                onChange={(genres) => selectGenre(genres)}
+                value={themeGenresValue}
+                onChange={setThemeGenresValue}
                 radius="md"
                 placeholder="Темы"
                 data={themeGenresData}

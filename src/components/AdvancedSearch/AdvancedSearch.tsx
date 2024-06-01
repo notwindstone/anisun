@@ -1,7 +1,7 @@
 "use client";
 
 import SearchInput from "@/components/SearchInput/SearchInput";
-import {Flex, rem} from "@mantine/core";
+import {Flex} from "@mantine/core";
 import AdvancedSearchFilters from "@/components/AdvancedSearch/AdvancedSearchFilters/AdvancedSearchFilters";
 import {useSearchParams} from "next/navigation";
 import classes from './AdvancedSearch.module.css';
@@ -69,6 +69,7 @@ export default function AdvancedSearch() {
         ).animes;
     }
     console.log(data);
+    console.log(studio, genre, season, kind);
     return (
         <AdvancedSearchContext.Provider
             value={{
