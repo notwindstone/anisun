@@ -3,6 +3,7 @@ import {useState} from "react";
 import {variables} from "@/configs/variables";
 import {useDisclosure} from "@mantine/hooks";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import classes from './SeasonFilter.module.css';
 
 const FIRST_ANIME_AIRED_ON = 1917;
 
@@ -78,6 +79,9 @@ export default function SeasonFilter() {
                 ) : (
                     <>
                         <Slider
+                            classNames={{
+                                bar: classes.bar
+                            }}
                             color={theme.color}
                             value={year}
                             onChange={setYear}
