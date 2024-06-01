@@ -1,7 +1,7 @@
 "use client";
 
 import SearchInput from "@/components/SearchInput/SearchInput";
-import {Flex} from "@mantine/core";
+import {Flex, rem} from "@mantine/core";
 import AdvancedSearchFilters from "@/components/AdvancedSearch/AdvancedSearchFilters/AdvancedSearchFilters";
 import {useSearchParams} from "next/navigation";
 import classes from './AdvancedSearch.module.css';
@@ -76,7 +76,7 @@ export default function AdvancedSearch() {
                 setSearchInput: setInput
             }}
         >
-            <Flex direction="column" className={classes.wrapper}>
+            <Flex className={classes.wrapper}>
                 <SearchInput />
                 <AdvancedSearchFilters />
             </Flex>

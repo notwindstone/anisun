@@ -7,6 +7,19 @@ import classes from './SeasonFilter.module.css';
 
 const FIRST_ANIME_AIRED_ON = 1917;
 const EARLIER_YEAR = 2000;
+const BIG_RANGE_MARKS = [
+    { value: 1920, label: '1920' },
+    { value: 1940, label: '1940' },
+    { value: 1960, label: '1960' },
+    { value: 1980, label: '1980' },
+    { value: 2000, label: '2000' },
+    { value: 2020, label: '2020' },
+];
+const SMALL_RANGE_MARKS = [
+    { value: 2000, label: '2000' },
+    { value: 2010, label: '2010' },
+    { value: 2020, label: '2020' },
+];
 
 export default function SeasonFilter() {
     const [yearStart, setYearStart] = useState(FIRST_ANIME_AIRED_ON);
@@ -68,19 +81,7 @@ export default function SeasonFilter() {
                     <>
                         <RangeSlider
                             minRange={1}
-                            marks={[
-                                { value: 1920, label: '1920' },
-                                { value: 1930, label: '1930' },
-                                { value: 1940, label: '1940' },
-                                { value: 1950, label: '1950' },
-                                { value: 1960, label: '1960' },
-                                { value: 1970, label: '1970' },
-                                { value: 1980, label: '1980' },
-                                { value: 1990, label: '1990' },
-                                { value: 2000, label: '2000' },
-                                { value: 2010, label: '2010' },
-                                { value: 2020, label: '2020' },
-                            ]}
+                            marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
                             color={theme.color}
                             value={rangedYears}
                             onChange={setRangedYears}
@@ -111,19 +112,7 @@ export default function SeasonFilter() {
                 ) : (
                     <>
                         <Slider
-                            marks={[
-                                { value: 1920, label: '1920' },
-                                { value: 1930, label: '1930' },
-                                { value: 1940, label: '1940' },
-                                { value: 1950, label: '1950' },
-                                { value: 1960, label: '1960' },
-                                { value: 1970, label: '1970' },
-                                { value: 1980, label: '1980' },
-                                { value: 1990, label: '1990' },
-                                { value: 2000, label: '2000' },
-                                { value: 2010, label: '2010' },
-                                { value: 2020, label: '2020' },
-                            ]}
+                            marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
                             classNames={{
                                 bar: classes.bar
                             }}

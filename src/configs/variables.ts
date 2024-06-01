@@ -120,39 +120,39 @@ export const variables: VariablesType = {
     "filters": {
         "order": [
             {
-                "label": "Айди (по возрастанию)",
+                "label": "По возрастанию айди",
                 "value": "id"
             },
             {
-                "label": "Айди (по убыванию)",
+                "label": "По убыванию айди",
                 "value": "id_desc"
             },
             {
-                "label": "Рейтинг",
+                "label": "По рейтингу",
                 "value": "ranked"
             },
             {
-                "label": "Тип",
+                "label": "По типу",
                 "value": "kind"
             },
             {
-                "label": "Популярность",
+                "label": "По популярности",
                 "value": "popularity"
             },
             {
-                "label": "Название",
+                "label": "По алфавиту",
                 "value": "name"
             },
             {
-                "label": "Дата выхода",
+                "label": "По дате выхода",
                 "value": "aired_on"
             },
             {
-                "label": "Кол-во эпизодов",
+                "label": "По кол-ву эпизодов",
                 "value": "episodes"
             },
             {
-                "label": "Статус",
+                "label": "По статусу",
                 "value": "status"
             },
             {

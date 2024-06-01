@@ -9,10 +9,11 @@ import GenreFilter from "@/components/Filters/GenreFilter/GenreFilter";
 import RatingFilter from "@/components/Filters/RatingFilter/RatingFilter";
 import StudioFilter from "@/components/Filters/StudioFilter/StudioFilter";
 import CensoredFilter from "@/components/Filters/CensoredFilter/CensoredFilter";
+import {Stack} from "@mantine/core";
 
 export default function AdvancedSearchFilters() {
     return (
-        <>
+        <Stack flex={1}>
             <GenreFilter />
             <OrderFilter />
             <KindFilter />
@@ -24,6 +25,6 @@ export default function AdvancedSearchFilters() {
             <RatingFilter />
             <StudioFilter />
             <CensoredFilter />
-        </>
+        </Stack>
     );
 }
