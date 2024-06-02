@@ -13,10 +13,10 @@ export default function getAllSearchParams(searchParams: ReadonlyURLSearchParams
     const score = parseInt(searchParams.get('score') ?? '7');
 
     const currentYear = new Date().getFullYear();
-    const year = parseInt(searchParams.get('year') ?? currentYear.toString());
+    const year = parseInt(searchParams.get('year') || currentYear.toString());
     const rangedYears: [number, number] = [
-        parseInt(searchParams.getAll('rangedYears')[0]),
-        parseInt(searchParams.getAll('rangedYears')[1])
+        parseInt(searchParams.getAll('rangedYears')[0]) || 2007,
+        parseInt(searchParams.getAll('rangedYears')[1]) || currentYear
     ];
     const yearsRanged = searchParams.get('yearsRanged');
 
