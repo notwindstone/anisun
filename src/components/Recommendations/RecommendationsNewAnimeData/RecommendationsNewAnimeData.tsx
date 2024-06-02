@@ -66,8 +66,8 @@ export default function RecommendationsNewAnimeData({
                 </AspectRatio>
                 <Stack className={classes.stack} h="100%" justify="flex-start">
                     <Text className={classes.title} lineClamp={2}>
-                        {anime?.russian ?? anime.name}
-                        {anime?.russian && ` - ${anime.name}`}
+                        {anime?.name}
+                        {anime?.russian && ` - ${anime.russian}`}
                     </Text>
                     <Text className={classes.text} lineClamp={1}>
                         {`${translatedKind}, ${translatedStatus}`}

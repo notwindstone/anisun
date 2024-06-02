@@ -42,9 +42,9 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
             <Title
                 className={classes.title}
                 order={2}
-                lineClamp={2}
+                lineClamp={4}
             >
-                {data?.russian} - {data?.name}
+                {data?.name} - {data?.russian}
             </Title>
             <Group className={classes.infoGroup} wrap="nowrap" justify="space-between">
                 <Group wrap="nowrap" gap={rem(8)}>

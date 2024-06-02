@@ -79,7 +79,7 @@ export default function CarouselCard({
                         order={3}
                         lineClamp={isAnnounced ? 3 : 2}
                     >
-                        {animeTitle?.russian}
+                        {animeTitle?.name}
                     </Title>
                 </Flex>
             </Overlay>

@@ -29,7 +29,7 @@ export default function TitlesList() {
                         filter: [
                             "id",
                             "url",
-                            "russian",
+                            "name",
                             "status",
                             "score",
                             "poster { id originalUrl mainUrl }",
