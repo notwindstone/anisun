@@ -22,8 +22,9 @@ export const animes = () => {
             });
     };
 
-    const list = async ({ search, limit, genre, status, studio, year, order, page, filter, score, kind }: AnimesType) => {
+    const list = async ({ ids, search, limit, genre, status, studio, year, order, page, filter, score, kind }: AnimesType) => {
         const params = options({
+            ids: ids,
             search: search,
             limit: limit,
             genre: genre,

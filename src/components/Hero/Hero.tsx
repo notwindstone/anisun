@@ -44,6 +44,7 @@ export default function Hero() {
                 .animes
                 .list({
                     order: "ranked",
+                    ids: "37521,19,5114,199,33,39535,1",
                     limit: HERO_TITLES_LIMIT,
                     filter: [
                         "id",
