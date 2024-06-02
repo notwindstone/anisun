@@ -7,10 +7,10 @@ export default function getAllSearchParams(searchParams: ReadonlyURLSearchParams
     const genreGenres = searchParams.getAll('genreGenres');
     const themeGenres = searchParams.getAll('themeGenres');
     const kinds = searchParams.getAll('kinds');
-    const limit = parseInt(searchParams.get('limit') ?? '20');
+    const limit = parseInt(searchParams.get('limit') || '20');
     const order = searchParams.get('order');
     const ratings = searchParams.getAll('ratings');
-    const score = parseInt(searchParams.get('score') ?? '7');
+    const score = parseInt(searchParams.get('score') || '7');
 
     const currentYear = new Date().getFullYear();
     const year = parseInt(searchParams.get('year') || currentYear.toString());

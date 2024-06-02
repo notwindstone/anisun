@@ -7,6 +7,7 @@ import AdvancedSearchFiltersChildren
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import getAllSearchParams from "@/utils/Misc/getAllSearchParams";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import NProgress from "nprogress";
 
 const FIRST_ANIME_AIRED_ON = 1917;
 
@@ -52,9 +53,72 @@ export default function AdvancedSearchFilters() {
     const [studio, setStudio] = useState<string | null>(initialStudio);
 
     function setFilters() {
-        const pathnameWithSearchParams = `${pathname}`;
+        let pathnameWithSearchParams = `${pathname}`;
 
-        return router.push(pathnameWithSearchParams);
+        pathnameWithSearchParams = `${pathnameWithSearchParams}?censored=${censored}`;
+
+        if (durations.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&durations=${durations}`;
+        }
+
+        if (demographicGenresValue.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&demographicGenres=${demographicGenresValue}`;
+        }
+
+        if (genreGenresValue.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&genreGenres=${genreGenresValue}`;
+        }
+
+        if (themeGenresValue.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&themeGenres=${themeGenresValue}`;
+        }
+
+        if (kinds.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&kinds=${kinds}`;
+        }
+
+        if (limit) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&limit=${limit}`;
+        }
+
+        if (order) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&order=${order}`;
+        }
+
+        if (ratings?.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&ratings=${ratings}`;
+        }
+
+        if (score) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&score=${score}`;
+        }
+
+        // Never Nesters, sorry, I'm tired.
+        if (yearsRanged) {
+            if (!isNaN(rangedYears[0]) && !isNaN(rangedYears[1])) {
+                pathnameWithSearchParams = `${pathnameWithSearchParams}&yearsRanged=true&rangedYears=${rangedYears}`;
+            }
+        } else {
+            if (!isNaN(year)) {
+                pathnameWithSearchParams = `${pathnameWithSearchParams}&yearsRanged=false&year=${year}`;
+            }
+        }
+
+        if (seasons.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&seasons=${seasons}`;
+        }
+
+        if (statuses.length) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&statuses=${statuses}`;
+        }
+
+        if (studio) {
+            pathnameWithSearchParams = `${pathnameWithSearchParams}&studio=${studio}`;
+        }
+
+        NProgress.start();
+        router.push(pathnameWithSearchParams);
+        NProgress.done();
     }
 
     return (

@@ -41,7 +41,7 @@ export default function AdvancedSearch() {
         ],
         queryFn: getShikimoriData,
     });
-    console.log(isPending, error);
+    console.log(data, isPending, error);
     async function getShikimoriData() {
         return (await shikimori
             .animes
@@ -68,8 +68,7 @@ export default function AdvancedSearch() {
             })
         ).animes;
     }
-    console.log(data);
-    console.log(studio, genre, season, kind);
+
     return (
         <AdvancedSearchContext.Provider
             value={{
