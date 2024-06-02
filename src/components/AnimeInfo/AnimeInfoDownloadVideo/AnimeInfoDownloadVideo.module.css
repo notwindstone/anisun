@@ -1,4 +1,20 @@
 .dropdown {
-    max-height: 30vh;
+    border: none;
+    background: var(--animeth-sidebar-color);
+    max-height: 50vh;
+    width: rem(512px);
+    max-width: 90vw;
     overflow-y: scroll;
+}
+
+.text {
+    @media screen and (max-width: rem(750px)) {
+        font-size: rem(14px);
+        line-height: rem(16px);
+    }
+
+    @media screen and (max-width: rem(550px)) {
+        font-size: rem(12px);
+        line-height: rem(14px);
+    }
 }

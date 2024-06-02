@@ -2,13 +2,16 @@ import {IconDownload} from "@tabler/icons-react";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {useQuery} from "@tanstack/react-query";
 import {anilibria} from "@/lib/anilibria/anilibria";
-import {Anchor, Popover, rem, Skeleton, Stack} from "@mantine/core";
+import {Alert, Anchor, Group, Popover, rem, Skeleton, Stack, Text} from "@mantine/core";
 import getShikimoriDataForAnilibriaQuery from "@/utils/Misc/getShikimoriDataForAnilibriaQuery";
 import {useState} from "react";
 import {AnimeTitleDownloadType} from "@/types/Anilibria/Responses/AnimeTitleDownload.type";
 import classes from './AnimeInfoDownloadVideo.module.css';
+import useCustomTheme from "@/hooks/useCustomTheme";
+import React from "react";
 
 export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
+    const { theme } = useCustomTheme();
     const [opened, setOpened] = useState(false);
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'download', id],
@@ -58,7 +61,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
     if (!data || !data?.player?.list || data?.torrents?.list.length === 0) {
         return;
     }
-    console.log(data);
+
     return (
         <>
             <Popover radius="md" opened={opened} onChange={setOpened}>
@@ -73,39 +76,116 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                     </div>
                 </Popover.Target>
                 <Popover.Dropdown className={classes.dropdown}>
-                    <Stack>
-                        {
-                            data?.player?.list?.map((episode, episodeIndex) => {
-                                if (!episode?.hls) {
-                                    return;
-                                }
-
-                                return Object.values(episode.hls).map((quality, qualityIndex) => {
-                                    const qualityName = Object.keys(episode.hls)[qualityIndex];
+                    <Stack pt={rem(4)} gap={rem(8)}>
+                        <Alert
+                            classNames={{
+                                root: classes.alert,
+                                message: classes.text
+                            }}
+                            radius="md"
+                            color={theme.color}
+                            title="Про формат .m3u8"
+                        >
+                            M3U8 - это формат потокового видео. Такие файлы мало весят и загружают видеофрагменты во время проигрывания видеоплеера. Чтобы его открыть на ПК, можно воспользоваться PotPlayer или VLC, а на телефоне - NextPlayer.
+                        </Alert>
+                        <Stack gap={rem(16)} p={rem(8)}>
+                            {
+                                data?.torrents?.list?.map((torrent) => {
+                                    const mainAnilibriaUrl = `https://anilibria.tv${torrent.url}`;
+                                    const mirrorAnilibriaUrl = `https://dl-20240602-3.anilib.moe${torrent.url}`;
 
                                     return (
-                                        <Anchor
-                                            key={quality}
-                                            href={`https://${data.player.host}${quality}`}
-                                        >
-                                            Напрямую (.m3u8): {episodeIndex} - {qualityName}
-                                        </Anchor>
+                                        <React.Fragment key={torrent.torrent_id}>
+                                            <Anchor
+                                                className={classes.text}
+                                                c={theme.color}
+                                                href={torrent.magnet}
+                                            >
+                                                <Group gap={0} justify="space-between">
+                                                    <Text className={classes.text}>
+                                                        Anilibria, Magnet-ссылка: Серии {torrent.episodes.string}
+                                                    </Text>
+                                                    <Text className={classes.text}>
+                                                        {torrent.quality.string} (.mkv)
+                                                    </Text>
+                                                </Group>
+                                            </Anchor>
+                                            <Anchor
+                                                className={classes.text}
+                                                c={theme.color}
+                                                href={mainAnilibriaUrl}
+                                            >
+                                                <Group gap={0} justify="space-between">
+                                                    <Text className={classes.text}>
+                                                        Anilibria, Torrent-файл: Серии {torrent.episodes.string}
+                                                    </Text>
+                                                    <Text className={classes.text}>
+                                                        {torrent.quality.string} (.mkv)
+                                                    </Text>
+                                                </Group>
+                                            </Anchor>
+                                            <Anchor
+                                                className={classes.text}
+                                                c={theme.color}
+                                                href={mirrorAnilibriaUrl}
+                                            >
+                                                <Group gap={0} justify="space-between">
+                                                    <Text className={classes.text}>
+                                                        (Зеркало) Anilibria, Torrent-файл: Серии {torrent.episodes.string}
+                                                    </Text>
+                                                    <Text className={classes.text}>
+                                                        {torrent.quality.string} (.mkv)
+                                                    </Text>
+                                                </Group>
+                                            </Anchor>
+                                        </React.Fragment>
                                     );
-                                });
-                            })
-                        }
-                        {
-                            data?.torrents?.list?.map((torrent) => {
-                                return (
-                                    <Anchor
-                                        key={torrent.torrent_id}
-                                        href={torrent.magnet}
-                                    >
-                                        Magnet: {torrent.episodes.string} - {torrent.quality.string}
-                                    </Anchor>
-                                );
-                            })
-                        }
+                                })
+                            }
+                            {
+                                data?.player?.list?.map((episode, episodeIndex) => {
+                                    if (!episode?.hls) {
+                                        return;
+                                    }
+
+                                    return Object.values(episode.hls).map((quality, qualityIndex) => {
+                                        const qualityName = Object.keys(episode.hls)[qualityIndex];
+
+                                        let qualityResolution;
+
+                                        switch (qualityName) {
+                                            case "fhd":
+                                                qualityResolution = "1080p";
+                                                break;
+                                            case "hd":
+                                                qualityResolution = "720p";
+                                                break;
+                                            case "sd":
+                                                qualityResolution = "480p";
+                                                break;
+                                        }
+
+                                        return (
+                                            <Anchor
+                                                className={classes.text}
+                                                c={theme.color}
+                                                key={quality}
+                                                href={`https://${data.player.host}${quality}`}
+                                            >
+                                                <Group gap={0} justify="space-between">
+                                                    <Text className={classes.text}>
+                                                        Anilibria: Серия {episodeIndex}
+                                                    </Text>
+                                                    <Text className={classes.text}>
+                                                        {qualityResolution} (.m3u8)
+                                                    </Text>
+                                                </Group>
+                                            </Anchor>
+                                        );
+                                    });
+                                })
+                            }
+                        </Stack>
                     </Stack>
                 </Popover.Dropdown>
             </Popover>
