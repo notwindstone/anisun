@@ -1,11 +1,14 @@
 import {MultiSelect} from "@mantine/core";
-import {useContext} from "react";
+import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
-export default function RatingFilter() {
-    const { ratings, setRatings } = useContext(AdvancedSearchFiltersContext);
-
+export default memo(function RatingFilter({
+    ratings,
+    setRatings
+}: {
+    ratings: string[] | undefined,
+    setRatings: Dispatch<SetStateAction<string[] | undefined>>
+}) {
     return (
         <>
             <MultiSelect
@@ -16,4 +19,4 @@ export default function RatingFilter() {
             />
         </>
     );
-}
+});

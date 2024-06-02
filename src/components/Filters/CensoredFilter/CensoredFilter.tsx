@@ -1,15 +1,16 @@
 import {Switch} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {memo} from "react";
 
-export default function CensoredFilter({
+export default memo(function CensoredFilter({
     censored,
     toggleCensored
 }: {
-    censored: boolean;
-    toggleCensored: () => void;
+    censored: boolean,
+    toggleCensored: () => void
 }) {
     const { theme } = useCustomTheme();
-    console.log("test");
+
     return (
         <>
             <Switch
@@ -20,4 +21,4 @@ export default function CensoredFilter({
             />
         </>
     );
-}
+});

@@ -1,11 +1,13 @@
 import {MultiSelect} from "@mantine/core";
-import {useContext} from "react";
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
+import {Dispatch, memo, SetStateAction} from "react";
 
-export default function DurationFilter() {
-    const { durations, setDurations } = useContext(AdvancedSearchFiltersContext);
-
-    console.log("durations");
+export default memo(function DurationFilter({
+    durations,
+    setDurations
+}: {
+    durations: string[],
+    setDurations: Dispatch<SetStateAction<string[]>>
+}) {
     return (
         <MultiSelect
             value={durations}
@@ -17,4 +19,4 @@ export default function DurationFilter() {
             ]}
         />
     );
-}
+});

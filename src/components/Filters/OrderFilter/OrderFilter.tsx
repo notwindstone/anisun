@@ -1,11 +1,14 @@
-import {useContext, useState} from "react";
+import {Dispatch, memo, SetStateAction} from "react";
 import {Select} from "@mantine/core";
 import {variables} from "@/configs/variables";
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
-export default function OrderFilter() {
-    const { order, setOrder } = useContext(AdvancedSearchFiltersContext);
-
+export default memo(function OrderFilter({
+    order,
+    setOrder
+}: {
+    order: string | null,
+    setOrder: Dispatch<SetStateAction<string | null>>
+}) {
     return (
         <Select
             placeholder="Сортировка"
@@ -14,4 +17,4 @@ export default function OrderFilter() {
             data={variables.filters.order}
         />
     );
-}
+});

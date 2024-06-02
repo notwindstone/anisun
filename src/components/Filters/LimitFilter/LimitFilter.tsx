@@ -1,11 +1,15 @@
 import {Slider} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
-import {useContext} from "react";
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
+import {Dispatch, memo, SetStateAction} from "react";
 
-export default function LimitFilter() {
+export default memo(function LimitFilter({
+    limit,
+    setLimit
+}: {
+    limit: number,
+    setLimit: Dispatch<SetStateAction<number>>
+}) {
     const { theme } = useCustomTheme();
-    const { limit, setLimit } = useContext(AdvancedSearchFiltersContext);
 
     return (
         <Slider
@@ -23,4 +27,4 @@ export default function LimitFilter() {
             max={50}
         />
     );
-}
+});

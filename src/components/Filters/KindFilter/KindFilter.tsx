@@ -1,11 +1,14 @@
 import {MultiSelect} from "@mantine/core";
-import {useContext} from "react";
+import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
-export default function KindFilter() {
-    const { kinds, setKinds } = useContext(AdvancedSearchFiltersContext);
-
+export default memo(function KindFilter({
+    kinds,
+    setKinds
+}: {
+    kinds: string[],
+    setKinds: Dispatch<SetStateAction<string[]>>
+}) {
     return (
         <MultiSelect
             value={kinds}
@@ -13,4 +16,4 @@ export default function KindFilter() {
             data={variables.filters.kind}
         />
     );
-}
+});

@@ -9,7 +9,7 @@ import DurationFilter from "@/components/Filters/DurationFilter/DurationFilter";
 import RatingFilter from "@/components/Filters/RatingFilter/RatingFilter";
 import StudioFilter from "@/components/Filters/StudioFilter/StudioFilter";
 import CensoredFilter from "@/components/Filters/CensoredFilter/CensoredFilter";
-import {memo, useContext, useMemo} from "react";
+import {useContext} from "react";
 import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 export default function AdvancedSearchFiltersChildren() {
@@ -50,27 +50,64 @@ export default function AdvancedSearchFiltersChildren() {
         setStudio,
     } = useContext(AdvancedSearchFiltersContext);
 
-    const MemoizedGenreFilter = memo(
-        GenreFilter,
-    );
-    const memoizedCensoredFilter = useMemo(() =>
-            <CensoredFilter censored={censored} toggleCensored={toggleCensored} />,
-        [censored, toggleCensored]
-    );
-
     return (
         <>
-            <MemoizedGenreFilter />
-            <OrderFilter />
-            <KindFilter />
-            <LimitFilter />
-            <StatusFilter />
-            <SeasonFilter />
-            <ScoreFilter />
-            <DurationFilter />
-            <RatingFilter />
-            <StudioFilter />
-            {memoizedCensoredFilter}
+            <GenreFilter
+                demographicGenresValue={demographicGenresValue}
+                setDemographicGenresValue={setDemographicGenresValue}
+                genreGenresValue={genreGenresValue}
+                setGenreGenresValue={setGenreGenresValue}
+                themeGenresValue={themeGenresValue}
+                setThemeGenresValue={setThemeGenresValue}
+            />
+            <OrderFilter
+                order={order}
+                setOrder={setOrder}
+            />
+            <KindFilter
+                kinds={kinds}
+                setKinds={setKinds}
+            />
+            <LimitFilter
+                limit={limit}
+                setLimit={setLimit}
+            />
+            <StatusFilter
+                statuses={statuses}
+                setStatuses={setStatuses}
+            />
+            <SeasonFilter
+                seasons={seasons}
+                setSeasons={setSeasons}
+                year={year}
+                setYear={setYear}
+                setRangedYears={setRangedYears}
+                rangedYears={rangedYears}
+                setYearStart={setYearStart}
+                yearsRanged={yearsRanged}
+                toggleYearsRanged={toggleYearsRanged}
+                yearStart={yearStart}
+            />
+            <ScoreFilter
+                score={score}
+                setScore={setScore}
+            />
+            <DurationFilter
+                durations={durations}
+                setDurations={setDurations}
+            />
+            <RatingFilter
+                ratings={ratings}
+                setRatings={setRatings}
+            />
+            <StudioFilter
+                studio={studio}
+                setStudio={setStudio}
+            />
+            <CensoredFilter
+                censored={censored}
+                toggleCensored={toggleCensored}
+            />
         </>
     );
 }

@@ -1,11 +1,14 @@
-import {useContext} from "react";
+import {Dispatch, SetStateAction} from "react";
 import {Select} from "@mantine/core";
 import {variables} from "@/configs/variables";
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
-export default function StudioFilter() {
-    const { studio, setStudio } = useContext(AdvancedSearchFiltersContext);
-
+export default (function StudioFilter({
+    studio,
+    setStudio
+}: {
+    studio: string | null,
+    setStudio: Dispatch<SetStateAction<string | null>>
+}) {
     return (
         <>
             <Select
@@ -16,4 +19,4 @@ export default function StudioFilter() {
             />
         </>
     );
-}
+});

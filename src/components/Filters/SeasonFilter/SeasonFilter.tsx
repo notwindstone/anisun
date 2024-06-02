@@ -1,9 +1,8 @@
 import {Group, MultiSelect, NumberInput, RangeSlider, Slider, Switch} from "@mantine/core";
-import {useContext} from "react";
+import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './SeasonFilter.module.css';
-import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 
 const FIRST_ANIME_AIRED_ON = 1917;
 const EARLIER_YEAR = 2000;
@@ -21,20 +20,30 @@ const SMALL_RANGE_MARKS = [
     { value: 2020, label: '2020' },
 ];
 
-export default function SeasonFilter() {
+export default memo(function SeasonFilter({
+    year,
+    setYear,
+    rangedYears,
+    setRangedYears,
+    yearStart,
+    setYearStart,
+    yearsRanged,
+    toggleYearsRanged,
+    seasons,
+    setSeasons,
+}: {
+    year: number,
+    setYear: Dispatch<SetStateAction<number>>,
+    rangedYears: [number, number],
+    setRangedYears: Dispatch<SetStateAction<[number, number]>>,
+    yearStart: number,
+    setYearStart: Dispatch<SetStateAction<number>>,
+    yearsRanged: boolean,
+    toggleYearsRanged: () => void,
+    seasons: string[],
+    setSeasons: Dispatch<SetStateAction<string[]>>
+}) {
     const currentYear = new Date().getFullYear();
-    const {
-        year,
-        setYear,
-        rangedYears,
-        setRangedYears,
-        yearStart,
-        setYearStart,
-        yearsRanged,
-        toggleYearsRanged,
-        seasons,
-        setSeasons,
-    } = useContext(AdvancedSearchFiltersContext);
     const { theme } = useCustomTheme();
 
     function setYearWithChecks({ year, toValue }: { year: number | string, toValue: string }) {
@@ -149,4 +158,4 @@ export default function SeasonFilter() {
             />
         </>
     );
-}
+});
