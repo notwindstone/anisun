@@ -72,7 +72,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                                                 className={classes.link}
                                                 href={`/titles?genre=${genre.id}`}
                                             >
-                                                {genre.name}
+                                                {genre.russian}
                                             </Link>
                                         </React.Fragment>
                                     );
