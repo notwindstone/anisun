@@ -174,10 +174,6 @@ export const variables: VariablesType = {
                 "value": "ona",
             },
             {
-                "label": `${OVA}/${ONA}`,
-                "value": "ova/ona",
-            },
-            {
                 "label": OVA,
                 "value": "ova",
             },
