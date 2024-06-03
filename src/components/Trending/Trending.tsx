@@ -1,19 +1,19 @@
 "use client";
 
-import {AspectRatio, Grid, Pagination, rem, Skeleton, Stack, Text, Title} from "@mantine/core";
+import {Pagination, rem, Stack, Text, Title} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import NProgress from "nprogress";
 import useCustomTheme from "@/hooks/useCustomTheme";
-import TrendingCard from "@/components/TrendingGrid/TrendingCard/TrendingCard";
-import classes from './TrendingGrid.module.css';
+import classes from './Trending.module.css';
+import TrendingGrid from "@/components/Trending/TrendingGrid/TrendingGrid";
 
 const TOTAL_PAGES = 500;
 const LIMIT = 32;
 const PLACEHOLDER_DATA = Array.from({ length: LIMIT });
 
-export default function TrendingGrid() {
+export default function Trending() {
     const { theme } = useCustomTheme();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -80,29 +80,11 @@ export default function TrendingGrid() {
                     error ? (
                         <Text>Ошибка: {error.message}</Text>
                     ) : (
-                        <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }}>
-                            {
-                                (isPending && !data) ? (
-                                    PLACEHOLDER_DATA.map((_placeholder, index) => {
-                                        return (
-                                            <Grid.Col key={index} span={{ base: 12, xs: 6, md: 3 }}>
-                                                <AspectRatio ratio={ 3 / 4 }>
-                                                    <Skeleton radius="md" w="100%" h="100%" />
-                                                </AspectRatio>
-                                            </Grid.Col>
-                                        );
-                                    })
-                                ) : data && (
-                                    data.map((anime) => {
-                                        return (
-                                            <Grid.Col key={anime.id} span={{ base: 12, xs: 6, md: 3 }}>
-                                                <TrendingCard anime={anime} />
-                                            </Grid.Col>
-                                        );
-                                    })
-                                )
-                            }
-                        </Grid>
+                        <TrendingGrid
+                            data={data}
+                            isPending={isPending}
+                            placeholderData={PLACEHOLDER_DATA}
+                        />
                     )
                 }
                 <Pagination

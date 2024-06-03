@@ -1,5 +1,5 @@
 import {Metadata} from "next";
-import TrendingGrid from "@/components/TrendingGrid/TrendingGrid";
+import Trending from "@/components/Trending/Trending";
 import classes from './page.module.css';
 import {Container} from "@mantine/core";
 
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function Page() {
     return (
         <Container className={classes.container} size={1200}>
-            <TrendingGrid />
+            <Trending />
         </Container>
     );
 }
