@@ -78,9 +78,15 @@ export default function AdvancedSearch() {
         ? `${rangedYears[0]}_${rangedYears[1]}`
         : yearWithSeasons;
 
-    let queryGenres: string = '';
+    let queryGenres: string | undefined = undefined;
 
-    console.log(queryGenres)
+    if (themeGenres.length || genreGenres.length || demographicGenres.length) {
+        queryGenres = '';
+
+        queryGenres = `${queryGenres}${themeGenres.length ? `${themeGenres.toString()},` : ''}`;
+        queryGenres = `${queryGenres}${genreGenres.length ? `${genreGenres.toString()},` : ''}`;
+        queryGenres = `${queryGenres}${demographicGenres.length ? `${demographicGenres.toString()},` : ''}`;
+    }
 
     const queryKinds = kinds.toString();
     const queryOrder = order;
