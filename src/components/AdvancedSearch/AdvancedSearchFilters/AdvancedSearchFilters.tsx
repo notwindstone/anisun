@@ -12,6 +12,7 @@ import NProgress from "nprogress";
 const FIRST_ANIME_AIRED_ON = 1917;
 
 export default function AdvancedSearchFilters() {
+    const [filtersToggled, { toggle: toggleFilters }] = useDisclosure(false);
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const router = useRouter();
@@ -161,10 +162,19 @@ export default function AdvancedSearchFilters() {
             }}
         >
             <Stack flex={1}>
-                <AdvancedSearchFiltersChildren />
-                <DecoratedButton onClick={setFilters}>
-                    Сохранить
+                <DecoratedButton variant="light" onClick={toggleFilters}>
+                    Раскрыть фильтры
                 </DecoratedButton>
+                {
+                    filtersToggled && (
+                        <>
+                            <AdvancedSearchFiltersChildren />
+                            <DecoratedButton onClick={setFilters}>
+                                Сохранить
+                            </DecoratedButton>
+                        </>
+                    )
+                }
             </Stack>
         </AdvancedSearchFiltersContext.Provider>
     );
