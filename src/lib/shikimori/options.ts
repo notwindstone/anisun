@@ -39,7 +39,7 @@ export const options = ({
     const userFilter = userFilterOptions();
 
     if (ids) {
-        query = `${query}ids: "${ids}"`;
+        query = `${query}ids: "${ids}", `;
     }
 
     if (search) {
@@ -51,7 +51,7 @@ export const options = ({
     }
 
     if (genre) {
-        query = `${query}genre: "${genre}"`;
+        query = `${query}genre: "${genre}", `;
     }
 
     if (status) {
@@ -75,27 +75,27 @@ export const options = ({
     }
 
     if (kind) {
-        query = `${query}kind: ${kind}`;
+        query = `${query}kind: "${kind}", `;
     }
 
     if (score) {
-        query = `${query}score: ${score}`;
+        query = `${query}score: ${score}, `;
     }
 
     if (entryType) {
-        query = `${query}entryType: ${entryType}`;
+        query = `${query}entryType: ${entryType}, `;
     }
 
     if (censored) {
-        query = `${query}censored: ${censored}`;
+        query = `${query}censored: ${censored}, `;
     }
 
     if (durations) {
-        query = `${query}duration: ${durations}`;
+        query = `${query}duration: "${durations}", `;
     }
 
     if (rating) {
-        query = `${query}rating: ${rating}`;
+        query = `${query}rating: "${rating}", `;
     }
 
     let endpoint;
