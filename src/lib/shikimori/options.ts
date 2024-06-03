@@ -15,6 +15,9 @@ export const options = ({
     filter,
     score,
     kind,
+    censored,
+    durations,
+    rating,
     queryType,
     entryType,
 }: AnimesType & GenresType & QueriesType) => {
@@ -81,6 +84,18 @@ export const options = ({
 
     if (entryType) {
         query = `${query}entryType: ${entryType}`;
+    }
+
+    if (censored) {
+        query = `${query}censored: ${censored}`;
+    }
+
+    if (durations) {
+        query = `${query}duration: ${durations}`;
+    }
+
+    if (rating) {
+        query = `${query}rating: ${rating}`;
     }
 
     let endpoint;

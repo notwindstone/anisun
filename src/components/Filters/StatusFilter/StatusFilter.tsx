@@ -13,6 +13,7 @@ export default memo(function StatusFilter({
 
     return (
         <MultiSelect
+            placeholder="Статус"
             value={statuses}
             onChange={setStatuses}
             data={statusesArray}

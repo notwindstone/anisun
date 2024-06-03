@@ -11,6 +11,7 @@ export default memo(function KindFilter({
 }) {
     return (
         <MultiSelect
+            placeholder="Тип"
             value={kinds}
             onChange={setKinds}
             data={variables.filters.kind}

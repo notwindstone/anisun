@@ -10,6 +10,7 @@ export default memo(function DurationFilter({
 }) {
     return (
         <MultiSelect
+            placeholder="Длительность эпизодов"
             value={durations}
             onChange={setDurations}
             data={[

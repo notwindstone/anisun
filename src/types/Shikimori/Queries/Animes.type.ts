@@ -7,12 +7,15 @@ export type AnimesType = {
     search?: string;
     limit?: number;
     genre?: string;
-    status?: StatusType;
-    studio?: string;
+    status?: StatusType | string;
+    studio?: string | null;
     year?: string;
-    order?: OrderType;
+    order?: OrderType | string | null;
     page?: number;
     kind?: string;
     score?: string;
+    durations?: string;
+    rating?: string;
+    censored?: boolean;
     filter?: OptionType[];
 };

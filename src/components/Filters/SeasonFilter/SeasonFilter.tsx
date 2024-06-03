@@ -151,11 +151,16 @@ export default memo(function SeasonFilter({
                     </>
                 )
             }
-            <MultiSelect
-                value={seasons}
-                onChange={setSeasons}
-                data={variables.filters.season}
-            />
+            {
+                !yearsRanged && (
+                    <MultiSelect
+                        placeholder="Сезон"
+                        value={seasons}
+                        onChange={setSeasons}
+                        data={variables.filters.season}
+                    />
+                )
+            }
         </>
     );
 });

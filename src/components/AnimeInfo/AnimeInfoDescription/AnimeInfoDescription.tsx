@@ -1,6 +1,7 @@
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import classes from "@/components/AnimeInfo/AnimeInfo.module.css";
 import {
+    Anchor,
     Box, Container,
     Group,
     Image,
@@ -21,10 +22,12 @@ import NextImage from "next/image";
 import Link from "next/link";
 import {formatNextEpisodeDate} from "@/utils/Misc/formatNextEpisodeDate";
 import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const [opened, { open, close }] = useDisclosure(false);
     const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
+    const { theme } = useCustomTheme();
 
     useHotkeys([
         ['escape', closeModal]
@@ -203,6 +206,16 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                 Фанатские субтитры: {data.fansubbers.map((fansub, index) => (
                                     <span key={fansub}>{index ? ', ' : ''}{fansub}</span>
                                 ))}
+                            </Text>
+                        )
+                    }
+                    {
+                        data?.url && (
+                            <Text>
+                                Страница на Shikimori: <Anchor
+                                    c={theme.color}
+                                    href={data.url}
+                                >{data.name}</Anchor>
                             </Text>
                         )
                     }
