@@ -62,7 +62,7 @@ export const options = ({
         query = `${query}studio: "${studio}", `;
     }
 
-    if (year) {
+    if (year && year !== "0") {
         query = `${query}season: "${year}", `;
     }
 

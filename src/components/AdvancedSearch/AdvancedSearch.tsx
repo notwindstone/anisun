@@ -1,7 +1,7 @@
 "use client";
 
 import SearchInput from "@/components/SearchInput/SearchInput";
-import {Flex} from "@mantine/core";
+import {AspectRatio, Flex, Grid, Skeleton, Stack} from "@mantine/core";
 import AdvancedSearchFilters from "@/components/AdvancedSearch/AdvancedSearchFilters/AdvancedSearchFilters";
 import {useSearchParams} from "next/navigation";
 import classes from './AdvancedSearch.module.css';
@@ -10,8 +10,10 @@ import {useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import getAllSearchParams from "@/utils/Misc/getAllSearchParams";
+import TrendingCard from "@/components/TrendingGrid/TrendingCard/TrendingCard";
 
 const LIMIT = 32;
+const PLACEHOLDER_DATA = Array.from({ length: LIMIT });
 
 export default function AdvancedSearch() {
     const shikimori = client();
@@ -91,7 +93,6 @@ export default function AdvancedSearch() {
     const queryKinds = kinds.toString();
     const queryOrder = order;
 
-    console.log(data, isPending, error);
     async function getShikimoriData() {
         return (await shikimori
             .animes
@@ -130,7 +131,32 @@ export default function AdvancedSearch() {
             }}
         >
             <Flex className={classes.wrapper}>
-                <SearchInput />
+                <Stack>
+                    <SearchInput />
+                    <Grid gutter={{ base: 5, xs: 'md', md: 'xl', xl: 50 }}>
+                        {
+                            (isPending && !data) ? (
+                                PLACEHOLDER_DATA.map((_placeholder, index) => {
+                                    return (
+                                        <Grid.Col key={index} span={{ base: 12, xs: 6, md: 3 }}>
+                                            <AspectRatio ratio={ 3 / 4 }>
+                                                <Skeleton radius="md" w="100%" h="100%" />
+                                            </AspectRatio>
+                                        </Grid.Col>
+                                    );
+                                })
+                            ) : data && (
+                                data.map((anime) => {
+                                    return (
+                                        <Grid.Col key={anime.id} span={{ base: 12, xs: 6, md: 3 }}>
+                                            <TrendingCard anime={anime} />
+                                        </Grid.Col>
+                                    );
+                                })
+                            )
+                        }
+                    </Grid>
+                </Stack>
                 <AdvancedSearchFilters />
             </Flex>
         </AdvancedSearchContext.Provider>

@@ -2,6 +2,6 @@
     gap: rem(16px);
 
     @media screen and (max-width: rem(750px)) {
-        flex-direction: column;
+        flex-direction: column-reverse;
     }
 }

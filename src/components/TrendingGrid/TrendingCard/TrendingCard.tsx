@@ -20,6 +20,7 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
 
     return (
         <Box
+            w="100%" h="100%"
             component={Link}
             href={`/titles/${anime?.url.replace('https://shikimori.one/animes/', '')}`}
         >
