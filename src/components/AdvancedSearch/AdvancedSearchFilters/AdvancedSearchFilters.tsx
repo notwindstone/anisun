@@ -8,6 +8,7 @@ import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import getAllSearchParams from "@/utils/Misc/getAllSearchParams";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import NProgress from "nprogress";
+import classes from './AdvancedSearchFilters.module.css';
 
 const FIRST_ANIME_AIRED_ON = 1917;
 
@@ -165,16 +166,12 @@ export default function AdvancedSearchFilters() {
                 <DecoratedButton variant="light" onClick={toggleFilters}>
                     Раскрыть фильтры
                 </DecoratedButton>
-                {
-                    filtersToggled && (
-                        <>
-                            <AdvancedSearchFiltersChildren />
-                            <DecoratedButton onClick={setFilters}>
-                                Сохранить
-                            </DecoratedButton>
-                        </>
-                    )
-                }
+                <Stack className={filtersToggled && classes.filters}>
+                    <AdvancedSearchFiltersChildren />
+                    <DecoratedButton onClick={setFilters}>
+                        Сохранить
+                    </DecoratedButton>
+                </Stack>
             </Stack>
         </AdvancedSearchFiltersContext.Provider>
     );
