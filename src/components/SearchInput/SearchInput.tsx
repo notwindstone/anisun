@@ -28,7 +28,6 @@ export default function SearchInput() {
 
     return (
         <TextInput
-            flex={2}
             value={input}
             onChange={(event) => setInput(event.currentTarget.value)}
             size={isMobile ? "md" : "xl"}

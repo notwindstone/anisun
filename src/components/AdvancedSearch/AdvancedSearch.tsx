@@ -12,9 +12,6 @@ import {client} from "@/lib/shikimori/client";
 import getAllSearchParams from "@/utils/Misc/getAllSearchParams";
 import TrendingGrid from "@/components/Trending/TrendingGrid/TrendingGrid";
 
-const LIMIT = 32;
-const PLACEHOLDER_DATA = Array.from({ length: LIMIT });
-
 export default function AdvancedSearch() {
     const shikimori = client();
     const searchParams = useSearchParams();
@@ -36,6 +33,8 @@ export default function AdvancedSearch() {
         statuses,
         studio
     } = getAllSearchParams(searchParams);
+
+    const PLACEHOLDER_DATA = Array.from({ length: limit });
 
     const [input, setInput] = useState('');
     const { data, isPending, error } = useQuery({
@@ -108,7 +107,7 @@ export default function AdvancedSearch() {
                 year: queryYear,
                 order: queryOrder,
                 kind: queryKinds,
-                limit: LIMIT,
+                limit: limit,
                 filter: [
                     "id",
                     "url",
