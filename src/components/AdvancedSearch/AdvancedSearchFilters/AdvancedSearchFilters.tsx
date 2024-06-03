@@ -13,7 +13,7 @@ import classes from './AdvancedSearchFilters.module.css';
 const FIRST_ANIME_AIRED_ON = 1917;
 
 export default function AdvancedSearchFilters() {
-    const [filtersToggled, { toggle: toggleFilters }] = useDisclosure(false);
+    const [filtersHidden, { toggle: toggleFilters }] = useDisclosure(true);
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const router = useRouter();
@@ -166,7 +166,7 @@ export default function AdvancedSearchFilters() {
                 <DecoratedButton variant="light" onClick={toggleFilters}>
                     Раскрыть фильтры
                 </DecoratedButton>
-                <Stack className={filtersToggled && classes.filters}>
+                <Stack className={filtersHidden && classes.filters}>
                     <AdvancedSearchFiltersChildren />
                     <DecoratedButton onClick={setFilters}>
                         Сохранить
