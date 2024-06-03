@@ -213,7 +213,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         data?.url && (
                             <Text>
                                 Страница на Shikimori: <Anchor
-                                    c={theme.color}
+                                    c={theme.color} target="_blank"
                                     href={data.url}
                                 >{data.name}</Anchor>
                             </Text>
