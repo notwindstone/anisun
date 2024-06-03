@@ -1,4 +1,4 @@
-import {Group, MultiSelect, NumberInput, RangeSlider, Slider, Switch} from "@mantine/core";
+import {Group, MultiSelect, NumberInput, RangeSlider, rem, Slider, Switch} from "@mantine/core";
 import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
 import useCustomTheme from "@/hooks/useCustomTheme";
@@ -96,6 +96,7 @@ export default memo(function SeasonFilter({
                 yearsRanged ? (
                     <>
                         <RangeSlider
+                            pb={rem(24)}
                             minRange={1}
                             marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
                             color={theme.color}
@@ -128,6 +129,7 @@ export default memo(function SeasonFilter({
                 ) : (
                     <>
                         <Slider
+                            pb={rem(24)}
                             marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
                             classNames={{
                                 bar: classes.bar

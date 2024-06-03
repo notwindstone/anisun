@@ -1,4 +1,4 @@
-import {Slider} from "@mantine/core";
+import {rem, Slider} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {Dispatch, memo, SetStateAction} from "react";
 
@@ -13,6 +13,7 @@ export default memo(function LimitFilter({
 
     return (
         <Slider
+            pb={rem(24)}
             value={limit}
             onChange={setLimit}
             marks={[

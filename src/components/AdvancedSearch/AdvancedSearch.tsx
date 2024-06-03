@@ -131,7 +131,7 @@ export default function AdvancedSearch() {
             }}
         >
             <Flex className={classes.wrapper}>
-                <Stack flex={1}>
+                <Stack flex={3}>
                     <SearchInput />
                     {
                         error ? (
@@ -141,6 +141,7 @@ export default function AdvancedSearch() {
                                 data={data}
                                 isPending={isPending}
                                 placeholderData={PLACEHOLDER_DATA}
+                                gridColDesktop={6}
                             />
                         )
                     }

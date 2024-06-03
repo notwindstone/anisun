@@ -1,6 +1,6 @@
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {Dispatch, memo, SetStateAction} from "react";
-import {Slider} from "@mantine/core";
+import {rem, Slider} from "@mantine/core";
 
 export default memo(function ScoreFilter({
     score,
@@ -13,6 +13,7 @@ export default memo(function ScoreFilter({
 
     return (
         <Slider
+            pb={rem(24)}
             inverted
             value={score}
             onChange={setScore}
