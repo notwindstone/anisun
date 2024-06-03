@@ -166,7 +166,7 @@ export default function AdvancedSearchFilters() {
                 <DecoratedButton variant="light" onClick={toggleFilters}>
                     Раскрыть фильтры
                 </DecoratedButton>
-                <Stack className={filtersHidden && classes.filters}>
+                <Stack className={`${filtersHidden && classes.filters}`}>
                     <AdvancedSearchFiltersChildren />
                     <DecoratedButton onClick={setFilters}>
                         Сохранить
