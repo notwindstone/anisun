@@ -72,6 +72,10 @@ export function Comment({
     }
 
     async function handleMessageEdit({ uuid, message }: { uuid: string, message?: string }) {
+        if (comment.message === message) {
+            return setIsEditing(false);
+        }
+
         const mutationQueryKey = isChild ? comment.parentuuid : comment.title;
 
         message = message ?? '';
