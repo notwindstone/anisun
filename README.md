@@ -20,10 +20,16 @@
 
 ## 📱 Screenshots
 
+<details>
+<summary>More screenshots</summary>
+
 <div align="center">
 <img src="public/docs/Screenshot_animeth_videoplayer1.jpg" width="49%">
 <img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_longCommentSection.jpg" width="49%">
 </div>
+
+</details>
 
 > [!NOTE]  
 > Work in progress. More screenshots will be available soon.

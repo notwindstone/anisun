@@ -9,7 +9,7 @@ import {VoteComment} from "@/components/Comments/VoteComment/VoteComment";
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {AddComment} from "@/components/Comments/AddComment/AddComment";
 import {DeleteComment} from "@/components/Comments/DeleteComment/DeleteComment";
-import {IconCheck} from "@tabler/icons-react";
+import {IconCheck, IconShare3} from "@tabler/icons-react";
 import {useRef, useState} from "react";
 import {EditComment} from "@/components/Comments/EditComment/EditComment";
 import {notify} from "@/utils/Notifications/notify";
@@ -17,7 +17,6 @@ import {comments} from "@/lib/comments/comments";
 import {CommentType} from "@/types/Comments/Comment.type";
 import {MutatedDataType} from "@/types/Comments/MutatedData.type";
 import {MutationCommentType, MutationInputType } from "@/types/Comments/MutationInput.type";
-import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import useCustomTheme from "@/hooks/useCustomTheme";
 
 export function Comment({
@@ -307,14 +306,17 @@ export function Comment({
                                 dislikes={comment.dislikes}
                                 sendVotes={handleNewVotes}
                             />
+                            <ActionIcon
+                                classNames={{
+                                    root: classes.iconWrapper,
+                                    icon: classes.iconWrapper,
+                                }}
+                                variant="default"
+                                onClick={toggleReply}
+                            >
+                                <IconShare3 className={classes.icon} size={20} stroke={1.5} />
+                            </ActionIcon>
                         </Group>
-                        <DecoratedButton
-                            color="var(--animeth-text-contrast-color)"
-                            variant="transparent"
-                            onClick={toggleReply}
-                        >
-                            Ответить
-                        </DecoratedButton>
                     </Group>
                 </Stack>
             </Flex>

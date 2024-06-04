@@ -117,3 +117,34 @@
         gap: rem(8px);
     }
 }
+
+.icon {
+    transform: rotate(180deg);
+
+    @media screen and (max-width: rem(750px)) {
+        width: rem(16px);
+        height: rem(16px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        width: rem(14px);
+        height: rem(14px);
+    }
+}
+
+.iconWrapper {
+    --local-background-color: light-dark(
+            darken(var(--animeth-sidebar-color), 0.025),
+            lighten(var(--animeth-sidebar-color), 0.025)
+    );
+    background: var(--local-background-color);
+    border: none;
+
+    @media screen and (max-width: rem(750px)) {
+        --ai-size: rem(24px) !important;
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        --ai-size: rem(20px) !important;
+    }
+}
