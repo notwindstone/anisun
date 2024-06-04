@@ -261,7 +261,7 @@ export function Comment({
                             <DeleteComment uuid={comment.uuid} userid={comment.userid} isInitiallyDeleted={comment.isDeleted} sendDelete={handleDelete} />
                         </Group>
                     </Group>
-                    <Group align="flex-start">
+                    <Group h="100%" align="flex-start">
                         {
                             comment.isDeleted
                                 ? (

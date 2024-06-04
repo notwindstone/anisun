@@ -2,7 +2,7 @@
     min-height: rem(160px);
     width: 100%;
     gap: rem(16px);
-    padding: rem(16px) rem(16px) 0;
+    padding: rem(16px);
 
     @media screen and (max-width: rem(750px)) {
         min-height: rem(144px);
