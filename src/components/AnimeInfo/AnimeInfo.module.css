@@ -115,3 +115,11 @@
     flex-wrap: nowrap;
     overflow-x: auto;
 }
+
+.defaultAnchor {
+    text-decoration: none;
+
+    @mixin hover {
+        text-decoration: underline;
+    }
+}

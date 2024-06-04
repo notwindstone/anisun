@@ -36,6 +36,17 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     let cleanDescription;
 
     if (data?.descriptionHtml) {
+        DOMPurify.addHook('afterSanitizeElements', function (node) {
+            if (!node.tagName) {
+                return;
+            }
+
+            if (node.tagName.toLowerCase() === 'a') {
+                node.setAttribute('style', `color: ${theme.color}`);
+                node.setAttribute('class', classes.defaultAnchor);
+            }
+        });
+
         cleanDescription = DOMPurify.sanitize(data.descriptionHtml);
     }
 
