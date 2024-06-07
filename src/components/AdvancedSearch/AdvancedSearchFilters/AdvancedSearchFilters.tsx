@@ -54,6 +54,20 @@ export default function AdvancedSearchFilters() {
     const [statuses, setStatuses] = useState<string[]>(initialStatuses);
     const [studio, setStudio] = useState<string | null>(initialStudio);
 
+    function getYearFilter(pathnameWithSearchParams: string) {
+        const areYearsRanged = yearsRanged && !isNaN(rangedYears[0]) && !isNaN(rangedYears[1]);
+
+        if (areYearsRanged) {
+            return `${pathnameWithSearchParams}&yearsRanged=true&rangedYears=${rangedYears}`;
+        }
+
+        if (!isNaN(year)) {
+            return `${pathnameWithSearchParams}&yearsRanged=false&year=${year}`;
+        }
+
+        return pathnameWithSearchParams;
+    }
+
     function setFilters() {
         let pathnameWithSearchParams = `${pathname}`;
 
@@ -95,16 +109,7 @@ export default function AdvancedSearchFilters() {
             pathnameWithSearchParams = `${pathnameWithSearchParams}&score=${score}`;
         }
 
-        // Never Nesters, sorry, I'm tired.
-        if (yearsRanged) {
-            if (!isNaN(rangedYears[0]) && !isNaN(rangedYears[1])) {
-                pathnameWithSearchParams = `${pathnameWithSearchParams}&yearsRanged=true&rangedYears=${rangedYears}`;
-            }
-        } else {
-            if (!isNaN(year)) {
-                pathnameWithSearchParams = `${pathnameWithSearchParams}&yearsRanged=false&year=${year}`;
-            }
-        }
+        pathnameWithSearchParams = getYearFilter(pathnameWithSearchParams);
 
         if (seasons.length) {
             pathnameWithSearchParams = `${pathnameWithSearchParams}&seasons=${seasons}`;
