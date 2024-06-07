@@ -252,7 +252,7 @@ npm run start
 
 * [Telegram - @windst1](https://t.me/windst1)
 
-* Discord - @notwindstone
+* Discord - [@notwindstone](https://discord.com/users/510709295814279168)
 
 ### Через наш чат или сервер
 
