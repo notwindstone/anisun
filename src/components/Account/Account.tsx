@@ -2,7 +2,7 @@
 
 import {useQuery} from "@tanstack/react-query";
 import {account} from "@/lib/account/account";
-import {Avatar, Flex, Image, Skeleton, Stack, Text, Title, Tooltip} from "@mantine/core";
+import {Avatar, Flex, Image, rem, Skeleton, Stack, Text, Title, Tooltip} from "@mantine/core";
 import React from "react";
 import {UserResource} from "@clerk/types";
 import dayjs from "dayjs";
@@ -44,7 +44,7 @@ export default function Account({ user }: { user: UserResource }) {
     );
 
     return (
-        <>
+        <Flex gap={rem(16)}>
             <Tooltip
                 radius="md"
                 color="black"
@@ -53,9 +53,9 @@ export default function Account({ user }: { user: UserResource }) {
                 position="top-start"
             >
                 <Avatar
-                    src={user.imageUrl}
+                    src={user.imageUrl ?? '/blurred.png'}
                     alt={user.username ?? 'unknown username'}
-                    size={64}
+                    size={112}
                     component={Link}
                     href={user.imageUrl}
                     target="_blank"
@@ -67,21 +67,23 @@ export default function Account({ user }: { user: UserResource }) {
                     }
                 </Avatar>
             </Tooltip>
-            <Title>{user.username}</Title>
+            <Stack gap={0}>
+                <Text fw={500} size={rem(36)}>{user.username}</Text>
 
-            <Text>
-                Дата создания аккаунта: {
+                <Text>
+                    Дата создания аккаунта: {
                     dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
                 }
-            </Text>
+                </Text>
 
-            <Skeleton visible={isPending} width={256} height={24}>
-                <Text>Репутация: {data?.reputation}</Text>
-            </Skeleton>
+                <Skeleton visible={isPending} width={256} height={24}>
+                    <Text>Репутация: {data?.reputation}</Text>
+                </Skeleton>
 
-            <Skeleton visible={isPending} width={256} height={24}>
-                <Text>Комментариев: {data?.totalComments}</Text>
-            </Skeleton>
-        </>
+                <Skeleton visible={isPending} width={256} height={24}>
+                    <Text>Комментариев: {data?.totalComments}</Text>
+                </Skeleton>
+            </Stack>
+        </Flex>
     );
 }
