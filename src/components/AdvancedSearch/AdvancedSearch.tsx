@@ -3,18 +3,16 @@
 import SearchInput from "@/components/SearchInput/SearchInput";
 import {Flex, Stack, Text} from "@mantine/core";
 import AdvancedSearchFilters from "@/components/AdvancedSearch/AdvancedSearchFilters/AdvancedSearchFilters";
-import {useSearchParams} from "next/navigation";
 import classes from './AdvancedSearch.module.css';
 import {AdvancedSearchContext} from "@/utils/Contexts/Contexts";
 import {useState} from "react";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
-import getAllSearchParams from "@/utils/Misc/getAllSearchParams";
 import TrendingGrid from "@/components/Trending/TrendingGrid/TrendingGrid";
+import useFilterParams from "@/hooks/useFilterParams";
 
 export default function AdvancedSearch() {
     const shikimori = client();
-    const searchParams = useSearchParams();
     const {
         censored,
         durations,
@@ -32,7 +30,7 @@ export default function AdvancedSearch() {
         seasons,
         statuses,
         studio
-    } = getAllSearchParams(searchParams);
+    } = useFilterParams();
 
     const PLACEHOLDER_DATA = Array.from({ length: limit });
 

@@ -1,10 +1,12 @@
-import {ReadonlyURLSearchParams} from "next/navigation";
+import {useSearchParams} from "next/navigation";
 
 function splitStringToArray(toSplit: string[]) {
     return toSplit?.[0]?.split(',') ?? [];
 }
 
-export default function getAllSearchParams(searchParams: ReadonlyURLSearchParams) {
+export default function useFilterParams() {
+    const searchParams = useSearchParams();
+
     const censored = searchParams.get('censored');
     const durations = splitStringToArray(searchParams.getAll('durations'));
     const demographicGenres = splitStringToArray(searchParams.getAll('demographicGenres'));

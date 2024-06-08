@@ -5,19 +5,18 @@ import {useState} from "react";
 import AdvancedSearchFiltersChildren
     from "@/components/AdvancedSearch/AdvancedSearchFilters/AdvancedSearchFiltersChildren/AdvancedSearchFiltersChildren";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
-import getAllSearchParams from "@/utils/Misc/getAllSearchParams";
-import {usePathname, useRouter, useSearchParams} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import classes from './AdvancedSearchFilters.module.css';
+import useFilterParams from "@/hooks/useFilterParams";
 
 const FIRST_ANIME_AIRED_ON = 1917;
 
 export default function AdvancedSearchFilters() {
     const [filtersHidden, { toggle: toggleFilters }] = useDisclosure(true);
-    const searchParams = useSearchParams();
     const pathname = usePathname();
     const router = useRouter();
-    const allSearchParams = getAllSearchParams(searchParams);
+    const allSearchParams = useFilterParams();
 
     const initialCensored = allSearchParams.censored === "true";
     const initialDurations = allSearchParams.durations ?? [];
