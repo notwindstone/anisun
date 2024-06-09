@@ -68,8 +68,9 @@ export default function NavigationBreadcrumbs() {
 
     async function getAccountData() {
         const userId = paths?.[1];
+        const containsUserId = userId?.includes('user');
 
-        if (!userId) {
+        if (!containsUserId) {
             return null;
         }
 
