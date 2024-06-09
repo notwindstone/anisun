@@ -2,7 +2,6 @@ import React from 'react';
 import {Container, Text} from "@mantine/core";
 import {clerkClient} from "@clerk/nextjs";
 import Account from "@/components/Account/Account";
-import Link from "next/link";
 import {Metadata} from "next";
 import classes from './page.module.css';
 
@@ -17,7 +16,6 @@ export default async function Page({ params }: { params: { userid: string } }) {
     if (!user) {
         return (
             <>
-                <Link href="/">Вернуться</Link>
                 <Text>Похоже, что такого пользователя не существует.</Text>
             </>
         );

@@ -5,13 +5,13 @@ import {IconChevronRight, IconHome} from "@tabler/icons-react";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import translateRouteNames from "@/utils/Translates/translateRouteNames";
-import {useUser} from "@clerk/nextjs";
 import classes from './NavigationBreadcrumbs.module.css';
 import useRipple from "use-ripple-hook";
 import React from "react";
 import {BreadcrumbType} from "@/types/Breadcrumb/Breadcrumb.type";
 import {variables} from "@/configs/variables";
 import getShikimoriId from "@/utils/Misc/getShikimoriId";
+import {getUserById} from "@/lib/actions";
 
 function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType) {
     const [ripple, event] = useRipple(variables.rippleColor);
@@ -36,7 +36,6 @@ function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType
 
 export default function NavigationBreadcrumbs() {
     let titlePath: string | null;
-    const { user } = useUser();
     const shikimori = client();
     const pathname = usePathname();
     const paths = pathname
@@ -47,26 +46,46 @@ export default function NavigationBreadcrumbs() {
         titlePath = paths[paths.length - 1];
     }
 
+    async function getShikimoriData() {
+        if (!titlePath) {
+            return null;
+        }
+
+        const shikimoriId = getShikimoriId(titlePath);
+
+        return (
+            await shikimori
+                .animes
+                .byId({
+                    ids: shikimoriId,
+                    filter: [
+                        'name',
+                        'russian'
+                    ],
+                })
+        ).animes;
+    }
+
+    async function getAccountData() {
+        const userId = paths?.[1];
+
+        if (!userId) {
+            return null;
+        }
+
+        return await getUserById({ id: userId });
+    }
+
     const { data } = useQuery({
         queryKey: ['breadcrumbs', pathname],
         queryFn: async () => {
-            if (!titlePath) {
-                return null;
-            }
+            const shikimoriData = await getShikimoriData();
+            const accountData = await getAccountData();
 
-            const shikimoriId = getShikimoriId(titlePath);
-
-            return (
-                await shikimori
-                    .animes
-                    .byId({
-                        ids: shikimoriId,
-                        filter: [
-                            'name',
-                            'russian'
-                        ],
-                    })
-            ).animes;
+            return {
+                shikimoriData,
+                accountData,
+            };
         }
     });
 
@@ -75,8 +94,8 @@ export default function NavigationBreadcrumbs() {
         const currentPathname = currentPathArray.join('/');
         const translatedBreadcrumb = translateRouteNames(breadcrumb);
         const previousBreadcrumb = array[index - 1];
-        const russianAnimeName = data?.[0].russian;
-        const originalAnimeName = data?.[0].name;
+        const russianAnimeName = data?.shikimoriData?.[0].russian;
+        const originalAnimeName = data?.shikimoriData?.[0].name;
         let currentBreadcrumb;
 
         switch (previousBreadcrumb) {
@@ -84,7 +103,7 @@ export default function NavigationBreadcrumbs() {
                 currentBreadcrumb = russianAnimeName ?? originalAnimeName;
                 break;
             case "account":
-                currentBreadcrumb = user?.username;
+                currentBreadcrumb = data?.accountData?.username;
                 break;
             default:
                 currentBreadcrumb = translatedBreadcrumb;
