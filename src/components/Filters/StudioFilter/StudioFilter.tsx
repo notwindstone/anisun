@@ -1,6 +1,7 @@
 import {Dispatch, SetStateAction} from "react";
 import {Select} from "@mantine/core";
 import {variables} from "@/configs/variables";
+import classes from '@/components/Filters/FiltersSelect.module.css';
 
 export default (function StudioFilter({
     studio,
@@ -12,6 +13,7 @@ export default (function StudioFilter({
     return (
         <>
             <Select
+                classNames={classes}
                 placeholder="Студия"
                 value={studio}
                 onChange={setStudio}

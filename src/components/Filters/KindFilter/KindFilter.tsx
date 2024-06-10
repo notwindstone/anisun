@@ -1,6 +1,7 @@
 import {MultiSelect} from "@mantine/core";
 import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
+import classes from '@/components/Filters/FiltersSelect.module.css';
 
 export default memo(function KindFilter({
     kinds,
@@ -11,6 +12,7 @@ export default memo(function KindFilter({
 }) {
     return (
         <MultiSelect
+            classNames={classes}
             placeholder="Тип"
             value={kinds}
             onChange={setKinds}

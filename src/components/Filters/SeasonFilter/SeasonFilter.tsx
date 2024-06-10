@@ -3,6 +3,7 @@ import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './SeasonFilter.module.css';
+import classesSelect from '@/components/Filters/FiltersSelect.module.css';
 
 const FIRST_ANIME_AIRED_ON = 1917;
 const EARLIER_YEAR = 2000;
@@ -166,6 +167,7 @@ export default memo(function SeasonFilter({
             {
                 !yearsRanged && (
                     <MultiSelect
+                        classNames={classesSelect}
                         placeholder="Сезон"
                         value={seasons}
                         onChange={setSeasons}

@@ -1,4 +1,10 @@
+.input {
+    background: var(--animeth-secondary-color);
+}
+
 .dropdown {
+    background: var(--animeth-secondary-color);
+    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
     z-index: 30000 !important;
     border-radius: rem(16px);
     padding-right: 0;

@@ -1,6 +1,7 @@
 import {MultiSelect} from "@mantine/core";
 import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
+import classes from '@/components/Filters/FiltersSelect.module.css';
 
 export default memo(function StatusFilter({
     statuses, 
@@ -13,6 +14,7 @@ export default memo(function StatusFilter({
 
     return (
         <MultiSelect
+            classNames={classes}
             placeholder="Статус"
             value={statuses}
             onChange={setStatuses}

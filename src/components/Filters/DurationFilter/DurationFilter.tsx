@@ -1,5 +1,6 @@
 import {MultiSelect} from "@mantine/core";
 import {Dispatch, memo, SetStateAction} from "react";
+import classes from '@/components/Filters/FiltersSelect.module.css';
 
 export default memo(function DurationFilter({
     durations,
@@ -10,6 +11,7 @@ export default memo(function DurationFilter({
 }) {
     return (
         <MultiSelect
+            classNames={classes}
             placeholder="Длительность эпизодов"
             value={durations}
             onChange={setDurations}

@@ -1,6 +1,7 @@
 import {MultiSelect} from "@mantine/core";
 import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
+import classes from '@/components/Filters/FiltersSelect.module.css';
 
 export default memo(function RatingFilter({
     ratings,
@@ -12,6 +13,7 @@ export default memo(function RatingFilter({
     return (
         <>
             <MultiSelect
+                classNames={classes}
                 value={ratings}
                 onChange={(rating) => setRatings(rating)}
                 placeholder="Возрастное ограничение"

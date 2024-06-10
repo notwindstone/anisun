@@ -4,6 +4,10 @@ import {useQuery} from "@tanstack/react-query";
 import {Dispatch, memo, SetStateAction, useEffect, useState} from "react";
 import {AdvancedSearchFiltersType} from "@/types/AdvancedSearch/AdvancedSearchFilters.type";
 import {GenreType} from "@/types/Shikimori/Responses/Types/Genre.type";
+import classes from '@/components/Filters/FiltersSelect.module.css';
+import {useDisclosure} from "@mantine/hooks";
+import useCustomTheme from "@/hooks/useCustomTheme";
+import {variables} from "@/configs/variables";
 
 export default memo(function GenreFilter({
     demographicGenresValue,
@@ -20,6 +24,7 @@ export default memo(function GenreFilter({
     themeGenresValue: string[],
     setThemeGenresValue: Dispatch<SetStateAction<string[]>>
 }) {
+    const { theme } = useCustomTheme();
     const [demographicGenresData, setDemographicGenres] = useState<AdvancedSearchFiltersType>();
     const [genreGenresData, setGenreGenres] = useState<AdvancedSearchFiltersType>();
     const [themeGenresData, setThemeGenres] = useState<AdvancedSearchFiltersType>();
@@ -28,6 +33,16 @@ export default memo(function GenreFilter({
         queryKey: ['genres'],
         queryFn: getGenres,
     });
+    const [demographicGenresFocused, demographicGenresHandler] = useDisclosure(false);
+    const [genreGenresFocused, genreGenresHandler] = useDisclosure(false);
+    const [themeGenresFocused, themeGenresHandler] = useDisclosure(false);
+
+    const color = theme.color;
+    // It can be MantineColor or HEXType code
+    // @ts-ignore
+    const isMantineColor = variables.mantineColors.includes(color);
+    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
+    const calculatedColor = isMantineColor ? mantineColor : color;
 
     async function getGenres() {
         return (await shikimori
@@ -91,6 +106,14 @@ export default memo(function GenreFilter({
     return (
         <>
             <MultiSelect
+                styles={{
+                    input: {
+                        borderColor: demographicGenresFocused ? calculatedColor : undefined
+                    }
+                }}
+                onDropdownOpen={demographicGenresHandler.open}
+                onDropdownClose={demographicGenresHandler.close}
+                classNames={classes}
                 value={demographicGenresValue}
                 onChange={setDemographicGenresValue}
                 radius="md"
@@ -98,6 +121,14 @@ export default memo(function GenreFilter({
                 data={demographicGenresData}
             />
             <MultiSelect
+                styles={{
+                    input: {
+                        borderColor: genreGenresFocused ? calculatedColor : undefined
+                    }
+                }}
+                onDropdownOpen={genreGenresHandler.open}
+                onDropdownClose={genreGenresHandler.close}
+                classNames={classes}
                 value={genreGenresValue}
                 onChange={setGenreGenresValue}
                 radius="md"
@@ -105,6 +136,14 @@ export default memo(function GenreFilter({
                 data={genreGenresData}
             />
             <MultiSelect
+                styles={{
+                    input: {
+                        borderColor: themeGenresFocused ? calculatedColor : undefined
+                    }
+                }}
+                onDropdownOpen={themeGenresHandler.open}
+                onDropdownClose={themeGenresHandler.close}
+                classNames={classes}
                 value={themeGenresValue}
                 onChange={setThemeGenresValue}
                 radius="md"

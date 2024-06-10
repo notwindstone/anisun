@@ -1,0 +1,19 @@
+.input, .dropdown {
+    color: white !important;
+    background: var(--animeth-secondary-color);
+    border-radius: var(--mantine-radius-md);
+    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+}
+
+.options {
+    border-radius: var(--mantine-radius-md);
+    overflow: clip;
+}
+
+.option {
+    border-radius: var(--mantine-radius-md);
+
+    @mixin hover {
+        background: alpha(var(--animeth-text-contrast-color), 0.05);
+    }
+}

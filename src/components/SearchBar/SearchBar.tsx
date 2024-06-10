@@ -223,13 +223,14 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
             <Autocomplete
                 comboboxProps={{ transitionProps: { transition: "fade-up" }, position: position ?? "top" }}
                 classNames={{
+                    input: classes.input,
                     dropdown: classes.dropdown,
                     options: classes.options,
                     option: classes.option,
                 }}
                 styles={{
                     input: {
-                        borderColor: focused ? calculatedColor : "var(--mantine-color-default-border)"
+                        borderColor: focused ? calculatedColor : "#0000"
                     }
                 }}
                 variant="default"
