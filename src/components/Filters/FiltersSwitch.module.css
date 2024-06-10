@@ -1,3 +1,7 @@
 .input:not(:checked) + .track {
     background: var(--animeth-secondary-color);
 }
+
+.track {
+    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+}
