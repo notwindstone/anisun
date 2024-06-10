@@ -7,6 +7,8 @@ import {useDebouncedValue, useFocusWithin} from "@mantine/hooks";
 import {TextInput} from "@mantine/core";
 import {AdvancedSearchContext} from "@/utils/Contexts/Contexts";
 import calculateColor from "@/utils/Misc/calculateColor";
+import classes from './SearchInput.module.css';
+import {IconSearch} from "@tabler/icons-react";
 
 export default function SearchInput() {
     const { setSearchInput } = useContext(AdvancedSearchContext);
@@ -23,13 +25,18 @@ export default function SearchInput() {
 
     return (
         <TextInput
+            classNames={classes}
             value={input}
             onChange={(event) => setInput(event.currentTarget.value)}
             size={isMobile ? "md" : "xl"}
             ref={ref}
+            placeholder="Поиск"
+            leftSection={
+                <IconSearch size={24} stroke={1.5} />
+            }
             styles={{
                 input: {
-                    borderColor: focused ? color : "var(--mantine-color-default-border)"
+                    borderColor: focused ? color : "#0000"
                 }
             }}
         />

@@ -1,6 +1,9 @@
 import {MultiSelect} from "@mantine/core";
 import {Dispatch, memo, SetStateAction} from "react";
 import classes from '@/components/Filters/FiltersSelect.module.css';
+import {useDisclosure} from "@mantine/hooks";
+import calculateColor from "@/utils/Misc/calculateColor";
+import useCustomTheme from "@/hooks/useCustomTheme";
 
 export default memo(function DurationFilter({
     durations,
@@ -9,8 +12,19 @@ export default memo(function DurationFilter({
     durations: string[],
     setDurations: Dispatch<SetStateAction<string[]>>
 }) {
+    const { theme } = useCustomTheme();
+    const [focused, { open, close }] = useDisclosure(false);
+    const color = calculateColor(theme.color);
+
     return (
         <MultiSelect
+            onDropdownOpen={open}
+            onDropdownClose={close}
+            styles={{
+                input: {
+                    borderColor: focused ? color : undefined
+                }
+            }}
             classNames={classes}
             placeholder="Длительность эпизодов"
             value={durations}

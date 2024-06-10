@@ -4,6 +4,8 @@ import {variables} from "@/configs/variables";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './SeasonFilter.module.css';
 import classesSelect from '@/components/Filters/FiltersSelect.module.css';
+import {useDisclosure} from "@mantine/hooks";
+import calculateColor from "@/utils/Misc/calculateColor";
 
 const FIRST_ANIME_AIRED_ON = 1917;
 const EARLIER_YEAR = 2000;
@@ -46,6 +48,8 @@ export default memo(function SeasonFilter({
 }) {
     const currentYear = new Date().getFullYear();
     const { theme } = useCustomTheme();
+    const [focused, { open, close }] = useDisclosure(false);
+    const color = calculateColor(theme.color);
 
     function setYearWithChecks({ year, toValue }: { year: number | string, toValue: string }) {
         const parsedYear = parseInt(year.toString());
@@ -167,6 +171,13 @@ export default memo(function SeasonFilter({
             {
                 !yearsRanged && (
                     <MultiSelect
+                        onDropdownOpen={open}
+                        onDropdownClose={close}
+                        styles={{
+                            input: {
+                                borderColor: focused ? color : undefined
+                            }
+                        }}
                         classNames={classesSelect}
                         placeholder="Сезон"
                         value={seasons}

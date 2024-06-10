@@ -2,6 +2,9 @@ import {Dispatch, SetStateAction} from "react";
 import {Select} from "@mantine/core";
 import {variables} from "@/configs/variables";
 import classes from '@/components/Filters/FiltersSelect.module.css';
+import useCustomTheme from "@/hooks/useCustomTheme";
+import {useDisclosure} from "@mantine/hooks";
+import calculateColor from "@/utils/Misc/calculateColor";
 
 export default (function StudioFilter({
     studio,
@@ -10,9 +13,20 @@ export default (function StudioFilter({
     studio: string | null,
     setStudio: Dispatch<SetStateAction<string | null>>
 }) {
+    const { theme } = useCustomTheme();
+    const [focused, { open, close }] = useDisclosure(false);
+    const color = calculateColor(theme.color);
+
     return (
         <>
             <Select
+                onDropdownOpen={open}
+                onDropdownClose={close}
+                styles={{
+                    input: {
+                        borderColor: focused ? color : undefined
+                    }
+                }}
                 classNames={classes}
                 placeholder="Студия"
                 value={studio}
