@@ -14,18 +14,6 @@ import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 import classes from './AdvancedSearchFiltersChildren.module.css';
 import {Accordion, rem, Stack} from "@mantine/core";
 
-const groceries = [
-    {
-        type: 'Apples',
-    },
-    {
-        type: 'Bananas',
-    },
-    {
-        type: 'Broccoli',
-    },
-];
-
 export default function AdvancedSearchFiltersChildren() {
     const {
         censored,
@@ -64,19 +52,11 @@ export default function AdvancedSearchFiltersChildren() {
         setStudio,
     } = useContext(AdvancedSearchFiltersContext);
 
-    const items = groceries.map((item) => (
-        <Accordion.Item key={item.type} value={item.type}>
-            <Accordion.Control>{item.type}</Accordion.Control>
-            <Accordion.Panel>
-                <Stack>
-                    <GenreFilter
-                        demographicGenresValue={demographicGenresValue}
-                        setDemographicGenresValue={setDemographicGenresValue}
-                        genreGenresValue={genreGenresValue}
-                        setGenreGenresValue={setGenreGenresValue}
-                        themeGenresValue={themeGenresValue}
-                        setThemeGenresValue={setThemeGenresValue}
-                    />
+    const filterGroups = [
+        {
+            type: 'Основные',
+            filters: (
+                <>
                     <OrderFilter
                         order={order}
                         setOrder={setOrder}
@@ -85,14 +65,36 @@ export default function AdvancedSearchFiltersChildren() {
                         kinds={kinds}
                         setKinds={setKinds}
                     />
-                    <LimitFilter
-                        limit={limit}
-                        setLimit={setLimit}
-                    />
                     <StatusFilter
                         statuses={statuses}
                         setStatuses={setStatuses}
                     />
+                    <StudioFilter
+                        studio={studio}
+                        setStudio={setStudio}
+                    />
+                </>
+            ),
+        },
+        {
+            type: 'Жанры',
+            filters: (
+                <>
+                    <GenreFilter
+                        demographicGenresValue={demographicGenresValue}
+                        setDemographicGenresValue={setDemographicGenresValue}
+                        genreGenresValue={genreGenresValue}
+                        setGenreGenresValue={setGenreGenresValue}
+                        themeGenresValue={themeGenresValue}
+                        setThemeGenresValue={setThemeGenresValue}
+                    />
+                </>
+            ),
+        },
+        {
+            type: 'Сезон',
+            filters: (
+                <>
                     <SeasonFilter
                         seasons={seasons}
                         setSeasons={setSeasons}
@@ -105,26 +107,46 @@ export default function AdvancedSearchFiltersChildren() {
                         toggleYearsRanged={toggleYearsRanged}
                         yearStart={yearStart}
                     />
-                    <ScoreFilter
-                        score={score}
-                        setScore={setScore}
+                </>
+            ),
+        },
+        {
+            type: 'Прочее',
+            filters: (
+                <>
+                    <RatingFilter
+                        ratings={ratings}
+                        setRatings={setRatings}
                     />
                     <DurationFilter
                         durations={durations}
                         setDurations={setDurations}
                     />
-                    <RatingFilter
-                        ratings={ratings}
-                        setRatings={setRatings}
+                    <ScoreFilter
+                        score={score}
+                        setScore={setScore}
                     />
-                    <StudioFilter
-                        studio={studio}
-                        setStudio={setStudio}
+                    <LimitFilter
+                        limit={limit}
+                        setLimit={setLimit}
                     />
                     <CensoredFilter
                         censored={censored}
                         toggleCensored={toggleCensored}
                     />
+                </>
+            ),
+        },
+    ];
+
+    const items = filterGroups.map((group) => (
+        <Accordion.Item key={group.type} value={group.type}>
+            <Accordion.Control>
+                {group.type}
+            </Accordion.Control>
+            <Accordion.Panel>
+                <Stack>
+                    {group.filters}
                 </Stack>
             </Accordion.Panel>
         </Accordion.Item>
