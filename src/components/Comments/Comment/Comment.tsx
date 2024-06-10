@@ -324,9 +324,9 @@ export function Comment({
                     </Group>
                 </Stack>
             </Flex>
-            {
-                isToggledReply && <AddComment title={comment.title} parentUUID={comment.uuid} sendComment={handleNewComment} />
-            }
+            <div className={`${classes.hiddenReplyWrapper} ${isToggledReply && classes.toggledReplyWrapper}`}>
+                <AddComment title={comment.title} parentUUID={comment.uuid} sendComment={handleNewComment} />
+            </div>
             {
                 /*
                  * Если к комментарию только 1 ответ, то он автоматически загрузится
