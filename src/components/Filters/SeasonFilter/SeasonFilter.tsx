@@ -1,4 +1,4 @@
-import {Group, MultiSelect, NumberInput, RangeSlider, rem, Slider, Switch} from "@mantine/core";
+import {Group, MultiSelect, NumberInput, RangeSlider, rem, Slider, Stack, Switch, Text} from "@mantine/core";
 import {Dispatch, memo, SetStateAction} from "react";
 import {variables} from "@/configs/variables";
 import useCustomTheme from "@/hooks/useCustomTheme";
@@ -95,16 +95,21 @@ export default memo(function SeasonFilter({
             {
                 yearsRanged ? (
                     <>
-                        <RangeSlider
-                            pb={rem(24)}
-                            minRange={1}
-                            marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
-                            color={theme.color}
-                            value={rangedYears}
-                            onChange={setRangedYears}
-                            min={yearStart}
-                            max={currentYear}
-                        />
+                        <Stack gap={rem(4)}>
+                            <Text size="sm">
+                                Годы
+                            </Text>
+                            <RangeSlider
+                                pb={rem(24)}
+                                minRange={1}
+                                marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
+                                color={theme.color}
+                                value={rangedYears}
+                                onChange={setRangedYears}
+                                min={yearStart}
+                                max={currentYear}
+                            />
+                        </Stack>
                         <NumberInput
                             value={rangedYears[0]}
                             onChange={(year) => setYearWithChecks({
@@ -128,20 +133,25 @@ export default memo(function SeasonFilter({
                     </>
                 ) : (
                     <>
-                        <Slider
-                            pb={rem(24)}
-                            marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
-                            classNames={{
-                                bar: classes.bar
-                            }}
-                            color={theme.color}
-                            value={year}
-                            onChange={setYear}
-                            min={yearStart}
-                            max={currentYear}
-                        />
+                        <Stack gap={rem(4)}>
+                            <Text size="sm">
+                                Годы
+                            </Text>
+                            <Slider
+                                pb={rem(24)}
+                                marks={yearStart === FIRST_ANIME_AIRED_ON ? BIG_RANGE_MARKS : SMALL_RANGE_MARKS}
+                                classNames={{
+                                    bar: classes.bar
+                                }}
+                                color={theme.color}
+                                value={year}
+                                onChange={setYear}
+                                min={yearStart}
+                                max={currentYear}
+                            />
+                        </Stack>
                         <NumberInput
-                            value={year}
+                            value={year || undefined}
                             onChange={(year) => setYearWithChecks({
                                 year: year,
                                 toValue: "defaultSlider"

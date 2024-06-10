@@ -9,7 +9,7 @@
     transition: transform 150ms ease;
 
     &[data-active] {
-        transform: scale(1.03);
+        transform: scale(1.025);
         z-index: 1;
         background-color: var(--animeth-secondary-color);
         box-shadow: var(--mantine-shadow-md);

@@ -12,7 +12,7 @@ import CensoredFilter from "@/components/Filters/CensoredFilter/CensoredFilter";
 import {useContext} from "react";
 import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 import classes from './AdvancedSearchFiltersChildren.module.css';
-import {Accordion, rem, Stack} from "@mantine/core";
+import {Accordion, rem, Stack, Text} from "@mantine/core";
 
 export default function AdvancedSearchFiltersChildren() {
     const {
@@ -140,9 +140,15 @@ export default function AdvancedSearchFiltersChildren() {
     ];
 
     const items = filterGroups.map((group) => (
-        <Accordion.Item key={group.type} value={group.type}>
+        <Accordion.Item
+            p={rem(8)}
+            key={group.type}
+            value={group.type}
+        >
             <Accordion.Control>
-                {group.type}
+                <Text>
+                    {group.type}
+                </Text>
             </Accordion.Control>
             <Accordion.Panel>
                 <Stack>
@@ -156,7 +162,6 @@ export default function AdvancedSearchFiltersChildren() {
         <>
             <Accordion
                 p={rem(8)}
-                defaultValue="Apples"
                 classNames={classes}
             >
                 {items}
