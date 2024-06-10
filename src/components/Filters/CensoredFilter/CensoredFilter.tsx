@@ -1,6 +1,7 @@
 import {Switch} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {memo} from "react";
+import classes from '@/components/Filters/FiltersSwitch.module.css';
 
 export default memo(function CensoredFilter({
     censored,
@@ -14,6 +15,7 @@ export default memo(function CensoredFilter({
     return (
         <>
             <Switch
+                classNames={classes}
                 label="Включить цензуру"
                 color={theme.color}
                 checked={censored}

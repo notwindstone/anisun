@@ -4,6 +4,7 @@ import {variables} from "@/configs/variables";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './SeasonFilter.module.css';
 import classesSelect from '@/components/Filters/FiltersSelect.module.css';
+import classesSwitch from '@/components/Filters/FiltersSwitch.module.css';
 import {useDisclosure} from "@mantine/hooks";
 import calculateColor from "@/utils/Misc/calculateColor";
 
@@ -85,12 +86,14 @@ export default memo(function SeasonFilter({
         <>
             <Group>
                 <Switch
+                    classNames={classesSwitch}
                     label="Выбрать промежутком"
                     color={theme.color}
                     checked={yearsRanged}
                     onChange={toggleYearsRanged}
                 />
                 <Switch
+                    classNames={classesSwitch}
                     label={`Начать промежуток с ${EARLIER_YEAR} года`}
                     color={theme.color}
                     checked={yearStart === EARLIER_YEAR}

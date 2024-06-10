@@ -1,0 +1,3 @@
+.input:not(:checked) + .track {
+    background: var(--animeth-secondary-color);
+}
