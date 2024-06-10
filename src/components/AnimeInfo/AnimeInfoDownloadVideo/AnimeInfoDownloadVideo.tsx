@@ -51,7 +51,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
     }
 
     if (isPending) {
-        return <Skeleton radius="xl" width={rem(126)} height={rem(36)} />;
+        return <Skeleton radius="xl" width={rem(118)} height={rem(36)} />;
     }
 
     if (error) {

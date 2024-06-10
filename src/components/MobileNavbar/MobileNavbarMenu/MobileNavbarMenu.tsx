@@ -182,7 +182,7 @@ export default function MobileNavbarMenu() {
                         </Sheet.Scroller>
                     </Sheet.Content>
                 </Sheet.Container>
-                <Sheet.Backdrop />
+                <Sheet.Backdrop onTap={close} />
             </Sheet>
             <Center flex={1}>
                 <UnstyledButton onClick={open} className={classes.buttonWrapper}>

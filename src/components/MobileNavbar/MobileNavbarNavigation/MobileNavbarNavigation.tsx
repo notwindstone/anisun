@@ -74,7 +74,7 @@ export default function MobileNavbarNavigation() {
                         </Sheet.Scroller>
                     </Sheet.Content>
                 </Sheet.Container>
-                <Sheet.Backdrop />
+                <Sheet.Backdrop onTap={close} />
             </Sheet>
             <Center flex={1}>
                 <UnstyledButton onClick={open} className={classes.buttonWrapper}>
