@@ -1,4 +1,4 @@
-import {MultiSelect, Skeleton} from "@mantine/core";
+import {ComboboxData, MultiSelect, Skeleton} from "@mantine/core";
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
 import {Dispatch, memo, SetStateAction, useEffect, useState} from "react";
@@ -9,7 +9,39 @@ import {useDisclosure} from "@mantine/hooks";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import calculateColor from "@/utils/Misc/calculateColor";
 
+function GenreMultiSelect({
+    color,
+    genresValue,
+    setGenresValue,
+    genresData,
+    placeholder,
+}: {
+    color: string | undefined;
+    genresValue: string[];
+    setGenresValue: Dispatch<SetStateAction<string[]>>;
+    genresData: ComboboxData | undefined;
+    placeholder: string;
+}) {
+    const [focused, { open, close }] = useDisclosure(false);
 
+    return (
+        <MultiSelect
+            styles={{
+                input: {
+                    borderColor: focused ? color : undefined
+                }
+            }}
+            onDropdownOpen={open}
+            onDropdownClose={close}
+            classNames={classes}
+            value={genresValue}
+            onChange={setGenresValue}
+            radius="md"
+            placeholder={placeholder}
+            data={genresData}
+        />
+    );
+}
 
 export default memo(function GenreFilter({
     demographicGenresValue,
@@ -35,9 +67,6 @@ export default memo(function GenreFilter({
         queryKey: ['genres'],
         queryFn: getGenres,
     });
-    const [demographicGenresFocused, demographicGenresHandler] = useDisclosure(false);
-    const [genreGenresFocused, genreGenresHandler] = useDisclosure(false);
-    const [themeGenresFocused, themeGenresHandler] = useDisclosure(false);
 
     const color = calculateColor(theme.color);
     
@@ -102,50 +131,26 @@ export default memo(function GenreFilter({
 
     return (
         <>
-            <MultiSelect
-                styles={{
-                    input: {
-                        borderColor: demographicGenresFocused ? color : undefined
-                    }
-                }}
-                onDropdownOpen={demographicGenresHandler.open}
-                onDropdownClose={demographicGenresHandler.close}
-                classNames={classes}
-                value={demographicGenresValue}
-                onChange={setDemographicGenresValue}
-                radius="md"
+            <GenreMultiSelect
+                color={color}
+                genresValue={demographicGenresValue}
+                setGenresValue={setDemographicGenresValue}
                 placeholder="Аудитория"
-                data={demographicGenresData}
+                genresData={demographicGenresData}
             />
-            <MultiSelect
-                styles={{
-                    input: {
-                        borderColor: genreGenresFocused ? color : undefined
-                    }
-                }}
-                onDropdownOpen={genreGenresHandler.open}
-                onDropdownClose={genreGenresHandler.close}
-                classNames={classes}
-                value={genreGenresValue}
-                onChange={setGenreGenresValue}
-                radius="md"
+            <GenreMultiSelect
+                color={color}
+                genresValue={genreGenresValue}
+                setGenresValue={setGenreGenresValue}
                 placeholder="Жанры"
-                data={genreGenresData}
+                genresData={genreGenresData}
             />
-            <MultiSelect
-                styles={{
-                    input: {
-                        borderColor: themeGenresFocused ? color : undefined
-                    }
-                }}
-                onDropdownOpen={themeGenresHandler.open}
-                onDropdownClose={themeGenresHandler.close}
-                classNames={classes}
-                value={themeGenresValue}
-                onChange={setThemeGenresValue}
-                radius="md"
+            <GenreMultiSelect
+                color={color}
+                genresValue={themeGenresValue}
+                setGenresValue={setThemeGenresValue}
                 placeholder="Темы"
-                data={themeGenresData}
+                genresData={themeGenresData}
             />
         </>
     );
