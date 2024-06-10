@@ -31,6 +31,7 @@ import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import Link from "next/link";
 import useMobileScreen from "@/hooks/useMobileScreen";
+import calculateColor from "@/utils/Misc/calculateColor";
 
 const NOTHING = {
     label: ' ',
@@ -152,12 +153,7 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
     const [input, setInput] = useState('');
     const [search] = useDebouncedValue(input, 300);
     const [focused, {open, close}] = useDisclosure(false);
-    const color = theme.color;
-    // It can be MantineColor or HEXType code
-    // @ts-ignore
-    const isMantineColor = variables.mantineColors.includes(color);
-    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
-    const calculatedColor = isMantineColor ? mantineColor : color;
+    const color = calculateColor(theme.color);
 
     const [
         titles,
@@ -230,7 +226,7 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
                 }}
                 styles={{
                     input: {
-                        borderColor: focused ? calculatedColor : "#0000"
+                        borderColor: focused ? color : "#0000"
                     }
                 }}
                 variant="default"

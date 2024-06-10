@@ -8,6 +8,7 @@ import {useHover} from "@mantine/hooks";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
+import calculateColor from "@/utils/Misc/calculateColor";
 
 export default function CarouselCard({
     animeTitle,
@@ -16,12 +17,7 @@ export default function CarouselCard({
 }) {
     const { theme } = useCustomTheme();
     const { hovered, ref } = useHover();
-    const color = theme.color;
-    // It can be MantineColor or HEXType code
-    // @ts-ignore
-    const isMantineColor = variables.mantineColors.includes(color);
-    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
-    const calculatedColor = isMantineColor ? mantineColor : color;
+    const color = calculateColor(theme.color);
     const animeStatus = animeTitle?.status ?? "";
     const isAnnounced = animeStatus === 'anons';
     const isReleased = animeStatus === 'released';
@@ -44,7 +40,7 @@ export default function CarouselCard({
                 className={classes.overlay}
                 style={{
                     outlineColor: hovered
-                        ? calculatedColor
+                        ? color
                         : "#00000000"
                 }}
             >

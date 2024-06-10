@@ -7,7 +7,9 @@ import {GenreType} from "@/types/Shikimori/Responses/Types/Genre.type";
 import classes from '@/components/Filters/FiltersSelect.module.css';
 import {useDisclosure} from "@mantine/hooks";
 import useCustomTheme from "@/hooks/useCustomTheme";
-import {variables} from "@/configs/variables";
+import calculateColor from "@/utils/Misc/calculateColor";
+
+
 
 export default memo(function GenreFilter({
     demographicGenresValue,
@@ -37,13 +39,8 @@ export default memo(function GenreFilter({
     const [genreGenresFocused, genreGenresHandler] = useDisclosure(false);
     const [themeGenresFocused, themeGenresHandler] = useDisclosure(false);
 
-    const color = theme.color;
-    // It can be MantineColor or HEXType code
-    // @ts-ignore
-    const isMantineColor = variables.mantineColors.includes(color);
-    const mantineColor = color === "black" ? "#000000" : `var(--mantine-color-${color}-6)`;
-    const calculatedColor = isMantineColor ? mantineColor : color;
-
+    const color = calculateColor(theme.color);
+    
     async function getGenres() {
         return (await shikimori
             .genres
@@ -108,7 +105,7 @@ export default memo(function GenreFilter({
             <MultiSelect
                 styles={{
                     input: {
-                        borderColor: demographicGenresFocused ? calculatedColor : undefined
+                        borderColor: demographicGenresFocused ? color : undefined
                     }
                 }}
                 onDropdownOpen={demographicGenresHandler.open}
@@ -123,7 +120,7 @@ export default memo(function GenreFilter({
             <MultiSelect
                 styles={{
                     input: {
-                        borderColor: genreGenresFocused ? calculatedColor : undefined
+                        borderColor: genreGenresFocused ? color : undefined
                     }
                 }}
                 onDropdownOpen={genreGenresHandler.open}
@@ -138,7 +135,7 @@ export default memo(function GenreFilter({
             <MultiSelect
                 styles={{
                     input: {
-                        borderColor: themeGenresFocused ? calculatedColor : undefined
+                        borderColor: themeGenresFocused ? color : undefined
                     }
                 }}
                 onDropdownOpen={themeGenresHandler.open}
