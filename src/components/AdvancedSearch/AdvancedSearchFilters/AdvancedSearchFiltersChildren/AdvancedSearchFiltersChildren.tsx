@@ -12,26 +12,17 @@ import CensoredFilter from "@/components/Filters/CensoredFilter/CensoredFilter";
 import {useContext} from "react";
 import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 import classes from './AdvancedSearchFiltersChildren.module.css';
-import {Accordion} from "@mantine/core";
+import {Accordion, rem, Stack} from "@mantine/core";
 
 const groceries = [
     {
-        emoji: '🍎',
-        value: 'Apples',
-        description:
-            'Crisp and refreshing fruit. Apples are known for their versatility and nutritional benefits. They come in a variety of flavors and are great for snacking, baking, or adding to salads.',
+        type: 'Apples',
     },
     {
-        emoji: '🍌',
-        value: 'Bananas',
-        description:
-            'Naturally sweet and potassium-rich fruit. Bananas are a popular choice for their energy-boosting properties and can be enjoyed as a quick snack, added to smoothies, or used in baking.',
+        type: 'Bananas',
     },
     {
-        emoji: '🥦',
-        value: 'Broccoli',
-        description:
-            'Nutrient-packed green vegetable. Broccoli is packed with vitamins, minerals, and fiber. It has a distinct flavor and can be enjoyed steamed, roasted, or added to stir-fries.',
+        type: 'Broccoli',
     },
 ];
 
@@ -74,77 +65,80 @@ export default function AdvancedSearchFiltersChildren() {
     } = useContext(AdvancedSearchFiltersContext);
 
     const items = groceries.map((item) => (
-        <Accordion.Item key={item.value} value={item.value}>
-            <Accordion.Control icon={item.emoji}>{item.value}</Accordion.Control>
-            <Accordion.Panel>{item.description}</Accordion.Panel>
+        <Accordion.Item key={item.type} value={item.type}>
+            <Accordion.Control>{item.type}</Accordion.Control>
+            <Accordion.Panel>
+                <Stack>
+                    <GenreFilter
+                        demographicGenresValue={demographicGenresValue}
+                        setDemographicGenresValue={setDemographicGenresValue}
+                        genreGenresValue={genreGenresValue}
+                        setGenreGenresValue={setGenreGenresValue}
+                        themeGenresValue={themeGenresValue}
+                        setThemeGenresValue={setThemeGenresValue}
+                    />
+                    <OrderFilter
+                        order={order}
+                        setOrder={setOrder}
+                    />
+                    <KindFilter
+                        kinds={kinds}
+                        setKinds={setKinds}
+                    />
+                    <LimitFilter
+                        limit={limit}
+                        setLimit={setLimit}
+                    />
+                    <StatusFilter
+                        statuses={statuses}
+                        setStatuses={setStatuses}
+                    />
+                    <SeasonFilter
+                        seasons={seasons}
+                        setSeasons={setSeasons}
+                        year={year}
+                        setYear={setYear}
+                        setRangedYears={setRangedYears}
+                        rangedYears={rangedYears}
+                        setYearStart={setYearStart}
+                        yearsRanged={yearsRanged}
+                        toggleYearsRanged={toggleYearsRanged}
+                        yearStart={yearStart}
+                    />
+                    <ScoreFilter
+                        score={score}
+                        setScore={setScore}
+                    />
+                    <DurationFilter
+                        durations={durations}
+                        setDurations={setDurations}
+                    />
+                    <RatingFilter
+                        ratings={ratings}
+                        setRatings={setRatings}
+                    />
+                    <StudioFilter
+                        studio={studio}
+                        setStudio={setStudio}
+                    />
+                    <CensoredFilter
+                        censored={censored}
+                        toggleCensored={toggleCensored}
+                    />
+                </Stack>
+            </Accordion.Panel>
         </Accordion.Item>
     ));
 
     return (
         <>
             <Accordion
-                maw={400}
+                p={rem(8)}
                 defaultValue="Apples"
                 classNames={classes}
             >
                 {items}
             </Accordion>
-            <GenreFilter
-                demographicGenresValue={demographicGenresValue}
-                setDemographicGenresValue={setDemographicGenresValue}
-                genreGenresValue={genreGenresValue}
-                setGenreGenresValue={setGenreGenresValue}
-                themeGenresValue={themeGenresValue}
-                setThemeGenresValue={setThemeGenresValue}
-            />
-            <OrderFilter
-                order={order}
-                setOrder={setOrder}
-            />
-            <KindFilter
-                kinds={kinds}
-                setKinds={setKinds}
-            />
-            <LimitFilter
-                limit={limit}
-                setLimit={setLimit}
-            />
-            <StatusFilter
-                statuses={statuses}
-                setStatuses={setStatuses}
-            />
-            <SeasonFilter
-                seasons={seasons}
-                setSeasons={setSeasons}
-                year={year}
-                setYear={setYear}
-                setRangedYears={setRangedYears}
-                rangedYears={rangedYears}
-                setYearStart={setYearStart}
-                yearsRanged={yearsRanged}
-                toggleYearsRanged={toggleYearsRanged}
-                yearStart={yearStart}
-            />
-            <ScoreFilter
-                score={score}
-                setScore={setScore}
-            />
-            <DurationFilter
-                durations={durations}
-                setDurations={setDurations}
-            />
-            <RatingFilter
-                ratings={ratings}
-                setRatings={setRatings}
-            />
-            <StudioFilter
-                studio={studio}
-                setStudio={setStudio}
-            />
-            <CensoredFilter
-                censored={censored}
-                toggleCensored={toggleCensored}
-            />
         </>
     );
 }

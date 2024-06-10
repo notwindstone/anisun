@@ -13,7 +13,6 @@ import useFilterParams from "@/hooks/useFilterParams";
 const FIRST_ANIME_AIRED_ON = 1917;
 
 export default function AdvancedSearchFilters() {
-    const [filtersHidden, { toggle: toggleFilters }] = useDisclosure(true);
     const pathname = usePathname();
     const router = useRouter();
     const allSearchParams = useFilterParams();
@@ -167,13 +166,10 @@ export default function AdvancedSearchFilters() {
             }}
         >
             <Stack flex={1}>
-                <DecoratedButton variant="light" onClick={toggleFilters}>
-                    Раскрыть фильтры
-                </DecoratedButton>
-                <Stack className={`${filtersHidden && classes.filters}`}>
+                <Stack className={classes.filters}>
                     <AdvancedSearchFiltersChildren />
                     <DecoratedButton onClick={setFilters}>
-                        Сохранить
+                        Применить фильтры
                     </DecoratedButton>
                 </Stack>
             </Stack>

@@ -1,12 +1,8 @@
 .control {
-    --local-background-color: light-dark(
-        darken(var(--animeth-sidebar-color), 0.025),
-        lighten(var(--animeth-sidebar-color), 0.025)
-    );
     z-index: 1000;
 
     &:not(:where([data-active])) {
-        background: var(--local-background-color);
+        background: var(--animeth-secondary-color);
         border: none;
     }
 }

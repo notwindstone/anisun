@@ -6,6 +6,7 @@
         --animeth-text-contrast-color: #000;
         --animeth-text-contrast-reversed-color: #fff;
         --animeth-accent-color: #000;
+        --animeth-secondary-color: darken(var(--animeth-sidebar-color), 0.025);
     }
 
     @mixin dark-root {
@@ -15,6 +16,7 @@
         --animeth-text-contrast-color: #fff;
         --animeth-text-contrast-reversed-color: #000;
         --animeth-accent-color: #fff;
+        --animeth-secondary-color: lighten(var(--animeth-sidebar-color), 0.025);
     }
 }
 

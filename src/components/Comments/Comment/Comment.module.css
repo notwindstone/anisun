@@ -133,11 +133,7 @@
 }
 
 .iconWrapper {
-    --local-background-color: light-dark(
-            darken(var(--animeth-sidebar-color), 0.025),
-            lighten(var(--animeth-sidebar-color), 0.025)
-    );
-    background: var(--local-background-color);
+    background: var(--animeth-secondary-color);
     border: none;
 
     @media screen and (max-width: rem(750px)) {
