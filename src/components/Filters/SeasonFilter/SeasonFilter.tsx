@@ -5,7 +5,8 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './SeasonFilter.module.css';
 import classesSelect from '@/components/Filters/FiltersSelect.module.css';
 import classesSwitch from '@/components/Filters/FiltersSwitch.module.css';
-import {useDisclosure} from "@mantine/hooks";
+import classesNumberInput from '@/components/Filters/FiltersNumberInput.module.css';
+import {useDisclosure, useFocusWithin} from "@mantine/hooks";
 import calculateColor from "@/utils/Misc/calculateColor";
 
 const FIRST_ANIME_AIRED_ON = 1917;
@@ -23,6 +24,41 @@ const SMALL_RANGE_MARKS = [
     { value: 2010, label: '2010' },
     { value: 2020, label: '2020' },
 ];
+
+function SeasonNumberInput({
+    color,
+    inputYear,
+    onChange,
+    yearStart,
+    currentYear,
+    placeholder,
+}: {
+    color: string | undefined;
+    inputYear: number | undefined;
+    onChange: (value: string | number) => void;
+    yearStart: number;
+    currentYear: number;
+    placeholder: string;
+}) {
+    const { ref, focused } = useFocusWithin();
+
+    return (
+        <NumberInput
+            styles={{
+                input: {
+                    borderColor: focused ? color : undefined
+                }
+            }}
+            ref={ref}
+            classNames={classesNumberInput}
+            value={inputYear}
+            onChange={onChange}
+            placeholder={placeholder}
+            min={yearStart}
+            max={currentYear}
+        />
+    );
+}
 
 export default memo(function SeasonFilter({
     year,
@@ -118,25 +154,27 @@ export default memo(function SeasonFilter({
                                 max={currentYear}
                             />
                         </Stack>
-                        <NumberInput
-                            value={rangedYears[0]}
+                        <SeasonNumberInput
+                            color={theme.color}
+                            inputYear={rangedYears[0]}
                             onChange={(year) => setYearWithChecks({
                                 year: year,
                                 toValue: "rangedSliderFirst"
                             })}
+                            yearStart={yearStart}
+                            currentYear={currentYear}
                             placeholder="От"
-                            min={yearStart}
-                            max={currentYear}
                         />
-                        <NumberInput
-                            value={rangedYears[1]}
+                        <SeasonNumberInput
+                            color={theme.color}
+                            inputYear={rangedYears[1]}
                             onChange={(year) => setYearWithChecks({
                                 year: year,
                                 toValue: "rangedSliderSecond"
                             })}
+                            yearStart={yearStart}
+                            currentYear={currentYear}
                             placeholder="До"
-                            min={yearStart}
-                            max={currentYear}
                         />
                     </>
                 ) : (
@@ -158,15 +196,16 @@ export default memo(function SeasonFilter({
                                 max={currentYear}
                             />
                         </Stack>
-                        <NumberInput
-                            value={year || undefined}
+                        <SeasonNumberInput
+                            color={theme.color}
+                            inputYear={year || undefined}
                             onChange={(year) => setYearWithChecks({
                                 year: year,
                                 toValue: "defaultSlider"
                             })}
+                            yearStart={yearStart}
+                            currentYear={currentYear}
                             placeholder="Год"
-                            min={yearStart}
-                            max={currentYear}
                         />
                     </>
                 )
