@@ -17,6 +17,7 @@
     "@mantine/hooks": "^7.9.1",
     "@mantine/notifications": "^7.9.1",
     "@neondatabase/serverless": "^0.9.0",
+    "@serwist/next": "^9.0.3",
     "@tabler/icons-react": "^3.5.0",
     "@tanstack/react-query": "^5.28.9",
     "@tanstack/react-virtual": "^3.5.0",
@@ -59,6 +60,7 @@
     "postcss": "^8.4.38",
     "postcss-preset-mantine": "^1.13.0",
     "postcss-simple-vars": "^7.0.1",
+    "serwist": "^9.0.3",
     "typescript": "^5"
   }
 }
