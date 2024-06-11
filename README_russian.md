@@ -157,8 +157,8 @@ NEON_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
 CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 KODIK_TOKEN='qwertyuiop1234567890'
@@ -173,14 +173,14 @@ NEON_DATABASE_URL='CHANGE_IT_postgres://postgres:adminadmin@0.0.0.0:5432/db'
 POSTGRESQL_DATABASE_URL='postgres://postgres:adminadmin@0.0.0.0:5432/db'
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_qwertyuiop1234567890
 CLERK_SECRET_KEY=sk_test_qwertyuiop1234567890
-NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
-NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+NEXT_PUBLIC_CLERK_SIGN_IN_URL=/
+NEXT_PUBLIC_CLERK_SIGN_UP_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL=/
 NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL=/
 KODIK_TOKEN='qwertyuiop1234567890'
 ```
 
-#### Режим разработки
+#### Разработки
 
 Если вы хотите запустить сайт в режиме разработки
 
@@ -188,7 +188,7 @@ KODIK_TOKEN='qwertyuiop1234567890'
 npm run dev
 ```
 
-#### Режим продакшна
+#### Продакшн
 
 > [!TIP]
 > Запускайте сайт в этом режиме, если не знаете, какой выбрать
@@ -223,9 +223,9 @@ npm run start
 
 3. `NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL` - `/`
 
-4. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/sign-up`
+4. `NEXT_PUBLIC_CLERK_SIGN_UP_URL` - `/`
 
-5. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
+5. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/`
 
 6. `CLERK_SECRET_KEY` - ваш собственный **Secret key** с сайта https://clerk.com
 
@@ -233,7 +233,7 @@ npm run start
 
 8. `NEON_DATABASE_URL` - ваш собственный **Connection string** с сайта https://neon.tech/
 
-9. (Необязательно) `KODIK_TOKEN` - ваш собственный ключ с сайта http://kodik.cc/ (вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме с Kodik Player'ом
+9. (Необязательно) `KODIK_TOKEN` - ваш собственный ключ с сайта http://kodik.cc/ (вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме в Kodik Player'е
 
 </details>
 
