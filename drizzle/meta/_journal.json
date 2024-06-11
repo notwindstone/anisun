@@ -15,6 +15,13 @@
       "when": 1712498373857,
       "tag": "0001_puzzling_mongu",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1718109846238,
+      "tag": "0002_ambiguous_thunderbolts",
+      "breakpoints": true
     }
   ]
 }
