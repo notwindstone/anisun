@@ -81,7 +81,7 @@
 
 - [x] Add subtitles from [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
 
-- [ ] Complete the page with anime search and filters
+- [x] Complete the page with anime search and filters
 
 - [x] Finish comments
 
@@ -126,6 +126,8 @@ You can use Neon Serverless DB as a database. If you are going to use local Post
 
 3. Paste your **Connection string** to `NEON_DATABASE_URL` in the `.env.local` file
 
+4. Make sure the `DATABASE_TYPE` line in the `.env.local` file is set to `NEON`
+
 > (Didn't test yet) Database configuration with: 2. Local PostgreSQL
 
 You can use local PostgreSQL as a database. If you are going to use Neon Serverless database, then skip this configuration
@@ -140,7 +142,9 @@ You can use local PostgreSQL as a database. If you are going to use Neon Serverl
 
 2. Run `npm install` to install the required dependencies
 
-3. Done! Your web app is ready to start
+3. Create a comments table in the database using the command `npx drizzle-kit push:pg`
+
+4. Done! Your web app is ready to start
 
 </details>
 
@@ -252,7 +256,7 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 * [Telegram - @windst1](https://t.me/windst1)
 
-* Discord - [@notwindstone](https://discord.com/users/510709295814279168)
+[Discord - @notwindstone](https://discord.com/users/510709295814279168)
 
 ### Through our Telegram chat or Discord server
 

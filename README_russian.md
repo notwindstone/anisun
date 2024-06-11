@@ -81,7 +81,7 @@
 
 - [x] Прикрутить API от [SovetRomanticaVideo](https://github.com/sovetromantica/sr-api)
 
-- [ ] Доделать страницу с поиском и фильтрами аниме
+- [x] Доделать страницу с поиском и фильтрами аниме
 
 - [x] Доделать комментарии
 
@@ -126,7 +126,9 @@
 
 3. Вставьте **Connection string** в строку `NEON_DATABASE_URL` в файле `.env.local`
 
-> (Не протестировано) Настройка базы данных: 2. Локальный PostgreSQL
+4. Убедитесь, что в строке `DATABASE_TYPE` в файле `.env.local` стоит значение `NEON`
+
+> Настройка базы данных: 2. Локальный PostgreSQL
 
 Вы можете использовать локальный PostgreSQL в качестве базы данных. Если вы собираетесь использовать базу данных Neon Serverless, то пропустите этот этап
 
@@ -136,11 +138,13 @@
 
 > Последние штрихи
 
-1. (Необязательно) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (Вам нужно связаться с ними через email почту)
+1. (Необязательно) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (вам нужно связаться с ними через email почту)
 
 2. Запустите команду `npm install` для того, чтобы установить все зависимости
 
-3. Готово!
+3. Создайте таблицу комментариев в базе данных с помощью команды `npx drizzle-kit push:pg`
+
+4. Готово! Теперь вы можете запустить приложение
 
 </details>
 
@@ -223,13 +227,13 @@ npm run start
 
 5. `NEXT_PUBLIC_CLERK_SIGN_IN_URL` - `/sign-in`
 
-6. `CLERK_SECRET_KEY` - Ваш собственный **Secret key** с сайта https://clerk.com
+6. `CLERK_SECRET_KEY` - ваш собственный **Secret key** с сайта https://clerk.com
 
-7. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - Ваш собственный **Publishable key** с сайта https://clerk.com
+7. `NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY` - ваш собственный **Publishable key** с сайта https://clerk.com
 
-8. `NEON_DATABASE_URL` - Ваш собственный **Connection string** с сайта https://neon.tech/
+8. `NEON_DATABASE_URL` - ваш собственный **Connection string** с сайта https://neon.tech/
 
-9. (Необязательно) `KODIK_TOKEN` - Ваш собственный ключ с сайта http://kodik.cc/ (Вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме с Kodik Player'ом
+9. (Необязательно) `KODIK_TOKEN` - ваш собственный ключ с сайта http://kodik.cc/ (вам нужно связаться с ними через email почту). Сайт может работать и без ключа, но в таком случае не будут показываться аниме с Kodik Player'ом
 
 </details>
 
@@ -252,7 +256,7 @@ npm run start
 
 * [Telegram - @windst1](https://t.me/windst1)
 
-* Discord - [@notwindstone](https://discord.com/users/510709295814279168)
+* [Discord - @notwindstone](https://discord.com/users/510709295814279168)
 
 ### Через наш чат или сервер
 
