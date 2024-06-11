@@ -11,6 +11,7 @@
   "dependencies": {
     "@clerk/localizations": "^1.28.0",
     "@clerk/nextjs": "^4.29.10",
+    "@ducanh2912/next-pwa": "^10.2.7",
     "@mantine/carousel": "^7.9.1",
     "@mantine/charts": "^7.9.1",
     "@mantine/core": "^7.9.1",
