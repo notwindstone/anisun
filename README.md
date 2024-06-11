@@ -24,13 +24,26 @@
 <img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="49%">
 </div>
 
+### More screenshots
+
 <details>
-<summary>More screenshots</summary>
+<summary>Expand</summary>
 
 <div align="center">
 <img src="public/docs/Screenshot_animeth_videoplayer1.jpg" width="49%">
 <img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_anime_page2.png" width="49%">
+<img src="public/docs/Screenshot_animeth_anime_page1.png" width="49%">
+<img src="public/docs/Screenshot_animeth_popular1.png" width="49%">
+<img src="public/docs/Screenshot_animeth_search1.png" width="49%">
+<img src="public/docs/Screenshot_animeth_account1.png" width="49%">
+<img src="public/docs/Screenshot_animeth_main_settings1.png" width="49%">
+<img src="public/docs/Screenshot_animeth_search_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_animeth_anime_page_description_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_animeth_settings_theme_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_animeth_settings_about_android1.jpg" width="32%">
 <img src="public/docs/Screenshot_animeth_longCommentSection.jpg" width="32%">
+<img src="public/docs/Screenshot_animeth_settings_account_android1.jpg" width="32%">
 </div>
 
 </details>
