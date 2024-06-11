@@ -270,7 +270,7 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 * [Telegram - @windst1](https://t.me/windst1)
 
-[Discord - @notwindstone](https://discord.com/users/510709295814279168)
+* [Discord - @notwindstone](https://discord.com/users/510709295814279168)
 
 ### Through our Telegram chat or Discord server
 
