@@ -27,6 +27,8 @@ const theme = createTheme({
 
 export const metadata: Metadata = {
     applicationName: APP_NAME,
+    category: "website",
+    generator: "Next.js",
     manifest: "/manifest.json",
     appleWebApp: {
         capable: true,
