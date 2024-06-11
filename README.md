@@ -15,9 +15,6 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
 
-> [!IMPORTANT]
-> The web app is currently in development
-
 ## 📱 Screenshots
 
 <details>
@@ -60,7 +57,7 @@
 
 ## ⭐ Features
 
-* Watch anime with subtitles or dubbing (only on Russian language in  Kodik, SovetRomantica and Anilibria players)
+* Watch anime with subs or dubs (only on Russian language in  Kodik, SovetRomantica and Anilibria players)
 
 * Download anime using torrent or directly from website (.m3u8)
 
@@ -75,17 +72,17 @@
 
 ## ✅ To-Do List
 
-- [x] Add the option to `.env` to use a database based on value
+- [x] Add the option to the `.env` file to use a database based on value
 
-- [x] Add option to download anime using torrent or directly from website
+- [x] Add the option to download anime using a torrent or directly from the website
 
-- [x] Add subtitles from [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
+- [x] Add subtitles from the [SovetRomanticaVideo API](https://github.com/sovetromantica/sr-api)
 
-- [x] Complete the page with anime search and filters
+- [x] Complete the page with an anime search and filters
 
 - [x] Finish comments
 
-- [x] Complete the page with popular animes
+- [x] Complete the page with popular anime
 
 ## ⬇️ Self-Hosting
 
