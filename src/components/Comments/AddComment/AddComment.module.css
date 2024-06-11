@@ -1,7 +1,7 @@
 .root {
     padding: rem(16px);
     transition: 0.15s ease;
-    background: var(--animeth-sidebar-color);
+    background: var(--animeth-secondary-color);
     border-radius: var(--mantine-radius-md);
 
     &:focus-within {
