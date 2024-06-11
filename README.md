@@ -17,19 +17,23 @@
 
 ## 📱 Screenshots
 
+<div align="center">
+<img src="public/docs/Screenshot_animeth_main_screen_pc1.png" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_pc2.png" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="49%">
+</div>
+
 <details>
 <summary>More screenshots</summary>
 
 <div align="center">
 <img src="public/docs/Screenshot_animeth_videoplayer1.jpg" width="49%">
 <img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
-<img src="public/docs/Screenshot_animeth_longCommentSection.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_longCommentSection.jpg" width="32%">
 </div>
 
 </details>
-
-> [!NOTE]  
-> Work in progress. More screenshots will be available soon.
 
 ## ⚙️ Tech Stack
 
@@ -125,7 +129,7 @@ You can use Neon Serverless DB as a database. If you are going to use local Post
 
 4. Make sure the `DATABASE_TYPE` line in the `.env.local` file is set to `NEON`
 
-> (Didn't test yet) Database configuration with: 2. Local PostgreSQL
+> Database configuration with: 2. Local PostgreSQL
 
 You can use local PostgreSQL as a database. If you are going to use Neon Serverless database, then skip this configuration
 

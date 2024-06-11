@@ -17,6 +17,13 @@
 
 ## 📱 Скриншоты
 
+<div align="center">
+<img src="public/docs/Screenshot_animeth_main_screen_pc1.png" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_pc2.png" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="49%">
+</div>
+
 <details>
 <summary>Больше скриншотов</summary>
 
@@ -27,9 +34,6 @@
 </div>
 
 </details>
-
-> [!NOTE]  
-> Сайт ещё не доделан. Другие скриншоты появятся позже.
 
 ## ⚙️ Набор технологий
 
