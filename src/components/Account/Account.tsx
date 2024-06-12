@@ -74,15 +74,21 @@ export default function Account({ user }: { user: UserResource }) {
                     dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
                 }
                 </Text>
-                <Stack gap={rem(4)}>
-                    <Skeleton visible={isPending} width={256} height={24}>
-                        <Text>Репутация: {data?.reputation}</Text>
-                    </Skeleton>
-
-                    <Skeleton visible={isPending} width={256} height={24}>
-                        <Text>Комментариев: {data?.totalComments}</Text>
-                    </Skeleton>
-                </Stack>
+                {
+                    isPending ? (
+                        <>
+                            <Stack gap={rem(4)}>
+                                <Skeleton w={256} h={24} />
+                                <Skeleton w={256} h={24} />
+                            </Stack>
+                        </>
+                    ) : (
+                        <>
+                            <Text>Репутация: {data?.reputation}</Text>
+                            <Text>Комментариев: {data?.totalComments}</Text>
+                        </>
+                    )
+                }
             </Stack>
         </Flex>
     );

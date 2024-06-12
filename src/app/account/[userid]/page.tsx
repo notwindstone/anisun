@@ -1,5 +1,5 @@
 import React from 'react';
-import {Container, Text} from "@mantine/core";
+import {Container, Flex, rem, Skeleton, Stack, Text} from "@mantine/core";
 import {clerkClient} from "@clerk/nextjs";
 import Account from "@/components/Account/Account";
 import {Metadata} from "next";
