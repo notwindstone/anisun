@@ -69,20 +69,20 @@ export default function Account({ user }: { user: UserResource }) {
             </Tooltip>
             <Stack gap={0}>
                 <Text fw={500} size={rem(36)}>{user.username}</Text>
-
                 <Text>
                     Дата создания аккаунта: {
                     dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
                 }
                 </Text>
+                <Stack gap={rem(4)}>
+                    <Skeleton visible={isPending} width={256} height={24}>
+                        <Text>Репутация: {data?.reputation}</Text>
+                    </Skeleton>
 
-                <Skeleton visible={isPending} width={256} height={24}>
-                    <Text>Репутация: {data?.reputation}</Text>
-                </Skeleton>
-
-                <Skeleton visible={isPending} width={256} height={24}>
-                    <Text>Комментариев: {data?.totalComments}</Text>
-                </Skeleton>
+                    <Skeleton visible={isPending} width={256} height={24}>
+                        <Text>Комментариев: {data?.totalComments}</Text>
+                    </Skeleton>
+                </Stack>
             </Stack>
         </Flex>
     );
