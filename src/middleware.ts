@@ -1,3 +1,26 @@
+// Yeah, it's deprecated. See https://stackoverflow.com/questions/77044738/vercel-blocking-google-from-indexing-website
+
+import { withClerkMiddleware } from "@clerk/nextjs/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export default withClerkMiddleware((req: NextRequest) => {
+    return NextResponse.next();
+});
+
+export const config = {
+    matcher: "/((?!_next/image|_next/static|favicon.ico).*)",
+};
+
+
+/*
+ * If you don't care about Google indexing, remove the legacy
+ * code at the top of the file and uncomment the code below.
+ */
+
+/*
+
 import { authMiddleware } from "@clerk/nextjs";
 
 // See https://clerk.com/docs/references/nextjs/auth-middleware
@@ -17,3 +40,5 @@ export const config = {
         "/(api|trpc)(.*)"
     ]
 };
+
+ */
