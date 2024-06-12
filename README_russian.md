@@ -20,8 +20,8 @@
 <div align="center">
 <img src="public/docs/Screenshot_animeth_main_screen_pc1.png" width="49%">
 <img src="public/docs/Screenshot_animeth_main_screen_pc2.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="32%">
 </div>
 
 ### Больше скриншотов
@@ -84,8 +84,11 @@
 
 * Тёмная и светлая темы
 
-> [!NOTE]  
-> В процессе заполнения...
+* Поиск аниме с фильтрами
+
+* Кастомная навигация с помощью router'а из Next.js для более быстрого перемещения между страницами
+
+...и ещё много чего!
 
 ## ✅ Список задач
 
@@ -273,8 +276,6 @@ npm run start
 * [Discord - @notwindstone](https://discord.com/users/510709295814279168)
 
 ### Через наш чат или сервер
-
-* [Telegram - Клуб фанатов партии любителей пива](https://t.me/democracysucks)
 
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
