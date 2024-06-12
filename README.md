@@ -20,8 +20,8 @@
 <div align="center">
 <img src="public/docs/Screenshot_animeth_main_screen_pc1.png" width="49%">
 <img src="public/docs/Screenshot_animeth_main_screen_pc2.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="49%">
+<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="32%">
 </div>
 
 ### More screenshots
@@ -74,9 +74,9 @@
 
 ## ⭐ Features
 
-* Watch anime with subs or dubs (only on Russian language in  Kodik, SovetRomantica and Anilibria players)
+* Watch anime with subs or dubs (only on Russian language in Kodik, SovetRomantica and Anilibria players)
 
-* Download anime using torrent or directly from website (.m3u8)
+* Download anime using a torrent or directly from the website (.m3u8)
 
 * Account authentication
 
@@ -84,8 +84,11 @@
 
 * Dark and light themes
 
-> [!NOTE]  
-> Work in progress...
+* Anime search with filters
+
+* Custom navigation bar using a Next.js router for faster navigation between routes
+
+...and a lot more!
 
 ## ✅ To-Do List
 
@@ -272,9 +275,7 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 * [Discord - @notwindstone](https://discord.com/users/510709295814279168)
 
-### Through our Telegram chat or Discord server
-
-* [Telegram - Клуб фанатов партии любителей пива](https://t.me/democracysucks)
+### Through our Discord server
 
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
