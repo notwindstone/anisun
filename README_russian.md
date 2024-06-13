@@ -7,12 +7,12 @@
 ### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
 <p align="center">
-<a href="https://github.com/windstone-aristotle-yellow/animeth/blob/main/README.md">English</a> | <strong>Русский</strong>
+<a href="https://github.com/notwindstone/animeth/blob/main/README.md">English</a> | <strong>Русский</strong>
 </p>
 
 </div>
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/windstone-aristotle-yellow/Animeth?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/windstone-aristotle-yellow/Animeth/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/notwindstone/Animeth?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/notwindstone/Animeth/stargazers)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
 
 ## 📱 Скриншоты
@@ -115,7 +115,7 @@
 
 > Клонирование репозитория
 
-1. Клонируйте этот репозиторий, введя `git clone https://github.com/windstone-aristotle-yellow/animeth`
+1. Клонируйте этот репозиторий, введя `git clone https://github.com/notwindstone/animeth`
 
 2. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
 
@@ -230,7 +230,7 @@ npm run start
 
 Нажмите кнопку ниже:
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fwindstone-aristotle-yellow%2Fanimeth)
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fnotwindstone%2Fanimeth)
 
 Затем перейдите по **Project** -> **Settings** -> **Environment Variables** и создайте следующие переменные с ключом и значением:
 
@@ -293,7 +293,7 @@ npm run start
 
 ## 📜 Лицензия
 
-[![GitHub](https://img.shields.io/github/license/windstone-aristotle-yellow/Animeth?style=for-the-badge)](https://github.com/windstone-aristotle-yellow/Animeth/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/notwindstone/Animeth?style=for-the-badge)](https://github.com/notwindstone/Animeth/blob/main/LICENSE)
 
 ## 🌐 Ресурсы
 
