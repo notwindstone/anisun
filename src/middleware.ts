@@ -1,12 +1,23 @@
-import { authMiddleware } from "@clerk/nextjs";
+import {
+    clerkMiddleware,
+} from '@clerk/nextjs/server';
+import createMiddleware from 'next-intl/middleware';
 
-// See https://clerk.com/docs/references/nextjs/auth-middleware
-// for more information about configuring your Middleware
-export default authMiddleware({
-    // Allow signed out users to access the specified routes:
-    // publicRoutes: ['/anyone-can-visit-this-route'],
-    publicRoutes: ['/', '/offline', '/account', '/titles', '/titles/(.*)', '/account/(.*)', '/trending']
+const intlMiddleware = createMiddleware({
+    locales: ["en", "ru"],
+    defaultLocale: "en",
 });
+
+//const isProtectedRoute = createRouteMatcher([
+//    'dashboard/(.*)',
+//]);
+
+export default clerkMiddleware((_auth, req) => {
+    //if (isProtectedRoute(req)) auth().protect();
+
+    return intlMiddleware(req);
+});
+
 
 export const config = {
     matcher: [

@@ -15,6 +15,8 @@ import SideBar from "@/components/SideBar/SideBar";
 import NavigationControl from "@/components/NavigationControl/NavigationControl";
 import ThemedNextTopLoader from "@/components/ThemedNextTopLoader/ThemedNextTopLoader";
 import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
+import {NextIntlClientProvider} from 'next-intl';
+import {getMessages} from 'next-intl/server';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -61,35 +63,43 @@ export const viewport: Viewport = {
     themeColor: "#FFFFFF",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
     children,
+    params: { locale },
 }: Readonly<{
     children: React.ReactNode;
+    params: {locale: string};
 }>) {
+    // Providing all messages to the client
+    // side is the easiest way to get started
+    const messages = await getMessages();
+
     return (
         <ClerkProvider localization={ruRU}>
-            <html lang="en">
+            <html lang={locale}>
                 <head>
                     <ColorSchemeScript/>
                 </head>
                 <body style={{ background: 'var(--animeth-background-color)' }} className={inter.className}>
-                    <ThemedNextTopLoader />
-                    <TanstackQueryProviders>
-                        <MantineProvider theme={theme} defaultColorScheme="dark">
-                            <Notifications zIndex={50000} limit={3} />
-                            <Group className="root-group" gap={0} wrap="nowrap">
-                                <SideBar>
-                                    <NavigationControl />
-                                </SideBar>
-                                <div className="app-wrapper">
-                                    <Main>
-                                        {children}
-                                    </Main>
-                                </div>
-                            </Group>
-                            <MobileNavbar />
-                        </MantineProvider>
-                    </TanstackQueryProviders>
+                    <NextIntlClientProvider messages={messages}>
+                        <ThemedNextTopLoader />
+                        <TanstackQueryProviders>
+                            <MantineProvider theme={theme} defaultColorScheme="dark">
+                                <Notifications zIndex={50000} limit={3} />
+                                <Group className="root-group" gap={0} wrap="nowrap">
+                                    <SideBar>
+                                        <NavigationControl />
+                                    </SideBar>
+                                    <div className="app-wrapper">
+                                        <Main>
+                                            {children}
+                                        </Main>
+                                    </div>
+                                </Group>
+                                <MobileNavbar />
+                            </MantineProvider>
+                        </TanstackQueryProviders>
+                    </NextIntlClientProvider>
                 </body>
             </html>
         </ClerkProvider>

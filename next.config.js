@@ -2,13 +2,23 @@ const {
   PHASE_DEVELOPMENT_SERVER,
   PHASE_PRODUCTION_BUILD,
 } = require("next/constants");
+const createNextIntlPlugin = require('next-intl/plugin');
+
+const withNextIntl = createNextIntlPlugin();
 
 /** @type {(phase: string, defaultConfig: import("next").NextConfig) => Promise<import("next").NextConfig>} */
 module.exports = async (phase) => {
   /** @type {import("next").NextConfig} */
   const nextConfig = {
+    reactStrictMode: true,
     env: {
       KODIK_TOKEN: process.env.KODIK_TOKEN,
+    },
+    experimental: {
+      optimizePackageImports: [
+        '@mantine/core',
+        '@mantine/hooks',
+      ],
     },
     images: {
       unoptimized: true,
@@ -55,8 +65,8 @@ module.exports = async (phase) => {
       swDest: "public/sw.js",
       reloadOnOnline: true,
     });
-    return withSerwist(nextConfig);
+    return withNextIntl(withSerwist(nextConfig));
   }
 
-  return nextConfig;
+  return withNextIntl(nextConfig);
 };
