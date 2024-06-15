@@ -63,9 +63,16 @@ export const animes = () => {
             });
     };
 
+    const studios = async () => {
+        return await axios
+            .get("https://shikimori.one/api/studios")
+            .then((response) => response.data);
+    };
+
     return {
         byId,
         list,
         similar,
+        studios,
     };
 };

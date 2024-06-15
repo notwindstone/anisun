@@ -103,9 +103,5 @@ export type VariablesType = {
             label: string;
             value: AnimeRatingEnum | string;
         }[];
-        studio: {
-            label: string;
-            value: string;
-        }[];
     };
 };
