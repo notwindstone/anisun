@@ -1,7 +1,7 @@
 "use server";
 
 import {Client} from "kodikwrapper";
-import {clerkClient} from "@clerk/nextjs";
+import {clerkClient} from "@clerk/nextjs/server";
 
 const kodikClient = new Client({
     token: process.env.KODIK_TOKEN!,
