@@ -1,5 +1,5 @@
 import {Container, Flex, rem, Skeleton, Stack} from "@mantine/core";
-import classes from "@/app/account/[userid]/page.module.css";
+import classes from "./page.module.css";
 import React from "react";
 
 export default function Loading() {

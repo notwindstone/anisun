@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Text} from "@mantine/core";
-import {clerkClient} from "@clerk/nextjs";
+import {clerkClient} from "@clerk/nextjs/server";
 import Account from "@/components/Account/Account";
 import {Metadata} from "next";
 import classes from './page.module.css';
