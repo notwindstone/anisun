@@ -64,7 +64,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
 
     return (
         <>
-            <Popover radius="md" opened={opened} onChange={setOpened}>
+            <Popover position="bottom-end" radius="md" opened={opened} onChange={setOpened}>
                 <Popover.Target>
                     <div>
                         <DecoratedButton
@@ -75,7 +75,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                         </DecoratedButton>
                     </div>
                 </Popover.Target>
-                <Popover.Dropdown className={classes.dropdown}>
+                <Popover.Dropdown  className={classes.dropdown}>
                     <Stack pt={rem(4)} gap={rem(8)}>
                         <Alert
                             classNames={{

@@ -3,7 +3,7 @@
     background: var(--animeth-sidebar-color);
     max-height: 50vh;
     width: rem(512px);
-    max-width: 90vw;
+    max-width: 80vw;
     overflow-y: scroll;
 }
 
