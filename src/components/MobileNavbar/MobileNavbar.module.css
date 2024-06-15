@@ -18,7 +18,7 @@
 .buttonWrapper {
     display: flex;
     justify-content: center;
-    align-content: center;
+    align-items: center;
     flex-direction: column;
     gap: rem(4px);
 }
