@@ -6,6 +6,7 @@
     "error": "Ошибка"
   },
   "Specific": {
+    "genres-title": "",
     "genres-demographic": "Аудитория",
     "genres-genre": "Жанры",
     "genres-theme": "Темы"

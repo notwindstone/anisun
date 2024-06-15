@@ -6,6 +6,7 @@
     "error": "Error"
   },
   "Specific": {
+    "genres-title": "Genres",
     "genres-demographic": "Demographics",
     "genres-genre": "Genres",
     "genres-theme": "Theme"
