@@ -8,6 +8,7 @@ import classes from '@/components/Filters/FiltersSelect.module.css';
 import {useDisclosure} from "@mantine/hooks";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import calculateColor from "@/utils/Misc/calculateColor";
+import {useTranslations} from "next-intl";
 
 function GenreMultiSelect({
     color,
@@ -58,6 +59,13 @@ export default memo(function GenreFilter({
     themeGenresValue: string[],
     setThemeGenresValue: Dispatch<SetStateAction<string[]>>
 }) {
+    const translateInfo = useTranslations('Info');
+    const translateCommon = useTranslations('Common');
+    const translateSpecific = useTranslations('Specific');
+
+    const currentLocale = translateInfo('locale');
+    const isEnglish = currentLocale === 'en';
+
     const { theme } = useCustomTheme();
     const [demographicGenresData, setDemographicGenres] = useState<AdvancedSearchFiltersType>();
     const [genreGenresData, setGenreGenres] = useState<AdvancedSearchFiltersType>();
@@ -92,17 +100,17 @@ export default memo(function GenreFilter({
             switch (genre.kind) {
                 case "demographic":
                     return demographicGenres.push({
-                        label: genre.russian,
+                        label: isEnglish ? genre.name : genre.russian,
                         value: genre.id,
                     });
                 case "genre":
                     return genreGenres.push({
-                        label: genre.russian,
+                        label: isEnglish ? genre.name : genre.russian,
                         value: genre.id,
                     });
                 case "theme":
                     return themeGenres.push({
-                        label: genre.russian,
+                        label: isEnglish ? genre.name : genre.russian,
                         value: genre.id,
                     });
             }
@@ -125,7 +133,7 @@ export default memo(function GenreFilter({
 
     if (error) {
         return (
-            <>Ошибка: {error.message}</>
+            <>{translateCommon('error')}: {error.message}</>
         );
     }
 
@@ -135,21 +143,21 @@ export default memo(function GenreFilter({
                 color={color}
                 genresValue={demographicGenresValue}
                 setGenresValue={setDemographicGenresValue}
-                placeholder="Аудитория"
+                placeholder={translateSpecific('genres-demographic')}
                 genresData={demographicGenresData}
             />
             <GenreMultiSelect
                 color={color}
                 genresValue={genreGenresValue}
                 setGenresValue={setGenreGenresValue}
-                placeholder="Жанры"
+                placeholder={translateSpecific('genres-genre')}
                 genresData={genreGenresData}
             />
             <GenreMultiSelect
                 color={color}
                 genresValue={themeGenresValue}
                 setGenresValue={setThemeGenresValue}
-                placeholder="Темы"
+                placeholder={translateSpecific('genres-theme')}
                 genresData={themeGenresData}
             />
         </>

@@ -1,5 +1,13 @@
 {
-  "Index": {
-    "title": "Привет, мир!"
+  "Info": {
+    "locale": "ru"
+  },
+  "Common": {
+    "error": "Ошибка"
+  },
+  "Specific": {
+    "genres-demographic": "Аудитория",
+    "genres-genre": "Жанры",
+    "genres-theme": "Темы"
   }
 }

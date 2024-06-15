@@ -1,5 +1,13 @@
 {
-  "Index": {
-    "title": "Hello world!"
+  "Info": {
+    "locale": "en"
+  },
+  "Common": {
+    "error": "Error"
+  },
+  "Specific": {
+    "genres-demographic": "Demographics",
+    "genres-genre": "Genres",
+    "genres-theme": "Theme"
   }
 }
