@@ -39,6 +39,9 @@ export default function Recommendations({ id }: { id: string } ) {
             return interval.stop();
         }
 
+        // idk what this was supposed to be, but i'm assuming
+        // that this interval was re-rendering the component
+        // and that was causing queryData to be assigned again
         interval.start();
         return interval.stop;
     // eslint-disable-next-line
@@ -118,13 +121,36 @@ export default function Recommendations({ id }: { id: string } ) {
             })).animes;
     }
 
+    const filtersSegmentedControl = (
+        <SegmentedControl
+            value={filter}
+            onChange={setFilter}
+            classNames={{
+                root: classes.segmentedControlRoot,
+                indicator: classes.segmentedControlIndicator,
+                label: classes.segmentedControlLabel
+            }}
+            radius="md"
+            withItemsBorders={false}
+            data={segmentedControlData}
+        />
+    );
+
     const mockVideos = Array.from({ length: 8 });
 
     if (isPending) {
         return (
             <Stack gap={rem(8)} className={classes.similar}>
                 <div className={classes.segmentedControlWrapper}>
-                    <Skeleton radius="md" h={32} w={48} />
+                    {
+                        queryData ? (
+                            <>
+                                {filtersSegmentedControl}
+                            </>
+                        ) : (
+                            <Skeleton radius="md" h={32} w={82} />
+                        )
+                    }
                 </div>
                 {
                     mockVideos.map((_mockVideo, index) => {
@@ -158,18 +184,7 @@ export default function Recommendations({ id }: { id: string } ) {
         return (
             <Stack gap={rem(8)} className={classes.similar}>
                 <div className={classes.segmentedControlWrapper}>
-                    <SegmentedControl
-                        value={filter}
-                        onChange={setFilter}
-                        classNames={{
-                            root: classes.segmentedControlRoot,
-                            indicator: classes.segmentedControlIndicator,
-                            label: classes.segmentedControlLabel
-                        }}
-                        radius="md"
-                        withItemsBorders={false}
-                        data={segmentedControlData}
-                    />
+                    {filtersSegmentedControl}
                 </div>
                 <Text>Error: {error.message}</Text>
             </Stack>
@@ -184,18 +199,7 @@ export default function Recommendations({ id }: { id: string } ) {
         return (
             <Stack pb={rem(112)} gap={rem(8)} className={classes.similar}>
                 <div className={classes.segmentedControlWrapper}>
-                    <SegmentedControl
-                        value={filter}
-                        onChange={setFilter}
-                        classNames={{
-                            root: classes.segmentedControlRoot,
-                            indicator: classes.segmentedControlIndicator,
-                            label: classes.segmentedControlLabel
-                        }}
-                        radius="md"
-                        withItemsBorders={false}
-                        data={segmentedControlData}
-                    />
+                    {filtersSegmentedControl}
                 </div>
                 <Text>К сожалению, ничего не найдено. Попробуйте выбрать другой фильтр</Text>
             </Stack>
@@ -248,18 +252,7 @@ export default function Recommendations({ id }: { id: string } ) {
     return (
         <Stack gap={rem(8)} className={classes.similar}>
             <div className={classes.segmentedControlWrapper}>
-                <SegmentedControl
-                    value={filter}
-                    onChange={setFilter}
-                    classNames={{
-                        root: classes.segmentedControlRoot,
-                        indicator: classes.segmentedControlIndicator,
-                        label: classes.segmentedControlLabel
-                    }}
-                    radius="md"
-                    withItemsBorders={false}
-                    data={segmentedControlData}
-                />
+                {filtersSegmentedControl}
             </div>
             {recommendationVideos}
         </Stack>
