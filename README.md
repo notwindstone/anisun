@@ -279,6 +279,11 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
+🤝 Contributing
+
+> [!NOTE]
+> To-Do
+
 ## ❤️ Credits
 
 * [zvshka](https://github.com/zvshka) for his help with the project
