@@ -28,17 +28,20 @@ const TRANSITION_PROPS: TransitionStylesType = {
 
 export default function HeroCard({
     animeTitle,
-    debouncedHeight
+    debouncedHeight,
+    aspectRatioWidth
 }: {
     animeTitle?: AnimeType,
-    debouncedHeight: number
+    debouncedHeight: string | number,
+    aspectRatioWidth?: string,
 }) {
+    const isHeightLoaded = typeof debouncedHeight === "number";
     const { width: viewportWidth } = useViewportSize();
     const { ref, inViewport } = useInViewport();
     const [debouncedInViewport] = useDebouncedValue(inViewport, 100);
     const [debouncedSlightlyInViewport] = useDebouncedValue(inViewport, 250);
     const [debouncedLongerInViewport] = useDebouncedValue(inViewport, 400);
-    const width = (debouncedHeight) / 0.42;
+    const width = isHeightLoaded ? (debouncedHeight) / 0.42 : aspectRatioWidth;
     const responsiveFontScale
         = viewportWidth > 1600 ? 1.8 : viewportWidth / 1000;
     const router = useRouter();

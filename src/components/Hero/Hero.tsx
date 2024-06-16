@@ -9,7 +9,6 @@ import {useViewportSize} from "@mantine/hooks";
 import classes from './Hero.module.css';
 import {useRef} from "react";
 import Autoplay from 'embla-carousel-autoplay';
-import useMobileScreen from "@/hooks/useMobileScreen";
 
 const CAROUSEL_PROPS = {
     slideSize: "100%",
@@ -26,7 +25,6 @@ const slidesLength: undefined[] = Array.from({ length: HERO_TITLES_LIMIT });
 
 export default function Hero() {
     const autoplay = useRef(Autoplay({ delay: 7000 }));
-    const { isMobile } = useMobileScreen();
     const { width } = useViewportSize();
     const shikimori = client();
     const { status, error, data } = useQuery({
@@ -34,9 +32,14 @@ export default function Hero() {
         queryFn: getTitles
     });
     // Around 21 / 9
-    const aspectRatioHeight = (width - 96) * 0.42;
+    const aspectRatioHeight = width
+        ? (width - 96) * 0.42
+        : "calc((100vw - 96px) * 0.42)";
+    const aspectRatioWidth = "calc(100vw - 96px)";
     // Around 5 / 6
-    const mobileHeight = width * 1.2;
+    const mobileHeight = width
+        ? width * 1.2
+        : "calc(100vw * 1.2)";
 
     async function getTitles() {
         return (
@@ -60,63 +63,58 @@ export default function Hero() {
 
     return (
         <>
-            {
-                /* Mobile Container */
-                isMobile ? (
-                    <Container
-                        className={classes.mobileWrapper}
-                        h={mobileHeight}
-                        {...CAROUSEL_CONTAINER_PROPS}
-                    >
-                        <Carousel
-                            classNames={{
-                                indicators: classes.indicators,
-                                indicator: classes.indicator,
-                                control: classes.control
-                            }}
-                            h={mobileHeight}
-                            plugins={[autoplay.current]}
-                            onMouseEnter={autoplay.current.stop}
-                            onMouseLeave={autoplay.current.reset}
-                            {...CAROUSEL_PROPS}
-                        >
-                            <HeroSlides
-                                isMobile
-                                data={data}
-                                status={status}
-                                error={error}
-                                slidesLength={slidesLength}
-                                debouncedHeight={mobileHeight}
-                            />
-                        </Carousel>
-                    </Container>
-                ) : (
-                    <Container
-                        className={classes.wrapper}
-                        h={aspectRatioHeight}
-                        {...CAROUSEL_CONTAINER_PROPS}
-                    >
-                        <Carousel
-                            classNames={{
-                                control: classes.control
-                            }}
-                            h={aspectRatioHeight}
-                            plugins={[autoplay.current]}
-                            onMouseEnter={autoplay.current.stop}
-                            onMouseLeave={autoplay.current.reset}
-                            {...CAROUSEL_PROPS}
-                        >
-                            <HeroSlides
-                                data={data}
-                                status={status}
-                                error={error}
-                                slidesLength={slidesLength}
-                                debouncedHeight={aspectRatioHeight}
-                            />
-                        </Carousel>
-                    </Container>
-                )
-            }
+            <Container
+                className={classes.mobileWrapper}
+                h={mobileHeight}
+                {...CAROUSEL_CONTAINER_PROPS}
+            >
+                <Carousel
+                    classNames={{
+                        indicators: classes.indicators,
+                        indicator: classes.indicator,
+                        control: classes.control
+                    }}
+                    h={mobileHeight}
+                    plugins={[autoplay.current]}
+                    onMouseEnter={autoplay.current.stop}
+                    onMouseLeave={autoplay.current.reset}
+                    {...CAROUSEL_PROPS}
+                >
+                    <HeroSlides
+                        isMobile
+                        data={data}
+                        status={status}
+                        error={error}
+                        slidesLength={slidesLength}
+                        debouncedHeight={mobileHeight}
+                    />
+                </Carousel>
+            </Container>
+            <Container
+                className={classes.wrapper}
+                h={aspectRatioHeight}
+                {...CAROUSEL_CONTAINER_PROPS}
+            >
+                <Carousel
+                    classNames={{
+                        control: classes.control
+                    }}
+                    h={aspectRatioHeight}
+                    plugins={[autoplay.current]}
+                    onMouseEnter={autoplay.current.stop}
+                    onMouseLeave={autoplay.current.reset}
+                    {...CAROUSEL_PROPS}
+                >
+                    <HeroSlides
+                        data={data}
+                        status={status}
+                        error={error}
+                        slidesLength={slidesLength}
+                        debouncedHeight={aspectRatioHeight}
+                        aspectRatioWidth={aspectRatioWidth}
+                    />
+                </Carousel>
+            </Container>
         </>
     );
 }

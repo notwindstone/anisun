@@ -8,8 +8,9 @@ interface HeroResponseInterface extends WrapperResponseInterface {
     status: "error" | "success" | "pending";
     error: Error | null;
     slidesLength: undefined[];
-    debouncedHeight: number;
+    debouncedHeight: string | number;
     isMobile?: boolean;
+    aspectRatioWidth?: string;
 }
 
 export default function HeroSlides({
@@ -18,21 +19,22 @@ export default function HeroSlides({
     error,
     slidesLength,
     debouncedHeight,
-    isMobile
+    isMobile,
+                                       aspectRatioWidth,
 }: HeroResponseInterface) {
     return slidesLength.map((_slide, index) => {
         let currentSlide;
 
         switch (status) {
             case "success":
-                currentSlide = isMobile ? (
+                currentSlide = isMobile && typeof debouncedHeight === "number" ? (
                     <HeroMobileCard animeTitle={data?.animes?.[index]} debouncedHeight={debouncedHeight} />
                 ) : (
-                    <HeroCard animeTitle={data?.animes?.[index]} debouncedHeight={debouncedHeight} />
+                    <HeroCard animeTitle={data?.animes?.[index]} debouncedHeight={debouncedHeight} aspectRatioWidth={aspectRatioWidth} />
                 );
                 break;
             case "pending":
-                currentSlide = isMobile ? (
+                currentSlide = isMobile && typeof debouncedHeight === "number" ? (
                     <Flex
                         h={debouncedHeight}
                         pl={rem(64)}
