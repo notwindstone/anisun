@@ -279,6 +279,17 @@ npm run start
 
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
+## 🤝 Помочь с переводом
+
+Помощь приветствуется!
+
+> [!NOTE]
+> To-Do: Hosted Weblate
+
+## ⭐️ График роста кол-ва звёздочек
+
+[![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/animeth&type=Date)](https://star-history.com/#notwindstone/animeth&Date)
+
 ## ❤️ Особая благодарность
 
 * [zvshka](https://github.com/zvshka) за оказание помощи при создании проекта
