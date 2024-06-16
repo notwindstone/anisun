@@ -12,6 +12,7 @@ import {BreadcrumbType} from "@/types/Breadcrumb/Breadcrumb.type";
 import {variables} from "@/configs/variables";
 import getShikimoriId from "@/utils/Misc/getShikimoriId";
 import {getUserById} from "@/lib/actions";
+import locales from '@/configs/locales.json';
 
 function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType) {
     const [ripple, event] = useRipple(variables.rippleColor);
@@ -38,9 +39,14 @@ export default function NavigationBreadcrumbs() {
     let titlePath: string | null;
     const shikimori = client();
     const pathname = usePathname();
-    const paths = pathname
+
+    let paths = pathname
         .split('/')
         .filter((path) => path);
+    locales.forEach((locale) => {
+        return paths = paths.filter((item) => item !== locale);
+    });
+
     const isTitlePath = paths.length > 1 && paths[paths.length - 2] === 'titles';
     if (isTitlePath) {
         titlePath = paths[paths.length - 1];

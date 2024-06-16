@@ -2,9 +2,10 @@ import {
     clerkMiddleware,
 } from '@clerk/nextjs/server';
 import createMiddleware from 'next-intl/middleware';
+import locales from '@/configs/locales.json';
 
 const intlMiddleware = createMiddleware({
-    locales: ["en", "ru"],
+    locales: locales,
     defaultLocale: "en",
 });
 
