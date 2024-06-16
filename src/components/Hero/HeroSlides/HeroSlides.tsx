@@ -3,6 +3,7 @@ import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import {Flex, rem, Skeleton, Text} from "@mantine/core";
 import {WrapperResponseInterface} from "@/types/Shikimori/Responses/Interfaces/WrapperResponse.interface";
 import HeroMobileCard from "@/components/Hero/HeroMobileCard/HeroMobileCard";
+import classes from './HeroSlides.module.css';
 
 interface HeroResponseInterface extends WrapperResponseInterface {
     status: "error" | "success" | "pending";
@@ -24,7 +25,6 @@ export default function HeroSlides({
 }: HeroResponseInterface) {
     return slidesLength.map((_slide, index) => {
         let currentSlide;
-
         switch (status) {
             case "success":
                 currentSlide = isMobile && typeof debouncedHeight === "number" ? (
@@ -44,7 +44,18 @@ export default function HeroSlides({
                         <Skeleton radius={32} h={debouncedHeight - 64} />
                     </Flex>
                 ) : (
-                    <Skeleton radius={0} w="100%" h={debouncedHeight} />
+                    <>
+                        <Skeleton className={classes.desktopSkeleton} radius={0} w="100%" h={debouncedHeight} />
+                        <Flex
+                            className={classes.mobileSkeleton}
+                            h={debouncedHeight}
+                            pl={rem(64)}
+                            pr={rem(64)}
+                            align="flex-end"
+                        >
+                            <Skeleton radius={32} h="calc((100vw * 1.2) - 64px)" />
+                        </Flex>
+                    </>
                 );
                 break;
             case "error":

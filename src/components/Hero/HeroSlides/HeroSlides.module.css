@@ -1,0 +1,13 @@
+.mobileSkeleton {
+    display: none;
+}
+
+@media screen and (max-width: rem(750px)) {
+    .desktopSkeleton {
+        display: none;
+    }
+
+    .mobileSkeleton {
+        display: flex;
+    }
+}
