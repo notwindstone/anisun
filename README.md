@@ -1,3 +1,14 @@
+> [!IMPORTANT]
+> Work in progress...
+
+## To-Do
+
+* Add option to login using Shikimori account (and maybe MAL too)
+* Update app to Next.js 15 and React 19
+* Rewrite comments
+* Refactor code
+* more
+
 <div align="center">
 
 <img width="160" height="160" align="center" src="public/favicon.png">
