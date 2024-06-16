@@ -2,10 +2,15 @@
   "Info": {
     "locale": "en"
   },
-  "Common": {
-    "error": "Error"
-  },
-  "Specific": {
+  "Translations": {
+    "home-placeholder": "Home",
+    "trending-placeholder": "Trending",
+    "settings-placeholder": "Settings",
+    "account-placeholder": "Account",
+    "search-placeholder": "Search",
+    "now-popular": "Trending",
+    "button-goto": "Open",
+    "error": "Error",
     "genres-title": "Genres",
     "genres-demographic": "Demographics",
     "genres-genre": "Genres",

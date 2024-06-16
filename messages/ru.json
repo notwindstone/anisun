@@ -2,11 +2,16 @@
   "Info": {
     "locale": "ru"
   },
-  "Common": {
-    "error": "Ошибка"
-  },
-  "Specific": {
-    "genres-title": "",
+  "Translations": {
+    "home-placeholder": "Главная",
+    "trending-placeholder": "Популярное",
+    "settings-placeholder": "Настройки",
+    "account-placeholder": "Аккаунт",
+    "search-placeholder": "Поиск",
+    "now-popular": "Сейчас популярно",
+    "button-goto": "Перейти",
+    "error": "Ошибка",
+    "genres-title": "Жанры",
     "genres-demographic": "Аудитория",
     "genres-genre": "Жанры",
     "genres-theme": "Темы"

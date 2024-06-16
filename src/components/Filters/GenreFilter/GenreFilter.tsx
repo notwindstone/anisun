@@ -59,11 +59,10 @@ export default memo(function GenreFilter({
     themeGenresValue: string[],
     setThemeGenresValue: Dispatch<SetStateAction<string[]>>
 }) {
-    const translateInfo = useTranslations('Info');
-    const translateCommon = useTranslations('Common');
-    const translateSpecific = useTranslations('Specific');
+    const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
 
-    const currentLocale = translateInfo('locale');
+    const currentLocale = info('locale');
     const isEnglish = currentLocale === 'en';
 
     const { theme } = useCustomTheme();
@@ -133,7 +132,7 @@ export default memo(function GenreFilter({
 
     if (error) {
         return (
-            <>{translateCommon('error')}: {error.message}</>
+            <>{translate('error')}: {error.message}</>
         );
     }
 
@@ -143,21 +142,21 @@ export default memo(function GenreFilter({
                 color={color}
                 genresValue={demographicGenresValue}
                 setGenresValue={setDemographicGenresValue}
-                placeholder={translateSpecific('genres-demographic')}
+                placeholder={translate('genres-demographic')}
                 genresData={demographicGenresData}
             />
             <GenreMultiSelect
                 color={color}
                 genresValue={genreGenresValue}
                 setGenresValue={setGenreGenresValue}
-                placeholder={translateSpecific('genres-genre')}
+                placeholder={translate('genres-genre')}
                 genresData={genreGenresData}
             />
             <GenreMultiSelect
                 color={color}
                 genresValue={themeGenresValue}
                 setGenresValue={setThemeGenresValue}
-                placeholder={translateSpecific('genres-theme')}
+                placeholder={translate('genres-theme')}
                 genresData={themeGenresData}
             />
         </>

@@ -32,6 +32,7 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import Link from "next/link";
 import useMobileScreen from "@/hooks/useMobileScreen";
 import calculateColor from "@/utils/Misc/calculateColor";
+import {useTranslations} from "next-intl";
 
 const NOTHING = {
     label: ' ',
@@ -146,6 +147,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
 };
 
 export default function SearchBar({position, size}: { position?: FloatingPosition, size: MantineSize }) {
+    const translate = useTranslations('Translations');
     const {theme} = useCustomTheme();
     const {height} = useViewportSize();
     const { isMobile } = useMobileScreen();
@@ -235,7 +237,7 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
                 onChange={(event) => {
                     setInput(event);
                 }}
-                placeholder="Поиск"
+                placeholder={translate('search-placeholder')}
                 leftSection={
                     <IconSearch size={24} stroke={1.5} />
                 }
