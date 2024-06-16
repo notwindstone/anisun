@@ -279,10 +279,16 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 * [Discord - Сага о сервере](https://discord.gg/JhmkZDScfg)
 
-🤝 Contributing
+## 🤝 Contributing
+
+Contributions are welcome!
 
 > [!NOTE]
-> To-Do
+> To-Do: Hosted Weblate
+
+## ⭐️ Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/animeth&type=Date)](https://star-history.com/#notwindstone/animeth&Date)
 
 ## ❤️ Credits
 
