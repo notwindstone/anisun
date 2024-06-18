@@ -3,11 +3,13 @@ import {IconTrendingUp} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
 import {useTranslations} from "next-intl";
 
-const REDIRECT_LINK = '/trending';
-
 export default function SideBarTrending() {
     const translate = useTranslations('Translations');
     const trendingLabel = translate('trending-placeholder');
+
+    const info = useTranslations('Info');
+    const locale = info('locale');
+    const REDIRECT_LINK = `/${locale}/trending`;
 
     return (
         <SideBarButton

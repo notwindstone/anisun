@@ -13,9 +13,11 @@ import {variables} from "@/configs/variables";
 import getShikimoriId from "@/utils/Misc/getShikimoriId";
 import {getUserById} from "@/lib/actions";
 import locales from '@/configs/locales.json';
+import {useTranslations} from "next-intl";
 
-function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType) {
+function Breadcrumb({ currentPathname, currentBreadcrumb, icon, websiteLocale }: BreadcrumbType) {
     const [ripple, event] = useRipple(variables.rippleColor);
+    const linkWithLocale = websiteLocale ? `${websiteLocale}/` : '';
 
     return (
         <Text
@@ -23,7 +25,7 @@ function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType
             ref={ripple}
             size="sm"
             component={Link}
-            href={`/${currentPathname}`}
+            href={`/${linkWithLocale}${currentPathname}`}
             onPointerDown={event}
         >
             {
@@ -39,6 +41,8 @@ export default function NavigationBreadcrumbs() {
     let titlePath: string | null;
     const shikimori = client();
     const pathname = usePathname();
+    const localeInfo = useTranslations('Info');
+    const websiteLocale = localeInfo('locale');
 
     let paths = pathname
         .split('/')
@@ -118,7 +122,7 @@ export default function NavigationBreadcrumbs() {
         }
 
         return (
-            <Breadcrumb key={breadcrumb} currentBreadcrumb={currentBreadcrumb} currentPathname={currentPathname} />
+            <Breadcrumb key={breadcrumb} currentBreadcrumb={currentBreadcrumb} currentPathname={currentPathname} websiteLocale={websiteLocale} />
         );
     });
 
@@ -130,7 +134,7 @@ export default function NavigationBreadcrumbs() {
             }}
             separator={<IconChevronRight size={22} stroke={1.5} />}
         >
-            <Breadcrumb currentPathname="/" icon={<IconHome size={20} stroke={1.5} />} />
+            <Breadcrumb currentPathname={`${websiteLocale}`} icon={<IconHome size={20} stroke={1.5} />} />
             {breadcrumbs}
         </Breadcrumbs>
     );

@@ -3,11 +3,13 @@ import {IconHome} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
 import {useTranslations} from "next-intl";
 
-const REDIRECT_LINK = '/';
-
 export default function SideBarHome() {
     const translate = useTranslations('Translations');
     const homeLabel = translate('home-placeholder');
+
+    const info = useTranslations('Info');
+    const locale = info('locale');
+    const REDIRECT_LINK = `/${locale}`;
 
     return (
         <SideBarButton

@@ -3,16 +3,19 @@ import {Center, rem, Text, ThemeIcon, UnstyledButton} from "@mantine/core";
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import NProgress from "nprogress";
 import {usePathname, useRouter} from "next/navigation";
+import {useTranslations} from "next-intl";
 
 export default function MobileNavbarSearch() {
     const router = useRouter();
     const pathname = usePathname();
+    const info = useTranslations('Info');
+    const locale = info('locale');
 
     function redirectUser() {
         NProgress.start();
-        router.push("/titles");
+        router.push(`/${locale}/titles`);
 
-        if (pathname === "/titles") {
+        if (pathname === `/${locale}/titles`) {
             NProgress.done();
         }
     }
