@@ -11,3 +11,20 @@
 .chevronRotated {
     transform: rotate(-180deg) !important;
 }
+
+.stack {
+    width: 100%;
+}
+
+.select {
+    width: 100%;
+    border-radius: var(--mantine-radius-md);
+
+    &:focus {
+        border-color: var(--animeth-text-contrast-color);
+    }
+}
+
+.dropdown {
+    border-radius: var(--mantine-radius-md);
+}

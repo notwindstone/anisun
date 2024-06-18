@@ -70,7 +70,8 @@ export default function NavigationBreadcrumbs() {
                     ids: shikimoriId,
                     filter: [
                         'name',
-                        'russian'
+                        'russian',
+                        'english',
                     ],
                 })
         ).animes;
@@ -106,12 +107,26 @@ export default function NavigationBreadcrumbs() {
         const translatedBreadcrumb = translateRouteNames(breadcrumb);
         const previousBreadcrumb = array[index - 1];
         const russianAnimeName = data?.shikimoriData?.[0].russian;
+        const englishAnimeName = data?.shikimoriData?.[0].english;
         const originalAnimeName = data?.shikimoriData?.[0].name;
         let currentBreadcrumb;
+        let animeName;
+
+        switch (websiteLocale) {
+            case "ru":
+                animeName = russianAnimeName;
+                break;
+            case "en":
+                animeName = englishAnimeName;
+                break;
+            default:
+                animeName = originalAnimeName;
+                break;
+        }
 
         switch (previousBreadcrumb) {
             case "titles":
-                currentBreadcrumb = russianAnimeName ?? originalAnimeName;
+                currentBreadcrumb = animeName ?? originalAnimeName;
                 break;
             case "account":
                 currentBreadcrumb = data?.accountData?.username;
