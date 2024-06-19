@@ -43,7 +43,17 @@ export const metadata: Metadata = {
     icons: {
         icon: "/favicon.png"
     },
-    title: APP_NAME,
+    alternates: {
+        canonical: '/',
+        languages: {
+            'en-US': '/en',
+            'ru-RU' : '/ru',
+        },
+    },
+    title: {
+        template: `%s - ${APP_NAME}`,
+        default: APP_NAME,
+    },
     description: APP_DESCRIPTION,
     openGraph: {
         images: "/banner.png",

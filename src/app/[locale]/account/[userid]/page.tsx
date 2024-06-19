@@ -6,8 +6,8 @@ import {Metadata} from "next";
 import classes from './page.module.css';
 
 export const metadata: Metadata = {
-    title: 'Аккаунт - Animeth',
-    description: 'Страница с профилем пользователя',
+    title: 'Account',
+    description: 'User profile page',
 };
 
 export default async function Page({ params }: { params: { userid: string } }) {
@@ -16,7 +16,9 @@ export default async function Page({ params }: { params: { userid: string } }) {
     if (!user) {
         return (
             <>
-                <Text>Похоже, что такого пользователя не существует.</Text>
+                <Text>
+                    Похоже, что такого пользователя не существует.
+                </Text>
             </>
         );
     }

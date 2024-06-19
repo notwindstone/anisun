@@ -6,10 +6,10 @@ export default function Page() {
             <Center w="100%" h="100svh">
                 <Stack w="75%">
                     <Title>
-                        Ошибка
+                        Unable to connect to the Internet
                     </Title>
                     <Text>
-                        Убедитесь, что присутствует интернет-соединение, и попробуйте перезайти в приложение.
+                        The page can be loaded once the device connects to a network.
                     </Text>
                 </Stack>
             </Center>
