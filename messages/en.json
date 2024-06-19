@@ -3,6 +3,7 @@
     "locale": "en"
   },
   "Translations": {
+    "account-not-found": "The user doesn't seem to exist",
     "home-placeholder": "Home",
     "trending-placeholder": "Trending",
     "settings-placeholder": "Settings",

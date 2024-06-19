@@ -1,9 +1,10 @@
 import React from 'react';
-import {Container, Text} from "@mantine/core";
+import {Center, Container, Text} from "@mantine/core";
 import {clerkClient} from "@clerk/nextjs/server";
 import Account from "@/components/Account/Account";
 import {Metadata} from "next";
 import classes from './page.module.css';
+import {getTranslations} from "next-intl/server";
 
 export const metadata: Metadata = {
     title: 'Account',
@@ -11,15 +12,35 @@ export const metadata: Metadata = {
 };
 
 export default async function Page({ params }: { params: { userid: string } }) {
-    const user = await clerkClient.users.getUser(params.userid);
+    let user;
 
-    if (!user) {
+    const info = await getTranslations('Info');
+    const translate = await getTranslations('Translations');
+    const locale = info('locale');
+
+    let message;
+
+    switch (locale) {
+        case "en":
+            message = translate('account-not-found');
+            break;
+        case "ru":
+            message = translate('account-not-found');
+            break;
+        default:
+            message = translate('account-not-found');
+            break;
+    }
+
+    try {
+        user = await clerkClient.users.getUser(params.userid);
+    } catch (error) {
         return (
-            <>
+            <Center h="calc(100vh - 1px)">
                 <Text>
-                    Похоже, что такого пользователя не существует.
+                    {message}
                 </Text>
-            </>
+            </Center>
         );
     }
 

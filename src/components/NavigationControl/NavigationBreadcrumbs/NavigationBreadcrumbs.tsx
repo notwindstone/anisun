@@ -129,6 +129,10 @@ export default function NavigationBreadcrumbs() {
                 currentBreadcrumb = animeName ?? originalAnimeName;
                 break;
             case "account":
+                if (data?.accountData === null) {
+                    return;
+                }
+
                 currentBreadcrumb = data?.accountData?.username;
                 break;
             default:
