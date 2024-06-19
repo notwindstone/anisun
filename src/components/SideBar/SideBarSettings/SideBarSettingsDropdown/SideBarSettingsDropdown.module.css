@@ -18,13 +18,27 @@
 
 .select {
     width: 100%;
-    border-radius: var(--mantine-radius-md);
 
     &:focus {
         border-color: var(--animeth-text-contrast-color);
     }
 }
 
-.dropdown {
+.select, .dropdown {
+    background: var(--animeth-secondary-color);
     border-radius: var(--mantine-radius-md);
+    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+}
+
+.options {
+    border-radius: var(--mantine-radius-md);
+    overflow: clip;
+}
+
+.option {
+    border-radius: var(--mantine-radius-md);
+
+    @mixin hover {
+        background: alpha(var(--animeth-text-contrast-color), 0.05);
+    }
 }

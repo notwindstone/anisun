@@ -22,7 +22,7 @@ import {useDisclosure} from "@mantine/hooks";
 import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 import {IconChevronDown} from "@tabler/icons-react";
 import GradientTitle from "@/components/GradientTitle/GradientTitle";
-import locales from '@/configs/locales.json';
+import localesData from '@/configs/localesData.json';
 import {useTranslations} from "next-intl";
 import NProgress from "nprogress";
 import {useRouter} from "next/navigation";
@@ -66,8 +66,10 @@ export default function SideBarSettingsDropdown() {
                         classNames={{
                             input: classes.select,
                             dropdown: classes.dropdown,
+                            options: classes.options,
+                            option: classes.option,
                         }}
-                        data={locales}
+                        data={localesData}
                         value={locale}
                         onChange={(value) => {
                             NProgress.start();
