@@ -20,7 +20,7 @@ export default function SideBarAccount() {
             mounted={settingsOpened}
             func={closeSettings}
         >
-            <UserProfile />
+            <UserProfile routing="virtual" />
         </AccountModal>
     );
 

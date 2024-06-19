@@ -39,7 +39,7 @@ export default function MobileNavbar() {
             mounted={settingsOpened}
             func={closeSettings}
         >
-            <UserProfile />
+            <UserProfile routing="virtual" />
         </AccountModal>
     );
 
