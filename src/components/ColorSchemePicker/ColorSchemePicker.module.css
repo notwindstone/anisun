@@ -11,6 +11,9 @@
 }
 
 .input {
+    background: var(--animeth-secondary-color);
+    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+
     &:focus-within {
         border-color: var(--animeth-text-contrast-color);
     }

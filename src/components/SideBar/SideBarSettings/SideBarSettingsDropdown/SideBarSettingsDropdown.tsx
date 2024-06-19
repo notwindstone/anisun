@@ -72,6 +72,13 @@ export default function SideBarSettingsDropdown() {
                         data={localesData}
                         value={locale}
                         onChange={(value) => {
+                            if (!value) {
+                                NProgress.start();
+                                router.refresh();
+                                NProgress.done();
+                                return;
+                            }
+
                             NProgress.start();
                             router.push(`/${value}`);
 
