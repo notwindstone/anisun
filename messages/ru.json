@@ -3,6 +3,11 @@
     "locale": "ru"
   },
   "Translations": {
+    "filters-types-basic-label": "Основные фильтры",
+    "filters-types-genres-label": "Жанры",
+    "filters-types-season-label": "Сезон",
+    "filters-types-other-label": "Прочее",
+    "filters-submit-label": "Применить фильтры",
     "account-creation-date-label": "Дата создания аккаунта",
     "account-reputation-label": "Репутация",
     "account-comments-label": "Комментариев",
@@ -11,7 +16,7 @@
     "account-not-found": "Похоже, что такого пользователя не существует",
     "account-placeholder": "Аккаунт",
     "button-goto": "Перейти",
-    "error": "Ошибка",
+    "common-error-label": "Ошибка",
     "genres-demographic": "Аудитория",
     "genres-genre": "Жанры",
     "genres-theme": "Темы",

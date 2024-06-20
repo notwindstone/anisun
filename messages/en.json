@@ -3,6 +3,11 @@
     "locale": "en"
   },
   "Translations": {
+    "filters-types-basic-label": "Basic filters",
+    "filters-types-genres-label": "Genres",
+    "filters-types-season-label": "Season",
+    "filters-types-other-label": "Other",
+    "filters-submit-label": "Apply filters",
     "account-creation-date-label": "Account creation date",
     "account-reputation-label": "Reputation",
     "account-comments-label": "Comments",
@@ -11,7 +16,7 @@
     "account-not-found": "The user doesn't seem to exist",
     "account-placeholder": "Account",
     "button-goto": "Open",
-    "error": "Error",
+    "common-error-label": "Error",
     "genres-demographic": "Demographics",
     "genres-genre": "Genres",
     "genres-theme": "Theme",
