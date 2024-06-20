@@ -3,6 +3,14 @@
     "locale": "en"
   },
   "Translations": {
+    "page-trending-title": "Trending",
+    "page-trending-description": "Page with trending anime",
+    "page-titles-title": "Search",
+    "page-titles-description": "Search anime and movies via the Shikimori API",
+    "page-account-title": "Account",
+    "page-account-description": "User profile page",
+    "page-anime-placeholder-title": "Watch",
+    "page-anime-placeholder-description": "Watch anime online with subs or dubs (in Russian) for free without any ads",
     "account-not-found": "The user doesn't seem to exist",
     "home-placeholder": "Home",
     "trending-placeholder": "Trending",

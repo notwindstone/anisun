@@ -4,7 +4,7 @@ export default function Page() {
     return (
         <>
             <Center w="100%" h="100svh">
-                <Stack w="75%">
+                <Stack align="center" w="75%">
                     <Title>
                         Unable to connect to the Internet
                     </Title>

@@ -6,10 +6,23 @@ import {Metadata} from "next";
 import classes from './page.module.css';
 import {getTranslations} from "next-intl/server";
 
-export const metadata: Metadata = {
-    title: 'Account',
-    description: 'User profile page',
-};
+export async function generateMetadata(): Promise<Metadata> {
+    const translate = await getTranslations('Translations');
+
+    const title = translate('page-account-title');
+    const description = translate('page-account-description');
+
+    return {
+        title: title,
+        description: description,
+        openGraph: {
+            siteName: 'Animeth',
+            type: "website",
+            title: title,
+            description: description,
+        }
+    };
+}
 
 export default async function Page({ params }: { params: { userid: string } }) {
     let user;

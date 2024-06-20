@@ -6,10 +6,15 @@ import Video from "@/components/Video/Video";
 import AnimeInfo from "@/components/AnimeInfo/AnimeInfo";
 import classes from './page.module.css';
 import Recommendations from "@/components/Recommendations/Recommendations";
+import {getTranslations} from "next-intl/server";
 
 export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
     const shikimori = client();
     const shikimoriId = getShikimoriId(params.code);
+
+    const info = await getTranslations('Info');
+    const translate = await getTranslations('Translations');
+    const locale = info('locale');
 
     const anime = (
         await shikimori
@@ -19,13 +24,14 @@ export async function generateMetadata({ params }: { params: { code: string } })
                 filter: [
                     'name',
                     'russian',
+                    'english',
                     'description'
                 ],
             })
     )?.animes[0];
 
-    const placeholderTitle = 'Просмотр аниме - Animeth';
-    const placeholderDescription = 'На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере';
+    const placeholderTitle = translate('page-anime-placeholder-title');
+    const placeholderDescription = translate('page-anime-placeholder-description');
 
     if (!anime) {
         return {
@@ -40,13 +46,27 @@ export async function generateMetadata({ params }: { params: { code: string } })
         };
     }
 
+    let animeName;
+
+    switch (locale) {
+        case "en":
+            animeName = anime.english ?? anime.name;
+            break;
+        case "ru":
+            animeName = anime.russian ?? anime.name;
+            break;
+        default:
+            animeName = anime.name;
+            break;
+    }
+
     return {
-        title: anime.russian ?? anime.name ?? placeholderTitle,
+        title: animeName ?? placeholderTitle,
         description: anime.description ?? placeholderDescription,
         openGraph: {
             siteName: 'Animeth',
             type: "website",
-            title: anime.russian ?? anime.name ?? placeholderTitle,
+            title: animeName,
             description: anime.description ?? placeholderDescription,
         }
     };

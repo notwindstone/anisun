@@ -21,7 +21,7 @@ import {getMessages} from 'next-intl/server';
 const inter = Inter({ subsets: ["latin"] });
 
 const APP_NAME = 'Animeth';
-const APP_DESCRIPTION = "Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Плеер сделан на AniLibria API и Kodik, а поиск аниме через Shikimori API.";
+const APP_DESCRIPTION = "An anime streaming website/PWA based on Next.js 14 and Shikimori, AniLibria, Kodik and SovetRomantica APIs with the Mantine UI kit.";
 
 const theme = createTheme({
     defaultRadius: "xl",
