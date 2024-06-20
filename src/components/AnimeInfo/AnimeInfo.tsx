@@ -30,7 +30,11 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
     }
 
     if (isPending) {
-        return <>Loading...</>;
+        return (
+            <>
+                Loading...
+            </>
+        );
     }
 
     if (error) {
