@@ -3,6 +3,11 @@
     "locale": "en"
   },
   "Translations": {
+    "account-creation-date-label": "Account creation date",
+    "account-reputation-label": "Reputation",
+    "account-comments-label": "Comments",
+    "common-close-label": "Close",
+    "dayjs-format-date": "MMMM D YYYY, h:mm A",
     "account-not-found": "The user doesn't seem to exist",
     "account-placeholder": "Account",
     "button-goto": "Open",

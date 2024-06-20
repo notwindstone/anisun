@@ -3,6 +3,11 @@
     "locale": "ru"
   },
   "Translations": {
+    "account-creation-date-label": "Дата создания аккаунта",
+    "account-reputation-label": "Репутация",
+    "account-comments-label": "Комментариев",
+    "common-close-label": "Закрыть",
+    "dayjs-format-date": "D MMMM YYYY в H:mm",
     "account-not-found": "Похоже, что такого пользователя не существует",
     "account-placeholder": "Аккаунт",
     "button-goto": "Перейти",

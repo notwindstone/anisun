@@ -9,9 +9,15 @@ import dayjs from "dayjs";
 import 'dayjs/locale/ru';
 import Link from "next/link";
 import classes from './Account.module.css';
+import {useTranslations} from "next-intl";
 
 export default function Account({ user }: { user: UserResource }) {
-    dayjs.locale('ru');
+    const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
+    const locale = info('locale');
+
+    dayjs.locale(locale);
+
     const getAccountStats = async () => {
         const accountReputation = await account.reputation({ userid: user.id });
         const accountTotalComments = await account.totalComments({ userid: user.id });
@@ -35,7 +41,7 @@ export default function Account({ user }: { user: UserResource }) {
                 src={user.imageUrl}
                 w={384}
                 h={384}
-                alt={`Аватар пользователя ${user.username ?? 'unknown username'}`}
+                alt={`${user.username ?? 'unknown username'} profile picture`}
             />
             <Stack className={classes.tooltipInfo} align="center" gap={0}>
                 <Title order={2}>{user.username ?? 'unknown username'}</Title>
@@ -70,9 +76,9 @@ export default function Account({ user }: { user: UserResource }) {
             <Stack gap={0}>
                 <Text fw={500} size={rem(36)}>{user.username}</Text>
                 <Text>
-                    Дата создания аккаунта: {
-                    dayjs(user.createdAt).format('D MMMM YYYY в H:mm')
-                }
+                    {
+                        `${translate('account-creation-date-label')}: ${dayjs(user.createdAt).format(translate('dayjs-format-date'))}`
+                    }
                 </Text>
                 {
                     isPending ? (
@@ -84,8 +90,16 @@ export default function Account({ user }: { user: UserResource }) {
                         </>
                     ) : (
                         <>
-                            <Text>Репутация: {data?.reputation}</Text>
-                            <Text>Комментариев: {data?.totalComments}</Text>
+                            <Text>
+                                {
+                                    `${translate('account-reputation-label')}: ${data?.reputation}`
+                                }
+                            </Text>
+                            <Text>
+                                {
+                                    `${translate('account-comments-label')}: ${data?.totalComments}`
+                                }
+                            </Text>
                         </>
                     )
                 }

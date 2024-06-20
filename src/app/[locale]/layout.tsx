@@ -7,7 +7,7 @@ import '@mantine/carousel/styles.css';
 import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
-import {ruRU} from "@clerk/localizations";
+import {ruRU, enUS} from "@clerk/localizations";
 import './global.css';
 import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
 import Main from "@/components/Main/Main";
@@ -84,8 +84,22 @@ export default async function RootLayout({
     // side is the easiest way to get started
     const messages = await getMessages();
 
+    let clerkLocale;
+
+    switch (locale) {
+        case "en":
+            clerkLocale = enUS;
+            break;
+        case "ru":
+            clerkLocale = ruRU;
+            break;
+        default:
+            clerkLocale = enUS;
+            break;
+    }
+
     return (
-        <ClerkProvider localization={ruRU}>
+        <ClerkProvider localization={clerkLocale}>
             <html lang={locale}>
                 <head>
                     <ColorSchemeScript/>
