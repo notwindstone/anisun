@@ -2,7 +2,7 @@
 
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
-import {Divider, Group, Image, rem, Stack, Text, Title} from "@mantine/core";
+import {Divider, Group, Image, rem, Skeleton, Stack, Text, Title} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
 import AnimeInfoCopyLink from "@/components/AnimeInfo/AnimeInfoCopyLink/AnimeInfoCopyLink";
@@ -32,7 +32,18 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
     if (isPending) {
         return (
             <>
-                Loading...
+                <Stack gap={rem(8)} w="100%"  className={classes.stack}>
+                    <Skeleton mb={rem(8)} w="100%" h={36} />
+                    <Group>
+                        <Skeleton w={96} h={40} />
+                        <Stack gap={4}>
+                            <Skeleton w={256} h={20} />
+                            <Skeleton w={128} h={20} />
+                        </Stack>
+                    </Group>
+                    <Divider />
+                    <Skeleton radius="md" w="100%" h={120} />
+                </Stack>
             </>
         );
     }

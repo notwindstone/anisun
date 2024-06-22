@@ -106,9 +106,9 @@ export default function NavigationBreadcrumbs() {
         const currentPathname = currentPathArray.join('/');
         const translatedBreadcrumb = translateRouteNames(breadcrumb);
         const previousBreadcrumb = array[index - 1];
-        const russianAnimeName = data?.shikimoriData?.[0].russian;
-        const englishAnimeName = data?.shikimoriData?.[0].english;
-        const originalAnimeName = data?.shikimoriData?.[0].name;
+        const russianAnimeName = data?.shikimoriData?.[0]?.russian;
+        const englishAnimeName = data?.shikimoriData?.[0]?.english;
+        const originalAnimeName = data?.shikimoriData?.[0]?.name;
         let currentBreadcrumb;
         let animeName;
 
