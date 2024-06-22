@@ -27,6 +27,7 @@ import sanitizeHTML from "@/utils/Misc/sanitizeHTML";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
     const locale = info('locale');
     const [opened, { open, close }] = useDisclosure(false);
     const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
@@ -54,18 +55,24 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
         }
     }
 
+    const nextEpisode = translate('component__anime-info-description__next-episode-label');
+
     const nextEpisodeAt
-        = data?.nextEpisodeAt ? `Следующий эпизод ${formatNextEpisodeDate(data.nextEpisodeAt)} • ` : "";
+        = data?.nextEpisodeAt
+            ? `${nextEpisode} ${formatNextEpisodeDate({ nextEpisodeDate: data.nextEpisodeAt, locale: locale })} • `
+            : "";
     const airedOn
         = (data?.airedOn?.date && data?.status)
-        ? (
-            `${translateAnimeStatus({ 
-                sortingType: data.status, 
-                withPrepositions: true,
-            })} ${formatAiredOnDate(data.airedOn.date)} • `
-        ) : "";
-    const animeKind
-        = data?.kind ? `${translateAnimeKind(data.kind)}` : "";
+            ? (
+                `${translate(
+                    translateAnimeStatus({
+                        sortingType: data.status,
+                        withPrepositions: true,
+                    })
+                )} ${formatAiredOnDate({ airedOnDate: data.airedOn.date, locale: locale })} • `
+            )
+            : "";
+    const animeKind = data?.kind ? translate(translateAnimeKind(data.kind)) : "";
 
     let description;
 
@@ -209,10 +216,26 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         )
                     }
                     {
-                        data?.english && (
-                            <Text>
-                                Английское название: {data.english}
-                            </Text>
+                        locale === 'ru' ? (
+                            <>
+                                {
+                                    data?.english && (
+                                        <Text>
+                                            Английское название: {data.english}
+                                        </Text>
+                                    )
+                                }
+                            </>
+                        ) : (
+                            <>
+                                {
+                                    data?.russian && (
+                                        <Text>
+                                            Р: {data.russian}
+                                        </Text>
+                                    )
+                                }
+                            </>
                         )
                     }
                     {
