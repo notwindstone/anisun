@@ -19,6 +19,8 @@
     "account-not-found": "The user doesn't seem to exist",
     "account-placeholder": "Account",
     "button-goto": "Open",
+    "common__share-label": "Share",
+    "common__copied-label": "Copied",
     "common__mirror-label": "Mirror",
     "common__file-label": "file",
     "common__link-label": "link",

@@ -12,9 +12,7 @@ import React from "react";
 import {useTranslations} from "next-intl";
 
 export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
-    const info = useTranslations('Info');
     const translate = useTranslations('Translations');
-    const locale = info('locale');
     const { theme } = useCustomTheme();
     const [opened, setOpened] = useState(false);
     const { data, isPending, error } = useQuery({

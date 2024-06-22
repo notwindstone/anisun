@@ -2,10 +2,12 @@ import {IconShare3} from "@tabler/icons-react";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {useClipboard} from "@mantine/hooks";
 import {usePathname} from "next/navigation";
+import {useTranslations} from "next-intl";
 
 export default function AnimeInfoCopyLink() {
     const pathname = usePathname();
     const clipboard = useClipboard({ timeout: 1000 });
+    const translate = useTranslations('Translations');
 
     function copyLink() {
         clipboard.copy(`https://animeth.vercel.app${pathname}`);
@@ -17,7 +19,9 @@ export default function AnimeInfoCopyLink() {
             onClick={copyLink}
         >
             {
-                clipboard.copied ? "Скопировано!" : "Поделиться"
+                clipboard.copied
+                    ? translate('common__copied-label')
+                    : translate('common__share-label')
             }
         </DecoratedButton>
     );
