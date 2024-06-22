@@ -32,7 +32,7 @@ export default function Recommendations({ id }: { id: string } ) {
         queryFn: async () => getSimilarAnimes(),
     });
     const queryClient = useQueryClient();
-    const queryData: AnimeType | undefined = queryClient.getQueryData(['anime', 'info', id]);
+    const queryData: AnimeType | undefined = queryClient.getQueryData(['anime', 'info', locale, id]);
     const [seconds, setSeconds] = useState(0);
     const interval = useInterval(() => setSeconds((s) => s + 1), 1000);
 

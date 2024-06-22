@@ -24,7 +24,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
     const { isTablet } = useMobileScreen();
     const shikimori = client();
     const { data, isPending, error } = useQuery({
-        queryKey: ['anime', 'info', id],
+        queryKey: ['anime', 'info', locale, id],
         queryFn: async () => getShikimoriInfo(),
     });
 

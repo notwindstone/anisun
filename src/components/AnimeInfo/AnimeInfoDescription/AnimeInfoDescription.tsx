@@ -104,7 +104,6 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     return (
         <>
             {
-                // Mantine Modal component blinks on open and I don't know how to fix it.
                 modalOpened && (
                     <Box onClick={closeModal} className={classes.imageModal}>
                         <Image
