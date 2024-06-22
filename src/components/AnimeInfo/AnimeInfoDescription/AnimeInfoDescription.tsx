@@ -16,7 +16,6 @@ import React from "react";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
 import {useDisclosure, useHotkeys} from "@mantine/hooks";
-import DOMPurify from "isomorphic-dompurify";
 import {variables} from "@/configs/variables";
 import NextImage from "next/image";
 import Link from "next/link";
@@ -28,7 +27,6 @@ import sanitizeHTML from "@/utils/Misc/sanitizeHTML";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const info = useTranslations('Info');
-    const translate = useTranslations('Translations');
     const locale = info('locale');
     const [opened, { open, close }] = useDisclosure(false);
     const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
