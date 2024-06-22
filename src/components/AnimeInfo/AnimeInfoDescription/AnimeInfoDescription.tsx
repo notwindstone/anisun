@@ -39,7 +39,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
 
     let cleanDescription;
 
-    if (data?.descriptionHtml) {
+    if (data?.descriptionHtml && locale === 'ru') {
         DOMPurify.addHook('afterSanitizeElements', function (node) {
             if (!node.tagName) {
                 return;
