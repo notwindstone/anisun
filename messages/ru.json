@@ -5,7 +5,7 @@
   "Translations": {
     "component__anime-info-download-video__dropdown-alert-title": "Про формат .m3u8",
     "component__anime-info-download-video__dropdown-alert-description": "M3U8 - это формат потокового видео. Такие файлы мало весят и загружают видеофрагменты во время проигрывания видеоплеера. Чтобы его открыть на ПК, можно воспользоваться PotPlayer или VLC, а на телефоне - NextPlayer.",
-    "component-anime-info-show-comments": "Раскрыть комментарии",
+    "component__anime-info__show-comments-label": "Раскрыть комментарии",
     "filters-types-basic-label": "Основные фильтры",
     "filters-types-genres-label": "Жанры",
     "filters-types-season-label": "Сезон",

@@ -172,7 +172,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                             radius="md"
                             onClick={() => setCommentsExpanded((expanded) => !expanded)}
                         >
-                            {translate('component-anime-info-show-comments')}
+                            {translate('component__anime-info__show-comments-label')}
                         </DecoratedButton>
                     </>
                 )

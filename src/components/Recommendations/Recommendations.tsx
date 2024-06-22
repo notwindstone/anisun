@@ -5,7 +5,7 @@ import {useQuery, useQueryClient} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import classes from './Recommendations.module.css';
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
@@ -16,11 +16,15 @@ import RecommendationsOldAnimeData
     from "@/components/Recommendations/RecommendationsOldAnimeData/RecommendationsOldAnimeData";
 import RecommendationsNewAnimeData
     from "@/components/Recommendations/RecommendationsNewAnimeData/RecommendationsNewAnimeData";
+import {useTranslations} from "next-intl";
 
 export default function Recommendations({ id }: { id: string } ) {
     const ALL = { label: "Похожие", value: "all" };
     const [segmentedControlData, setSegmentedControlData] = useState([ALL]);
     const router = useRouter();
+    const pathname = usePathname();
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const shikimori = client();
     const [filter, setFilter] = useState(ALL.value);
     const { data, isPending, error } = useQuery({
@@ -214,11 +218,14 @@ export default function Recommendations({ id }: { id: string } ) {
         function redirectUser() {
             NProgress.start();
 
-            if (isNewType) {
-                return router.push(`/titles/${anime?.url.replace('https://shikimori.one/animes/', '')}`);
-            }
+            const newLink = `/titles/${anime?.url.replace('https://shikimori.one/animes/', '')}`;
+            const oldLink = `/titles/${anime.url.replace('/animes/', '')}`;
 
-            return router.push(`/titles/${anime.url.replace('/animes/', '')}`);
+            router.push(isNewType ? newLink : oldLink);
+
+            if (pathname === `/${locale}${newLink}` || pathname === `/${locale}${oldLink}`) {
+                return NProgress.done();
+            }
         }
 
         const translatedKind = translateAnimeKind(anime.kind ?? '');
