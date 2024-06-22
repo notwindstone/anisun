@@ -29,6 +29,10 @@ html {
     }
 }
 
+body {
+    background: var(--animeth-background-color);
+}
+
 .root-group {
     background: var(--animeth-sidebar-color);
 }

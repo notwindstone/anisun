@@ -104,7 +104,7 @@ export default async function RootLayout({
                 <head>
                     <ColorSchemeScript/>
                 </head>
-                <body style={{ background: 'var(--animeth-background-color)' }} className={inter.className}>
+                <body className={inter.className}>
                     <NextIntlClientProvider messages={messages}>
                         <ThemedNextTopLoader />
                         <TanstackQueryProviders>
