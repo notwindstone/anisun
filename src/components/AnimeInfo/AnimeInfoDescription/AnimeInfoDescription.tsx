@@ -24,6 +24,7 @@ import {formatNextEpisodeDate} from "@/utils/Misc/formatNextEpisodeDate";
 import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {useTranslations} from "next-intl";
+import sanitizeHTML from "@/utils/Misc/sanitizeHTML";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const info = useTranslations('Info');
@@ -40,18 +41,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     let cleanDescription;
 
     if (data?.descriptionHtml && locale === 'ru') {
-        DOMPurify.addHook('afterSanitizeElements', function (node) {
-            if (!node.tagName) {
-                return;
-            }
-
-            if (node.tagName.toLowerCase() === 'a') {
-                node.setAttribute('style', `color: ${theme.color}`);
-                node.setAttribute('class', classes.defaultAnchor);
-            }
-        });
-
-        cleanDescription = DOMPurify.sanitize(data.descriptionHtml);
+        cleanDescription = DOMPurify.sanitize(sanitizeHTML({ color: theme.color, descriptionHtml: data.descriptionHtml }));
     }
 
     function descriptionOpen() {
@@ -77,7 +67,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
             })} ${formatAiredOnDate(data.airedOn.date)} • `
         ) : "";
     const animeKind
-        = data?.kind ? `${translateAnimeKind(data?.kind)}` : "";
+        = data?.kind ? `${translateAnimeKind(data.kind)}` : "";
 
     let description;
 
