@@ -14,6 +14,7 @@ import Comments from "@/components/Comments/Comments";
 import useMobileScreen from "@/hooks/useMobileScreen";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {useTranslations} from "next-intl";
+import {jikan} from "@/lib/jikan/jikan";
 
 export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: string }) {
     const info = useTranslations('Info');
@@ -28,9 +29,23 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
     });
 
     async function getShikimoriInfo() {
-        return (await shikimori.animes.byId({
+        let jikanData;
+
+        if (locale !== 'ru') {
+            const jikanClient = jikan();
+            jikanData = await jikanClient.animes.byId({ id: id });
+        }
+
+        let shikimoriData = (await shikimori.animes.byId({
             ids: id,
         })).animes[0];
+
+        shikimoriData = {
+            ...shikimoriData,
+            synopsis: jikanData?.synopsis
+        };
+
+        return shikimoriData;
     }
 
     if (isPending) {

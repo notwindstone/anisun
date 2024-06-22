@@ -23,8 +23,12 @@ import Link from "next/link";
 import {formatNextEpisodeDate} from "@/utils/Misc/formatNextEpisodeDate";
 import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {useTranslations} from "next-intl";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
+    const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
+    const locale = info('locale');
     const [opened, { open, close }] = useDisclosure(false);
     const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
     const { theme } = useCustomTheme();
@@ -75,6 +79,38 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const animeKind
         = data?.kind ? `${translateAnimeKind(data?.kind)}` : "";
 
+    let description;
+
+    switch (locale) {
+        case "en":
+            description = (
+                <Text {...opened ? null : { lineClamp: 1 }}>
+                    {data?.synopsis}
+                </Text>
+            );
+            break;
+        case "ru":
+            if (!cleanDescription || !data?.description) {
+                description = null;
+                break;
+            }
+
+            description = (
+                <Text
+                    {...opened ? null : { lineClamp: 1 }}
+                    dangerouslySetInnerHTML={{ __html: cleanDescription }}
+                />
+            );
+            break;
+        default:
+            description = (
+                <Text {...opened ? null : { lineClamp: 1 }}>
+                    {data?.synopsis}
+                </Text>
+            );
+            break;
+    }
+
     return (
         <>
             {
@@ -118,13 +154,12 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         className={classes.descriptionGroup}
                     >
                         {
-                            cleanDescription && data?.description && (
+                            ((cleanDescription && data?.description) || description) && (
                                 <Stack gap={rem(8)}>
-                                    <Title className={classes.heading} pt={rem(8)} order={4}>Описание</Title>
-                                    <Text
-                                        {...opened ? null : { lineClamp: 1 }}
-                                        dangerouslySetInnerHTML={{ __html: cleanDescription }}
-                                    />
+                                    <Title className={classes.heading} pt={rem(8)} order={4}>
+                                        Описание
+                                    </Title>
+                                    {description}
                                 </Stack>
                             )
                         }
