@@ -205,7 +205,9 @@ export default function Recommendations({ id }: { id: string } ) {
                 <div className={classes.segmentedControlWrapper}>
                     {filtersSegmentedControl}
                 </div>
-                <Text>К сожалению, ничего не найдено. Попробуйте выбрать другой фильтр</Text>
+                <Text>
+                    К сожалению, ничего не найдено. Попробуйте выбрать другой фильтр
+                </Text>
             </Stack>
         );
     }
