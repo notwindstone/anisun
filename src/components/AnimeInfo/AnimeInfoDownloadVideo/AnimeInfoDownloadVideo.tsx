@@ -9,8 +9,12 @@ import {AnimeTitleDownloadType} from "@/types/Anilibria/Responses/AnimeTitleDown
 import classes from './AnimeInfoDownloadVideo.module.css';
 import useCustomTheme from "@/hooks/useCustomTheme";
 import React from "react";
+import {useTranslations} from "next-intl";
 
 export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
+    const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const [opened, setOpened] = useState(false);
     const { data, isPending, error } = useQuery({
@@ -55,12 +59,22 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
     }
 
     if (error) {
-        return <>Ошибка: {error.message}</>;
+        return (
+            <>
+                {translate('common-error-label')}: {error.message}
+            </>
+        );
     }
 
     if (!data || !data?.player?.list || data?.torrents?.list.length === 0) {
         return;
     }
+
+    const episodesTranslated = translate('common__episodes-label');
+    const episodeTranslated = translate('common__episode-label');
+    const fileTranslated = translate('common__file-label');
+    const mirrorTranslated = translate('common__mirror-label');
+    const linkTranslated = translate('common__link-label');
 
     return (
         <>
@@ -71,7 +85,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                             leftSection={<IconDownload size={18} stroke={1.5} />}
                             onClick={togglePopover}
                         >
-                            Скачать
+                            {translate('common-download-label')}
                         </DecoratedButton>
                     </div>
                 </Popover.Target>
@@ -84,9 +98,9 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                             }}
                             radius="md"
                             color={theme.color}
-                            title="Про формат .m3u8"
+                            title={translate('component__anime-info-download-video__dropdown-alert-title')}
                         >
-                            M3U8 - это формат потокового видео. Такие файлы мало весят и загружают видеофрагменты во время проигрывания видеоплеера. Чтобы его открыть на ПК, можно воспользоваться PotPlayer или VLC, а на телефоне - NextPlayer.
+                            {translate('component__anime-info-download-video__dropdown-alert-description')}
                         </Alert>
                         <Stack gap={rem(16)} p={rem(8)}>
                             {
@@ -103,7 +117,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                                             >
                                                 <Group gap={0} justify="space-between">
                                                     <Text className={classes.text}>
-                                                        Anilibria, Magnet-ссылка: Серии {torrent.episodes.string}
+                                                        Anilibria, Magnet-{linkTranslated}: {episodesTranslated} {torrent.episodes.string}
                                                     </Text>
                                                     <Text className={classes.text}>
                                                         {torrent.quality.string} (.mkv)
@@ -117,7 +131,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                                             >
                                                 <Group gap={0} justify="space-between">
                                                     <Text className={classes.text}>
-                                                        Anilibria, Torrent-файл: Серии {torrent.episodes.string}
+                                                        Anilibria, Torrent-{fileTranslated}: {episodesTranslated} {torrent.episodes.string}
                                                     </Text>
                                                     <Text className={classes.text}>
                                                         {torrent.quality.string} (.mkv)
@@ -131,7 +145,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                                             >
                                                 <Group gap={0} justify="space-between">
                                                     <Text className={classes.text}>
-                                                        (Зеркало) Anilibria, Torrent-файл: Серии {torrent.episodes.string}
+                                                        ({mirrorTranslated}) Anilibria, Torrent-{fileTranslated}: {episodesTranslated} {torrent.episodes.string}
                                                     </Text>
                                                     <Text className={classes.text}>
                                                         {torrent.quality.string} (.mkv)
@@ -174,7 +188,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                                             >
                                                 <Group gap={0} justify="space-between">
                                                     <Text className={classes.text}>
-                                                        Anilibria: Серия {episodeIndex}
+                                                        Anilibria: {episodeTranslated} {episodeIndex}
                                                     </Text>
                                                     <Text className={classes.text}>
                                                         {qualityResolution} (.m3u8)

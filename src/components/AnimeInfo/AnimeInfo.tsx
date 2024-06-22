@@ -13,8 +13,12 @@ import AnimeInfoDescription from "@/components/AnimeInfo/AnimeInfoDescription/An
 import Comments from "@/components/Comments/Comments";
 import useMobileScreen from "@/hooks/useMobileScreen";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
+import {useTranslations} from "next-intl";
 
 export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: string }) {
+    const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
+    const locale = info('locale');
     const [commentsExpanded, setCommentsExpanded] = useState(false);
     const { isTablet } = useMobileScreen();
     const shikimori = client();
@@ -49,7 +53,25 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
     }
 
     if (error) {
-        return <>Error...</>;
+        return (
+            <>
+                {translate('common-error-label')}: {error.message}
+            </>
+        );
+    }
+
+    let animeTitle;
+
+    switch (locale) {
+        case "en":
+            animeTitle = `${data?.name} - ${data?.english}`;
+            break;
+        case "ru":
+            animeTitle = `${data?.name} - ${data?.russian}`;
+            break;
+        default:
+            animeTitle = data?.name;
+            break;
     }
 
     return (
@@ -59,7 +81,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                 order={2}
                 lineClamp={4}
             >
-                {data?.name} - {data?.russian}
+                {animeTitle}
             </Title>
             <Group className={classes.infoGroup} wrap="nowrap" justify="space-between">
                 <Group wrap="nowrap" gap={rem(8)}>
@@ -78,6 +100,20 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                         <Text lineClamp={1} fw={600}>
                             {
                                 data?.genres.map((genre, index) => {
+                                    let genreName;
+
+                                    switch (locale) {
+                                        case "en":
+                                            genreName = genre.name;
+                                            break;
+                                        case "ru":
+                                            genreName = genre.russian;
+                                            break;
+                                        default:
+                                            genreName = genre.name;
+                                            break;
+                                    }
+
                                     return (
                                         <React.Fragment key={genre.id}>
                                             <span className={classes.span}>
@@ -87,7 +123,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                                                 className={classes.link}
                                                 href={`/titles?genre=${genre.id}`}
                                             >
-                                                {genre.russian}
+                                                {genreName}
                                             </Link>
                                         </React.Fragment>
                                     );
@@ -136,7 +172,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                             radius="md"
                             onClick={() => setCommentsExpanded((expanded) => !expanded)}
                         >
-                            Раскрыть комментарии
+                            {translate('component-anime-info-show-comments')}
                         </DecoratedButton>
                     </>
                 )

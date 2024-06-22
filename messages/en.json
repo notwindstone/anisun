@@ -3,6 +3,9 @@
     "locale": "en"
   },
   "Translations": {
+    "component__anime-info-download-video__dropdown-alert-title": "About .m3u8",
+    "component__anime-info-download-video__dropdown-alert-description": "M3U8 is a video streaming format. Such files are lightweight, and video fragments are loaded while the video player is playing. To open it on a PC, you can use PotPlayer or VLC, and on a phone - NextPlayer.",
+    "component-anime-info-show-comments": "Show comments",
     "filters-types-basic-label": "Basic filters",
     "filters-types-genres-label": "Genres",
     "filters-types-season-label": "Season",
@@ -16,7 +19,13 @@
     "account-not-found": "The user doesn't seem to exist",
     "account-placeholder": "Account",
     "button-goto": "Open",
+    "common__mirror-label": "Mirror",
+    "common__file-label": "file",
+    "common__link-label": "link",
+    "common__episodes-label": "Episodes",
+    "common__episode-label": "Episode",
     "common-error-label": "Error",
+    "common-download-label": "Download",
     "genres-demographic": "Demographics",
     "genres-genre": "Genres",
     "genres-theme": "Theme",
