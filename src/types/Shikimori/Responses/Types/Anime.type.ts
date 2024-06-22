@@ -55,6 +55,7 @@ export type AnimeType = {
     statusesStats: StatusStatType[];
     studios: StudioType[];
     synonyms: string[];
+    synopsis?: string;
     topic: TopicType | null;
     updatedAt: string;
     url: string;

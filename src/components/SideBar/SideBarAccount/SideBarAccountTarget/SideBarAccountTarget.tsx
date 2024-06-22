@@ -8,10 +8,11 @@ import useRipple from "use-ripple-hook";
 import {variables} from "@/configs/variables";
 import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 import {useHover} from "@mantine/hooks";
-
-const LABEL = "Аккаунт";
+import {useTranslations} from "next-intl";
 
 export default function SideBarAccountTarget() {
+    const translate = useTranslations('Translations');
+    const accountPlaceholder = translate('account-placeholder');
     const { user } = useUser();
     const { expanded, setExpanded } = useContext(
         SideBarPopoverContext
@@ -35,7 +36,7 @@ export default function SideBarAccountTarget() {
                 position="right"
                 transitionProps={{ transition: 'fade-right' }}
                 ref={ref}
-                label={LABEL}
+                label={accountPlaceholder}
                 opened={hovered && !opened && !expanded}
             >
                 <UnstyledButton
@@ -72,7 +73,7 @@ export default function SideBarAccountTarget() {
                                     size="lg"
                                     inline
                                 >
-                                    {user?.username ?? LABEL}
+                                    {user?.username ?? accountPlaceholder}
                                 </Text>
                             </Stack>
                             <IconChevronRight

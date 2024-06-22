@@ -2,13 +2,48 @@
   "Info": {
     "locale": "ru"
   },
-  "Common": {
-    "error": "Ошибка"
-  },
-  "Specific": {
-    "genres-title": "",
+  "Translations": {
+    "component__anime-info-download-video__dropdown-alert-title": "Про формат .m3u8",
+    "component__anime-info-download-video__dropdown-alert-description": "M3U8 - это формат потокового видео. Такие файлы мало весят и загружают видеофрагменты во время проигрывания видеоплеера. Чтобы его открыть на ПК, можно воспользоваться PotPlayer или VLC, а на телефоне - NextPlayer.",
+    "component__anime-info__show-comments-label": "Раскрыть комментарии",
+    "filters-types-basic-label": "Основные фильтры",
+    "filters-types-genres-label": "Жанры",
+    "filters-types-season-label": "Сезон",
+    "filters-types-other-label": "Прочее",
+    "filters-submit-label": "Применить фильтры",
+    "account-creation-date-label": "Дата создания аккаунта",
+    "account-reputation-label": "Репутация",
+    "account-comments-label": "Комментариев",
+    "common-close-label": "Закрыть",
+    "dayjs-format-date": "D MMMM YYYY в H:mm",
+    "account-not-found": "Похоже, что такого пользователя не существует",
+    "account-placeholder": "Аккаунт",
+    "button-goto": "Перейти",
+    "common__share-label": "Поделиться",
+    "common__copied-label": "Скопировано",
+    "common__mirror-label": "Зеркало",
+    "common__file-label": "файл",
+    "common__link-label": "ссылка",
+    "common__episodes-label": "Серии",
+    "common__episode-label": "Серия",
+    "common-error-label": "Ошибка",
+    "common-download-label": "Скачать",
     "genres-demographic": "Аудитория",
     "genres-genre": "Жанры",
-    "genres-theme": "Темы"
+    "genres-theme": "Темы",
+    "genres-title": "Жанры",
+    "home-placeholder": "Главная",
+    "now-popular": "Сейчас популярно",
+    "page-account-description": "Страница с профилем пользователя",
+    "page-account-title": "Аккаунт",
+    "page-anime-placeholder-description": "На сайте Animeth можно бесплатно и без рекламы смотреть аниме с субтитрами или озвучкой, которая выбирается в плеере",
+    "page-anime-placeholder-title": "Просмотр аниме",
+    "page-titles-description": "Поиск по аниме сериалам и фильмам через Shikimori API",
+    "page-titles-title": "Поиск аниме",
+    "page-trending-description": "Страница с популярными тайтлами",
+    "page-trending-title": "Популярное",
+    "search-placeholder": "Поиск",
+    "settings-placeholder": "Настройки",
+    "trending-placeholder": "Популярное"
   }
 }

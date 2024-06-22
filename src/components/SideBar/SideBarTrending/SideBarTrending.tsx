@@ -1,15 +1,20 @@
 import SideBarButton from "@/components/SideBar/SideBarButton/SideBarButton";
 import {IconTrendingUp} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
-
-const LABEL = "Популярное";
-const REDIRECT_LINK = '/trending';
+import {useTranslations} from "next-intl";
 
 export default function SideBarTrending() {
+    const translate = useTranslations('Translations');
+    const trendingLabel = translate('trending-placeholder');
+
+    const info = useTranslations('Info');
+    const locale = info('locale');
+    const REDIRECT_LINK = `/${locale}/trending`;
+
     return (
         <SideBarButton
             icon={<IconTrendingUp {...variables.iconProps} />}
-            label={LABEL}
+            label={trendingLabel}
             redirectLink={REDIRECT_LINK}
         />
     );

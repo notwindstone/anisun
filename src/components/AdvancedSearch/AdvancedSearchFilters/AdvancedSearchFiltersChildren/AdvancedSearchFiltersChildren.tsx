@@ -13,8 +13,10 @@ import {useContext} from "react";
 import {AdvancedSearchFiltersContext} from "@/utils/Contexts/Contexts";
 import classes from './AdvancedSearchFiltersChildren.module.css';
 import {Accordion, rem, Stack, Text} from "@mantine/core";
+import {useTranslations} from "next-intl";
 
 export default function AdvancedSearchFiltersChildren() {
+    const translate = useTranslations('Translations');
     const {
         censored,
         toggleCensored,
@@ -54,7 +56,7 @@ export default function AdvancedSearchFiltersChildren() {
 
     const filterGroups = [
         {
-            type: 'Основные',
+            type: translate('filters-types-basic-label'),
             filters: (
                 <>
                     <OrderFilter
@@ -77,7 +79,7 @@ export default function AdvancedSearchFiltersChildren() {
             ),
         },
         {
-            type: 'Жанры',
+            type: translate('filters-types-genres-label'),
             filters: (
                 <>
                     <GenreFilter
@@ -92,7 +94,7 @@ export default function AdvancedSearchFiltersChildren() {
             ),
         },
         {
-            type: 'Сезон',
+            type: translate('filters-types-season-label'),
             filters: (
                 <>
                     <SeasonFilter
@@ -111,7 +113,7 @@ export default function AdvancedSearchFiltersChildren() {
             ),
         },
         {
-            type: 'Прочее',
+            type: translate('filters-types-other-label'),
             filters: (
                 <>
                     <RatingFilter

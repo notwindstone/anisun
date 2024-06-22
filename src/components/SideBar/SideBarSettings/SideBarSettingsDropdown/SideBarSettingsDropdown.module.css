@@ -11,3 +11,34 @@
 .chevronRotated {
     transform: rotate(-180deg) !important;
 }
+
+.stack {
+    width: 100%;
+}
+
+.select {
+    width: 100%;
+
+    &:focus {
+        border-color: var(--animeth-text-contrast-color);
+    }
+}
+
+.select, .dropdown {
+    background: var(--animeth-secondary-color);
+    border-radius: var(--mantine-radius-md);
+    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+}
+
+.options {
+    border-radius: var(--mantine-radius-md);
+    overflow: clip;
+}
+
+.option {
+    border-radius: var(--mantine-radius-md);
+
+    @mixin hover {
+        background: alpha(var(--animeth-text-contrast-color), 0.05);
+    }
+}

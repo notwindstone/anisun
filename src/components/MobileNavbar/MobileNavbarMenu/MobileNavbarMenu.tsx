@@ -5,9 +5,9 @@ import {
     Center, Collapse,
     Flex,
     Group,
-    Image,
+    Image, NativeSelect,
     rem,
-    SegmentedControl,
+    SegmentedControl, Space,
     Stack,
     Text,
     ThemeIcon,
@@ -26,13 +26,21 @@ import ThemeSchemeControl from "@/components/ThemeSchemeControl/ThemeSchemeContr
 import {Sheet} from "react-modal-sheet";
 import MobileNavbarMenuAccount
     from "@/components/MobileNavbar/MobileNavbarMenu/MobileNavbarMenuAccount/MobileNavbarMenuAccount";
+import localesData from "@/configs/localesData.json";
+import NProgress from "nprogress";
+import {useTranslations} from "next-intl";
+import {useRouter} from "next/navigation";
 
 const GENERAL = variables.settings.general;
 const ABOUT = variables.settings.about;
 const ACCOUNT = variables.settings.account;
+const LANGUAGE = variables.settings.language;
 const LINKS = variables.websiteLinks;
 
 export default function MobileNavbarMenu() {
+    const info = useTranslations('Info');
+    const locale = info('locale');
+    const router = useRouter();
     const { theme } = useCustomTheme();
     const [opened, { open, close }] = useDisclosure(false);
     const [colorPickerExpanded, { toggle: togglePicker }] = useDisclosure(false);
@@ -54,7 +62,40 @@ export default function MobileNavbarMenu() {
 
     let content;
 
+    function changeLanguage(value: string | null) {
+        if (!value) {
+            NProgress.start();
+            router.refresh();
+            NProgress.done();
+            return;
+        }
+
+        NProgress.start();
+        router.push(`/${value}`);
+
+        if (value === locale) {
+            NProgress.done();
+        }
+    }
+
     switch (section) {
+        case "language":
+            content = (
+                <Stack className={classes.stack}>
+                    <Title c="var(--animeth-text-contrast-color)">
+                        Язык
+                    </Title>
+                    <NativeSelect
+                        classNames={{
+                            input: classes.select,
+                        }}
+                        data={localesData}
+                        value={locale}
+                        onChange={(event) => changeLanguage(event.currentTarget.value)}
+                    />
+                </Stack>
+            );
+            break;
         case "about":
             content = (
                 <Stack align="center">
@@ -173,11 +214,13 @@ export default function MobileNavbarMenu() {
                                     onChange={setSection}
                                     data={[
                                         GENERAL,
+                                        LANGUAGE,
                                         ABOUT,
                                         ACCOUNT
                                     ]}
                                 />
                                 {content}
+                                <Space my="xs" />
                             </Stack>
                         </Sheet.Scroller>
                     </Sheet.Content>

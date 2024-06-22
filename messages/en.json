@@ -2,13 +2,48 @@
   "Info": {
     "locale": "en"
   },
-  "Common": {
-    "error": "Error"
-  },
-  "Specific": {
-    "genres-title": "Genres",
+  "Translations": {
+    "component__anime-info-download-video__dropdown-alert-title": "About .m3u8",
+    "component__anime-info-download-video__dropdown-alert-description": "M3U8 is a video streaming format. Such files are lightweight, and video fragments are loaded while the video player is playing. To open it on a PC, you can use PotPlayer or VLC, and on a phone - NextPlayer.",
+    "component__anime-info__show-comments-label": "Show comments",
+    "filters-types-basic-label": "Basic filters",
+    "filters-types-genres-label": "Genres",
+    "filters-types-season-label": "Season",
+    "filters-types-other-label": "Other",
+    "filters-submit-label": "Apply filters",
+    "account-creation-date-label": "Account creation date",
+    "account-reputation-label": "Reputation",
+    "account-comments-label": "Comments",
+    "common-close-label": "Close",
+    "dayjs-format-date": "MMMM D YYYY, h:mm A",
+    "account-not-found": "The user doesn't seem to exist",
+    "account-placeholder": "Account",
+    "button-goto": "Open",
+    "common__share-label": "Share",
+    "common__copied-label": "Copied",
+    "common__mirror-label": "Mirror",
+    "common__file-label": "file",
+    "common__link-label": "link",
+    "common__episodes-label": "Episodes",
+    "common__episode-label": "Episode",
+    "common-error-label": "Error",
+    "common-download-label": "Download",
     "genres-demographic": "Demographics",
     "genres-genre": "Genres",
-    "genres-theme": "Theme"
+    "genres-theme": "Theme",
+    "genres-title": "Genres",
+    "home-placeholder": "Home",
+    "now-popular": "Trending",
+    "page-account-description": "User profile page",
+    "page-account-title": "Account",
+    "page-anime-placeholder-description": "Watch anime online with subs or dubs (in Russian) for free without any ads",
+    "page-anime-placeholder-title": "Watch",
+    "page-titles-description": "Search anime and movies via the Shikimori API",
+    "page-titles-title": "Search",
+    "page-trending-description": "Page with trending anime",
+    "page-trending-title": "Trending",
+    "search-placeholder": "Search",
+    "settings-placeholder": "Settings",
+    "trending-placeholder": "Trending"
   }
 }

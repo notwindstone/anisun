@@ -7,6 +7,7 @@ import {Sheet} from "react-modal-sheet";
 import React from "react";
 import NProgress from "nprogress";
 import MobileNavbarLink from "@/components/MobileNavbar/MobileNavbarLink/MobileNavbarLink";
+import {useTranslations} from "next-intl";
 
 const ICON_STYLES = {
     size: 32,
@@ -17,6 +18,8 @@ export default function MobileNavbarNavigation() {
     const [opened, { open, close }] = useDisclosure(false);
     const pathname = usePathname();
     const router = useRouter();
+    const info = useTranslations('Info');
+    const locale = info('locale');
 
     function redirect(link: string) {
         NProgress.start();
@@ -30,12 +33,12 @@ export default function MobileNavbarNavigation() {
     const NAV_LINKS = [
         {
             label: "Главная",
-            func: () => redirect('/'),
+            func: () => redirect(`/${locale}`),
             icon: <IconHome {...ICON_STYLES} />,
         },
         {
             label: "Популярное",
-            func: () => redirect('/trending'),
+            func: () => redirect(`/${locale}/trending`),
             icon: <IconTrendingUp {...ICON_STYLES} />
         },
 

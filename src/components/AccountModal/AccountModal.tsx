@@ -2,6 +2,7 @@ import {Button, Flex, rem, Transition} from "@mantine/core";
 import React from "react";
 import classes from './AccountModal.module.css';
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {useTranslations} from "next-intl";
 
 export default function AccountModal({
     children,
@@ -13,6 +14,7 @@ export default function AccountModal({
     func: () => void;
 }) {
     const { theme } = useCustomTheme();
+    const translate = useTranslations('Translations');
 
     return (
         <Transition
@@ -30,7 +32,7 @@ export default function AccountModal({
                             className={classes.closeButton}
                             onClick={func}
                         >
-                            Закрыть
+                            {translate('common-close-label')}
                         </Button>
                         {children}
                     </Flex>

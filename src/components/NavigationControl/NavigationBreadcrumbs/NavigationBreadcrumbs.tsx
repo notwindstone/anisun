@@ -13,9 +13,11 @@ import {variables} from "@/configs/variables";
 import getShikimoriId from "@/utils/Misc/getShikimoriId";
 import {getUserById} from "@/lib/actions";
 import locales from '@/configs/locales.json';
+import {useTranslations} from "next-intl";
 
-function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType) {
+function Breadcrumb({ currentPathname, currentBreadcrumb, icon, websiteLocale }: BreadcrumbType) {
     const [ripple, event] = useRipple(variables.rippleColor);
+    const linkWithLocale = websiteLocale ? `${websiteLocale}/` : '';
 
     return (
         <Text
@@ -23,7 +25,7 @@ function Breadcrumb({ currentPathname, currentBreadcrumb, icon }: BreadcrumbType
             ref={ripple}
             size="sm"
             component={Link}
-            href={`/${currentPathname}`}
+            href={`/${linkWithLocale}${currentPathname}`}
             onPointerDown={event}
         >
             {
@@ -39,6 +41,8 @@ export default function NavigationBreadcrumbs() {
     let titlePath: string | null;
     const shikimori = client();
     const pathname = usePathname();
+    const localeInfo = useTranslations('Info');
+    const websiteLocale = localeInfo('locale');
 
     let paths = pathname
         .split('/')
@@ -66,7 +70,8 @@ export default function NavigationBreadcrumbs() {
                     ids: shikimoriId,
                     filter: [
                         'name',
-                        'russian'
+                        'russian',
+                        'english',
                     ],
                 })
         ).animes;
@@ -101,15 +106,33 @@ export default function NavigationBreadcrumbs() {
         const currentPathname = currentPathArray.join('/');
         const translatedBreadcrumb = translateRouteNames(breadcrumb);
         const previousBreadcrumb = array[index - 1];
-        const russianAnimeName = data?.shikimoriData?.[0].russian;
-        const originalAnimeName = data?.shikimoriData?.[0].name;
+        const russianAnimeName = data?.shikimoriData?.[0]?.russian;
+        const englishAnimeName = data?.shikimoriData?.[0]?.english;
+        const originalAnimeName = data?.shikimoriData?.[0]?.name;
         let currentBreadcrumb;
+        let animeName;
+
+        switch (websiteLocale) {
+            case "ru":
+                animeName = russianAnimeName;
+                break;
+            case "en":
+                animeName = englishAnimeName;
+                break;
+            default:
+                animeName = originalAnimeName;
+                break;
+        }
 
         switch (previousBreadcrumb) {
             case "titles":
-                currentBreadcrumb = russianAnimeName ?? originalAnimeName;
+                currentBreadcrumb = animeName ?? originalAnimeName;
                 break;
             case "account":
+                if (data?.accountData === null) {
+                    return;
+                }
+
                 currentBreadcrumb = data?.accountData?.username;
                 break;
             default:
@@ -118,7 +141,7 @@ export default function NavigationBreadcrumbs() {
         }
 
         return (
-            <Breadcrumb key={breadcrumb} currentBreadcrumb={currentBreadcrumb} currentPathname={currentPathname} />
+            <Breadcrumb key={breadcrumb} currentBreadcrumb={currentBreadcrumb} currentPathname={currentPathname} websiteLocale={websiteLocale} />
         );
     });
 
@@ -130,7 +153,7 @@ export default function NavigationBreadcrumbs() {
             }}
             separator={<IconChevronRight size={22} stroke={1.5} />}
         >
-            <Breadcrumb currentPathname="/" icon={<IconHome size={20} stroke={1.5} />} />
+            <Breadcrumb currentPathname={`${websiteLocale}`} icon={<IconHome size={20} stroke={1.5} />} />
             {breadcrumbs}
         </Breadcrumbs>
     );

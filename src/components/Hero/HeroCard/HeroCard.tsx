@@ -19,6 +19,7 @@ import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
+import {useTranslations} from "next-intl";
 
 const TRANSITION_PROPS: TransitionStylesType = {
     transition: "fade-left",
@@ -35,6 +36,12 @@ export default function HeroCard({
     debouncedHeight: string | number,
     aspectRatioWidth?: string,
 }) {
+    const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
+
+    const currentLocale = info('locale');
+    const isEnglish = currentLocale === 'en';
+
     const isHeightLoaded = typeof debouncedHeight === "number";
     const { width: viewportWidth } = useViewportSize();
     const { ref, inViewport } = useInViewport();
@@ -151,7 +158,7 @@ export default function HeroCard({
                                                                 `${animeTitle?.id}_${genre.name}`
                                                             }
                                                         >
-                                                            {genre.russian}
+                                                            {isEnglish ? genre.name : genre.russian}
                                                         </Badge>
                                                     );
                                                 })
@@ -172,7 +179,7 @@ export default function HeroCard({
                                             radius="md"
                                             style={styles}
                                         >
-                                            Перейти
+                                            {translate('button-goto')}
                                         </DecoratedButton>
                                     )
                                 }

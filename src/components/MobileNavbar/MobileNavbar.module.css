@@ -60,3 +60,14 @@
 .chevronRotated {
     transform: rotate(-180deg) !important;
 }
+
+.select {
+    width: 100%;
+    background: var(--animeth-secondary-color);
+    border-radius: var(--mantine-radius-md);
+    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+
+    &:focus {
+        border-color: var(--animeth-text-contrast-color);
+    }
+}

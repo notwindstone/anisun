@@ -9,10 +9,12 @@ import {usePathname, useRouter} from "next/navigation";
 import NProgress from "nprogress";
 import classes from './AdvancedSearchFilters.module.css';
 import useFilterParams from "@/hooks/useFilterParams";
+import {useTranslations} from "next-intl";
 
 const FIRST_ANIME_AIRED_ON = 1917;
 
 export default function AdvancedSearchFilters() {
+    const translate = useTranslations('Translations');
     const pathname = usePathname();
     const router = useRouter();
     const allSearchParams = useFilterParams();
@@ -169,7 +171,7 @@ export default function AdvancedSearchFilters() {
                 <Stack className={classes.filters}>
                     <AdvancedSearchFiltersChildren />
                     <DecoratedButton onClick={setFilters}>
-                        Применить фильтры
+                        {translate('filters-submit-label')}
                     </DecoratedButton>
                 </Stack>
             </Stack>

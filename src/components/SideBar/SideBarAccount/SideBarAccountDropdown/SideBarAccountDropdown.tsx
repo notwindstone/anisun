@@ -8,6 +8,7 @@ import React, {useContext} from "react";
 import {SideBarAccountPopoverContext, SideBarPopoverContext} from "@/utils/Contexts/Contexts";
 import {IconCloudLockOpen, IconLogin, IconLogout, IconSettings, IconUserCircle} from "@tabler/icons-react";
 import {variables} from "@/configs/variables";
+import {useTranslations} from "next-intl";
 
 function DropdownButton({
     children,
@@ -34,6 +35,8 @@ function DropdownButton({
 }
 
 export default function SideBarAccountDropdown() {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const [ripple, event] = useRipple(variables.rippleColor);
     const { setExpanded } = useContext(
         SideBarPopoverContext
@@ -54,7 +57,7 @@ export default function SideBarAccountDropdown() {
             return;
         }
 
-        const accountURL = `/account/${user.id}`;
+        const accountURL = `/${locale}/account/${user.id}`;
 
         toggle();
         NProgress.start();

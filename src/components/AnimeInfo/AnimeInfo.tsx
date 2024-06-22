@@ -2,7 +2,7 @@
 
 import {client} from "@/lib/shikimori/client";
 import {useQuery} from "@tanstack/react-query";
-import {Divider, Group, Image, rem, Stack, Text, Title} from "@mantine/core";
+import {Divider, Group, Image, rem, Skeleton, Stack, Text, Title} from "@mantine/core";
 import classes from './AnimeInfo.module.css';
 import AnimeInfoDownloadVideo from "@/components/AnimeInfo/AnimeInfoDownloadVideo/AnimeInfoDownloadVideo";
 import AnimeInfoCopyLink from "@/components/AnimeInfo/AnimeInfoCopyLink/AnimeInfoCopyLink";
@@ -13,28 +13,80 @@ import AnimeInfoDescription from "@/components/AnimeInfo/AnimeInfoDescription/An
 import Comments from "@/components/Comments/Comments";
 import useMobileScreen from "@/hooks/useMobileScreen";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
+import {useTranslations} from "next-intl";
+import {jikan} from "@/lib/jikan/jikan";
 
 export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: string }) {
+    const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
+    const locale = info('locale');
     const [commentsExpanded, setCommentsExpanded] = useState(false);
     const { isTablet } = useMobileScreen();
     const shikimori = client();
     const { data, isPending, error } = useQuery({
-        queryKey: ['anime', 'info', id],
+        queryKey: ['anime', 'info', locale, id],
         queryFn: async () => getShikimoriInfo(),
     });
 
     async function getShikimoriInfo() {
-        return (await shikimori.animes.byId({
+        let jikanData;
+
+        if (locale !== 'ru') {
+            const jikanClient = jikan();
+            jikanData = await jikanClient.animes.byId({ id: id });
+        }
+
+        let shikimoriData = (await shikimori.animes.byId({
             ids: id,
         })).animes[0];
+
+        shikimoriData = {
+            ...shikimoriData,
+            synopsis: jikanData?.synopsis
+        };
+
+        return shikimoriData;
     }
 
     if (isPending) {
-        return <>Loading...</>;
+        return (
+            <>
+                <Stack gap={rem(8)} w="100%"  className={classes.stack}>
+                    <Skeleton mb={rem(8)} w="100%" h={36} />
+                    <Group>
+                        <Skeleton w={96} h={40} />
+                        <Stack gap={4}>
+                            <Skeleton w={256} h={20} />
+                            <Skeleton w={128} h={20} />
+                        </Stack>
+                    </Group>
+                    <Divider />
+                    <Skeleton radius="md" w="100%" h={120} />
+                </Stack>
+            </>
+        );
     }
 
     if (error) {
-        return <>Error...</>;
+        return (
+            <>
+                {translate('common-error-label')}: {error.message}
+            </>
+        );
+    }
+
+    let animeTitle;
+
+    switch (locale) {
+        case "en":
+            animeTitle = `${data?.name} - ${data?.english}`;
+            break;
+        case "ru":
+            animeTitle = `${data?.name} - ${data?.russian}`;
+            break;
+        default:
+            animeTitle = data?.name;
+            break;
     }
 
     return (
@@ -44,7 +96,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                 order={2}
                 lineClamp={4}
             >
-                {data?.name} - {data?.russian}
+                {animeTitle}
             </Title>
             <Group className={classes.infoGroup} wrap="nowrap" justify="space-between">
                 <Group wrap="nowrap" gap={rem(8)}>
@@ -63,6 +115,20 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                         <Text lineClamp={1} fw={600}>
                             {
                                 data?.genres.map((genre, index) => {
+                                    let genreName;
+
+                                    switch (locale) {
+                                        case "en":
+                                            genreName = genre.name;
+                                            break;
+                                        case "ru":
+                                            genreName = genre.russian;
+                                            break;
+                                        default:
+                                            genreName = genre.name;
+                                            break;
+                                    }
+
                                     return (
                                         <React.Fragment key={genre.id}>
                                             <span className={classes.span}>
@@ -72,7 +138,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                                                 className={classes.link}
                                                 href={`/titles?genre=${genre.id}`}
                                             >
-                                                {genre.russian}
+                                                {genreName}
                                             </Link>
                                         </React.Fragment>
                                     );
@@ -121,7 +187,7 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
                             radius="md"
                             onClick={() => setCommentsExpanded((expanded) => !expanded)}
                         >
-                            Раскрыть комментарии
+                            {translate('component__anime-info__show-comments-label')}
                         </DecoratedButton>
                     </>
                 )

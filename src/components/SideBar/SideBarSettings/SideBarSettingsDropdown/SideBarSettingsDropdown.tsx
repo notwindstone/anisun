@@ -6,7 +6,7 @@ import {
     Group,
     Image, Popover,
     rem,
-    SegmentedControl,
+    SegmentedControl, Select,
     Stack,
     Text,
     Title,
@@ -22,15 +22,23 @@ import {useDisclosure} from "@mantine/hooks";
 import ColorSchemePicker from "@/components/ColorSchemePicker/ColorSchemePicker";
 import {IconChevronDown} from "@tabler/icons-react";
 import GradientTitle from "@/components/GradientTitle/GradientTitle";
+import localesData from '@/configs/localesData.json';
+import {useTranslations} from "next-intl";
+import NProgress from "nprogress";
+import {useRouter} from "next/navigation";
 
 const GENERAL = variables.settings.general;
 const ABOUT = variables.settings.about;
+const LANGUAGE = variables.settings.language;
 const LINKS = variables.websiteLinks;
 
 export default function SideBarSettingsDropdown() {
     const { theme } = useCustomTheme();
     const [section, setSection] = useState<string>(GENERAL.value);
     const [opened, { toggle }] = useDisclosure(false);
+    const info = useTranslations('Info');
+    const locale = info('locale');
+    const router = useRouter();
 
     const WEBSITE_COLOR = {
         label: "Элементы сайта",
@@ -48,6 +56,40 @@ export default function SideBarSettingsDropdown() {
     let content;
 
     switch (section) {
+        case "language":
+            content = (
+                <Stack className={classes.stack}>
+                    <Title c="var(--animeth-text-contrast-color)">
+                        Язык
+                    </Title>
+                    <Select
+                        classNames={{
+                            input: classes.select,
+                            dropdown: classes.dropdown,
+                            options: classes.options,
+                            option: classes.option,
+                        }}
+                        data={localesData}
+                        value={locale}
+                        onChange={(value) => {
+                            if (!value) {
+                                NProgress.start();
+                                router.refresh();
+                                NProgress.done();
+                                return;
+                            }
+
+                            NProgress.start();
+                            router.push(`/${value}`);
+
+                            if (value === locale) {
+                                NProgress.done();
+                            }
+                        }}
+                    />
+                </Stack>
+            );
+            break;
         case "about":
             content = (
                 <Stack align="center">
@@ -156,7 +198,8 @@ export default function SideBarSettingsDropdown() {
                     onChange={setSection}
                     data={[
                         GENERAL,
-                        ABOUT
+                        LANGUAGE,
+                        ABOUT,
                     ]}
                 />
                 {content}

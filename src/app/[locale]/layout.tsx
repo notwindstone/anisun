@@ -7,7 +7,7 @@ import '@mantine/carousel/styles.css';
 import {Notifications} from "@mantine/notifications";
 import '@mantine/notifications/styles.css';
 import {ClerkProvider} from "@clerk/nextjs";
-import {ruRU} from "@clerk/localizations";
+import {ruRU, enUS} from "@clerk/localizations";
 import './global.css';
 import TanstackQueryProviders from "@/utils/Providers/TanstackQueryProviders";
 import Main from "@/components/Main/Main";
@@ -21,7 +21,7 @@ import {getMessages} from 'next-intl/server';
 const inter = Inter({ subsets: ["latin"] });
 
 const APP_NAME = 'Animeth';
-const APP_DESCRIPTION = "Сайт для онлайн просмотра аниме на основе Next.JS 14, Mantine UI, Tanstack Query и Drizzle ORM. Плеер сделан на AniLibria API и Kodik, а поиск аниме через Shikimori API.";
+const APP_DESCRIPTION = "An anime streaming website/PWA based on Next.js 14 and Shikimori, AniLibria, Kodik and SovetRomantica APIs with the Mantine UI kit.";
 
 const theme = createTheme({
     defaultRadius: "xl",
@@ -43,7 +43,17 @@ export const metadata: Metadata = {
     icons: {
         icon: "/favicon.png"
     },
-    title: APP_NAME,
+    alternates: {
+        canonical: '/',
+        languages: {
+            'en-US': '/en',
+            'ru-RU' : '/ru',
+        },
+    },
+    title: {
+        template: `%s - ${APP_NAME}`,
+        default: APP_NAME,
+    },
     description: APP_DESCRIPTION,
     openGraph: {
         images: "/banner.png",
@@ -74,13 +84,27 @@ export default async function RootLayout({
     // side is the easiest way to get started
     const messages = await getMessages();
 
+    let clerkLocale;
+
+    switch (locale) {
+        case "en":
+            clerkLocale = enUS;
+            break;
+        case "ru":
+            clerkLocale = ruRU;
+            break;
+        default:
+            clerkLocale = enUS;
+            break;
+    }
+
     return (
-        <ClerkProvider localization={ruRU}>
+        <ClerkProvider localization={clerkLocale}>
             <html lang={locale}>
                 <head>
                     <ColorSchemeScript/>
                 </head>
-                <body style={{ background: 'var(--animeth-background-color)' }} className={inter.className}>
+                <body className={inter.className}>
                     <NextIntlClientProvider messages={messages}>
                         <ThemedNextTopLoader />
                         <TanstackQueryProviders>

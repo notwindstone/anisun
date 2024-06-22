@@ -53,6 +53,10 @@ export const variables: VariablesType = {
             "label": "О сайте",
             "value": "about"
         },
+        "language": {
+            "label": "Язык",
+            "value": "language"
+        },
         "account": {
             "label": "Аккаунт",
             "value": "account"

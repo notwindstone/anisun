@@ -9,6 +9,7 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './MobileNavbarMenuAccount.module.css';
 import {usePathname, useRouter} from "next/navigation";
 import MobileNavbarLink from "@/components/MobileNavbar/MobileNavbarLink/MobileNavbarLink";
+import {useTranslations} from "next-intl";
 
 const ICON_STYLES = {
     size: 32,
@@ -23,13 +24,15 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
     );
     const router = useRouter();
     const pathname = usePathname();
+    const info = useTranslations('Info');
+    const locale = info('locale');
 
     function pushToProfile() {
         if (!user) {
             return;
         }
 
-        const accountURL = `/account/${user.id}`;
+        const accountURL = `/${locale}/account/${user.id}`;
 
         close();
         NProgress.start();

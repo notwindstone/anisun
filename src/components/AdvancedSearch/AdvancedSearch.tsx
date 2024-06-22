@@ -10,6 +10,7 @@ import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
 import TrendingGrid from "@/components/Trending/TrendingGrid/TrendingGrid";
 import useFilterParams from "@/hooks/useFilterParams";
+import {useTranslations} from "next-intl";
 
 export default function AdvancedSearch() {
     const shikimori = client();
@@ -31,6 +32,8 @@ export default function AdvancedSearch() {
         statuses,
         studio
     } = useFilterParams();
+
+    const translate = useTranslations('Translations');
 
     const PLACEHOLDER_DATA = Array.from({ length: limit });
 
@@ -109,6 +112,8 @@ export default function AdvancedSearch() {
                 filter: [
                     "id",
                     "url",
+                    "name",
+                    "english",
                     "russian",
                     "status",
                     "score",
@@ -132,7 +137,9 @@ export default function AdvancedSearch() {
                     <SearchInput />
                     {
                         error ? (
-                            <Text>Ошибка: {error.message}</Text>
+                            <Text>
+                                {translate('common-error-label')}: {error.message}
+                            </Text>
                         ) : (
                             <TrendingGrid
                                 data={data}

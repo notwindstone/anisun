@@ -7,10 +7,11 @@ import {variables} from "@/configs/variables";
 import {IconChevronRight, IconSettings} from "@tabler/icons-react";
 import SideBarItemExpanded from "@/components/SideBar/SideBarItemExpanded/SideBarItemExpanded";
 import {useHover} from "@mantine/hooks";
-
-const LABEL = "Настройки";
+import {useTranslations} from "next-intl";
 
 export default function SideBarSettingsTarget() {
+    const translate = useTranslations('Translations');
+    const settingsLabel = translate('settings-placeholder');
     const { expanded, setExpanded } = useContext(
         SideBarPopoverContext
     );
@@ -33,7 +34,7 @@ export default function SideBarSettingsTarget() {
                 position="right"
                 transitionProps={{ transition: 'fade-right' }}
                 ref={ref}
-                label={LABEL}
+                label={settingsLabel}
                 opened={hovered && !opened && !expanded}
             >
                 <UnstyledButton
@@ -58,7 +59,7 @@ export default function SideBarSettingsTarget() {
                         </Group>
                         <SideBarItemExpanded mounted={opened}>
                             <Text size="lg" inline>
-                                {LABEL}
+                                {settingsLabel}
                             </Text>
                             <IconChevronRight
                                 className={

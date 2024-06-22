@@ -48,6 +48,10 @@ export type VariablesType = {
             label: string;
             value: "about";
         };
+        language: {
+            label: string;
+            value: "language";
+        };
         account: {
             label: string;
             value: "account";
