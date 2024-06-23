@@ -38,6 +38,7 @@ const LANGUAGE = variables.settings.language;
 const LINKS = variables.websiteLinks;
 
 export default function MobileNavbarMenu() {
+    const translate = useTranslations('Translations');
     const info = useTranslations('Info');
     const locale = info('locale');
     const router = useRouter();
@@ -232,7 +233,9 @@ export default function MobileNavbarMenu() {
                     <ThemeIcon className={classes.button}>
                         <IconMenu2 className={classes.icon} stroke={1.5} size={rem(28)} />
                     </ThemeIcon>
-                    <Text className={classes.text}>Меню</Text>
+                    <Text className={classes.text}>
+                        {translate('common__menu-label')}
+                    </Text>
                 </UnstyledButton>
             </Center>
         </>

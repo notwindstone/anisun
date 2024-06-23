@@ -139,8 +139,10 @@
     "page-titles-title": "Search",
     "page-trending-description": "Page with trending anime",
     "page-trending-title": "Trending",
-    "search-placeholder": "Search",
+    "common__search-placeholder": "Search",
     "settings-placeholder": "Settings",
-    "trending-placeholder": "Trending"
+    "trending-placeholder": "Trending",
+    "common__menu-label": "Menu",
+    "common__navigation-label": "Navigation"
   }
 }

@@ -237,7 +237,7 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
                 onChange={(event) => {
                     setInput(event);
                 }}
-                placeholder={translate('search-placeholder')}
+                placeholder={translate('common__search-placeholder')}
                 leftSection={
                     <IconSearch size={24} stroke={1.5} />
                 }

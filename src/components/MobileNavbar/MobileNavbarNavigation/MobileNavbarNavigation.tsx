@@ -15,6 +15,7 @@ const ICON_STYLES = {
 };
 
 export default function MobileNavbarNavigation() {
+    const translate = useTranslations('Translations');
     const [opened, { open, close }] = useDisclosure(false);
     const pathname = usePathname();
     const router = useRouter();
@@ -84,7 +85,9 @@ export default function MobileNavbarNavigation() {
                     <ThemeIcon className={`${classes.button} ${pathname === "/" && classes.activeButton}`}>
                         <IconBrandSafari className={classes.icon} stroke={1.5} size={rem(28)} />
                     </ThemeIcon>
-                    <Text className={classes.text}>Навигация</Text>
+                    <Text className={classes.text}>
+                        {translate('common__navigation-label')}
+                    </Text>
                 </UnstyledButton>
             </Center>
         </>

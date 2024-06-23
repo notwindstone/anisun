@@ -139,8 +139,10 @@
     "page-titles-title": "Поиск аниме",
     "page-trending-description": "Страница с популярными тайтлами",
     "page-trending-title": "Популярное",
-    "search-placeholder": "Поиск",
+    "common__search-placeholder": "Поиск",
     "settings-placeholder": "Настройки",
-    "trending-placeholder": "Популярное"
+    "trending-placeholder": "Популярное",
+    "common__menu-label": "Меню",
+    "common__navigation-label": "Навигация"
   }
 }
