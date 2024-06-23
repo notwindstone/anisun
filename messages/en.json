@@ -3,6 +3,14 @@
     "locale": "en"
   },
   "Translations": {
+    "component__rating-filter__age-rating-label": "Age rating",
+    "common__rating-none-label": "None",
+    "common__rating-g-label": "G",
+    "common__rating-pg-label": "PG",
+    "common__rating-pg-13-label": "PG-13",
+    "common__rating-r-17-label": "R-17",
+    "common__rating-r_plus-label": "R+",
+    "common__rating-rx-label": "Rx",
     "common__order-id-label": "By ID",
     "common__order-id_desc-label": "By ID (Descending)",
     "common__order-ranked-label": "By score",

@@ -248,31 +248,31 @@ export const variables: VariablesType = {
         ],
         "rating": [
             {
-                "label": "Отсутствует",
+                "label": "common__rating-none-label",
                 "value": "none",
             },
             {
-                "label": "G",
+                "label": "common__rating-g-label",
                 "value": "g",
             },
             {
-                "label": "PG",
+                "label": "common__rating-pg-label",
                 "value": "pg",
             },
             {
-                "label": "PG_13",
+                "label": "common__rating-pg-13-label",
                 "value": "pg_13",
             },
             {
-                "label": "R-17",
+                "label": "common__rating-r-17-label",
                 "value": "r",
             },
             {
-                "label": "R+",
+                "label": "common__rating-r_plus-label",
                 "value": "r_plus",
             },
             {
-                "label": "Rx",
+                "label": "common__rating-rx-label",
                 "value": "rx",
             },
         ],

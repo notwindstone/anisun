@@ -5,6 +5,7 @@ import classes from '@/components/Filters/FiltersSelect.module.css';
 import useCustomTheme from "@/hooks/useCustomTheme";
 import calculateColor from "@/utils/Misc/calculateColor";
 import {useDisclosure} from "@mantine/hooks";
+import {useTranslations} from "next-intl";
 
 export default memo(function RatingFilter({
     ratings,
@@ -13,9 +14,16 @@ export default memo(function RatingFilter({
     ratings: string[] | undefined,
     setRatings: Dispatch<SetStateAction<string[] | undefined>>
 }) {
+    const translate = useTranslations('Translations');
     const { theme } = useCustomTheme();
     const [focused, { open, close }] = useDisclosure(false);
     const color = calculateColor(theme.color);
+    const ratingData = variables.filters.rating.map((rating) => {
+        return {
+            label: translate(rating.label),
+            value: rating.value
+        };
+    });
 
     return (
         <>
@@ -31,8 +39,8 @@ export default memo(function RatingFilter({
                 classNames={classes}
                 value={ratings}
                 onChange={(rating) => setRatings(rating)}
-                placeholder="Возрастное ограничение"
-                data={variables.filters.rating}
+                placeholder={translate('component__rating-filter__age-rating-label')}
+                data={ratingData}
             />
         </>
     );

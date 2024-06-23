@@ -3,6 +3,14 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__rating-filter__age-rating-label": "Возрастное ограничение",
+    "common__rating-none-label": "Отсутствует",
+    "common__rating-g-label": "G",
+    "common__rating-pg-label": "PG",
+    "common__rating-pg-13-label": "PG-13",
+    "common__rating-r-17-label": "R-17",
+    "common__rating-r_plus-label": "R+",
+    "common__rating-rx-label": "Rx",
     "common__order-id-label": "По возрастанию айди",
     "common__order-id_desc-label": "По убыванию айди",
     "common__order-ranked-label": "По оценкам",
