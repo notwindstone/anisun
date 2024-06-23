@@ -9,12 +9,16 @@ import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 import calculateColor from "@/utils/Misc/calculateColor";
+import {useTranslations} from "next-intl";
 
 export default function CarouselCard({
     animeTitle,
 }: {
     animeTitle?: AnimeType;
 }) {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const { hovered, ref } = useHover();
     const color = calculateColor(theme.color);
@@ -25,6 +29,20 @@ export default function CarouselCard({
     const episodesBadge = isReleased
         ? `${animeTitle?.episodes} / ${animeTitle?.episodes}`
         : `${animeTitle?.episodesAired} / ${animeTitle?.episodes}`;
+
+    let animeName;
+
+    switch (locale) {
+        case "en":
+            animeName = animeTitle?.english;
+            break;
+        case "ru":
+            animeName = animeTitle?.russian;
+            break;
+        default:
+            animeName = animeTitle?.english;
+            break;
+    }
 
     return (
         <Paper
@@ -45,7 +63,11 @@ export default function CarouselCard({
                 }}
             >
                 <Badge className={classes.status} color="black">
-                    {translateAnimeStatus({ sortingType: animeStatus, singular: true })}
+                    {
+                        translate(
+                            translateAnimeStatus({ sortingType: animeStatus, singular: true })
+                        )
+                    }
                 </Badge>
                 {
                     !isAnnounced && (
@@ -73,9 +95,9 @@ export default function CarouselCard({
                     <Title
                         className={classes.title}
                         order={3}
-                        lineClamp={isAnnounced ? 3 : 2}
+                        lineClamp={isAnnounced ? 4 : 3}
                     >
-                        {animeTitle?.name}
+                        {animeName}
                     </Title>
                 </Flex>
             </Overlay>

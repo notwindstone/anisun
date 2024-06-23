@@ -7,12 +7,16 @@ import classes from "./CarouselMobileCard.module.css";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import NextImage from "next/image";
 import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
+import {useTranslations} from "next-intl";
 
 export default function CarouselMobileCard({
     animeTitle,
 }: {
     animeTitle?: AnimeType;
 }) {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const animeStatus = animeTitle?.status ?? "";
     const isAnnounced = animeStatus === 'anons';
@@ -21,6 +25,20 @@ export default function CarouselMobileCard({
     const episodesBadge = isReleased
         ? `${animeTitle?.episodes} / ${animeTitle?.episodes}`
         : `${animeTitle?.episodesAired} / ${animeTitle?.episodes}`;
+
+    let animeName;
+
+    switch (locale) {
+        case "en":
+            animeName = animeTitle?.english;
+            break;
+        case "ru":
+            animeName = animeTitle?.russian;
+            break;
+        default:
+            animeName = animeTitle?.english;
+            break;
+    }
 
     return (
         <Paper
@@ -35,7 +53,11 @@ export default function CarouselMobileCard({
                 className={classes.overlay}
             >
                 <Badge className={classes.status} color="black">
-                    {translateAnimeStatus({ sortingType: animeStatus, singular: true })}
+                    {
+                        translate(
+                            translateAnimeStatus({ sortingType: animeStatus, singular: true })
+                        )
+                    }
                 </Badge>
                 {
                     !isAnnounced && (
@@ -65,7 +87,7 @@ export default function CarouselMobileCard({
                         order={3}
                         lineClamp={isAnnounced ? 3 : 2}
                     >
-                        {animeTitle?.name}
+                        {animeName}
                     </Title>
                 </Flex>
             </Overlay>

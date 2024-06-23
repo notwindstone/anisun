@@ -4,6 +4,7 @@ import CarouselCard from "@/components/Carousel/CarouselCard/CarouselCard";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import useMobileScreen from "@/hooks/useMobileScreen";
 import CarouselMobileCard from "@/components/Carousel/CarouselMobileCard/CarouselMobileCard";
+import {useTranslations} from "next-intl";
 
 export default function CarouselSlides(
     {
@@ -19,6 +20,7 @@ export default function CarouselSlides(
     }
 ) {
     const { isMobile } = useMobileScreen();
+    const translate = useTranslations('Translations');
 
     return carouselSlides.map((_slide, index) => {
         return (
@@ -36,7 +38,9 @@ export default function CarouselSlides(
                                 }
                             </>
                         ) : status === 'error' ? (
-                            <>Error: {error?.message}</>
+                            <>
+                                {translate('common__error-label')}: {error?.message}
+                            </>
                         ) : (
                             <Skeleton width={209} height={317} />
                         )

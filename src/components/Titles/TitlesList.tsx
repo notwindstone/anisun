@@ -33,6 +33,8 @@ export default function TitlesList() {
                             "id",
                             "url",
                             "name",
+                            "russian",
+                            "english",
                             "status",
                             "score",
                             "poster { id originalUrl mainUrl }",
