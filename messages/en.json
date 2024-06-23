@@ -3,6 +3,10 @@
     "locale": "en"
   },
   "Translations": {
+    "component__add-comment__write-label": "Write comment...",
+    "component__add-comment__no-account-label": "You must be logged in to post a comment",
+    "common__send-label": "Send",
+    "common__no-nickname-label": "User without nickname",
     "common__changed-label": "edited",
     "component__comment__deleted-label": "The message has been deleted",
     "component__delete-comment__restore-title": "Comment restoration",

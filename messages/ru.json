@@ -3,6 +3,10 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__add-comment__write-label": "Написать комментарий...",
+    "component__add-comment__no-account-label": "Вы должны войти в аккаунт, чтобы написать комментарий",
+    "common__send-label": "Написать",
+    "common__no-nickname-label": "Пользователь без никнейма",
     "common__changed-label": "изменено",
     "component__comment__deleted-label": "Сообщение было удалено",
     "component__delete-comment__restore-title": "Восстановление комментария",
