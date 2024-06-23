@@ -3,6 +3,11 @@
     "locale": "en"
   },
   "Translations": {
+    "component__duration-filter__duration-less-than-ten-minutes-label": "Less than 10 minutes",
+    "component__duration-filter__duration-ten-to-thirty-minutes-label": "10 - 30 minutes",
+    "component__duration-filter__duration-more-than-thirty-minutes-label": "More than 30 minutes",
+    "component__duration-filter__episodes-duration-label": "Episodes duration",
+    "component__censored-filter__censure-label": "Censored",
     "component__add-comment__write-label": "Write comment...",
     "component__add-comment__no-account-label": "You must be logged in to post a comment",
     "common__send-label": "Send",

@@ -3,6 +3,11 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__duration-filter__duration-less-than-ten-minutes-label": "Меньше 10 минут",
+    "component__duration-filter__duration-ten-to-thirty-minutes-label": "10 - 30 минут",
+    "component__duration-filter__duration-more-than-thirty-minutes-label": "Больше 30 минут",
+    "component__duration-filter__episodes-duration-label": "Длительность эпизодов",
+    "component__censored-filter__censure-label": "Включить цензуру",
     "component__add-comment__write-label": "Написать комментарий...",
     "component__add-comment__no-account-label": "Вы должны войти в аккаунт, чтобы написать комментарий",
     "common__send-label": "Написать",
