@@ -3,6 +3,17 @@
     "locale": "en"
   },
   "Translations": {
+    "common__season-winter": "Winter",
+    "common__season-spring": "Spring",
+    "common__season-summer": "Summer",
+    "common__season-fall": "Fall",
+    "component__season-filter__from-label": "From",
+    "component__season-filter__to-label": "To",
+    "component__season-filter__select-ranged-label": "Choose between",
+    "component__season-filter__start-from-later-label": "Start interval from {LATER_YEAR}",
+    "component__season-filter__season-label": "Season",
+    "component__season-filter__year-label": "Year",
+    "component__season-filter__years-label": "Years",
     "component__score-filter__score-label": "Scores",
     "component__rating-filter__age-rating-label": "Age rating",
     "common__rating-none-label": "None",

@@ -230,19 +230,19 @@ export const variables: VariablesType = {
         ],
         "season": [
             {
-                "label": "Зима",
+                "label": "common__season-winter",
                 "value": "winter",
             },
             {
-                "label": "Весна",
+                "label": "common__season-spring",
                 "value": "spring",
             },
             {
-                "label": "Лето",
+                "label": "common__season-summer",
                 "value": "summer",
             },
             {
-                "label": "Осень",
+                "label": "common__season-fall",
                 "value": "fall",
             },
         ],

@@ -3,6 +3,17 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__season-winter": "Зима",
+    "common__season-spring": "Весна",
+    "common__season-summer": "Лето",
+    "common__season-fall": "Осень",
+    "component__season-filter__from-label": "От",
+    "component__season-filter__to-label": "До",
+    "component__season-filter__select-ranged-label": "Выбрать промежутком",
+    "component__season-filter__start-from-later-label": "Начать период с {LATER_YEAR} года",
+    "component__season-filter__season-label": "Сезон",
+    "component__season-filter__year-label": "Год",
+    "component__season-filter__years-label": "Годы",
     "component__score-filter__score-label": "Оценки",
     "component__rating-filter__age-rating-label": "Возрастное ограничение",
     "common__rating-none-label": "Отсутствует",
