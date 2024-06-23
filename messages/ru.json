@@ -3,6 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__kind-label": "Тип",
     "component__duration-filter__duration-less-than-ten-minutes-label": "Меньше 10 минут",
     "component__duration-filter__duration-ten-to-thirty-minutes-label": "10 - 30 минут",
     "component__duration-filter__duration-more-than-thirty-minutes-label": "Больше 30 минут",
@@ -44,6 +45,9 @@
     "common__kind-movie": "Фильм",
     "common__kind-music": "Клип",
     "common__kind-tv": "Сериал",
+    "common__kind-tv-13": "Короткий сериал",
+    "common__kind-tv-24": "Обычный сериал",
+    "common__kind-tv-48": "Длинный сериал",
     "common__kind-ova": "OVA",
     "common__kind-ona": "ONA",
     "common__kind-special": "Спецвыпуск",

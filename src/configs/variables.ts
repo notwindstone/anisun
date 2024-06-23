@@ -3,6 +3,9 @@ import {VariablesType} from "@/types/Config/Variables.type";
 const MOVIE = "common__kind-movie";
 const MUSIC = "common__kind-music";
 const TV = "common__kind-tv";
+const TV_13 = "common__kind-tv-13";
+const TV_24 = "common__kind-tv-24";
+const TV_48 = "common__kind-tv-48";
 const OVA = "common__kind-ova";
 const ONA = "common__kind-ona";
 const SPECIAL = "common__kind-special";
@@ -190,15 +193,15 @@ export const variables: VariablesType = {
                 "value": "tv",
             },
             {
-                "label": "Короткий сериал",
+                "label": TV_13,
                 "value": "tv_13",
             },
             {
-                "label": "Обычный сериал",
+                "label": TV_24,
                 "value": "tv_24",
             },
             {
-                "label": "Длинный сериал",
+                "label": TV_48,
                 "value": "tv_48",
             },
             {
