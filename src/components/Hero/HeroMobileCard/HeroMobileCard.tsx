@@ -6,6 +6,7 @@ import NextImage from "next/image";
 import {variables} from "@/configs/variables";
 import Link from "next/link";
 import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
+import {useTranslations} from "next-intl";
 
 export default function HeroMobileCard({
     animeTitle,
@@ -14,6 +15,8 @@ export default function HeroMobileCard({
     animeTitle?: AnimeType,
     debouncedHeight: number
 }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { width: viewportWidth } = useViewportSize();
     const { ref, inViewport } = useInViewport();
 
@@ -35,6 +38,20 @@ export default function HeroMobileCard({
     }
 
     const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
+
+    let animeName;
+
+    switch (locale) {
+        case "en":
+            animeName = animeTitle?.english;
+            break;
+        case "ru":
+            animeName = animeTitle?.russian;
+            break;
+        default:
+            animeName = animeTitle?.english;
+            break;
+    }
 
     return (
         <Container
@@ -83,7 +100,7 @@ export default function HeroMobileCard({
                             order={order}
                             lineClamp={2}
                         >
-                            {animeTitle?.name}
+                            {animeName}
                         </Title>
                         <Group
                             w="100%"
@@ -101,6 +118,20 @@ export default function HeroMobileCard({
                                         return;
                                     }
 
+                                    let genreName;
+
+                                    switch (locale) {
+                                        case "en":
+                                            genreName = genre.name;
+                                            break;
+                                        case "ru":
+                                            genreName = genre.russian;
+                                            break;
+                                        default:
+                                            genreName = genre.name;
+                                            break;
+                                    }
+
                                     return (
                                         <Badge
                                             size={size}
@@ -110,7 +141,7 @@ export default function HeroMobileCard({
                                                 `${animeTitle?.id}_${genre.name}`
                                             }
                                         >
-                                            {genre.russian}
+                                            {genreName}
                                         </Badge>
                                     );
                                 })
