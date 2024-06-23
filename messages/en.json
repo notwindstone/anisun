@@ -3,6 +3,7 @@
     "locale": "en"
   },
   "Translations": {
+    "component__score-filter__score-label": "Scores",
     "component__rating-filter__age-rating-label": "Age rating",
     "common__rating-none-label": "None",
     "common__rating-g-label": "G",

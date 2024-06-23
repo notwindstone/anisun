@@ -3,6 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__score-filter__score-label": "Оценки",
     "component__rating-filter__age-rating-label": "Возрастное ограничение",
     "common__rating-none-label": "Отсутствует",
     "common__rating-g-label": "G",

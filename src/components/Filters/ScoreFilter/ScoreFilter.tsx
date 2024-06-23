@@ -1,6 +1,7 @@
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {Dispatch, memo, SetStateAction} from "react";
 import {rem, Slider, Stack, Text} from "@mantine/core";
+import {useTranslations} from "next-intl";
 
 export default memo(function ScoreFilter({
     score,
@@ -9,12 +10,13 @@ export default memo(function ScoreFilter({
     score: number,
     setScore: Dispatch<SetStateAction<number>>
 }) {
+    const translate = useTranslations('Translations');
     const { theme } = useCustomTheme();
 
     return (
         <Stack gap={rem(4)}>
             <Text size="sm">
-                Рейтинг
+                {translate('component__score-filter__score-label')}
             </Text>
             <Slider
                 pb={rem(24)}
