@@ -3,6 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__limit-filter__limit-label": "Лимит",
     "common__kind-label": "Тип",
     "component__duration-filter__duration-less-than-ten-minutes-label": "Меньше 10 минут",
     "component__duration-filter__duration-ten-to-thirty-minutes-label": "10 - 30 минут",
