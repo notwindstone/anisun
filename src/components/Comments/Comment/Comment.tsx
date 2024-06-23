@@ -274,7 +274,7 @@ export function Comment({
                                 </Text>
                             </Link>
                             <Text className={classes.commentText}>
-                                {makeDate(comment.createdAt)}
+                                {makeDate({ createdAt: comment.createdAt, locale: locale })}
                             </Text>
                             {
                                 comment.isEdited && !comment.isDeleted
