@@ -3,6 +3,10 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__update-label": "Обновить",
+    "component__color-scheme-picker__hide-loader-label": "Скрыть загрузчик",
+    "component__color-scheme-picker__show-loader-label": "Показать загрузчик",
+    "component__color-scheme-picker__enter-color-label": "Введите цвет",
     "common__collapse-label": "Свернуть",
     "component__anime-info-description__episode-duration-label": "Длительность эпизода",
     "component__anime-info-description__score-label": "Оценка",

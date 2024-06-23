@@ -3,6 +3,10 @@
     "locale": "en"
   },
   "Translations": {
+    "common__update-label": "Update",
+    "component__color-scheme-picker__hide-loader-label": "Hide loader",
+    "component__color-scheme-picker__show-loader-label": "Show loader",
+    "component__color-scheme-picker__enter-color-label": "Enter color",
     "common__collapse-label": "Collapse",
     "component__anime-info-description__episode-duration-label": "Episode duration",
     "component__anime-info-description__score-label": "Score",
