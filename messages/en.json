@@ -3,6 +3,7 @@
     "locale": "en"
   },
   "Translations": {
+    "component__studio-filter__studio-placeholder-label": "Studio",
     "component__status-filter__status-label": "Status",
     "common__season-winter": "Winter",
     "common__season-spring": "Spring",

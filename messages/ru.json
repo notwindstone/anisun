@@ -3,6 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__studio-filter__studio-placeholder-label": "Студия",
     "component__status-filter__status-label": "Статус",
     "common__season-winter": "Зима",
     "common__season-spring": "Весна",
