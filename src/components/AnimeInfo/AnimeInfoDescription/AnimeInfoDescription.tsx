@@ -286,11 +286,25 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                 <Group>
                                     {
                                         data.related.map((relation) => {
+                                            let relationLabel;
+
+                                            switch (locale) {
+                                                case "en":
+                                                    relationLabel = relation.relationEn;
+                                                    break;
+                                                case "ru":
+                                                    relationLabel = relation.relationRu;
+                                                    break;
+                                                default:
+                                                    relationLabel = relation.relationEn;
+                                                    break;
+                                            }
+
                                             return (
                                                 <Group align="flex-start" key={relation.id}>
                                                     <Image
                                                         radius="md"
-                                                        alt={relation.relationRu}
+                                                        alt={relationLabel}
                                                         h={rem(48)}
                                                         w="auto"
                                                         src={relation.anime?.poster?.mainUrl ?? relation.manga?.poster?.mainUrl}
@@ -300,7 +314,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                                             {relation.anime?.name ?? relation.manga?.name}
                                                         </Text>
                                                         <Text className={classes.relationSubtitle} lineClamp={1}>
-                                                            {relation.relationRu}
+                                                            {relationLabel}
                                                         </Text>
                                                         <Text lineClamp={1}></Text>
                                                     </Stack>
