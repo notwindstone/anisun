@@ -3,6 +3,12 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__delete-comment__restore-title": "Восстановление комментария",
+    "component__delete-comment__restore-description": "Вы уверены, что хотите восстановить комментарий? Ваш комментарий вновь станет доступным всем.",
+    "component__delete-comment__delete-title": "Удаление комментария",
+    "component__delete-comment__delete-description": "Вы уверены, что хотите удалить комментарий? Вы сможете восстановить его позже.",
+    "common__no-label": "Нет",
+    "common__yes-label": "Да",
     "common__update-label": "Обновить",
     "component__color-scheme-picker__hide-loader-label": "Скрыть загрузчик",
     "component__color-scheme-picker__show-loader-label": "Показать загрузчик",

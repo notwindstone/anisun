@@ -7,8 +7,10 @@ import {IconArrowBack, IconX} from "@tabler/icons-react";
 import {comments} from "@/lib/comments/comments";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import classes from './DeleteComment.module.css';
+import {useTranslations} from "next-intl";
 
 export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: { uuid: string, userid: string, isInitiallyDeleted: boolean, sendDelete: (isDeleted: boolean) => void }) {
+    const translate = useTranslations('Translations');
     const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false);
     const [isDeleted, { toggle }] = useDisclosure(isInitiallyDeleted);
@@ -55,10 +57,12 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
         }, 500);
     };
 
-    const modalTitle = isDeleted ? "Восстановление комментария" : "Удаление комментария";
+    const modalTitle = isDeleted
+        ? translate('component__delete-comment__restore-title')
+        : translate('component__delete-comment__delete-title');
     const modalDescription = isDeleted
-        ? "Вы уверены, что хотите восстановить комментарий? Ваш комментарий вновь станет доступным всем."
-        : "Вы уверены, что хотите удалить комментарий? Вы сможете восстановить его позже.";
+        ? translate('component__delete-comment__restore-description')
+        : translate('component__delete-comment__delete-description');
 
     return (
         <>
@@ -79,10 +83,10 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
                     gap="1rem"
                 >
                     <Button className={classes.button} variant="default" onClick={close}>
-                        Нет
+                        {translate('common__no-label')}
                     </Button>
                     <DecoratedButton onClick={() => handleDelete()}>
-                        Да
+                        {translate('common__yes-label')}
                     </DecoratedButton>
                 </Flex>
             </Modal>

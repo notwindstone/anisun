@@ -3,6 +3,12 @@
     "locale": "en"
   },
   "Translations": {
+    "component__delete-comment__restore-title": "Comment restoration",
+    "component__delete-comment__restore-description": "Are you sure you want to restore the comment? Your comment will be visible to everyone.",
+    "component__delete-comment__delete-title": "Comment deletion",
+    "component__delete-comment__delete-description": "Are you sure you want to delete the comment? You can restore it later.",
+    "common__no-label": "No",
+    "common__yes-label": "Yes",
     "common__update-label": "Update",
     "component__color-scheme-picker__hide-loader-label": "Hide loader",
     "component__color-scheme-picker__show-loader-label": "Show loader",
