@@ -6,8 +6,8 @@ import Link from "next/link";
 import classes from "./CarouselMobileCard.module.css";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import NextImage from "next/image";
-import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 import {useTranslations} from "next-intl";
+import getCarouselCardDate from "@/utils/Misc/getCarouselCardData";
 
 export default function CarouselMobileCard({
     animeTitle,
@@ -18,27 +18,22 @@ export default function CarouselMobileCard({
     const info = useTranslations('Info');
     const locale = info('locale');
     const { theme } = useCustomTheme();
-    const animeStatus = animeTitle?.status ?? "";
-    const isAnnounced = animeStatus === 'anons';
-    const isReleased = animeStatus === 'released';
-    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
-    const episodesBadge = isReleased
-        ? `${animeTitle?.episodes} / ${animeTitle?.episodes}`
-        : `${animeTitle?.episodesAired} / ${animeTitle?.episodes}`;
 
-    let animeName;
-
-    switch (locale) {
-        case "en":
-            animeName = animeTitle?.english;
-            break;
-        case "ru":
-            animeName = animeTitle?.russian;
-            break;
-        default:
-            animeName = animeTitle?.english;
-            break;
-    }
+    const {
+        animeStatus,
+        animeName,
+        scoreBadgeColor,
+        isAnnounced,
+        episodesBadge,
+    } = getCarouselCardDate({
+        locale: locale,
+        status: animeTitle?.status,
+        episodes: animeTitle?.episodes,
+        english: animeTitle?.english,
+        score: animeTitle?.score,
+        episodesAired: animeTitle?.episodesAired,
+        russian: animeTitle?.russian,
+    });
 
     return (
         <Paper

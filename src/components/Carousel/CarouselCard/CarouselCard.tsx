@@ -7,9 +7,9 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import {useHover} from "@mantine/hooks";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
-import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 import calculateColor from "@/utils/Misc/calculateColor";
 import {useTranslations} from "next-intl";
+import getCarouselCardDate from "@/utils/Misc/getCarouselCardData";
 
 export default function CarouselCard({
     animeTitle,
@@ -22,27 +22,22 @@ export default function CarouselCard({
     const { theme } = useCustomTheme();
     const { hovered, ref } = useHover();
     const color = calculateColor(theme.color);
-    const animeStatus = animeTitle?.status ?? "";
-    const isAnnounced = animeStatus === 'anons';
-    const isReleased = animeStatus === 'released';
-    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
-    const episodesBadge = isReleased
-        ? `${animeTitle?.episodes} / ${animeTitle?.episodes}`
-        : `${animeTitle?.episodesAired} / ${animeTitle?.episodes}`;
 
-    let animeName;
-
-    switch (locale) {
-        case "en":
-            animeName = animeTitle?.english;
-            break;
-        case "ru":
-            animeName = animeTitle?.russian;
-            break;
-        default:
-            animeName = animeTitle?.english;
-            break;
-    }
+    const {
+        animeStatus,
+        animeName,
+        scoreBadgeColor,
+        isAnnounced,
+        episodesBadge,
+    } = getCarouselCardDate({
+        locale: locale,
+        status: animeTitle?.status,
+        episodes: animeTitle?.episodes,
+        english: animeTitle?.english,
+        score: animeTitle?.score,
+        episodesAired: animeTitle?.episodesAired,
+        russian: animeTitle?.russian,
+    });
 
     return (
         <Paper
