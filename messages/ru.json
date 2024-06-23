@@ -3,6 +3,17 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__order-id-label": "По возрастанию айди",
+    "common__order-id_desc-label": "По убыванию айди",
+    "common__order-ranked-label": "По оценкам",
+    "common__order-kind-label": "По типу",
+    "common__order-popularity-label": "По популярности",
+    "common__order-name-label": "По алфавиту",
+    "common__order-aired_on-label": "По дате выхода",
+    "common__order-episodes-label": "По кол-ву эпизодов",
+    "common__order-status-label": "По статусу",
+    "common__order-random-label": "Случайно",
+    "component__order-filter__order-label": "Сортировка",
     "component__limit-filter__limit-label": "Лимит",
     "common__kind-label": "Тип",
     "component__duration-filter__duration-less-than-ten-minutes-label": "Меньше 10 минут",

@@ -3,6 +3,17 @@
     "locale": "en"
   },
   "Translations": {
+    "common__order-id-label": "By ID",
+    "common__order-id_desc-label": "By ID (Descending)",
+    "common__order-ranked-label": "By score",
+    "common__order-kind-label": "By type",
+    "common__order-popularity-label": "By popularity",
+    "common__order-name-label": "In alphabetical order",
+    "common__order-aired_on-label": "By release date",
+    "common__order-episodes-label": "By number of episodes",
+    "common__order-status-label": "By status",
+    "common__order-random-label": "By random",
+    "component__order-filter__order-label": "Order",
     "component__limit-filter__limit-label": "Limit",
     "common__kind-label": "Kind",
     "component__duration-filter__duration-less-than-ten-minutes-label": "Less than 10 minutes",
