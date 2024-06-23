@@ -81,7 +81,9 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
                     <Button className={classes.button} variant="default" onClick={close}>
                         Нет
                     </Button>
-                    <DecoratedButton onClick={() => handleDelete()}>Да</DecoratedButton>
+                    <DecoratedButton onClick={() => handleDelete()}>
+                        Да
+                    </DecoratedButton>
                 </Flex>
             </Modal>
             <ActionIcon
