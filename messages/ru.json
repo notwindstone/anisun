@@ -3,6 +3,8 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__changed-label": "изменено",
+    "component__comment__deleted-label": "Сообщение было удалено",
     "component__delete-comment__restore-title": "Восстановление комментария",
     "component__delete-comment__restore-description": "Вы уверены, что хотите восстановить комментарий? Ваш комментарий вновь станет доступным всем.",
     "component__delete-comment__delete-title": "Удаление комментария",
@@ -14,6 +16,7 @@
     "component__color-scheme-picker__show-loader-label": "Показать загрузчик",
     "component__color-scheme-picker__enter-color-label": "Введите цвет",
     "common__collapse-label": "Свернуть",
+    "common__expand-label": "Раскрыть",
     "component__anime-info-description__episode-duration-label": "Длительность эпизода",
     "component__anime-info-description__score-label": "Оценка",
     "component__anime-info-description__episodes-label": "Эпизоды",

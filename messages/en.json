@@ -3,6 +3,8 @@
     "locale": "en"
   },
   "Translations": {
+    "common__changed-label": "edited",
+    "component__comment__deleted-label": "The message has been deleted",
     "component__delete-comment__restore-title": "Comment restoration",
     "component__delete-comment__restore-description": "Are you sure you want to restore the comment? Your comment will be visible to everyone.",
     "component__delete-comment__delete-title": "Comment deletion",
@@ -14,6 +16,7 @@
     "component__color-scheme-picker__show-loader-label": "Show loader",
     "component__color-scheme-picker__enter-color-label": "Enter color",
     "common__collapse-label": "Collapse",
+    "common__expand-label": "Expand",
     "component__anime-info-description__episode-duration-label": "Episode duration",
     "component__anime-info-description__score-label": "Score",
     "component__anime-info-description__episodes-label": "Episodes",
