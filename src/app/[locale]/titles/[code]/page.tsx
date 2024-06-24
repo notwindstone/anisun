@@ -30,8 +30,8 @@ export async function generateMetadata({ params }: { params: { code: string } })
             })
     )?.animes[0];
 
-    const placeholderTitle = translate('page-anime-placeholder-title');
-    const placeholderDescription = translate('page-anime-placeholder-description');
+    const placeholderTitle = translate('page__anime__metadata-placeholder-title');
+    const placeholderDescription = translate('page__anime__metadata-placeholder-description');
 
     if (!anime) {
         return {

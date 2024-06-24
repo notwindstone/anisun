@@ -11,7 +11,7 @@ import {useTranslations} from "next-intl";
 
 export default function SideBarSettingsTarget() {
     const translate = useTranslations('Translations');
-    const settingsLabel = translate('settings-placeholder');
+    const settingsLabel = translate('common__settings-placeholder');
     const { expanded, setExpanded } = useContext(
         SideBarPopoverContext
     );

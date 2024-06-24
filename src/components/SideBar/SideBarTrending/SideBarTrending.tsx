@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 
 export default function SideBarTrending() {
     const translate = useTranslations('Translations');
-    const trendingLabel = translate('trending-placeholder');
+    const trendingLabel = translate('common__trending-placeholder');
 
     const info = useTranslations('Info');
     const locale = info('locale');
