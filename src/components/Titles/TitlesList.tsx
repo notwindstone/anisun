@@ -53,7 +53,7 @@ export default function TitlesList() {
                 <Stack gap={rem(8)} align="stretch" pl={rem(32)} pr={rem(32)}>
                     <TitlesSort />
                     <Title>
-                        {translate('now-popular')}
+                        {translate('common__trending-label')}
                     </Title>
                 </Stack>
             </Container>

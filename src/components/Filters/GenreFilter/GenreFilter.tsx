@@ -142,21 +142,21 @@ export default memo(function GenreFilter({
                 color={color}
                 genresValue={demographicGenresValue}
                 setGenresValue={setDemographicGenresValue}
-                placeholder={translate('genres-demographic')}
+                placeholder={translate('common__genres-demographic-label')}
                 genresData={demographicGenresData}
             />
             <GenreMultiSelect
                 color={color}
                 genresValue={genreGenresValue}
                 setGenresValue={setGenreGenresValue}
-                placeholder={translate('genres-genre')}
+                placeholder={translate('common__genres-genre-label')}
                 genresData={genreGenresData}
             />
             <GenreMultiSelect
                 color={color}
                 genresValue={themeGenresValue}
                 setGenresValue={setThemeGenresValue}
-                placeholder={translate('genres-theme')}
+                placeholder={translate('common__genres-theme-label')}
                 genresData={themeGenresData}
             />
         </>

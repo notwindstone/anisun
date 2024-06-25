@@ -12,7 +12,7 @@ import {useTranslations} from "next-intl";
 
 export default function SideBarAccountTarget() {
     const translate = useTranslations('Translations');
-    const accountPlaceholder = translate('account-placeholder');
+    const accountPlaceholder = translate('common__account-placeholder-label');
     const { user } = useUser();
     const { expanded, setExpanded } = useContext(
         SideBarPopoverContext

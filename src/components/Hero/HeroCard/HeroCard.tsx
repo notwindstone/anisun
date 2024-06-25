@@ -205,7 +205,7 @@ export default function HeroCard({
                                             radius="md"
                                             style={styles}
                                         >
-                                            {translate('button-goto')}
+                                            {translate('common__open-label')}
                                         </DecoratedButton>
                                     )
                                 }

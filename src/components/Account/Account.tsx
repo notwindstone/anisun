@@ -77,7 +77,7 @@ export default function Account({ user }: { user: UserResource }) {
                 <Text fw={500} size={rem(36)}>{user.username}</Text>
                 <Text>
                     {
-                        `${translate('account-creation-date-label')}: ${dayjs(user.createdAt).format(translate('dayjs-format-date'))}`
+                        `${translate('common__account-creation-date-label')}: ${dayjs(user.createdAt).format(translate('common__dayjs-format-date'))}`
                     }
                 </Text>
                 {
@@ -92,12 +92,12 @@ export default function Account({ user }: { user: UserResource }) {
                         <>
                             <Text>
                                 {
-                                    `${translate('account-reputation-label')}: ${data?.reputation}`
+                                    `${translate('common__reputation-label')}: ${data?.reputation}`
                                 }
                             </Text>
                             <Text>
                                 {
-                                    `${translate('account-comments-label')}: ${data?.totalComments}`
+                                    `${translate('common__comments-label')}: ${data?.totalComments}`
                                 }
                             </Text>
                         </>

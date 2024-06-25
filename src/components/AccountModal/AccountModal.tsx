@@ -32,7 +32,7 @@ export default function AccountModal({
                             className={classes.closeButton}
                             onClick={func}
                         >
-                            {translate('common-close-label')}
+                            {translate('common__close-label')}
                         </Button>
                         {children}
                     </Flex>
