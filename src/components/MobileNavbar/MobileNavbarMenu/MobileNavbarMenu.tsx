@@ -49,11 +49,11 @@ export default function MobileNavbarMenu() {
     const { ref, active } = useMove(() => {});
 
     const WEBSITE_COLOR = {
-        label: "Элементы сайта",
+        label: translate('component__mobile-navbar-menu__theme-website-elements-label'),
         value: "website",
     };
     const NEXT_TOP_LOADER_COLOR = {
-        label: "Индикатор загрузчика",
+        label: translate('component__mobile-navbar-menu__theme-loader-label'),
         value: "topLoader",
     };
 
@@ -84,7 +84,7 @@ export default function MobileNavbarMenu() {
             content = (
                 <Stack className={classes.stack}>
                     <Title c="var(--animeth-text-contrast-color)">
-                        Язык
+                        {translate('common__language-label')}
                     </Title>
                     <NativeSelect
                         classNames={{
@@ -130,7 +130,7 @@ export default function MobileNavbarMenu() {
                         }
                     </Group>
                     <Text ta="center">
-                        Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.
+                        {translate('common__website-description-text')}
                     </Text>
                 </Stack>
             );
@@ -139,7 +139,7 @@ export default function MobileNavbarMenu() {
             content = (
                 <Stack>
                     <Title c="var(--animeth-text-contrast-color)">
-                        Тема
+                        {translate('common__theme-label')}
                     </Title>
                     <div>
                         <SegmentedControl
@@ -175,7 +175,7 @@ export default function MobileNavbarMenu() {
                             />
                         }
                     >
-                        Выбрать свой цвет
+                        {translate('component__mobile-navbar-menu__select-color-label')}
                     </Button>
                     <Collapse in={colorPickerExpanded}>
                         <ColorSchemePicker customRef={ref} option={themingOption} />

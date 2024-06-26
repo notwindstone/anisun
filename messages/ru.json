@@ -3,6 +3,12 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__mobile-navbar-menu__select-color-label": "Выбрать свой цвет",
+    "common__theme-label": "Тема",
+    "common__website-description-text": "Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.",
+    "common__language-label": "Язык",
+    "component__mobile-navbar-menu__theme-website-elements-label": "Элементы сайта",
+    "component__mobile-navbar-menu__theme-loader-label": "Индикатор загрузчика",
     "common__sign-up-label": "Зарегистрироваться",
     "common__sign-in-label": "Войти",
     "common__quit-label": "Выйти",

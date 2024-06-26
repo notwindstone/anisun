@@ -3,6 +3,12 @@
     "locale": "en"
   },
   "Translations": {
+    "component__mobile-navbar-menu__select-color-label": "Select your own color",
+    "common__theme-label": "Theme",
+    "common__website-description-text": "Website for watching anime based on Next.js and Mantine UI. More details can be found in the Github repository.",
+    "common__language-label": "Language",
+    "component__mobile-navbar-menu__theme-website-elements-label": "Elements",
+    "component__mobile-navbar-menu__theme-loader-label": "Top loader",
     "common__sign-up-label": "Sign up",
     "common__sign-in-label": "Sign in",
     "common__quit-label": "Quit",
