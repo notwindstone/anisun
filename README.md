@@ -92,6 +92,8 @@
 
 ## ✅ To-Do List
 
+- [ ] Localize the website
+
 - [x] Add the option to the `.env` file to use a database based on value
 
 - [x] Add the option to download anime using a torrent or directly from the website
