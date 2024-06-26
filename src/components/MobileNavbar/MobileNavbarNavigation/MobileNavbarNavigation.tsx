@@ -33,12 +33,12 @@ export default function MobileNavbarNavigation() {
 
     const NAV_LINKS = [
         {
-            label: "Главная",
+            label: translate('common__home-label'),
             func: () => redirect(`/${locale}`),
             icon: <IconHome {...ICON_STYLES} />,
         },
         {
-            label: "Популярное",
+            label: translate('common__trending-placeholder'),
             func: () => redirect(`/${locale}/trending`),
             icon: <IconTrendingUp {...ICON_STYLES} />
         },
@@ -60,7 +60,7 @@ export default function MobileNavbarNavigation() {
                                 <Title
                                     c="var(--animeth-text-contrast-color)"
                                 >
-                                    Навигация
+                                    {translate('common__navigation-label')}
                                 </Title>
                                 <Divider my={rem(16)} w="100%" />
                                 <Stack gap={rem(16)}>
