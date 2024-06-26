@@ -24,6 +24,7 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
     );
     const router = useRouter();
     const pathname = usePathname();
+    const translate = useTranslations('Translations');
     const info = useTranslations('Info');
     const locale = info('locale');
 
@@ -66,12 +67,12 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
 
     const NAV_LINKS = [
         {
-            label: "Мой профиль",
+            label: translate("component__mobile-navbar-menu-account__my-profile-label"),
             func: pushToProfile,
             icon: <IconUserCircle {...ICON_STYLES} />,
         },
         {
-            label: "Настройки",
+            label: translate("component__mobile-navbar-menu-account__settings-label"),
             func: toggleSettings,
             icon: <IconSettings {...ICON_STYLES} />
         }
@@ -84,12 +85,12 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
                     <Avatar
                         src={user?.imageUrl ?? '/blurred.png'}
                         size={rem(64)}
-                        alt={`Аватар пользователя ${user?.username}`}
+                        alt={`User profile picture of ${user?.username}`}
                     >
                         {user?.username?.[0]}
                     </Avatar>
                     <Title order={2} pb={rem(8)}>
-                        {user?.username ?? "Аккаунт"}
+                        {user?.username ?? translate('common__account-placeholder-label')}
                     </Title>
                     <Divider my={rem(16)} w="100%" />
                     <Stack w="100%">
@@ -113,7 +114,7 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
                                 label: classes.label
                             }}
                             onClick={signOut}
-                            label="Выйти"
+                            label={translate('common__quit-label')}
                             leftSection={
                                 <ThemeIcon
                                     size={48}
@@ -134,13 +135,15 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
                     >
                         <IconUserCircle size={64} stroke={1.5} />
                     </Box>
-                    <Title order={2}>Аккаунт</Title>
+                    <Title order={2}>
+                        {translate('common__account-placeholder-label')}
+                    </Title>
                     <Stack pt={rem(16)} gap={rem(8)}>
                         <DecoratedButton onClick={signIn}>
-                            Войти
+                            {translate('common__sign-in-label')}
                         </DecoratedButton>
                         <DecoratedButton onClick={signUp}>
-                            Зарегистрироваться
+                            {translate('common__sign-up-label')}
                         </DecoratedButton>
                     </Stack>
                 </SignedOut>

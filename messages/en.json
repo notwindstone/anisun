@@ -3,6 +3,11 @@
     "locale": "en"
   },
   "Translations": {
+    "common__sign-up-label": "Sign up",
+    "common__sign-in-label": "Sign in",
+    "common__quit-label": "Quit",
+    "component__mobile-navbar-menu-account__settings-label": "Settings",
+    "component__mobile-navbar-menu-account__my-profile-label": "My profile",
     "component__studio-filter__studio-placeholder-label": "Studio",
     "component__status-filter__status-label": "Status",
     "common__season-winter": "Winter",

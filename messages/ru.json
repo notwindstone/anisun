@@ -3,6 +3,11 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__sign-up-label": "Зарегистрироваться",
+    "common__sign-in-label": "Войти",
+    "common__quit-label": "Выйти",
+    "component__mobile-navbar-menu-account__settings-label": "Настройки",
+    "component__mobile-navbar-menu-account__my-profile-label": "Мой профиль",
     "component__studio-filter__studio-placeholder-label": "Студия",
     "component__status-filter__status-label": "Статус",
     "common__season-winter": "Зима",
