@@ -67,12 +67,12 @@ export default function MobileNavbarMenuAccount({ close }: { close: () => void }
 
     const NAV_LINKS = [
         {
-            label: translate("component__mobile-navbar-menu-account__my-profile-label"),
+            label: translate("common__my-profile-label"),
             func: pushToProfile,
             icon: <IconUserCircle {...ICON_STYLES} />,
         },
         {
-            label: translate("component__mobile-navbar-menu-account__settings-label"),
+            label: translate("common__settings-label"),
             func: toggleSettings,
             icon: <IconSettings {...ICON_STYLES} />
         }

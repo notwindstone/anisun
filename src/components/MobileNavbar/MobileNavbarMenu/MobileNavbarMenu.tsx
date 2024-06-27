@@ -49,11 +49,11 @@ export default function MobileNavbarMenu() {
     const { ref, active } = useMove(() => {});
 
     const WEBSITE_COLOR = {
-        label: translate('component__mobile-navbar-menu__theme-website-elements-label'),
+        label: translate('common__theme-website-elements-label'),
         value: "website",
     };
     const NEXT_TOP_LOADER_COLOR = {
-        label: translate('component__mobile-navbar-menu__theme-loader-label'),
+        label: translate('common__theme-loader-label'),
         value: "topLoader",
     };
 
@@ -187,7 +187,7 @@ export default function MobileNavbarMenu() {
                             />
                         }
                     >
-                        {translate('component__mobile-navbar-menu__select-color-label')}
+                        {translate('common__select-color-label')}
                     </Button>
                     <Collapse in={colorPickerExpanded}>
                         <ColorSchemePicker customRef={ref} option={themingOption} />

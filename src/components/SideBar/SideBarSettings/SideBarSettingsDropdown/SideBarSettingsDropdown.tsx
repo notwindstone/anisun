@@ -49,11 +49,11 @@ export default function SideBarSettingsDropdown() {
     });
 
     const WEBSITE_COLOR = {
-        label: translate('component__mobile-navbar-menu__theme-website-elements-label'),
+        label: translate('common__theme-website-elements-label'),
         value: "website",
     };
     const NEXT_TOP_LOADER_COLOR = {
-        label: translate('component__mobile-navbar-menu__theme-loader-label'),
+        label: translate('common__theme-loader-label'),
         value: "topLoader",
     };
 

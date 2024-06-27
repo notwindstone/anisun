@@ -112,14 +112,14 @@ export default function SideBarAccountDropdown() {
                     <DropdownButton func={pushToProfile}>
                         <IconUserCircle stroke={1.5} />
                         <Text className={classes.text}>
-                            {translate('component__mobile-navbar-menu-account__my-profile-label')}
+                            {translate('common__my-profile-label')}
                         </Text>
                     </DropdownButton>
 
                     <DropdownButton func={toggleSettings}>
                         <IconSettings stroke={1.5} />
                         <Text className={classes.text}>
-                            {translate('component__mobile-navbar-menu-account__settings-label')}
+                            {translate('common__settings-label')}
                         </Text>
                     </DropdownButton>
 
