@@ -68,7 +68,7 @@ export default function SideBarSettingsDropdown() {
             content = (
                 <Stack className={classes.stack}>
                     <Title c="var(--animeth-text-contrast-color)">
-                        Язык
+                        {translate('common__language-label')}
                     </Title>
                     <Select
                         classNames={{
@@ -131,7 +131,7 @@ export default function SideBarSettingsDropdown() {
                         }
                     </Group>
                     <Text ta="center">
-                        Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.
+                        {translate('common__website-description-text')}
                     </Text>
                 </Stack>
             );
@@ -141,7 +141,7 @@ export default function SideBarSettingsDropdown() {
             content = (
                 <Stack>
                     <Title c="var(--animeth-text-contrast-color)">
-                        Тема
+                        {translate('common__theme-label')}
                     </Title>
                     <SegmentedControl
                         autoContrast
@@ -175,7 +175,7 @@ export default function SideBarSettingsDropdown() {
                             />
                         }
                     >
-                        Выбрать свой цвет
+                        {translate('common__menu-label')}
                     </Button>
                     <Collapse in={opened}>
                         <ColorSchemePicker option={themingOption} />
