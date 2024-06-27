@@ -3,6 +3,8 @@
     "locale": "en"
   },
   "Translations": {
+    "component__video-not-found__title-label": "This video is not available",
+    "component__video-not-found__description-label": "Try choosing a different player",
     "common__about-label": "About",
     "common__general-label": "General",
     "common__similar-label": "Similar",

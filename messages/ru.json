@@ -3,6 +3,8 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__video-not-found__title-label": "Видео недоступно",
+    "component__video-not-found__description-label": "Попробуйте выбрать другой плеер",
     "common__about-label": "О сайте",
     "common__general-label": "Общее",
     "common__similar-label": "Похожие",
