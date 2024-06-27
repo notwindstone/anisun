@@ -247,8 +247,12 @@ export default function Recommendations({ id }: { id: string } ) {
             }
         }
 
-        const translatedKind = translateAnimeKind(anime.kind ?? '');
-        const translatedStatus = translateAnimeStatus({sortingType: anime.status ?? '', singular: true, lowerCase: true });
+        const translatedKind = translate(
+            translateAnimeKind(anime.kind ?? '')
+        );
+        const translatedStatus = translate(
+            translateAnimeStatus({sortingType: anime.status ?? '', singular: true, lowerCase: true })
+        );
 
         if (isNewType) {
             return (

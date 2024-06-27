@@ -1,4 +1,4 @@
-import {AspectRatio, Skeleton} from "@mantine/core";
+import {AspectRatio, Skeleton, Group} from "@mantine/core";
 import classes from './VideoSkeleton.module.css';
 
 export default function VideoSkeleton() {

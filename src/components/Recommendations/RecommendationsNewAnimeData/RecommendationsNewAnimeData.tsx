@@ -6,6 +6,7 @@ import {variables} from "@/configs/variables";
 import NextImage from "next/image";
 import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
+import {useTranslations} from "next-intl";
 
 export default function RecommendationsNewAnimeData({
     anime,
@@ -18,10 +19,26 @@ export default function RecommendationsNewAnimeData({
     translatedKind: string;
     translatedStatus: string;
 }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const isReleased = anime?.status === 'released';
     const episodesBadge = isReleased
         ? `${anime?.episodes} / ${anime?.episodes}`
         : `${anime?.episodesAired} / ${anime?.episodes}`;
+
+    let animeName;
+
+    switch (locale) {
+        case "en":
+            animeName = `${anime?.name}${anime?.english ? ` - ${anime.english}` : ''}`;
+            break;
+        case "ru":
+            animeName = `${anime?.name}${anime?.russian ? ` - ${anime.russian}` : ''}`;
+            break;
+        default:
+            animeName = `${anime?.name}${anime?.english ? ` - ${anime.english}` : ''}`;
+            break;
+    }
 
     return (
         <div className={classes.recommendationWrapper}>
@@ -66,14 +83,15 @@ export default function RecommendationsNewAnimeData({
                 </AspectRatio>
                 <Stack className={classes.stack} h="100%" justify="flex-start">
                     <Text className={classes.title} lineClamp={2}>
-                        {anime?.name}
-                        {anime?.russian && ` - ${anime.russian}`}
+                        {animeName}
                     </Text>
                     <Text className={classes.text} lineClamp={1}>
                         {`${translatedKind}, ${translatedStatus}`}
                     </Text>
                     <Text className={classes.text} lineClamp={1}>
-                        {formatAiredOnDate(anime.airedOn?.date ?? '')}
+                        {
+                            formatAiredOnDate({ airedOnDate: anime.airedOn?.date ?? '', locale: locale })
+                        }
                     </Text>
                 </Stack>
             </Group>
