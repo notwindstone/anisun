@@ -7,6 +7,7 @@ import {TitlesSortContext} from "@/utils/Contexts/Contexts";
 import classes from './TitlesSort.module.css';
 import {useViewportSize} from "@mantine/hooks";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {useTranslations} from "next-intl";
 
 const sorting = variables.sorting;
 const LATEST_TITLES = sorting.latest;
@@ -15,6 +16,7 @@ const ONGOING_TITLES = sorting.ongoing;
 const RELEASED_TITLES = sorting.released;
 
 export default function TitlesSort() {
+    const translate = useTranslations('Translations');
     const { width: viewportWidth } = useViewportSize();
     const { sortingType, setSortingType } = useContext(TitlesSortContext);
     const { theme } = useCustomTheme();
@@ -31,6 +33,18 @@ export default function TitlesSort() {
         size = "xl";
     }
 
+    const translatedData = [
+        LATEST_TITLES,
+        ANNOUNCED_TITLES,
+        ONGOING_TITLES,
+        RELEASED_TITLES,
+    ].map((data) => {
+        return {
+            label: translate(data.label),
+            value: data.value
+        };
+    });
+
     return (
         <SegmentedControl
             p={0}
@@ -44,12 +58,7 @@ export default function TitlesSort() {
             value={sortingType}
             // @ts-ignore
             onChange={setSortingType}
-            data={[
-                LATEST_TITLES,
-                ANNOUNCED_TITLES,
-                ONGOING_TITLES,
-                RELEASED_TITLES,
-            ]}
+            data={translatedData}
         />
     );
 }
