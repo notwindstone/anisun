@@ -7,8 +7,12 @@ import NextImage from "next/image";
 import classes from './TrendingCard.module.css';
 import Link from "next/link";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
+import {useTranslations} from "next-intl";
 
 export default function TrendingCard({ anime }: { anime: AnimeType }) {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const animeStatus = anime?.status ?? "";
     const isAnnounced = animeStatus === 'anons';
@@ -17,6 +21,23 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
     const episodesBadge = isReleased
         ? `${anime?.episodes} / ${anime?.episodes}`
         : `${anime?.episodesAired} / ${anime?.episodes}`;
+    const translatedStatus = translate(
+        translateAnimeStatus({ sortingType: animeStatus, singular: true })
+    );
+
+    let animeName;
+
+    switch (locale) {
+        case "en":
+            animeName = anime?.english;
+            break;
+        case "ru":
+            animeName = anime?.russian;
+            break;
+        default:
+            animeName = anime?.english;
+            break;
+    }
 
     return (
         <Box
@@ -34,7 +55,7 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
                     className={classes.overlay}
                 >
                     <Badge className={classes.status} color="black">
-                        {translateAnimeStatus({ sortingType: animeStatus, singular: true })}
+                        {translatedStatus}
                     </Badge>
                     {
                         !isAnnounced && (
@@ -64,7 +85,7 @@ export default function TrendingCard({ anime }: { anime: AnimeType }) {
                             order={3}
                             lineClamp={isAnnounced ? 3 : 2}
                         >
-                            {anime?.russian}
+                            {animeName ?? anime?.name}
                         </Title>
                     </Flex>
                 </Overlay>
