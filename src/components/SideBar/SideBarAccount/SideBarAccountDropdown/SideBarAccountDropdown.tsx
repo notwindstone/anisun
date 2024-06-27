@@ -27,7 +27,7 @@ function DropdownButton({
             onClick={func}
             p={rem(8)}
         >
-            <Group align="center">
+            <Group align="center" pr={rem(4)}>
                 {children}
             </Group>
         </UnstyledButton>
@@ -35,6 +35,7 @@ function DropdownButton({
 }
 
 export default function SideBarAccountDropdown() {
+    const translate = useTranslations('Translations');
     const info = useTranslations('Info');
     const locale = info('locale');
     const [ripple, event] = useRipple(variables.rippleColor);
@@ -100,7 +101,7 @@ export default function SideBarAccountDropdown() {
                             href={user?.imageUrl ?? '/blurred.png'}
                             target="_blank"
                             src={user?.imageUrl ?? '/blurred.png'}
-                            alt={`Аватар пользователя ${user?.username}`}
+                            alt={`User profile picture - ${user?.username}`}
                             size="lg"
                         >
                             {user?.username?.[0]}
@@ -111,14 +112,14 @@ export default function SideBarAccountDropdown() {
                     <DropdownButton func={pushToProfile}>
                         <IconUserCircle stroke={1.5} />
                         <Text className={classes.text}>
-                            Мой профиль
+                            {translate('component__mobile-navbar-menu-account__my-profile-label')}
                         </Text>
                     </DropdownButton>
 
                     <DropdownButton func={toggleSettings}>
                         <IconSettings stroke={1.5} />
                         <Text className={classes.text}>
-                            Настройки
+                            {translate('component__mobile-navbar-menu-account__settings-label')}
                         </Text>
                     </DropdownButton>
 
@@ -134,7 +135,7 @@ export default function SideBarAccountDropdown() {
                             <Group align="center">
                                 <IconLogout stroke={1.5} />
                                 <Text className={classes.text}>
-                                    Выйти
+                                    {translate('common__quit-label')}
                                 </Text>
                             </Group>
                         </UnstyledButton>
@@ -143,19 +144,21 @@ export default function SideBarAccountDropdown() {
             </SignedIn>
             <SignedOut>
                 <Stack p={rem(8)} gap={0}>
-                    <Title className={classes.title} pb={rem(8)} order={2}>Аккаунт</Title>
+                    <Title className={classes.title} pb={rem(8)} order={2}>
+                        {translate('common__account-placeholder-label')}
+                    </Title>
 
                     <DropdownButton func={signIn}>
                         <IconLogin stroke={1.5}/>
                         <Text className={classes.text}>
-                            Войти
+                            {translate('common__sign-in-label')}
                         </Text>
                     </DropdownButton>
 
                     <DropdownButton func={signUp}>
                         <IconCloudLockOpen stroke={1.5} />
                         <Text className={classes.text}>
-                            Зарегистрироваться
+                            {translate('common__sign-up-label')}
                         </Text>
                     </DropdownButton>
                 </Stack>
