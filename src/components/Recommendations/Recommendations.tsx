@@ -43,9 +43,9 @@ export default function Recommendations({ id }: { id: string } ) {
             return interval.stop();
         }
 
-        // idk what this was supposed to be, but i'm assuming
+        // IDK what this was supposed to be, but I'm assuming
         // that this interval was re-rendering the component
-        // and that was causing queryData to be assigned again
+        // and that was causing queryClient to get cache again
         interval.start();
         return interval.stop;
     // eslint-disable-next-line
