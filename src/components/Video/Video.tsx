@@ -8,17 +8,20 @@ import classes from './Video.module.css';
 import KodikVideo from "@/components/Video/KodikVideo/KodikVideo";
 import {IconInfoCircle} from "@tabler/icons-react";
 import SovetRomanticaVideo from "@/components/Video/SovetRomanticaVideo/SovetRomanticaVideo";
+import {useTranslations} from "next-intl";
 
 const ANILIBRIA_PLAYER = "anilibria";
 const KODIK_PLAYER = "kodik";
 const SOVETROMANTICA_PLAYER = "sovetromantica";
-const KODIK_DESCRIPTION = 'К сожалению, в плеере Kodik нельзя отключить рекламу. Она встроена в плеер и не зависит от нашего сайта. Зато доступен широкий выбор озвучек!';
-const ANILIBRIA_DESCRIPTION = 'В нашем плеере отсутствует реклама, но озвучка используется только от AniLibria.';
-const SOVETROMANTICA_DESCRIPTION = 'В плеере от SovetRomantica используются только субтитры.';
 
 export default function Video({ id }: { id: string }) {
+    const translate = useTranslations('Translations');
     const { theme } = useCustomTheme();
     const [player, setPlayer] = useState(KODIK_PLAYER);
+
+    const KODIK_DESCRIPTION = translate('component__video__player-kodik-description-label');
+    const ANILIBRIA_DESCRIPTION = translate('component__video__player-anilibria-description-label');
+    const SOVETROMANTICA_DESCRIPTION = translate('component__video__player-sovetromantica-description-label');
 
     return (
         <Stack p={0} gap={rem(8)}>
@@ -57,7 +60,7 @@ export default function Video({ id }: { id: string }) {
                 radius="md"
                 variant="light"
                 color="gray"
-                title="Информация о плеере"
+                title={translate('component__video__player-information-label')}
                 icon={<IconInfoCircle />}
             >
                 {
