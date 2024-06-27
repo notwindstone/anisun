@@ -118,6 +118,7 @@ export default memo(function GenreFilter({
         setDemographicGenres(demographicGenres);
         setGenreGenres(genreGenres);
         setThemeGenres(themeGenres);
+        // eslint-disable-next-line
     }, [data]);
 
     if (isPending) {

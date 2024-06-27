@@ -3,6 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__next-label": "Дальше",
     "component__video__player-sovetromantica-description-label": "В плеере от SovetRomantica используются только субтитры.",
     "component__video__player-anilibria-description-label": "В нашем плеере отсутствует реклама, но озвучка используется только от AniLibria.",
     "component__video__player-kodik-description-label": "К сожалению, в плеере Kodik нельзя отключить рекламу. Она встроена в плеер и не зависит от нашего сайта. Зато доступен широкий выбор озвучек!",

@@ -11,6 +11,7 @@ import {Button, Text} from "@mantine/core";
 import {VideoPlayerType} from "@/types/Video/VideoPlayer.type";
 import createHLSMasterPlaylist from "@/utils/Misc/createHLSMasterPlaylist";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {useTranslations} from "next-intl";
 
 function changeEpisode({ player }: VideoPlayerType, episode: number) {
     const host = `https://${player.host}`;
@@ -20,6 +21,9 @@ function changeEpisode({ player }: VideoPlayerType, episode: number) {
 }
 
 export default function VideoPlayer({ title, player }: VideoPlayerType) {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const mediaPlayerRef = useRef<MediaPlayerInstance>(null);
     const { started, currentTime, duration } = useMediaStore(mediaPlayerRef);
@@ -53,7 +57,7 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
                         }
                     }
                 >
-                    Серия {episodeIndex}
+                    {translate('common__episode-label')} {episodeIndex}
                 </Menu.Radio>);
         }
     );
@@ -66,6 +70,19 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
 
         setCurrentEpisode(nextEpisode);
         setEpisodeSource(changeEpisode({ player }, nextEpisode));
+    }
+
+    let translationProps;
+
+    switch (locale) {
+        case "ru":
+            translationProps = {
+                translations: videoPlayerTranslation
+            };
+            break;
+        case "en":
+        default:
+            break;
     }
 
     return (
@@ -92,7 +109,7 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
             ref={mediaPlayerRef}
         >
             <MediaProvider />
-            <DefaultVideoLayout icons={defaultLayoutIcons} translations={videoPlayerTranslation}>
+            <DefaultVideoLayout icons={defaultLayoutIcons} {...translationProps}>
                 <Menu.Root className={`${classes.playlist} ${classes[hideMenu]} vds-menu`}>
                     <Menu.Button className={`${classes.playlistButton} vds - menu - button vds-button`} aria-label="Chapter Switch">
                         <PlaylistIcon className={classes.playlistIcon} />
@@ -102,12 +119,21 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
                             {episodesList}
                         </Menu.RadioGroup>
                     </Menu.Items>
-                    <Text fw={700} className={classes.currentEpisodeMarker}>{currentEpisode} серия</Text>
+                    <Text fw={700} className={classes.currentEpisodeMarker}>
+                        {translate('common__episode-label')} {currentEpisode}
+                    </Text>
                     {
                         started && isLastTenSeconds && hasNextEpisode
                             ? (
                                 <div className={classes.nextEpisode}>
-                                    <Button variant="transparent" className={classes.nextEpisodeButton} onClick={setNextEpisode}>Дальше</Button>
+                                    <Button
+                                        radius="md"
+                                        variant="transparent"
+                                        className={classes.nextEpisodeButton}
+                                        onClick={setNextEpisode}
+                                    >
+                                        {translate('common__next-label')}
+                                    </Button>
                                 </div>
                             )
                             : (
