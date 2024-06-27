@@ -23,8 +23,6 @@ import NextImage from 'next/image';
 import {client} from "@/lib/shikimori/client";
 import translateAnimeKind from "@/utils/Translates/translateAnimeKind";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
-import {AnimeKindEnum} from "@/types/Shikimori/Responses/Enums/AnimeKind.enum";
-import {AnimeStatus} from "kodikwrapper";
 import {variables} from "@/configs/variables";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import {SearchBarDataType} from "@/types/SearchBar/SearchBarData.type";
@@ -57,14 +55,11 @@ const optionsFilter: OptionsFilter = ({ options }) => (options as ComboboxItem[]
 const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option }) => {
     const optionData = option.value.split('--');
 
-    const nonTranslatedKind: AnimeKindEnum | string = optionData[3];
-    const nonTranslatedStatus: AnimeStatus | string = optionData[4];
-
     const posterSourceURL = optionData[1];
-    const russianName = optionData[2];
-    const kind = translateAnimeKind(nonTranslatedKind);
-    const status = translateAnimeStatus({ sortingType: nonTranslatedStatus, singular: true });
-    const englishName = optionData[5];
+    const translatedName = optionData[2];
+    const kind = optionData[3];
+    const status = optionData[4];
+    const originalName = optionData[5];
 
     switch (option.value) {
         case 'nothing':
@@ -123,7 +118,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     lineClamp={2}
                     order={3}
                 >
-                    {englishName}
+                    {originalName}
                 </Title>
                 <Text
                     className={`${classes.text} ${classes.subtitle}`}
@@ -139,14 +134,16 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     size="md"
                     opacity={0.5}
                 >
-                    {status}{russianName ? (`, ${russianName}`) : []}
+                    {status}{translatedName ? (`, ${translatedName}`) : []}
                 </Text>
             </div>
         </Flex>
     );
 };
 
-export default function SearchBar({position, size}: { position?: FloatingPosition, size: MantineSize }) {
+export default function SearchBar({ position, size }: { position?: FloatingPosition, size: MantineSize }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const translate = useTranslations('Translations');
     const {theme} = useCustomTheme();
     const {height} = useViewportSize();
@@ -182,6 +179,7 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
                 "url",
                 "poster { id originalUrl mainUrl }",
                 "russian",
+                "english",
                 "kind",
                 "status"
             ]
@@ -195,14 +193,33 @@ export default function SearchBar({position, size}: { position?: FloatingPositio
             const titleCode = title.url.replace('https://shikimori.one/animes/', '');
             const posterSourceURL = title.poster?.mainUrl ?? '/missing-image.png';
             const originalName = title.name;
-            const russianName = title.russian ?? originalName;
-            const animeKind = title.kind;
-            const animeStatus = title.status;
+            const russianName = title?.russian ?? originalName;
+            const englishName = title?.english ?? originalName;
+            const animeKind = translate(
+                translateAnimeKind(title?.kind ?? '')
+            );
+            const animeStatus = translate(
+                translateAnimeStatus({ sortingType: title?.status ?? '', singular: true })
+            );
+
+            let translatedName;
+
+            switch (locale) {
+                case "en":
+                    translatedName = englishName;
+                    break;
+                case "ru":
+                    translatedName = russianName;
+                    break;
+                default:
+                    translatedName = englishName;
+                    break;
+            }
 
             return (
                 {
-                    value: `${titleCode}--${posterSourceURL}--${russianName}--${animeKind}--${animeStatus}--${originalName}`,
-                    label: `${russianName} / ${originalName}`,
+                    value: `${titleCode}--${posterSourceURL}--${translatedName}--${animeKind}--${animeStatus}--${originalName}`,
+                    label: `${translatedName} / ${originalName}`,
                 }
             );
         });
