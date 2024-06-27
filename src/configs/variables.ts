@@ -60,19 +60,19 @@ export const variables: VariablesType = {
     },
     "settings": {
         "general": {
-            "label": "Общее",
+            "label": "common__general-label",
             "value": "general"
         },
         "about": {
-            "label": "О сайте",
+            "label": "common__about-label",
             "value": "about"
         },
         "language": {
-            "label": "Язык",
+            "label": "common__language-label",
             "value": "language"
         },
         "account": {
-            "label": "Аккаунт",
+            "label": "common__account-placeholder-label",
             "value": "account"
         },
     },

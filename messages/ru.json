@@ -3,6 +3,8 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__about-label": "О сайте",
+    "common__general-label": "Общее",
     "common__similar-label": "Похожие",
     "component__recommendations__nothing-found-label": "К сожалению, ничего не найдено. Попробуйте выбрать другой фильтр",
     "component__recommendations__studio-label": "Студия",

@@ -3,6 +3,8 @@
     "locale": "en"
   },
   "Translations": {
+    "common__about-label": "About",
+    "common__general-label": "General",
     "common__similar-label": "Similar",
     "component__recommendations__nothing-found-label": "Unfortunately, nothing was found. Try choosing a different filter",
     "component__recommendations__studio-label": "Studio",

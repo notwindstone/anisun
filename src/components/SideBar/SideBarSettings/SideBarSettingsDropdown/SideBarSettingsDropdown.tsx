@@ -36,16 +36,24 @@ export default function SideBarSettingsDropdown() {
     const { theme } = useCustomTheme();
     const [section, setSection] = useState<string>(GENERAL.value);
     const [opened, { toggle }] = useDisclosure(false);
+    const translate = useTranslations('Translations');
     const info = useTranslations('Info');
     const locale = info('locale');
     const router = useRouter();
 
+    const translatedData = [GENERAL, LANGUAGE, ABOUT].map((data) => {
+        return {
+            label: translate(data.label),
+            value: data.value,
+        };
+    });
+
     const WEBSITE_COLOR = {
-        label: "Элементы сайта",
+        label: translate('component__mobile-navbar-menu__theme-website-elements-label'),
         value: "website",
     };
     const NEXT_TOP_LOADER_COLOR = {
-        label: "Индикатор загрузчика",
+        label: translate('component__mobile-navbar-menu__theme-loader-label'),
         value: "topLoader",
     };
 
@@ -196,11 +204,7 @@ export default function SideBarSettingsDropdown() {
                     withItemsBorders={false}
                     value={section}
                     onChange={setSection}
-                    data={[
-                        GENERAL,
-                        LANGUAGE,
-                        ABOUT,
-                    ]}
+                    data={translatedData}
                 />
                 {content}
             </Group>

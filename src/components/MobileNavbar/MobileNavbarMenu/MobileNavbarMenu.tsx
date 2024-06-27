@@ -57,6 +57,18 @@ export default function MobileNavbarMenu() {
         value: "topLoader",
     };
 
+    const translatedData = [
+        GENERAL,
+        LANGUAGE,
+        ABOUT,
+        ACCOUNT
+    ].map((data) => {
+        return {
+            label: translate(data.label),
+            value: data.value,
+        };
+    });
+
     const [themingOption, setThemingOption] = useState(WEBSITE_COLOR.value);
     const isTopLoaderSection = themingOption === "topLoader";
     const currentColor = isTopLoaderSection ? theme.topLoaderColor : theme.color;
@@ -213,12 +225,7 @@ export default function MobileNavbarMenu() {
                                     withItemsBorders={false}
                                     value={section}
                                     onChange={setSection}
-                                    data={[
-                                        GENERAL,
-                                        LANGUAGE,
-                                        ABOUT,
-                                        ACCOUNT
-                                    ]}
+                                    data={translatedData}
                                 />
                                 {content}
                                 <Space my="xs" />
