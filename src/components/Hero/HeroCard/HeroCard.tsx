@@ -137,7 +137,7 @@ export default function HeroCard({
                                             className={classes.title}
                                             style={styles}
                                         >
-                                            {animeName}
+                                            {animeName ?? animeTitle?.name}
                                         </Title>
                                     )
                                 }
@@ -225,6 +225,7 @@ export default function HeroCard({
             size,
             responsiveFontScale,
             width,
+            animeTitle?.name,
             animeTitle?.poster?.originalUrl,
             animeTitle?.score,
             scoreBadgeColor,
