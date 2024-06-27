@@ -118,7 +118,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     lineClamp={2}
                     order={3}
                 >
-                    {originalName}
+                    {translatedName}
                 </Title>
                 <Text
                     className={`${classes.text} ${classes.subtitle}`}
@@ -134,7 +134,7 @@ const renderAutocompleteOption: AutocompleteProps['renderOption'] = ({ option })
                     size="md"
                     opacity={0.5}
                 >
-                    {status}{translatedName ? (`, ${translatedName}`) : []}
+                    {status}{`, ${originalName}`}
                 </Text>
             </div>
         </Flex>
