@@ -79,10 +79,10 @@ export default function AnimeInfo({ id, titleCode }: { id: string, titleCode: st
 
     switch (locale) {
         case "en":
-            animeTitle = `${data?.name} - ${data?.english}`;
+            animeTitle = `${data?.name}${data?.english ? ` - ${data.english}` : ""}`;
             break;
         case "ru":
-            animeTitle = `${data?.name} - ${data?.russian}`;
+            animeTitle = `${data?.name}${data?.russian ? ` - ${data.russian}` : ""}`;
             break;
         default:
             animeTitle = data?.name;
