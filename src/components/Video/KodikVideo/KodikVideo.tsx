@@ -4,8 +4,10 @@ import {getKodikPlayer} from "@/lib/actions";
 import classes from './KodikVideo.module.css';
 import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
 import VideoSkeleton from "@/components/Video/VideoSkeleton/VideoSkeleton";
+import {useTranslations} from "next-intl";
 
 export default function KodikVideo({ id }: { id: string }) {
+    const translate = useTranslations('Translations');
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'kodik', id],
         queryFn: async () => getKodikData(),
@@ -28,7 +30,11 @@ export default function KodikVideo({ id }: { id: string }) {
     }
 
     if (error) {
-        return <>Ошибка: {error.message}</>;
+        return (
+            <>
+                {translate('common__descriptive-error-label')}: {error.message}
+            </>
+        );
     }
 
     if (!isPending && !data) {

@@ -3,6 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__descriptive-error-label": "Что-то пошло не так... Попробуйте перезапустить сайт. Ошибка",
     "component__video-not-found__title-label": "Видео недоступно",
     "component__video-not-found__description-label": "Попробуйте выбрать другой плеер",
     "common__about-label": "О сайте",

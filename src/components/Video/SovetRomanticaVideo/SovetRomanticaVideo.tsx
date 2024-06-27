@@ -11,8 +11,10 @@ import SovetRomanticaVideoButton
     from "@/components/Video/SovetRomanticaVideo/SovetRomanticaVideoButton/SovetRomanticaVideoButton";
 import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
 import VideoSkeleton from "@/components/Video/VideoSkeleton/VideoSkeleton";
+import {useTranslations} from "next-intl";
 
 export default function SovetRomanticaVideo({ id }: { id: string }) {
+    const translate = useTranslations('Translations');
     const [opened, setOpened] = useState(false);
     const shikimori = client();
     const { data, isPending, error } = useQuery({
@@ -68,7 +70,11 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
     }
 
     if (error) {
-        return <>Error: {error.message}</>;
+        return (
+            <>
+                {translate('common__descriptive-error-label')}: {error.message}
+            </>
+        );
     }
 
     if (!isPending && !data) {

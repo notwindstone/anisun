@@ -3,6 +3,7 @@
     "locale": "en"
   },
   "Translations": {
+    "common__descriptive-error-label": "Oops, something went wrong. Please try reloading the page. Error",
     "component__video-not-found__title-label": "This video is not available",
     "component__video-not-found__description-label": "Try choosing a different player",
     "common__about-label": "About",
