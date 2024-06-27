@@ -100,7 +100,7 @@ export default function HeroMobileCard({
                             order={order}
                             lineClamp={2}
                         >
-                            {animeName}
+                            {animeName ?? animeTitle?.name}
                         </Title>
                         <Group
                             w="100%"
