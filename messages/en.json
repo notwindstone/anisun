@@ -7,7 +7,7 @@
     "component__video__player-sovetromantica-description-label": "The player from SovetRomantica uses only subtitles.",
     "component__video__player-anilibria-description-label": "There are no ads in our player, but the dub is only from AniLibria.",
     "component__video__player-kodik-description-label": "Unfortunately, there is no way to disable ads in Kodik Player. It is built into the player and does not depend on our site. But Kodik offers a wide selection of dubs!",
-    "component__video__player-information-label": "About player",
+    "component__video__player-information-label": "About the player",
     "common__descriptive-error-label": "Oops, something went wrong. Please try reloading the page. Error",
     "component__video-not-found__title-label": "This video is not available",
     "component__video-not-found__description-label": "Try choosing a different player",
