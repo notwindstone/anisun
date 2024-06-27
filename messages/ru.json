@@ -3,6 +3,9 @@
     "locale": "ru"
   },
   "Translations": {
+    "common__similar-label": "Похожие",
+    "component__recommendations__nothing-found-label": "К сожалению, ничего не найдено. Попробуйте выбрать другой фильтр",
+    "component__recommendations__studio-label": "Студия",
     "component__mobile-navbar-menu__select-color-label": "Выбрать свой цвет",
     "common__theme-label": "Тема",
     "common__website-description-text": "Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.",
