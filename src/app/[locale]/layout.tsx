@@ -17,6 +17,7 @@ import ThemedNextTopLoader from "@/components/ThemedNextTopLoader/ThemedNextTopL
 import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -124,6 +125,7 @@ export default async function RootLayout({
                             </MantineProvider>
                         </TanstackQueryProviders>
                     </NextIntlClientProvider>
+                    <Analytics />
                 </body>
             </html>
         </ClerkProvider>
