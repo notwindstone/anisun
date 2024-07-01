@@ -39,8 +39,24 @@ export const animes = () => {
             });
     };
 
+    const getAnimeInfo = async ({ id }: { id: string }) => {
+        return await axios
+            .get(`https://animetize-api.vercel.app/info/${id}`)
+            .then((response: {
+                data: {
+                    episodes: never[];
+                }
+            }) => response.data)
+            .catch(() => {
+                return {
+
+                };
+            });
+    };
+
     return {
         getSubsEmbed,
         getDubsEmbed,
+        getAnimeInfo,
     };
 };

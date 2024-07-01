@@ -2,7 +2,7 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {useTranslations} from "next-intl";
 
-export default function SovetRomanticaVideoButton({
+export default function FrameVideoButton({
     isActive,
     changeEpisode,
     episodeCount,

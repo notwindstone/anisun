@@ -8,8 +8,10 @@ import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
 import classes from '@/components/Video/GeneralFrameVideo.module.css';
 import {IconMenu2} from "@tabler/icons-react";
 import {useState} from "react";
+import FrameVideoButton from "@/components/Video/FrameVideoButton/FrameVideoButton";
 
 export default function VidstreamingVideo() {
+    const [episodesCount, setEpisodesCount] = useState(0);
     const [opened, setOpened] = useState(false);
     const animetizeClient = animetize();
     const pathname = usePathname();
@@ -19,10 +21,22 @@ export default function VidstreamingVideo() {
     idArray.shift();
     const animeId = idArray.join('-');
     const translate = useTranslations('Translations');
+
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'vidstreaming', animeId],
         queryFn: async () => getVidstreamingVideo(),
     });
+
+    const { data: animeInfoData, isPending: isAnimeInfoDataPending, error: animeInfoError } = useQuery({
+        queryKey: ['animeInfo', 'animetize', animeId],
+        queryFn: async () => getAnimetizeInfo(),
+    });
+
+    const [embedSrc, setEmbedSrc] = useState(data?.headers?.Referer);
+
+    async function getAnimetizeInfo() {
+        return 'clown';
+    }
 
     async function getVidstreamingVideo() {
         return await animetizeClient.animes.getSubsEmbed({
@@ -53,7 +67,13 @@ export default function VidstreamingVideo() {
         setOpened((o) => !o);
     }
 
+    function changeEpisode(episodeSrc?: string) {
+        setEmbedSrc(episodeSrc);
+    }
+
     const embedLink = data?.headers?.Referer;
+
+
 
     return (
         <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
@@ -79,7 +99,6 @@ export default function VidstreamingVideo() {
                 </Popover.Target>
                 <Popover.Dropdown p={rem(8)}>
                     <Stack className={classes.dropdownStack} gap={rem(8)}>
-
                     </Stack>
                 </Popover.Dropdown>
             </Popover>
