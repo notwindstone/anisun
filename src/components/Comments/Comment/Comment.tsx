@@ -107,13 +107,13 @@ export function Comment({
 
     function handleChecks(message: string) {
         if (editDelayed) {
-            notify.delay();
+            notify.delay(locale);
 
             return false;
         }
 
         if (message.length < 1 || message.length > 2000) {
-            notify.incorrectInput();
+            notify.incorrectInput(locale);
 
             return false;
         }

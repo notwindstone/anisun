@@ -10,6 +10,8 @@ import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import {useTranslations} from "next-intl";
 
 export function AddComment({ title, parentUUID, sendComment }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const translate = useTranslations('Translations');
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
@@ -19,24 +21,24 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
 
     const handleSubmit = async () => {
         if (delayed) {
-            return notify.delay();
+            return notify.delay(locale);
         }
 
         if (!isUser || !user) {
-            return notify.notAuthenticated();
+            return notify.notAuthenticated(locale);
         }
 
         const message = ref.current?.value ?? "";
 
         if (message.length < 1 || message.length > 2000) {
-            return notify.incorrectInput();
+            return notify.incorrectInput(locale);
         }
 
         setDelayed(true);
 
         const notificationId = nanoid();
 
-        notify.loading(notificationId, true);
+        notify.loading(notificationId, true, locale);
 
         const uuid = nanoid();
         const createdAt = new Date().toJSON();
@@ -79,7 +81,7 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
             false,
         );
 
-        notify.loading(notificationId, false);
+        notify.loading(notificationId, false, locale);
 
         setTimeout(() => {
             setDelayed(false);

@@ -6,8 +6,11 @@ import {comments} from "@/lib/comments/comments";
 import {useUser} from "@clerk/nextjs";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './VoteComment.module.css';
+import {useTranslations} from "next-intl";
 
 export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string, likes: unknown[] | null, dislikes: unknown[] | null, sendVotes: ({ newLikes, newDislikes }: { newLikes?: unknown[], newDislikes?: unknown[] }) => void }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false);
     const { theme } = useCustomTheme();
@@ -22,13 +25,13 @@ export function VoteComment({ uuid, likes, dislikes, sendVotes }: { uuid: string
 
     const handleChecks = () => {
         if (delayed) {
-            notify.delay();
+            notify.delay(locale);
 
             return false;
         }
 
         if (!isUser || !user) {
-            notify.notAuthenticated();
+            notify.notAuthenticated(locale);
 
             return false;
         }

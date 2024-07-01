@@ -10,6 +10,8 @@ import classes from './DeleteComment.module.css';
 import {useTranslations} from "next-intl";
 
 export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: { uuid: string, userid: string, isInitiallyDeleted: boolean, sendDelete: (isDeleted: boolean) => void }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const translate = useTranslations('Translations');
     const { isLoaded, isSignedIn, user } = useUser();
     const [delayed, setDelayed] = useState(false);
@@ -24,13 +26,13 @@ export function DeleteComment({ uuid, userid, isInitiallyDeleted, sendDelete }: 
 
     const handleChecks = () => {
         if (delayed) {
-            notify.delay();
+            notify.delay(locale);
 
             return false;
         }
 
         if (!isUser || !user) {
-            notify.notAuthenticated();
+            notify.notAuthenticated(locale);
 
             return false;
         }
