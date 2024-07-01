@@ -3,7 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
-    "component__video__player-vidstreaming-description-label": "Это плеер с английскими субтитрами",
+    "component__video__player-vidstreaming-description-label": "Это плеер с английскими субтитрами или дубляжом",
     "common__next-label": "Дальше",
     "component__video__player-sovetromantica-description-label": "В плеере от SovetRomantica используются только субтитры.",
     "component__video__player-anilibria-description-label": "В нашем плеере отсутствует реклама, но озвучка используется только от AniLibria.",
