@@ -123,7 +123,7 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
                     </ActionIcon>
                 </Popover.Target>
                 <Popover.Dropdown p={rem(8)}>
-                    <Stack gap={rem(8)}>
+                    <Stack className={classes.dropdownStack} gap={rem(8)}>
                         {buttons}
                     </Stack>
                 </Popover.Dropdown>

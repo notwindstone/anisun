@@ -32,7 +32,8 @@
 
 .dropdown {
     max-height: rem(384px);
-    overflow: scroll;
+    overflow-y: scroll;
+    overflow-x: hidden;
     color: #fff;
     background: #00000088;
     backdrop-filter: blur(rem(8px));
@@ -48,4 +49,8 @@
     @media screen and (max-width: rem(400px)) {
         max-height: rem(128px);
     }
+}
+
+.dropdownStack {
+    min-width: fit-content;
 }
