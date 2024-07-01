@@ -140,7 +140,7 @@ export default function VidstreamingVideo() {
                                     onClick={togglePopover}
                                     variant="light"
                                     radius="md"
-                                    className={classes.switchEpisodes}
+                                    className={classes.actionIcon}
                                 >
                                     <IconMenu2 className={classes.playlistIcon} />
                                 </ActionIcon>

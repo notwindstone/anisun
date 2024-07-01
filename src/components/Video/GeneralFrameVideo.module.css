@@ -26,6 +26,12 @@
     }
 }
 
+.switchEpisodes {
+    top: rem(8px);
+    right: rem(8px);
+    position: absolute;
+}
+
 .aspectRatio {
     position: relative;
 }
