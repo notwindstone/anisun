@@ -19,7 +19,7 @@
 }
 
 .root {
-    overflow-x: auto;
+    flex-wrap: wrap;
     background: none;
     border-radius: 0;
 
