@@ -32,9 +32,7 @@ export const animes = () => {
             }) => response.data)
             .catch(() => {
                 return {
-                    headers: {
-                        Referer: undefined
-                    }
+                    headers: undefined
                 };
             });
     };

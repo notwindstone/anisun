@@ -9,7 +9,7 @@
     "component__video__player-anilibria-description-label": "В нашем плеере отсутствует реклама, но озвучка используется только от AniLibria.",
     "component__video__player-kodik-description-label": "К сожалению, в плеере Kodik нельзя отключить рекламу. Она встроена в плеер и не зависит от нашего сайта.",
     "component__video__player-information-label": "Информация о плеере",
-    "common__descriptive-error-label": "Что-то пошло не так... Попробуйте перезапустить сайт. Ошибка",
+    "common__descriptive-error-label": "Что-то пошло не так... Попробуйте перезапустить сайт. Если это не помогает, подождите полминуты и попробуйте снова. Ошибка",
     "component__video-not-found__title-label": "Видео недоступно",
     "component__video-not-found__description-label": "Попробуйте выбрать другой плеер",
     "common__about-label": "О сайте",

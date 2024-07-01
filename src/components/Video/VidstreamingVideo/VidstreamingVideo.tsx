@@ -76,7 +76,7 @@ export default function VidstreamingVideo() {
         );
     }
 
-    if (!isPending && !data) {
+    if (!isPending && !data?.headers) {
         return <VideoNotFound />;
     }
 
@@ -109,7 +109,7 @@ export default function VidstreamingVideo() {
     return (
         <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
             {
-                episodesCountData && (
+                episodesCountData ? (
                     <Group className={classes.buttonsGroup} gap={rem(8)}>
                         <ActionIcon
                             onClick={toggleIsSubs}
@@ -152,7 +152,7 @@ export default function VidstreamingVideo() {
                             </Popover.Dropdown>
                         </Popover>
                     </Group>
-                )
+                ) : null
             }
             {
                 !isPending && (

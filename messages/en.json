@@ -9,7 +9,7 @@
     "component__video__player-anilibria-description-label": "There are no ads in our player, but the dub is only from AniLibria.",
     "component__video__player-kodik-description-label": "Unfortunately, there is no way to disable ads in Kodik Player. They are built into the player and do not depend on our site.",
     "component__video__player-information-label": "About the player",
-    "common__descriptive-error-label": "Oops, something went wrong. Please try reloading the page. Error",
+    "common__descriptive-error-label": "Oops, something went wrong. Please try reloading the page. If this doesn't help, wait half a minute and try again. Error",
     "component__video-not-found__title-label": "This video is not available",
     "component__video-not-found__description-label": "Try choosing a different player",
     "common__about-label": "About",
