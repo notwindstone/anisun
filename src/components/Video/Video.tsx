@@ -9,10 +9,12 @@ import KodikVideo from "@/components/Video/KodikVideo/KodikVideo";
 import {IconInfoCircle} from "@tabler/icons-react";
 import SovetRomanticaVideo from "@/components/Video/SovetRomanticaVideo/SovetRomanticaVideo";
 import {useTranslations} from "next-intl";
+import VidstreamingVideo from "@/components/Video/VidstreamingVideo/VidstreamingVideo";
 
 const ANILIBRIA_PLAYER = "anilibria";
 const KODIK_PLAYER = "kodik";
 const SOVETROMANTICA_PLAYER = "sovetromantica";
+const VIDSTREAMING_PLAYER = "vidstreaming";
 
 export default function Video({ id }: { id: string }) {
     const translate = useTranslations('Translations');
@@ -22,6 +24,7 @@ export default function Video({ id }: { id: string }) {
     const KODIK_DESCRIPTION = translate('component__video__player-kodik-description-label');
     const ANILIBRIA_DESCRIPTION = translate('component__video__player-anilibria-description-label');
     const SOVETROMANTICA_DESCRIPTION = translate('component__video__player-sovetromantica-description-label');
+    const VIDSTREAMING_DESCRIPTION = translate('component__video__player-vidstreaming-description-label');
 
     return (
         <Stack p={0} gap={rem(8)}>
@@ -33,8 +36,10 @@ export default function Video({ id }: { id: string }) {
                             <KodikVideo id={id} />
                         ) : player === ANILIBRIA_PLAYER ? (
                             <AnilibriaVideo id={id} />
-                        ) : (
+                        ) : player === SOVETROMANTICA_PLAYER ? (
                             <SovetRomanticaVideo id={id} />
+                        ) : (
+                            <VidstreamingVideo id={id} />
                         )
                     }
                 </div>
@@ -52,7 +57,8 @@ export default function Video({ id }: { id: string }) {
                 data={[
                     { label: 'Kodik', value: KODIK_PLAYER },
                     { label: 'Animeth', value: ANILIBRIA_PLAYER },
-                    { label: 'SovetRomantica', value: SOVETROMANTICA_PLAYER }
+                    { label: 'SovetRomantica', value: SOVETROMANTICA_PLAYER },
+                    { label: 'Vidstreaming (English)', value: VIDSTREAMING_PLAYER }
                 ]}
             />
             <Alert
@@ -68,7 +74,9 @@ export default function Video({ id }: { id: string }) {
                         ? KODIK_DESCRIPTION
                         : player === ANILIBRIA_PLAYER
                             ? ANILIBRIA_DESCRIPTION
-                            : SOVETROMANTICA_DESCRIPTION
+                            : player === SOVETROMANTICA_PLAYER
+                                ? SOVETROMANTICA_DESCRIPTION
+                                : VIDSTREAMING_DESCRIPTION
                 }
             </Alert>
         </Stack>

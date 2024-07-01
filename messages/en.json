@@ -3,6 +3,7 @@
     "locale": "en"
   },
   "Translations": {
+    "component__video__player-vidstreaming-description-label": "Vidstreaming is a player with English subtitles",
     "common__next-label": "Next",
     "component__video__player-sovetromantica-description-label": "The player from SovetRomantica uses only subtitles.",
     "component__video__player-anilibria-description-label": "There are no ads in our player, but the dub is only from AniLibria.",
