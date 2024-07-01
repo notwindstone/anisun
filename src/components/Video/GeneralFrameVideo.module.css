@@ -9,13 +9,17 @@
     }
 }
 
-.switchEpisodes {
+.buttonsGroup {
+    top: rem(8px);
+    right: rem(8px);
+    position: absolute;
+    width: fit-content;
+}
+
+.switchEpisodes, .actionIcon {
     background: rgb(0 0 0 / 0.2);
     width: rem(32px);
     height: rem(32px);
-    position: absolute;
-    top: rem(8px);
-    right: rem(8px);
 
     &:hover, &:active {
         background: rgb(0 0 0 / 0.3);

@@ -4,13 +4,14 @@ import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
 import {useTranslations} from "next-intl";
 import {animetize} from "@/lib/animetize/animetize";
 import {usePathname} from "next/navigation";
-import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
+import {ActionIcon, AspectRatio, Group, Popover, rem, Stack} from "@mantine/core";
 import classes from '@/components/Video/GeneralFrameVideo.module.css';
-import {IconMenu2} from "@tabler/icons-react";
+import {IconBadgeCcFilled, IconBadgeVoFilled, IconMenu2} from "@tabler/icons-react";
 import {useState} from "react";
 import FrameVideoButton from "@/components/Video/FrameVideoButton/FrameVideoButton";
 
 export default function VidstreamingVideo() {
+    const [isSubs, setIsSubs] = useState<boolean>(false);
     const [currentEpisode, setCurrentEpisode] = useState(1);
     const [episodesCount, setEpisodesCount] = useState(0);
     const [opened, setOpened] = useState(false);
@@ -27,7 +28,7 @@ export default function VidstreamingVideo() {
     const translate = useTranslations('Translations');
 
     const { data, isPending, error } = useQuery({
-        queryKey: ['anime', 'vidstreaming', animeId, currentEpisode],
+        queryKey: ['anime', 'vidstreaming', animeId, currentEpisode, isSubs],
         queryFn: async () => getVidstreamingVideo(),
     });
 
@@ -48,7 +49,14 @@ export default function VidstreamingVideo() {
     }
 
     async function getVidstreamingVideo() {
-        return await animetizeClient.animes.getSubsEmbed({
+        if (isSubs) {
+            return await animetizeClient.animes.getSubsEmbed({
+                id: animeId,
+                episode: currentEpisode,
+            });
+        }
+
+        return await animetizeClient.animes.getDubsEmbed({
             id: animeId,
             episode: currentEpisode,
         });
@@ -76,6 +84,10 @@ export default function VidstreamingVideo() {
         setOpened((o) => !o);
     }
 
+    function toggleIsSubs() {
+        setIsSubs((o) => !o);
+    }
+
     function changeEpisode(episode: number) {
         setCurrentEpisode(episode);
     }
@@ -98,32 +110,48 @@ export default function VidstreamingVideo() {
         <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
             {
                 episodesCountData && (
-                    <Popover
-                        classNames={{
-                            dropdown: classes.dropdown
-                        }}
-                        position="bottom-end"
-                        transitionProps={{ transition: "scale-y" }}
-                        opened={opened}
-                        onChange={setOpened}
-                        radius="md"
-                    >
-                        <Popover.Target>
-                            <ActionIcon
-                                onClick={togglePopover}
-                                variant="light"
-                                radius="md"
-                                className={classes.switchEpisodes}
-                            >
-                                <IconMenu2 className={classes.playlistIcon} />
-                            </ActionIcon>
-                        </Popover.Target>
-                        <Popover.Dropdown p={rem(8)}>
-                            <Stack className={classes.dropdownStack} gap={rem(8)}>
-                                {buttons}
-                            </Stack>
-                        </Popover.Dropdown>
-                    </Popover>
+                    <Group className={classes.buttonsGroup} gap={rem(8)}>
+                        <ActionIcon
+                            onClick={toggleIsSubs}
+                            variant="light"
+                            radius="md"
+                            className={classes.actionIcon}
+                        >
+                            {
+                                isSubs ? (
+                                    <IconBadgeCcFilled className={classes.playlistIcon} />
+                                ) : (
+                                    <IconBadgeVoFilled className={classes.playlistIcon} />
+                                )
+                            }
+                        </ActionIcon>
+                        <Popover
+                            classNames={{
+                                dropdown: classes.dropdown
+                            }}
+                            position="bottom-end"
+                            transitionProps={{ transition: "scale-y" }}
+                            opened={opened}
+                            onChange={setOpened}
+                            radius="md"
+                        >
+                            <Popover.Target>
+                                <ActionIcon
+                                    onClick={togglePopover}
+                                    variant="light"
+                                    radius="md"
+                                    className={classes.switchEpisodes}
+                                >
+                                    <IconMenu2 className={classes.playlistIcon} />
+                                </ActionIcon>
+                            </Popover.Target>
+                            <Popover.Dropdown p={rem(8)}>
+                                <Stack className={classes.dropdownStack} gap={rem(8)}>
+                                    {buttons}
+                                </Stack>
+                            </Popover.Dropdown>
+                        </Popover>
+                    </Group>
                 )
             }
             {
