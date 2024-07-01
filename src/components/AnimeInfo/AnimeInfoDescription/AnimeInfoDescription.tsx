@@ -136,7 +136,9 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         </Text>
                         {
                             !opened && (
-                                <Text className={classes.expandText}>Нажмите, чтобы раскрыть</Text>
+                                <Text className={classes.expandText}>
+                                    {translate('component__anime-info-description__expand-label')}
+                                </Text>
                             )
                         }
                     </Group>
