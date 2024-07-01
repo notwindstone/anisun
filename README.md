@@ -18,10 +18,10 @@
 ## 📱 Screenshots
 
 <div align="center">
-<img src="public/docs/Screenshot_animeth_main_screen_pc1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_pc2.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="32%">
+<img src="public/docs/EN_Screenshot_animeth_main_screen_pc1.png" width="49%">
+<img src="public/docs/EN_Screenshot_animeth_main_screen_pc2.png" width="49%">
+<img src="public/docs/EN_Screenshot_animeth_main_screen_android1.jpg" width="32%">
+<img src="public/docs/EN_Screenshot_animeth_main_screen_android2.jpg" width="32%">
 </div>
 
 ### More screenshots
