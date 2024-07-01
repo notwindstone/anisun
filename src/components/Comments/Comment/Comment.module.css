@@ -147,7 +147,15 @@
 
 .hiddenReplyWrapper {
     display: none;
-    padding-left: rem(80px);
+    padding-left: rem(96px);
+
+    @media screen and (max-width: rem(750px)) {
+        padding-left: rem(80px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        padding-left: rem(72px);
+    }
 }
 
 .toggledReplyWrapper {
