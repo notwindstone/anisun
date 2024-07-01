@@ -1,7 +1,7 @@
 import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
-import classes from './SovetRomantica.module.css';
+import classes from '@/components/Video/GeneralFrameVideo.module.css';
 import {AnimeInfoType} from "@/types/SovetRomantica/Responses/AnimeInfo.type";
 import {EpisodesType} from "@/types/SovetRomantica/Responses/Episodes.type";
 import {client} from "@/lib/shikimori/client";

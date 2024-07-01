@@ -4,10 +4,13 @@ import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
 import {useTranslations} from "next-intl";
 import {animetize} from "@/lib/animetize/animetize";
 import {usePathname} from "next/navigation";
-import {AspectRatio} from "@mantine/core";
-import classes from "@/components/Video/SovetRomanticaVideo/SovetRomantica.module.css";
+import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
+import classes from '@/components/Video/GeneralFrameVideo.module.css';
+import {IconMenu2} from "@tabler/icons-react";
+import {useState} from "react";
 
 export default function VidstreamingVideo() {
+    const [opened, setOpened] = useState(false);
     const animetizeClient = animetize();
     const pathname = usePathname();
     const paths = pathname.split('/');
@@ -22,7 +25,7 @@ export default function VidstreamingVideo() {
     });
 
     async function getVidstreamingVideo() {
-        return await animetizeClient.animes.getLink({
+        return await animetizeClient.animes.getSubsEmbed({
             id: animeId,
             episode: 1,
         });
@@ -46,10 +49,40 @@ export default function VidstreamingVideo() {
         return <VideoNotFound />;
     }
 
+    function togglePopover() {
+        setOpened((o) => !o);
+    }
+
     const embedLink = data?.headers?.Referer;
 
     return (
-        <AspectRatio className={'classes.aspectRatio'} ratio={16 / 9}>
+        <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
+            <Popover
+                classNames={{
+                    dropdown: classes.dropdown
+                }}
+                position="bottom-end"
+                transitionProps={{ transition: "scale-y" }}
+                opened={opened}
+                onChange={setOpened}
+                radius="md"
+            >
+                <Popover.Target>
+                    <ActionIcon
+                        onClick={togglePopover}
+                        variant="light"
+                        radius="md"
+                        className={classes.switchEpisodes}
+                    >
+                        <IconMenu2 className={classes.playlistIcon} />
+                    </ActionIcon>
+                </Popover.Target>
+                <Popover.Dropdown p={rem(8)}>
+                    <Stack className={classes.dropdownStack} gap={rem(8)}>
+
+                    </Stack>
+                </Popover.Dropdown>
+            </Popover>
             <iframe
                 className={classes.frame}
                 src={embedLink}
