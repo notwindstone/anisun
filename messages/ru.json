@@ -3,6 +3,7 @@
     "locale": "ru"
   },
   "Translations": {
+    "component__anime-info-description__expand-label": "Нажмите, чтобы раскрыть",
     "component__video__player-vidstreaming-description-label": "Это плеер с английскими субтитрами или дубляжом",
     "common__next-label": "Дальше",
     "component__video__player-sovetromantica-description-label": "В плеере от SovetRomantica используются только субтитры.",
