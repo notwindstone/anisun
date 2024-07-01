@@ -5,7 +5,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 export function makeDate({ createdAt, locale }: { createdAt: string, locale: string }) {
     dayjs.locale(locale);
     dayjs.extend(relativeTime);
-console.log(dayjs('2024-07-01T10:32:18.592Z').format(`D MMMM H:mm`))
+
     let preposition, wordYesterday, wordToday;
 
     switch (locale) {

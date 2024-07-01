@@ -81,7 +81,7 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
         default:
             break;
     }
-console.log('UPDATE VIDEO_PLAYER');
+
     return (
         <MediaPlayer
             onControlsChange={
