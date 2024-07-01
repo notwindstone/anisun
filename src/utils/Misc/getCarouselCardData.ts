@@ -8,14 +8,16 @@ export default function getCarouselCardDate({
     episodesAired,
     russian,
     score,
+    original,
 }: {
     english: string | null | undefined;
-    locale: string | null | undefined;
+    locale: string | undefined;
     status: string | null | undefined;
-    episodes: number | null | undefined;
-    episodesAired: number | null | undefined;
+    episodes: number | undefined;
+    episodesAired: number | undefined;
     russian: string | null | undefined;
     score: number | null | undefined;
+    original: string | undefined;
 }) {
     const animeStatus = status ?? "";
     const isAnnounced = animeStatus === 'anons';
@@ -38,6 +40,8 @@ export default function getCarouselCardDate({
             animeName = english;
             break;
     }
+
+    animeName = animeName ?? original;
 
     return {
         animeStatus,

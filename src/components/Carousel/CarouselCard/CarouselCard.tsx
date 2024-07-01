@@ -37,6 +37,7 @@ export default function CarouselCard({
         score: animeTitle?.score,
         episodesAired: animeTitle?.episodesAired,
         russian: animeTitle?.russian,
+        original: animeTitle?.name,
     });
 
     return (
