@@ -39,7 +39,7 @@ export default function Video({ id }: { id: string }) {
                         ) : player === SOVETROMANTICA_PLAYER ? (
                             <SovetRomanticaVideo id={id} />
                         ) : (
-                            <VidstreamingVideo id={id} />
+                            <VidstreamingVideo />
                         )
                     }
                 </div>
