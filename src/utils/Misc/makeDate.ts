@@ -5,7 +5,7 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 export function makeDate({ createdAt, locale }: { createdAt: string, locale: string }) {
     dayjs.locale(locale);
     dayjs.extend(relativeTime);
-
+console.log(dayjs('2024-07-01T10:32:18.592Z').format(`D MMMM H:mm`))
     let preposition, wordYesterday, wordToday;
 
     switch (locale) {
@@ -36,7 +36,9 @@ export function makeDate({ createdAt, locale }: { createdAt: string, locale: str
     const isYesterday = dayjs(createdAt).isSame(yesterday, 'day');
 
     if (isYesterday) {
-        return dayjs(createdAt).format(`${wordYesterday}${preposition}H:mm`);
+        const formattedDate = dayjs(createdAt).format('H:mm');
+
+        return `${wordYesterday}${preposition}${formattedDate}`;
     }
 
     const isToday = dayjs(createdAt).isSame(dayjs(), 'day');
@@ -47,7 +49,9 @@ export function makeDate({ createdAt, locale }: { createdAt: string, locale: str
             return dayjs(createdAt).fromNow();
         }
 
-        return dayjs(createdAt).format(`${wordToday}${preposition}H:mm`);
+        const formattedDate = dayjs(createdAt).format('H:mm');
+
+        return `${wordToday}${preposition}${formattedDate}`;
     }
 
     // В любой другой день, если не прошлый год, не вчера и не сегодня
