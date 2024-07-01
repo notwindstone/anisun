@@ -1,17 +1,19 @@
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
-import {MediaPlayer, MediaPlayerInstance, MediaProvider, Menu, useMediaStore} from '@vidstack/react';
+import {MediaPlayer, MediaPlayerInstance, MediaProvider, Menu} from '@vidstack/react';
 import { defaultLayoutIcons, DefaultVideoLayout } from '@vidstack/react/player/layouts/default';
 import {useRef, useState} from 'react';
 import videoPlayerTranslation from '@/configs/videoPlayerTranslation.json';
 import classes from './VideoPlayer.module.css';
 import './VideoPlayer.global.css';
 import {PlaylistIcon} from "@vidstack/react/icons";
-import {Button, Text} from "@mantine/core";
+import {Text} from "@mantine/core";
 import {VideoPlayerType} from "@/types/Video/VideoPlayer.type";
 import createHLSMasterPlaylist from "@/utils/Misc/createHLSMasterPlaylist";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {useTranslations} from "next-intl";
+import VideoPlayerNextEpisodeButton
+    from "@/components/Video/VideoPlayer/VideoPlayerNextEpisodeButton/VideoPlayerNextEpisodeButton";
 
 function changeEpisode({ player }: VideoPlayerType, episode: number) {
     const host = `https://${player.host}`;
@@ -26,12 +28,9 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
     const locale = info('locale');
     const { theme } = useCustomTheme();
     const mediaPlayerRef = useRef<MediaPlayerInstance>(null);
-    const { started, currentTime, duration } = useMediaStore(mediaPlayerRef);
     const [episodeSource, setEpisodeSource] = useState(changeEpisode({ player }, 1));
     const [hideMenu, setHideMenu] = useState('hidden');
     const [currentEpisode, setCurrentEpisode] = useState(1);
-
-    const isLastTenSeconds = (duration - currentTime) <= 10;
     const episodesAmount = Object.entries(player.list);
 
     const episodesList = episodesAmount.map((_value, index) => {
@@ -63,8 +62,6 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
     );
 
     const episodesCount = episodesList.length;
-    const hasNextEpisode = (episodesCount - currentEpisode) > 0;
-
     function setNextEpisode() {
         const nextEpisode = currentEpisode + 1;
 
@@ -84,7 +81,7 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
         default:
             break;
     }
-
+console.log('UPDATE VIDEO_PLAYER');
     return (
         <MediaPlayer
             onControlsChange={
@@ -122,24 +119,12 @@ export default function VideoPlayer({ title, player }: VideoPlayerType) {
                     <Text fw={700} className={classes.currentEpisodeMarker}>
                         {translate('common__episode-label')} {currentEpisode}
                     </Text>
-                    {
-                        started && isLastTenSeconds && hasNextEpisode
-                            ? (
-                                <div className={classes.nextEpisode}>
-                                    <Button
-                                        radius="md"
-                                        variant="transparent"
-                                        className={classes.nextEpisodeButton}
-                                        onClick={setNextEpisode}
-                                    >
-                                        {translate('common__next-label')}
-                                    </Button>
-                                </div>
-                            )
-                            : (
-                                <div className={classes.nextEpisode} />
-                            )
-                    }
+                    <VideoPlayerNextEpisodeButton
+                        currentEpisode={currentEpisode}
+                        mediaPlayerRef={mediaPlayerRef}
+                        setNextEpisode={setNextEpisode}
+                        episodesCount={episodesCount}
+                    />
                 </Menu.Root>
             </DefaultVideoLayout>
         </MediaPlayer>
