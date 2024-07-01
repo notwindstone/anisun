@@ -3,6 +3,7 @@
     "locale": "en"
   },
   "Translations": {
+    "component__anime-info-description__expand-label": "Click to expand",
     "component__video__player-vidstreaming-description-label": "Vidstreaming is a player with English subs or dubs",
     "common__next-label": "Next",
     "component__video__player-sovetromantica-description-label": "The player from SovetRomantica uses only subtitles.",
