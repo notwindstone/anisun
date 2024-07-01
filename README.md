@@ -74,7 +74,7 @@
 
 ## ⭐ Features
 
-* Watch anime with subs or dubs (only on Russian language in Kodik, SovetRomantica and Anilibria players)
+* Watch anime with subs or dubs (in English or Russian)
 
 * Download anime using a torrent or directly from the website (.m3u8)
 
@@ -92,7 +92,7 @@
 
 ## ✅ To-Do List
 
-- [ ] Localize the website
+- [x] Website internationalization with [next-intl](https://next-intl-docs.vercel.app/)
 
 - [x] Add the option to the `.env` file to use a database based on value
 
