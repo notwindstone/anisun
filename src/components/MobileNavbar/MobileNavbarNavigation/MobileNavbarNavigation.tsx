@@ -1,5 +1,24 @@
-import {IconBrandSafari, IconHome, IconTrendingUp} from "@tabler/icons-react";
-import {Box, Center, Divider, rem, Stack, Text, ThemeIcon, Title, UnstyledButton} from "@mantine/core";
+import {
+    IconBrandSafari,
+    IconChevronLeft,
+    IconChevronRight,
+    IconHome,
+    IconReload,
+    IconTrendingUp
+} from "@tabler/icons-react";
+import {
+    ActionIcon,
+    Box,
+    Center,
+    Divider,
+    Group,
+    rem,
+    Stack,
+    Text,
+    ThemeIcon,
+    Title,
+    UnstyledButton
+} from "@mantine/core";
 import classes from "@/components/MobileNavbar/MobileNavbar.module.css";
 import {useDisclosure} from "@mantine/hooks";
 import {usePathname, useRouter} from "next/navigation";
@@ -8,6 +27,8 @@ import React from "react";
 import NProgress from "nprogress";
 import MobileNavbarLink from "@/components/MobileNavbar/MobileNavbarLink/MobileNavbarLink";
 import {useTranslations} from "next-intl";
+import useCustomTheme from "@/hooks/useCustomTheme";
+import {useQueryClient} from "@tanstack/react-query";
 
 const ICON_STYLES = {
     size: 32,
@@ -15,12 +36,14 @@ const ICON_STYLES = {
 };
 
 export default function MobileNavbarNavigation() {
+    const { theme } = useCustomTheme();
     const translate = useTranslations('Translations');
     const [opened, { open, close }] = useDisclosure(false);
     const pathname = usePathname();
     const router = useRouter();
     const info = useTranslations('Info');
     const locale = info('locale');
+    const queryClient = useQueryClient();
 
     function redirect(link: string) {
         NProgress.start();
@@ -29,6 +52,25 @@ export default function MobileNavbarNavigation() {
         if (link === pathname) {
             NProgress.done();
         }
+    }
+
+    function reloadPage() {
+        NProgress.start();
+        router.refresh();
+        queryClient.clear();
+        NProgress.done();
+    }
+
+    function navigateBack() {
+        NProgress.start();
+        router.back();
+        NProgress.done();
+    }
+
+    function navigateForward() {
+        NProgress.start();
+        router.forward();
+        NProgress.done();
     }
 
     const NAV_LINKS = [
@@ -42,7 +84,24 @@ export default function MobileNavbarNavigation() {
             func: () => redirect(`/${locale}/trending`),
             icon: <IconTrendingUp {...ICON_STYLES} />
         },
+    ];
 
+    const NAV_BUTTONS = [
+        {
+            key: 'back',
+            func: navigateBack,
+            icon: <IconChevronLeft {...ICON_STYLES} />,
+        },
+        {
+            key: 'forward',
+            func: navigateForward,
+            icon: <IconChevronRight {...ICON_STYLES} />,
+        },
+        {
+            key: 'reload',
+            func: reloadPage,
+            icon: <IconReload {...ICON_STYLES} />,
+        },
     ];
 
     return (
@@ -57,11 +116,31 @@ export default function MobileNavbarNavigation() {
                     <Sheet.Content>
                         <Sheet.Scroller>
                             <Box pb={rem(16)}>
-                                <Title
-                                    c="var(--anisun-text-contrast-color)"
-                                >
-                                    {translate('common__navigation-label')}
-                                </Title>
+                                <Group justify="space-between" wrap="nowrap">
+                                    <Title
+                                        c="var(--anisun-text-contrast-color)"
+                                    >
+                                        {translate('common__navigation-label')}
+                                    </Title>
+                                    <Group wrap="nowrap">
+                                        {
+                                            NAV_BUTTONS.map((link) => {
+                                                return (
+                                                    <ActionIcon
+                                                        key={link.key}
+                                                        color={theme.color}
+                                                        variant="light"
+                                                        size={48}
+                                                        radius="md"
+                                                        onClick={link.func}
+                                                    >
+                                                        {link.icon}
+                                                    </ActionIcon>
+                                                );
+                                            })
+                                        }
+                                    </Group>
+                                </Group>
                                 <Divider my={rem(16)} w="100%" />
                                 <Stack gap={rem(16)}>
                                     {
