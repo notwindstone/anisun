@@ -67,7 +67,7 @@ export default function SideBarSettingsDropdown() {
         case "language":
             content = (
                 <Stack className={classes.stack}>
-                    <Title c="var(--animeth-text-contrast-color)">
+                    <Title c="var(--anisun-text-contrast-color)">
                         {translate('common__language-label')}
                     </Title>
                     <Select
@@ -102,7 +102,7 @@ export default function SideBarSettingsDropdown() {
             content = (
                 <Stack align="center">
                     <Image
-                        alt="Animeth website icon"
+                        alt="Anisun website icon"
                         src="/favicon.png"
                         radius="xl"
                         w={64}
@@ -140,7 +140,7 @@ export default function SideBarSettingsDropdown() {
         default:
             content = (
                 <Stack>
-                    <Title c="var(--animeth-text-contrast-color)">
+                    <Title c="var(--anisun-text-contrast-color)">
                         {translate('common__theme-label')}
                     </Title>
                     <SegmentedControl

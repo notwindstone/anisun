@@ -56,7 +56,7 @@ export default function Video({ id }: { id: string }) {
                 onChange={setPlayer}
                 data={[
                     { label: 'Kodik', value: KODIK_PLAYER },
-                    { label: 'Animeth', value: ANILIBRIA_PLAYER },
+                    { label: 'Anisun', value: ANILIBRIA_PLAYER },
                     { label: 'SovetRomantica', value: SOVETROMANTICA_PLAYER },
                     { label: 'Vidstreaming (English)', value: VIDSTREAMING_PLAYER }
                 ]}

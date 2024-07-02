@@ -112,7 +112,7 @@ export const variables: VariablesType = {
     "websiteLinks": [
         {
             label: "GitHub",
-            href: "https://github.com/windstone-aristotle-yellow/animeth",
+            href: "https://github.com/windstone-aristotle-yellow/anisun",
         },
         {
             label: "Telegram",
@@ -120,7 +120,7 @@ export const variables: VariablesType = {
         },
         {
             label: "License",
-            href: "https://github.com/windstone-aristotle-yellow/animeth/blob/main/LICENSE",
+            href: "https://github.com/windstone-aristotle-yellow/anisun/blob/main/LICENSE",
         },
     ],
     "kind": {

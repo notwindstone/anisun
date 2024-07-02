@@ -95,7 +95,7 @@ export default function MobileNavbarMenu() {
         case "language":
             content = (
                 <Stack className={classes.stack}>
-                    <Title c="var(--animeth-text-contrast-color)">
+                    <Title c="var(--anisun-text-contrast-color)">
                         {translate('common__language-label')}
                     </Title>
                     <NativeSelect
@@ -113,7 +113,7 @@ export default function MobileNavbarMenu() {
             content = (
                 <Stack align="center">
                     <Image
-                        alt="Animeth website icon"
+                        alt="Anisun website icon"
                         src="/favicon.png"
                         radius="xl"
                         w={64}
@@ -150,7 +150,7 @@ export default function MobileNavbarMenu() {
         case "general":
             content = (
                 <Stack>
-                    <Title c="var(--animeth-text-contrast-color)">
+                    <Title c="var(--anisun-text-contrast-color)">
                         {translate('common__theme-label')}
                     </Title>
                     <div>

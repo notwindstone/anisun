@@ -58,7 +58,7 @@ export default function MobileNavbarNavigation() {
                         <Sheet.Scroller>
                             <Box pb={rem(16)}>
                                 <Title
-                                    c="var(--animeth-text-contrast-color)"
+                                    c="var(--anisun-text-contrast-color)"
                                 >
                                     {translate('common__navigation-label')}
                                 </Title>

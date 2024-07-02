@@ -189,7 +189,7 @@ export default function Comments({ titleCode }: { titleCode: string }) {
                     <Title
                         p={rem(16)}
                         order={3}
-                        c="var(--animeth-text-contrast-color)"
+                        c="var(--anisun-text-contrast-color)"
                     >
                         {totalCount} {makeWordEnding({ replies: totalCount, wordTypes: [wordComment, wordCommentsUpToFour, wordComments] })}
                     </Title>

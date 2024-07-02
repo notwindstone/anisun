@@ -26,7 +26,7 @@ export default function GradientTitle() {
             variant="gradient"
             gradient={{ from: color, to: nextColor, deg: 90 }}
         >
-            ANIMETH
+            ANISUN
         </Text>
     );
 }

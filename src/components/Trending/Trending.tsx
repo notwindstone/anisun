@@ -67,7 +67,7 @@ export default function Trending() {
     return (
         <>
             <Stack p={rem(8)}>
-                <Title c="var(--animeth-text-contrast-color)">
+                <Title c="var(--anisun-text-contrast-color)">
                     {translate('common__trending-placeholder')}
                 </Title>
                 <Pagination
