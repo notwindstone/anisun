@@ -2,7 +2,7 @@
 
 <img width="160" height="160" align="center" src="public/favicon.png">
 
-# Anisun
+# [Anisun](https://anisun.vercel.app)
 
 ### A web app for watching anime built with Next.js and Mantine UI
 
