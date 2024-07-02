@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
         title: title,
         description: description,
         openGraph: {
-            siteName: 'Animeth',
+            siteName: 'Anisun',
             type: "website",
             title: title,
             description: description,

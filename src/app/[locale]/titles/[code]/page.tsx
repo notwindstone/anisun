@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
             title: placeholderTitle,
             description: placeholderDescription,
             openGraph: {
-                siteName: 'Animeth',
+                siteName: 'Anisun',
                 type: "website",
                 title: placeholderTitle,
                 description: placeholderDescription,
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
         title: animeName ?? placeholderTitle,
         description: anime.description ?? placeholderDescription,
         openGraph: {
-            siteName: 'Animeth',
+            siteName: 'Anisun',
             type: "website",
             title: animeName,
             description: anime.description ?? placeholderDescription,

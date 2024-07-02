@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
     openGraph: {
         images: "/banner.png",
-        siteName: 'Animeth',
+        siteName: 'Anisun',
         type: "website",
         title: APP_NAME,
         description: APP_DESCRIPTION,
