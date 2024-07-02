@@ -1,22 +1,22 @@
 :root {
     @mixin light-root {
-        --animeth-background-color: #fff;
-        --animeth-ripple-color: #0000004d;
-        --animeth-sidebar-color: #fdfdfd;
-        --animeth-text-contrast-color: #000;
-        --animeth-text-contrast-reversed-color: #fff;
-        --animeth-accent-color: #000;
-        --animeth-secondary-color: darken(var(--animeth-sidebar-color), 0.025);
+        --anisun-background-color: #fff;
+        --anisun-ripple-color: #0000004d;
+        --anisun-sidebar-color: #fdfdfd;
+        --anisun-text-contrast-color: #000;
+        --anisun-text-contrast-reversed-color: #fff;
+        --anisun-accent-color: #000;
+        --anisun-secondary-color: darken(var(--anisun-sidebar-color), 0.025);
     }
 
     @mixin dark-root {
-        --animeth-background-color: #000;
-        --animeth-ripple-color: #ffffff4c;
-        --animeth-sidebar-color: #080808;
-        --animeth-text-contrast-color: #fff;
-        --animeth-text-contrast-reversed-color: #000;
-        --animeth-accent-color: #fff;
-        --animeth-secondary-color: lighten(var(--animeth-sidebar-color), 0.025);
+        --anisun-background-color: #000;
+        --anisun-ripple-color: #ffffff4c;
+        --anisun-sidebar-color: #080808;
+        --anisun-text-contrast-color: #fff;
+        --anisun-text-contrast-reversed-color: #000;
+        --anisun-accent-color: #fff;
+        --anisun-secondary-color: lighten(var(--anisun-sidebar-color), 0.025);
     }
 }
 
@@ -30,16 +30,16 @@ html {
 }
 
 body {
-    background: var(--animeth-background-color);
+    background: var(--anisun-background-color);
     scrollbar-color: #606060 transparent;
 }
 
 .root-group {
-    background: var(--animeth-sidebar-color);
+    background: var(--anisun-sidebar-color);
 }
 
 .app-wrapper {
-    background: var(--animeth-background-color);
+    background: var(--anisun-background-color);
     box-sizing: border-box;
     border-radius: rem(12px) 0 0 0;
     width: 100%;

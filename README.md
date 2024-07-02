@@ -2,26 +2,26 @@
 
 <img width="160" height="160" align="center" src="public/favicon.png">
 
-# Animeth
+# Anisun
 
 ### A web app for watching anime built with Next.js and Mantine UI
 
 <p align="center">
-<strong>English</strong> | <a href="https://github.com/notwindstone/animeth/blob/main/README_russian.md">Русский</a>
+<strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/README_russian.md">Русский</a>
 </p>
 
 </div>
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/notwindstone/Animeth?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/notwindstone/Animeth/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/notwindstone/Anisun?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/notwindstone/Anisun/stargazers)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
 
 ## 📱 Screenshots
 
 <div align="center">
-<img src="public/docs/EN_Screenshot_animeth_main_screen_pc1.png" width="49%">
-<img src="public/docs/EN_Screenshot_animeth_main_screen_pc2.png" width="49%">
-<img src="public/docs/EN_Screenshot_animeth_main_screen_android1.jpg" width="32%">
-<img src="public/docs/EN_Screenshot_animeth_main_screen_android2.jpg" width="32%">
+<img src="public/docs/EN_Screenshot_anisun_main_screen_pc1.png" width="49%">
+<img src="public/docs/EN_Screenshot_anisun_main_screen_pc2.png" width="49%">
+<img src="public/docs/EN_Screenshot_anisun_main_screen_android1.jpg" width="32%">
+<img src="public/docs/EN_Screenshot_anisun_main_screen_android2.jpg" width="32%">
 </div>
 
 ### More screenshots
@@ -30,20 +30,20 @@
 <summary>Expand</summary>
 
 <div align="center">
-<img src="public/docs/Screenshot_animeth_videoplayer1.jpg" width="49%">
-<img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
-<img src="public/docs/Screenshot_animeth_anime_page2.png" width="49%">
-<img src="public/docs/Screenshot_animeth_anime_page1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_popular1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_search1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_account1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_settings1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_search_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_anime_page_description_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_settings_theme_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_settings_about_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_longCommentSection.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_settings_account_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_videoplayer1.jpg" width="49%">
+<img src="public/docs/Screenshot_anisun_videoplayer2.jpg" width="49%">
+<img src="public/docs/Screenshot_anisun_anime_page2.png" width="49%">
+<img src="public/docs/Screenshot_anisun_anime_page1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_popular1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_search1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_account1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_main_settings1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_search_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_anime_page_description_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_settings_theme_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_settings_about_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_longCommentSection.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_settings_account_android1.jpg" width="32%">
 </div>
 
 </details>
@@ -117,7 +117,7 @@
 
 > Cloning the repository
 
-1. Clone this repository by running `git clone https://github.com/notwindstone/animeth`
+1. Clone this repository by running `git clone https://github.com/notwindstone/anisun`
 
 2. Rename the `.env.example` file in the root directory to `.env.local`
 
@@ -232,7 +232,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Click the button
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fnotwindstone%2Fanimeth)
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fnotwindstone%2Fanisun)
 
 Navigate to **Project** -> **Settings** -> **Environment Variables** and then add values to the following keys:
 
@@ -290,7 +290,7 @@ Contributions are welcome!
 
 ## ⭐️ Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/animeth&type=Date)](https://star-history.com/#notwindstone/animeth&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/anisun&type=Date)](https://star-history.com/#notwindstone/anisun&Date)
 
 ## ❤️ Credits
 
@@ -298,7 +298,7 @@ Contributions are welcome!
 
 * cos (discord account) for his help with the UI
 
-* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) and [SovetRomantica](https://sovetromantica.com/) for their wonderful APIs, without which Animeth could not work
+* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) and [SovetRomantica](https://sovetromantica.com/) for their wonderful APIs, without which Anisun could not work
 
 * [Sora](https://github.com/Khanhtran47/Sora) and [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Some of the UI designs are borrowed from them
 
@@ -306,7 +306,7 @@ Contributions are welcome!
 
 ## 📜 License
 
-[![GitHub](https://img.shields.io/github/license/notwindstone/Animeth?style=for-the-badge)](https://github.com/notwindstone/Animeth/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/notwindstone/Anisun?style=for-the-badge)](https://github.com/notwindstone/Anisun/blob/main/LICENSE)
 
 ## 🌐 Cool resources
 

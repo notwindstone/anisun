@@ -78,7 +78,7 @@
     right: 0;
     opacity: 0;
     border-radius: var(--mantine-radius-md);
-    background: var(--animeth-background-color);
+    background: var(--anisun-background-color);
 
     @mixin hover {
         background: var(--mantine-color-default-hover);
@@ -90,7 +90,7 @@
         bottom: rem(12px);
         right: rem(12px);
         transform: scale(1.5);
-        color: var(--animeth-text-contrast-color);
+        color: var(--anisun-text-contrast-color);
     }
 }
 
@@ -118,7 +118,7 @@
 
 .title {
     text-wrap: balance;
-    color: var(--animeth-text-contrast-color);
+    color: var(--anisun-text-contrast-color);
     font-weight: 500;
     font-size: rem(14px);
     line-height: rem(20px);
@@ -154,9 +154,9 @@
 }
 
 .segmentedControlIndicator {
-    background: var(--animeth-text-contrast-color);
+    background: var(--anisun-text-contrast-color);
 }
 
 .segmentedControlLabel:where([data-active]) {
-    color: var(--animeth-background-color);;
+    color: var(--anisun-background-color);;
 }

@@ -11,6 +11,6 @@
     border-radius: var(--mantine-radius-xl);
 
     @mixin hover {
-        background: lighten(var(--animeth-sidebar-color), 0.1)
+        background: lighten(var(--anisun-sidebar-color), 0.1)
     }
 }

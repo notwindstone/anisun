@@ -90,7 +90,7 @@ export const variables: VariablesType = {
         "rx": "Rx",
     },
     "rippleColor": {
-        "color": "var(--animeth-ripple-color)",
+        "color": "var(--anisun-ripple-color)",
     },
     "mantineColors": [
         "black",

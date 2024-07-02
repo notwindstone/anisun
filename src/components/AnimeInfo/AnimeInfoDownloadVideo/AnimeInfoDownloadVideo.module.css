@@ -1,6 +1,6 @@
 .dropdown {
     border: none;
-    background: var(--animeth-sidebar-color);
+    background: var(--anisun-sidebar-color);
     max-height: 50vh;
     width: rem(512px);
     max-width: 80vw;

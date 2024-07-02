@@ -21,8 +21,8 @@ import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const APP_NAME = 'Animeth';
-const APP_DESCRIPTION = "An anime streaming website/PWA based on Next.js 14 and Shikimori, AniLibria, Kodik and SovetRomantica APIs with the Mantine UI kit.";
+const APP_NAME = 'Anisun';
+const APP_DESCRIPTION = "An anime streaming website/PWA based on Next.js 14 and Shikimori, AniLibria, Kodik, Animetize and SovetRomantica APIs with the Mantine UI kit.";
 
 const theme = createTheme({
     defaultRadius: "xl",

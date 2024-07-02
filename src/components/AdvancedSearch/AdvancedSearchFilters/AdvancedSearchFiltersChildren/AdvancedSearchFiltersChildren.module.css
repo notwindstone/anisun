@@ -16,7 +16,7 @@
     &[data-active] {
         transform: scale(1.025);
         z-index: 1;
-        background-color: var(--animeth-secondary-color);
+        background-color: var(--anisun-secondary-color);
         box-shadow: var(--mantine-shadow-md);
         border-radius: var(--mantine-radius-md);
     }

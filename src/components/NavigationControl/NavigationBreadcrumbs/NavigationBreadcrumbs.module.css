@@ -23,6 +23,6 @@
 
     @mixin hover {
         background: darken(var(--mantine-color-default-hover), 0.05);
-        color: var(--animeth-text-contrast-color);
+        color: var(--anisun-text-contrast-color);
     }
 }
