@@ -19,12 +19,13 @@ import RecommendationsNewAnimeData
 import {useTranslations} from "next-intl";
 
 export default function Recommendations({ id }: { id: string } ) {
-    const ALL = { label: "Похожие", value: "all" };
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
+    const ALL = { label: translate('common__similar-label'), value: "all" };
     const [segmentedControlData, setSegmentedControlData] = useState([ALL]);
     const router = useRouter();
     const pathname = usePathname();
-    const info = useTranslations('Info');
-    const locale = info('locale');
     const shikimori = client();
     const [filter, setFilter] = useState(ALL.value);
     const { data, isPending, error } = useQuery({
@@ -43,9 +44,9 @@ export default function Recommendations({ id }: { id: string } ) {
             return interval.stop();
         }
 
-        // idk what this was supposed to be, but i'm assuming
+        // IDK what this was supposed to be, but I'm assuming
         // that this interval was re-rendering the component
-        // and that was causing queryData to be assigned again
+        // and that was causing queryClient to get cache again
         interval.start();
         return interval.stop;
     // eslint-disable-next-line
@@ -62,18 +63,32 @@ export default function Recommendations({ id }: { id: string } ) {
 
         queryData.studios?.forEach((studio) => {
             const dataArray = segmentedControlData;
-            dataArray.push({ label: `Студия: ${studio.name}`, value: `studio-${studio.id}` });
+            dataArray.push({ label: `${translate('component__recommendations__studio-label')}: ${studio.name}`, value: `studio-${studio.id}` });
 
             return setSegmentedControlData(dataArray);
         });
 
         queryData.genres?.forEach((genre) => {
+            let genreName;
+
+            switch (locale) {
+                case "en":
+                    genreName = genre.name;
+                    break;
+                case "ru":
+                    genreName = genre.russian;
+                    break;
+                default:
+                    genreName = genre.name;
+                    break;
+            }
+
             const dataArray = segmentedControlData;
-            dataArray.push({ label: genre.russian, value: genre.id });
+            dataArray.push({ label: genreName, value: genre.id });
 
             return setSegmentedControlData(dataArray);
         });
-    }, [queryData, segmentedControlData]);
+    }, [locale, queryData, segmentedControlData, translate]);
 
     async function getSimilarAnimes() {
         if (filter === ALL.value) {
@@ -91,6 +106,7 @@ export default function Recommendations({ id }: { id: string } ) {
                     filter: [
                         "id",
                         "name",
+                        "english",
                         "russian",
                         "url",
                         "status",
@@ -112,6 +128,7 @@ export default function Recommendations({ id }: { id: string } ) {
                 filter: [
                     "id",
                     "name",
+                    "english",
                     "russian",
                     "url",
                     "status",
@@ -206,7 +223,7 @@ export default function Recommendations({ id }: { id: string } ) {
                     {filtersSegmentedControl}
                 </div>
                 <Text>
-                    К сожалению, ничего не найдено. Попробуйте выбрать другой фильтр
+                    {translate('component__recommendations__nothing-found-label')}
                 </Text>
             </Stack>
         );
@@ -230,8 +247,12 @@ export default function Recommendations({ id }: { id: string } ) {
             }
         }
 
-        const translatedKind = translateAnimeKind(anime.kind ?? '');
-        const translatedStatus = translateAnimeStatus({sortingType: anime.status ?? '', singular: true, lowerCase: true });
+        const translatedKind = translate(
+            translateAnimeKind(anime.kind ?? '')
+        );
+        const translatedStatus = translate(
+            translateAnimeStatus({sortingType: anime.status ?? '', singular: true, lowerCase: true })
+        );
 
         if (isNewType) {
             return (

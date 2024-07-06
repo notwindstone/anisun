@@ -38,9 +38,7 @@ export default function HeroCard({
 }) {
     const info = useTranslations('Info');
     const translate = useTranslations('Translations');
-
     const currentLocale = info('locale');
-    const isEnglish = currentLocale === 'en';
 
     const isHeightLoaded = typeof debouncedHeight === "number";
     const { width: viewportWidth } = useViewportSize();
@@ -71,6 +69,20 @@ export default function HeroCard({
         router.push(`/titles/${animeTitle?.url.replace('https://shikimori.one/animes/', '')}`);
         NProgress.start();
     }, [animeTitle?.url, router]);
+
+    let animeName;
+
+    switch (currentLocale) {
+        case "en":
+            animeName = animeTitle?.english;
+            break;
+        case "ru":
+            animeName = animeTitle?.russian;
+            break;
+        default:
+            animeName = animeTitle?.english;
+            break;
+    }
 
     return useMemo(
         () => (
@@ -125,7 +137,7 @@ export default function HeroCard({
                                             className={classes.title}
                                             style={styles}
                                         >
-                                            {animeTitle?.name}
+                                            {animeName ?? animeTitle?.name}
                                         </Title>
                                     )
                                 }
@@ -149,6 +161,20 @@ export default function HeroCard({
                                                         return;
                                                     }
 
+                                                    let genreName;
+
+                                                    switch (currentLocale) {
+                                                        case "en":
+                                                            genreName = genre.name;
+                                                            break;
+                                                        case "ru":
+                                                            genreName = genre.russian;
+                                                            break;
+                                                        default:
+                                                            genreName = genre.name;
+                                                            break;
+                                                    }
+
                                                     return (
                                                         <Badge
                                                             size={size}
@@ -158,7 +184,7 @@ export default function HeroCard({
                                                                 `${animeTitle?.id}_${genre.name}`
                                                             }
                                                         >
-                                                            {isEnglish ? genre.name : genre.russian}
+                                                            {genreName}
                                                         </Badge>
                                                     );
                                                 })
@@ -179,7 +205,7 @@ export default function HeroCard({
                                             radius="md"
                                             style={styles}
                                         >
-                                            {translate('button-goto')}
+                                            {translate('common__open-label')}
                                         </DecoratedButton>
                                     )
                                 }
@@ -190,14 +216,17 @@ export default function HeroCard({
             </Container>
         ),
         [
+            animeName,
+            translate,
+            currentLocale,
             redirect,
             debouncedHeight,
             ref,
             size,
             responsiveFontScale,
             width,
-            animeTitle?.poster?.originalUrl,
             animeTitle?.name,
+            animeTitle?.poster?.originalUrl,
             animeTitle?.score,
             scoreBadgeColor,
             animeTitle?.genres,

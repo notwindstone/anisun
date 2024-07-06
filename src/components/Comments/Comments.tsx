@@ -10,8 +10,11 @@ import {useEffect, useState} from "react";
 import {makeWordEnding} from "@/utils/Misc/makeWordEnding";
 import classes from './Comments.module.css';
 import {useInViewport} from "@mantine/hooks";
+import {useTranslations} from "next-intl";
 
 export default function Comments({ titleCode }: { titleCode: string }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { ref, inViewport } = useInViewport();
     const [delayed, setDelayed] = useState(false);
     const {
@@ -157,18 +160,38 @@ export default function Comments({ titleCode }: { titleCode: string }) {
     // eslint-disable-next-line
     }, [inViewport]);
 
+    let wordComment, wordCommentsUpToFour, wordComments;
+
+    switch (locale) {
+        case "en":
+            wordComment = 'comment';
+            wordCommentsUpToFour = 'comments';
+            wordComments = 'comments';
+            break;
+        case "ru":
+            wordComment = 'комментарий';
+            wordCommentsUpToFour = 'комментария';
+            wordComments = 'комментариев';
+            break;
+        default:
+            wordComment = 'comment';
+            wordCommentsUpToFour = 'comments';
+            wordComments = 'comments';
+            break;
+    }
+
     return (
         <Box className={classes.wrapper}>
             {   status === 'pending'
                 ? (
-                    <Skeleton w={144} h={32}></Skeleton>
+                    <Skeleton w={144} h={32} m={rem(16)} />
                 ) : (
                     <Title
                         p={rem(16)}
                         order={3}
-                        c="var(--animeth-text-contrast-color)"
+                        c="var(--anisun-text-contrast-color)"
                     >
-                        {totalCount} {makeWordEnding({ replies: totalCount, wordTypes: ['комментарий', 'комментария', 'комментариев'] })}
+                        {totalCount} {makeWordEnding({ replies: totalCount, wordTypes: [wordComment, wordCommentsUpToFour, wordComments] })}
                     </Title>
                 )
             }

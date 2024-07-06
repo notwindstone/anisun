@@ -6,6 +6,7 @@ import {useDisclosure} from "@mantine/hooks";
 import calculateColor from "@/utils/Misc/calculateColor";
 import {useQuery} from "@tanstack/react-query";
 import {client} from "@/lib/shikimori/client";
+import {useTranslations} from "next-intl";
 
 export default (function StudioFilter({
     studio,
@@ -14,6 +15,7 @@ export default (function StudioFilter({
     studio: string | null,
     setStudio: Dispatch<SetStateAction<string | null>>
 }) {
+    const translate = useTranslations('Translations');
     const [studiosData, setStudiosData] = useState<{ label: string, value: string }[]>([]);
     const shikimori = client();
     const { theme } = useCustomTheme();
@@ -66,7 +68,9 @@ export default (function StudioFilter({
 
     if (error) {
         return (
-            <>Ошибка: {error.message}</>
+            <>
+                {translate('common__error-label')}: {error.message}
+            </>
         );
     }
 
@@ -83,7 +87,7 @@ export default (function StudioFilter({
                     }
                 }}
                 classNames={classes}
-                placeholder="Студия"
+                placeholder={translate('component__studio-filter__studio-placeholder-label')}
                 value={studio}
                 onChange={setStudio}
                 data={studiosData}

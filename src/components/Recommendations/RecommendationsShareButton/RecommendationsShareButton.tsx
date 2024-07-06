@@ -15,7 +15,7 @@ export default function RecommendationsShareButton({ url }: { url: string } ) {
     const clipboard = useClipboard({ timeout: 1000 });
 
     function copyLink() {
-        clipboard.copy(`https://animeth.vercel.app/titles/${url.replace('/animes/', '')}`);
+        clipboard.copy(`https://anisun.vercel.app/titles/${url.replace('/animes/', '')}`);
     }
 
     return (

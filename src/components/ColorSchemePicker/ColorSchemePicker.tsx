@@ -7,8 +7,10 @@ import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
 import classes from './ColorSchemePicker.module.css';
 import NProgress from "nprogress";
 import {useDisclosure} from "@mantine/hooks";
+import {useTranslations} from "next-intl";
 
 export default function ColorSchemePicker({ option, customRef }: { option: string, customRef?: RefObject<HTMLDivElement> }) {
+    const translate = useTranslations('Translations');
     const { theme, setTheme } = useCustomTheme();
     const [color, onChange] = useState('#000000');
     const isTopLoader = option === "topLoader";
@@ -60,7 +62,7 @@ export default function ColorSchemePicker({ option, customRef }: { option: strin
                     onChange={onChange}
                     withPicker={false}
                     variant="default"
-                    placeholder="Введите цвет"
+                    placeholder={translate('component__color-scheme-picker__enter-color-label')}
                 />
                 <Group grow wrap="nowrap" justify="space-between">
                     {
@@ -73,8 +75,8 @@ export default function ColorSchemePicker({ option, customRef }: { option: strin
                             >
                                 {
                                     activated
-                                        ? "Скрыть загрузчик"
-                                        : "Показать загрузчик"
+                                        ? translate('component__color-scheme-picker__hide-loader-label')
+                                        : translate('component__color-scheme-picker__show-loader-label')
                                 }
                             </DecoratedButton>
                         )
@@ -85,7 +87,7 @@ export default function ColorSchemePicker({ option, customRef }: { option: strin
                         variant="light"
                         onClick={updateColor}
                     >
-                        Обновить
+                        {translate('common__update-label')}
                     </DecoratedButton>
                 </Group>
             </Stack>

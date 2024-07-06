@@ -19,7 +19,9 @@
 }
 
 .root {
+    flex-wrap: wrap;
     background: none;
+    border-radius: 0;
 
     @media screen and (max-width: rem(750px)) {
         padding-left: rem(16px);

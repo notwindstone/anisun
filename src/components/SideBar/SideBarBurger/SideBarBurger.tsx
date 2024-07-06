@@ -50,7 +50,7 @@ export default function SideBarBurger() {
                             }}
                         >
                             <Image
-                                alt="Animeth website icon"
+                                alt="Anisun website icon"
                                 src="/favicon.png"
                                 radius="xl"
                                 w={32}

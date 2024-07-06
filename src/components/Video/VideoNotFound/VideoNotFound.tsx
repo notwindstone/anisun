@@ -1,8 +1,11 @@
 import {AspectRatio, Box, Center, Group, Stack, Text} from "@mantine/core";
 import {IconAlertCircle} from "@tabler/icons-react";
 import classes from './VideoNotFound.module.css';
+import {useTranslations} from "next-intl";
 
 export default function VideoNotFound() {
+    const translate = useTranslations('Translations');
+
     return (
         <AspectRatio className={classes.aspectRatio} ratio={16 / 9}>
             <Center w="100%" h="100%">
@@ -12,10 +15,10 @@ export default function VideoNotFound() {
                     </Box>
                     <Stack className={classes.stack}>
                         <Text className={classes.title}>
-                            Видео недоступно
+                            {translate('component__video-not-found__title-label')}
                         </Text>
                         <Text className={classes.subtitle}>
-                            Попробуйте выбрать другой плеер
+                            {translate('component__video-not-found__description-label')}
                         </Text>
                     </Stack>
                 </Group>

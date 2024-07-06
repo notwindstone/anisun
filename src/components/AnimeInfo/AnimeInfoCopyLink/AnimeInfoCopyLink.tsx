@@ -10,7 +10,7 @@ export default function AnimeInfoCopyLink() {
     const translate = useTranslations('Translations');
 
     function copyLink() {
-        clipboard.copy(`https://animeth.vercel.app${pathname}`);
+        clipboard.copy(`https://anisun.vercel.app${pathname}`);
     }
 
     return (

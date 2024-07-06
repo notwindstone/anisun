@@ -21,7 +21,7 @@
 
 .indicator {
     @media screen and (max-width: rem(750px)) {
-        background: var(--animeth-text-contrast-color);
+        background: var(--anisun-text-contrast-color);
     }
 }
 

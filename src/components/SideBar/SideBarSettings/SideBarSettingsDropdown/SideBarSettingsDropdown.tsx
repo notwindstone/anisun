@@ -36,16 +36,24 @@ export default function SideBarSettingsDropdown() {
     const { theme } = useCustomTheme();
     const [section, setSection] = useState<string>(GENERAL.value);
     const [opened, { toggle }] = useDisclosure(false);
+    const translate = useTranslations('Translations');
     const info = useTranslations('Info');
     const locale = info('locale');
     const router = useRouter();
 
+    const translatedData = [GENERAL, LANGUAGE, ABOUT].map((data) => {
+        return {
+            label: translate(data.label),
+            value: data.value,
+        };
+    });
+
     const WEBSITE_COLOR = {
-        label: "Элементы сайта",
+        label: translate('common__theme-website-elements-label'),
         value: "website",
     };
     const NEXT_TOP_LOADER_COLOR = {
-        label: "Индикатор загрузчика",
+        label: translate('common__theme-loader-label'),
         value: "topLoader",
     };
 
@@ -59,8 +67,8 @@ export default function SideBarSettingsDropdown() {
         case "language":
             content = (
                 <Stack className={classes.stack}>
-                    <Title c="var(--animeth-text-contrast-color)">
-                        Язык
+                    <Title c="var(--anisun-text-contrast-color)">
+                        {translate('common__language-label')}
                     </Title>
                     <Select
                         classNames={{
@@ -94,7 +102,7 @@ export default function SideBarSettingsDropdown() {
             content = (
                 <Stack align="center">
                     <Image
-                        alt="Animeth website icon"
+                        alt="Anisun website icon"
                         src="/favicon.png"
                         radius="xl"
                         w={64}
@@ -123,7 +131,7 @@ export default function SideBarSettingsDropdown() {
                         }
                     </Group>
                     <Text ta="center">
-                        Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.
+                        {translate('common__website-description-text')}
                     </Text>
                 </Stack>
             );
@@ -132,8 +140,8 @@ export default function SideBarSettingsDropdown() {
         default:
             content = (
                 <Stack>
-                    <Title c="var(--animeth-text-contrast-color)">
-                        Тема
+                    <Title c="var(--anisun-text-contrast-color)">
+                        {translate('common__theme-label')}
                     </Title>
                     <SegmentedControl
                         autoContrast
@@ -167,7 +175,7 @@ export default function SideBarSettingsDropdown() {
                             />
                         }
                     >
-                        Выбрать свой цвет
+                        {translate('common__menu-label')}
                     </Button>
                     <Collapse in={opened}>
                         <ColorSchemePicker option={themingOption} />
@@ -196,11 +204,7 @@ export default function SideBarSettingsDropdown() {
                     withItemsBorders={false}
                     value={section}
                     onChange={setSection}
-                    data={[
-                        GENERAL,
-                        LANGUAGE,
-                        ABOUT,
-                    ]}
+                    data={translatedData}
                 />
                 {content}
             </Group>

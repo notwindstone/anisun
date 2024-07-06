@@ -9,7 +9,7 @@
     border: rem(2px) solid var(--mantine-color-default-border);
 
     @mixin hover {
-        color: var(--animeth-text-contrast-color);
+        color: var(--anisun-text-contrast-color);
         background: darken(var(--mantine-color-default-hover), 0.05);
     }
 }

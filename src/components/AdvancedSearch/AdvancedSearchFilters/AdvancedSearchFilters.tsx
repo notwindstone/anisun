@@ -171,7 +171,7 @@ export default function AdvancedSearchFilters() {
                 <Stack className={classes.filters}>
                     <AdvancedSearchFiltersChildren />
                     <DecoratedButton onClick={setFilters}>
-                        {translate('filters-submit-label')}
+                        {translate('common__filters-submit-label')}
                     </DecoratedButton>
                 </Stack>
             </Stack>

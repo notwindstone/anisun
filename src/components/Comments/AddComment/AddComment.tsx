@@ -7,8 +7,12 @@ import {CommentType} from "@/types/Comments/Comment.type";
 import {useUser} from "@clerk/nextjs";
 import classes from './AddComment.module.css';
 import DecoratedButton from "@/components/DecoratedButton/DecoratedButton";
+import {useTranslations} from "next-intl";
 
 export function AddComment({ title, parentUUID, sendComment }: { title: string, parentUUID: string | null, sendComment: (comment: CommentType) => void }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
+    const translate = useTranslations('Translations');
     const { isLoaded, isSignedIn, user } = useUser();
     const ref = useRef<HTMLTextAreaElement>(null);
     const [delayed, setDelayed] = useState(false);
@@ -17,30 +21,30 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
 
     const handleSubmit = async () => {
         if (delayed) {
-            return notify.delay();
+            return notify.delay(locale);
         }
 
         if (!isUser || !user) {
-            return notify.notAuthenticated();
+            return notify.notAuthenticated(locale);
         }
 
         const message = ref.current?.value ?? "";
 
         if (message.length < 1 || message.length > 2000) {
-            return notify.incorrectInput();
+            return notify.incorrectInput(locale);
         }
 
         setDelayed(true);
 
         const notificationId = nanoid();
 
-        notify.loading(notificationId, true);
+        notify.loading(notificationId, true, locale);
 
         const uuid = nanoid();
         const createdAt = new Date().toJSON();
 
         const userId = user?.id;
-        const username = user?.username ?? "Пользователь без никнейма";
+        const username = user?.username ?? translate('common__no-nickname-label');
         const avatar = user?.imageUrl;
         const children = [{ count: 0 }];
 
@@ -77,7 +81,7 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
             false,
         );
 
-        notify.loading(notificationId, false);
+        notify.loading(notificationId, false, locale);
 
         setTimeout(() => {
             setDelayed(false);
@@ -94,8 +98,8 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                 ref={ref}
                 placeholder={
                     isUser
-                        ? "Написать комментарий..."
-                        : "Вы должны войти в аккаунт, чтобы написать комментарий"
+                        ? translate('component__add-comment__write-label')
+                        : translate('component__add-comment__no-account-label')
                 }
                 autosize
                 required
@@ -108,7 +112,7 @@ export function AddComment({ title, parentUUID, sendComment }: { title: string, 
                     variant="filled"
                     disabled={!isUser}
                 >
-                    Написать
+                    {translate('common__send-label')}
                 </DecoratedButton>
             </Flex>
         </Paper>

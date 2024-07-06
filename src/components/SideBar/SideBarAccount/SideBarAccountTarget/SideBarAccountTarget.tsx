@@ -12,7 +12,7 @@ import {useTranslations} from "next-intl";
 
 export default function SideBarAccountTarget() {
     const translate = useTranslations('Translations');
-    const accountPlaceholder = translate('account-placeholder');
+    const accountPlaceholder = translate('common__account-placeholder-label');
     const { user } = useUser();
     const { expanded, setExpanded } = useContext(
         SideBarPopoverContext
@@ -54,7 +54,7 @@ export default function SideBarAccountTarget() {
                                 className={classes.avatar}
                                 src={user?.imageUrl ?? '/blurred.png'}
                                 size={rem(32)}
-                                alt={`Аватар пользователя ${user?.username}`}
+                                alt={`User profile picture - ${user?.username}`}
                             >
                                 {user?.username?.[0]}
                             </Avatar>

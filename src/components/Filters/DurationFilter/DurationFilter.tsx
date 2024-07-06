@@ -4,6 +4,7 @@ import classes from '@/components/Filters/FiltersSelect.module.css';
 import {useDisclosure} from "@mantine/hooks";
 import calculateColor from "@/utils/Misc/calculateColor";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {useTranslations} from "next-intl";
 
 export default memo(function DurationFilter({
     durations,
@@ -12,6 +13,7 @@ export default memo(function DurationFilter({
     durations: string[],
     setDurations: Dispatch<SetStateAction<string[]>>
 }) {
+    const translate = useTranslations('Translations');
     const { theme } = useCustomTheme();
     const [focused, { open, close }] = useDisclosure(false);
     const color = calculateColor(theme.color);
@@ -26,13 +28,22 @@ export default memo(function DurationFilter({
                 }
             }}
             classNames={classes}
-            placeholder="Длительность эпизодов"
+            placeholder={translate('component__duration-filter__episodes-duration-label')}
             value={durations}
             onChange={setDurations}
             data={[
-                { label: "Меньше 10 минут", value: "S" },
-                { label: "10 - 30 минут", value: "D" },
-                { label: "Больше 30 минут", value: "F" },
+                {
+                    label: translate('component__duration-filter__duration-less-than-ten-minutes-label'),
+                    value: "S"
+                },
+                {
+                    label: translate('component__duration-filter__duration-ten-to-thirty-minutes-label'),
+                    value: "D"
+                },
+                {
+                    label: translate('component__duration-filter__duration-more-than-thirty-minutes-label'),
+                    value: "F"
+                },
             ]}
         />
     );

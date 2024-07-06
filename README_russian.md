@@ -2,26 +2,26 @@
 
 <img width="160" height="160" align="center" src="public/favicon.png">
 
-# Animeth
+# [Anisun](https://anisun.vercel.app)
 
 ### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
 <p align="center">
-<a href="https://github.com/notwindstone/animeth/blob/main/README.md">English</a> | <strong>Русский</strong>
+<a href="https://github.com/notwindstone/anisun/blob/main/README.md">English</a> | <strong>Русский</strong>
 </p>
 
 </div>
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/notwindstone/Animeth?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/notwindstone/Animeth/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/stars/notwindstone/Anisun?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/notwindstone/Anisun/stargazers)
 [![Discord Server](https://img.shields.io/discord/1218281145138151430?label=Discord&labelColor=7289da&color=2c2f33&style=for-the-badge)](https://discord.gg/JhmkZDScfg)
 
 ## 📱 Скриншоты
 
 <div align="center">
-<img src="public/docs/Screenshot_animeth_main_screen_pc1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_pc2.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_screen_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_main_screen_android2.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_main_screen_pc1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_main_screen_pc2.png" width="49%">
+<img src="public/docs/Screenshot_anisun_main_screen_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_main_screen_android2.jpg" width="32%">
 </div>
 
 ### Больше скриншотов
@@ -30,20 +30,20 @@
 <summary>Раскрыть</summary>
 
 <div align="center">
-<img src="public/docs/Screenshot_animeth_videoplayer1.jpg" width="49%">
-<img src="public/docs/Screenshot_animeth_videoplayer2.jpg" width="49%">
-<img src="public/docs/Screenshot_animeth_anime_page2.png" width="49%">
-<img src="public/docs/Screenshot_animeth_anime_page1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_popular1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_search1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_account1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_main_settings1.png" width="49%">
-<img src="public/docs/Screenshot_animeth_search_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_anime_page_description_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_settings_theme_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_settings_about_android1.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_longCommentSection.jpg" width="32%">
-<img src="public/docs/Screenshot_animeth_settings_account_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_videoplayer1.jpg" width="49%">
+<img src="public/docs/Screenshot_anisun_videoplayer2.jpg" width="49%">
+<img src="public/docs/Screenshot_anisun_anime_page2.png" width="49%">
+<img src="public/docs/Screenshot_anisun_anime_page1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_popular1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_search1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_account1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_main_settings1.png" width="49%">
+<img src="public/docs/Screenshot_anisun_search_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_anime_page_description_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_settings_theme_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_settings_about_android1.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_longCommentSection.jpg" width="32%">
+<img src="public/docs/Screenshot_anisun_settings_account_android1.jpg" width="32%">
 </div>
 
 </details>
@@ -74,7 +74,7 @@
 
 ## ⭐️ Возможности
 
-* Просмотр аниме с субтитрами или озвучкой (Kodik, SovetRomantica, Anilibria)
+* Просмотр аниме с субтитрами или озвучкой (на русском или английском)
 
 * Загрузка аниме с торрента или напрямую через сайт (.m3u8)
 
@@ -91,6 +91,8 @@
 ...и ещё много чего!
 
 ## ✅ Список задач
+
+- [x] Локализировать сайт с [next-intl](https://next-intl-docs.vercel.app/)
 
 - [x] Добавить возможность выбирать базу данных в `.env.local`
 
@@ -115,7 +117,7 @@
 
 > Клонирование репозитория
 
-1. Клонируйте этот репозиторий, введя `git clone https://github.com/notwindstone/animeth`
+1. Клонируйте этот репозиторий, введя `git clone https://github.com/notwindstone/anisun`
 
 2. Переименуйте находящийся в корне приложения файл `.env.example` в `.env.local`
 
@@ -155,7 +157,7 @@
 
 > Последние штрихи
 
-1. (Необязательно) Если вы хотите смотреть аниме не только через плеер Animeth (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (вам нужно связаться с ними через email почту)
+1. (Необязательно) Если вы хотите смотреть аниме не только через плеер Anisun (который только с озвучкой Anilibria), но и через Kodik, то получите токен Kodik на http://kodik.cc/ (вам нужно связаться с ними через email почту)
 
 2. Запустите команду `npm install` для того, чтобы установить все зависимости
 
@@ -230,7 +232,7 @@ npm run start
 
 Нажмите кнопку ниже:
 
-[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fnotwindstone%2Fanimeth)
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fnotwindstone%2Fanisun)
 
 Затем перейдите по **Project** -> **Settings** -> **Environment Variables** и создайте следующие переменные с ключом и значением:
 
@@ -288,7 +290,7 @@ npm run start
 
 ## ⭐️ График роста кол-ва звёздочек
 
-[![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/animeth&type=Date)](https://star-history.com/#notwindstone/animeth&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/anisun&type=Date)](https://star-history.com/#notwindstone/anisun&Date)
 
 ## ❤️ Особая благодарность
 
@@ -296,7 +298,7 @@ npm run start
 
 * cos (discord аккаунт) за оказание помощи в дизайне сайта
 
-* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) и [SovetRomantica](https://sovetromantica.com/) за их прекрасные API, без которых Animeth не смог бы работать
+* [Shikimori](https://shikimori.one/api/doc/graphql), [Anilibria](https://github.com/anilibria/docs), [Kodik](http://kodik.cc/) и [SovetRomantica](https://sovetromantica.com/) за их прекрасные API, без которых Anisun не смог бы работать
 
 * [Sora](https://github.com/Khanhtran47/Sora) и [Sync for Reddit](https://github.com/laurencedawson/sync-for-reddit). Некоторые элементы дизайна были позаимствованы у них
 
@@ -304,7 +306,7 @@ npm run start
 
 ## 📜 Лицензия
 
-[![GitHub](https://img.shields.io/github/license/notwindstone/Animeth?style=for-the-badge)](https://github.com/notwindstone/Animeth/blob/main/LICENSE)
+[![GitHub](https://img.shields.io/github/license/notwindstone/Anisun?style=for-the-badge)](https://github.com/notwindstone/Anisun/blob/main/LICENSE)
 
 ## 🌐 Ресурсы
 

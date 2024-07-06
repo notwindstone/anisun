@@ -1,10 +1,10 @@
 .input {
-    background: var(--animeth-secondary-color);
+    background: var(--anisun-secondary-color);
 }
 
 .dropdown {
-    background: var(--animeth-secondary-color);
-    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+    background: var(--anisun-secondary-color);
+    border-color: alpha(var(--anisun-text-contrast-color), 0.05);
     z-index: 30000 !important;
     border-radius: rem(16px);
     padding-right: 0;
@@ -19,7 +19,7 @@
     border-radius: rem(16px);
 
     @mixin hover {
-        background: alpha(var(--animeth-accent-color), 0.2)
+        background: alpha(var(--anisun-accent-color), 0.2)
     }
 
     &:where([data-combobox-disabled]) {

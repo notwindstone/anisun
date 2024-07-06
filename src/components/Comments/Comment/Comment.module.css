@@ -48,8 +48,8 @@
 
 .collapse {
     margin-left: rem(88px);
-    color: var(--animeth-background-color);
-    background: var(--animeth-text-contrast-color);
+    color: var(--anisun-background-color);
+    background: var(--anisun-text-contrast-color);
     border-radius: var(--mantine-radius-md);
     padding: rem(8px);
     font-size: rem(16px);
@@ -81,14 +81,14 @@
 }
 
 .textArea {
-    background: var(--animeth-sidebar-color);
+    background: var(--anisun-sidebar-color);
     padding: rem(8px) rem(16px);
     border-radius: var(--mantine-radius-md);
 }
 
 .link {
     text-decoration: none;
-    color: var(--animeth-text-contrast-color);
+    color: var(--anisun-text-contrast-color);
     font-weight: 500;
 }
 
@@ -133,7 +133,7 @@
 }
 
 .iconWrapper {
-    background: var(--animeth-secondary-color);
+    background: var(--anisun-secondary-color);
     border: none;
 
     @media screen and (max-width: rem(750px)) {
@@ -147,6 +147,15 @@
 
 .hiddenReplyWrapper {
     display: none;
+    padding-left: rem(96px);
+
+    @media screen and (max-width: rem(750px)) {
+        padding-left: rem(80px);
+    }
+
+    @media screen and (max-width: rem(500px)) {
+        padding-left: rem(72px);
+    }
 }
 
 .toggledReplyWrapper {

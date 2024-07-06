@@ -249,7 +249,7 @@ export const options = ({
         url: 'https://shikimori.one/api/graphql',
         headers: {
             'content-type': 'application/json',
-            'User-Agent': 'Animeth'
+            'User-Agent': 'Anisun'
         },
         data: {
             query: `

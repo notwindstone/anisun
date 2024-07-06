@@ -7,14 +7,14 @@ import {getTranslations} from "next-intl/server";
 export async function generateMetadata(): Promise<Metadata> {
     const translate = await getTranslations('Translations');
 
-    const title = translate('page-trending-title');
-    const description = translate('page-trending-description');
+    const title = translate('page__trending__trending-title');
+    const description = translate('page__trending__trending-description');
 
     return {
         title: title,
         description: description,
         openGraph: {
-            siteName: 'Animeth',
+            siteName: 'Anisun',
             type: "website",
             title: title,
             description: description,

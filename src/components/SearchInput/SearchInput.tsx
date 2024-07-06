@@ -9,8 +9,10 @@ import {AdvancedSearchContext} from "@/utils/Contexts/Contexts";
 import calculateColor from "@/utils/Misc/calculateColor";
 import classes from './SearchInput.module.css';
 import {IconSearch} from "@tabler/icons-react";
+import {useTranslations} from "next-intl";
 
 export default function SearchInput() {
+    const translate = useTranslations('Translations');
     const { setSearchInput } = useContext(AdvancedSearchContext);
     const [input, setInput] = useState('');
     const { theme } = useCustomTheme();
@@ -30,7 +32,7 @@ export default function SearchInput() {
             onChange={(event) => setInput(event.currentTarget.value)}
             size={isMobile ? "md" : "xl"}
             ref={ref}
-            placeholder="Поиск"
+            placeholder={translate('common__search-placeholder')}
             leftSection={
                 <IconSearch size={24} stroke={1.5} />
             }

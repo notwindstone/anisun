@@ -30,15 +30,15 @@ export async function generateMetadata({ params }: { params: { code: string } })
             })
     )?.animes[0];
 
-    const placeholderTitle = translate('page-anime-placeholder-title');
-    const placeholderDescription = translate('page-anime-placeholder-description');
+    const placeholderTitle = translate('page__anime__metadata-placeholder-title');
+    const placeholderDescription = translate('page__anime__metadata-placeholder-description');
 
     if (!anime) {
         return {
             title: placeholderTitle,
             description: placeholderDescription,
             openGraph: {
-                siteName: 'Animeth',
+                siteName: 'Anisun',
                 type: "website",
                 title: placeholderTitle,
                 description: placeholderDescription,
@@ -64,7 +64,7 @@ export async function generateMetadata({ params }: { params: { code: string } })
         title: animeName ?? placeholderTitle,
         description: anime.description ?? placeholderDescription,
         openGraph: {
-            siteName: 'Animeth',
+            siteName: 'Anisun',
             type: "website",
             title: animeName,
             description: anime.description ?? placeholderDescription,

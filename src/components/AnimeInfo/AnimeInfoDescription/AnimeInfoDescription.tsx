@@ -27,6 +27,7 @@ import sanitizeHTML from "@/utils/Misc/sanitizeHTML";
 
 export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
     const info = useTranslations('Info');
+    const translate = useTranslations('Translations');
     const locale = info('locale');
     const [opened, { open, close }] = useDisclosure(false);
     const [modalOpened, { open: openModal, close: closeModal }] = useDisclosure(false);
@@ -54,18 +55,24 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
         }
     }
 
+    const nextEpisode = translate('component__anime-info-description__next-episode-label');
+
     const nextEpisodeAt
-        = data?.nextEpisodeAt ? `Следующий эпизод ${formatNextEpisodeDate(data.nextEpisodeAt)} • ` : "";
+        = data?.nextEpisodeAt
+            ? `${nextEpisode} ${formatNextEpisodeDate({ nextEpisodeDate: data.nextEpisodeAt, locale: locale })} • `
+            : "";
     const airedOn
         = (data?.airedOn?.date && data?.status)
-        ? (
-            `${translateAnimeStatus({ 
-                sortingType: data.status, 
-                withPrepositions: true,
-            })} ${formatAiredOnDate(data.airedOn.date)} • `
-        ) : "";
-    const animeKind
-        = data?.kind ? `${translateAnimeKind(data.kind)}` : "";
+            ? (
+                `${translate(
+                    translateAnimeStatus({
+                        sortingType: data.status,
+                        withPrepositions: true,
+                    })
+                )} ${formatAiredOnDate({ airedOnDate: data.airedOn.date, locale: locale })} • `
+            )
+            : "";
+    const animeKind = data?.kind ? translate(translateAnimeKind(data.kind)) : "";
 
     let description;
 
@@ -129,7 +136,9 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         </Text>
                         {
                             !opened && (
-                                <Text className={classes.expandText}>Нажмите, чтобы раскрыть</Text>
+                                <Text className={classes.expandText}>
+                                    {translate('component__anime-info-description__expand-label')}
+                                </Text>
                             )
                         }
                     </Group>
@@ -144,7 +153,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                             ((cleanDescription && data?.description) || description) && (
                                 <Stack gap={rem(8)}>
                                     <Title className={classes.heading} pt={rem(8)} order={4}>
-                                        Описание
+                                        {translate('component__anime-info-description__description-label')}
                                     </Title>
                                     {description}
                                 </Stack>
@@ -172,53 +181,71 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                             />
                         </Container>
                     </Group>
-                    <Title className={classes.heading} order={4}>Информация</Title>
+                    <Title className={classes.heading} order={4}>
+                        {translate('component__anime-info-description__info-label')}
+                    </Title>
                     {
                         !!data?.score && (
                             <Text>
-                                Оценка: {data.score}
+                                {translate('component__anime-info-description__score-label')}: {data.score}
                             </Text>
                         )
                     }
                     {
                         (data?.episodesAired && data?.episodes) > 0 && (
                             <Text>
-                                Эпизоды: {data.episodesAired} / {data.episodes}
+                                {translate('component__anime-info-description__episodes-label')}: {data.episodesAired} / {data.episodes}
                             </Text>
                         )
                     }
                     {
                         !!data?.duration && (
                             <Text>
-                                Длительность эпизода: {data.duration} мин.
+                                {translate('component__anime-info-description__episode-duration-label')}: {data.duration} мин.
                             </Text>
                         )
                     }
                     {
                         data?.rating && (
                             <Text>
-                                Возрастной рейтинг: {variables.rating[data.rating]}
+                                {translate('component__anime-info-description__rating-label')}: {variables.rating[data.rating]}
                             </Text>
                         )
                     }
                     {
                         data?.japanese && (
                             <Text>
-                                Японское название: {data.japanese}
+                                {translate('component__anime-info-description__japanese-label')}: {data.japanese}
                             </Text>
                         )
                     }
                     {
-                        data?.english && (
-                            <Text>
-                                Английское название: {data.english}
-                            </Text>
+                        locale === 'ru' ? (
+                            <>
+                                {
+                                    data?.english && (
+                                        <Text>
+                                            {translate('component__anime-info-description__english-label')}: {data.english}
+                                        </Text>
+                                    )
+                                }
+                            </>
+                        ) : (
+                            <>
+                                {
+                                    data?.russian && (
+                                        <Text>
+                                            {translate('component__anime-info-description__russian-label')}: {data.russian}
+                                        </Text>
+                                    )
+                                }
+                            </>
                         )
                     }
                     {
                         data?.synonyms?.length > 0 && (
                             <Text>
-                                Другие названия: {data.synonyms.map((synonym, index) => (
+                                {translate('component__anime-info-description__other-anime-names-label')}: {data.synonyms.map((synonym, index) => (
                                     <span key={synonym}>{index ? ', ' : ''}{synonym}</span>
                                 ))}
                             </Text>
@@ -227,7 +254,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.fandubbers?.length > 0 && (
                             <Text>
-                                Фанатский дубляж: {data.fandubbers.map((fandub, index) => (
+                                {translate('component__anime-info-description__fandubs-label')}: {data.fandubbers.map((fandub, index) => (
                                     <span key={fandub}>{index ? ', ' : ''}{fandub}</span>
                                 ))}
                             </Text>
@@ -236,7 +263,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.fansubbers?.length > 0 && (
                             <Text>
-                                Фанатские субтитры: {data.fansubbers.map((fansub, index) => (
+                                {translate('component__anime-info-description__fansubs-label')}: {data.fansubbers.map((fansub, index) => (
                                     <span key={fansub}>{index ? ', ' : ''}{fansub}</span>
                                 ))}
                             </Text>
@@ -245,7 +272,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.url && (
                             <Text>
-                                Страница на Shikimori: <Anchor
+                                {translate('component__anime-info-description__shikimori-page-label')}: <Anchor
                                     c={theme.color} target="_blank"
                                     href={data.url}
                                 >{data.name}</Anchor>
@@ -255,15 +282,31 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.related?.length > 0 && (
                             <>
-                                <Title className={classes.heading} order={4}>Связанное</Title>
+                                <Title className={classes.heading} order={4}>
+                                    {translate('component__anime-info-description__related-label')}
+                                </Title>
                                 <Group>
                                     {
                                         data.related.map((relation) => {
+                                            let relationLabel;
+
+                                            switch (locale) {
+                                                case "en":
+                                                    relationLabel = relation.relationEn;
+                                                    break;
+                                                case "ru":
+                                                    relationLabel = relation.relationRu;
+                                                    break;
+                                                default:
+                                                    relationLabel = relation.relationEn;
+                                                    break;
+                                            }
+
                                             return (
                                                 <Group align="flex-start" key={relation.id}>
                                                     <Image
                                                         radius="md"
-                                                        alt={relation.relationRu}
+                                                        alt={relationLabel}
                                                         h={rem(48)}
                                                         w="auto"
                                                         src={relation.anime?.poster?.mainUrl ?? relation.manga?.poster?.mainUrl}
@@ -273,7 +316,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                                                             {relation.anime?.name ?? relation.manga?.name}
                                                         </Text>
                                                         <Text className={classes.relationSubtitle} lineClamp={1}>
-                                                            {relation.relationRu}
+                                                            {relationLabel}
                                                         </Text>
                                                         <Text lineClamp={1}></Text>
                                                     </Stack>
@@ -288,7 +331,9 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                     {
                         data?.videos?.length > 0 && (
                             <>
-                                <Title className={classes.heading} order={4}>Видео</Title>
+                                <Title className={classes.heading} order={4}>
+                                    {translate('component__anime-info-description__videos-label')}
+                                </Title>
                                 <Group className={classes.videosGroup}>
                                     {
                                         data.videos.map((video) => {
@@ -315,7 +360,7 @@ export default function AnimeInfoDescription({ data }: { data: AnimeType }) {
                         )
                     }
                     <UnstyledButton className={classes.button} onClick={close}>
-                        Свернуть
+                        {translate('common__collapse-label')}
                     </UnstyledButton>
                 </Stack>
             </Group>

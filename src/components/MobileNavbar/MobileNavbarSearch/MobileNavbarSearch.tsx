@@ -6,6 +6,7 @@ import {usePathname, useRouter} from "next/navigation";
 import {useTranslations} from "next-intl";
 
 export default function MobileNavbarSearch() {
+    const translate = useTranslations('Translations');
     const router = useRouter();
     const pathname = usePathname();
     const info = useTranslations('Info');
@@ -29,7 +30,9 @@ export default function MobileNavbarSearch() {
                     >
                         <IconSearch className={classes.icon} stroke={1.5} size={rem(28)} />
                     </ThemeIcon>
-                    <Text className={classes.text}>Поиск</Text>
+                    <Text className={classes.text}>
+                        {translate('common__search-placeholder')}
+                    </Text>
                 </UnstyledButton>
             </Center>
         </>

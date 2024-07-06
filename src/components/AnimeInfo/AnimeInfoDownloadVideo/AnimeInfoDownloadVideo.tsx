@@ -83,7 +83,7 @@ export default function AnimeInfoDownloadVideo({ id }: { id: string }) {
                             leftSection={<IconDownload size={18} stroke={1.5} />}
                             onClick={togglePopover}
                         >
-                            {translate('common-download-label')}
+                            {translate('common__download-label')}
                         </DecoratedButton>
                     </div>
                 </Popover.Target>

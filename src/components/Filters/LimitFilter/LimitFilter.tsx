@@ -1,6 +1,7 @@
 import {rem, Slider, Stack, Text} from "@mantine/core";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import {Dispatch, memo, SetStateAction} from "react";
+import {useTranslations} from "next-intl";
 
 export default memo(function LimitFilter({
     limit,
@@ -9,12 +10,13 @@ export default memo(function LimitFilter({
     limit: number,
     setLimit: Dispatch<SetStateAction<number>>
 }) {
+    const translate = useTranslations('Translations');
     const { theme } = useCustomTheme();
 
     return (
         <Stack gap={rem(4)}>
             <Text size="sm">
-                Лимит
+                {translate('component__limit-filter__limit-label')}
             </Text>
             <Slider
                 pb={rem(24)}

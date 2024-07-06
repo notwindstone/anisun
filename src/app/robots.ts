@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
             allow: '/',
             disallow: '/account/',
         },
-        sitemap: 'https://animeth.vercel.app/sitemap.xml',
+        sitemap: 'https://anisun.vercel.app/sitemap.xml',
     };
 }

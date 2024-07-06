@@ -1,8 +1,22 @@
 import {notifications} from "@mantine/notifications";
 import notificationsData from '../../../configs/notificationsData.json';
 
-export const done = () => {
+export const done = (locale: string) => {
     notifications.clean();
 
-    return notifications.show(notificationsData.done);
+    let message;
+
+    switch (locale) {
+        case "en":
+            message = notificationsData.done.en;
+            break;
+        case "ru":
+            message = notificationsData.done.ru;
+            break;
+        default:
+            message = notificationsData.done.en;
+            break;
+    }
+
+    return notifications.show(message);
 };

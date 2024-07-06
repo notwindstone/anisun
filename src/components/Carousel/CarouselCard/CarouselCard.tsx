@@ -7,24 +7,38 @@ import useCustomTheme from "@/hooks/useCustomTheme";
 import {useHover} from "@mantine/hooks";
 import {AnimeType} from "@/types/Shikimori/Responses/Types/Anime.type";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
-import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
 import calculateColor from "@/utils/Misc/calculateColor";
+import {useTranslations} from "next-intl";
+import getCarouselCardDate from "@/utils/Misc/getCarouselCardData";
 
 export default function CarouselCard({
     animeTitle,
 }: {
     animeTitle?: AnimeType;
 }) {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const { hovered, ref } = useHover();
     const color = calculateColor(theme.color);
-    const animeStatus = animeTitle?.status ?? "";
-    const isAnnounced = animeStatus === 'anons';
-    const isReleased = animeStatus === 'released';
-    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
-    const episodesBadge = isReleased
-        ? `${animeTitle?.episodes} / ${animeTitle?.episodes}`
-        : `${animeTitle?.episodesAired} / ${animeTitle?.episodes}`;
+
+    const {
+        animeStatus,
+        animeName,
+        scoreBadgeColor,
+        isAnnounced,
+        episodesBadge,
+    } = getCarouselCardDate({
+        locale: locale,
+        status: animeTitle?.status,
+        episodes: animeTitle?.episodes,
+        english: animeTitle?.english,
+        score: animeTitle?.score,
+        episodesAired: animeTitle?.episodesAired,
+        russian: animeTitle?.russian,
+        original: animeTitle?.name,
+    });
 
     return (
         <Paper
@@ -45,7 +59,11 @@ export default function CarouselCard({
                 }}
             >
                 <Badge className={classes.status} color="black">
-                    {translateAnimeStatus({ sortingType: animeStatus, singular: true })}
+                    {
+                        translate(
+                            translateAnimeStatus({ sortingType: animeStatus, singular: true })
+                        )
+                    }
                 </Badge>
                 {
                     !isAnnounced && (
@@ -73,9 +91,9 @@ export default function CarouselCard({
                     <Title
                         className={classes.title}
                         order={3}
-                        lineClamp={isAnnounced ? 3 : 2}
+                        lineClamp={isAnnounced ? 4 : 3}
                     >
-                        {animeTitle?.name}
+                        {animeName}
                     </Title>
                 </Flex>
             </Overlay>

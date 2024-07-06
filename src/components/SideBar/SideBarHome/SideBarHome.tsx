@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 
 export default function SideBarHome() {
     const translate = useTranslations('Translations');
-    const homeLabel = translate('home-placeholder');
+    const homeLabel = translate('common__home-label');
 
     const info = useTranslations('Info');
     const locale = info('locale');

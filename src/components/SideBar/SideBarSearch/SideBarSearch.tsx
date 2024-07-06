@@ -5,7 +5,7 @@ import {useTranslations} from "next-intl";
 
 export default function SideBarSearch() {
     const translate = useTranslations('Translations');
-    const searchLabel = translate('search-placeholder');
+    const searchLabel = translate('common__search-placeholder');
 
     const info = useTranslations('Info');
     const locale = info('locale');

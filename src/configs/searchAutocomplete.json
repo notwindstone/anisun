@@ -1,10 +1,10 @@
 {
   "nothing": {
-    "label": "Ничего не найдено",
+    "label": "Nothing found",
     "image": "/favicon.png"
   },
   "noValue": {
-    "label": "Введите название аниме",
+    "label": "Enter anime name",
     "image": "/favicon.png"
   }
 }

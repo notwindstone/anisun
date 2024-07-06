@@ -17,11 +17,12 @@ import ThemedNextTopLoader from "@/components/ThemedNextTopLoader/ThemedNextTopL
 import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
 import {NextIntlClientProvider} from 'next-intl';
 import {getMessages} from 'next-intl/server';
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-const APP_NAME = 'Animeth';
-const APP_DESCRIPTION = "An anime streaming website/PWA based on Next.js 14 and Shikimori, AniLibria, Kodik and SovetRomantica APIs with the Mantine UI kit.";
+const APP_NAME = 'Anisun';
+const APP_DESCRIPTION = "An anime streaming website/PWA based on Next.js 14 and Shikimori, AniLibria, Kodik, Animetize and SovetRomantica APIs with the Mantine UI kit.";
 
 const theme = createTheme({
     defaultRadius: "xl",
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
     description: APP_DESCRIPTION,
     openGraph: {
         images: "/banner.png",
-        siteName: 'Animeth',
+        siteName: APP_NAME,
         type: "website",
         title: APP_NAME,
         description: APP_DESCRIPTION,
@@ -124,6 +125,7 @@ export default async function RootLayout({
                             </MantineProvider>
                         </TanstackQueryProviders>
                     </NextIntlClientProvider>
+                    <Analytics />
                 </body>
             </html>
         </ClerkProvider>

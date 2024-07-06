@@ -11,10 +11,10 @@
 }
 
 .input {
-    background: var(--animeth-secondary-color);
-    border-color: alpha(var(--animeth-text-contrast-color), 0.05);
+    background: var(--anisun-secondary-color);
+    border-color: alpha(var(--anisun-text-contrast-color), 0.05);
 
     &:focus-within {
-        border-color: var(--animeth-text-contrast-color);
+        border-color: var(--anisun-text-contrast-color);
     }
 }

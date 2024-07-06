@@ -18,6 +18,7 @@ import {CommentType} from "@/types/Comments/Comment.type";
 import {MutatedDataType} from "@/types/Comments/MutatedData.type";
 import {MutationCommentType, MutationInputType } from "@/types/Comments/MutationInput.type";
 import useCustomTheme from "@/hooks/useCustomTheme";
+import {useTranslations} from "next-intl";
 
 export function Comment({
     comment,
@@ -28,6 +29,9 @@ export function Comment({
     isChild?: boolean,
     level: number,
 }) {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const [editDelayed, setEditDelayed] = useState(false);
     const [isExpandedChild, { toggle: toggleChild }] = useDisclosure(false);
@@ -103,13 +107,13 @@ export function Comment({
 
     function handleChecks(message: string) {
         if (editDelayed) {
-            notify.delay();
+            notify.delay(locale);
 
             return false;
         }
 
         if (message.length < 1 || message.length > 2000) {
-            notify.incorrectInput();
+            notify.incorrectInput(locale);
 
             return false;
         }
@@ -226,6 +230,26 @@ export function Comment({
         }
     });
 
+    let wordReply, wordRepliesUpToFour, wordReplies;
+
+    switch (locale) {
+        case "en":
+            wordReply = 'reply';
+            wordRepliesUpToFour = 'replies';
+            wordReplies = 'replies';
+            break;
+        case "ru":
+            wordReply = 'ответ';
+            wordRepliesUpToFour = 'ответа';
+            wordReplies = 'ответов';
+            break;
+        default:
+            wordReply = 'replies';
+            wordRepliesUpToFour = 'replies';
+            wordReplies = 'replies';
+            break;
+    }
+
     return (
         <div>
             <Flex className={classes.root}>
@@ -250,11 +274,13 @@ export function Comment({
                                 </Text>
                             </Link>
                             <Text className={classes.commentText}>
-                                {makeDate(comment.createdAt)}
+                                {makeDate({ createdAt: comment.createdAt, locale: locale })}
                             </Text>
                             {
                                 comment.isEdited && !comment.isDeleted
-                                && <Text className={classes.edited}>(изменено)</Text>
+                                && <Text className={classes.edited}>
+                                    ({translate('common__changed-label')})
+                                </Text>
                             }
                         </Group>
                         <Group className={classes.commentGroup}>
@@ -269,7 +295,9 @@ export function Comment({
                         {
                             comment.isDeleted
                                 ? (
-                                    <Text className={classes.deleted}>Сообщение было удалено</Text>
+                                    <Text className={classes.deleted}>
+                                        {translate('component__comment__deleted-label')}
+                                    </Text>
                                 )
                                 : (
                                     isEditing
@@ -343,7 +371,9 @@ export function Comment({
                                         onClick={toggleChild}
                                     >
                                         {
-                                            isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding({ replies: children, wordTypes: ['ответ', 'ответа', 'ответов'] })}`
+                                            isExpandedChild
+                                                ? translate('common__collapse-label')
+                                                : `${translate('common__expand-label')} ${children} ${makeWordEnding({ replies: children, wordTypes: [wordReply, wordRepliesUpToFour, wordReplies] })}`
                                         }
                                     </UnstyledButton>
                                 )
@@ -367,7 +397,9 @@ export function Comment({
                                     onClick={toggleChild}
                                 >
                                     {
-                                        isExpandedChild ? "Свернуть" : `Раскрыть ${children} ${makeWordEnding({ replies: children, wordTypes: ['ответ', 'ответа', 'ответов'] })}`
+                                        isExpandedChild
+                                            ? translate('common__collapse-label')
+                                            : `${translate('common__expand-label')} ${children} ${makeWordEnding({ replies: children, wordTypes: [wordReply, wordRepliesUpToFour, wordReplies] })}`
                                     }
                                 </UnstyledButton>
                                 {

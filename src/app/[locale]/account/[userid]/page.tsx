@@ -9,14 +9,14 @@ import {getTranslations} from "next-intl/server";
 export async function generateMetadata(): Promise<Metadata> {
     const translate = await getTranslations('Translations');
 
-    const title = translate('page-account-title');
-    const description = translate('page-account-description');
+    const title = translate('page__account__metadata-title');
+    const description = translate('page__account__metadata-description');
 
     return {
         title: title,
         description: description,
         openGraph: {
-            siteName: 'Animeth',
+            siteName: 'Anisun',
             type: "website",
             title: title,
             description: description,
@@ -35,13 +35,13 @@ export default async function Page({ params }: { params: { userid: string } }) {
 
     switch (locale) {
         case "en":
-            message = translate('account-not-found');
+            message = translate('common__account-not-found-label');
             break;
         case "ru":
-            message = translate('account-not-found');
+            message = translate('common__account-not-found-label');
             break;
         default:
-            message = translate('account-not-found');
+            message = translate('common__account-not-found-label');
             break;
     }
 

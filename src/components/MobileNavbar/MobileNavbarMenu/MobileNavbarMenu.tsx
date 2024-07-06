@@ -38,6 +38,7 @@ const LANGUAGE = variables.settings.language;
 const LINKS = variables.websiteLinks;
 
 export default function MobileNavbarMenu() {
+    const translate = useTranslations('Translations');
     const info = useTranslations('Info');
     const locale = info('locale');
     const router = useRouter();
@@ -48,13 +49,25 @@ export default function MobileNavbarMenu() {
     const { ref, active } = useMove(() => {});
 
     const WEBSITE_COLOR = {
-        label: "Элементы сайта",
+        label: translate('common__theme-website-elements-label'),
         value: "website",
     };
     const NEXT_TOP_LOADER_COLOR = {
-        label: "Индикатор загрузчика",
+        label: translate('common__theme-loader-label'),
         value: "topLoader",
     };
+
+    const translatedData = [
+        GENERAL,
+        LANGUAGE,
+        ABOUT,
+        ACCOUNT
+    ].map((data) => {
+        return {
+            label: translate(data.label),
+            value: data.value,
+        };
+    });
 
     const [themingOption, setThemingOption] = useState(WEBSITE_COLOR.value);
     const isTopLoaderSection = themingOption === "topLoader";
@@ -82,8 +95,8 @@ export default function MobileNavbarMenu() {
         case "language":
             content = (
                 <Stack className={classes.stack}>
-                    <Title c="var(--animeth-text-contrast-color)">
-                        Язык
+                    <Title c="var(--anisun-text-contrast-color)">
+                        {translate('common__language-label')}
                     </Title>
                     <NativeSelect
                         classNames={{
@@ -100,7 +113,7 @@ export default function MobileNavbarMenu() {
             content = (
                 <Stack align="center">
                     <Image
-                        alt="Animeth website icon"
+                        alt="Anisun website icon"
                         src="/favicon.png"
                         radius="xl"
                         w={64}
@@ -129,7 +142,7 @@ export default function MobileNavbarMenu() {
                         }
                     </Group>
                     <Text ta="center">
-                        Сайт для просмотра аниме на основе Next.js и Mantine UI. Более подробная информация находится в репозитории на GitHub.
+                        {translate('common__website-description-text')}
                     </Text>
                 </Stack>
             );
@@ -137,8 +150,8 @@ export default function MobileNavbarMenu() {
         case "general":
             content = (
                 <Stack>
-                    <Title c="var(--animeth-text-contrast-color)">
-                        Тема
+                    <Title c="var(--anisun-text-contrast-color)">
+                        {translate('common__theme-label')}
                     </Title>
                     <div>
                         <SegmentedControl
@@ -174,7 +187,7 @@ export default function MobileNavbarMenu() {
                             />
                         }
                     >
-                        Выбрать свой цвет
+                        {translate('common__select-color-label')}
                     </Button>
                     <Collapse in={colorPickerExpanded}>
                         <ColorSchemePicker customRef={ref} option={themingOption} />
@@ -212,12 +225,7 @@ export default function MobileNavbarMenu() {
                                     withItemsBorders={false}
                                     value={section}
                                     onChange={setSection}
-                                    data={[
-                                        GENERAL,
-                                        LANGUAGE,
-                                        ABOUT,
-                                        ACCOUNT
-                                    ]}
+                                    data={translatedData}
                                 />
                                 {content}
                                 <Space my="xs" />
@@ -232,7 +240,9 @@ export default function MobileNavbarMenu() {
                     <ThemeIcon className={classes.button}>
                         <IconMenu2 className={classes.icon} stroke={1.5} size={rem(28)} />
                     </ThemeIcon>
-                    <Text className={classes.text}>Меню</Text>
+                    <Text className={classes.text}>
+                        {translate('common__menu-label')}
+                    </Text>
                 </UnstyledButton>
             </Center>
         </>

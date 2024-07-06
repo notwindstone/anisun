@@ -1,18 +1,20 @@
 import {ActionIcon, AspectRatio, Popover, rem, Stack} from "@mantine/core";
 import {useQuery} from "@tanstack/react-query";
 import {sovetromantica} from "@/lib/sovetromantica/sovetromantica";
-import classes from './SovetRomantica.module.css';
+import classes from '@/components/Video/GeneralFrameVideo.module.css';
 import {AnimeInfoType} from "@/types/SovetRomantica/Responses/AnimeInfo.type";
 import {EpisodesType} from "@/types/SovetRomantica/Responses/Episodes.type";
 import {client} from "@/lib/shikimori/client";
 import {IconMenu2} from "@tabler/icons-react";
 import {useState} from "react";
-import SovetRomanticaVideoButton
-    from "@/components/Video/SovetRomanticaVideo/SovetRomanticaVideoButton/SovetRomanticaVideoButton";
+import FrameVideoButton
+    from "@/components/Video/FrameVideoButton/FrameVideoButton";
 import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
 import VideoSkeleton from "@/components/Video/VideoSkeleton/VideoSkeleton";
+import {useTranslations} from "next-intl";
 
 export default function SovetRomanticaVideo({ id }: { id: string }) {
+    const translate = useTranslations('Translations');
     const [opened, setOpened] = useState(false);
     const shikimori = client();
     const { data, isPending, error } = useQuery({
@@ -68,7 +70,11 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
     }
 
     if (error) {
-        return <>Error: {error.message}</>;
+        return (
+            <>
+                {translate('common__descriptive-error-label')}: {error.message}
+            </>
+        );
     }
 
     if (!isPending && !data) {
@@ -85,7 +91,7 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
             || (embedSrc === undefined && data?.[0]?.embed === episode.embed);
 
         return (
-            <SovetRomanticaVideoButton
+            <FrameVideoButton
                 key={episode.episode_id}
                 isActive={isActive}
                 changeEpisode={() => changeEpisode(episode.embed)}
@@ -117,7 +123,7 @@ export default function SovetRomanticaVideo({ id }: { id: string }) {
                     </ActionIcon>
                 </Popover.Target>
                 <Popover.Dropdown p={rem(8)}>
-                    <Stack gap={rem(8)}>
+                    <Stack className={classes.dropdownStack} gap={rem(8)}>
                         {buttons}
                     </Stack>
                 </Popover.Dropdown>

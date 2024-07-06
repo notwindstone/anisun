@@ -6,6 +6,7 @@ import {variables} from "@/configs/variables";
 import NextImage from "next/image";
 import {formatAiredOnDate} from "@/utils/Misc/formatAiredOnDate";
 import {OldAnimeType} from "@/types/Shikimori/Responses/Types/OldAnime.type";
+import {useTranslations} from "next-intl";
 
 export default function RecommendationsOldAnimeData({
     anime,
@@ -18,6 +19,8 @@ export default function RecommendationsOldAnimeData({
     translatedKind: string;
     translatedStatus: string;
 }) {
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const isReleased = anime?.status === 'released';
     const episodesBadge = isReleased
         ? `${anime?.episodes} / ${anime?.episodes}`
@@ -67,13 +70,13 @@ export default function RecommendationsOldAnimeData({
                 <Stack className={classes.stack} h="100%" justify="flex-start">
                     <Text className={classes.title} lineClamp={2}>
                         {anime?.name}
-                        {anime?.russian && ` - ${anime.russian}`}
+                        {locale === 'ru' && anime?.russian && ` - ${anime.russian}`}
                     </Text>
                     <Text className={classes.text} lineClamp={1}>
                         {`${translatedKind}, ${translatedStatus}`}
                     </Text>
                     <Text className={classes.text} lineClamp={1}>
-                        {formatAiredOnDate(anime.aired_on)}
+                        {formatAiredOnDate({ airedOnDate: anime.aired_on, locale: locale })}
                     </Text>
                 </Stack>
             </Group>

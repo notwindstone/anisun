@@ -52,6 +52,8 @@ export default function Hero() {
                     filter: [
                         "id",
                         "name",
+                        "russian",
+                        "english",
                         "url",
                         "score",
                         "genres { id name russian kind }",

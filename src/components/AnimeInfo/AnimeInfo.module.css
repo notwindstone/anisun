@@ -6,7 +6,7 @@
 }
 
 .title {
-    color: var(--animeth-text-contrast-color);
+    color: var(--anisun-text-contrast-color);
 }
 
 .span {
@@ -23,7 +23,7 @@
     transition: 150ms ease;
 
     @mixin hover {
-        color: var(--animeth-text-contrast-color);
+        color: var(--anisun-text-contrast-color);
     }
 }
 
@@ -60,12 +60,12 @@
     font-weight: 500;
     font-size: rem(16);
     line-height: rem(16);
-    color: var(--animeth-text-contrast-color);
+    color: var(--anisun-text-contrast-color);
 }
 
 .heading {
     text-transform: uppercase;
-    color: var(--animeth-text-contrast-color);
+    color: var(--anisun-text-contrast-color);
 }
 
 .expandText {
@@ -73,7 +73,7 @@
 }
 
 .statsText, .expandText {
-    color: var(--animeth-text-contrast-color);
+    color: var(--anisun-text-contrast-color);
     font-size: rem(16px);
     line-height: rem(16px);
     font-weight: 600;

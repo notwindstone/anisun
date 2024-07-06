@@ -13,7 +13,6 @@ export default function CommentSkeleton() {
                 <Skeleton className={classes.skeleton} radius="xl" height={20} width={512} />
                 <Group>
                     <Skeleton className={classes.skeleton} radius="xl" height={20} width={64} />
-                    <Skeleton className={classes.skeleton} radius="xl" height={20} width={64} />
                 </Group>
             </Stack>
         </Flex>

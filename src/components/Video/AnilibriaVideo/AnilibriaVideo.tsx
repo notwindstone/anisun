@@ -5,8 +5,10 @@ import {AspectRatio} from "@mantine/core";
 import getShikimoriDataForAnilibriaQuery from "@/utils/Misc/getShikimoriDataForAnilibriaQuery";
 import VideoNotFound from "@/components/Video/VideoNotFound/VideoNotFound";
 import VideoSkeleton from "@/components/Video/VideoSkeleton/VideoSkeleton";
+import {useTranslations} from "next-intl";
 
 export default function AnilibriaVideo({ id }: { id: string }) {
+    const translate = useTranslations('Translations');
     const { data, isPending, error } = useQuery({
         queryKey: ['anime', 'anilibria', id],
         queryFn: async () => getAnilibriaData(),
@@ -47,7 +49,11 @@ export default function AnilibriaVideo({ id }: { id: string }) {
     }
 
     if (error) {
-        return <>Что-то пошло не так... Попробуйте перезапустить сайт. Ошибка: {error.message}</>;
+        return (
+            <>
+                {translate('common__descriptive-error-label')}: {error.message}
+            </>
+        );
     }
 
     const player = data?.player;

@@ -6,21 +6,35 @@ import Link from "next/link";
 import classes from "./CarouselMobileCard.module.css";
 import translateAnimeStatus from "@/utils/Translates/translateAnimeStatus";
 import NextImage from "next/image";
-import {getScoreBadgeColor} from "@/utils/Misc/getScoreBadgeColor";
+import {useTranslations} from "next-intl";
+import getCarouselCardDate from "@/utils/Misc/getCarouselCardData";
 
 export default function CarouselMobileCard({
     animeTitle,
 }: {
     animeTitle?: AnimeType;
 }) {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
-    const animeStatus = animeTitle?.status ?? "";
-    const isAnnounced = animeStatus === 'anons';
-    const isReleased = animeStatus === 'released';
-    const scoreBadgeColor = getScoreBadgeColor({ score: animeTitle?.score });
-    const episodesBadge = isReleased
-        ? `${animeTitle?.episodes} / ${animeTitle?.episodes}`
-        : `${animeTitle?.episodesAired} / ${animeTitle?.episodes}`;
+
+    const {
+        animeStatus,
+        animeName,
+        scoreBadgeColor,
+        isAnnounced,
+        episodesBadge,
+    } = getCarouselCardDate({
+        locale: locale,
+        status: animeTitle?.status,
+        episodes: animeTitle?.episodes,
+        english: animeTitle?.english,
+        score: animeTitle?.score,
+        episodesAired: animeTitle?.episodesAired,
+        russian: animeTitle?.russian,
+        original: animeTitle?.name,
+    });
 
     return (
         <Paper
@@ -35,7 +49,11 @@ export default function CarouselMobileCard({
                 className={classes.overlay}
             >
                 <Badge className={classes.status} color="black">
-                    {translateAnimeStatus({ sortingType: animeStatus, singular: true })}
+                    {
+                        translate(
+                            translateAnimeStatus({ sortingType: animeStatus, singular: true })
+                        )
+                    }
                 </Badge>
                 {
                     !isAnnounced && (
@@ -65,7 +83,7 @@ export default function CarouselMobileCard({
                         order={3}
                         lineClamp={isAnnounced ? 3 : 2}
                     >
-                        {animeTitle?.name}
+                        {animeName}
                     </Title>
                 </Flex>
             </Overlay>

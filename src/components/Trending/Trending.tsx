@@ -8,12 +8,16 @@ import NProgress from "nprogress";
 import useCustomTheme from "@/hooks/useCustomTheme";
 import classes from './Trending.module.css';
 import TrendingGrid from "@/components/Trending/TrendingGrid/TrendingGrid";
+import {useTranslations} from "next-intl";
 
 const TOTAL_PAGES = 500;
 const LIMIT = 32;
 const PLACEHOLDER_DATA = Array.from({ length: LIMIT });
 
 export default function Trending() {
+    const translate = useTranslations('Translations');
+    const info = useTranslations('Info');
+    const locale = info('locale');
     const { theme } = useCustomTheme();
     const pathname = usePathname();
     const searchParams = useSearchParams();
@@ -34,6 +38,7 @@ export default function Trending() {
                         filter: [
                             "id",
                             "url",
+                            "english",
                             "russian",
                             "status",
                             "score",
@@ -48,7 +53,7 @@ export default function Trending() {
     });
 
     function pushToNextPage(nextPage: number) {
-        const redirectUrl = `/trending?page=${nextPage}`;
+        const redirectUrl = `/${locale}/trending?page=${nextPage}`;
         const pathnameWithSearchParams = `${pathname}?page=${page}`;
 
         if (pathnameWithSearchParams === redirectUrl) {
@@ -62,8 +67,8 @@ export default function Trending() {
     return (
         <>
             <Stack p={rem(8)}>
-                <Title c="var(--animeth-text-contrast-color)">
-                    Популярное
+                <Title c="var(--anisun-text-contrast-color)">
+                    {translate('common__trending-placeholder')}
                 </Title>
                 <Pagination
                     classNames={{
@@ -78,7 +83,7 @@ export default function Trending() {
                 />
                 {
                     error ? (
-                        <Text>Ошибка: {error.message}</Text>
+                        <Text>{translate('common__error-label')}: {error.message}</Text>
                     ) : (
                         <TrendingGrid
                             data={data}

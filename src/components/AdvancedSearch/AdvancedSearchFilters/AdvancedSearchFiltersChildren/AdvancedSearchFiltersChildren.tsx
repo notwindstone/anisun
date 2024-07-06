@@ -56,7 +56,7 @@ export default function AdvancedSearchFiltersChildren() {
 
     const filterGroups = [
         {
-            type: translate('filters-types-basic-label'),
+            type: translate('common__filters-types-basic-label'),
             filters: (
                 <>
                     <OrderFilter
@@ -79,7 +79,7 @@ export default function AdvancedSearchFiltersChildren() {
             ),
         },
         {
-            type: translate('filters-types-genres-label'),
+            type: translate('common__filters-types-genres-label'),
             filters: (
                 <>
                     <GenreFilter
@@ -94,7 +94,7 @@ export default function AdvancedSearchFiltersChildren() {
             ),
         },
         {
-            type: translate('filters-types-season-label'),
+            type: translate('common__filters-types-season-label'),
             filters: (
                 <>
                     <SeasonFilter
@@ -113,7 +113,7 @@ export default function AdvancedSearchFiltersChildren() {
             ),
         },
         {
-            type: translate('filters-types-other-label'),
+            type: translate('common__filters-types-other-label'),
             filters: (
                 <>
                     <RatingFilter

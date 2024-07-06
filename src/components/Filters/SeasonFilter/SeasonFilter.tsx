@@ -8,9 +8,10 @@ import classesSwitch from '@/components/Filters/FiltersSwitch.module.css';
 import classesNumberInput from '@/components/Filters/FiltersNumberInput.module.css';
 import {useDisclosure, useFocusWithin} from "@mantine/hooks";
 import calculateColor from "@/utils/Misc/calculateColor";
+import {useTranslations} from "next-intl";
 
 const FIRST_ANIME_AIRED_ON = 1917;
-const EARLIER_YEAR = 2000;
+const LATER_YEAR = 2000;
 const BIG_RANGE_MARKS = [
     { value: 1920, label: '1920' },
     { value: 1940, label: '1940' },
@@ -83,6 +84,7 @@ export default memo(function SeasonFilter({
     seasons: string[],
     setSeasons: Dispatch<SetStateAction<string[]>>
 }) {
+    const translate = useTranslations('Translations');
     const currentYear = new Date().getFullYear();
     const { theme } = useCustomTheme();
     const [focused, { open, close }] = useDisclosure(false);
@@ -112,27 +114,34 @@ export default memo(function SeasonFilter({
 
     function toggleStartYear() {
         if (yearStart === FIRST_ANIME_AIRED_ON) {
-            return setYearStart(EARLIER_YEAR);
+            return setYearStart(LATER_YEAR);
         }
 
         return setYearStart(FIRST_ANIME_AIRED_ON);
     }
+
+    const seasonsData = variables.filters.season.map((season) => {
+        return {
+            label: translate(season.label),
+            value: season.value
+        };
+    });
 
     return (
         <>
             <Group>
                 <Switch
                     classNames={classesSwitch}
-                    label="Выбрать промежутком"
+                    label={translate('component__season-filter__select-ranged-label')}
                     color={theme.color}
                     checked={yearsRanged}
                     onChange={toggleYearsRanged}
                 />
                 <Switch
                     classNames={classesSwitch}
-                    label={`Начать промежуток с ${EARLIER_YEAR} года`}
+                    label={translate('component__season-filter__start-from-later-label', { LATER_YEAR })}
                     color={theme.color}
-                    checked={yearStart === EARLIER_YEAR}
+                    checked={yearStart === LATER_YEAR}
                     onChange={toggleStartYear}
                 />
             </Group>
@@ -141,7 +150,7 @@ export default memo(function SeasonFilter({
                     <>
                         <Stack gap={rem(4)}>
                             <Text size="sm">
-                                Годы
+                                {translate('component__season-filter__years-label')}
                             </Text>
                             <RangeSlider
                                 pb={rem(24)}
@@ -163,7 +172,7 @@ export default memo(function SeasonFilter({
                             })}
                             yearStart={yearStart}
                             currentYear={currentYear}
-                            placeholder="От"
+                            placeholder={translate('component__season-filter__from-label')}
                         />
                         <SeasonNumberInput
                             color={theme.color}
@@ -174,14 +183,14 @@ export default memo(function SeasonFilter({
                             })}
                             yearStart={yearStart}
                             currentYear={currentYear}
-                            placeholder="До"
+                            placeholder={translate('component__season-filter__to-label')}
                         />
                     </>
                 ) : (
                     <>
                         <Stack gap={rem(4)}>
                             <Text size="sm">
-                                Годы
+                                {translate('component__season-filter__year-label')}
                             </Text>
                             <Slider
                                 pb={rem(24)}
@@ -205,7 +214,7 @@ export default memo(function SeasonFilter({
                             })}
                             yearStart={yearStart}
                             currentYear={currentYear}
-                            placeholder="Год"
+                            placeholder={translate('component__season-filter__year-label')}
                         />
                     </>
                 )
@@ -221,10 +230,10 @@ export default memo(function SeasonFilter({
                             }
                         }}
                         classNames={classesSelect}
-                        placeholder="Сезон"
+                        placeholder={translate('component__season-filter__season-label')}
                         value={seasons}
                         onChange={setSeasons}
-                        data={variables.filters.season}
+                        data={seasonsData}
                     />
                 )
             }

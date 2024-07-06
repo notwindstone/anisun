@@ -61,7 +61,7 @@ export default function HeroSlides({
             case "error":
             default:
                 currentSlide = (
-                    <Text>Ошибка: {error?.message}</Text>
+                    <Text>Error: {error?.message}</Text>
                 );
         }
 
