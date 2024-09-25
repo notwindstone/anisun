@@ -6,6 +6,8 @@
 
 ### Сайт для просмотра аниме на основе Next.js и Mantine UI
 
+Сайт переписывается. Прогресс можно посмотреть здесь: [v5 branch](https://github.com/notwindstone/anisun/tree/v5) 
+
 <p align="center">
 <a href="https://github.com/notwindstone/anisun/blob/main/README.md">English</a> | <strong>Русский</strong>
 </p>
