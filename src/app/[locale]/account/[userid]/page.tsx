@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
     };
 }
 
-export default async function Page({ params }: { params: { userid: string } }) {
+export default async function Page({ params }: { params: Promise<{ userid: string }> }) {
     let user;
 
     const info = await getTranslations('Info');
@@ -46,7 +46,7 @@ export default async function Page({ params }: { params: { userid: string } }) {
     }
 
     try {
-        user = await clerkClient.users.getUser(params.userid);
+        user = await clerkClient.users.getUser((await params).userid);
     } catch (error) {
         return (
             <Center h="calc(100vh - 1px)">

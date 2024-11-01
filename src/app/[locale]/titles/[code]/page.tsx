@@ -7,10 +7,11 @@ import AnimeInfo from "@/components/AnimeInfo/AnimeInfo";
 import classes from './page.module.css';
 import Recommendations from "@/components/Recommendations/Recommendations";
 import {getTranslations} from "next-intl/server";
+import {use} from "react";
 
-export async function generateMetadata({ params }: { params: { code: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ code: string }> }): Promise<Metadata> {
     const shikimori = client();
-    const shikimoriId = getShikimoriId(params.code);
+    const shikimoriId = getShikimoriId((await params).code);
 
     const info = await getTranslations('Info');
     const translate = await getTranslations('Translations');
@@ -72,8 +73,8 @@ export async function generateMetadata({ params }: { params: { code: string } })
     };
 }
 
-export default function Page({ params }: { params: { code: string } }) {
-    const shikimoriId = getShikimoriId(params.code);
+export default function Page({ params }: { params: Promise<{ code: string }> }) {
+    const shikimoriId = getShikimoriId(use(params).code);
 
     return (
         <>
@@ -84,7 +85,7 @@ export default function Page({ params }: { params: { code: string } }) {
             >
                 <Stack className={classes.primary} flex={1}>
                     <Video id={shikimoriId} />
-                    <AnimeInfo id={shikimoriId} titleCode={params.code} />
+                    <AnimeInfo id={shikimoriId} titleCode={use(params).code} />
                 </Stack>
                 <Recommendations id={shikimoriId} />
             </Group>

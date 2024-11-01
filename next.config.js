@@ -15,6 +15,7 @@ module.exports = async (phase) => {
       KODIK_TOKEN: process.env.KODIK_TOKEN,
     },
     experimental: {
+      reactCompiler: true,
       optimizePackageImports: [
         '@mantine/core',
         '@mantine/hooks',
