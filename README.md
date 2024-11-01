@@ -1,3 +1,7 @@
+I only enabled React Compiler and updated [params code](https://nextjs.org/docs/app/building-your-application/upgrading/version-15) to make this app build on Next.js 15 without errors. You can try the app here: https://anisun-git-nextjs-15-tom-hollands-projects.vercel.app
+
+Comparing performance, the site with Next.js 14 works better
+
 <div align="center">
 
 <img width="160" height="160" align="center" src="public/favicon.png">
