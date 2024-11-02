@@ -317,3 +317,10 @@ Contributions are welcome!
 * [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
 
 * [Realtime Colors](https://www.realtimecolors.com)
+
+## ❗ Disclaimer
+
+> [!IMPORTANT]
+> Anisun does not host any files, it merely links to 3rd party services.
+> Legal issues should be taken up with the file hosts and providers.
+> Anisun is not responsible for any media files shown by the video providers.
