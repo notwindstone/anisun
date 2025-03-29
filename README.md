@@ -6,7 +6,7 @@
 
 ### A web app for watching anime built with Next.js and Mantine UI
 
-I'm currently refactoring this app. You can check the progress here: [v5 branch](https://github.com/notwindstone/anisun/tree/v5) 
+I plan to start a complete rewrite of this app within the week. You can check the progress here: [v5 branch](https://github.com/notwindstone/anisun/tree/v5) 
 
 <p align="center">
 <strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/README_russian.md">Русский</a>
