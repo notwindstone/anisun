@@ -1,6 +1,6 @@
 {
   "name": "anisun",
-  "version": "1.0.50",
+  "version": "5.0.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "bun run --watch src/index.ts",
