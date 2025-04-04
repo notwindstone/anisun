@@ -1,8 +1,0 @@
-.control {
-    z-index: 1000;
-
-    &:not(:where([data-active])) {
-        background: var(--anisun-secondary-color);
-        border: none;
-    }
-}

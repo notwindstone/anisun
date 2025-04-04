@@ -1,7 +1,0 @@
-.container {
-    padding: rem(82px) rem(16px) rem(16px);
-
-    @media screen and (max-width: rem(750px)) {
-        padding: rem(8px);
-    }
-}
