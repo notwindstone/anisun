@@ -4,15 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "concurrently \"next build\" \"bun backend:build\"",
-    "start": "concurrently \"next start\" \"bun backend:start\"",
+    "build": "next build",
+    "start": "next start",
     "push": "bunx drizzle-kit push",
     "lint": "concurrently --raw \"bun lint:eslint\" \"bun lint:ts\"",
     "lint:eslint": "next lint",
-    "lint:ts": "tsc",
-    "backend:build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile ./build/server backend/elysia/index.ts",
-    "backend:start": "./build/server",
-    "backend:dev": "bun run --watch backend/elysia/index.ts"
+    "lint:ts": "tsc"
   },
   "dependencies": {
     "@elysiajs/eden": "^1.2.0",
