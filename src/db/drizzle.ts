@@ -1,14 +1,17 @@
-import { Pool } from '@neondatabase/serverless';
-import {drizzle as drizzleNeon, NeonDatabase} from 'drizzle-orm/neon-serverless';
 import postgres from "postgres";
-import {drizzle as drizzlePostgres, PostgresJsDatabase} from "drizzle-orm/postgres-js";
+import mysql from "mysql2/promise";
+import { drizzle as drizzleMySQL, MySql2Database } from "drizzle-orm/mysql2";
+import { Pool } from '@neondatabase/serverless';
+import { drizzle as drizzleNeon, NeonDatabase } from 'drizzle-orm/neon-serverless';
+import { drizzle as drizzlePostgres, PostgresJsDatabase } from "drizzle-orm/postgres-js";
+import { url } from "inspector";
 
 const dbType = process.env.DATABASE_TYPE!;
-let db: NeonDatabase | PostgresJsDatabase;
+let db: NeonDatabase | PostgresJsDatabase | MySql2Database;
 
 switch (dbType.toLowerCase()) {
     case "neon": {
-        const pool = new Pool({connectionString: process.env.NEON_DATABASE_URL});
+        const pool = new Pool({ connectionString: process.env.NEON_DATABASE_URL });
         db = drizzleNeon(pool);
         break;
     }
@@ -17,10 +20,13 @@ switch (dbType.toLowerCase()) {
         db = drizzlePostgres(queryClient);
         break;
     }
-    default: {
-        const pool = new Pool({connectionString: process.env.NEON_DATABASE_URL});
-        db = drizzleNeon(pool);
+    case "mysql": {
+        const pool = mysql.createPool(process.env.MYSQL_DATABASE_URL!);
+        db = drizzleMySQL(pool);
         break;
+    }
+    default: {
+        throw new Error(`Unsupported database type: ${dbType}`);
     }
 }
 

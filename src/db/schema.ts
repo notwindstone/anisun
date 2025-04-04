@@ -1,4 +1,4 @@
-import {text, json, pgTable, boolean} from "drizzle-orm/pg-core";
+import {text, json, pgTable, boolean, uuid} from "drizzle-orm/pg-core";
 
 export const comments = pgTable("comments", {
     uuid: text("uuid").primaryKey(),
