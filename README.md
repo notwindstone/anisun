@@ -9,4 +9,4 @@
 * more
 
 tech stack
-next.js, elysia, eden, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-immer, vidstack.js, kodikwrapper, zustand
+next.js, elysia, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-immer, vidstack.js, kodikwrapper, zustand
