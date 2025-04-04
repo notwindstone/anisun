@@ -9,9 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@elysiajs/eden": "^1.2.0",
+    "elysia": "^1.2.25",
+    "next": "15.2.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.2.4"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "typescript": "^5",
