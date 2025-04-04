@@ -11,7 +11,8 @@
     "lint:eslint": "next lint",
     "lint:ts": "tsc",
     "backend:build": "bun build --compile --minify-whitespace --minify-syntax --target bun --outfile ./build/server backend/elysia/index.ts",
-    "backend:start": "./build/server"
+    "backend:start": "./build/server",
+    "backend:dev": "bun run --watch backend/elysia/index.ts"
   },
   "dependencies": {
     "@elysiajs/eden": "^1.2.0",
