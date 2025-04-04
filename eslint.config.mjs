@@ -24,6 +24,7 @@ const eslintConfig = [
       "object-curly-spacing": ["error", "always"],
       "comma-dangle": ["error", "always-multiline"],
       "arrow-parens": ["error", "always"],
+      "unicorn/filename-case": ["off"],
     },
   }
 ];

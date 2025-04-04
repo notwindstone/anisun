@@ -6,6 +6,6 @@ export const messageController = new Elysia({ prefix: '/message' })
 
     .post('/', ({ body }) => body, {
         body: t.Object({
-            name: t.String()
-        })
-    })
+            name: t.String(),
+        }),
+    });
