@@ -3,13 +3,10 @@
 
 ## To-Do
 
-* Add option to login using Shikimori account (and maybe MAL too)
-* Update app to Next.js 15 and React 19
+* Shikimori, MAL and AniList integrations
+* Next.js 15 for frontend + Elysia for backend
 * Rewrite everything
 * more
 
-don't forget to learn and use typescript utility types please
-https://www.typescriptlang.org/docs/handbook/utility-types.html
-
 tech stack
-next.js, typescript, tailwind, [useHooks](https://usehooks.com/), drizzle orm, tanstack query, axios, use-immer, vidstack.js, kodikwrapper, day.js
+next.js, elysia, eden, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-immer, vidstack.js, kodikwrapper, zustand
