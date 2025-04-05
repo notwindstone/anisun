@@ -3,8 +3,8 @@
 import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { setCookie } from "@/lib/actions/cookies";
-import { ConfigType } from "@/constants/configs";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { ConfigType } from "@/types/Configs/Config.type";
 
 async function setConfig({
     configs,
@@ -27,8 +27,11 @@ export default function ColorSchemeChanger() {
             asd
             {JSON.stringify(data)}
             <button onClick={async () => {
-                const newData = {
+                const newData: ConfigType = {
                     theme: "light",
+                    colors: {
+                        accent: "var(--color-rose-100)",
+                    },
                 };
 
                 await setConfig({ configs: newData });

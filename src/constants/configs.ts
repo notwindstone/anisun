@@ -1,5 +1,6 @@
 export const InitialConfig = {
     theme: "dark",
+    colors: {
+        accent: "white",
+    },
 };
-
-export type ConfigType = typeof InitialConfig;
