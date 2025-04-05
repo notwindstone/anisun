@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import ConfigsProvider from "@/utils/providers/ConfigsProvider";
+import {getCookie} from "@/lib/actions/cookies";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -22,12 +24,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+    const configs = getCookie({ key: "configs" });
+
     return (
         <html lang="en">
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                {children}
+                <ConfigsProvider configs={configs}>
+                    {children}
+                </ConfigsProvider>
             </body>
         </html>
     );

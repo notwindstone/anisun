@@ -1,6 +1,17 @@
 "use server";
 
 import { cookies } from "next/headers";
+import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+
+export async function getCookie({
+    key,
+}: {
+    key: string;
+}): Promise<RequestCookie | undefined> {
+    const cookieStore = await cookies();
+
+    return cookieStore.get(key);
+}
 
 export async function setCookie({
     key,
