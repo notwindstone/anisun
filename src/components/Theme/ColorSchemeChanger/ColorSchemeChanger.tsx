@@ -1,9 +1,15 @@
+"use client";
+
+import { useContext } from "react";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+
 export default function ColorSchemeChanger() {
-    console.log("i should be server-side");
+    const { data } = useContext(ConfigsContext);
 
     return (
         <div>
             asd
+            {data}
         </div>
     );
 }

@@ -3,9 +3,11 @@
 import { createContext } from "react";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
 
-const ConfigsContext = createContext<object>({});
+export const ConfigsContext = createContext<{
+    data: string | undefined;
+}>({ data: undefined });
 
-export default function ConfigsProvider({
+export function ConfigsProvider({
     children,
     configs,
 }: {
