@@ -2,9 +2,10 @@
 
 import { createContext } from "react";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { ConfigType, InitialConfig } from "@/constants/configs";
 
 export const ConfigsContext = createContext<{
-    data: string | undefined;
+    data: ConfigType | undefined;
 }>({ data: undefined });
 
 export function ConfigsProvider({
@@ -14,7 +15,7 @@ export function ConfigsProvider({
     children: React.ReactNode;
     configs: RequestCookie | undefined;
 }) {
-    const cookieData = configs?.value ?? "";
+    const cookieData = JSON.parse(configs?.value ?? JSON.stringify(InitialConfig));
 
     return (
         <ConfigsContext.Provider value={{
