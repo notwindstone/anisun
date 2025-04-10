@@ -5,7 +5,9 @@ export default function Home() {
     return (
         <div>
             <ColorSchemeChanger />
-            <Link href={"/profile/1234"}>profile</Link>
+            <Link href={"/profile/1234"}>
+                profile
+            </Link>
         </div>
     );
 }
