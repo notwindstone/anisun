@@ -6,7 +6,7 @@ import { InitialConfig } from "@/constants/configs";
 import { ConfigType } from "@/types/Configs/Config.type";
 
 export const ConfigsContext = createContext<{
-    data: ConfigType | undefined;
+    data: ConfigType;
 }>({ data: undefined });
 
 export function ConfigsProvider({
@@ -16,7 +16,7 @@ export function ConfigsProvider({
     children: React.ReactNode;
     configs: RequestCookie | undefined;
 }) {
-    const cookieData = JSON.parse(configs?.value ?? JSON.stringify(InitialConfig));
+    const cookieData = JSON.parse(configs?.value || JSON.stringify(InitialConfig));
 
     return (
         <ConfigsContext.Provider value={{

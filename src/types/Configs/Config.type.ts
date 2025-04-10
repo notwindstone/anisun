@@ -1,3 +1,6 @@
-import { InitialConfig } from "@/constants/configs";
-
-export type ConfigType = typeof InitialConfig;
+export type ConfigType = {
+    theme?: string;
+    colors?: {
+        accent?: string;
+    };
+} | undefined;

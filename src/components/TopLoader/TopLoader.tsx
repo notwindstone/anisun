@@ -3,14 +3,16 @@
 import NextTopLoader from "nextjs-toploader";
 import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { InitialConfig } from "@/constants/configs";
 
 export default function TopLoader() {
     const { data } = useContext(ConfigsContext);
+    const color = data?.colors?.accent ?? InitialConfig.colors.accent;
 
     return (
         <>
             <NextTopLoader
-                color={data?.colors.accent}
+                color={color}
                 showSpinner={false}
             />
         </>
