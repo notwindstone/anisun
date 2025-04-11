@@ -40,7 +40,8 @@ export default function ColorSchemeChanger() {
             }}>
                 set theme {d("greetings")}
             </button>
-            <LocaleSelector />
+            <label for="locale-selector" />
+            <LocaleSelector id="locale-selector" />
         </div>
     );
 }
