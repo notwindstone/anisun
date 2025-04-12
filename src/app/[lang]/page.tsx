@@ -2,6 +2,7 @@ import ColorSchemeChanger from "@/components/Theme/ColorSchemeChanger/ColorSchem
 import Link from "next/link";
 import { Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
+import LocaleSwitcher from "@/components/LocaleSwitcher/LocaleSwitcher";
 
 export default async function Home({
     params,
@@ -17,6 +18,7 @@ export default async function Home({
             <Link href={"/profile/1234"}>
                 {dictionary.greetings}
             </Link>
+            <LocaleSwitcher />
         </div>
     );
 }
