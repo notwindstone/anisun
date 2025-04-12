@@ -1,4 +1,6 @@
-export const InitialConfig = {
+import { SafeConfigType } from "@/types/Configs/Config.type";
+
+export const InitialConfig: SafeConfigType = {
     theme: "dark",
     colors: {
         accent: "white",

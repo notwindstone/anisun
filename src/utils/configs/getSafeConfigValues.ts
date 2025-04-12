@@ -1,4 +1,5 @@
 import { ConfigType, SafeConfigType } from "@/types/Configs/Config.type";
+import { InitialConfig } from "@/constants/configs";
 
 export default function getSafeConfigValues({
     config,
@@ -6,9 +7,9 @@ export default function getSafeConfigValues({
     config: ConfigType;
 }): SafeConfigType {
     return {
-        theme: "",
+        theme: config?.theme ?? InitialConfig.theme,
         colors: {
-            accent: "",
+            accent: config?.colors?.accent ?? InitialConfig.colors.accent,
         },
     };
 }
