@@ -16,7 +16,14 @@ export function ConfigsProvider({
     children: React.ReactNode;
     configs: RequestCookie | undefined;
 }) {
-    const cookieData = JSON.parse(configs?.value || JSON.stringify(InitialConfig));
+    let cookieData;
+    const fallbackConfig = JSON.stringify(InitialConfig);
+
+    try {
+        cookieData = JSON.parse(configs?.value || fallbackConfig);
+    } catch {
+        cookieData = InitialConfig;
+    }
 
     return (
         <ConfigsContext.Provider value={{
