@@ -5,7 +5,6 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { setCookie } from "@/lib/actions/cookies";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { ConfigType } from "@/types/Configs/Config.type";
-import { LocaleSelector, useDict } from "gt-next/client";
 
 async function setConfig({
     configs,
@@ -21,8 +20,7 @@ async function setConfig({
 }
 
 export default function ColorSchemeChanger() {
-    const { data } = useContext(ConfigsContext);
-    const d = useDict();
+    const { data, dictionaries } = useContext(ConfigsContext);
 
     return (
         <div>
@@ -38,10 +36,8 @@ export default function ColorSchemeChanger() {
 
                 await setConfig({ configs: newData });
             }}>
-                set theme {d("greetings")}
+                set theme {dictionaries?.greetings}
             </button>
-            <label className="hidden" id="locale-selector-label">Select language</label>
-            <LocaleSelector aria-labelledby="locale-selector-label" />
         </div>
     );
 }
