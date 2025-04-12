@@ -22,7 +22,13 @@ async function getLocale(request: NextRequest): Promise<string | undefined> {
     });
 
     if (cookieLocale?.value) {
-        const parsedLocale = JSON.parse(cookieLocale.value);
+        let parsedLocale;
+
+        try {
+            parsedLocale = JSON.parse(cookieLocale.value);
+        } catch {
+            parsedLocale = "en";
+        }
 
         if (locales.includes(parsedLocale)) {
             return parsedLocale;
