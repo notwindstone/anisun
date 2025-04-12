@@ -5,6 +5,7 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { setCookie } from "@/lib/actions/cookies";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { ConfigType } from "@/types/Configs/Config.type";
+import { CookieConfigKey } from "@/constants/configs";
 
 async function setConfig({
     configs,
@@ -12,7 +13,7 @@ async function setConfig({
     configs: ConfigType | undefined;
 }) {
     await setCookie({
-        key: "configs",
+        key: CookieConfigKey,
         value: JSON.stringify(configs),
         expiresAt: getRelativeDate({ days: 365 }),
         httpOnly: false,

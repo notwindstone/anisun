@@ -10,6 +10,7 @@ import Negotiator from "negotiator";
 import { getCookie, setCookie } from "@/lib/actions/cookies";
 import { cookies } from "next/headers";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { CookieLocaleKey, DefaultLocale } from "@/constants/localization";
 
 async function getLocale(request: NextRequest): Promise<string | undefined> {
     // eslint-disable-next-line
@@ -17,7 +18,7 @@ async function getLocale(request: NextRequest): Promise<string | undefined> {
     const locales: string[] = i18n.locales;
     const cookieStore = await cookies();
     const cookieLocale = await getCookie({
-        key: "locale",
+        key: CookieLocaleKey,
         store: cookieStore,
     });
 
@@ -27,7 +28,7 @@ async function getLocale(request: NextRequest): Promise<string | undefined> {
         try {
             parsedLocale = JSON.parse(cookieLocale.value);
         } catch {
-            parsedLocale = "en";
+            parsedLocale = DefaultLocale;
         }
 
         if (locales.includes(parsedLocale)) {
@@ -49,7 +50,7 @@ async function getLocale(request: NextRequest): Promise<string | undefined> {
     const locale = matchLocale(languages, locales, i18n.defaultLocale);
 
     await setCookie({
-        key: "locale",
+        key: CookieLocaleKey,
         value: JSON.stringify(locale),
         expiresAt: getRelativeDate({ days: 365 }),
         httpOnly: false,
