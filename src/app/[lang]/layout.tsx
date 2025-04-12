@@ -5,8 +5,6 @@ import { ConfigsProvider } from "@/utils/providers/ConfigsProvider";
 import { getCookie } from "@/lib/actions/cookies";
 import TopLoader from "@/components/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
-import { GTProvider } from "gt-next";
-import { getLocale } from "gt-next/server";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
