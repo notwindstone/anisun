@@ -2,15 +2,24 @@
 
 import { cookies } from "next/headers";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
+import { ReadonlyRequestCookies } from "next/dist/server/web/spec-extension/adapters/request-cookies";
 
 export async function getCookie({
     key,
+    store,
 }: {
     key: string;
+    store?: ReadonlyRequestCookies;
 }): Promise<RequestCookie | undefined> {
-    const cookieStore = await cookies();
+    // passing already defined cookieStore is faster
+    // than redefining it on every function call
+    if (!store) {
+        const cookieStore = await cookies();
 
-    return cookieStore.get(key);
+        return cookieStore.get(key);
+    }
+
+    return store.get(key);
 }
 
 export async function setCookie({
@@ -18,13 +27,15 @@ export async function setCookie({
     value,
     expiresAt,
     httpOnly,
+    store,
 }: {
     key: string;
     value: string;
     expiresAt: Date;
     httpOnly: boolean;
+    store?: ReadonlyRequestCookies;
 }): Promise<void> {
-    const cookieStore = await cookies();
+    const cookieStore = store ?? await cookies();
 
     cookieStore.set(key, value, {
         httpOnly: httpOnly,

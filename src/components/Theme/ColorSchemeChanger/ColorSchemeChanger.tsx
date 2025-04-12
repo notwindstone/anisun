@@ -25,6 +25,10 @@ export default function ColorSchemeChanger() {
     return (
         <div>
             asd
+            <button
+                className=""
+            >
+            </button>
             {JSON.stringify(data)}
             <button onClick={async () => {
                 const newData: ConfigType = {

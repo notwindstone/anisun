@@ -7,16 +7,32 @@ import { i18n } from "./i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
+import { getCookie, setCookie } from "@/lib/actions/cookies";
+import { cookies } from "next/headers";
+import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 
-function getLocale(request: NextRequest): string | undefined {
+async function getLocale(request: NextRequest): Promise<string | undefined> {
+    // eslint-disable-next-line
+    // @ts-ignore locales are readonly
+    const locales: string[] = i18n.locales;
+    const cookieStore = await cookies();
+    const cookieLocale = await getCookie({
+        key: "locale",
+        store: cookieStore,
+    });
+
+    if (cookieLocale?.value) {
+        const parsedLocale = JSON.parse(cookieLocale.value);
+
+        if (locales.includes(parsedLocale)) {
+            return parsedLocale;
+        }
+    }
+
     // Negotiator expects plain object so we need to transform headers
     const negotiatorHeaders: Record<string, string> = {};
     // eslint-disable-next-line
     request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
-
-    // eslint-disable-next-line
-    // @ts-ignore locales are readonly
-    const locales: string[] = i18n.locales;
 
     // Use negotiator and intl-localematcher to get best locale
     // eslint-disable-next-line
@@ -26,10 +42,18 @@ function getLocale(request: NextRequest): string | undefined {
 
     const locale = matchLocale(languages, locales, i18n.defaultLocale);
 
+    await setCookie({
+        key: "locale",
+        value: JSON.stringify(locale),
+        expiresAt: getRelativeDate({ days: 365 }),
+        httpOnly: false,
+        store: cookieStore,
+    });
+
     return locale;
 }
 
-export function middleware(request: NextRequest) {
+export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
 
     // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
@@ -51,7 +75,7 @@ export function middleware(request: NextRequest) {
 
     // Redirect if there is no locale
     if (pathnameIsMissingLocale) {
-        const locale = getLocale(request);
+        const locale = await getLocale(request);
 
         // e.g. incoming request is /products
         // The new URL is now /en-US/products

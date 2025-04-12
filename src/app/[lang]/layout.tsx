@@ -7,6 +7,7 @@ import TopLoader from "@/components/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
+import { cookies } from "next/headers";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -37,7 +38,9 @@ export default async function RootLayout({
 }>) {
     const { lang } = await params;
     const dictionaries = await getDictionary(lang);
-    const configs = await getCookie({ key: "configs" });
+    const configs = await getCookie({
+        key: "configs",
+    });
 
     return (
         <html lang={lang}>
