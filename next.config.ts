@@ -8,4 +8,5 @@ const nextConfig: NextConfig = {
 export default withGTConfig(nextConfig, {
     defaultLocale: "en",
     locales: ["en", "ru"],
+    loadDictionaryPath: "./src/loadDictionary.js",
 });
