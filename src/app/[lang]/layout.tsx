@@ -78,7 +78,7 @@ export default async function RootLayout({
                                         step: 500,
                                     }),
                                 }}>
-                                    This is server-side rendered text.
+                                    {dictionaries.server}
                                 </p>
                                 {children}
                             </div>

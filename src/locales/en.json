@@ -1,3 +1,4 @@
 {
-  "greetings": "hello"
+  "greetings": "hello",
+  "server": "This is server-side rendered text."
 }
