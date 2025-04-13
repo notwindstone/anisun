@@ -2,47 +2,48 @@
 
 import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import { setCookie } from "@/lib/actions/cookies";
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
-import { ConfigType } from "@/types/Configs/Config.type";
-import { CookieConfigKey } from "@/constants/configs";
+import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
+import { Moon, Sun } from "lucide-react";
+import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
+import setConfigValues from "@/utils/configs/setConfigValues";
+import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 
-async function setConfig({
-    configs,
+async function switchTheme({
+    currentConfig,
 }: {
-    configs: ConfigType | undefined;
+    currentConfig: SafeConfigType;
 }) {
-    await setCookie({
-        key: CookieConfigKey,
-        value: JSON.stringify(configs),
-        expiresAt: getRelativeDate({ days: 365 }),
-        httpOnly: false,
-    });
+    const newData: SafeConfigType = {
+        ...currentConfig,
+        theme: currentConfig.theme === DarkThemeKey
+            ? LightThemeKey
+            : DarkThemeKey,
+    };
+
+    await setConfigValues({ configs: newData });
 }
 
 export default function ColorSchemeChanger() {
-    const { data, dictionaries } = useContext(ConfigsContext);
+    const { data } = useContext(ConfigsContext);
+    const config = getSafeConfigValues({ config: data });
 
     return (
-        <div>
-            asd
+        <>
             <button
                 className=""
+                onClick={async () => switchTheme({
+                    currentConfig: config,
+                })}
+                aria-label="Toggle color scheme"
             >
+                {
+                    config.theme === DarkThemeKey ? (
+                        <Sun />
+                    ) : (
+                        <Moon />
+                    )
+                }
             </button>
-            {JSON.stringify(data)}
-            <button onClick={async () => {
-                const newData: ConfigType = {
-                    theme: "light",
-                    colors: {
-                        accent: "var(--color-rose-100)",
-                    },
-                };
-
-                await setConfig({ configs: newData });
-            }}>
-                set theme {dictionaries?.greetings}
-            </button>
-        </div>
+        </>
     );
 }

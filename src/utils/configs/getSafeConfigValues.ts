@@ -1,4 +1,5 @@
-import { ConfigType, SafeConfigType } from "@/types/Configs/Config.type";
+import { ConfigType } from "@/types/Configs/Config.type";
+import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { InitialConfig } from "@/constants/configs";
 
 export default function getSafeConfigValues({

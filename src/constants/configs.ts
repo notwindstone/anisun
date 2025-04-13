@@ -1,8 +1,10 @@
-import { SafeConfigType } from "@/types/Configs/Config.type";
+import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 
 export const CookieConfigKey = "configs";
+export const DarkThemeKey = "dark";
+export const LightThemeKey = "light";
 export const InitialConfig: SafeConfigType = {
-    theme: "dark",
+    theme: DarkThemeKey,
     colors: {
         accent: "white",
     },
