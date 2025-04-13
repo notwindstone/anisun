@@ -11,6 +11,7 @@ export default function getSafeConfigValues({
         theme: config?.theme ?? InitialConfig.theme,
         colors: {
             accent: config?.colors?.accent ?? InitialConfig.colors.accent,
+            topLoader: config?.colors?.topLoader ?? InitialConfig.colors.topLoader,
         },
     };
 }

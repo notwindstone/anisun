@@ -6,6 +6,7 @@ export const LightThemeKey = "light";
 export const InitialConfig: SafeConfigType = {
     theme: DarkThemeKey,
     colors: {
-        accent: "white",
+        accent: "#ea9a97",
+        topLoader: "#ea9a97",
     },
 };

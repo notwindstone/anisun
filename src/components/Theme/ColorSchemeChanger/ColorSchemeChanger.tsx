@@ -46,7 +46,7 @@ export default function ColorSchemeChanger() {
                     setPending(false);
                 }}
                 style={{
-                    opacity: pending ? 0.4 : 1,
+                    opacity: pending ? 0.6 : 1,
                     cursor: pending ? "default" : "pointer",
                 }}
                 aria-label="Toggle color scheme"

@@ -7,12 +7,12 @@ import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 
 export default function TopLoader() {
     const { data } = useContext(ConfigsContext);
-    const { colors: { accent } } = getSafeConfigValues({ config: data });
+    const { colors: { topLoader } } = getSafeConfigValues({ config: data });
 
     return (
         <>
             <NextTopLoader
-                color={accent}
+                color={topLoader}
                 showSpinner={false}
             />
         </>
