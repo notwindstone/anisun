@@ -13,7 +13,7 @@ export default function TopLoader() {
         color: accent,
         step: 500,
     });
-    console.log(color);
+
     return (
         <>
             <NextTopLoader
