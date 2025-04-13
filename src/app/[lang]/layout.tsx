@@ -11,6 +11,7 @@ import { CookieConfigKey, DarkThemeKey } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import Sidebar from "@/components/Sidebar/Sidebar";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -45,7 +46,7 @@ export default async function RootLayout({
         key: CookieConfigKey,
     });
     const parsedCookieData = readCookiesData({ configs });
-    const { theme } = getSafeConfigValues({
+    const { theme, colors: { accent } } = getSafeConfigValues({
         config: parsedCookieData,
     });
     const darkThemeClass = theme === DarkThemeKey
@@ -71,6 +72,14 @@ export default async function RootLayout({
                         <main className="w-full h-[100svh] flex flex-nowrap gap-0">
                             <Sidebar />
                             <div className="overflow-y-auto w-full">
+                                <p style={{
+                                    color: parseTailwindColor({
+                                        color: accent,
+                                        step: 500,
+                                    }),
+                                }}>
+                                    This is server-side rendered text.
+                                </p>
                                 {children}
                             </div>
                         </main>
