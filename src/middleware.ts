@@ -7,15 +7,19 @@ import { i18n } from "./i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import { getCookie } from "@/lib/actions/cookies";
+import { getCookie, setCookie } from "@/lib/actions/cookies";
+import { cookies } from "next/headers";
+import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { CookieLocaleKey, DefaultLocale } from "@/constants/localization";
 
 async function getLocale(request: NextRequest): Promise<string | undefined> {
     // eslint-disable-next-line
     // @ts-ignore locales are readonly
     const locales: string[] = i18n.locales;
+    const cookieStore = await cookies();
     const cookieLocale = await getCookie({
         key: CookieLocaleKey,
+        store: cookieStore,
     });
 
     if (cookieLocale?.value) {
@@ -44,6 +48,14 @@ async function getLocale(request: NextRequest): Promise<string | undefined> {
     );
 
     const locale = matchLocale(languages, locales, i18n.defaultLocale);
+
+    await setCookie({
+        key: CookieLocaleKey,
+        value: JSON.stringify(locale),
+        expiresAt: getRelativeDate({ days: 365 }),
+        httpOnly: false,
+        store: cookieStore,
+    });
 
     return locale;
 }
