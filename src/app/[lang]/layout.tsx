@@ -8,6 +8,8 @@ import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/Tan
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import { CookieConfigKey } from "@/constants/configs";
+import Wrapper from "@/components/Wrapper/Wrapper";
+import readCookiesData from "@/utils/configs/readCookiesData";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -41,6 +43,7 @@ export default async function RootLayout({
     const configs = await getCookie({
         key: CookieConfigKey,
     });
+    const parsedCookieData = readCookiesData({ configs });
 
     return (
         <html lang={lang}>
@@ -48,9 +51,11 @@ export default async function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <TanstackQueryProviders>
-                    <ConfigsProvider configs={configs} dictionaries={dictionaries}>
+                    <ConfigsProvider configs={parsedCookieData} dictionaries={dictionaries}>
                         <TopLoader />
-                        {children}
+                        <Wrapper configs={parsedCookieData}>
+                            {children}
+                        </Wrapper>
                     </ConfigsProvider>
                 </TanstackQueryProviders>
             </body>
