@@ -1,6 +1,5 @@
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
-import { ColorVariantsType } from "@/types/TailwindCSS/ColorVariants.type";
 
 export const AccentColors: Array<AccentColorsType> = [
     "red",

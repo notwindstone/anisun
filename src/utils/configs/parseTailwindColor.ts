@@ -2,7 +2,7 @@ import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 import { StepsType } from "@/types/TailwindCSS/Steps.type";
 import colors from 'tailwindcss/colors';
 
-export default function getTailwindColor({
+export default function parseTailwindColor({
     color,
     step,
 }: {
