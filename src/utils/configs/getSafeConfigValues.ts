@@ -1,8 +1,9 @@
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import { AccentColors, BaseColors, DarkThemeKey, InitialConfig, LightThemeKey } from "@/constants/configs";
+import { DarkThemeKey, InitialConfig, LightThemeKey } from "@/constants/configs";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
+import { AccentColors, BaseColors } from "@/constants/tailwind";
 
 // Yeah, this is a mess, typescript is diabolical
 const getThemeColor = (config: ParsedConfigType): "light" | "dark" => {

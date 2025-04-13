@@ -1,5 +1,6 @@
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 import { StepsType } from "@/types/TailwindCSS/Steps.type";
+import colors from 'tailwindcss/colors';
 
 export default function getTailwindColor({
     color,
@@ -7,6 +8,6 @@ export default function getTailwindColor({
 }: {
     color: PaletteType;
     step: StepsType;
-}): `var(--color-${PaletteType}-${StepsType})` {
-    return `var(--color-${color}-${step})`;
+}): string {
+    return colors[color][step];
 }
