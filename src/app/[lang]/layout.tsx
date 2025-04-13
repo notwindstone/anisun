@@ -7,9 +7,9 @@ import TopLoader from "@/components/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import { CookieConfigKey } from "@/constants/configs";
-import Wrapper from "@/components/Wrapper/Wrapper";
+import { CookieConfigKey, DarkThemeKey } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
+import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -44,18 +44,27 @@ export default async function RootLayout({
         key: CookieConfigKey,
     });
     const parsedCookieData = readCookiesData({ configs });
+    const { theme } = getSafeConfigValues({
+        config: parsedCookieData,
+    });
 
     return (
         <html lang={lang}>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors`}
+                style={{
+                    backgroundColor: theme === DarkThemeKey
+                        ? "var(--dark-background)"
+                        : "var(--dark-foreground)",
+                    color: theme === DarkThemeKey
+                        ? "var(--light-background)"
+                        : "var(--light-foreground)",
+                }}
             >
                 <TanstackQueryProviders>
                     <ConfigsProvider configs={parsedCookieData} dictionaries={dictionaries}>
                         <TopLoader />
-                        <Wrapper configs={parsedCookieData}>
-                            {children}
-                        </Wrapper>
+                        {children}
                     </ConfigsProvider>
                 </TanstackQueryProviders>
             </body>
