@@ -10,6 +10,7 @@ import { getDictionary } from "@/get-dictionary";
 import { CookieConfigKey, DarkThemeKey } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
+import Sidebar from "@/components/Sidebar/Sidebar";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -67,7 +68,12 @@ export default async function RootLayout({
                 <TanstackQueryProviders>
                     <ConfigsProvider configs={parsedCookieData} dictionaries={dictionaries}>
                         <TopLoader />
-                        {children}
+                        <main className="w-full h-[100svh] flex flex-nowrap gap-0">
+                            <Sidebar />
+                            <div className="overflow-y-auto w-full">
+                                {children}
+                            </div>
+                        </main>
                     </ConfigsProvider>
                 </TanstackQueryProviders>
             </body>

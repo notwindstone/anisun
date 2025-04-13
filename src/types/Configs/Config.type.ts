@@ -1,7 +1,10 @@
+import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
+import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
+
 export type ConfigType = {
     theme?: string;
     colors?: {
-        accent?: string;
-        topLoader?: string;
+        base?: BaseColorsType;
+        accent?: AccentColorsType;
     };
 } | undefined;

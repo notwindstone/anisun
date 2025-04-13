@@ -31,7 +31,7 @@ export default function ColorSchemeChanger() {
     return (
         <>
             <button
-                className="border-zinc-500 border-[1px] rounded-md p-2 transition hover:border-zinc-800 dark:hover:border-zinc-300"
+                className="border-neutral-400 dark:border-neutral-700 border-[1px] rounded-md p-2 transition hover:border-neutral-800 dark:hover:border-neutral-300"
                 onClick={async () => {
                     if (pending) {
                         return;
