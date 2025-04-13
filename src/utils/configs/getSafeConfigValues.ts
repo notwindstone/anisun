@@ -9,7 +9,7 @@ export default function getSafeConfigValues({
 }: {
     config: ParsedConfigType;
 }): SafeConfigType {
-    // sorry for this mess, typescript is diabolical
+    // Yeah, this is a mess, typescript is diabolical
     const getThemeColor = (): "light" | "dark" => {
         if (config?.theme === undefined) {
             return InitialConfig.theme;

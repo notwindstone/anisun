@@ -1,11 +1,11 @@
 "use client";
 
 import { createContext } from "react";
-import { ConfigType } from "@/types/Configs/Config.type";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
+import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 
 export const ConfigsContext = createContext<{
-    data: ConfigType;
+    data: ParsedConfigType;
     dictionaries: DictionariesType;
 }>({ data: undefined, dictionaries: undefined });
 
@@ -15,7 +15,7 @@ export function ConfigsProvider({
     dictionaries,
 }: {
     children: React.ReactNode;
-    configs: ConfigType;
+    configs: ParsedConfigType;
     dictionaries: DictionariesType;
 }) {
     return (

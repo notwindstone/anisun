@@ -7,6 +7,6 @@ export default function getTailwindColor({
 }: {
     color: PaletteType;
     step: StepsType;
-}): `theme("colors.${PaletteType}.${StepsType}")` {
-    return `theme("colors.${color}.${step}")`;
+}): `var(--color-${PaletteType}-${StepsType})` {
+    return `var(--color-${color}-${step})`;
 }
