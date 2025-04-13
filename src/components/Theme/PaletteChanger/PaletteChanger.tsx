@@ -7,7 +7,7 @@ import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { useContext, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
-import {AccentColors, BaseColors} from "@/constants/tailwind";
+import { AccentColors, BaseColors } from "@/constants/tailwind";
 
 async function changePalette({
     currentConfig,

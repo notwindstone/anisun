@@ -46,7 +46,7 @@ export default async function RootLayout({
         key: CookieConfigKey,
     });
     const parsedCookieData = readCookiesData({ configs });
-    const { theme, colors: { accent } } = getSafeConfigValues({
+    const { theme, colors: { accent, base } } = getSafeConfigValues({
         config: parsedCookieData,
     });
     const darkThemeClass = theme === DarkThemeKey
@@ -59,10 +59,16 @@ export default async function RootLayout({
                 className={`${darkThemeClass} ${geistSans.variable} ${geistMono.variable} antialiased transition-colors`}
                 style={{
                     backgroundColor: theme === DarkThemeKey
-                        ? "var(--dark-background)"
-                        : "var(--dark-foreground)",
+                        ? parseTailwindColor({
+                            color: base,
+                            step: 950,
+                        })
+                        : parseTailwindColor({
+                            color: base,
+                            step: 50,
+                        }),
                     color: theme === DarkThemeKey
-                        ? "var(--light-background)"
+                        ? "var(--dark-foreground)"
                         : "var(--light-foreground)",
                 }}
             >
@@ -70,9 +76,33 @@ export default async function RootLayout({
                     <ConfigsProvider configs={parsedCookieData} dictionaries={dictionaries}>
                         <TopLoader />
                         <main className="w-full h-[100svh] flex flex-nowrap gap-0">
-                            <Sidebar />
+                            <Sidebar
+                                colors={{
+                                    dark: {
+                                        background: parseTailwindColor({
+                                            color: base,
+                                            step: 900,
+                                        }),
+                                        border: parseTailwindColor({
+                                            color: base,
+                                            step: 800,
+                                        }),
+                                    },
+                                    light: {
+                                        background: parseTailwindColor({
+                                            color: base,
+                                            step: 100,
+                                        }),
+                                        border: parseTailwindColor({
+                                            color: base,
+                                            step: 400,
+                                        }),
+                                    },
+                                }}
+                                isDark={theme === DarkThemeKey}
+                            />
                             <div className="overflow-y-auto w-full">
-                                <p style={{
+                                <p className="transition-colors" style={{
                                     color: parseTailwindColor({
                                         color: accent,
                                         step: 500,
