@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/*
+ * Default tailwind's 'dark:*' selector uses
+ * prefers-color-scheme media query,
+ * but here we tell tailwind to apply 'dark:*' selector
+ * only if the 'dark' class is presented in the HTML tree
+ *
+ * This way we can implement a color scheme toggle
+ */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* Initial colors */
 /* Color scheme is being stored in cookies */
 :root {

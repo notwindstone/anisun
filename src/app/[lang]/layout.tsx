@@ -47,11 +47,14 @@ export default async function RootLayout({
     const { theme } = getSafeConfigValues({
         config: parsedCookieData,
     });
+    const darkThemeClass = theme === DarkThemeKey
+        ? "dark"
+        : "light";
 
     return (
         <html lang={lang}>
             <body
-                className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors`}
+                className={`${darkThemeClass} ${geistSans.variable} ${geistMono.variable} antialiased transition-colors`}
                 style={{
                     backgroundColor: theme === DarkThemeKey
                         ? "var(--dark-background)"

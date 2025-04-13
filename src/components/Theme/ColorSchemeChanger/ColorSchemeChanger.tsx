@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
 import { Moon, Sun } from "lucide-react";
@@ -24,16 +24,31 @@ async function switchTheme({
 }
 
 export default function ColorSchemeChanger() {
+    const [pending, setPending] = useState(false);
     const { data } = useContext(ConfigsContext);
     const config = getSafeConfigValues({ config: data });
 
     return (
         <>
             <button
-                className=""
-                onClick={async () => switchTheme({
-                    currentConfig: config,
-                })}
+                className="border-zinc-500 border-[1px] rounded-md p-2 transition hover:border-zinc-800 dark:hover:border-zinc-300"
+                onClick={async () => {
+                    if (pending) {
+                        return;
+                    }
+
+                    setPending(true);
+
+                    await switchTheme({
+                        currentConfig: config,
+                    });
+
+                    setPending(false);
+                }}
+                style={{
+                    opacity: pending ? 0.4 : 1,
+                    cursor: pending ? "default" : "pointer",
+                }}
                 aria-label="Toggle color scheme"
             >
                 {

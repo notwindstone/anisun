@@ -4,7 +4,7 @@ import LocaleSwitcher from "@/components/LocaleSwitcher/LocaleSwitcher";
 
 export default async function Home() {
     return (
-        <div>
+        <div className="flex items-center p-4 gap-4">
             <ColorSchemeChanger />
             <Link href={"/profile/1234"}>
                 profile
