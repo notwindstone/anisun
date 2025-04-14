@@ -1,4 +1,11 @@
 {
   "greetings": "hello",
-  "server": "This is server-side rendered text."
+  "server": "This is server-side rendered text.",
+  "sidebar": {
+    "home": "",
+    "history": "",
+    "watchLater": "",
+    "settings": "",
+    "account": ""
+  }
 }

@@ -1,17 +1,20 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { Dispatch, SetStateAction, useContext, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
 import { Moon, Sun } from "lucide-react";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import setConfigValues from "@/utils/configs/setConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
+import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 
 async function switchTheme({
     currentConfig,
+    optimisticallyUpdate,
 }: {
     currentConfig: SafeConfigType;
+    optimisticallyUpdate: Dispatch<SetStateAction<ParsedConfigType>> | undefined;
 }) {
     const newData: SafeConfigType = {
         ...currentConfig,
@@ -20,12 +23,14 @@ async function switchTheme({
             : DarkThemeKey,
     };
 
+    optimisticallyUpdate?.(newData);
+
     await setConfigValues({ configs: newData });
 }
 
 export default function ColorSchemeChanger() {
     const [pending, setPending] = useState(false);
-    const { data } = useContext(ConfigsContext);
+    const { data, optimisticallyUpdate } = useContext(ConfigsContext);
     const config = getSafeConfigValues({ config: data });
 
     return (
@@ -41,6 +46,7 @@ export default function ColorSchemeChanger() {
 
                     await switchTheme({
                         currentConfig: config,
+                        optimisticallyUpdate,
                     });
 
                     setPending(false);

@@ -13,9 +13,7 @@
 /* Initial colors */
 /* Color scheme is being stored in cookies */
 :root {
-  --dark-background: var(--color-black);
   --dark-foreground: var(--color-white);
-  --light-background: var(--color-white);
   --light-foreground: var(--color-black);
 }
 

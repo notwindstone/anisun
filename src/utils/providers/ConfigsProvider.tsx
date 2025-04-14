@@ -1,13 +1,18 @@
 "use client";
 
-import { createContext } from "react";
+import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 
 export const ConfigsContext = createContext<{
     data: ParsedConfigType;
+    optimisticallyUpdate: Dispatch<SetStateAction<ParsedConfigType>> | undefined;
     dictionaries: DictionariesType;
-}>({ data: undefined, dictionaries: undefined });
+}>({
+    data: undefined,
+    optimisticallyUpdate: undefined,
+    dictionaries: undefined,
+});
 
 export function ConfigsProvider({
     children,
@@ -18,9 +23,12 @@ export function ConfigsProvider({
     configs: ParsedConfigType;
     dictionaries: DictionariesType;
 }) {
+    const [configsState, setConfigsState] = useState<ParsedConfigType>(configs);
+
     return (
         <ConfigsContext.Provider value={{
-            data: configs,
+            data: configsState,
+            optimisticallyUpdate: setConfigsState,
             dictionaries: dictionaries,
         }}>
             {children}
