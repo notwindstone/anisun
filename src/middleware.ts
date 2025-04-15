@@ -7,20 +7,14 @@ import { i18n } from "./i18n-config";
 
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import { getCookie, setCookie } from "@/lib/actions/cookies";
-import { cookies } from "next/headers";
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { CookieLocaleKey, DefaultLocale } from "@/constants/localization";
+import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 
-async function getLocale(request: NextRequest): Promise<string | undefined> {
+function getLocale(request: NextRequest): string | undefined {
     // eslint-disable-next-line
     // @ts-ignore locales are readonly
     const locales: string[] = i18n.locales;
-    const cookieStore = await cookies();
-    const cookieLocale = await getCookie({
-        key: CookieLocaleKey,
-        store: cookieStore,
-    });
+    const cookieLocale = request.cookies.get(CookieLocaleKey);
 
     if (cookieLocale?.value) {
         let parsedLocale;
@@ -47,17 +41,7 @@ async function getLocale(request: NextRequest): Promise<string | undefined> {
         locales,
     );
 
-    const locale = matchLocale(languages, locales, i18n.defaultLocale);
-
-    await setCookie({
-        key: CookieLocaleKey,
-        value: JSON.stringify(locale),
-        expiresAt: getRelativeDate({ days: 365 }),
-        httpOnly: false,
-        store: cookieStore,
-    });
-
-    return locale;
+    return matchLocale(languages, locales, i18n.defaultLocale);
 }
 
 export async function middleware(request: NextRequest) {
@@ -82,16 +66,26 @@ export async function middleware(request: NextRequest) {
 
     // Redirect if there is no locale
     if (pathnameIsMissingLocale) {
-        const locale = await getLocale(request);
+        const locale = getLocale(request);
 
         // e.g. incoming request is /products
         // The new URL is now /en-US/products
-        return NextResponse.redirect(
+        const response = NextResponse.redirect(
             new URL(
                 `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
                 request.url,
             ),
         );
+
+        response.cookies.set(CookieLocaleKey, JSON.stringify(locale), {
+            httpOnly: false,
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
+            expires: getRelativeDate({ days: 365 }),
+            path: "/",
+        });
+
+        return response;
     }
 }
 
