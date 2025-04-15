@@ -34,15 +34,17 @@ export default function LocaleSwitcher() {
         <div>
             <p>Locale switcher:</p>
             <ul>
-                {i18n.locales.map((locale) => {
-                    return (
-                        <li key={locale}>
-                            <Link href={redirectedPathname(locale)} onClick={() => handleLocaleSwitch(locale)}>
-                                {locale}
-                            </Link>
-                        </li>
-                    );
-                })}
+                {
+                    i18n.locales.map((locale) => {
+                        return (
+                            <li key={locale}>
+                                <Link href={redirectedPathname(locale)} onClick={() => handleLocaleSwitch(locale)}>
+                                    {locale}
+                                </Link>
+                            </li>
+                        );
+                    })
+                }
             </ul>
         </div>
     );

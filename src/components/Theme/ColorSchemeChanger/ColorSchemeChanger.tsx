@@ -1,20 +1,18 @@
 "use client";
 
-import { Dispatch, SetStateAction, useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
 import { Moon, Sun } from "lucide-react";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import setConfigValues from "@/utils/configs/setConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 
 async function switchTheme({
     currentConfig,
-    optimisticallyUpdate,
 }: {
     currentConfig: SafeConfigType;
-    optimisticallyUpdate: Dispatch<SetStateAction<ParsedConfigType>> | undefined;
 }) {
     const newData: SafeConfigType = {
         ...currentConfig,
@@ -22,8 +20,6 @@ async function switchTheme({
             ? LightThemeKey
             : DarkThemeKey,
     };
-
-    optimisticallyUpdate?.(newData);
 
     await setConfigValues({ configs: newData });
 }
@@ -35,6 +31,14 @@ export default function ColorSchemeChanger() {
 
     return (
         <>
+            <p className="transition-colors" style={{
+                color: parseTailwindColor({
+                    color: config.colors.accent,
+                    step: 500,
+                }),
+            }}>
+                Client-side
+            </p>
             <button
                 className="border-neutral-400 dark:border-neutral-700 border-[1px] rounded-md p-2 transition hover:border-neutral-800 dark:hover:border-neutral-300"
                 onClick={async () => {
@@ -44,9 +48,17 @@ export default function ColorSchemeChanger() {
 
                     setPending(true);
 
+                    optimisticallyUpdate?.((state) => {
+                        return {
+                            ...state,
+                            theme: config.theme === DarkThemeKey
+                                ? LightThemeKey
+                                : DarkThemeKey,
+                        };
+                    });
+
                     await switchTheme({
                         currentConfig: config,
-                        optimisticallyUpdate,
                     });
 
                     setPending(false);

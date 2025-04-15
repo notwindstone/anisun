@@ -42,7 +42,7 @@ async function changePalette({
             break;
         }
     }
-    
+
     await setConfigValues({ configs: newData });
 }
 
@@ -54,7 +54,7 @@ export default function PaletteChanger({
     propertyKey: "base" | "accent";
 }) {
     const [pending, setPending] = useState(false);
-    const { data } = useContext(ConfigsContext);
+    const { data, optimisticallyUpdate } = useContext(ConfigsContext);
     const config = getSafeConfigValues({ config: data });
 
     return (
@@ -68,6 +68,20 @@ export default function PaletteChanger({
                             }
 
                             setPending(true);
+
+                            optimisticallyUpdate?.((state) => {
+                                return {
+                                    ...state,
+                                    colors: {
+                                        accent: propertyKey === "accent"
+                                            ? color
+                                            : state?.colors?.accent,
+                                        base: propertyKey === "base"
+                                            ? color
+                                            : state?.colors?.base,
+                                    },
+                                };
+                            });
 
                             await changePalette({
                                 currentConfig: config,

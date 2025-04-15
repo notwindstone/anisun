@@ -62,6 +62,12 @@ export default async function RootLayout({
                         <AppWrapper>
                             <TopLoader />
                             <main className="w-full h-[100svh] flex flex-nowrap gap-0">
+                                {
+                                /*
+                                 * SidebarWrapper is client-side
+                                 * Sidebar is server-side
+                                 */
+                                }
                                 <SidebarWrapper>
                                     <Sidebar />
                                 </SidebarWrapper>
