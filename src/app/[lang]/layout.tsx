@@ -7,11 +7,13 @@ import TopLoader from "@/components/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import { CookieConfigKey, DarkThemeKey } from "@/constants/configs";
+import { CookieConfigKey } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import AppWrapper from "@/components/AppWrapper/AppWrapper";
+import SidebarWrapper from "@/components/Sidebar/SidebarWrapper/SidebarWrapper";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -46,73 +48,36 @@ export default async function RootLayout({
         key: CookieConfigKey,
     });
     const parsedCookieData = readCookiesData({ configs });
-    const { theme, colors: { accent, base } } = getSafeConfigValues({
+    const { colors: { accent } } = getSafeConfigValues({
         config: parsedCookieData,
     });
-    const darkThemeClass = theme === DarkThemeKey
-        ? "dark"
-        : "light";
 
     return (
         <html lang={lang}>
             <body
-                className={`${darkThemeClass} ${geistSans.variable} ${geistMono.variable} antialiased transition-colors`}
-                style={{
-                    backgroundColor: theme === DarkThemeKey
-                        ? parseTailwindColor({
-                            color: base,
-                            step: 950,
-                        })
-                        : parseTailwindColor({
-                            color: base,
-                            step: 50,
-                        }),
-                    color: theme === DarkThemeKey
-                        ? "var(--dark-foreground)"
-                        : "var(--light-foreground)",
-                }}
+                className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <TanstackQueryProviders>
                     <ConfigsProvider configs={parsedCookieData} dictionaries={dictionaries}>
-                        <TopLoader />
-                        <main className="w-full h-[100svh] flex flex-nowrap gap-0">
-                            <Sidebar
-                                colors={{
-                                    dark: {
-                                        background: parseTailwindColor({
-                                            color: base,
-                                            step: 900,
+                        <AppWrapper>
+                            <TopLoader />
+                            <main className="w-full h-[100svh] flex flex-nowrap gap-0">
+                                <SidebarWrapper>
+                                    <Sidebar />
+                                </SidebarWrapper>
+                                <div className="overflow-y-auto w-full">
+                                    <p className="transition-colors" style={{
+                                        color: parseTailwindColor({
+                                            color: accent,
+                                            step: 500,
                                         }),
-                                        border: parseTailwindColor({
-                                            color: base,
-                                            step: 800,
-                                        }),
-                                    },
-                                    light: {
-                                        background: parseTailwindColor({
-                                            color: base,
-                                            step: 100,
-                                        }),
-                                        border: parseTailwindColor({
-                                            color: base,
-                                            step: 400,
-                                        }),
-                                    },
-                                }}
-                                isDark={theme === DarkThemeKey}
-                            />
-                            <div className="overflow-y-auto w-full">
-                                <p className="transition-colors" style={{
-                                    color: parseTailwindColor({
-                                        color: accent,
-                                        step: 500,
-                                    }),
-                                }}>
-                                    {dictionaries.server}
-                                </p>
-                                {children}
-                            </div>
-                        </main>
+                                    }}>
+                                        {dictionaries.server}
+                                    </p>
+                                    {children}
+                                </div>
+                            </main>
+                        </AppWrapper>
                     </ConfigsProvider>
                 </TanstackQueryProviders>
             </body>
