@@ -1,4 +1,8 @@
 {
+  "metadata": {
+    "title": "Home | Anisun",
+    "description": "create next"
+  },
   "greetings": "hello",
   "server": "This is server-side rendered text.",
   "sidebar": {
