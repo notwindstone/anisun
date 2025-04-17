@@ -5,11 +5,11 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
 import { Moon, Sun } from "lucide-react";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
-import setConfigValues from "@/utils/configs/setConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 
-async function switchTheme({
+function switchTheme({
     currentConfig,
 }: {
     currentConfig: SafeConfigType;
@@ -21,7 +21,10 @@ async function switchTheme({
             : DarkThemeKey,
     };
 
-    await setConfigValues({ configs: newData });
+    setConfigValuesClient({
+        configs: newData,
+        document: document,
+    });
 }
 
 export default function ColorSchemeChanger() {
@@ -41,7 +44,7 @@ export default function ColorSchemeChanger() {
             </p>
             <button
                 className="border-neutral-400 dark:border-neutral-700 border-[1px] rounded-md p-2 transition hover:border-neutral-800 dark:hover:border-neutral-300"
-                onClick={async () => {
+                onClick={() => {
                     if (pending) {
                         return;
                     }
@@ -57,10 +60,9 @@ export default function ColorSchemeChanger() {
                         };
                     });
 
-                    await switchTheme({
+                    switchTheme({
                         currentConfig: config,
                     });
-
                     setPending(false);
                 }}
                 style={{
