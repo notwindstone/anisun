@@ -2,6 +2,8 @@ import { setCookie } from "@/lib/actions/cookies";
 import { CookieConfigKey } from "@/constants/configs";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
+import { setCookie as setCookiesClient } from 'cookies-next/client';
+
 
 export default async function setConfigValues({
     configs,
@@ -18,32 +20,14 @@ export default async function setConfigValues({
 
 export function setConfigValuesClient({
     configs,
-    document,
 }: {
     configs: SafeConfigType | undefined;
-    document: Document;
 }) {
-    const splitKey = "; ";
-    const configCookieKey = `${CookieConfigKey}=`;
-    const cookiesData: string[] = document.cookie.split(splitKey);
-    const configCookies = cookiesData.find((row) => {
-        return row.startsWith(configCookieKey);
+    setCookiesClient(CookieConfigKey, configs, {
+        httpOnly: false,
+        sameSite: "lax",
+        secure: process.env.NODE_ENV === "production",
+        expires: getRelativeDate({ days: 365 }),
+        path: "/",
     });
-
-    if (!configCookies) {
-        cookiesData.push(
-            `${configCookieKey}${encodeURIComponent(
-                JSON.stringify(configs),
-            )}; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=Lax; Secure`,
-        );
-        document.cookie = cookiesData.join(splitKey);
-
-        return;
-    }
-
-    console.log(configCookies)
-    console.log(JSON.parse(decodeURIComponent(document.cookie
-        .split("; ")
-        .find((row) => row.startsWith("configs="))
-        ?.split("=")[1] ?? "")));
 }

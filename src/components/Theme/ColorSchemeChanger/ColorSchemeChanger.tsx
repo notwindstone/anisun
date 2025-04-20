@@ -23,7 +23,6 @@ function switchTheme({
 
     setConfigValuesClient({
         configs: newData,
-        document: document,
     });
 }
 
