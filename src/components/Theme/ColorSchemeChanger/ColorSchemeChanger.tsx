@@ -8,6 +8,7 @@ import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
+import Button from "@/components/Button/Button";
 
 function switchTheme({
     currentConfig,
@@ -41,8 +42,10 @@ export default function ColorSchemeChanger() {
             }}>
                 Client-side
             </p>
-            <button
-                className="border-neutral-400 dark:border-neutral-700 border-[1px] rounded-md p-2 transition hover:border-neutral-800 dark:hover:border-neutral-300"
+            <Button
+                custom={{
+                    pending: pending,
+                }}
                 onClick={() => {
                     if (pending) {
                         return;
@@ -64,10 +67,6 @@ export default function ColorSchemeChanger() {
                     });
                     setPending(false);
                 }}
-                style={{
-                    opacity: pending ? 0.6 : 1,
-                    cursor: pending ? "default" : "pointer",
-                }}
                 aria-label="Toggle color scheme"
             >
                 {
@@ -77,7 +76,7 @@ export default function ColorSchemeChanger() {
                         <Moon />
                     )
                 }
-            </button>
+            </Button>
         </>
     );
 }

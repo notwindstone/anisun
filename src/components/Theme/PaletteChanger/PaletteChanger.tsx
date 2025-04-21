@@ -2,14 +2,17 @@
 
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
-import setConfigValues from "@/utils/configs/setConfigValues";
+import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { useContext, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
+import { PaletteType } from "@/types/TailwindCSS/Palette.type";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import Button from "@/components/Button/Button";
 
-async function changePalette({
+function changePalette({
     currentConfig,
     color,
     propertyKey,
@@ -43,7 +46,7 @@ async function changePalette({
         }
     }
 
-    await setConfigValues({ configs: newData });
+    setConfigValuesClient({ configs: newData });
 }
 
 export default function PaletteChanger({
@@ -57,42 +60,60 @@ export default function PaletteChanger({
     const { data, optimisticallyUpdate } = useContext(ConfigsContext);
     const config = getSafeConfigValues({ config: data });
 
+    function switchColor(color: PaletteType) {
+        if (pending) {
+            return;
+        }
+
+        setPending(true);
+
+        optimisticallyUpdate?.((state) => {
+            return {
+                ...state,
+                colors: {
+                    accent: propertyKey === "accent"
+                        ? color
+                        : state?.colors?.accent,
+                    base: propertyKey === "base"
+                        ? color
+                        : state?.colors?.base,
+                },
+            };
+        });
+
+        changePalette({
+            currentConfig: config,
+            color,
+            propertyKey,
+        });
+
+        setPending(false);
+    }
+
     return (
         <>
             <div>
                 {
                     colors.map((color) => (
-                        <div key={color} onClick={async () => {
-                            if (pending) {
-                                return;
-                            }
-
-                            setPending(true);
-
-                            optimisticallyUpdate?.((state) => {
-                                return {
-                                    ...state,
-                                    colors: {
-                                        accent: propertyKey === "accent"
-                                            ? color
-                                            : state?.colors?.accent,
-                                        base: propertyKey === "base"
-                                            ? color
-                                            : state?.colors?.base,
-                                    },
-                                };
-                            });
-
-                            await changePalette({
-                                currentConfig: config,
-                                color,
-                                propertyKey,
-                            });
-
-                            setPending(false);
-                        }}>
+                        <Button
+                            custom={{
+                                appendClassNames: "w-32",
+                                pending: pending,
+                            }}
+                            key={color}
+                            onClick={() => switchColor(color)}
+                        >
+                            <div
+                                className="w-6 h-6 rounded-full"
+                                style={{
+                                    background: parseTailwindColor({
+                                        color,
+                                        step: 500,
+                                    }),
+                                }}
+                            />
                             {color}
-                        </div>
+                        </Button>
                     ))
                 }
             </div>
