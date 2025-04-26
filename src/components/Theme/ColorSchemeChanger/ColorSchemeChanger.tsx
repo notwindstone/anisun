@@ -77,6 +77,9 @@ export default function ColorSchemeChanger() {
                     )
                 }
             </Button>
+            <button className="temporaryshit">
+                Label
+            </button>
         </>
     );
 }
