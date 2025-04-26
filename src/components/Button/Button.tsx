@@ -28,7 +28,7 @@ export default function Button({
                 { ...properties }
             >
                 {children}
-            </button   >
+            </button>
         </>
     );
 }
