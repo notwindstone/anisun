@@ -4,10 +4,11 @@ import { drizzle as drizzleMySQL, MySql2Database } from "drizzle-orm/mysql2";
 import { Pool } from '@neondatabase/serverless';
 import { drizzle as drizzleNeon, NeonDatabase } from 'drizzle-orm/neon-serverless';
 import { drizzle as drizzlePostgres, PostgresJsDatabase } from "drizzle-orm/postgres-js";
-import { url } from "inspector";
+import { drizzle as drizzleSqlite, BetterSQLite3Database } from 'drizzle-orm/better-sqlite3';
+import Database from "better-sqlite3";
 
 const dbType = process.env.DATABASE_TYPE!;
-let db: NeonDatabase | PostgresJsDatabase | MySql2Database;
+let db: NeonDatabase | PostgresJsDatabase | MySql2Database | BetterSQLite3Database;
 
 switch (dbType.toLowerCase()) {
     case "neon": {
@@ -23,6 +24,10 @@ switch (dbType.toLowerCase()) {
     case "mysql": {
         const pool = mysql.createPool(process.env.MYSQL_DATABASE_URL!);
         db = drizzleMySQL(pool);
+        break;
+    }
+    case "sqlite": {
+        db = drizzleSqlite(new Database(process.env.SQLITE_DATABASE_URL!));
         break;
     }
     default: {

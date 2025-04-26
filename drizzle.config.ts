@@ -6,7 +6,7 @@ config({ path: ".env.local" });
 
 const dbType = process.env.DATABASE_TYPE!;
 let dbConnectionString: string;
-let driver: "pg" | "mysql2";
+let driver: "pg" | "mysql2" | "better-sqlite";
 
 switch (dbType.toLowerCase()) {
     case "neon": {
@@ -24,6 +24,11 @@ switch (dbType.toLowerCase()) {
         driver = "mysql2";
         break;
     }
+    case "sqlite": {
+        dbConnectionString = process.env.SQLITE_DATABASE_URL!;
+        driver = "better-sqlite";
+        break;
+    }
     default: {
         throw new Error(`Unsupported database type: ${dbType}`);
     }
@@ -35,6 +40,7 @@ export default {
     driver: driver,
     dbCredentials: {
         uri: dbConnectionString,
+        url: dbConnectionString,
         connectionString: dbConnectionString,
     },
 } satisfies Config;
