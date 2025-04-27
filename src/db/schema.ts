@@ -2,9 +2,9 @@ import {text, json, pgTable, boolean} from "drizzle-orm/pg-core";
 import {sqliteTable, text as sqliteText, integer as sqliteInteger} from "drizzle-orm/sqlite-core";
 
 const getCommentsTableSchema = () => {
-    /*switch (process.env.DATABASE_TYPE!) {
-        case "postgresql":
-        case "neon":
+//    switch (process.env.DATABASE_TYPE) {
+//        case "postgresql":
+//        case "neon":
             return pgTable("comments", {
                 uuid: text("uuid").primaryKey(),
                 parentuuid: text("parentuuid"),
@@ -21,7 +21,7 @@ const getCommentsTableSchema = () => {
                 isDeleted: boolean("isDeleted").default(false).notNull(),
                 isEdited: boolean("isEdited").default(false).notNull(),
             });
-        case "sqlite":*/
+/*        case "sqlite":
             return sqliteTable("comments", {
                 uuid: sqliteText("uuid").primaryKey(),
                 parentuuid: sqliteText("parentuuid"),
@@ -38,13 +38,17 @@ const getCommentsTableSchema = () => {
                 isDeleted: sqliteInteger("isDeleted").default(0).notNull(),
                 isEdited: sqliteInteger("isEdited").default(0).notNull(),
             });
-        /*default:
-            throw new Error("blah blah");
+        default:
+            throw new Error("Unsupported DATABASE_TYPE. Please set DATABASE_TYPE to 'postgresql' or 'sqlite'.");
     }*/
 };
 
-export const parseCommentsTableSchema = () => {
-
+export const parseCommentsTableSchema = (row: any) => {
+    return {
+        ...row,
+        likes: row.likes ? JSON.parse(row.likes) : [],
+        dislikes: row.dislikes ? JSON.parse(row.dislikes) : [],
+    };
 };
 
 export const comments = getCommentsTableSchema();
