@@ -20,8 +20,6 @@ export default function Button({
         ...custom,
     };
 
-    console.log(pending, appendClassNames)
-
     return (
         <>
             <button>
