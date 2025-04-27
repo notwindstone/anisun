@@ -1,4 +1,5 @@
 import { ButtonHTMLAttributes } from "react";
+import { ButtonCustomProperties } from "@/components/Button/Button.config";
 
 export default function Button({
     children,
@@ -11,8 +12,15 @@ export default function Button({
         pending?: boolean;
     };
 } & ButtonHTMLAttributes<HTMLButtonElement>): React.ReactNode {
-    const appendClassNames = custom?.appendClassNames ?? "";
-    const pending = custom?.pending ?? false;
+    const {
+        pending,
+        appendClassNames,
+    } = {
+        ...ButtonCustomProperties,
+        ...custom,
+    };
+
+    console.log(pending, appendClassNames)
 
     return (
         <>
@@ -20,11 +28,13 @@ export default function Button({
 
             </button>
             <button
-                className={"flex gap-2 border-neutral-400 dark:border-neutral-700 border-[1px] rounded-md p-2 transition hover:border-neutral-800 dark:hover:border-neutral-300 " + appendClassNames}
+                className={"flex gap-2 border-neutral-400 dark:border-neutral-700 disabled:border-neutral-400 dark:disabled:border-neutral-700  border-[1px] rounded-md p-2 transition hover:border-neutral-800 dark:hover:border-neutral-300 active:bg-neutral-200 dark:active:bg-neutral-800 " + appendClassNames}
                 style={{
                     opacity: pending ? 0.6 : 1,
                     cursor: pending ? "default" : "pointer",
+
                 }}
+                disabled={pending}
                 { ...properties }
             >
                 {children}
