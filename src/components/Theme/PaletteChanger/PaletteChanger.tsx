@@ -81,7 +81,7 @@ export default function PaletteChanger({
 
     return (
         <>
-            <div>
+            <div className="flex flex-col gap-2">
                 {
                     colors.map((color) => (
                         <Button
