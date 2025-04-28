@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, useContext } from "react";
+import { ButtonHTMLAttributes, useContext, useState } from "react";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
@@ -9,11 +9,14 @@ export default function Button({
     ...properties
 }: {
     children: React.ReactNode;
+    /** Sets aria-label */
     label: string;
+    /** Custom properties */
     custom?: {
         appendClassNames?: string;
     };
 } & ButtonHTMLAttributes<HTMLButtonElement>): React.ReactNode {
+    const [animation, triggerAnimation] = useState<number | undefined>();
     const { data: { colors: { accent } } } = useContext(ConfigsContext);
     const {
         appendClassNames,
@@ -21,11 +24,13 @@ export default function Button({
         appendClassNames: "",
         ...custom,
     };
+    const animationClassName = animation ? "animate-click" : "";
 
     return (
         <>
             <button
-                className={"text-white flex gap-2 rounded-md p-2 transition cursor-pointer disabled:opacity-60 disabled:cursor-default " + appendClassNames}
+                key={animation}
+                className={`text-white flex gap-2 rounded-md p-2 cursor-pointer disabled:opacity-60 disabled:cursor-default hover:brightness-75 ${animationClassName} ${appendClassNames}`}
                 style={{
                     background: parseTailwindColor({
                         color: accent,
@@ -34,6 +39,10 @@ export default function Button({
                 }}
                 aria-label={label}
                 { ...properties }
+                onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
+                    triggerAnimation(Math.random());
+                    properties?.onClick?.(event);
+                }}
             >
                 {children}
             </button>
