@@ -15,7 +15,7 @@ export default function SidebarWrapper({
     return (
         <>
             <div
-                className="shrink-0 w-0 sm:w-64 h-full border-r-[1px] transition-colors"
+                className="shrink-0 w-0 sm:w-64 h-full transition-colors"
                 style={{
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
@@ -25,15 +25,6 @@ export default function SidebarWrapper({
                         : parseTailwindColor({
                             color: base,
                             step: 100,
-                        }),
-                    borderColor: theme === DarkThemeKey
-                        ? parseTailwindColor({
-                            color: base,
-                            step: 800,
-                        })
-                        : parseTailwindColor({
-                            color: base,
-                            step: 400,
                         }),
                 }}
             >

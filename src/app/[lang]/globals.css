@@ -1,6 +1,23 @@
 @import "tailwindcss";
 
 /*
+ * Custom animations
+ */
+@theme {
+  --animate-gradient: gradient 3s linear infinite;
+
+  @keyframes gradient {
+    from {
+      background-position: 0 center;
+    }
+
+    to {
+      background-position: 200% center;
+    }
+  }
+}
+
+/*
  * Default tailwind's 'dark:*' selector uses
  * prefers-color-scheme media query,
  * but here we tell tailwind to apply 'dark:*' selector

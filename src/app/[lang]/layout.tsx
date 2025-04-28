@@ -12,6 +12,7 @@ import readCookiesData from "@/utils/configs/readCookiesData";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import AppWrapper from "@/components/AppWrapper/AppWrapper";
 import SidebarWrapper from "@/components/Sidebar/SidebarWrapper/SidebarWrapper";
+import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -60,6 +61,9 @@ export default async function RootLayout({
         key: CookieConfigKey,
     });
     const parsedCookieData = readCookiesData({ configs });
+    const safeConfigValues = getSafeConfigValues({
+        config: parsedCookieData,
+    });
 
     return (
         <html lang={lang}>
@@ -78,7 +82,7 @@ export default async function RootLayout({
                                  */
                                 }
                                 <SidebarWrapper>
-                                    <Sidebar />
+                                    <Sidebar config={safeConfigValues} />
                                 </SidebarWrapper>
                                 <div className="overflow-y-auto w-full">
                                     {children}

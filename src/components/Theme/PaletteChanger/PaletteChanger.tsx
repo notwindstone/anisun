@@ -98,13 +98,16 @@ export default function PaletteChanger({
                             key={color}
                             onClick={() => switchColor(color)}
                             label={`${dictionaries?.aria?.changePaletteColor} "${dictionaries?.appearance?.[color]}"`}
+                            title={dictionaries?.appearance?.[color] as string}
                         >
-                            {[
-                                config.colors.accent,
-                                config.colors.base,
-                            ].includes(color) && (
-                                <Check />
-                            )}
+                            {
+                                [
+                                    config.colors.accent,
+                                    config.colors.base,
+                                ].includes(color) && (
+                                    <Check />
+                                )
+                            }
                         </Button>
                     ))
                 }
