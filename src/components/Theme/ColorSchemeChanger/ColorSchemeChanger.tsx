@@ -54,7 +54,7 @@ export default function ColorSchemeChanger() {
                         currentConfig: config,
                     });
                 }}
-                aria-label="Toggle color scheme"
+                label="Toggle color scheme"
             >
                 {
                     config.theme === DarkThemeKey ? (
@@ -64,9 +64,6 @@ export default function ColorSchemeChanger() {
                     )
                 }
             </Button>
-            <button className="temporaryshit">
-                Label
-            </button>
         </>
     );
 }

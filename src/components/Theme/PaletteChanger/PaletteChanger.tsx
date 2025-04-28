@@ -90,6 +90,7 @@ export default function PaletteChanger({
                             }}
                             key={color}
                             onClick={() => switchColor(color)}
+                            label={`Set palette color to ${color}`}
                         >
                             <div
                                 className="w-6 h-6 rounded-full"
