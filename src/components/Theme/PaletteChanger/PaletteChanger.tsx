@@ -87,6 +87,7 @@ export default function PaletteChanger({
                         <Button
                             custom={{
                                 appendClassNames: "w-32",
+                                style: "default",
                             }}
                             key={color}
                             onClick={() => switchColor(color)}

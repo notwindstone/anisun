@@ -3,6 +3,7 @@ import Link from "next/link";
 import LocaleSwitcher from "@/components/LocaleSwitcher/LocaleSwitcher";
 import PaletteChanger from "@/components/Theme/PaletteChanger/PaletteChanger";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
+import Button from "@/components/Button/Button";
 
 export default async function Home() {
     return (
@@ -20,6 +21,18 @@ export default async function Home() {
                 colors={AccentColors}
                 propertyKey="accent"
             />
+            <Button label={""} custom={{ style:"base" }}>
+                asdf
+            </Button>
+            <Button label={""} custom={{ style:"accent" }}>
+                asdf
+            </Button>
+            <Button label={""} custom={{ style:"default" }}>
+                asdf
+            </Button>
+            <Button label={""} custom={{ style:"transparent" }}>
+                asdf
+            </Button>
         </div>
     );
 }

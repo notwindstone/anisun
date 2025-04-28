@@ -1,22 +1,6 @@
 @import "tailwindcss";
 
 /*
- * Custom animations
- */
-@theme {
-  --animate-click: click 300ms ease 1;
-
-  @keyframes click {
-    0% {
-      filter: brightness(95%);
-    }
-    100% {
-      filter: brightness(75%);
-    }
-  }
-}
-
-/*
  * Default tailwind's 'dark:*' selector uses
  * prefers-color-scheme media query,
  * but here we tell tailwind to apply 'dark:*' selector
