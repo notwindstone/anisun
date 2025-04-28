@@ -49,7 +49,7 @@ export default function getButtonColor({
             foreground = "white";
             background = parseTailwindColor({
                 color: accent,
-                step: 500,
+                step: 600,
             });
             break;
         }

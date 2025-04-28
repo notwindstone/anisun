@@ -55,7 +55,7 @@ export default function PaletteChanger({
     colors: Array<BaseColorsType | AccentColorsType>;
     propertyKey: "base" | "accent";
 }) {
-    const { data: config, optimisticallyUpdate } = useContext(ConfigsContext);
+    const { data: config, optimisticallyUpdate, dictionaries } = useContext(ConfigsContext);
 
     function switchColor(color: PaletteType) {
         optimisticallyUpdate?.((state) => {
@@ -94,15 +94,15 @@ export default function PaletteChanger({
                             label={`Set palette color to ${color}`}
                         >
                             <div
-                                className="w-6 h-6 rounded-full"
+                                className="w-6 h-6 shrink-0 rounded-full"
                                 style={{
                                     background: parseTailwindColor({
                                         color,
-                                        step: 500,
+                                        step: 600,
                                     }),
                                 }}
                             />
-                            {color}
+                            {dictionaries?.appearance?.[color]}
                         </Button>
                     ))
                 }
