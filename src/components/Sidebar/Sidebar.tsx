@@ -9,11 +9,11 @@ export default function Sidebar({
     const { colors: { accent } } = config;
     const gradientFrom = parseTailwindColor({
         color: accent,
-        step: 400,
+        step: 600,
     });
     const gradientTo = parseTailwindColor({
         color: accent,
-        step: 600,
+        step: 400,
     });
 
     return (
@@ -26,7 +26,7 @@ export default function Sidebar({
                     <div
                         className={`animate-gradient text-2xl font-bold text-transparent leading-none`}
                         style={{
-                            background: `linear-gradient(to right,${gradientFrom},${gradientTo},${gradientFrom})`,
+                            backgroundImage: `linear-gradient(to right,${gradientFrom},${gradientTo},${gradientFrom})`,
                             backgroundClip: "text",
                             backgroundSize: "200% auto",
                         }}
