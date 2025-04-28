@@ -11,8 +11,8 @@ export default function Button({
     custom,
     ...properties
 }: {
-    children: React.ReactNode;
-    /** Sets aria-label */
+    children?: React.ReactNode;
+    /** Sets both aria-label & title properties */
     label: string;
     /** Custom properties */
     custom?: {
@@ -40,6 +40,7 @@ export default function Button({
                     background,
                 }}
                 aria-label={label}
+                title={label}
                 { ...properties }
             >
                 {children}

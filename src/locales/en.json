@@ -35,5 +35,9 @@
     "fuchsia": "Fuchsia",
     "pink": "Pink",
     "rose": "Rose"
+  },
+  "aria": {
+    "toggleColorScheme": "Toggle app color scheme",
+    "changePaletteColor": "Set palette color to"
   }
 }

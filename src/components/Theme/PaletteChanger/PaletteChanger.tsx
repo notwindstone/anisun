@@ -10,6 +10,7 @@ import { AccentColors, BaseColors } from "@/constants/tailwind";
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import Button from "@/components/Button/Button";
+import { Check } from "lucide-react";
 
 function changePalette({
     currentConfig,
@@ -86,23 +87,24 @@ export default function PaletteChanger({
                     colors.map((color) => (
                         <Button
                             custom={{
-                                appendClassNames: "w-32",
-                                style: "base",
+                                appendClassNames: "w-10 h-10 rounded-md",
+                            }}
+                            style={{
+                                background: parseTailwindColor({
+                                    color,
+                                    step: 600,
+                                }),
                             }}
                             key={color}
                             onClick={() => switchColor(color)}
-                            label={`Set palette color to ${color}`}
+                            label={`${dictionaries?.aria?.changePaletteColor} "${dictionaries?.appearance?.[color]}"`}
                         >
-                            <div
-                                className="w-6 h-6 shrink-0 rounded-full"
-                                style={{
-                                    background: parseTailwindColor({
-                                        color,
-                                        step: 600,
-                                    }),
-                                }}
-                            />
-                            {dictionaries?.appearance?.[color]}
+                            {[
+                                config.colors.accent,
+                                config.colors.base,
+                            ].includes(color) && (
+                                <Check />
+                            )}
                         </Button>
                     ))
                 }

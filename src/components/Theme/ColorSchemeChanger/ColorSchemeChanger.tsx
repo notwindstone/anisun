@@ -27,7 +27,7 @@ function switchTheme({
 }
 
 export default function ColorSchemeChanger() {
-    const { data: config, optimisticallyUpdate } = useContext(ConfigsContext);
+    const { data: config, optimisticallyUpdate, dictionaries } = useContext(ConfigsContext);
 
     return (
         <>
@@ -54,7 +54,7 @@ export default function ColorSchemeChanger() {
                         currentConfig: config,
                     });
                 }}
-                label="Toggle color scheme"
+                label={dictionaries?.aria?.toggleColorScheme as string}
             >
                 {
                     config.theme === DarkThemeKey ? (
