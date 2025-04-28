@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
 import { Moon, Sun } from "lucide-react";
-import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
@@ -28,8 +27,7 @@ function switchTheme({
 }
 
 export default function ColorSchemeChanger() {
-    const { data, optimisticallyUpdate } = useContext(ConfigsContext);
-    const config = getSafeConfigValues({ config: data });
+    const { data: config, optimisticallyUpdate } = useContext(ConfigsContext);
 
     return (
         <>

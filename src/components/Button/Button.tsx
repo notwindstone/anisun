@@ -4,10 +4,12 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function Button({
     children,
+    label,
     custom,
     ...properties
 }: {
     children: React.ReactNode;
+    label: string;
     custom?: {
         appendClassNames?: string;
     };
@@ -30,6 +32,7 @@ export default function Button({
                         step: 500,
                     }),
                 }}
+                aria-label={label}
                 { ...properties }
             >
                 {children}

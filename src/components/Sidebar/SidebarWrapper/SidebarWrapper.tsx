@@ -2,7 +2,6 @@
 
 import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 
@@ -11,8 +10,7 @@ export default function SidebarWrapper({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const { data } = useContext(ConfigsContext);
-    const { theme, colors: { base } } = getSafeConfigValues({ config: data });
+    const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
 
     return (
         <>

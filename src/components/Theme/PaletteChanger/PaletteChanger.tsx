@@ -6,7 +6,6 @@ import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
@@ -56,8 +55,7 @@ export default function PaletteChanger({
     colors: Array<BaseColorsType | AccentColorsType>;
     propertyKey: "base" | "accent";
 }) {
-    const { data, optimisticallyUpdate } = useContext(ConfigsContext);
-    const config = getSafeConfigValues({ config: data });
+    const { data: config, optimisticallyUpdate } = useContext(ConfigsContext);
 
     function switchColor(color: PaletteType) {
         optimisticallyUpdate?.((state) => {
