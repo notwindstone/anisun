@@ -1,50 +1,10 @@
 "use client";
 
 import { ButtonHTMLAttributes, useContext } from "react";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import useConfiguredRipple from "@/hooks/useConfiguredRipple";
-import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
-import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
-import { DarkThemeKey } from "@/constants/configs";
-
-type stylesType = "default" | "accent" | "base" | "transparent";
-
-const getBackgroundColor = ({
-    style,
-    theme,
-    colors: {
-        accent,
-        base,
-    },
-}: {
-    style: stylesType;
-    theme: "dark" | "light";
-    colors: {
-        accent: AccentColorsType;
-        base: BaseColorsType;
-    };
-}) => {
-    switch (style) {
-        case "base": {
-            return parseTailwindColor({
-                color: base,
-                step: theme === DarkThemeKey
-                    ? 900
-                    : 200,
-            });
-        }
-        case "transparent": {
-            return "transparent";
-        }
-        default: {
-            return parseTailwindColor({
-                color: accent,
-                step: 500,
-            });
-        }
-    }
-};
+import { ButtonStylesType } from "@/types/Appearance/ButtonStyles.type";
+import getButtonColor from "@/utils/appearance/getButtonColor";
 
 export default function Button({
     children,
@@ -60,7 +20,7 @@ export default function Button({
         /** Adds your own classes without overwriting current */
         appendClassNames?: string;
         /** Sets button style */
-        style?: stylesType;
+        style?: ButtonStylesType;
     };
 } & ButtonHTMLAttributes<HTMLButtonElement>): React.ReactNode {
     const { ripple, event } = useConfiguredRipple({
@@ -69,18 +29,19 @@ export default function Button({
     const { data: { theme, colors } } = useContext(ConfigsContext);
     const appendClassNames = custom?.appendClassNames ?? "";
     const style = custom?.style ?? "default";
-
+    const { foreground, background } = getButtonColor({
+        theme,
+        colors,
+        style,
+    });
 
     return (
         <>
             <button
                 className={`text-white flex gap-2 rounded-md p-2 cursor-pointer transition-colors disabled:opacity-60 disabled:cursor-default ${appendClassNames}`}
                 style={{
-                    background: getBackgroundColor({
-                        style,
-                        theme,
-                        colors,
-                    }),
+                    color: foreground,
+                    background,
                 }}
                 aria-label={label}
                 { ...properties }
