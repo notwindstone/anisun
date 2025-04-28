@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
 import { Moon, Sun } from "lucide-react";
@@ -28,7 +28,6 @@ function switchTheme({
 }
 
 export default function ColorSchemeChanger() {
-    const [pending, setPending] = useState(false);
     const { data, optimisticallyUpdate } = useContext(ConfigsContext);
     const config = getSafeConfigValues({ config: data });
 
@@ -43,16 +42,7 @@ export default function ColorSchemeChanger() {
                 Client-side
             </p>
             <Button
-                custom={{
-                    pending: pending,
-                }}
                 onClick={() => {
-                    if (pending) {
-                        return;
-                    }
-
-                    setPending(true);
-
                     optimisticallyUpdate?.((state) => {
                         return {
                             ...state,
@@ -65,7 +55,6 @@ export default function ColorSchemeChanger() {
                     switchTheme({
                         currentConfig: config,
                     });
-                    setPending(false);
                 }}
                 aria-label="Toggle color scheme"
             >

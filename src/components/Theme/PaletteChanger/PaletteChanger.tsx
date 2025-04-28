@@ -4,7 +4,7 @@ import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
@@ -56,17 +56,10 @@ export default function PaletteChanger({
     colors: Array<BaseColorsType | AccentColorsType>;
     propertyKey: "base" | "accent";
 }) {
-    const [pending, setPending] = useState(false);
     const { data, optimisticallyUpdate } = useContext(ConfigsContext);
     const config = getSafeConfigValues({ config: data });
 
     function switchColor(color: PaletteType) {
-        if (pending) {
-            return;
-        }
-
-        setPending(true);
-
         optimisticallyUpdate?.((state) => {
             return {
                 ...state,
@@ -86,8 +79,6 @@ export default function PaletteChanger({
             color,
             propertyKey,
         });
-
-        setPending(false);
     }
 
     return (
@@ -98,7 +89,6 @@ export default function PaletteChanger({
                         <Button
                             custom={{
                                 appendClassNames: "w-32",
-                                pending: pending,
                             }}
                             key={color}
                             onClick={() => switchColor(color)}

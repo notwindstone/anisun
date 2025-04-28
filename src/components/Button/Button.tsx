@@ -1,5 +1,6 @@
-import { ButtonHTMLAttributes } from "react";
-import { ButtonCustomProperties } from "@/components/Button/Button.config";
+import { ButtonHTMLAttributes, useContext } from "react";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function Button({
     children,
@@ -9,30 +10,26 @@ export default function Button({
     children: React.ReactNode;
     custom?: {
         appendClassNames?: string;
-        pending?: boolean;
     };
 } & ButtonHTMLAttributes<HTMLButtonElement>): React.ReactNode {
+    const { data: { colors: { accent } } } = useContext(ConfigsContext);
     const {
-        pending,
         appendClassNames,
     } = {
-        ...ButtonCustomProperties,
+        appendClassNames: "",
         ...custom,
     };
 
     return (
         <>
-            <button>
-
-            </button>
             <button
-                className={"flex gap-2 border-neutral-400 dark:border-neutral-700 disabled:border-neutral-400 dark:disabled:border-neutral-700  border-[1px] rounded-md p-2 transition hover:border-neutral-800 dark:hover:border-neutral-300 active:bg-neutral-200 dark:active:bg-neutral-800 " + appendClassNames}
+                className={"text-white flex gap-2 rounded-md p-2 transition cursor-pointer disabled:opacity-60 disabled:cursor-default " + appendClassNames}
                 style={{
-                    opacity: pending ? 0.6 : 1,
-                    cursor: pending ? "default" : "pointer",
-
+                    background: parseTailwindColor({
+                        color: accent,
+                        step: 500,
+                    }),
                 }}
-                disabled={pending}
                 { ...properties }
             >
                 {children}

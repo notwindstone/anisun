@@ -3,13 +3,16 @@
 import { createContext, Dispatch, SetStateAction, useState } from "react";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
+import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
+import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
+import { InitialConfig } from "@/constants/configs";
 
 export const ConfigsContext = createContext<{
-    data: ParsedConfigType;
+    data: SafeConfigType;
     optimisticallyUpdate: Dispatch<SetStateAction<ParsedConfigType>> | undefined;
     dictionaries: DictionariesType;
 }>({
-    data: undefined,
+    data: InitialConfig,
     optimisticallyUpdate: undefined,
     dictionaries: undefined,
 });
@@ -24,10 +27,13 @@ export function ConfigsProvider({
     dictionaries: DictionariesType;
 }) {
     const [configsState, setConfigsState] = useState<ParsedConfigType>(configs);
+    const safeConfigsState = getSafeConfigValues({
+        config: configsState,
+    });
 
     return (
         <ConfigsContext.Provider value={{
-            data: configsState,
+            data: safeConfigsState,
             optimisticallyUpdate: setConfigsState,
             dictionaries: dictionaries,
         }}>
