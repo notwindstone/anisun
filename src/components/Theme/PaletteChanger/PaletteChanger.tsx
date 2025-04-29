@@ -11,8 +11,6 @@ import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import Button from "@/components/Button/Button";
 import { Check } from "lucide-react";
-import { useRouter } from "nextjs-toploader/app";
-import { useTopLoader } from "nextjs-toploader";
 
 function changePalette({
     currentConfig,
@@ -59,11 +57,8 @@ export default function PaletteChanger({
     propertyKey: "base" | "accent";
 }) {
     const { data: config, optimisticallyUpdate, dictionaries } = useContext(ConfigsContext);
-    const router = useRouter();
-    const loader = useTopLoader();
 
     function switchColor(color: PaletteType) {
-        loader.start();
         optimisticallyUpdate?.((state) => {
             return {
                 ...state,
@@ -83,8 +78,6 @@ export default function PaletteChanger({
             color,
             propertyKey,
         });
-        router.refresh();
-        loader.done();
     }
 
     return (

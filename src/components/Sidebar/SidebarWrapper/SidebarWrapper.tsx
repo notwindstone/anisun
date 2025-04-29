@@ -15,7 +15,7 @@ export default function SidebarWrapper({
     return (
         <>
             <div
-                className="shrink-0 w-0 sm:w-64 h-full transition-colors"
+                className="shrink-0 w-8 sm:w-64 h-full transition-colors overflow-hidden"
                 style={{
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
