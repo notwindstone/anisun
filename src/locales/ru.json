@@ -6,11 +6,12 @@
   "greetings": "srfdf",
   "server": "Это генерируемый на сервере текст.",
   "sidebar": {
-    "home": "",
-    "history": "",
-    "watchLater": "",
-    "settings": "",
-    "account": ""
+    "home": "Главная",
+    "history": "История",
+    "search": "Поиск",
+    "watchLater": "Смотреть позже",
+    "settings": "Настройки",
+    "account": "Аккаунт"
   },
   "appearance": {
     "slate": "Сланцевый",

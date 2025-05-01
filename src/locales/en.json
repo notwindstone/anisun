@@ -6,11 +6,12 @@
   "greetings": "hello",
   "server": "This is server-side rendered text.",
   "sidebar": {
-    "home": "",
-    "history": "",
-    "watchLater": "",
-    "settings": "",
-    "account": ""
+    "home": "Home",
+    "history": "History",
+    "search": "Search",
+    "watchLater": "Watch Later",
+    "settings": "Settings",
+    "account": "Account"
   },
   "appearance": {
     "slate": "Slate",

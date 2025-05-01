@@ -30,6 +30,7 @@
 /* Initial colors */
 /* Color scheme is being stored in cookies */
 :root {
+  --background: var(--color-black);
   --dark-foreground: var(--color-white);
   --light-foreground: var(--color-black);
 }
@@ -39,6 +40,11 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  background: var(--background);
+}
+
 body {
+  background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }

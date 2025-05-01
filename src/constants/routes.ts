@@ -5,6 +5,10 @@ export const APIRoutes = {
 };
 export const PageRoutes = {
     Root: "/",
+    Settings: {
+        Root: "/settings",
+        Pathname: "settings",
+    },
     Profile: {
         Root: "/profile",
         Pathname: "profile",
