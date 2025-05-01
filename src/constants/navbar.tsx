@@ -19,7 +19,7 @@ export const getNavbarItems = (dictionaries: DictionariesType): Array<{
     },
     {
         name: dictionaries?.sidebar?.account,
-        href: PageRoutes.Settings.Root,
+        href: PageRoutes.Account.Root,
         icon: <CircleUser className="shrink-0" size={24} />,
     },
 ];
