@@ -12,11 +12,11 @@ export default function AnimatedGradientText({
     const { data: { colors: { accent } } } = useContext(ConfigsContext);
     const gradientFrom = parseTailwindColor({
         color: accent,
-        step: 600,
+        step: 700,
     });
     const gradientTo = parseTailwindColor({
         color: accent,
-        step: 300,
+        step: 400,
     });
 
     return (

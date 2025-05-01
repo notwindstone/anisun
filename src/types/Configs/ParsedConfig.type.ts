@@ -1,7 +1,4 @@
-export type ParsedConfigType = {
-    theme?: string;
-    colors?: {
-        base?: string;
-        accent?: string;
-    };
-} | undefined;
+import { Stringify } from "@/types/Utils/Stringify.type";
+import { ConfigType } from "@/types/Configs/Config.type";
+
+export type ParsedConfigType = Stringify<ConfigType>

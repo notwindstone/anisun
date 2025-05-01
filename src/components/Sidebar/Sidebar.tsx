@@ -17,6 +17,7 @@ export default function Sidebar({
                         anisun
                     </AnimatedGradientText>
                 </div>
+                {JSON.stringify(config)}
             </div>
         </>
     );
