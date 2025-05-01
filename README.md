@@ -1,6 +1,8 @@
 > [!IMPORTANT]
 > Work in progress...
 
+https://x.com/ahiru_tokotoko/status/1568517301737242625
+
 ## To-Do
 
 * Shikimori, MAL and AniList integrations
@@ -13,7 +15,7 @@ next.js, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-i
 
 <div align="center">
 
-<img width="160" height="160" align="center" src="public/favicon.png">
+<img width="160" height="160" align="center" src="public/favicon.webp">
 
 # [anisun (rebooted)](https://anisun.vercel.app)
 
