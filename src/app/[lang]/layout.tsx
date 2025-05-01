@@ -13,6 +13,7 @@ import Sidebar from "@/components/Sidebar/Sidebar";
 import AppWrapper from "@/components/AppWrapper/AppWrapper";
 import SidebarWrapper from "@/components/Sidebar/SidebarWrapper/SidebarWrapper";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
+import { AppName } from "@/constants/app";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -36,7 +37,7 @@ export async function generateMetadata({
 
     return {
         title: {
-            template: "%s | anisun",
+            template: `%s | ${AppName.toLowerCase()}`,
             default: title,
         },
         description,

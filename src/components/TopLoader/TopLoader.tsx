@@ -9,7 +9,7 @@ export default function TopLoader() {
     const { data: { colors: { accent } } } = useContext(ConfigsContext);
     const color = parseTailwindColor({
         color: accent,
-        step: 500,
+        step: 600,
     });
 
     return (

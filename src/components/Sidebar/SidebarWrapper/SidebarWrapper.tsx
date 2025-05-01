@@ -7,6 +7,11 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import Button from "@/components/Button/Button";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
+import AnimatedGradientText from "@/components/AnimatedGradientText/AnimatedGradientText";
+import { AppName } from "@/constants/app";
+import favicon from "@/../public/favicon.jpg";
+import Image from "next/image";
+import Link from "next/link";
 
 const icons: {
     [key: string]: {
@@ -39,9 +44,9 @@ export default function SidebarWrapper({
     return (
         <>
             <div
-                className="shrink-0 h-full transition overflow-hidden"
+                className="flex flex-col gap-2 items-start justify-start p-2 shrink-0 h-full transition-colors overflow-hidden"
                 style={{
-                    width: expanded ? 256 : 48,
+                    width: expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
                             color: base,
@@ -53,41 +58,59 @@ export default function SidebarWrapper({
                         }),
                 }}
             >
-                <Button
-                    custom={{
-                        style: "base",
-                    }}
-                    onClick={() => {
-                        optimisticallyUpdate?.((state) => {
-                            return {
-                                ...state,
-                                layout: {
-                                    ...state?.layout,
-                                    sidebar: {
-                                        ...state?.layout?.sidebar,
-                                        expanded: !state?.layout?.sidebar?.expanded,
-                                    },
-                                },
-                            };
-                        });
-
-                        setConfigValuesClient({
-                            configs: {
-                                ...config,
-                                layout: {
-                                    ...config.layout,
-                                    sidebar: {
-                                        ...config.layout.sidebar,
-                                        expanded: !config.layout.sidebar.expanded,
-                                    },
-                                },
-                            },
-                        });
-                    }}
-                    label={dictionaries?.aria?.toggleSidebar as string}
+                <div
+                    className="flex w-full items-center justify-between"
                 >
-                    {icons?.[serverSideSidebarPosition]?.[expanded.toString()]}
-                </Button>
+                    {
+                        expanded && (
+                            <Link className="flex gap-4 items-center select-none" href="/">
+                                <Image
+                                    className="w-10 h-10 rounded-md ring-2 ring-black dark:ring-white drop-shadow-md transition"
+                                    src={favicon}
+                                    alt={""}
+                                />
+                                <AnimatedGradientText>
+                                    {AppName.toUpperCase()}
+                                </AnimatedGradientText>
+                            </Link>
+                        )
+                    }
+                    <Button
+                        custom={{
+                            style: "base",
+                        }}
+                        onClick={() => {
+                            optimisticallyUpdate?.((state) => {
+                                return {
+                                    ...state,
+                                    layout: {
+                                        ...state?.layout,
+                                        sidebar: {
+                                            ...state?.layout?.sidebar,
+                                            expanded: !state?.layout?.sidebar?.expanded,
+                                        },
+                                    },
+                                };
+                            });
+
+                            setConfigValuesClient({
+                                configs: {
+                                    ...config,
+                                    layout: {
+                                        ...config.layout,
+                                        sidebar: {
+                                            ...config.layout.sidebar,
+                                            expanded: !config.layout.sidebar.expanded,
+                                        },
+                                    },
+                                },
+                            });
+                        }}
+                        label={dictionaries?.aria?.toggleSidebar as string}
+                    >
+                        {icons?.[serverSideSidebarPosition]?.[expanded.toString()]}
+                    </Button>
+                </div>
                 {children}
             </div>
         </>
