@@ -12,7 +12,7 @@ export default function Sidebar({
                 className="w-full h-full"
             >
                 <div className="flex select-none">
-                    <div className="w-8 h-8 rounded-full bg-rose-200" />
+                    <div className="shrink-0 w-8 h-8 rounded-full bg-rose-200" />
                     <AnimatedGradientText>
                         anisun
                     </AnimatedGradientText>
