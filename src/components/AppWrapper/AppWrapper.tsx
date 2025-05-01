@@ -16,7 +16,7 @@ export default function AppWrapper({
         : "light";
 
     return (
-        <div className={`${darkThemeClass} transition-colors`} style={{
+        <div className={`${darkThemeClass} transition-colors duration-200`} style={{
             backgroundColor: theme === DarkThemeKey
                 ? parseTailwindColor({
                     color: base,

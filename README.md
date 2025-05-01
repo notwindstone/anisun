@@ -1,6 +1,8 @@
 > [!IMPORTANT]
 > Work in progress...
 
+credits for logo
+
 https://x.com/ahiru_tokotoko/status/1568517301737242625
 
 ## To-Do
@@ -48,6 +50,11 @@ PageSpeed Insights
 Web Page Size Checker
 
 Comparison with the anisun v4
+
+// 01.05.2025 audit --- commit b1e869e27375610ebe38c31dcc3935cc38e728ba
+
+[![Pagespeed Insights Screenshot #1](/public/psi/pagespeed-insights-1.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-1.png)
+[![Pagespeed Insights Screenshot #2](/public/psi/pagespeed-insights-2.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-2.png)
 
 ## ⚙️ Tech Stack
 
