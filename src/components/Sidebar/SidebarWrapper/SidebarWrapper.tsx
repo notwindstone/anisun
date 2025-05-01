@@ -9,7 +9,7 @@ import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import AnimatedGradientText from "@/components/AnimatedGradientText/AnimatedGradientText";
 import { AppName, FaviconBlurredBase64 } from "@/constants/app";
-import favicon from "../../../../public/favicon-original.jpg";
+import favicon from "../../../../public/favicon-x40.jpg";
 import Image from "next/image";
 import Link from "next/link";
 
