@@ -33,7 +33,7 @@ export default function SidebarWrapper({
     const { data: config, data: {
         theme,
         colors: { base },
-        layout: { sidebar: { expanded, position } },
+        layout: { sidebar: { expanded } },
     }, dictionaries, optimisticallyUpdate } = useContext(ConfigsContext);
 
     return (
