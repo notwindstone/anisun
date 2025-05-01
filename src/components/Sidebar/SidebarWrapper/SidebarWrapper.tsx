@@ -82,6 +82,7 @@ export default function SidebarWrapper({
                                     src={favicon}
                                     alt={"Tenshi Hinanawi, a character from Touhou"}
                                     blurDataURL={FaviconBlurredBase64}
+                                    placeholder={"blur"}
                                 />
                                 <AnimatedGradientText>
                                     {AppName.toUpperCase()}
