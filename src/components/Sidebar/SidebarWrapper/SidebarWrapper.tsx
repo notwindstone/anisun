@@ -25,8 +25,10 @@ const icons: {
 
 export default function SidebarWrapper({
     children,
+    serverSideSidebarPosition,
 }: Readonly<{
     children: React.ReactNode;
+    serverSideSidebarPosition: "left" | "right";
 }>) {
     const { data: config, data: {
         theme,
@@ -84,7 +86,7 @@ export default function SidebarWrapper({
                     }}
                     label={dictionaries?.aria?.toggleSidebar as string}
                 >
-                    {icons?.[position]?.[expanded.toString()]}
+                    {icons?.[serverSideSidebarPosition]?.[expanded.toString()]}
                 </Button>
                 {children}
             </div>

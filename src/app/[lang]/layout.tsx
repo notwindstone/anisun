@@ -88,7 +88,7 @@ export default async function RootLayout({
                                  * Sidebar is server-side
                                  */
                                 }
-                                <SidebarWrapper>
+                                <SidebarWrapper serverSideSidebarPosition={safeConfigValues.layout.sidebar.position}>
                                     <Sidebar config={safeConfigValues} />
                                 </SidebarWrapper>
                                 <div className="overflow-y-auto w-full">
