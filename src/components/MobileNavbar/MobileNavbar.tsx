@@ -60,7 +60,7 @@ export default function MobileNavbar() {
                                     style={focused === item.href ? {
                                         color: parseTailwindColor({
                                             color: accent,
-                                            step: 600,
+                                            step: 500,
                                         }),
                                     } : undefined}
                                     href={item.href}
