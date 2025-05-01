@@ -11,6 +11,7 @@ export default function Sidebar({
             <Button label={""} custom={{ style: "transparent" }}>
                 asdf
             </Button>
+            {JSON.stringify(config)}
         </>
     );
 }
