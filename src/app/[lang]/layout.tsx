@@ -14,6 +14,7 @@ import AppWrapper from "@/components/AppWrapper/AppWrapper";
 import SidebarWrapper from "@/components/Sidebar/SidebarWrapper/SidebarWrapper";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { AppName } from "@/constants/app";
+import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -66,6 +67,9 @@ export default async function RootLayout({
     const safeConfigValues = getSafeConfigValues({
         config: parsedCookieData,
     });
+    const layoutClassNames = safeConfigValues.layout.sidebar.position === SidebarLeftPosition
+        ? "flex-col sm:flex-row"
+        : "flex-col sm:flex-row-reverse";
 
     return (
         <html lang={lang}>
@@ -77,12 +81,7 @@ export default async function RootLayout({
                         <AppWrapper>
                             <TopLoader />
                             <main
-                                className="w-full h-[100svh] flex flex-nowrap gap-0"
-                                style={{
-                                    flexFlow: safeConfigValues.layout.sidebar.position === SidebarLeftPosition
-                                        ? "row"
-                                        : "row-reverse",
-                                }}
+                                className={`w-full h-[100svh] flex flex-nowrap gap-0 ${layoutClassNames}`}
                             >
                                 {
                                 /*
@@ -96,6 +95,7 @@ export default async function RootLayout({
                                 <div className="overflow-y-auto w-full">
                                     {children}
                                 </div>
+                                <MobileNavbar />
                             </main>
                         </AppWrapper>
                     </ConfigsProvider>

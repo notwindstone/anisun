@@ -12,6 +12,7 @@ import { AppName, FaviconBlurredBase64 } from "@/constants/app";
 import favicon from "@/../public/favicon-x60.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { useMediaQuery } from "@mantine/hooks";
 
 const icons: {
     [key: string]: {
@@ -40,11 +41,16 @@ export default function SidebarWrapper({
         colors: { base },
         layout: { sidebar: { expanded } },
     }, dictionaries, optimisticallyUpdate } = useContext(ConfigsContext);
+    const matches = useMediaQuery('(min-width: 640px)');
+
+    if (matches === false) {
+        return;
+    }
 
     return (
         <>
             <div
-                className="flex flex-col gap-2 items-start justify-start p-2 shrink-0 h-full transition-colors duration-200 overflow-hidden"
+                className="hidden sm:flex flex-col gap-2 items-start justify-start p-2 shrink-0 h-full transition-colors duration-200 overflow-hidden"
                 style={{
                     width: expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
