@@ -8,7 +8,7 @@ import Button from "@/components/Button/Button";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import AnimatedGradientText from "@/components/AnimatedGradientText/AnimatedGradientText";
-import { AppName } from "@/constants/app";
+import { AppName, FaviconBlurredBase64 } from "@/constants/app";
 import favicon from "../../../../public/favicon-original.jpg";
 import Image from "next/image";
 import Link from "next/link";
@@ -80,7 +80,8 @@ export default function SidebarWrapper({
                                 <Image
                                     className="w-10 h-10 rounded-md ring-2 ring-black dark:ring-white drop-shadow-md transition"
                                     src={favicon}
-                                    alt={""}
+                                    alt={"Tenshi Hinanawi, a character from Touhou"}
+                                    blurDataURL={FaviconBlurredBase64}
                                 />
                                 <AnimatedGradientText>
                                     {AppName.toUpperCase()}
