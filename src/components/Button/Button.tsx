@@ -42,6 +42,19 @@ export default function Button({
                 aria-label={label}
                 title={label}
                 { ...properties }
+                onPointerUp={(event: React.PointerEvent<HTMLButtonElement>) => {
+                    const currentTarget = event?.currentTarget;
+
+                    properties?.onPointerUp?.(event);
+
+                    const timeout = setTimeout(() => {
+                        currentTarget?.blur?.();
+                    }, 150);
+
+                    return () => {
+                        clearTimeout(timeout);
+                    };
+                }}
             >
                 {children}
             </button>
