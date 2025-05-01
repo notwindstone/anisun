@@ -38,6 +38,7 @@
   },
   "aria": {
     "toggleColorScheme": "Toggle app color scheme",
-    "changePaletteColor": "Set palette color to"
+    "changePaletteColor": "Set palette color to",
+    "switchLayout": "Switch app layout"
   }
 }

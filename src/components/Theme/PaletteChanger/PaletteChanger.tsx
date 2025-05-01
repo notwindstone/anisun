@@ -63,6 +63,7 @@ export default function PaletteChanger({
             return {
                 ...state,
                 colors: {
+                    ...state?.colors,
                     accent: propertyKey === "accent"
                         ? color
                         : state?.colors?.accent,
