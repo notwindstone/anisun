@@ -1,4 +1,5 @@
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
+import Button from "@/components/Button/Button";
 
 export default function Sidebar({
     config,
@@ -7,15 +8,9 @@ export default function Sidebar({
 }) {
     return (
         <>
-            <div
-                className="w-full h-full"
-            >
-                <div className="flex select-none">
-                    <div className="shrink-0 w-8 h-8 rounded-full bg-rose-200" />
-
-                </div>
-                {JSON.stringify(config)}
-            </div>
+            <Button label={""} custom={{ style: "transparent" }}>
+                asdf
+            </Button>
         </>
     );
 }

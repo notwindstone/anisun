@@ -2,7 +2,7 @@
 
 import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import { DarkThemeKey } from "@/constants/configs";
+import { DarkThemeKey, SidebarRightPosition } from "@/constants/configs";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import Button from "@/components/Button/Button";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
@@ -60,10 +60,23 @@ export default function SidebarWrapper({
             >
                 <div
                     className="flex w-full items-center justify-between"
+                    style={{
+                        flexDirection: serverSideSidebarPosition === SidebarRightPosition
+                            ? "row-reverse"
+                            : "row",
+                    }}
                 >
                     {
                         expanded && (
-                            <Link className="flex gap-4 items-center select-none" href="/">
+                            <Link
+                                className="flex gap-4 items-center select-none"
+                                href="/"
+                                style={{
+                                    flexDirection: serverSideSidebarPosition === SidebarRightPosition
+                                        ? "row-reverse"
+                                        : "row",
+                                }}
+                            >
                                 <Image
                                     className="w-10 h-10 rounded-md ring-2 ring-black dark:ring-white drop-shadow-md transition"
                                     src={favicon}
