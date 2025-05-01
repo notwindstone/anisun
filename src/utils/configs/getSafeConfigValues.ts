@@ -1,5 +1,11 @@
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import { DarkThemeKey, InitialConfig, LightThemeKey } from "@/constants/configs";
+import {
+    DarkThemeKey,
+    InitialConfig,
+    LightThemeKey,
+    SidebarLeftPosition,
+    SidebarRightPosition,
+} from "@/constants/configs";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
@@ -47,6 +53,25 @@ const getBaseColor = (config: ParsedConfigType): BaseColorsType => {
 
     return InitialConfig.colors.base;
 };
+const getSidebarProperties = (config: ParsedConfigType): {
+    position: "left" | "right";
+    expanded: boolean;
+} => {
+    const position = config?.layout?.sidebar?.position;
+    const expanded = config?.layout?.sidebar?.expanded ?? InitialConfig.layout.sidebar.expanded;
+
+    if (position !== SidebarLeftPosition && position !== SidebarRightPosition) {
+        return {
+            position: InitialConfig.layout.sidebar.position,
+            expanded: expanded,
+        };
+    }
+
+    return {
+        position: position,
+        expanded: expanded,
+    };
+};
 
 export default function getSafeConfigValues({
     config,
@@ -58,6 +83,9 @@ export default function getSafeConfigValues({
         colors: {
             accent: getAccentColor(config),
             base: getBaseColor(config),
+        },
+        layout: {
+            sidebar: getSidebarProperties(config),
         },
     };
 }

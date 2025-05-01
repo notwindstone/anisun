@@ -7,4 +7,10 @@ export type ConfigType = {
         base?: BaseColorsType;
         accent?: AccentColorsType;
     };
+    layout?: {
+        sidebar?: {
+            expanded?: boolean;
+            position?: "right" | "left";
+        };
+    };
 } | undefined;

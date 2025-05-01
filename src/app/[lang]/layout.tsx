@@ -7,7 +7,7 @@ import TopLoader from "@/components/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import { CookieConfigKey } from "@/constants/configs";
+import { CookieConfigKey, SidebarLeftPosition } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import AppWrapper from "@/components/AppWrapper/AppWrapper";
@@ -74,7 +74,14 @@ export default async function RootLayout({
                     <ConfigsProvider configs={parsedCookieData} dictionaries={dictionaries}>
                         <AppWrapper>
                             <TopLoader />
-                            <main className="w-full h-[100svh] flex flex-nowrap gap-0">
+                            <main
+                                className="w-full h-[100svh] flex flex-nowrap gap-0"
+                                style={{
+                                    flexFlow: safeConfigValues.layout.sidebar.position === SidebarLeftPosition
+                                        ? "row"
+                                        : "row-reverse",
+                                }}
+                            >
                                 {
                                 /*
                                  * SidebarWrapper is client-side

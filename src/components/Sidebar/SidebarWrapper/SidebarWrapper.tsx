@@ -10,13 +10,18 @@ export default function SidebarWrapper({
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const { data: {
+        theme,
+        colors: { base },
+        layout: { sidebar: { expanded } },
+    } } = useContext(ConfigsContext);
 
     return (
         <>
             <div
-                className="shrink-0 w-8 sm:w-64 h-full transition-colors overflow-hidden"
+                className="shrink-0 h-full transition overflow-hidden"
                 style={{
+                    width: expanded ? 256 : 64,
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
                             color: base,
