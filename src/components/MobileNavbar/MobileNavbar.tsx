@@ -56,7 +56,7 @@ export default function MobileNavbar() {
                         return (
                             <React.Fragment key={item.href}>
                                 <Link
-                                    className="flex flex-col gap-1 text-sm items-center justify-center transition-colors"
+                                    className="flex flex-col gap-1 text-sm items-center justify-center transition hover:brightness-75 px-4"
                                     style={focused === item.href ? {
                                         color: parseTailwindColor({
                                             color: accent,

@@ -23,18 +23,6 @@ export default async function Home() {
                 propertyKey="accent"
             />
             <LayoutChanger />
-            <Button label={""} custom={{ style:"base" }}>
-                asdf
-            </Button>
-            <Button label={""} custom={{ style:"accent" }}>
-                asdf
-            </Button>
-            <Button label={""} custom={{ style:"default" }}>
-                asdf
-            </Button>
-            <Button label={""} custom={{ style:"transparent" }}>
-                asdf
-            </Button>
         </div>
     );
 }
