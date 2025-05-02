@@ -1,7 +1,7 @@
-import Link from "next/link";
 import Button from "@/components/Button/Button";
 import { ShikimoriIcon } from "@/constants/icons";
 import { OAuth2Routes } from "@/constants/routes";
+import Link from "next/link";
 
 export default async function Page() {
     return (
@@ -9,10 +9,13 @@ export default async function Page() {
             <Link href={"/"}>
                 home
             </Link>
-            <Link href={OAuth2Routes.Shikimori.Login}>
-                <Button custom={{
-                    style: "base",
-                }}>
+            <a href={OAuth2Routes.Shikimori.Login}>
+                <Button
+                    custom={{
+                        style: "base",
+                    }}
+                    label={"Login using Shikimori"}
+                >
                     <div className="fill-white w-5 h-5">
                         {ShikimoriIcon}
                     </div>
@@ -20,7 +23,7 @@ export default async function Page() {
                         Shikimori
                     </p>
                 </Button>
-            </Link>
+            </a>
         </div>
     );
 }

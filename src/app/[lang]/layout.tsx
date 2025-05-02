@@ -7,14 +7,17 @@ import TopLoader from "@/components/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import { CookieConfigKey, SidebarLeftPosition } from "@/constants/configs";
+import { CookieConfigKey, InitialConfig, SidebarLeftPosition } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import AppWrapper from "@/components/AppWrapper/AppWrapper";
 import SidebarWrapper from "@/components/Sidebar/SidebarWrapper/SidebarWrapper";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
-import { AppName } from "@/constants/app";
+import { AccountInfoCookieKey, AppName } from "@/constants/app";
 import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
+import { cookies } from "next/headers";
+import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
+import { UserType } from "@/types/OAuth2/User.type";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -60,12 +63,32 @@ export default async function RootLayout({
 }>) {
     const { lang } = await params;
     const dictionaries = await getDictionary(lang);
+
+    const cookieStore = await cookies();
+
     const configs = await getCookie({
+        store: cookieStore,
         key: CookieConfigKey,
     });
-    const parsedCookieData = readCookiesData({ configs });
+    const accountInfo = await getCookie({
+        store: cookieStore,
+        key: AccountInfoCookieKey,
+    });
+
+    const parsedConfigData = readCookiesData<ParsedConfigType>({
+        data: configs,
+        fallbackData: InitialConfig,
+    });
+    const parsedAccountInfoData = readCookiesData<UserType | unknown>({
+        data: accountInfo,
+        fallbackData: {
+            username: "",
+            avatar: "",
+        },
+    });
+
     const safeConfigValues = getSafeConfigValues({
-        config: parsedCookieData,
+        config: parsedConfigData,
     });
     const layoutClassNames = safeConfigValues.layout.sidebar.position === SidebarLeftPosition
         ? "flex-col sm:flex-row"
@@ -77,7 +100,7 @@ export default async function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <TanstackQueryProviders>
-                    <ConfigsProvider configs={parsedCookieData} dictionaries={dictionaries}>
+                    <ConfigsProvider configs={parsedConfigData} dictionaries={dictionaries}>
                         <AppWrapper>
                             <TopLoader />
                             <main
@@ -95,7 +118,9 @@ export default async function RootLayout({
                                 <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
                                     {children}
                                 </div>
-                                <MobileNavbar />
+                                <MobileNavbar
+                                    accountInfo={parsedAccountInfoData}
+                                />
                             </main>
                         </AppWrapper>
                     </ConfigsProvider>

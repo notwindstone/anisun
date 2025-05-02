@@ -13,7 +13,11 @@ import { Locales } from "@/constants/localization";
 
 const locales = new Set<string>(Locales);
 
-export default function MobileNavbar() {
+export default function MobileNavbar({
+    accountInfo,
+}: {
+    accountInfo: unknown;
+}) {
     const pathname = usePathname()
         .split("/")
         .filter((word) => !locales.has(word))
@@ -33,7 +37,21 @@ export default function MobileNavbar() {
         return;
     }
 
-    const navbarItems = getNavbarItems(dictionaries);
+    let avatar: string | undefined;
+
+    if (
+        typeof accountInfo === "object"
+        && accountInfo !== null
+        && "avatar" in accountInfo
+        && typeof accountInfo.avatar === "string"
+    ) {
+        avatar = accountInfo.avatar;
+    }
+
+    const navbarItems = getNavbarItems({
+        dictionaries,
+        avatar,
+    });
 
     return (
         <>
@@ -56,7 +74,7 @@ export default function MobileNavbar() {
                         return (
                             <React.Fragment key={item.href}>
                                 <Link
-                                    className="flex flex-col gap-1 text-sm items-center justify-center transition hover:brightness-75 px-4"
+                                    className="flex flex-col gap-1 text-sm items-center justify-center transition hover:brightness-75 w-24"
                                     style={focused === item.href ? {
                                         color: parseTailwindColor({
                                             color: accent,

@@ -1,4 +1,3 @@
-import { NextRequest } from "next/server";
 import * as arctic from "arctic";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";

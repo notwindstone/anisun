@@ -1,19 +1,19 @@
-import { InitialConfig } from "@/constants/configs";
 import { RequestCookie } from "next/dist/compiled/@edge-runtime/cookies";
-import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 
-export default function readCookiesData({
-    configs,
+export default function readCookiesData<T>({
+    data,
+    fallbackData,
 }: {
-    configs: RequestCookie | undefined;
-}): ParsedConfigType {
-    let cookieData: ParsedConfigType;
-    const fallbackConfig = JSON.stringify(InitialConfig);
+    data: RequestCookie | undefined;
+    fallbackData: T;
+}): T {
+    let cookieData: T;
+    const fallbackConfig = JSON.stringify(fallbackData);
 
     try {
-        cookieData = JSON.parse(configs?.value || fallbackConfig);
+        cookieData = JSON.parse(data?.value || fallbackConfig);
     } catch {
-        cookieData = InitialConfig;
+        cookieData = fallbackData;
     }
 
     return cookieData;
