@@ -14,6 +14,14 @@ export const APIRoutes = {
                 Root: "/shikimori",
                 Pathname: "shikimori",
             },
+            Anilist: {
+                Root: "/anilist",
+                Pathname: "anilist",
+            },
+            MAL: {
+                Root: "/mal",
+                Pathname: "mal",
+            },
         },
         Callback: {
             Root: "/callback",
@@ -23,13 +31,31 @@ export const APIRoutes = {
                 Root: "/shikimori",
                 Pathname: "shikimori",
             },
+            Anilist: {
+                Root: "/anilist",
+                Pathname: "anilist",
+            },
+            MAL: {
+                Root: "/mal",
+                Pathname: "mal",
+            },
         },
     },
 };
+const loginBase = APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Login.Root;
+const callbackBase = APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Callback.Root;
 export const OAuth2Routes = {
     Shikimori: {
-        Login: APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Login.Root + APIRoutes.OAuth2.Login.Shikimori.Root,
-        Callback: APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Callback.Root + APIRoutes.OAuth2.Callback.Shikimori.Root,
+        Login:      loginBase       + APIRoutes.OAuth2.Login.Shikimori.Root,
+        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Shikimori.Root,
+    },
+    Anilist: {
+        Login:      loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
+        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
+    },
+    MAL: {
+        Login:      loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
+        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
     },
 };
 export const PageRoutes = {
