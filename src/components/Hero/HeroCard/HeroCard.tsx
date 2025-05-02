@@ -104,7 +104,10 @@ export default function HeroCard({
                         {data.score}
                     </p>
                     {
-                        data.genres.map((genre: any, index: number) => {
+                        data.genres.map((genre: {
+                            id: string;
+                            name: string;
+                        }, index: number) => {
                             if (index >= 2) {
                                 return;
                             }
