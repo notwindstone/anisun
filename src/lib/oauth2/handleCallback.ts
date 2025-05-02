@@ -4,13 +4,12 @@ import * as arctic from "arctic";
 import { NextRequest } from "next/server";
 import { PageRoutes } from "@/constants/routes";
 import { ErrorStrings } from "@/constants/errors";
-import { UserType } from "@/types/OAuth2/User.type";
-import { getUniversalUser } from "@/utils/oauth2/getUniversalUser";
 import { setCookie } from "@/lib/actions/cookies";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { cookies } from "next/headers";
 import { AccessTokenCookieKey, AccessTokenProviderCookieKey, AccountInfoCookieKey } from "@/constants/app";
 import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
+import { getUser } from "@/lib/actions/user";
 
 export async function handleCallback({
     request,
@@ -55,18 +54,14 @@ export async function handleCallback({
         return PageRoutes.Account.Segment + ErrorStrings.OAuth2.ServerError.Label;
     }
 
-    const response = await fetchUserProfile(accessToken);
+    const user = await getUser({
+        accessToken,
+        fetchUser: fetchUserProfile,
+        oauth2Provider: providerName,
+    });
 
-    let user: UserType;
-
-    try {
-        const data = await response.json();
-
-        user = getUniversalUser({
-            user: data,
-        });
-    } catch {
-        return PageRoutes.Account.Segment + ErrorStrings.OAuth2.ServerError.Label;
+    if (!user) {
+        return PageRoutes.Account.Segment + ErrorStrings.OAuth2.NoUser.Label;
     }
 
     const cookieStore = await cookies();

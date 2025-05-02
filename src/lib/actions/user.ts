@@ -2,36 +2,43 @@
 
 import { LRUCache } from "@/lib/cache/LRUCache";
 import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
-import { OAuth2Endpoints } from "@/constants/oauth2";
 import { UserType } from "@/types/OAuth2/User.type";
 import { getUniversalUser } from "@/utils/oauth2/getUniversalUser";
 
 export async function getUser({
     accessToken,
     oauth2Provider,
+    fetchUser,
 }: {
     accessToken: string;
     oauth2Provider: OAuth2ProvidersType;
+    fetchUser: (accessToken: string) => Promise<Response>;
 }): Promise<UserType | undefined> {
     const key = `${oauth2Provider}/${accessToken}`;
     const user = LRUCache.get(key);
 
     if (!user) {
-        const endpoint = OAuth2Endpoints[oauth2Provider].User;
-        const response = await fetch(endpoint);
+        const response = await fetchUser(accessToken);
 
         if (!response.ok) {
             return undefined;
         }
 
-        const data = await response.json();
-        const parsedUser = getUniversalUser({
-            user: data,
-        });
+        let fetchedUser: UserType;
 
-        LRUCache.set(key, parsedUser);
+        try {
+            const data = await response.json();
 
-        return parsedUser;
+            fetchedUser = getUniversalUser({
+                user: data,
+            });
+        } catch {
+            return undefined;
+        }
+
+        LRUCache.set(key, fetchedUser);
+
+        return fetchedUser;
     }
 
     return user;

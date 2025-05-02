@@ -16,5 +16,9 @@ export const ErrorStrings = {
             Label: "request_error",
             Description: "Invalid authorization code, credentials, or redirect URI",
         },
+        NoUser: {
+            Label: "no_user",
+            Description: "no user???",
+        },
     },
 };
