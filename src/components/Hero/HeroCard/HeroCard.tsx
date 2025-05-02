@@ -126,8 +126,8 @@ export default function HeroCard({
                                         color: parseTailwindColor({
                                             color: base,
                                             step: theme === DarkThemeKey
-                                                ? 400
-                                                : 600,
+                                                ? 300
+                                                : 800,
                                         }),
                                     }}
                                 >
