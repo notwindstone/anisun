@@ -42,12 +42,35 @@ export const APIRoutes = {
         },
     },
 };
+export const RemoteRoutes = {
+    Shikimori: {
+        V1: {
+            Root: "https://shikimori.one/api",
+            Users: {
+                Root: "/users",
+                Pathname: "users",
+                Segment: "/users/",
+                WhoAmI: {
+                    Root: "/whoami",
+                    Pathname: "whoami",
+                },
+            },
+        },
+        V2: {},
+        GraphQL: {},
+    },
+};
+
 const loginBase = APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Login.Root;
 const callbackBase = APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Callback.Root;
+
 export const OAuth2Routes = {
     Shikimori: {
         Login:      loginBase       + APIRoutes.OAuth2.Login.Shikimori.Root,
         Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Shikimori.Root,
+        _FetchUser: RemoteRoutes.Shikimori.V1.Root
+            + RemoteRoutes.Shikimori.V1.Users.Root
+            + RemoteRoutes.Shikimori.V1.Users.WhoAmI.Root,
     },
     Anilist: {
         Login:      loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
@@ -96,5 +119,9 @@ export const PageRoutes = {
     Account: {
         Root: "/account",
         Pathname: "account",
+        Segment: "/account/",
+        Params: {
+            Error: "error",
+        },
     },
 };
