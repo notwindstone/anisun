@@ -80,6 +80,12 @@ export const OAuth2Routes = {
         Login:      loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
         Callback:   callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
     },
+    // lazyness to refactor peak
+    __Endpoints: {
+        shikimori: "https://shikimori.one/api/users/whoami",
+        anilist: "https://graphql.anilist.co",
+        mal: "https://api.myanimelist.net/v2/users/@me",
+    },
 };
 export const PageRoutes = {
     Root: "/",

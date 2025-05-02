@@ -8,10 +8,14 @@ import { UserType } from "@/types/OAuth2/User.type";
 import { getUniversalUser } from "@/utils/oauth2/getUniversalUser";
 import { setCookie } from "@/lib/actions/cookies";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { cookies } from "next/headers";
+import { AccessTokenCookieKey, AccessTokenProviderCookieKey, AccountInfoCookieKey } from "@/constants/app";
+import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 
 export async function handleCallback({
     request,
     provider,
+    providerName,
     fetchUserProfile,
 }: {
     request: NextRequest;
@@ -20,15 +24,16 @@ export async function handleCallback({
             accessToken: () => string;
         }>;
     };
+    providerName: OAuth2ProvidersType;
     fetchUserProfile: (accessToken: string) => Promise<Response>;
 }): Promise<string> {
     let tokens;
     let accessToken;
 
-    const cookieStore = request.cookies;
+    const requestCookieStore = request.cookies;
     const code = request.nextUrl.searchParams.get("code");
     const state = request.nextUrl.searchParams.get("state");
-    const storedState = cookieStore.get('state')?.value;
+    const storedState = requestCookieStore.get('state')?.value;
 
     if (storedState === undefined) {
         return PageRoutes.Account.Segment + ErrorStrings.OAuth2.BrowserChanged.Label;
@@ -64,20 +69,26 @@ export async function handleCallback({
         return PageRoutes.Account.Segment + ErrorStrings.OAuth2.ServerError.Label;
     }
 
-    const {
-        username,
-        avatar,
-    } = user;
+    const cookieStore = await cookies();
 
     await setCookie({
-        key: "",
-        value: "",
+        store: cookieStore,
+        key: AccessTokenCookieKey,
+        value: accessToken,
         expiresAt: getRelativeDate({ days: 30 }),
         httpOnly: true,
     });
     await setCookie({
-        key: "",
-        value: "",
+        store: cookieStore,
+        key: AccessTokenProviderCookieKey,
+        value: providerName,
+        expiresAt: getRelativeDate({ days: 30 }),
+        httpOnly: true,
+    });
+    await setCookie({
+        store: cookieStore,
+        key: AccountInfoCookieKey,
+        value: JSON.stringify(user),
         expiresAt: getRelativeDate({ days: 30 }),
         httpOnly: true,
     });
