@@ -6,25 +6,18 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
+import { AnimeType } from "@/types/Anime/Anime.type";
 
 export default function HeroCard({
     data,
 }: {
-    data: {
-        idMal: string;
-        averageScore: number;
-        coverImage: {
-            extraLarge: string;
-        };
-        title: {
-            romaji: string;
-        };
-        genres: string[];
-    };
+    data: AnimeType;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
 
-    const score = data.averageScore / 10;
+    const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";
+    const image = data?.coverImage?.extraLarge;
+    const score = Number(data.averageScore) / 10;
     const scoreBadgeColorClassName = score > 8.5
         ? "bg-green-700"
         : (score > 7
@@ -39,8 +32,8 @@ export default function HeroCard({
                     objectPosition: "100% 20%",
                 }}
                 fill
-                src={data.coverImage.extraLarge}
-                alt={`${data.title.romaji} anime's poster`}
+                src={image}
+                alt={`${name} anime's poster`}
             />
             <div className="text-black absolute w-full h-full bg-[linear-gradient(to_bottom,#0004,#000d)]" />
             <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2">
@@ -49,7 +42,7 @@ export default function HeroCard({
                         {score}
                     </p>
                     {
-                        data.genres.map((genre: string, index: number) => {
+                        data?.genres?.map((genre: string, index: number) => {
                             if (index >= 2) {
                                 return;
                             }
@@ -80,7 +73,7 @@ export default function HeroCard({
                     }
                 </div>
                 <p className="text-2xl text-pretty text-center font-bold">
-                    {data.title.romaji}
+                    {name}
                 </p>
             </div>
         </Link>

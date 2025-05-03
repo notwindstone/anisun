@@ -1,14 +1,15 @@
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { AnimeType } from "@/types/Anime/Anime.type";
 
-const fetchHeroTitle = async (options?: globalThis.Request | {
-    next: NextFetchRequestConfig;
-}) => {
-    // If it's January 1, then ofc there will be no good animes
-    // that were released on January 1, so we go back 30 days before.
-    const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
+// If it's January 1, then ofc there will be no good animes
+// that were released on January 1, so we go back 30 days before.
+const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
+
+const fetchHeroTitle = async (options?: Partial<Request>): Promise<AnimeType> => {
     const query = `
         query($seasonYear: Int) {
             Media(seasonYear: $seasonYear, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
+                id
                 idMal
                 title { english native romaji }
                 meanScore
@@ -20,7 +21,7 @@ const fetchHeroTitle = async (options?: globalThis.Request | {
             }
         }
     `;
-
+const t1= performance.now()
     const response = await fetch('https://graphql.anilist.co', {
         method: 'POST',
         headers: {
@@ -34,7 +35,7 @@ const fetchHeroTitle = async (options?: globalThis.Request | {
         }),
         ...options,
     });
-
+console.log(performance.now() - t1)
     if (!response.ok) {
         throw new Error("Something went wrong");
     }
