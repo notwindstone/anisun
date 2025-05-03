@@ -35,9 +35,9 @@ export default function HeroCard({
     const gradientColorOne = gradientColorOneArray.join("");
 
     return (
-        <Link href={`/anime/${data?.idMal}`}>
+        <Link className="group" href={`/anime/${data?.idMal}`}>
             <Image
-                className="object-cover transition duration-500 group-hover:scale-110 group-hover:brightness-75"
+                className="object-cover transition duration-500 group-hover:scale-110 group-hover:brightness-75 group-focus:scale-110 group-focus:brightness-75"
                 style={{
                     objectPosition: "100% 20%",
                 }}
@@ -91,7 +91,7 @@ export default function HeroCard({
                         })
                     }
                 </div>
-                <p className="text-2xl text-pretty text-center font-bold">
+                <p className="text-2xl text-pretty text-center font-medium">
                     {name}
                 </p>
             </div>

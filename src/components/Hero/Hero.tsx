@@ -12,12 +12,19 @@ export default function Hero({
 }) {
     return (
         <>
-            <div className="group relative overflow-clip w-full h-full aspect-video">
-                <Suspense fallback={
-                    <SkeletonCard theme={theme} base={base} />
-                }>
-                    <ServerFetch />
-                </Suspense>
+            <div className="flex flex-col gap-4">
+                <div className="relative overflow-clip w-full h-full aspect-video">
+                    <Suspense fallback={
+                        <SkeletonCard theme={theme} base={base} />
+                    }>
+                        <ServerFetch />
+                    </Suspense>
+                </div>
+                <div className="px-4">
+                    <p className="text-2xl font-medium">
+                        Trending Now
+                    </p>
+                </div>
             </div>
         </>
     );
