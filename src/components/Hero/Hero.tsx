@@ -17,7 +17,7 @@ export default function Hero({
                     <Suspense fallback={
                         <SkeletonCard theme={theme} base={base} />
                     }>
-                        <ServerFetch />
+                        <ServerFetch theme={theme} base={base} />
                     </Suspense>
                 </div>
                 <div className="px-4">

@@ -4,6 +4,9 @@ import fetchHeroTitle from "@/lib/anime/fetchHeroTitle";
 import ClientFetch from "@/components/Hero/ClientFetch/ClientFetch";
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import { AnimeLRUCache } from "@/lib/cache/LRUCaches";
+import SkeletonCard from "@/components/Hero/SkeletonCard/SkeletonCard";
+import ErrorCard from "@/components/Hero/ErrorCard/ErrorCard";
+import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 
 const timeout = 2000;
 const key = "hero/anime";
@@ -13,7 +16,13 @@ const key = "hero/anime";
 // If there is no cache, a user will see a loading state (skeleton).
 // If there is an error while getting the data server-side,
 // Data will be fetched client-side using Tanstack Query.
-export default async function ServerFetch() {
+export default async function ServerFetch({
+    theme,
+    base,
+}: {
+    theme: "light" | "dark";
+    base: BaseColorsType;
+}) {
     let data;
 
     try {
@@ -31,7 +40,14 @@ export default async function ServerFetch() {
         return (
             <>
                 <ClientFetch
+                    queryKey={["hero", "anime"]}
                     method={"FetchHeroTitle"}
+                    pendingUI={
+                        <SkeletonCard theme={theme} base={base} />
+                    }
+                    errorUI={
+                        <ErrorCard />
+                    }
                 />
             </>
         );
