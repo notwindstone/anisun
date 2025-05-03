@@ -7,8 +7,12 @@ import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
+import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 
 const placeholderArray = [ "w-9", "w-14", "w-14" ];
+// If it's January 1, then ofc there will be no good animes
+// that were released on January 1, so we go back 30 days before.
+const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
 
 export default function HeroCard({
     provider,
@@ -20,17 +24,14 @@ export default function HeroCard({
         queryKey: ['hero', provider],
         queryFn: async () => {
             const query = `
-                query {
-                    Media(seasonYear: 2025, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
+                query($seasonYear: Int) {
+                    Media(seasonYear: $seasonYear, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
                         id
                         title { english native romaji }
                         meanScore
                         averageScore
                         coverImage {
-                            color
                             extraLarge
-                            large
-                            medium
                         }
                         genres
                     }
@@ -44,6 +45,9 @@ export default function HeroCard({
                 },
                 body: JSON.stringify({
                     query: query,
+                    variables: JSON.stringify({
+                        seasonYear: currentAnimeYear,
+                    }),
                 }),
             });
 
@@ -90,7 +94,7 @@ export default function HeroCard({
                         }
                     </div>
                     <div
-                        className="animate-pulse rounded-sm w-96 h-8"
+                        className="animate-pulse rounded-sm w-96 max-w-[60%] h-8"
                         style={{
                             backgroundColor: parseTailwindColor({
                                 color: base,
@@ -129,9 +133,6 @@ export default function HeroCard({
                 fill
                 src={data.coverImage.extraLarge}
                 alt={`${data.title.romaji} anime's poster`}
-                //placeholder={"blur"}
-                //blurDataURL={""}
-                // #e4bb50
             />
             <div className="text-black absolute w-full h-full bg-[linear-gradient(to_bottom,#0004,#000d)]" />
             <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2">
