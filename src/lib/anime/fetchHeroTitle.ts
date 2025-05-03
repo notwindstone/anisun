@@ -21,7 +21,7 @@ const fetchHeroTitle = async (options?: Partial<Request>): Promise<AnimeType> =>
             }
         }
     `;
-const t1= performance.now()
+
     const response = await fetch('https://graphql.anilist.co', {
         method: 'POST',
         headers: {
@@ -35,7 +35,7 @@ const t1= performance.now()
         }),
         ...options,
     });
-console.log(performance.now() - t1)
+
     if (!response.ok) {
         throw new Error("Something went wrong");
     }

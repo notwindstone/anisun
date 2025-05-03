@@ -11,13 +11,13 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 export default function HeroCard({
     data,
 }: {
-    data: AnimeType;
+    data: AnimeType | undefined;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
 
     const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";
-    const image = data?.coverImage?.extraLarge;
-    const score = Number(data.averageScore) / 10;
+    const image = data?.coverImage?.extraLarge ?? "/favicon-original.jpg";
+    const score = Number(data?.averageScore) / 10;
     const scoreBadgeColorClassName = score > 8.5
         ? "bg-green-700"
         : (score > 7
@@ -25,7 +25,7 @@ export default function HeroCard({
             : "bg-red-700");
 
     return (
-        <Link href={`/anime/${data.idMal}`}>
+        <Link href={`/anime/${data?.idMal}`}>
             <Image
                 className="object-cover transition duration-500 group-hover:scale-110 group-hover:brightness-75"
                 style={{

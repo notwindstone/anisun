@@ -1,9 +1,9 @@
 "use server";
 
-import { getUserLRUCache, setUserLRUCache } from "@/lib/cache/LRUCaches";
 import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 import { UserType } from "@/types/OAuth2/User.type";
 import { getUniversalUser } from "@/utils/oauth2/getUniversalUser";
+import { UserLRUCache } from "@/lib/cache/LRUCaches";
 
 export async function getUser({
     accessToken,
@@ -14,7 +14,6 @@ export async function getUser({
     oauth2Provider: OAuth2ProvidersType;
     fetchUser: (accessToken: string) => Promise<Response>;
 }): Promise<UserType | undefined> {
-    const UserLRUCache = await getUserLRUCache();
     const key = `${oauth2Provider}/${accessToken}`;
     const user = UserLRUCache.get(key);
 
@@ -37,10 +36,7 @@ export async function getUser({
             return undefined;
         }
 
-        await setUserLRUCache({
-            key,
-            user: fetchedUser,
-        });
+        UserLRUCache.set(key, fetchedUser);
 
         return fetchedUser;
     }
