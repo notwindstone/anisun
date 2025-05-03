@@ -5,7 +5,7 @@ export default async function Page({
 }) {
     // id is the anime's id from MyAnimeList
     const { id } = await params;
-
+    console.log(id);
     return (
         <>
         </>
