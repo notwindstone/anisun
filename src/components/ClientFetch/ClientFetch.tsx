@@ -6,12 +6,13 @@ import { Getters } from "@/lib/anime/getters";
 import { ClientFetchDataProvider } from "@/utils/providers/ClientFetchDataProvider";
 
 export default function ClientFetch({
+    children,
     queryKey,
     method,
     pendingUI,
     errorUI,
-
 }: {
+    children: React.ReactNode;
     queryKey: Array<string>
     method: keyof typeof Getters;
     pendingUI: React.ReactNode;
@@ -32,7 +33,7 @@ export default function ClientFetch({
 
     return (
         <ClientFetchDataProvider data={data}>
-            <HeroCard />
+            {children}
         </ClientFetchDataProvider>
     );
 }
