@@ -1,19 +1,17 @@
 "use client";
 
 import { useContext, useRef } from "react";
-import { useDebouncedState } from "@mantine/hooks";
 import { ListFilter, SearchIcon } from "lucide-react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import Button from "@/components/Button/Button";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
+import { SearchContext } from "@/utils/providers/SearchProvider";
 
 export default function Search() {
     const { data: { theme, colors: { base } }, dictionaries } = useContext(ConfigsContext);
+    const { setData } = useContext(SearchContext);
     const reference = useRef<HTMLInputElement>(null);
-    const [debounced, setDebounced] = useDebouncedState("", 300, {
-        leading: true,
-    });
 
     return (
         <div className="px-2 w-full flex flex-nowrap gap-2">
@@ -41,7 +39,7 @@ export default function Search() {
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
 
-                        setDebounced(value);
+                        setData(value);
                     }}
                     placeholder={dictionaries?.misc?.searchAnimes}
                     title={dictionaries?.aria?.searchAnimes}
