@@ -118,7 +118,7 @@ export default async function RootLayout({
                                 </SidebarWrapper>
                                 <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
                                     {children}
-                                    <Footer />
+                                    <Footer dictionaries={dictionaries} />
                                 </div>
                                 <MobileNavbar
                                     accountInfo={parsedAccountInfoData}

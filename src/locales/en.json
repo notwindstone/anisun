@@ -13,6 +13,43 @@
     "settings": "Settings",
     "account": "Account"
   },
+  "footer": {
+    "description": "This site does not store any files on our server, we are linked to the media which is hosted on 3rd party services.",
+    "about": {
+      "title": "About",
+      "links": [
+        {
+          "name": "Source Code",
+          "url": "https://github.com/notwindstone/anisun"
+        },
+        {
+          "name": "Github Issues",
+          "url": "https://github.com/notwindstone/anisun/issues"
+        },
+        {
+          "name": "Contribute",
+          "url": "https://github.com/notwindstone/anisun/pulls"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "links": [
+        {
+          "name": "on Telegram",
+          "url": "https://t.me/windst1"
+        },
+        {
+          "name": "on Discord",
+          "url": "https://discord.com/users/510709295814279168"
+        },
+        {
+          "name": "on Github",
+          "url": "https://github.com/notwindstone/"
+        }
+      ]
+    }
+  },
   "appearance": {
     "slate": "Slate",
     "gray": "Gray",

@@ -7,8 +7,8 @@ import { AnimeLRUCache } from "@/lib/cache/LRUCaches";
 import SkeletonCard from "@/components/Hero/SkeletonCard/SkeletonCard";
 import ErrorCard from "@/components/Hero/ErrorCard/ErrorCard";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
+import { ServerFetchTimeout } from "@/constants/app";
 
-const timeout = 2000;
 const key = "hero/anime";
 
 // Because of the cache getting data requires just 1-3ms,
@@ -31,7 +31,7 @@ export default async function ServerFetch({
         } else {
             data = await fetchHeroTitle({
                 // Abort fetch after 1000ms
-                signal: AbortSignal.timeout(timeout),
+                signal: AbortSignal.timeout(ServerFetchTimeout),
             });
 
             AnimeLRUCache.set(key, data);

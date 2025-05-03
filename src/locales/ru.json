@@ -13,6 +13,43 @@
     "settings": "Настройки",
     "account": "Аккаунт"
   },
+  "footer": {
+    "description": "Данный сайт не хранит что-либо на своих серверах, он лишь использует размещённые на сторонних сервисах медиа файлы.",
+    "about": {
+      "title": "О сайте",
+      "links": [
+        {
+          "name": "Исходный код",
+          "url": "https://github.com/notwindstone/anisun"
+        },
+        {
+          "name": "Github Issues",
+          "url": "https://github.com/notwindstone/anisun/issues"
+        },
+        {
+          "name": "Внести вклад",
+          "url": "https://github.com/notwindstone/anisun/pulls"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Связаться",
+      "links": [
+        {
+          "name": "в Telegram",
+          "url": "https://t.me/windst1"
+        },
+        {
+          "name": "в Discord",
+          "url": "https://discord.com/users/510709295814279168"
+        },
+        {
+          "name": "на Github",
+          "url": "https://github.com/notwindstone/"
+        }
+      ]
+    }
+  },
   "appearance": {
     "slate": "Сланцевый",
     "gray": "Серый",
