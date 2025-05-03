@@ -43,10 +43,15 @@ export default function Search() {
 
                         setDebounced(value);
                     }}
+                    placeholder={dictionaries?.misc?.searchAnimes}
+                    title={dictionaries?.aria?.searchAnimes}
+                    aria-label={dictionaries?.aria?.searchAnimes}
                 />
             </div>
-            <Button label={"Filters"}>
-                <ListFilter size={16} />
+            <Button label={dictionaries?.aria?.filterAnimes ?? ""}>
+                <ListFilter
+                    size={16}
+                />
             </Button>
         </div>
     );

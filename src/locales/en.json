@@ -78,6 +78,11 @@
     "toggleColorScheme": "Toggle app color scheme",
     "changePaletteColor": "Set palette color to",
     "switchLayout": "Switch app layout",
-    "toggleSidebar": "Toggle sidebar"
+    "toggleSidebar": "Toggle sidebar",
+    "searchAnimes": "Search anime titles",
+    "filterAnimes": "Filter anime titles"
+  },
+  "misc": {
+    "searchAnimes": "Search anime..."
   }
 }
