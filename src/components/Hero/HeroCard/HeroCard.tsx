@@ -8,17 +8,22 @@ import Link from "next/link";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import { ImagePlaceholder } from "@/constants/app";
 import ConfiguredImage from "@/components/ConfiguredImage/ConfiguredImage";
+import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
 
 export default function HeroCard({
     data,
 }: {
-    data: AnimeType | undefined;
+    data?: AnimeType | undefined;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const { data: animeData } = useContext<{
+        data: AnimeType;
+    }>(ClientFetchDataContext);
+    const currentData = data ?? animeData;
 
-    const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";
-    const image = data?.coverImage?.extraLarge ?? ImagePlaceholder;
-    const score = Number(data?.averageScore) / 10;
+    const name = currentData?.title?.romaji ?? currentData?.title?.english ?? currentData?.title?.native ?? "none";
+    const image = currentData?.coverImage?.extraLarge ?? ImagePlaceholder;
+    const score = Number(currentData?.averageScore) / 10;
     const scoreBadgeColorClassName = score > 8.5
         ? "bg-green-700"
         : (score > 7
@@ -37,7 +42,7 @@ export default function HeroCard({
     const gradientColorOne = gradientColorOneArray.join("");
 
     return (
-        <Link className="select-none group" href={`/anime/${data?.idMal}`}>
+        <Link className="select-none group" href={`/anime/${currentData?.idMal}`}>
             <ConfiguredImage
                 className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75"
                 style={{
@@ -60,10 +65,14 @@ export default function HeroCard({
             <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2">
                 <div className="flex flex-wrap justify-center gap-2">
                     <p className={`${scoreBadgeColorClassName} rounded-sm text-sm px-2 py-1 leading-none`}>
-                        {score}
+                        {
+                            // Cast this variable to a string
+                            // because it might be NaN
+                            score.toString()
+                        }
                     </p>
                     {
-                        data?.genres?.map((genre: string, index: number) => {
+                        currentData?.genres?.map((genre: string, index: number) => {
                             if (index >= 2) {
                                 return;
                             }

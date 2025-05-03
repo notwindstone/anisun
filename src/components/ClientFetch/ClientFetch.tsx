@@ -3,12 +3,14 @@
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import { useQuery } from "@tanstack/react-query";
 import { Getters } from "@/lib/anime/getters";
+import { ClientFetchDataProvider } from "@/utils/providers/ClientFetchDataProvider";
 
 export default function ClientFetch({
     queryKey,
     method,
     pendingUI,
     errorUI,
+
 }: {
     queryKey: Array<string>
     method: keyof typeof Getters;
@@ -29,8 +31,8 @@ export default function ClientFetch({
     }
 
     return (
-        <>
-            <HeroCard data={data} />
-        </>
+        <ClientFetchDataProvider data={data}>
+            <HeroCard />
+        </ClientFetchDataProvider>
     );
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import fetchHeroTitle from "@/lib/anime/fetchHeroTitle";
-import ClientFetch from "@/components/Hero/ClientFetch/ClientFetch";
+import ClientFetch from "@/components/ClientFetch/ClientFetch";
 import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import { AnimeLRUCache } from "@/lib/cache/LRUCaches";
 import SkeletonCard from "@/components/Hero/SkeletonCard/SkeletonCard";
