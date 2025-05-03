@@ -8,6 +8,7 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import Link from "next/link";
 
 const placeholderArray = [ "w-9", "w-14", "w-14" ];
 // If it's January 1, then ofc there will be no good animes
@@ -26,7 +27,7 @@ export default function HeroCard({
             const query = `
                 query($seasonYear: Int) {
                     Media(seasonYear: $seasonYear, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
-                        id
+                        idMal
                         title { english native romaji }
                         meanScore
                         averageScore
@@ -118,16 +119,16 @@ export default function HeroCard({
 
     const score = data.averageScore / 10;
     const scoreBadgeColorClassName = score > 8.5
-        ? "bg-green-600"
-        : (score > 7.5
-            ? "bg-yellow-600"
-            : "bg-red-600");
+        ? "bg-green-700"
+        : (score > 7
+            ? "bg-yellow-700"
+            : "bg-red-700");
 
     return (
-        <>
+        <Link href={`/${data.idMal}`}>
             <Image
+                className="object-cover transition duration-500 group-hover:scale-110 group-hover:brightness-75"
                 style={{
-                    objectFit: "cover",
                     objectPosition: "100% 20%",
                 }}
                 fill
@@ -175,6 +176,6 @@ export default function HeroCard({
                     {data.title.romaji}
                 </p>
             </div>
-        </>
+        </Link>
     );
 }

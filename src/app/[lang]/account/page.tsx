@@ -16,7 +16,7 @@ export default async function Page() {
                     }}
                     label={"Login using Shikimori"}
                 >
-                    <div className="fill-white w-5 h-5">
+                    <div className="fill-black dark:fill-white w-5 h-5">
                         {ShikimoriIcon}
                     </div>
                     <p>
