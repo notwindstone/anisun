@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
@@ -8,6 +7,7 @@ import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import { ImagePlaceholder } from "@/constants/app";
+import ConfiguredImage from "@/components/ConfiguredImage/ConfiguredImage";
 
 export default function HeroCard({
     data,
@@ -26,7 +26,9 @@ export default function HeroCard({
             : "bg-red-700");
     const gradientColorTwo = parseTailwindColor({
         color: base,
-        step: 950,
+        step: theme === DarkThemeKey
+            ? 950
+            : 50,
     });
     const gradientColorOneArray = [ ...gradientColorTwo ];
 
@@ -36,8 +38,8 @@ export default function HeroCard({
 
     return (
         <Link className="group" href={`/anime/${data?.idMal}`}>
-            <Image
-                className="object-cover transition duration-500 group-hover:scale-110 group-hover:brightness-75 group-focus:scale-110 group-focus:brightness-75"
+            <ConfiguredImage
+                className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75"
                 style={{
                     objectPosition: "100% 20%",
                 }}
@@ -91,7 +93,7 @@ export default function HeroCard({
                         })
                     }
                 </div>
-                <p className="text-2xl text-pretty text-center font-medium">
+                <p className="text-2xl text-black dark:text-white text-pretty text-center font-medium">
                     {name}
                 </p>
             </div>
