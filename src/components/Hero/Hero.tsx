@@ -4,7 +4,7 @@ export default function Hero() {
     return (
         <>
             <div className="group relative overflow-clip w-full h-full aspect-video">
-                <HeroCard provider={"shikimori"} />
+                <HeroCard />
             </div>
         </>
     );

@@ -1,6 +1,5 @@
 "use client";
 
-import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
 import { useContext } from "react";
@@ -15,14 +14,10 @@ const placeholderArray = [ "w-9", "w-14", "w-14" ];
 // that were released on January 1, so we go back 30 days before.
 const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
 
-export default function HeroCard({
-    provider,
-}: {
-    provider: OAuth2ProvidersType;
-}) {
+export default function HeroCard() {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
     const { isPending, error, data } = useQuery({
-        queryKey: ['hero', provider],
+        queryKey: ["hero", "anime"],
         queryFn: async () => {
             const query = `
                 query($seasonYear: Int) {
@@ -125,7 +120,7 @@ export default function HeroCard({
             : "bg-red-700");
 
     return (
-        <Link href={`/${data.idMal}`}>
+        <Link href={`/anime/${data.idMal}`}>
             <Image
                 className="object-cover transition duration-500 group-hover:scale-110 group-hover:brightness-75"
                 style={{
