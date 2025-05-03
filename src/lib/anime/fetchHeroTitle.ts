@@ -5,7 +5,7 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 // that were released on January 1, so we go back 30 days before.
 const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
 
-const fetchHeroTitle = async (options?: Partial<Request>): Promise<AnimeType> => {
+const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<AnimeType> => {
     const query = `
         query($seasonYear: Int) {
             Media(seasonYear: $seasonYear, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
