@@ -7,6 +7,7 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
 import { AnimeType } from "@/types/Anime/Anime.type";
+import { ImagePlaceholder } from "@/constants/app";
 
 export default function HeroCard({
     data,
@@ -16,7 +17,7 @@ export default function HeroCard({
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
 
     const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";
-    const image = data?.coverImage?.extraLarge ?? "/favicon-original.jpg";
+    const image = data?.coverImage?.extraLarge ?? ImagePlaceholder;
     const score = Number(data?.averageScore) / 10;
     const scoreBadgeColorClassName = score > 8.5
         ? "bg-green-700"
