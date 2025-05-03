@@ -24,6 +24,15 @@ export default function HeroCard({
         : (score > 7
             ? "bg-yellow-700"
             : "bg-red-700");
+    const gradientColorTwo = parseTailwindColor({
+        color: base,
+        step: 950,
+    });
+    const gradientColorOneArray = [ ...gradientColorTwo ];
+
+    gradientColorOneArray.pop();
+    gradientColorOneArray.push(" / 26.67%)");
+    const gradientColorOne = gradientColorOneArray.join("");
 
     return (
         <Link href={`/anime/${data?.idMal}`}>
@@ -36,7 +45,16 @@ export default function HeroCard({
                 src={image}
                 alt={`${name} anime's poster`}
             />
-            <div className="text-black absolute w-full h-full bg-[linear-gradient(to_bottom,#0004,#000d)]" />
+            <div
+                className="text-black absolute w-full h-full"
+                style={{
+                    backgroundImage: `linear-gradient(
+                        to bottom,
+                        ${gradientColorOne},
+                        ${gradientColorTwo}
+                    )`,
+                }}
+            />
             <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2">
                 <div className="flex flex-wrap justify-center gap-2">
                     <p className={`${scoreBadgeColorClassName} rounded-sm text-sm px-2 py-1 leading-none`}>

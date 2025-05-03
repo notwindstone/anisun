@@ -2,6 +2,9 @@ import Button from "@/components/Button/Button";
 import { ShikimoriIcon } from "@/constants/icons";
 import { OAuth2Routes } from "@/constants/routes";
 import Link from "next/link";
+import ColorSchemeChanger from "@/components/Theme/ColorSchemeChanger/ColorSchemeChanger";
+import PaletteChanger from "@/components/Theme/PaletteChanger/PaletteChanger";
+import { AccentColors, BaseColors } from "@/constants/tailwind";
 
 export default async function Page() {
     return (
@@ -24,6 +27,15 @@ export default async function Page() {
                     </p>
                 </Button>
             </a>
+            <ColorSchemeChanger />
+            <PaletteChanger
+                colors={AccentColors}
+                propertyKey={"accent"}
+            />
+            <PaletteChanger
+                colors={BaseColors}
+                propertyKey={"base"}
+            />
         </div>
     );
 }
