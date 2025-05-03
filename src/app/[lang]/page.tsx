@@ -4,6 +4,7 @@ import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
+import Search from "@/components/Search/Search";
 
 export default async function Home() {
     const configs = await getCookie({
@@ -20,6 +21,8 @@ export default async function Home() {
     return (
         <div>
             <Hero theme={theme} base={base} />
+            <div className="w-full h-2" />
+            <Search />
         </div>
     );
 }
