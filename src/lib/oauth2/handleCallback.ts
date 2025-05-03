@@ -57,7 +57,6 @@ export async function handleCallback({
     const user = await getUser({
         accessToken,
         fetchUser: fetchUserProfile,
-        oauth2Provider: providerName,
     });
 
     if (!user) {

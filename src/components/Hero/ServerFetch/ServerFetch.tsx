@@ -34,8 +34,6 @@ export default async function ServerFetch() {
         );
     }
 
-
-
     return (
         <>
             <HeroCard data={data} />
