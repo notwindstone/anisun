@@ -37,7 +37,7 @@ export default function HeroCard({
     const gradientColorOne = gradientColorOneArray.join("");
 
     return (
-        <Link className="group" href={`/anime/${data?.idMal}`}>
+        <Link className="select-none group" href={`/anime/${data?.idMal}`}>
             <ConfiguredImage
                 className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75"
                 style={{

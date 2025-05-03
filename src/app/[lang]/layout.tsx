@@ -18,6 +18,7 @@ import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
 import { cookies } from "next/headers";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
+import Footer from "@/components/Footer/Footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -117,6 +118,7 @@ export default async function RootLayout({
                                 </SidebarWrapper>
                                 <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
                                     {children}
+                                    <Footer />
                                 </div>
                                 <MobileNavbar
                                     accountInfo={parsedAccountInfoData}

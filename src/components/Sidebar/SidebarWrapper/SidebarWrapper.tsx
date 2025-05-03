@@ -8,11 +8,10 @@ import Button from "@/components/Button/Button";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import AnimatedGradientText from "@/components/AnimatedGradientText/AnimatedGradientText";
-import { AppName, FaviconBlurredBase64 } from "@/constants/app";
-import favicon from "@/../public/favicon-x60.jpg";
-import Image from "next/image";
+import { AppName } from "@/constants/app";
 import Link from "next/link";
 import { useMediaQuery } from "@mantine/hooks";
+import Favicon from "@/components/Favicon/Favicon";
 
 const icons: {
     [key: string]: {
@@ -83,13 +82,7 @@ export default function SidebarWrapper({
                                         : "row",
                                 }}
                             >
-                                <Image
-                                    className="w-10 h-10 rounded-md ring-2 ring-black dark:ring-white drop-shadow-md transition"
-                                    src={favicon}
-                                    alt={"Tenshi Hinanawi, a character from Touhou"}
-                                    blurDataURL={FaviconBlurredBase64}
-                                    placeholder={"blur"}
-                                />
+                                <Favicon />
                                 <AnimatedGradientText>
                                     {AppName.toUpperCase()}
                                 </AnimatedGradientText>
