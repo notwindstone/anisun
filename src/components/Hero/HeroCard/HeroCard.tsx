@@ -8,6 +8,8 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 
+const placeholderArray = [ "w-9", "w-14", "w-14" ];
+
 export default function HeroCard({
     provider,
 }: {
@@ -18,18 +20,24 @@ export default function HeroCard({
         queryKey: ['hero', provider],
         queryFn: async () => {
             const query = `
-                {
-                    animes(limit: 1, status: "ongoing") {
+                query {
+                    Media(seasonYear: 2025, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
                         id
-                        name
-                        score
-                        genres { id name }
-                        poster { originalUrl }
+                        title { english native romaji }
+                        meanScore
+                        averageScore
+                        coverImage {
+                            color
+                            extraLarge
+                            large
+                            medium
+                        }
+                        genres
                     }
                 }
             `;
 
-            const response = await fetch('https://shikimori.one/api/graphql', {
+            const response = await fetch('https://graphql.anilist.co', {
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json",
@@ -51,7 +59,7 @@ export default function HeroCard({
                 throw new Error("Something went wrong");
             }
 
-            return data.data.animes[0];
+            return data.data.Media;
         },
     });
 
@@ -59,16 +67,40 @@ export default function HeroCard({
         return (
             <>
                 <div
-                    className="animate-pulse w-full h-full"
-                    style={{
-                        backgroundColor: parseTailwindColor({
-                            color: base,
-                            step: theme === DarkThemeKey
-                                ? 800
-                                : 200,
-                        }),
-                    }}
-                />
+                    className="w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2"
+                >
+                    <div className="flex flex-wrap justify-center gap-2">
+                        {
+                            placeholderArray.map((widthClassName, index) => {
+                                return (
+                                    <div
+                                        className={`animate-pulse rounded-sm h-[22px] ${widthClassName}`}
+                                        key={`${widthClassName}_${index}`}
+                                        style={{
+                                            backgroundColor: parseTailwindColor({
+                                                color: base,
+                                                step: theme === DarkThemeKey
+                                                    ? 800
+                                                    : 200,
+                                            }),
+                                        }}
+                                    />
+                                );
+                            })
+                        }
+                    </div>
+                    <div
+                        className="animate-pulse rounded-sm w-96 h-8"
+                        style={{
+                            backgroundColor: parseTailwindColor({
+                                color: base,
+                                step: theme === DarkThemeKey
+                                    ? 800
+                                    : 200,
+                            }),
+                        }}
+                    />
+                </div>
             </>
         );
     }
@@ -80,9 +112,10 @@ export default function HeroCard({
         );
     }
 
-    const scoreBadgeColorClassName = data.score > 8.5
+    const score = data.averageScore / 10;
+    const scoreBadgeColorClassName = score > 8.5
         ? "bg-green-600"
-        : (data.score > 7.5
+        : (score > 7.5
             ? "bg-yellow-600"
             : "bg-red-600");
 
@@ -94,28 +127,28 @@ export default function HeroCard({
                     objectPosition: "100% 20%",
                 }}
                 fill
-                src={data.poster.originalUrl}
-                alt={`${data.name} anime's poster`}
+                src={data.coverImage.extraLarge}
+                alt={`${data.title.romaji} anime's poster`}
+                //placeholder={"blur"}
+                //blurDataURL={""}
+                // #e4bb50
             />
             <div className="text-black absolute w-full h-full bg-[linear-gradient(to_bottom,#0004,#000d)]" />
             <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2">
                 <div className="flex flex-wrap justify-center gap-2">
-                    <p className={`${scoreBadgeColorClassName} rounded-md text-sm px-2 py-1 leading-none`}>
-                        {data.score}
+                    <p className={`${scoreBadgeColorClassName} rounded-sm text-sm px-2 py-1 leading-none`}>
+                        {score}
                     </p>
                     {
-                        data.genres.map((genre: {
-                            id: string;
-                            name: string;
-                        }, index: number) => {
+                        data.genres.map((genre: string, index: number) => {
                             if (index >= 2) {
                                 return;
                             }
 
                             return (
                                 <p
-                                    key={genre.id}
-                                    className="rounded-md text-sm px-2 py-1 leading-none"
+                                    key={genre}
+                                    className="rounded-sm text-sm px-2 py-1 leading-none"
                                     style={{
                                         backgroundColor: parseTailwindColor({
                                             color: base,
@@ -131,14 +164,14 @@ export default function HeroCard({
                                         }),
                                     }}
                                 >
-                                    {genre.name}
+                                    {genre}
                                 </p>
                             );
                         })
                     }
                 </div>
-                <p className="text-2xl text-pretty text-center font-bold leading-none">
-                    {data.name}
+                <p className="text-2xl text-pretty text-center font-bold">
+                    {data.title.romaji}
                 </p>
             </div>
         </>
