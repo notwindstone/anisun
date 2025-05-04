@@ -6,7 +6,6 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { ImagePlaceholder } from "@/constants/app";
 import ConfiguredImage from "@/components/ConfiguredImage/ConfiguredImage";
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
 import Badge from "@/components/Badge/Badge";
@@ -23,7 +22,7 @@ export default function HeroCard({
     const currentData = data ?? animeData;
 
     const name = currentData?.title?.romaji ?? currentData?.title?.english ?? currentData?.title?.native ?? "none";
-    const image = currentData?.coverImage?.extraLarge ?? ImagePlaceholder;
+    const image = currentData?.coverImage?.extraLarge;
     const score = Number(currentData?.averageScore) / 10;
 
     const gradientColorTwo = parseTailwindColor({

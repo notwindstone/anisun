@@ -10,13 +10,15 @@ export default function Cards() {
 
     return (
         <>
-            {
-                animeData.map((anime: AnimeType) => {
-                    return (
-                        <SmallCard key={anime.id} data={anime} />
-                    );
-                })
-            }
+            <div className="p-4 flex flex-nowrap gap-4 w-full overflow-x-auto scrollbar-hidden">
+                {
+                    animeData.map((anime: AnimeType) => {
+                        return (
+                            <SmallCard key={anime.id} data={anime} />
+                        );
+                    })
+                }
+            </div>
         </>
     );
 }

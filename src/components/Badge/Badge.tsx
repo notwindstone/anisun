@@ -9,10 +9,12 @@ export default function Badge({
     children,
     isScore,
     score,
+    textSize = "text-md",
 }: {
     children: React.ReactNode;
     isScore?: boolean;
     score?: number;
+    textSize?: `text-${"xs" | "sm" | "md" | "lg" | "xl" | "2xl"}`;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
     let scoreBadgeColorClassName = "";
@@ -25,25 +27,30 @@ export default function Badge({
                 : "bg-red-700");
     }
 
+    const scoreIsNotZero = (!isScore) || (isScore && score !== 0);
+    const hasText = children !== "";
+
     return (
-        <p
-            className={`rounded-sm text-sm px-2 py-1 leading-none ${scoreBadgeColorClassName}`}
-            style={isScore ? undefined : {
-                backgroundColor: parseTailwindColor({
-                    color: base,
-                    step: theme === DarkThemeKey
-                        ? 900
-                        : 100,
-                }),
-                color: parseTailwindColor({
-                    color: base,
-                    step: theme === DarkThemeKey
-                        ? 300
-                        : 800,
-                }),
-            }}
-        >
-            {children}
-        </p>
+        scoreIsNotZero && hasText ? (
+            <p
+                className={`rounded-sm ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName}`}
+                style={isScore ? undefined : {
+                    backgroundColor: parseTailwindColor({
+                        color: base,
+                        step: theme === DarkThemeKey
+                            ? 900
+                            : 100,
+                    }),
+                    color: parseTailwindColor({
+                        color: base,
+                        step: theme === DarkThemeKey
+                            ? 300
+                            : 800,
+                    }),
+                }}
+            >
+                {children}
+            </p>
+        ) : undefined
     );
 }

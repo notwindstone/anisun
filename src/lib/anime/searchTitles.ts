@@ -7,6 +7,7 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<s
                 media(search: $search, idMal: $idMal, type: ANIME) {
                     id
                     idMal
+                    status
                     title { english native romaji }
                     meanScore
                     genres

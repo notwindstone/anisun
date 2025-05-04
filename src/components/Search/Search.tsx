@@ -20,7 +20,7 @@ export default function Search() {
     const [searchType, setSearchType] = useState<"id" | "name">("name");
 
     return (
-        <div className="px-2 w-full flex flex-nowrap gap-2">
+        <div className="px-4 w-full flex flex-nowrap gap-2">
             <div
                 onClick={() => {
                     reference.current?.focus();

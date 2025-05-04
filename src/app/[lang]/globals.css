@@ -11,6 +11,9 @@
     display: none;
   }
 }
+@utility aspect-poster {
+  aspect-ratio: 9 / 16;
+}
 
 /*
  * Custom animations

@@ -23,6 +23,7 @@ export default async function Home() {
             <Hero theme={theme} base={base} />
             <div className="w-full h-2" />
             <SearchedAnimes />
+            <div className="w-full h-4" />
             <div className="px-4">
                 <p className="text-2xl font-medium">
                     Trending Now
