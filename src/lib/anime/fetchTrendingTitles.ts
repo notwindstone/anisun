@@ -1,17 +1,12 @@
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
-
-// If it's January 1, then ofc there will be no good animes
-// that were released on January 1, so we go back 30 days before.
-const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
 
 const fetchTrendingTitles = async (options?: Partial<Request> | undefined): Promise<
     Array<AnimeType>
 > => {
     const query = `
-        query($perPage: Int, $seasonYear: Int) {
+        query($perPage: Int) {
             Page(perPage: $perPage) {
-                media(sort: POPULARITY_DESC, type: ANIME, seasonYear: $seasonYear) {
+                media(sort: TRENDING_DESC, type: ANIME) {
                     id
                     idMal
                     status
@@ -35,8 +30,7 @@ const fetchTrendingTitles = async (options?: Partial<Request> | undefined): Prom
         body: JSON.stringify({
             query: query,
             variables: JSON.stringify({
-                seasonYear: currentAnimeYear,
-                perPage: 24,
+                perPage: 32
             }),
         }),
         ...options,
