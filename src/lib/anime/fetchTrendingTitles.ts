@@ -30,7 +30,7 @@ const fetchTrendingTitles = async (options?: Partial<Request> | undefined): Prom
         body: JSON.stringify({
             query: query,
             variables: JSON.stringify({
-                perPage: 32
+                perPage: 32,
             }),
         }),
         ...options,

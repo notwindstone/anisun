@@ -3,11 +3,10 @@
 import ClientFetch from "@/components/ClientFetch/ClientFetch";
 import { AnimeLRUCache, MiscLRUCache } from "@/lib/cache/LRUCaches";
 import { ServerFetchTimeout } from "@/constants/app";
-import Cards from "@/components/Cards/Cards";
 import fetchTrendingTitles from "@/lib/anime/fetchTrendingTitles";
-
-const key = "trending/anime";
-const errorKey = "trending/error";
+import { Getters } from "@/lib/anime/getters";
+import React from "react";
+import { AnimeType } from "@/types/Anime/Anime.type";
 
 // Because of the cache getting data requires just 1-3ms,
 // and the anime data will load instantly on the client.
@@ -18,24 +17,44 @@ const errorKey = "trending/error";
 // so it will refetch on every page render that contains this component.
 // That's why i implemented an error counter: if there is more than
 // 3 errors (in the last 3 minutes), just let the client handle everything.
-export default async function ServerFetch() {
+export default async function ServerFetch({
+    children,
+    queryKey,
+    method,
+    pendingUI,
+    errorUI,
+    cacheQueryKey,
+    cacheErrorKey,
+    dataIsArray,
+    renderChildrenWithData,
+}: {
+    children: React.ReactNode;
+    queryKey: Array<string>;
+    method: keyof typeof Getters;
+    pendingUI: React.ReactNode;
+    errorUI: React.ReactNode;
+    cacheQueryKey: string;
+    cacheErrorKey: string;
+    dataIsArray: boolean;
+    renderChildrenWithData: ({
+        data,
+    }: {
+        data?: AnimeType | Array<AnimeType>;
+    }) => React.ReactNode;
+}) {
     const clientReactNode = (
         <>
             <ClientFetch
-                queryKey={["trending", "anime"]}
-                method={"SearchTitles"}
-                pendingUI={
-                    <Cards isPending />
-                }
-                errorUI={
-                    <Cards isError />
-                }
+                queryKey={queryKey}
+                method={method}
+                pendingUI={pendingUI}
+                errorUI={errorUI}
             >
-                <Cards />
+                {children}
             </ClientFetch>
         </>
     );
-    const errorCount = Number(MiscLRUCache.get(errorKey) ?? 0);
+    const errorCount = Number(MiscLRUCache.get(cacheErrorKey) ?? 0);
     let data;
 
     try {
@@ -43,30 +62,35 @@ export default async function ServerFetch() {
             return clientReactNode;
         }
 
-        if (AnimeLRUCache.has(key)) {
-            data = AnimeLRUCache.get(key);
+        if (AnimeLRUCache.has(cacheQueryKey)) {
+            data = AnimeLRUCache.get(cacheQueryKey);
         } else {
             data = await fetchTrendingTitles({
                 // Abort fetch after 3000ms
                 signal: AbortSignal.timeout(ServerFetchTimeout),
             });
 
-            AnimeLRUCache.set(key, data);
+            AnimeLRUCache.set(cacheQueryKey, data);
         }
     } catch {
-        MiscLRUCache.set(errorKey, errorCount + 1);
+        MiscLRUCache.set(cacheErrorKey, errorCount + 1);
 
         return clientReactNode;
     }
 
-    // should never occur
-    if (!Array.isArray(data)) {
+    if (
+        data === undefined
+        || (dataIsArray && !Array.isArray(data))
+        || (!dataIsArray && Array.isArray(data))
+    ) {
         return;
     }
 
     return (
         <>
-            <Cards data={data} />
+            {
+                renderChildrenWithData({ data })
+            }
         </>
     );
 }

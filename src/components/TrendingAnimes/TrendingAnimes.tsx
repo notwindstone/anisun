@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import Cards from "@/components/Cards/Cards";
-import ServerFetch from "@/components/TrendingAnimes/ServerFetch/ServerFetch";
+import ServerFetch from "@/components/ServerFetch/ServerFetch";
+import { AnimeType } from "@/types/Anime/Anime.type";
 
 export default function TrendingAnimes() {
     return (
@@ -16,7 +17,30 @@ export default function TrendingAnimes() {
                 <Suspense fallback={
                     <Cards isPending />
                 }>
-                    <ServerFetch />
+                    <ServerFetch
+                        renderChildrenWithData={
+                            ({
+                                data,
+                            }: {
+                                data?: AnimeType | Array<AnimeType>;
+                            }) => (
+                                <Cards data={data} />
+                            )
+                        }
+                        queryKey={["trending", "anime"]}
+                        method={"FetchTrendingTitles"}
+                        pendingUI={
+                            <Cards isPending />
+                        }
+                        errorUI={
+                            <Cards isError />
+                        }
+                        cacheErrorKey={"trending/anime"}
+                        cacheQueryKey={"trending/error"}
+                        dataIsArray
+                    >
+                        <Cards />
+                    </ServerFetch>
                 </Suspense>
             </div>
         </>

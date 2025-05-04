@@ -47,11 +47,15 @@ export default function Cards({
     isPending?: boolean;
     isError?: boolean;
     search?: string;
-    data?: Array<AnimeType>;
+    data?: AnimeType | Array<AnimeType>;
 }) {
     const { data: animeData } = useContext(ClientFetchDataContext);
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
     const currentData = data ?? animeData;
+
+    if (!Array.isArray(currentData)) {
+        return;
+    }
 
     const colorFirstArray = [ ...parseTailwindColor({
         color: base,
