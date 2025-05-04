@@ -1,16 +1,13 @@
 "use server";
 
-import fetchHeroTitle from "@/lib/anime/fetchHeroTitle";
 import ClientFetch from "@/components/ClientFetch/ClientFetch";
-import HeroCard from "@/components/Hero/HeroCard/HeroCard";
 import { AnimeLRUCache, MiscLRUCache } from "@/lib/cache/LRUCaches";
-import SkeletonCard from "@/components/Hero/SkeletonCard/SkeletonCard";
-import ErrorCard from "@/components/Hero/ErrorCard/ErrorCard";
-import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { ServerFetchTimeout } from "@/constants/app";
+import Cards from "@/components/Cards/Cards";
+import fetchTrendingTitles from "@/lib/anime/fetchTrendingTitles";
 
-const key = "hero/anime";
-const errorKey = "hero/error";
+const key = "trending/anime";
+const errorKey = "trending/error";
 
 // Because of the cache getting data requires just 1-3ms,
 // and the anime data will load instantly on the client.
@@ -21,26 +18,20 @@ const errorKey = "hero/error";
 // so it will refetch on every page render that contains this component.
 // That's why i implemented an error counter: if there is more than
 // 3 errors (in the last 3 minutes), just let the client handle everything.
-export default async function ServerFetch({
-    theme,
-    base,
-}: {
-    theme: "light" | "dark";
-    base: BaseColorsType;
-}) {
+export default async function ServerFetch() {
     const clientReactNode = (
         <>
             <ClientFetch
-                queryKey={["hero", "anime"]}
-                method={"FetchHeroTitle"}
+                queryKey={["trending", "anime"]}
+                method={"SearchTitles"}
                 pendingUI={
-                    <SkeletonCard theme={theme} base={base} />
+                    <Cards isPending />
                 }
                 errorUI={
-                    <ErrorCard />
+                    <Cards isError />
                 }
             >
-                <HeroCard />
+                <Cards />
             </ClientFetch>
         </>
     );
@@ -55,7 +46,7 @@ export default async function ServerFetch({
         if (AnimeLRUCache.has(key)) {
             data = AnimeLRUCache.get(key);
         } else {
-            data = await fetchHeroTitle({
+            data = await fetchTrendingTitles({
                 // Abort fetch after 3000ms
                 signal: AbortSignal.timeout(ServerFetchTimeout),
             });
@@ -69,13 +60,13 @@ export default async function ServerFetch({
     }
 
     // should never occur
-    if (Array.isArray(data)) {
+    if (!Array.isArray(data)) {
         return;
     }
 
     return (
         <>
-            <HeroCard data={data} />
+            <Cards data={data} />
         </>
     );
 }

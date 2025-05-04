@@ -17,14 +17,18 @@ export default function Badge({
     textSize?: `text-${"xs" | "sm" | "md" | "lg" | "xl" | "2xl"}`;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
-    let scoreBadgeColorClassName = "";
+    let scoreBadgeColorClassName;
 
-    if (isScore && score !== undefined) {
-        scoreBadgeColorClassName = score > 8.5
-            ? "bg-green-700"
-            : (score > 7
-                ? "bg-yellow-700"
-                : "bg-red-700");
+    if (!isScore || score === undefined) {
+        scoreBadgeColorClassName = "";
+    } else if (score >= 8.75) {
+        scoreBadgeColorClassName = "bg-indigo-700";
+    } else if (score >= 8) {
+        scoreBadgeColorClassName = "bg-green-700";
+    } else if (score >= 6.5) {
+        scoreBadgeColorClassName = "bg-yellow-700";
+    } else {
+        scoreBadgeColorClassName = "bg-red-700";
     }
 
     const scoreIsNotZero = (!isScore) || (isScore && score !== 0);

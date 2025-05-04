@@ -41,14 +41,17 @@ export default function Cards({
     isPending,
     isError,
     search,
+    data,
 }: {
     isGrid?: boolean;
     isPending?: boolean;
     isError?: boolean;
     search?: string;
+    data?: Array<AnimeType>;
 }) {
     const { data: animeData } = useContext(ClientFetchDataContext);
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const currentData = data ?? animeData;
 
     const colorFirstArray = [ ...parseTailwindColor({
         color: base,
@@ -119,7 +122,7 @@ export default function Cards({
         );
     }
     
-    if (animeData.length === 0) {
+    if (currentData.length === 0) {
         return;
     }
 
@@ -131,9 +134,9 @@ export default function Cards({
                 colorSecond={colorSecond}
             >
                 {
-                    animeData.map((anime: AnimeType) => {
+                    currentData.map((anime: AnimeType) => {
                         return (
-                            <SmallCard isGrid key={anime.id} data={anime} />
+                            <SmallCard isGrid={isGrid} key={anime.id} data={anime} />
                         );
                     })
                 }

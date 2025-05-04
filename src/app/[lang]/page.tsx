@@ -25,7 +25,7 @@ export default async function Home() {
             <div className="w-full h-2" />
             <SearchedAnimes />
             <div className="w-full h-4" />
-            <TrendingAnimes theme={theme} base={base} />
+            <TrendingAnimes />
         </div>
     );
 }

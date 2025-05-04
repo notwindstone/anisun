@@ -29,7 +29,7 @@ export default function SmallCard({
     baseColor.pop();
     const posterDarkEffect = `${baseColor.join("")} / 0.5)`;
 
-    const gridClassNames = isGrid ? "w-full flex-max-w-1/2 xs:flex-max-w-1/3 lg:flex-max-w-1/4 xl:flex-max-w-1/6" : "";
+    const gridClassNames = isGrid ? "w-full flex-max-w-1/2 xs:flex-max-w-1/3 lg:flex-max-w-1/4 xl:flex-max-w-1/6" : "h-full";
 
     return (
         <>

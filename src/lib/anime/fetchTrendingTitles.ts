@@ -1,13 +1,17 @@
-import { SearchType } from "@/types/Anime/Search.type";
 import { AnimeType } from "@/types/Anime/Anime.type";
+import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 
-const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
+// If it's January 1, then ofc there will be no good animes
+// that were released on January 1, so we go back 30 days before.
+const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
+
+const fetchTrendingTitles = async (options?: Partial<Request> | undefined): Promise<
     Array<AnimeType>
 > => {
     const query = `
-        query($search: String, $idMal: Int, $perPage: Int) {
+        query($perPage: Int, $seasonYear: Int) {
             Page(perPage: $perPage) {
-                media(search: $search, idMal: $idMal, type: ANIME) {
+                media(sort: POPULARITY_DESC, type: ANIME, seasonYear: $seasonYear) {
                     id
                     idMal
                     status
@@ -22,12 +26,6 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
             }
         }
     `;
-    
-    const variables = options?.type === "name" ? {
-        search: options?.search,
-    } : {
-        idMal: options?.search,
-    };
 
     const response = await fetch('https://graphql.anilist.co', {
         method: 'POST',
@@ -37,10 +35,11 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
         body: JSON.stringify({
             query: query,
             variables: JSON.stringify({
-                ...variables,
-                perPage: 32,
+                seasonYear: currentAnimeYear,
+                perPage: 24,
             }),
         }),
+        ...options,
     });
 
     if (!response.ok) {
@@ -58,4 +57,4 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
     return data.data.Page.media;
 };
 
-export default searchTitles;
+export default fetchTrendingTitles;
