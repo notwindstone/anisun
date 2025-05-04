@@ -7,11 +7,11 @@ import { SearchContext } from "@/utils/providers/SearchProvider";
 
 export default function ClientFetchWrapper() {
     const { data: search } = useContext(SearchContext);
-    console.log(search);
+
     return (
         <>
             <ClientFetch
-                queryKey={["search", search]}
+                queryKey={["search", search.search, search.type]}
                 method={"SearchTitles"}
                 pendingUI={<></>}
                 errorUI={<></>}

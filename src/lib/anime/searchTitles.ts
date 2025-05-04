@@ -1,8 +1,14 @@
-const searchTitles = async (search?: string | undefined): Promise<string> => {
+import { SearchType } from "@/types/Anime/Search.type";
+
+const searchTitles = async ({
+    search,
+    type,
+}: Partial<SearchType>): Promise<string> => {
     const query = `
-        query($search: String, $perPage: Int) {
+        query($search: String, $idMal: Int, $perPage: Int) {
             Page(perPage: $perPage) {
-                media(search: $search, type: ANIME) {
+                media(search: $search, idMal: $idMal, type: ANIME) {
+                    id
                     idMal
                     title { english native romaji }
                     meanScore
@@ -15,6 +21,12 @@ const searchTitles = async (search?: string | undefined): Promise<string> => {
             }
         }
     `;
+    
+    const variables = type === "name" ? {
+        search: search,
+    } : {
+        idMal: search,
+    };
 
     const response = await fetch('https://graphql.anilist.co', {
         method: 'POST',
@@ -24,7 +36,7 @@ const searchTitles = async (search?: string | undefined): Promise<string> => {
         body: JSON.stringify({
             query: query,
             variables: JSON.stringify({
-                search: search,
+                ...variables,
                 perPage: 32,
             }),
         }),

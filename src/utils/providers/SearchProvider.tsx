@@ -2,12 +2,16 @@
 
 import { createContext, Dispatch, SetStateAction } from "react";
 import { useDebouncedState } from "@mantine/hooks";
+import { SearchType } from "@/types/Anime/Search.type";
 
 export const SearchContext = createContext<{
-    data: string;
-    setData: Dispatch<SetStateAction<string>>;
+    data: SearchType;
+    setData: Dispatch<SetStateAction<SearchType>>;
 }>({
-    data: "",
+    data: {
+        search: "",
+        type: "name",
+    },
     setData: () => {},
 });
 
@@ -16,7 +20,7 @@ export function SearchProvider({
 }: {
     children: React.ReactNode;
 }) {
-    const [debounced, setDebounced] = useDebouncedState<string>("", 300, {
+    const [debounced, setDebounced] = useDebouncedState<SearchType>({ search: "", type: "name" }, 300, {
         leading: true,
     });
 

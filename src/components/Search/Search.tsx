@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useRef } from "react";
+import { useContext, useRef, useState } from "react";
 import { ListFilter, SearchIcon } from "lucide-react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import Button from "@/components/Button/Button";
@@ -8,10 +8,16 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { SearchContext } from "@/utils/providers/SearchProvider";
 
+const icons = {
+    id: "ID",
+    name: "Name",
+};
+
 export default function Search() {
     const { data: { theme, colors: { base } }, dictionaries } = useContext(ConfigsContext);
     const { setData } = useContext(SearchContext);
     const reference = useRef<HTMLInputElement>(null);
+    const [searchType, setSearchType] = useState<"id" | "name">("name");
 
     return (
         <div className="px-2 w-full flex flex-nowrap gap-2">
@@ -35,16 +41,47 @@ export default function Search() {
                 <input
                     defaultValue={""}
                     ref={reference}
-                    className="pr-2 w-full h-full text-sm focus:outline-none"
+                    className="w-full h-full text-sm focus:outline-none"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
 
-                        setData(value);
+                        setData({
+                            search: value,
+                            type: searchType,
+                        });
                     }}
                     placeholder={dictionaries?.misc?.searchAnimes}
                     title={dictionaries?.aria?.searchAnimes}
                     aria-label={dictionaries?.aria?.searchAnimes}
                 />
+                <div
+                    onClick={() => {
+                        let changedSearchType: "id" | "name";
+
+                        setSearchType((state) => {
+                            if (state === "id") {
+                                changedSearchType = "name";
+
+                                return "name";
+                            }
+
+                            changedSearchType = "id";
+
+                            return "id";
+                        });
+                        setData((state) => {
+                            return {
+                                ...state,
+                                type: changedSearchType,
+                            };
+                        });
+                    }}
+                    className="flex justify-center items-center h-full shrink-0 px-2 cursor-pointer hover:text-neutral-500 dark:hover:text-neutral-400 transition"
+                >
+                    <p className="text-sm">
+                        {icons[searchType]}
+                    </p>
+                </div>
             </div>
             <Button label={dictionaries?.aria?.filterAnimes ?? ""}>
                 <ListFilter
