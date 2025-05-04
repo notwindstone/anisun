@@ -20,7 +20,9 @@ export default function ClientFetchWrapper({
                 pendingUI={
                     <Cards search={search.search} isPending />
                 }
-                errorUI={<></>}
+                errorUI={
+                    <Cards isError />
+                }
                 fetchArguments={search}
             >
                 {children}
