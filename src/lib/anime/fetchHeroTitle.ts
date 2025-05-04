@@ -8,7 +8,7 @@ const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
 const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<AnimeType> => {
     const query = `
         query($seasonYear: Int) {
-            Media(seasonYear: $seasonYear, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
+            Media(type: ANIME, seasonYear: $seasonYear, status: RELEASING, sort: POPULARITY_DESC, format: TV, isAdult: false) {
                 id
                 idMal
                 title { english native romaji }

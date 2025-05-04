@@ -20,11 +20,6 @@ export default function Hero({
                         <ServerFetch theme={theme} base={base} />
                     </Suspense>
                 </div>
-                <div className="px-4">
-                    <p className="text-2xl font-medium">
-                        Trending Now
-                    </p>
-                </div>
             </div>
         </>
     );

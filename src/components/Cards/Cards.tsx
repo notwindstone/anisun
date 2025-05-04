@@ -5,10 +5,10 @@ import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvide
 
 export default function Cards() {
     const { data: animeData } = useContext(ClientFetchDataContext);
-    console.log(JSON.stringify(animeData));
+
     return (
         <>
-            {JSON.stringify("")}
+            {JSON.stringify(animeData)}
         </>
     );
 }

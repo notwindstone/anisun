@@ -33,7 +33,7 @@ export default function Search() {
                     <SearchIcon size={16} />
                 </div>
                 <input
-                    defaultValue={"  "}
+                    defaultValue={""}
                     ref={reference}
                     className="pr-2 w-full h-full text-sm focus:outline-none"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
