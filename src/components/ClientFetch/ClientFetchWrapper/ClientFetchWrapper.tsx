@@ -1,11 +1,15 @@
 "use client";
 
 import ClientFetch from "@/components/ClientFetch/ClientFetch";
-import Cards from "@/components/Cards/Cards";
 import { useContext } from "react";
 import { SearchContext } from "@/utils/providers/SearchProvider";
+import Cards from "@/components/Cards/Cards";
 
-export default function ClientFetchWrapper() {
+export default function ClientFetchWrapper({
+    children,
+}: {
+    children: React.ReactNode;
+}) {
     const { data: search } = useContext(SearchContext);
 
     return (
@@ -13,11 +17,13 @@ export default function ClientFetchWrapper() {
             <ClientFetch
                 queryKey={["search", search.search, search.type]}
                 method={"SearchTitles"}
-                pendingUI={<></>}
+                pendingUI={
+                    <Cards search={search.search} isPending />
+                }
                 errorUI={<></>}
                 fetchArguments={search}
             >
-                <Cards />
+                {children}
             </ClientFetch>
         </>
     );

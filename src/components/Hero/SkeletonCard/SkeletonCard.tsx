@@ -20,7 +20,7 @@ export default function SkeletonCard({
                     placeholderArray.map((widthClassName, index) => {
                         return (
                             <div
-                                className={`animate-pulse rounded-sm h-[22px] ${widthClassName}`}
+                                className={`animate-pulse rounded-md h-[22px] ${widthClassName}`}
                                 key={`${widthClassName}_${index}`}
                                 style={{
                                     backgroundColor: parseTailwindColor({
@@ -36,7 +36,7 @@ export default function SkeletonCard({
                 }
             </div>
             <div
-                className="animate-pulse rounded-sm w-96 max-w-[60%] h-8"
+                className="animate-pulse rounded-md w-96 max-w-[60%] h-8"
                 style={{
                     backgroundColor: parseTailwindColor({
                         color: base,

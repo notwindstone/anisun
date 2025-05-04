@@ -33,7 +33,7 @@ export default function Badge({
     return (
         scoreIsNotZero && hasText ? (
             <p
-                className={`rounded-sm ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName}`}
+                className={`rounded-md ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName}`}
                 style={isScore ? undefined : {
                     backgroundColor: parseTailwindColor({
                         color: base,
