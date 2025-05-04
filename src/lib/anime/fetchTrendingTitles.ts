@@ -1,5 +1,6 @@
 import { AnimeType } from "@/types/Anime/Anime.type";
 
+// TODO implement a GraphQL query builder
 const fetchTrendingTitles = async (options?: Partial<Request> | undefined): Promise<
     Array<AnimeType>
 > => {

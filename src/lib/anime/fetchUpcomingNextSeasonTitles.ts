@@ -1,7 +1,55 @@
-const fetchUpcomingNextSeasonTitles = async () => {
-    return {
-        id: 0,
-    };
+import { AnimeType } from "@/types/Anime/Anime.type";
+
+// TODO implement a GraphQL query builder
+const fetchUpcomingNextSeasonTitles = async (options?: Partial<Request> | undefined): Promise<
+    Array<AnimeType>
+> => {
+    const query = `
+        query($perPage: Int) {
+            Page(perPage: $perPage) {
+                media(sort: POPULARITY_DESC, seasonYear: 2025, season: SUMMER, type: ANIME) {
+                    id
+                    idMal
+                    status
+                    title { english native romaji }
+                    meanScore
+                    genres
+                    averageScore
+                    coverImage {
+                        extraLarge
+                    }
+                }
+            }
+        }
+    `;
+
+    const response = await fetch('https://graphql.anilist.co', {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            query: query,
+            variables: JSON.stringify({
+                perPage: 32,
+            }),
+        }),
+        ...options,
+    });
+
+    if (!response.ok) {
+        throw new Error("Something went wrong");
+    }
+
+    let data;
+
+    try {
+        data = await response.json();
+    } catch {
+        throw new Error("Something went wrong");
+    }
+
+    return data.data.Page.media;
 };
 
 export default fetchUpcomingNextSeasonTitles;

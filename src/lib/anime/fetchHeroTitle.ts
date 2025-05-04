@@ -5,6 +5,7 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 // that were released on January 1, so we go back 30 days before.
 const currentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
 
+// TODO implement a GraphQL query builder
 const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<AnimeType> => {
     const query = `
         query($seasonYear: Int) {

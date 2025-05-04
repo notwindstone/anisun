@@ -27,11 +27,21 @@ export default async function Home() {
             <div className="w-full h-4" />
             <ListAnimes
                 title={"Trending Now"}
-                description={"Explore currently popular anime titles"}
+                description={"Watch the currently popular titles"}
                 method={"FetchTrendingTitles"}
-                queryKey={["trending", "anime"]}
-                cacheQueryKey={"trending/anime"}
-                cacheErrorKey={"trending/error"}
+                queryKey={"trending"}
+            />
+            <ListAnimes
+                title={"Upcoming Next Season"}
+                description={"Explore the animes that are going to be released soon"}
+                method={"FetchUpcomingNextSeasonTitles"}
+                queryKey={"upcoming"}
+            />
+            <ListAnimes
+                title={"Top 30 Anime"}
+                description={"Check the best series ever sorted by a score"}
+                method={"FetchTopTitles"}
+                queryKey={"top"}
             />
         </div>
     );

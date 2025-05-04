@@ -9,16 +9,15 @@ export default function ListAnimes({
     description,
     method,
     queryKey,
-    cacheQueryKey,
-    cacheErrorKey,
 }: {
     title: string;
     description: string;
     method: keyof typeof Getters;
-    queryKey: Array<string>;
-    cacheQueryKey: string;
-    cacheErrorKey: string;
+    queryKey: string;
 }) {
+    const cacheQueryKey = `${queryKey}/anime`;
+    const cacheErrorKey = `${queryKey}/error`;
+
     return (
         <>
             <div className="flex flex-col gap-4">
@@ -42,7 +41,7 @@ export default function ListAnimes({
                                 <Cards data={data} />
                             )
                         }
-                        queryKey={queryKey}
+                        queryKey={[queryKey, "anime"]}
                         method={method}
                         pendingUI={
                             <Cards isPending />
