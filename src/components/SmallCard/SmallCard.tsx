@@ -9,8 +9,10 @@ import Badge from "@/components/Badge/Badge";
 
 export default function SmallCard({
     data,
+    isGrid,
 }: {
     data: AnimeType;
+    isGrid?: boolean;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
 
@@ -25,11 +27,16 @@ export default function SmallCard({
             : 50,
     }) ];
     baseColor.pop();
-    const posterDarkEffect = `${baseColor.join("")} / 0.4)`;
+    const posterDarkEffect = `${baseColor.join("")} / 0.5)`;
+
+    const gridClassNames = isGrid ? "w-full flex-max-w-1/3 lg:flex-max-w-1/4 xl:flex-max-w-1/6" : "";
 
     return (
         <>
-            <Link href={`/anime/${data?.idMal}`} className="shrink-0 select-none group relative aspect-poster rounded-md overflow-clip w-32">
+            <Link
+                href={`/anime/${data?.idMal}`}
+                className={`shrink-0 select-none group relative aspect-poster rounded-md overflow-clip ${gridClassNames}`}
+            >
                 <ConfiguredImage
                     className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75"
                     style={{
@@ -46,7 +53,7 @@ export default function SmallCard({
                     }}
                 />
                 <div className="absolute w-full h-full flex flex-col justify-between items-start p-2 text-white gap-2">
-                    <div className="flex flex-wrap gap-1">
+                    <div className="w-full flex flex-wrap justify-between gap-1">
                         {
                             (status === "FINISHED" || status === "RELEASING") && (
                                 <Badge textSize="text-xs">
