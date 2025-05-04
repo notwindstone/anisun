@@ -2,17 +2,32 @@ import { Suspense } from "react";
 import Cards from "@/components/Cards/Cards";
 import ServerFetch from "@/components/ServerFetch/ServerFetch";
 import { AnimeType } from "@/types/Anime/Anime.type";
+import { Getters } from "@/lib/anime/getters";
 
-export default function TrendingAnimes() {
+export default function ListAnimes({
+    title,
+    description,
+    method,
+    queryKey,
+    cacheQueryKey,
+    cacheErrorKey,
+}: {
+    title: string;
+    description: string;
+    method: keyof typeof Getters;
+    queryKey: Array<string>;
+    cacheQueryKey: string;
+    cacheErrorKey: string;
+}) {
     return (
         <>
             <div className="flex flex-col gap-4">
                 <div />
                 <p className="text-2xl font-medium leading-none px-4">
-                    Trending Now
+                    {title}
                 </p>
                 <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none px-4">
-                    Explore currently popular anime titles
+                    {description}
                 </p>
                 <Suspense fallback={
                     <Cards isPending />
@@ -27,16 +42,16 @@ export default function TrendingAnimes() {
                                 <Cards data={data} />
                             )
                         }
-                        queryKey={["trending", "anime"]}
-                        method={"FetchTrendingTitles"}
+                        queryKey={queryKey}
+                        method={method}
                         pendingUI={
                             <Cards isPending />
                         }
                         errorUI={
                             <Cards isError />
                         }
-                        cacheErrorKey={"trending/anime"}
-                        cacheQueryKey={"trending/error"}
+                        cacheErrorKey={cacheErrorKey}
+                        cacheQueryKey={cacheQueryKey}
                         dataIsArray
                     >
                         <Cards />

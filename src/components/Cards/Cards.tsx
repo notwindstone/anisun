@@ -53,7 +53,7 @@ export default function Cards({
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
     const currentData = data ?? animeData;
 
-    if (!Array.isArray(currentData)) {
+    if (data !== undefined && !Array.isArray(currentData)) {
         return;
     }
 

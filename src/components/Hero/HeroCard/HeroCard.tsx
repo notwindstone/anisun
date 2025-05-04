@@ -21,7 +21,7 @@ export default function HeroCard({
     }>(ClientFetchDataContext);
     const currentData = data ?? animeData;
 
-    if (Array.isArray(currentData)) {
+    if (currentData !== undefined && Array.isArray(currentData)) {
         return;
     }
 
