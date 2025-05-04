@@ -1,9 +1,6 @@
 import { SearchType } from "@/types/Anime/Search.type";
 
-const searchTitles = async ({
-    search,
-    type,
-}: Partial<SearchType>): Promise<string> => {
+const searchTitles = async (options: Partial<SearchType> | undefined): Promise<string> => {
     const query = `
         query($search: String, $idMal: Int, $perPage: Int) {
             Page(perPage: $perPage) {
@@ -22,10 +19,10 @@ const searchTitles = async ({
         }
     `;
     
-    const variables = type === "name" ? {
-        search: search,
+    const variables = options?.type === "name" ? {
+        search: options?.search,
     } : {
-        idMal: search,
+        idMal: options?.search,
     };
 
     const response = await fetch('https://graphql.anilist.co', {

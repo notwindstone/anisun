@@ -18,7 +18,7 @@ export default function ClientFetch({
     method: keyof typeof Getters;
     pendingUI: React.ReactNode;
     errorUI: React.ReactNode;
-    fetchArguments: SearchType;
+    fetchArguments?: SearchType;
 }) {
     const { isPending, error, data } = useQuery({
         queryKey: queryKey,
