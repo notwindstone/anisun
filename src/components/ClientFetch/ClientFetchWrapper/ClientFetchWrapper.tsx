@@ -7,8 +7,10 @@ import Cards from "@/components/Cards/Cards";
 
 export default function ClientFetchWrapper({
     children,
+    isGrid,
 }: {
     children: React.ReactNode;
+    isGrid?: boolean;
 }) {
     const { data: search } = useContext(SearchContext);
 
@@ -18,10 +20,10 @@ export default function ClientFetchWrapper({
                 queryKey={["search", search.search, search.type]}
                 method={"SearchTitles"}
                 pendingUI={
-                    <Cards search={search.search} isPending />
+                    <Cards isGrid={isGrid} search={search.search} isPending />
                 }
                 errorUI={
-                    <Cards isError />
+                    <Cards isGrid={isGrid} isError />
                 }
                 fetchArguments={search}
             >

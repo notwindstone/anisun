@@ -79,6 +79,7 @@ export default function Cards({
                         placeholderArray.map((_, index) => {
                             return (
                                 <ErrorSmallCard
+                                    isGrid={isGrid}
                                     key={`error_${index}`}
                                 />
                             );
@@ -105,6 +106,7 @@ export default function Cards({
                         placeholderArray.map((_, index) => {
                             return (
                                 <SkeletonSmallCard
+                                    isGrid={isGrid}
                                     key={`skeleton_${index}`}
                                     theme={theme}
                                     base={base}

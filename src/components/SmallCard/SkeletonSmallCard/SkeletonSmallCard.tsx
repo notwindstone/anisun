@@ -8,15 +8,19 @@ const placeholderNamesArray = [ "w-28", "w-20" ];
 export default function SkeletonSmallCard({
     theme,
     base,
+    isGrid,
 }: {
     theme: "light" | "dark";
     base: BaseColorsType;
+    isGrid?: boolean;
 }) {
+    const gridClassNames = isGrid ? "w-full flex-max-w-1/2 xs:flex-max-w-1/3 lg:flex-max-w-1/4 xl:flex-max-w-1/6" : "";
+
     return (
         <>
-            <div className="shrink-0 relative aspect-poster rounded-md overflow-clip w-32">
+            <div className={`shrink-0 relative aspect-poster rounded-md overflow-clip ${gridClassNames}`}>
                 <div className="absolute w-full h-full flex flex-col justify-between items-start p-2 gap-2">
-                    <div className="flex flex-wrap gap-1">
+                    <div className="flex flex-wrap justify-between gap-1 w-full">
                         {
                             placeholderArray.map((widthClassName, index) => {
                                 return (

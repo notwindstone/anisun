@@ -8,8 +8,8 @@ export default function SearchedAnimes() {
         <>
             <SearchProvider>
                 <Search />
-                <ClientFetchWrapper>
-                    <Cards />
+                <ClientFetchWrapper isGrid>
+                    <Cards isGrid />
                 </ClientFetchWrapper>
             </SearchProvider>
         </>
