@@ -12,7 +12,7 @@ export default function Footer({
 
     return (
         <>
-            <div className="p-4 flex flex-col md:flex-row gap-4">
+            <div className="p-4 flex flex-col md:justify-between md:flex-row gap-4">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-nowrap gap-4">
                         <Favicon />
@@ -29,7 +29,7 @@ export default function Footer({
                         {footerItems.description}
                     </div>
                 </div>
-                <div className="flex gap-2 flex-nowrap items-start w-full">
+                <div className="flex gap-2 flex-nowrap items-start w-full md:w-fit md:min-w-[25%]">
                     {
                         footerItems.columns.map((column) => {
                             return (

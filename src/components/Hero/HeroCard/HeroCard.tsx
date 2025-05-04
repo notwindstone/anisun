@@ -9,6 +9,7 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import { ImagePlaceholder } from "@/constants/app";
 import ConfiguredImage from "@/components/ConfiguredImage/ConfiguredImage";
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
+import Badge from "@/components/Badge/Badge";
 
 export default function HeroCard({
     data,
@@ -24,11 +25,7 @@ export default function HeroCard({
     const name = currentData?.title?.romaji ?? currentData?.title?.english ?? currentData?.title?.native ?? "none";
     const image = currentData?.coverImage?.extraLarge ?? ImagePlaceholder;
     const score = Number(currentData?.averageScore) / 10;
-    const scoreBadgeColorClassName = score > 8.5
-        ? "bg-green-700"
-        : (score > 7
-            ? "bg-yellow-700"
-            : "bg-red-700");
+
     const gradientColorTwo = parseTailwindColor({
         color: base,
         step: theme === DarkThemeKey
@@ -64,13 +61,13 @@ export default function HeroCard({
             />
             <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2">
                 <div className="flex flex-wrap justify-center gap-2">
-                    <p className={`${scoreBadgeColorClassName} rounded-sm text-sm px-2 py-1 leading-none`}>
+                    <Badge score={score} isScore>
                         {
                             // Cast this variable to a string
                             // because it might be NaN
                             score.toString()
                         }
-                    </p>
+                    </Badge>
                     {
                         currentData?.genres?.map((genre: string, index: number) => {
                             if (index >= 2) {
@@ -78,26 +75,9 @@ export default function HeroCard({
                             }
 
                             return (
-                                <p
-                                    key={genre}
-                                    className="rounded-sm text-sm px-2 py-1 leading-none"
-                                    style={{
-                                        backgroundColor: parseTailwindColor({
-                                            color: base,
-                                            step: theme === DarkThemeKey
-                                                ? 900
-                                                : 100,
-                                        }),
-                                        color: parseTailwindColor({
-                                            color: base,
-                                            step: theme === DarkThemeKey
-                                                ? 300
-                                                : 800,
-                                        }),
-                                    }}
-                                >
+                                <Badge key={genre}>
                                     {genre}
-                                </p>
+                                </Badge>
                             );
                         })
                     }
