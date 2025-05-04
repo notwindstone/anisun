@@ -3,7 +3,6 @@
 import ClientFetch from "@/components/ClientFetch/ClientFetch";
 import { AnimeLRUCache, MiscLRUCache } from "@/lib/cache/LRUCaches";
 import { ServerFetchTimeout } from "@/constants/app";
-import fetchTrendingTitles from "@/lib/anime/fetchTrendingTitles";
 import { Getters } from "@/lib/anime/getters";
 import React from "react";
 import { AnimeType } from "@/types/Anime/Anime.type";
@@ -65,7 +64,7 @@ export default async function ServerFetch({
         if (AnimeLRUCache.has(cacheQueryKey)) {
             data = AnimeLRUCache.get(cacheQueryKey);
         } else {
-            data = await fetchTrendingTitles({
+            data = await Getters[method]({
                 // Abort fetch after 3000ms
                 signal: AbortSignal.timeout(ServerFetchTimeout),
             });

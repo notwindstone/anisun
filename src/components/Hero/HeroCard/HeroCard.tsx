@@ -13,13 +13,17 @@ import Badge from "@/components/Badge/Badge";
 export default function HeroCard({
     data,
 }: {
-    data?: AnimeType | undefined;
+    data?: Array<AnimeType> | AnimeType | undefined;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
     const { data: animeData } = useContext<{
         data: AnimeType;
     }>(ClientFetchDataContext);
     const currentData = data ?? animeData;
+
+    if (Array.isArray(currentData)) {
+        return;
+    }
 
     const name = currentData?.title?.romaji ?? currentData?.title?.english ?? currentData?.title?.native ?? "none";
     const image = currentData?.coverImage?.extraLarge;

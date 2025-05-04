@@ -1,5 +1,7 @@
 const fetchTopTitles = async () => {
-    return;
+    return {
+        id: 0,
+    };
 };
 
 export default fetchTopTitles;

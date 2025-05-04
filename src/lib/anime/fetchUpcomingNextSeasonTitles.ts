@@ -1,5 +1,7 @@
 const fetchUpcomingNextSeasonTitles = async () => {
-    return;
+    return {
+        id: 0,
+    };
 };
 
 export default fetchUpcomingNextSeasonTitles;
