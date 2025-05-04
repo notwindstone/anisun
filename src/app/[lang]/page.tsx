@@ -5,6 +5,7 @@ import readCookiesData from "@/utils/configs/readCookiesData";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import SearchedAnimes from "@/components/SearchedAnimes/SearchedAnimes";
+import TrendingAnimes from "@/components/TrendingAnimes/TrendingAnimes";
 
 export default async function Home() {
     const configs = await getCookie({
@@ -24,11 +25,7 @@ export default async function Home() {
             <div className="w-full h-2" />
             <SearchedAnimes />
             <div className="w-full h-4" />
-            <div className="px-4">
-                <p className="text-2xl font-medium">
-                    Trending Now
-                </p>
-            </div>
+            <TrendingAnimes theme={theme} base={base} />
         </div>
     );
 }
