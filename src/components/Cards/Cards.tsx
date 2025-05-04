@@ -14,11 +14,35 @@ import ScrollableCards from "@/components/Cards/ScrollableCards/ScrollableCards"
 
 const placeholderArray = Array.from({ length: 16 });
 
+const LocalContainer = ({
+    children,
+    colorFirst,
+    colorSecond,
+    isGridCards,
+}: {
+    children: React.ReactNode;
+    colorFirst: string;
+    colorSecond: string;
+    isGridCards?: boolean;
+}) => (
+    isGridCards ? (
+        <GridCards>
+            {children}
+        </GridCards>
+    ) : (
+        <ScrollableCards gradientColorOne={colorFirst} gradientColorTwo={colorSecond}>
+            {children}
+        </ScrollableCards>
+    )
+);
+
 export default function Cards({
+    isGrid,
     isPending,
     isError,
     search,
 }: {
+    isGrid?: boolean;
     isPending?: boolean;
     isError?: boolean;
     search?: string;
@@ -46,7 +70,11 @@ export default function Cards({
     if (isError) {
         return (
             <>
-                <GridCards gradientColorOne={colorFirst} gradientColorTwo={colorSecond}>
+                <LocalContainer
+                    isGridCards={isGrid}
+                    colorFirst={colorFirst}
+                    colorSecond={colorSecond}
+                >
                     {
                         placeholderArray.map((_, index) => {
                             return (
@@ -56,7 +84,7 @@ export default function Cards({
                             );
                         })
                     }
-                </GridCards>
+                </LocalContainer>
             </>
         );
     }
@@ -68,7 +96,11 @@ export default function Cards({
     if (isPending) {
         return (
             <>
-                <GridCards gradientColorOne={colorFirst} gradientColorTwo={colorSecond}>
+                <LocalContainer
+                    isGridCards={isGrid}
+                    colorFirst={colorFirst}
+                    colorSecond={colorSecond}
+                >
                     {
                         placeholderArray.map((_, index) => {
                             return (
@@ -80,7 +112,7 @@ export default function Cards({
                             );
                         })
                     }
-                </GridCards>
+                </LocalContainer>
             </>
         );
     }
@@ -91,24 +123,19 @@ export default function Cards({
 
     return (
         <>
-            <ScrollableCards gradientColorOne={colorFirst} gradientColorTwo={colorSecond}>
+            <LocalContainer
+                isGridCards={isGrid}
+                colorFirst={colorFirst}
+                colorSecond={colorSecond}
+            >
                 {
                     animeData.map((anime: AnimeType) => {
                         return (
-                            <SmallCard key={anime.id} data={anime} />
+                            <SmallCard isGrid key={anime.id} data={anime} />
                         );
                     })
                 }
-            </ScrollableCards>
-            <GridCards gradientColorOne={colorFirst} gradientColorTwo={colorSecond}>
-                {
-                    animeData.map((anime: AnimeType) => {
-                        return (
-                            <SmallCard key={anime.id} data={anime} />
-                        );
-                    })
-                }
-            </GridCards>
+            </LocalContainer>
         </>
     );
 }
