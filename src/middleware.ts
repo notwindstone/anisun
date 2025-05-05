@@ -32,10 +32,10 @@ function getLocale(request: NextRequest): string | undefined {
 
     // Negotiator expects plain object so we need to transform headers
     const negotiatorHeaders: Record<string, string> = {};
-    // eslint-disable-next-line
+    // eslint-disable-next-line unicorn/no-array-for-each
     request.headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-    // Use negotiator and intl-localematcher to get best locale
+    // Use negotiator and intl-localematcher to get the best locale
     // eslint-disable-next-line
     let languages = new Negotiator({ headers: negotiatorHeaders }).languages(
         locales,
