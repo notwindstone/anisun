@@ -37,12 +37,14 @@ const LocalContainer = ({
 );
 
 export default function Cards({
+    isImageUnoptimized,
     isGrid,
     isPending,
     isError,
     search,
     data,
 }: {
+    isImageUnoptimized?: boolean;
     isGrid?: boolean;
     isPending?: boolean;
     isError?: boolean;
@@ -140,7 +142,12 @@ export default function Cards({
                 {
                     currentData.map((anime: AnimeType) => {
                         return (
-                            <SmallCard isGrid={isGrid} key={anime.id} data={anime} />
+                            <SmallCard
+                                isImageUnoptimized={isImageUnoptimized}
+                                isGrid={isGrid}
+                                key={anime.id}
+                                data={anime}
+                            />
                         );
                     })
                 }

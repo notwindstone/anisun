@@ -10,9 +10,11 @@ import Badge from "@/components/Badge/Badge";
 export default function SmallCard({
     data,
     isGrid,
+    isImageUnoptimized,
 }: {
     data: AnimeType;
     isGrid?: boolean;
+    isImageUnoptimized?: boolean;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
 
@@ -45,6 +47,7 @@ export default function SmallCard({
                     fill
                     src={data?.coverImage?.extraLarge}
                     alt={`${data?.title?.romaji} anime's poster`}
+                    unoptimized={isImageUnoptimized ?? false}
                 />
                 <div
                     className="text-black absolute w-full h-full"

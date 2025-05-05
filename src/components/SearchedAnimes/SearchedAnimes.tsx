@@ -9,7 +9,7 @@ export default function SearchedAnimes() {
             <SearchProvider>
                 <Search />
                 <ClientFetchWrapper isGrid>
-                    <Cards isGrid />
+                    <Cards isImageUnoptimized isGrid />
                 </ClientFetchWrapper>
             </SearchProvider>
         </>

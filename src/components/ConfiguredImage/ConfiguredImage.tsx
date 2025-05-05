@@ -25,6 +25,7 @@ export default function ConfiguredImage({
                     properties?.onLoad?.(event);
                     setOpacity(1);
                 }}
+                unoptimized={properties.unoptimized ?? true}
             />
         </>
     );

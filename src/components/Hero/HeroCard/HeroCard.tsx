@@ -51,6 +51,7 @@ export default function HeroCard({
                 fill
                 src={image}
                 alt={`${name} anime's poster`}
+                unoptimized={false}
                 priority
             />
             <div

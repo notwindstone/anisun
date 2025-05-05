@@ -51,7 +51,7 @@ Web Page Size Checker
 
 Comparison with the anisun v4
 
-// 01.05.2025 audit --- commit b1e869e27375610ebe38c31dcc3935cc38e728ba
+// 04.05.2025 audit --- commit c355bb2bd6ce411b462bcadee93edc3ebf876102
 
 [![Pagespeed Insights Screenshot #1](/public/psi/pagespeed-insights-1.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-1.png)
 [![Pagespeed Insights Screenshot #2](/public/psi/pagespeed-insights-2.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-2.png)
