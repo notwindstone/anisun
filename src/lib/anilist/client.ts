@@ -1,12 +1,15 @@
-import { Media } from "@/lib/anilist/endpoints/media";
+import { AnimeType } from "@/types/Anime/Anime.type";
+import { GraphQLBuilderResponseType } from "@/types/General/GraphQLBuilderResponse.type";
 
-export const AnilistClient = () => {
+export const AnilistClient = ({
+    params,
+    fields,
+}: {
+    params: string;
+    fields: string;
+}): GraphQLBuilderResponseType<AnimeType, ""> => {
     return {
-        List: {
-            Media: Media.Page,
-        },
-        Item: {
-            Media: Media.Default,
-        },
+        query: {},
+        variables: {},
     };
 };

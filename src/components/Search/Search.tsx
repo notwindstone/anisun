@@ -76,7 +76,7 @@ export default function Search() {
                             };
                         });
                     }}
-                    className="flex justify-center items-center h-full shrink-0 px-2 cursor-pointer hover:text-neutral-500 dark:hover:text-neutral-400 transition"
+                    className="select-none flex justify-center items-center h-full shrink-0 px-2 cursor-pointer hover:text-neutral-500 dark:hover:text-neutral-400 transition"
                 >
                     <p className="text-sm">
                         {icons[searchType]}
