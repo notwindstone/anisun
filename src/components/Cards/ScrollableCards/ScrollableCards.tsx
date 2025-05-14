@@ -1,6 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 
-const momentumVelocity = 0.9;
+const momentumVelocity = 0.95;
 
 export default function ScrollableCards({
     children,
@@ -17,7 +17,7 @@ export default function ScrollableCards({
     const handleMouseDown = useCallback((event: React.MouseEvent) => {
         event.preventDefault();
 
-        // Momentum
+        // momentum
         let velocityX = 0;
         let momentumID: number;
 

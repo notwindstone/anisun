@@ -45,7 +45,7 @@ export default function SmallCard({
                         objectPosition: "100% 20%",
                     }}
                     fill
-                    src={data?.coverImage?.large}
+                    src={data?.coverImage?.extraLarge}
                     alt={`${data?.title?.romaji} anime's poster`}
                     unoptimized={isImageUnoptimized ?? false}
                 />

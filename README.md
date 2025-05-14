@@ -60,6 +60,8 @@ Comparison with the anisun v4
 
 ## ⭐ Features
 
+i'm using as few libraries as i can
+
 ## ⬇️ Self-Hosting
 
 ### Local
@@ -69,6 +71,10 @@ Comparison with the anisun v4
 #### Development
 
 #### Production
+
+running this app in `bun run build` & `bun run start` is not enough.
+
+You need to install a reverse-proxy like Caddy.
 
 #### Website URL
 

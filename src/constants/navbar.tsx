@@ -34,6 +34,7 @@ export const getNavbarItems = ({
                 height={24}
                 src={avatar}
                 alt={"User avatar"}
+                unoptimized={true}
             />
             : <CircleUser className="shrink-0" size={24} />,
     },
