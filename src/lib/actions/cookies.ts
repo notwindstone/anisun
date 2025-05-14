@@ -48,17 +48,15 @@ export async function setCookie({
 
 export async function deleteCookie({
     key,
-    httpOnly,
+    store,
 }: {
     key: string;
-    value: string;
-    expiresAt: Date;
-    httpOnly: boolean;
+    store?: ReadonlyRequestCookies;
 }): Promise<void> {
-    const cookieStore = await cookies();
+    const cookieStore = store ?? await cookies();
 
     cookieStore.set(key, "", {
-        httpOnly: httpOnly,
+        httpOnly: false,
         sameSite: "lax",
         secure: process.env.NODE_ENV === "production",
         maxAge: 0,

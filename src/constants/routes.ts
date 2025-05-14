@@ -1,4 +1,5 @@
 import { AnimesQueryParameters } from "@/constants/shikimori";
+import { AnilistIcon, MALIcon, ShikimoriIcon } from "@/constants/icons";
 
 export const APIRoutes = {
     Root: "/api",
@@ -71,14 +72,17 @@ export const OAuth2Routes = {
         _FetchUser: RemoteRoutes.Shikimori.V1.Root
             + RemoteRoutes.Shikimori.V1.Users.Root
             + RemoteRoutes.Shikimori.V1.Users.WhoAmI.Root,
+        __Icon:      ShikimoriIcon,
     },
     Anilist: {
         Login:      loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
         Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
+        __Icon:      AnilistIcon,
     },
     MAL: {
         Login:      loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
         Callback:   callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
+        __Icon:      MALIcon,
     },
 };
 export const PageRoutes = {
