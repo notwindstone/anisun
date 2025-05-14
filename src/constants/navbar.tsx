@@ -1,6 +1,6 @@
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
-import { CircleUser, House, Search } from "lucide-react";
+import { CircleUser, House, Library } from "lucide-react";
 import ConfiguredImage from "@/components/ConfiguredImage/ConfiguredImage";
 
 export const getNavbarItems = ({
@@ -20,9 +20,9 @@ export const getNavbarItems = ({
         icon: <House className="shrink-0" size={24} />,
     },
     {
-        name: dictionaries?.sidebar?.search,
-        href: PageRoutes.Search.Root,
-        icon: <Search className="shrink-0" size={24} />,
+        name: dictionaries?.sidebar?.library,
+        href: PageRoutes.Library.Root,
+        icon: <Library className="shrink-0" size={24} />,
     },
     {
         name: dictionaries?.sidebar?.account,

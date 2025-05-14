@@ -116,10 +116,10 @@ export const PageRoutes = {
         Root: "/history",
         Pathname: "history",
     },
-    Search: {
-        Root: "/search",
-        Pathname: "search",
-        Segment: "/search/",
+    Library: {
+        Root: "/library",
+        Pathname: "library",
+        Segment: "/library/",
         // refer to https://shikimori.one/api/doc/graphql
         SearchParams: AnimesQueryParameters,
     },
