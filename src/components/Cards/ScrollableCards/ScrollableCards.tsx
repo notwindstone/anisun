@@ -1,5 +1,7 @@
 import { useCallback, useRef, useState } from "react";
 
+const momentumVelocity = 0.9;
+
 export default function ScrollableCards({
     children,
     gradientColorOne,
@@ -15,36 +17,44 @@ export default function ScrollableCards({
     const handleMouseDown = useCallback((event: React.MouseEvent) => {
         event.preventDefault();
 
+        // Momentum
+        let velocityX = 0;
+        let momentumID: number;
+
         const element = containerReference.current;
 
         if (!element) {
             return;
         }
 
+        const scrollLeft = element.scrollLeft;
         const startPos = {
             left: element.scrollLeft,
-            top: element.scrollTop,
             x: event.clientX,
-            y: event.clientY,
         };
 
+        // typescript is going nuts here if i specify only React.MouseEvent
         const handleMouseMove = (mouseMoveEvent: React.MouseEvent | Event) => {
+            // typescript sometimes can be ridiculous, but i still love it <3
             if (!(mouseMoveEvent instanceof MouseEvent)) {
                 return;
             }
 
+            // don't fire <Link /> click event only when dragging is involved
             if (!isDragged) {
                 setDragged(true);
             }
 
             const dx = mouseMoveEvent.clientX - startPos.x;
-            const dy = mouseMoveEvent.clientY - startPos.y;
-            element.scrollTop = startPos.top - dy;
+            const previousScrollLeft = element.scrollLeft;
+
             element.scrollLeft = startPos.left - dx;
+            velocityX = scrollLeft - dx - previousScrollLeft;
         };
 
         const handleMouseUp = () => {
             setDragged(false);
+            beginMomentumTracking();
 
             document.removeEventListener('mousemove', handleMouseMove);
             document.removeEventListener('mouseup', handleMouseUp);
@@ -52,6 +62,28 @@ export default function ScrollableCards({
 
         document.addEventListener('mousemove', handleMouseMove);
         document.addEventListener('mouseup', handleMouseUp);
+
+        function beginMomentumTracking() {
+            cancelMomentumTracking();
+            momentumID = requestAnimationFrame(momentumLoop);
+        }
+
+        function cancelMomentumTracking() {
+            cancelAnimationFrame(momentumID);
+        }
+
+        function momentumLoop() {
+            if (!element) {
+                return;
+            }
+
+            element.scrollLeft += velocityX;
+            velocityX *= momentumVelocity;
+
+            if (Math.abs(velocityX) > 0.5) {
+                momentumID = requestAnimationFrame(momentumLoop);
+            }
+        }
     }, [isDragged]);
 
     return (
