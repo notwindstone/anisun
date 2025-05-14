@@ -7,9 +7,16 @@ export const AnilistClient = ({
 }: {
     params: string;
     fields: string;
-}): GraphQLBuilderResponseType<AnimeType, ""> => {
+}): GraphQLBuilderResponseType<
+    AnimeType,
+    {
+        [K: string]: string | number;
+    }
+> => {
     return {
         query: {},
-        variables: {},
+        variables: {
+            suck: 1,
+        },
     };
 };
