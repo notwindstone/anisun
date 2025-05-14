@@ -83,36 +83,34 @@ export default function PaletteChanger({
 
     return (
         <>
-            <div className="flex flex-col gap-2">
-                {
-                    colors.map((color) => (
-                        <Button
-                            custom={{
-                                appendClassNames: "w-10 h-10 rounded-md",
-                            }}
-                            style={{
-                                background: parseTailwindColor({
-                                    color,
-                                    step: 600,
-                                }),
-                            }}
-                            key={color}
-                            onClick={() => switchColor(color)}
-                            label={`${dictionaries?.aria?.changePaletteColor} "${dictionaries?.appearance?.[color]}"`}
-                            title={dictionaries?.appearance?.[color] as string}
-                        >
-                            {
-                                [
-                                    config.colors.accent,
-                                    config.colors.base,
-                                ].includes(color) && (
-                                    <Check />
-                                )
-                            }
-                        </Button>
-                    ))
-                }
-            </div>
+            {
+                colors.map((color) => (
+                    <Button
+                        custom={{
+                            appendClassNames: "w-10 h-10 rounded-md",
+                        }}
+                        style={{
+                            background: parseTailwindColor({
+                                color,
+                                step: 600,
+                            }),
+                        }}
+                        key={color}
+                        onClick={() => switchColor(color)}
+                        label={`${dictionaries?.aria?.changePaletteColor} "${dictionaries?.appearance?.[color]}"`}
+                        title={dictionaries?.appearance?.[color] as string}
+                    >
+                        {
+                            [
+                                config.colors.accent,
+                                config.colors.base,
+                            ].includes(color) && (
+                                <Check />
+                            )
+                        }
+                    </Button>
+                ))
+            }
         </>
     );
 }

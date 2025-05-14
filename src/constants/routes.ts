@@ -73,16 +73,19 @@ export const OAuth2Routes = {
             + RemoteRoutes.Shikimori.V1.Users.Root
             + RemoteRoutes.Shikimori.V1.Users.WhoAmI.Root,
         __Icon:      ShikimoriIcon,
+        __Name:      "Shikimori",
     },
     Anilist: {
         Login:      loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
         Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
         __Icon:      AnilistIcon,
+        __Name:      "AniList",
     },
     MAL: {
         Login:      loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
         Callback:   callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
         __Icon:      MALIcon,
+        __Name:      "MyAnimeList",
     },
 };
 export const PageRoutes = {

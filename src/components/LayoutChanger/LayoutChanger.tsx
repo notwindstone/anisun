@@ -72,7 +72,7 @@ export default function LayoutChanger() {
         <>
             <Button
                 custom={{
-                    appendClassNames: pending ? "ring-2" : "",
+                    appendClassNames: pending ? "ring-2 hidden sm:flex" : "hidden sm:flex",
                 }}
                 disabled={pending}
                 onClick={() => throttledSwitcher()}

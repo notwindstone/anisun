@@ -22,7 +22,7 @@ export default async function OAuth2Links() {
                 <div className="flex gap-2">
                     {
                         entries.map((entry) => {
-                            const { Login, __Icon: Icon } = OAuth2Routes[entry];
+                            const { Login, __Icon: Icon, __Name: Name } = OAuth2Routes[entry];
 
                             return (
                                 <a key={entry} href={Login}>
@@ -30,13 +30,13 @@ export default async function OAuth2Links() {
                                         custom={{
                                             style: "base",
                                         }}
-                                        label={`Login using ${entry}`}
+                                        label={`Login using ${Name}`}
                                     >
                                         <div className="fill-black dark:fill-white w-5 h-5">
                                             {Icon}
                                         </div>
                                         <p>
-                                            {entry}
+                                            {Name}
                                         </p>
                                     </Button>
                                 </a>

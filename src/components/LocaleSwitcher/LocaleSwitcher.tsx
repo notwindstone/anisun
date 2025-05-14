@@ -6,6 +6,7 @@ import { i18n, type Locale } from "@/i18n-config";
 import { setCookie } from "@/lib/actions/cookies";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { CookieLocaleKey } from "@/constants/localization";
+import Button from "@/components/Button/Button";
 
 const handleLocaleSwitch = async (locale: Locale) => {
     await setCookie({
@@ -31,21 +32,27 @@ export default function LocaleSwitcher() {
     };
 
     return (
-        <div>
-            <p>Locale switcher:</p>
-            <ul>
-                {
-                    i18n.locales.map((locale) => {
-                        return (
-                            <li key={locale}>
-                                <Link href={redirectedPathname(locale)} onClick={() => handleLocaleSwitch(locale)}>
-                                    {locale}
-                                </Link>
-                            </li>
-                        );
-                    })
-                }
-            </ul>
-        </div>
+        <>
+            {
+                i18n.locales.map((locale) => {
+                    return (
+                        <Link
+                            key={locale}
+                            href={redirectedPathname(locale)}
+                            onClick={() => handleLocaleSwitch(locale)}
+                        >
+                            <Button
+                                custom={{
+                                    style: "base",
+                                }}
+                                label={`${locale} locale selector`}
+                            >
+                                {locale}
+                            </Button>
+                        </Link>
+                    );
+                })
+            }
+        </>
     );
 }

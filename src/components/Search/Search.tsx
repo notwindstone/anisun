@@ -25,7 +25,7 @@ export default function Search() {
                 onClick={() => {
                     reference.current?.focus();
                 }}
-                className="focus-within:ring-2 ring-black dark:ring-white rounded-md flex flex-nowrap items-center overflow-clip h-8 gap-0 cursor-text transition w-full"
+                className="focus-within:ring-2 ring-black dark:ring-white rounded-md flex flex-nowrap items-center overflow-clip h-10 gap-0 cursor-text transition w-full"
                 style={{
                     background: parseTailwindColor({
                         color: base,
@@ -35,8 +35,8 @@ export default function Search() {
                     }),
                 }}
             >
-                <div className="flex justify-center items-center w-8 h-full shrink-0">
-                    <SearchIcon size={16} />
+                <div className="flex justify-center items-center w-10 h-full shrink-0">
+                    <SearchIcon size={18} />
                 </div>
                 <input
                     defaultValue={""}
@@ -84,9 +84,7 @@ export default function Search() {
                 </div>
             </div>
             <Button label={dictionaries?.aria?.filterAnimes ?? ""}>
-                <ListFilter
-                    size={16}
-                />
+                <ListFilter />
             </Button>
         </div>
     );
