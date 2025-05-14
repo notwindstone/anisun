@@ -24,17 +24,32 @@ export default async function Page() {
                 Manage your settings
             </p>
             <Divider />
-            <LayoutChanger />
-            <LocaleSwitcher />
-            <ColorSchemeChanger />
-            <PaletteChanger
-                colors={AccentColors}
-                propertyKey={"accent"}
-            />
-            <PaletteChanger
-                colors={BaseColors}
-                propertyKey={"base"}
-            />
+            <p className="text-lg leading-none pt-2">
+                Select your language
+            </p>
+            <div className="flex flex-wrap gap-2">
+                <LocaleSwitcher />
+            </div>
+            <p className="text-lg leading-none pt-2">
+                Select accent color
+            </p>
+            <div className="flex flex-wrap gap-2">
+                <PaletteChanger
+                    colors={AccentColors}
+                    propertyKey={"accent"}
+                />
+            </div>
+            <p className="text-lg leading-none pt-2">
+                Select layout color
+            </p>
+            <div className="flex flex-wrap gap-2">
+                <PaletteChanger
+                    colors={BaseColors}
+                    propertyKey={"base"}
+                />
+                <ColorSchemeChanger />
+                <LayoutChanger />
+            </div>
         </div>
     );
 }

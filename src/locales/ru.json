@@ -1,7 +1,11 @@
 {
   "metadata": {
     "title": "Главная | Anisun",
-    "description": "создать next"
+    "description": "создать next",
+    "languages": {
+      "en": "English",
+      "ru": "Русский"
+    }
   },
   "greetings": "srfdf",
   "server": "Это генерируемый на сервере текст.",

@@ -5,7 +5,6 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, LightThemeKey } from "@/constants/configs";
 import { Moon, Sun } from "lucide-react";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import Button from "@/components/Button/Button";
 
@@ -31,14 +30,6 @@ export default function ColorSchemeChanger() {
 
     return (
         <>
-            <p className="transition-colors" style={{
-                color: parseTailwindColor({
-                    color: config.colors.accent,
-                    step: 500,
-                }),
-            }}>
-                Client-side
-            </p>
             <Button
                 onClick={() => {
                     optimisticallyUpdate?.((state) => {

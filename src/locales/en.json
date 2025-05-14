@@ -1,7 +1,11 @@
 {
   "metadata": {
     "title": "Home | Anisun",
-    "description": "create next"
+    "description": "create next",
+    "languages": {
+      "en": "English",
+      "ru": "Русский"
+    }
   },
   "greetings": "hello",
   "server": "This is server-side rendered text.",

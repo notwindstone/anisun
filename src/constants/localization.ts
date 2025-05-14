@@ -10,11 +10,11 @@ export const LocaleItems: Record<Locale, {
     icon: string;
 }> = {
     en: {
-        name: "",
-        icon: "",
+        name: "English",
+        icon: "🇺🇸",
     },
     ru: {
-        name: "",
-        icon: "",
+        name: "Русский",
+        icon: "🇷🇺",
     },
 };

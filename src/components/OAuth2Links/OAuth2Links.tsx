@@ -19,7 +19,7 @@ export default async function OAuth2Links() {
     if (!accessToken?.value) {
         return (
             <>
-                <div className="flex gap-2">
+                <div className="flex flex-wrap gap-2">
                     {
                         entries.map((entry) => {
                             const { Login, __Icon: Icon, __Name: Name } = OAuth2Routes[entry];
