@@ -1,9 +1,10 @@
 "use client";
 
-import { deleteCookie } from "cookies-next";
-import { AccessTokenCookieKey, AccountInfoCookieKey } from "@/constants/app";
 import Button from "@/components/Button/Button";
 import { LogOut } from "lucide-react";
+import { deleteCookie } from "@/lib/actions/cookies";
+import { AccessTokenCookieKey } from "@/constants/app";
+import { deleteCookie as deleteClientCookies } from "cookies-next";
 
 export default function OAuth2LogOut() {
     return (
@@ -13,9 +14,12 @@ export default function OAuth2LogOut() {
                     style: "base",
                 }}
                 label={"Sign out from your account"}
-                onClick={() => {
-                    deleteCookie(AccessTokenCookieKey);
-                    deleteCookie(AccountInfoCookieKey);
+                onClick={async () => {
+                    await deleteCookie({
+                        key: AccessTokenCookieKey,
+                    });
+
+                    deleteClientCookies("locale");
                 }}
             >
                 <div className="fill-black dark:fill-white">

@@ -84,7 +84,7 @@ export async function handleCallback({
         key: AccountInfoCookieKey,
         value: JSON.stringify(user),
         expiresAt: getRelativeDate({ days: 30 }),
-        httpOnly: true,
+        httpOnly: false,
     });
 
     return PageRoutes.Account.Root;
