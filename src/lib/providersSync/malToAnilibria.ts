@@ -1,8 +1,12 @@
 import { RemoteRoutes } from "@/constants/routes";
 import { MALToAnilibriaType } from "@/types/Anime/MALToAnilibria.type";
 
-export default async function malToAnilibria(): Promise<Array<MALToAnilibriaType> | undefined> {
-    let data: Array<MALToAnilibriaType>;
+export default async function malToAnilibria({
+    idMal,
+}: {
+    idMal: number;
+}): Promise<number | undefined> {
+    let animes: Array<MALToAnilibriaType>;
 
     try {
         const response = await fetch(RemoteRoutes.MALToAnilibriaID.Data, {
@@ -11,12 +15,16 @@ export default async function malToAnilibria(): Promise<Array<MALToAnilibriaType
             },
         });
 
-        data = await response.json();
-    } catch (error) {
-        console.log(error);
-
+        animes = await response.json();
+    } catch {
         return undefined;
     }
 
-    return data;
+    for (const anime of animes) {
+        if (anime.myanimelist_id == idMal) {
+            return anime.anilibria_id;
+        }
+    }
+
+    return undefined;
 }
