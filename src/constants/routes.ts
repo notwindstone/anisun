@@ -60,6 +60,9 @@ export const RemoteRoutes = {
         V2: {},
         GraphQL: {},
     },
+    MALToAnilibriaID: {
+        Data: "https://raw.githubusercontent.com/qt-kaneko/MALibria/db/mapped.json",
+    },
 };
 
 const loginBase = APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Login.Root;
