@@ -3,8 +3,14 @@
 import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AnilibriaSearchContext } from "@/utils/providers/AnilibriaSearchProvider";
+import Button from "@/components/Button/Button";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 
 export default function AnilibriaFetch() {
+    const searchParameters = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
     const { search } = useContext(AnilibriaSearchContext);
     const { isPending, error, data } = useQuery({
         queryKey: ["anime", "anilibria", search],
@@ -29,9 +35,33 @@ export default function AnilibriaFetch() {
         return <>error</>;
     }
 
+    function handleMediaSelect(url: string) {
+        const parameters = new URLSearchParams(searchParameters);
+        parameters.set("mediaSrc", url);
+        replace(`${pathname}?${parameters.toString()}`);
+    }
+
     return (
         <>
-            {JSON.stringify(data)}
+            {
+                data.map((anime) => {
+                    return (
+                        <div key={anime.id}>
+                            <div>
+                                {anime.names.ru}
+                            </div>
+                            <Button
+                                onClick={() => handleMediaSelect(
+                                    `https://cache.libria.fun${anime.player.list?.["1"].hls.fhd}`,
+                                )}
+                                label={anime.names.en}
+                            >
+                                go
+                            </Button>
+                        </div>
+                    );
+                })
+            }
         </>
     );
 }
