@@ -1,5 +1,5 @@
-import { AnimeType } from "@/types/Anime/Anime.type";
 import { GraphQLBuilderResponseType } from "@/types/General/GraphQLBuilderResponse.type";
+import { QueryType } from "@/types/Anime/Query.type";
 
 export const AnilistClient = ({
     params,
@@ -8,11 +8,12 @@ export const AnilistClient = ({
     params: string;
     fields: string;
 }): GraphQLBuilderResponseType<
-    AnimeType,
+    QueryType,
     {
         [K: string]: string | number;
     }
 > => {
+    console.log(params, fields);
     return {
         query: {},
         variables: {

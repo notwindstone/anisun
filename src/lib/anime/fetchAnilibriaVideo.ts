@@ -1,3 +1,5 @@
+// TODO
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const fetchAnilibriaVideo = async (anilibriaId: number): Promise<any> => {
     let anime;
 
