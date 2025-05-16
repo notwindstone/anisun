@@ -8,10 +8,10 @@ export default async function AnilibriaVideo({
 }) {
     const anilibriaId = await malToAnilibria({ idMal });
 
-    console.log(anilibriaId);
     if (!anilibriaId) {
         return;
     }
+
     return (
         <>
             <VideoClientFetch
