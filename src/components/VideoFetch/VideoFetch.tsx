@@ -4,9 +4,11 @@ import AnilibriaVideo from "@/components/VideoFetch/AnilibriaVideo/AnilibriaVide
 export default function VideoFetch({
     idMal,
     selectedPlayer,
+    mediaSrc,
 }: {
     idMal: number;
     selectedPlayer: string;
+    mediaSrc?: string;
 }) {
     let player: React.ReactNode;
 

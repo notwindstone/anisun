@@ -2,6 +2,7 @@ import malToAnilibria from "@/lib/providersSync/malToAnilibria";
 import VideoClientFetch from "@/components/VideoFetch/VideoClientFetch/VideoClientFetch";
 import { AnilibriaSearchProvider } from "@/utils/providers/AnilibriaSearchProvider";
 import AnilibriaSearch from "@/components/AnilibriaSearch/AnilibriaSearch";
+import AnilibriaFetch from "@/components/AnilibriaFetch/AnilibriaFetch";
 
 export default async function AnilibriaVideo({
     idMal,
@@ -16,6 +17,7 @@ export default async function AnilibriaVideo({
                 <>no linked anime found</>
                 <AnilibriaSearchProvider>
                     <AnilibriaSearch />
+                    <AnilibriaFetch />
                 </AnilibriaSearchProvider>
             </>
         );
