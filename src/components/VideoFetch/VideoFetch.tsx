@@ -18,7 +18,10 @@ export default function VideoFetch({
                 <Suspense fallback={
                     <>loading...</>
                 }>
-                    <AnilibriaVideo idMal={idMal} />
+                    <AnilibriaVideo
+                        idMal={idMal}
+                        mediaSrc={mediaSrc}
+                    />
                 </Suspense>
             );
 
