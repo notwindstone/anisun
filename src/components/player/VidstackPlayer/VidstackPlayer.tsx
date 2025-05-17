@@ -28,13 +28,14 @@ export default function VidstackPlayer({
             <MediaPlayer
                 ref={reference}
                 src={videoSrc}
+                title={searchParameters.get("title") ?? undefined}
             >
                 <MediaProvider />
                 <DefaultAudioLayout icons={defaultLayoutIcons} />
                 <DefaultVideoLayout icons={defaultLayoutIcons} />
             </MediaPlayer>
         ),
-        [videoSrc],
+        [videoSrc, searchParameters],
     );
 
     useEffect(() => {
