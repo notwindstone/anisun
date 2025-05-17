@@ -136,10 +136,7 @@ export default function VidstackPlayer({
                     <div
                         className="pointer-events-none absolute flex aspect-square h-[200%] top-0 right-0 translate-x-[85%] translate-y-[-25%] rounded-full transition duration-100"
                         style={{
-                            // using an additional statement with currentTime
-                            // to get rid of displaying seek layout
-                            // when starting the video for the first time
-                            background: (isSeeked === "forward" && currentTime >= 1)
+                            background: isSeeked === "forward"
                                 ? "#0005"
                                 : "#0000",
                         }}
