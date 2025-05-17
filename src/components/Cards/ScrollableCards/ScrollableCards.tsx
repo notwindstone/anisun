@@ -11,15 +11,14 @@ export default function ScrollableCards({
     gradientColorOne: string;
     gradientColorTwo: string;
 }) {
+    const momentumIDReference = useRef<number>(null);
     const containerReference = useRef<HTMLDivElement>(null);
     const [isDragged, setDragged] = useState(false);
 
     const handleMouseDown = useCallback((event: React.MouseEvent) => {
         event.preventDefault();
 
-        // momentum
         let velocityX = 0;
-        let momentumID: number;
 
         const element = containerReference.current;
 
@@ -35,6 +34,10 @@ export default function ScrollableCards({
 
         // typescript is going nuts here if i specify only React.MouseEvent
         const handleMouseMove = (mouseMoveEvent: React.MouseEvent | Event) => {
+            if (momentumIDReference.current) {
+                cancelAnimationFrame(momentumIDReference.current);
+            }
+
             // typescript sometimes can be ridiculous, but i still love it <3
             if (!(mouseMoveEvent instanceof MouseEvent)) {
                 return;
@@ -65,11 +68,15 @@ export default function ScrollableCards({
 
         function beginMomentumTracking() {
             cancelMomentumTracking();
-            momentumID = requestAnimationFrame(momentumLoop);
+            momentumIDReference.current = requestAnimationFrame(momentumLoop);
         }
 
         function cancelMomentumTracking() {
-            cancelAnimationFrame(momentumID);
+            if (!momentumIDReference.current) {
+                return;
+            }
+
+            cancelAnimationFrame(momentumIDReference.current);
         }
 
         function momentumLoop() {
@@ -81,7 +88,7 @@ export default function ScrollableCards({
             velocityX *= momentumVelocity;
 
             if (Math.abs(velocityX) > 0.5) {
-                momentumID = requestAnimationFrame(momentumLoop);
+                momentumIDReference.current = requestAnimationFrame(momentumLoop);
             }
         }
     }, [isDragged]);
