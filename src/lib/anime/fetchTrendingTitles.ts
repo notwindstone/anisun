@@ -18,6 +18,11 @@ const fetchTrendingTitles = async (options?: Partial<Request> | undefined): Prom
                     coverImage {
                         extraLarge
                     }
+                    relations {
+                        nodes {
+                            title { english native romaji }
+                        }
+                    }
                 }
             }
         }

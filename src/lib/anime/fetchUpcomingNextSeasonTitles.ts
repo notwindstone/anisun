@@ -18,6 +18,11 @@ const fetchUpcomingNextSeasonTitles = async (options?: Partial<Request> | undefi
                     coverImage {
                         extraLarge
                     }
+                    relations {
+                        nodes {
+                            title { english native romaji }
+                        }
+                    }
                 }
             }
         }

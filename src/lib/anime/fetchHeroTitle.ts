@@ -19,6 +19,11 @@ const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<A
                     extraLarge
                 }
                 genres
+                relations {
+                    nodes {
+                        title { english native romaji }
+                    }
+                }
             }
         }
     `;

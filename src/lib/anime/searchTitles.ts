@@ -19,6 +19,11 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
                     coverImage {
                         extraLarge
                     }
+                    relations {
+                        nodes {
+                            title { english native romaji }
+                        }
+                    }
                 }
             }
         }

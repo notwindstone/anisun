@@ -28,6 +28,16 @@ export default function HeroCard({
     const name = currentData?.title?.romaji ?? currentData?.title?.english ?? currentData?.title?.native ?? "none";
     const image = currentData?.coverImage?.extraLarge;
     const score = Number(currentData?.averageScore) / 10;
+    const redirectURLAnimeName =
+        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+        // eslint-disable-next-line
+        // @ts-ignore
+        data?.relations?.nodes?.[0]?.title?.romaji
+        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+        // eslint-disable-next-line
+        // @ts-ignore
+        ?? data?.relations?.nodes?.[0]?.title?.english
+        ?? name;
 
     const gradientColorTwo = parseTailwindColor({
         color: base,
@@ -42,7 +52,7 @@ export default function HeroCard({
     const gradientColorOne = gradientColorOneArray.join("");
 
     return (
-        <Link className="select-none group" href={`/anime/${currentData?.idMal}`}>
+        <Link className="select-none group" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
             <ConfiguredImage
                 className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75"
                 style={{

@@ -18,6 +18,11 @@ const fetchTopTitles = async (options?: Partial<Request> | undefined): Promise<
                     coverImage {
                         extraLarge
                     }
+                    relations {
+                        nodes {
+                            title { english native romaji }
+                        }
+                    }
                 }
             }
         }

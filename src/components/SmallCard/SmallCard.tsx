@@ -21,6 +21,16 @@ export default function SmallCard({
     const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";
     const status = data?.status ?? "";
     const score = Number(data?.averageScore) / 10;
+    const redirectURLAnimeName =
+        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+        // eslint-disable-next-line
+        // @ts-ignore
+        data?.relations?.nodes?.[0]?.title?.romaji
+        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+        // eslint-disable-next-line
+        // @ts-ignore
+        ?? data?.relations?.nodes?.[0]?.title?.english
+        ?? name;
 
     const baseColor = [ ...parseTailwindColor({
         color: base,
@@ -36,7 +46,7 @@ export default function SmallCard({
     return (
         <>
             <Link
-                href={`/anime/${data?.idMal}?title=${name}`}
+                href={`/anime/${data?.idMal}?title=${redirectURLAnimeName}`}
                 className={`shrink-0 select-none group relative aspect-poster rounded-md overflow-clip ${gridClassNames}`}
             >
                 <ConfiguredImage
