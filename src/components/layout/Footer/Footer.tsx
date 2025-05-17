@@ -20,7 +20,7 @@ export default function Footer({
                             <p className="text-xl font-medium leading-none">
                                 {AppName}
                             </p>
-                            <Link href="/public" className="text-sm leading-none text-neutral-500 dark:text-neutral-400 transition-colors hover:text-neutral-800 dark:hover:text-neutral-200">
+                            <Link href="/" className="text-sm leading-none text-neutral-500 dark:text-neutral-400 transition-colors hover:text-neutral-800 dark:hover:text-neutral-200">
                                 anime.tatar
                             </Link>
                         </div>
