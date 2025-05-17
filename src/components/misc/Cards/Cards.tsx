@@ -9,8 +9,8 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
-import GridCards from "@/components/misc/GridCards/GridCards";
-import ScrollableCards from "@/components/misc/ScrollableCards/ScrollableCards";
+import GridCards from "@/components/layout/GridCards/GridCards";
+import ScrollableCards from "@/components/layout/ScrollableCards/ScrollableCards";
 
 const placeholderArray = Array.from({ length: 16 });
 
