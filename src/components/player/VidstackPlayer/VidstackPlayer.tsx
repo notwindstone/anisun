@@ -42,6 +42,9 @@ export default function VidstackPlayer({
     const [beforeSeekTime, setBeforeSeekTime] = useState(currentTime);
 
     const isPlayerCompact = playerWidth <= 676;
+    const localControlsClassName = isPlayerCompact
+        ? "__local-control"
+        : "";
     const handleSeek = () => {
         if (!reference.current) {
             return;
@@ -92,7 +95,7 @@ export default function VidstackPlayer({
                     slots={{
                         playButton: (
                             <button
-                                className="__local-control flex justify-center items-center bg-transparent transition duration-200 ease-out hover:scale-110 hover:bg-[#fff3] hover:cursor-pointer active:scale-110 active:bg-[#fff3] mr-2"
+                                className={`${localControlsClassName} flex justify-center items-center bg-transparent transition duration-200 ease-out hover:scale-110 hover:bg-[#fff3] hover:cursor-pointer active:scale-110 active:bg-[#fff3] mr-2`}
                                 style={{
                                     borderRadius: isPlayerCompact ? "100%" : 8,
                                     width: isPlayerCompact ? 96 : 40,
