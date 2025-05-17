@@ -25,17 +25,22 @@ export default function VidstackPlayer({
 }: {
     videoSrc?: string;
 }) {
-    const [isSeeked, setIsSeeked] = useState<"forward" | "backward" | undefined>();
+
     const searchParameters = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
+
     const reference = useRef<MediaPlayerInstance>(null);
+
     const currentTime = useMediaState('currentTime', reference);
-    const [beforeSeekTime, setBeforeSeekTime] = useState(currentTime);
     const error = useMediaState('error', reference);
     const controlsVisible = useMediaState('controlsVisible', reference);
     const isPlayingMediaState = useMediaState('playing', reference);
     const playerWidth = useMediaState('width', reference);
+
+    const [isSeeked, setIsSeeked] = useState<"forward" | "backward" | undefined>();
+    const [beforeSeekTime, setBeforeSeekTime] = useState(currentTime);
+
     const isPlayerCompact = playerWidth <= 676;
     const handleSeek = () => {
         if (!reference.current) {
@@ -121,7 +126,7 @@ export default function VidstackPlayer({
                     }}
                 >
                     <div
-                        className="pointer-events-none absolute flex aspect-square h-[200%] top-0 left-0 translate-x-[-80%] translate-y-[-25%] rounded-full transition duration-100"
+                        className="pointer-events-none absolute flex aspect-square h-[200%] top-0 left-0 translate-x-[-85%] translate-y-[-25%] rounded-full transition duration-100"
                         style={{
                             background: isSeeked === "backward"
                                 ? "#0005"
@@ -129,9 +134,12 @@ export default function VidstackPlayer({
                         }}
                     />
                     <div
-                        className="pointer-events-none absolute flex aspect-square h-[200%] top-0 right-0 translate-x-[80%] translate-y-[-25%] rounded-full transition duration-100"
+                        className="pointer-events-none absolute flex aspect-square h-[200%] top-0 right-0 translate-x-[85%] translate-y-[-25%] rounded-full transition duration-100"
                         style={{
-                            background: isSeeked === "forward"
+                            // using an additional statement with currentTime
+                            // to get rid of displaying seek layout
+                            // when starting the video for the first time
+                            background: (isSeeked === "forward" && currentTime >= 1)
                                 ? "#0005"
                                 : "#0000",
                         }}
@@ -171,7 +179,15 @@ export default function VidstackPlayer({
                 </DefaultVideoLayout>
             </MediaPlayer>
         ),
-        [beforeSeekTime, isSeeked, isPlayingMediaState, isPlayerCompact, controlsVisible, videoSrc, searchParameters],
+        [
+            beforeSeekTime,
+            isSeeked,
+            isPlayingMediaState,
+            isPlayerCompact,
+            controlsVisible,
+            videoSrc,
+            searchParameters,
+        ],
     );
 
     useEffect(() => {
