@@ -5,26 +5,27 @@ import {
     MediaPlayerInstance,
     MediaProvider,
     useMediaState,
-    Menu, MediaPlayerQuery,
+    Menu,
 } from '@vidstack/react';
 import {
     DefaultAudioLayout,
     defaultLayoutIcons,
     DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
 import '@/components/player/VidstackPlayer/VidstackPlayer.global.css';
-import { List } from "lucide-react";
+import { List, Pause, Play } from "lucide-react";
 
 export default function VidstackPlayer({
     videoSrc,
 }: {
     videoSrc?: string;
 }) {
+    const [isPaused, setIsPaused] = useState(true);
     const searchParameters = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
@@ -32,11 +33,14 @@ export default function VidstackPlayer({
     const currentTime = useMediaState('currentTime', reference);
     const error = useMediaState('error', reference);
     const controlsVisible = useMediaState('controlsVisible', reference);
+    const seeked = useMediaState('seeking', reference);
+    console.log(seeked);
     const playerWidth = useMediaState('width', reference);
     const isPlayerCompact = playerWidth <= 676;
     const memoizedPlayer = useMemo(
         () => (
             <MediaPlayer
+                playsInline={true}
                 ref={reference}
                 src={videoSrc}
                 title={searchParameters.get("title") ?? undefined}
@@ -48,6 +52,43 @@ export default function VidstackPlayer({
                 <DefaultAudioLayout icons={defaultLayoutIcons} />
                 <DefaultVideoLayout
                     icons={defaultLayoutIcons}
+                    slots={{
+                        playButton: (
+                            <button
+                                className="__local-control flex justify-center items-center bg-transparent transition duration-200 ease-out hover:scale-110 hover:bg-[#fff3] hover:cursor-pointer active:scale-110 active:bg-[#fff3] mr-2"
+                                style={{
+                                    borderRadius: isPlayerCompact ? "100%" : 8,
+                                    width: isPlayerCompact ? 96 : 40,
+                                    height: isPlayerCompact ? 96 : 40,
+                                }}
+                                onClick={async () => {
+                                    if (!reference.current) {
+                                        return;
+                                    }
+
+                                    if (reference.current.paused) {
+                                        await reference.current.play();
+                                        setIsPaused(false);
+
+                                        return;
+                                    }
+
+                                    await reference.current.pause();
+                                    setIsPaused(true);
+                                }}
+                                title={"Play video"}
+                                aria-label={"Play video"}
+                            >
+                                {
+                                    isPaused ? (
+                                        <Play size={isPlayerCompact ? 40 : 24} />
+                                    ) : (
+                                        <Pause size={isPlayerCompact ? 40 : 24} />
+                                    )
+                                }
+                            </button>
+                        ),
+                    }}
                 >
                     <Menu.Root>
                         <Menu.Button
@@ -84,7 +125,7 @@ export default function VidstackPlayer({
                 </DefaultVideoLayout>
             </MediaPlayer>
         ),
-        [isPlayerCompact, controlsVisible, videoSrc, searchParameters],
+        [isPaused, isPlayerCompact, controlsVisible, videoSrc, searchParameters],
     );
 
     useEffect(() => {
@@ -102,7 +143,7 @@ export default function VidstackPlayer({
         replace(`${pathname}?${parameters.toString()}`);
     }, [error, pathname, searchParameters, replace]);
 
-    console.log(currentTime, error);
+    //console.log(currentTime, error);
 
     return (
         <>
