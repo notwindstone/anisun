@@ -14,7 +14,6 @@ export default function AnilibriaSearch() {
 
     return (
         <>
-            {search}
             <div
                 onClick={() => {
                     reference.current?.focus();
@@ -33,7 +32,7 @@ export default function AnilibriaSearch() {
                     <SearchIcon size={18} />
                 </div>
                 <input
-                    defaultValue={""}
+                    defaultValue={search}
                     ref={reference}
                     className="w-full h-full text-sm focus:outline-none"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

@@ -15,7 +15,7 @@ export default async function Page({
     const { id } = await params;
     const search = await searchParams;
     const idMal = Number(id);
-console.log(idMal);
+
     return (
         <>
             <VideoFetch

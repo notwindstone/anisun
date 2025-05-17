@@ -46,7 +46,7 @@ function getLocale(request: NextRequest): string | undefined {
 
 export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
-    const searchParams = request.nextUrl.searchParams;
+    const searchParameters = request.nextUrl.searchParams;
 
     // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
     // // If you have one
@@ -73,7 +73,7 @@ export async function middleware(request: NextRequest) {
         // The new URL is now /en/products
         const response = NextResponse.redirect(
             new URL(
-                `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}?${searchParams.toString()}`,
+                `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}?${searchParameters.toString()}`,
                 request.url,
             ),
         );
