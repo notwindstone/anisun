@@ -1,4 +1,4 @@
-import VideoFetch from "@/components/VideoFetch/VideoFetch";
+import VideoFetch from "@/components/player/VideoFetch/VideoFetch";
 
 export default async function Page({
     params,

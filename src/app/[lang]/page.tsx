@@ -1,11 +1,11 @@
-import Hero from "@/components/Hero/Hero";
+import Hero from "@/components/misc/Hero/Hero";
 import { getCookie } from "@/lib/actions/cookies";
 import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
-import SearchedAnimes from "@/components/SearchedAnimes/SearchedAnimes";
-import ListAnimes from "@/components/ListAnimes/ListAnimes";
+import SearchedAnimes from "@/components/search/SearchedAnimes/SearchedAnimes";
+import ListAnimes from "@/components/misc/ListAnimes/ListAnimes";
 
 export default async function Home() {
     const configs = await getCookie({

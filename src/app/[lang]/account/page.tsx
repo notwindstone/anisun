@@ -1,10 +1,10 @@
-import ColorSchemeChanger from "@/components/Theme/ColorSchemeChanger/ColorSchemeChanger";
-import PaletteChanger from "@/components/Theme/PaletteChanger/PaletteChanger";
+import ColorSchemeChanger from "@/components/layout/ColorSchemeChanger/ColorSchemeChanger";
+import PaletteChanger from "@/components/layout/PaletteChanger/PaletteChanger";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
-import LocaleSwitcher from "@/components/LocaleSwitcher/LocaleSwitcher";
-import OAuth2Links from "@/components/OAuth2Links/OAuth2Links";
-import LayoutChanger from "@/components/LayoutChanger/LayoutChanger";
-import Divider from "@/components/Divider/Divider";
+import LocaleSwitcher from "@/components/layout/LocaleSwitcher/LocaleSwitcher";
+import OAuth2Links from "@/components/misc/OAuth2Links/OAuth2Links";
+import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
+import Divider from "@/components/base/Divider/Divider";
 
 export default async function Page() {
     return (

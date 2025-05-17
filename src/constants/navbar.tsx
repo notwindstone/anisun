@@ -1,7 +1,7 @@
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
 import { CircleUser, House, Library } from "lucide-react";
-import ConfiguredImage from "@/components/ConfiguredImage/ConfiguredImage";
+import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 export const getNavbarItems = ({
     dictionaries,

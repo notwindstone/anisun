@@ -3,22 +3,22 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ConfigsProvider } from "@/utils/providers/ConfigsProvider";
 import { getCookie } from "@/lib/actions/cookies";
-import TopLoader from "@/components/TopLoader/TopLoader";
+import TopLoader from "@/components/layout/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import { CookieConfigKey, InitialConfig, SidebarLeftPosition } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
-import Sidebar from "@/components/Sidebar/Sidebar";
-import AppWrapper from "@/components/AppWrapper/AppWrapper";
-import SidebarWrapper from "@/components/Sidebar/SidebarWrapper/SidebarWrapper";
+import Sidebar from "@/components/layout/Sidebar/Sidebar";
+import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
+import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { AccountInfoCookieKey, AppName } from "@/constants/app";
-import MobileNavbar from "@/components/MobileNavbar/MobileNavbar";
+import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
 import { cookies } from "next/headers";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
-import Footer from "@/components/Footer/Footer";
+import Footer from "@/components/layout/Footer/Footer";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
