@@ -13,10 +13,12 @@ export const AnilibriaSearchContext = createContext<{
 
 export function AnilibriaSearchProvider({
     children,
+    searchName,
 }: {
     children: React.ReactNode;
+    searchName: string;
 }) {
-    const [debounced, setDebounced] = useDebouncedState<string>("", 300, {
+    const [debounced, setDebounced] = useDebouncedState<string>(searchName, 300, {
         leading: true,
     });
 

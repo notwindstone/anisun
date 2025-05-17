@@ -27,7 +27,6 @@ export default function VidstackPlayer({
         () => (
             <MediaPlayer
                 ref={reference}
-                title="anime video"
                 src={videoSrc}
             >
                 <MediaProvider />

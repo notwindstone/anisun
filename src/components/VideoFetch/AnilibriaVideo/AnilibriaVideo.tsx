@@ -8,9 +8,11 @@ import VidstackPlayer from "@/components/VideoPlayer/VidstackPlayer/VidstackPlay
 export default async function AnilibriaVideo({
     idMal,
     mediaSrc,
+    title,
 }: {
     idMal: number;
     mediaSrc?: string;
+    title: string;
 }) {
     const anilibriaId = await malToAnilibria({ idMal });
 
@@ -26,7 +28,7 @@ export default async function AnilibriaVideo({
         return (
             <>
                 <>no linked anime found</>
-                <AnilibriaSearchProvider>
+                <AnilibriaSearchProvider searchName={title}>
                     <AnilibriaSearch />
                     <AnilibriaFetch />
                 </AnilibriaSearchProvider>

@@ -36,7 +36,7 @@ export default function SmallCard({
     return (
         <>
             <Link
-                href={`/anime/${data?.idMal}`}
+                href={`/anime/${data?.idMal}?title=${name}`}
                 className={`shrink-0 select-none group relative aspect-poster rounded-md overflow-clip ${gridClassNames}`}
             >
                 <ConfiguredImage

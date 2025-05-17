@@ -8,6 +8,7 @@ export default async function Page({
     searchParams?: Promise<{
         selectedPlayer?: string;
         mediaSrc?: string;
+        title?: string;
     }>;
 }) {
     // id is the anime's id from MyAnimeList
@@ -21,6 +22,7 @@ export default async function Page({
                 idMal={idMal}
                 selectedPlayer={"anilibria"}
                 mediaSrc={search?.mediaSrc}
+                title={search?.title ?? ""}
             />
         </>
     );

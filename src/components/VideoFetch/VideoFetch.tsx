@@ -5,9 +5,11 @@ export default function VideoFetch({
     idMal,
     selectedPlayer,
     mediaSrc,
+    title,
 }: {
     idMal: number;
     selectedPlayer: string;
+    title: string;
     mediaSrc?: string;
 }) {
     let player: React.ReactNode;
@@ -21,6 +23,7 @@ export default function VideoFetch({
                     <AnilibriaVideo
                         idMal={idMal}
                         mediaSrc={mediaSrc}
+                        title={title}
                     />
                 </Suspense>
             );
