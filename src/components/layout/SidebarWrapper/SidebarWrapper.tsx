@@ -75,7 +75,7 @@ export default function SidebarWrapper({
                         expanded && (
                             <Link
                                 className="flex gap-4 items-center select-none"
-                                href="/public"
+                                href="/"
                                 style={{
                                     flexDirection: serverSideSidebarPosition === SidebarRightPosition
                                         ? "row-reverse"
