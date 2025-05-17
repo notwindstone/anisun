@@ -42,6 +42,11 @@ export default function VidstackPlayer({
     const [beforeSeekTime, setBeforeSeekTime] = useState(currentTime);
 
     const isPlayerCompact = playerWidth <= 676;
+    // __local-control class changes the parent's node height to zero
+    // so that user could seek the video using double taps/clicks
+    // but:
+    // 1. setting the parent's node height to zero breaks controls positions in the normal layout
+    // 2. also in the normal layout we don't need the parent's node height value as zero for seeking
     const localControlsClassName = isPlayerCompact
         ? "__local-control"
         : "";
