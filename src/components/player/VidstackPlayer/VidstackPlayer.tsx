@@ -5,33 +5,35 @@ import {
     MediaPlayerInstance,
     MediaProvider,
     useMediaState,
-    Menu,
+    Menu, MediaPlayerQuery,
 } from '@vidstack/react';
 import {
     DefaultAudioLayout,
     defaultLayoutIcons,
     DefaultVideoLayout,
 } from '@vidstack/react/player/layouts/default';
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import '@vidstack/react/player/styles/default/theme.css';
 import '@vidstack/react/player/styles/default/layouts/video.css';
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
 import '@/components/player/VidstackPlayer/VidstackPlayer.global.css';
-import { List, SettingsIcon } from "lucide-react";
+import { List } from "lucide-react";
 
 export default function VidstackPlayer({
     videoSrc,
 }: {
     videoSrc?: string;
 }) {
-    const [controlsShown, setControlsShown] = useState(false);
     const searchParameters = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
     const reference = useRef<MediaPlayerInstance>(null);
     const currentTime = useMediaState('currentTime', reference);
     const error = useMediaState('error', reference);
+    const controlsVisible = useMediaState('controlsVisible', reference);
+    const playerWidth = useMediaState('width', reference);
+    const isPlayerCompact = playerWidth <= 676;
     const memoizedPlayer = useMemo(
         () => (
             <MediaPlayer
@@ -39,7 +41,6 @@ export default function VidstackPlayer({
                 src={videoSrc}
                 title={searchParameters.get("title") ?? undefined}
                 className="!rounded-none"
-                onControlsChange={setControlsShown}
                 viewType="video"
                 aspectRatio={"16 / 9"}
             >
@@ -50,13 +51,31 @@ export default function VidstackPlayer({
                 >
                     <Menu.Root>
                         <Menu.Button
-                            className={`absolute w-9 h-9 rounded-lg flex justify-center items-center z-10 top-1 left-1 bg-transparent transition duration-200 ease-out hover:scale-105 hover:bg-[#fff3] hover:cursor-pointer focus:scale-105 focus:bg-[#fff3] ${controlsShown ? "" : "hidden"}`}
+                            className={"absolute w-9 h-9 rounded-lg justify-center items-center z-10 bg-transparent transition duration-200 ease-out hover:scale-110 hover:bg-[#fff3] hover:cursor-pointer focus:scale-110 focus:bg-[#fff3]"}
+                            style={
+                                isPlayerCompact ? {
+                                    display: controlsVisible ? "flex" : "none",
+                                    top: 4,
+                                    left: 4,
+                                } : {
+                                    display: controlsVisible ? "flex" : "none",
+                                    bottom: 10,
+                                    right: 96,
+                                }
+                            }
                         >
                             <List size={24} />
                         </Menu.Button>
                         <Menu.Items
-                            className="vds-menu-items flex transition max-h-[400px] ml-1 min-w-56 flex-col overflow-y-auto overscroll-y-contain rounded-lg border border-white/10 bg-black/95 p-2.5 font-sans text-[15px] font-medium outline-none"
-                            placement="top"
+                            className="vds-menu-items flex transition max-h-[400px] min-w-56 flex-col overflow-y-auto overscroll-y-contain rounded-lg border border-white/10 bg-black/95 p-2.5 font-sans text-[15px] font-medium outline-none"
+                            placement={
+                                isPlayerCompact ? "bottom start" : "top end"
+                            }
+                            style={{
+                                margin: isPlayerCompact
+                                    ? "0 4px 0 0"
+                                    : "0 0 0 4px",
+                            }}
                             offset={0}
                         >
                             {/* Menu Items + Submenus */}
@@ -65,7 +84,7 @@ export default function VidstackPlayer({
                 </DefaultVideoLayout>
             </MediaPlayer>
         ),
-        [controlsShown, videoSrc, searchParameters],
+        [isPlayerCompact, controlsVisible, videoSrc, searchParameters],
     );
 
     useEffect(() => {
