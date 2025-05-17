@@ -25,26 +25,58 @@ export default function VidstackPlayer({
 }: {
     videoSrc?: string;
 }) {
-    const [isPaused, setIsPaused] = useState(true);
+    const [isSeeked, setIsSeeked] = useState<"forward" | "backward" | undefined>();
     const searchParameters = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
     const reference = useRef<MediaPlayerInstance>(null);
     const currentTime = useMediaState('currentTime', reference);
+    const [beforeSeekTime, setBeforeSeekTime] = useState(currentTime);
     const error = useMediaState('error', reference);
     const controlsVisible = useMediaState('controlsVisible', reference);
-    const seeked = useMediaState('seeking', reference);
-    console.log(seeked);
+    const isPlayingMediaState = useMediaState('playing', reference);
     const playerWidth = useMediaState('width', reference);
     const isPlayerCompact = playerWidth <= 676;
+    const handleSeek = () => {
+        if (!reference.current) {
+            return;
+        }
+
+        setBeforeSeekTime(reference.current.currentTime);
+    };
     const memoizedPlayer = useMemo(
         () => (
             <MediaPlayer
+                onClick={handleSeek}
+                onTouchStart={handleSeek}
+                onSeeked={(time: number) => {
+                    const difference = beforeSeekTime - time;
+
+                    if (difference < 0) {
+                        setIsSeeked("forward");
+
+                        const timeout = setTimeout(() => {
+                            setIsSeeked(undefined);
+                        }, 400);
+
+                        return () => clearTimeout(timeout);
+                    }
+
+                    if (difference > 0) {
+                        setIsSeeked("backward");
+
+                        const timeout = setTimeout(() => {
+                            setIsSeeked(undefined);
+                        }, 400);
+
+                        return () => clearTimeout(timeout);
+                    }
+                }}
                 playsInline={true}
                 ref={reference}
                 src={videoSrc}
                 title={searchParameters.get("title") ?? undefined}
-                className="!rounded-none"
+                className="!rounded-none !overflow-clip"
                 viewType="video"
                 aspectRatio={"16 / 9"}
             >
@@ -68,28 +100,42 @@ export default function VidstackPlayer({
 
                                     if (reference.current.paused) {
                                         await reference.current.play();
-                                        setIsPaused(false);
 
                                         return;
                                     }
 
                                     await reference.current.pause();
-                                    setIsPaused(true);
                                 }}
                                 title={"Play video"}
                                 aria-label={"Play video"}
                             >
                                 {
-                                    isPaused ? (
-                                        <Play size={isPlayerCompact ? 40 : 24} />
-                                    ) : (
+                                    isPlayingMediaState ? (
                                         <Pause size={isPlayerCompact ? 40 : 24} />
+                                    ) : (
+                                        <Play size={isPlayerCompact ? 40 : 24} />
                                     )
                                 }
                             </button>
                         ),
                     }}
                 >
+                    <div
+                        className="pointer-events-none absolute flex aspect-square h-[200%] top-0 left-0 translate-x-[-80%] translate-y-[-25%] rounded-full transition duration-100"
+                        style={{
+                            background: isSeeked === "backward"
+                                ? "#0005"
+                                : "#0000",
+                        }}
+                    />
+                    <div
+                        className="pointer-events-none absolute flex aspect-square h-[200%] top-0 right-0 translate-x-[80%] translate-y-[-25%] rounded-full transition duration-100"
+                        style={{
+                            background: isSeeked === "forward"
+                                ? "#0005"
+                                : "#0000",
+                        }}
+                    />
                     <Menu.Root>
                         <Menu.Button
                             className={"absolute w-9 h-9 rounded-lg justify-center items-center z-10 bg-transparent transition duration-200 ease-out hover:scale-110 hover:bg-[#fff3] hover:cursor-pointer focus:scale-110 focus:bg-[#fff3]"}
@@ -125,7 +171,7 @@ export default function VidstackPlayer({
                 </DefaultVideoLayout>
             </MediaPlayer>
         ),
-        [isPaused, isPlayerCompact, controlsVisible, videoSrc, searchParameters],
+        [beforeSeekTime, isSeeked, isPlayingMediaState, isPlayerCompact, controlsVisible, videoSrc, searchParameters],
     );
 
     useEffect(() => {
