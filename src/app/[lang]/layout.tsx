@@ -114,7 +114,10 @@ export default async function RootLayout({
                                  */
                                 }
                                 <SidebarWrapper serverSideSidebarPosition={safeConfigValues.layout.sidebar.position}>
-                                    <Sidebar config={safeConfigValues} />
+                                    <Sidebar
+                                        config={safeConfigValues}
+                                        dictionaries={dictionaries}
+                                    />
                                 </SidebarWrapper>
                                 <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
                                     {children}
