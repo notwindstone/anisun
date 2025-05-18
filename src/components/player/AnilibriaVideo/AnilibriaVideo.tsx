@@ -1,8 +1,8 @@
 import malToAnilibria from "@/lib/providersSync/malToAnilibria";
-import VideoClientFetch from "@/components/player/VideoClientFetch/VideoClientFetch";
+import VideoClientQuery from "@/components/player/VideoClientQuery/VideoClientQuery";
 import { AnilibriaSearchProvider } from "@/utils/providers/AnilibriaSearchProvider";
 import AnilibriaSearch from "@/components/search/AnilibriaSearch/AnilibriaSearch";
-import AnilibriaFetch from "@/components/fetch/AnilibriaFetch/AnilibriaFetch";
+import AnilibriaQuery from "@/components/player/AnilibriaQuery/AnilibriaQuery";
 import VidstackPlayer from "@/components/player/VidstackPlayer/VidstackPlayer";
 
 export default async function AnilibriaVideo({
@@ -30,7 +30,7 @@ export default async function AnilibriaVideo({
                 <>no linked anime found</>
                 <AnilibriaSearchProvider searchName={title}>
                     <AnilibriaSearch />
-                    <AnilibriaFetch />
+                    <AnilibriaQuery />
                 </AnilibriaSearchProvider>
             </>
         );
@@ -38,7 +38,7 @@ export default async function AnilibriaVideo({
 
     return (
         <>
-            <VideoClientFetch
+            <VideoClientQuery
                 queryKey={[anilibriaId.toString()]}
                 method={"FetchAnilibriaVideo"}
                 fetchArguments={anilibriaId}

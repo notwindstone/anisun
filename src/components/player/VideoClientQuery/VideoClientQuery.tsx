@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 
-export default function VideoClientFetch({
+export default function VideoClientQuery({
     queryKey,
     method,
     fetchArguments,

@@ -7,7 +7,7 @@ import Button from "@/components/base/Button/Button";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
 
-export default function AnilibriaFetch() {
+export default function AnilibriaQuery() {
     const searchParameters = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
