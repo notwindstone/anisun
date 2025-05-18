@@ -74,6 +74,9 @@ export default function MobileNavbar({
                         return (
                             <React.Fragment key={item.href}>
                                 <Link
+                                    // `null` by default, which means only static routes gonna fully prefetch
+                                    // `true` allows for the full dynamic route prefetch
+                                    prefetch
                                     className="flex flex-col gap-1 text-sm items-center justify-center transition hover:brightness-125 dark:hover:brightness-75 w-24"
                                     style={focused === item.href ? {
                                         color: parseTailwindColor({
