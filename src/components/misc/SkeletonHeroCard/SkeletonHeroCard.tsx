@@ -13,14 +13,14 @@ export default function SkeletonHeroCard({
 }) {
     return (
         <div
-            className="w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2"
+            className="w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2 sm:w-192 sm:justify-center sm:items-start sm:pl-[8%] sm:gap-4"
         >
             <div className="flex flex-wrap justify-center gap-2">
                 {
                     placeholderArray.map((widthClassName, index) => {
                         return (
                             <div
-                                className={`animate-pulse rounded-md h-[22px] ${widthClassName}`}
+                                className={`animate-pulse rounded-md h-[22px] sm:h-[28px] ${widthClassName}`}
                                 key={`${widthClassName}_${index}`}
                                 style={{
                                     backgroundColor: parseTailwindColor({
@@ -36,7 +36,18 @@ export default function SkeletonHeroCard({
                 }
             </div>
             <div
-                className="animate-pulse rounded-md w-96 max-w-[60%] h-8"
+                className="animate-pulse rounded-md w-96 max-w-[60%] h-8 sm:h-10"
+                style={{
+                    backgroundColor: parseTailwindColor({
+                        color: base,
+                        step: theme === DarkThemeKey
+                            ? 800
+                            : 200,
+                    }),
+                }}
+            />
+            <div
+                className="hidden sm:block animate-pulse rounded-md w-[100%] h-[56px]"
                 style={{
                     backgroundColor: parseTailwindColor({
                         color: base,
