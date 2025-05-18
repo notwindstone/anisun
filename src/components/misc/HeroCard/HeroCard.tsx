@@ -61,7 +61,7 @@ export default function HeroCard({
     return (
         <Link className="select-none group" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
             <ConfiguredImage
-                className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-md sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
+                className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-sm sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
                 style={{
                     objectPosition: "100% 20%",
                 }}
@@ -81,7 +81,7 @@ export default function HeroCard({
                     )`,
                 }}
             />
-            <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2 sm:gap-4 sm:pl-12 sm:flex-col sm:w-fit sm:justify-center sm:items-start sm:max-w-192">
+            <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2 sm:gap-4 sm:pl-[8%] sm:flex-col sm:w-fit sm:justify-center sm:items-start sm:max-w-192">
                 <div className="flex flex-wrap justify-center gap-2">
                     <Badge textSize="sm:text-xl text-md" score={score} isScore>
                         {
