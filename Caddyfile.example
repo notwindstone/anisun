@@ -1,8 +1,4 @@
-YOUR_DOMAIN_HERE {
+example.com {
     reverse_proxy localhost:3000
     encode gzip
-}
-
-http://YOUR_DOMAIN_HERE {
-  redir https://{host}{uri}
 }
