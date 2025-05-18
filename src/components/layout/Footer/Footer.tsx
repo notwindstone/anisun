@@ -12,7 +12,7 @@ export default function Footer({
 
     return (
         <>
-            <div className="p-4 flex flex-col lg:justify-between lg:flex-row gap-4">
+            <div className="p-4 flex flex-col lg:justify-between lg:flex-row gap-4 mx-auto max-w-384 sm:py-8">
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-nowrap gap-4">
                         <Favicon />

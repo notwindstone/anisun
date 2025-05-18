@@ -20,7 +20,7 @@ export default function ListAnimes({
 
     return (
         <>
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-4 mx-auto max-w-384">
                 <div />
                 <p className="text-2xl font-medium leading-none px-4">
                     {title}
