@@ -33,28 +33,31 @@ export default function Sidebar({
             {
                 sidebarItems.map(({ title, links }) => {
                     return (
-                        <div key={title}>
-                            <p className="">
+                        <div key={title} className="flex flex-col gap-2 w-full">
+                            <p className="mt-4 text-neutral-700 dark:text-neutral-300 font-medium px-2">
                                 {title}
                             </p>
-                            <div>
-                                {
-                                    links.map((link) => {
-                                        return (
-                                            <Link
-                                                href={link.href}
-                                                key={link.href}
-                                                className=""
-                                            >
+                            {
+                                links.map((link) => {
+                                    return (
+                                        <Link
+                                            // `null` by default, which means only static routes gonna fully prefetch
+                                            // `true` allows for the full dynamic route prefetch
+                                            prefetch
+                                            href={link.href}
+                                            key={link.href}
+                                            className="flex flex-nowrap items-center overflow-clip w-full p-2 bg-amber-500 rounded-md"
+                                        >
+                                            <div className="flex justify-center items-center w-6 shrink-0">
                                                 {link.icon}
-                                                <p>
-                                                    {link.name}
-                                                </p>
-                                            </Link>
-                                        );
-                                    })
-                                }
-                            </div>
+                                            </div>
+                                            <p className="pl-2 line-clamp-1">
+                                                {link.name}
+                                            </p>
+                                        </Link>
+                                    );
+                                })
+                            }
                         </div>
                     );
                 })

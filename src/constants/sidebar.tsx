@@ -3,6 +3,8 @@ import { PageRoutes } from "@/constants/routes";
 import { CircleUser, History, Hourglass, House, Library, Settings } from "lucide-react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
+const iconSize = 20;
+
 export const getSideBarLinks = ({
     dictionaries,
     avatar,
@@ -18,38 +20,38 @@ export const getSideBarLinks = ({
     }>;
 }> => [
     {
-        title: "main",
+        title: "Main",
         links: [
             {
                 name: dictionaries?.sidebar?.home,
                 href: PageRoutes.Root,
-                icon: <House className="shrink-0" size={24} />,
+                icon: <House className="shrink-0" size={iconSize} />,
             },
             {
                 name: dictionaries?.sidebar?.library,
                 href: PageRoutes.Library.Root,
-                icon: <Library className="shrink-0" size={24} />,
+                icon: <Library className="shrink-0" size={iconSize} />,
             },
             {
                 name: dictionaries?.sidebar?.history,
                 href: PageRoutes.History.Root,
-                icon: <History className="shrink-0" size={24} />,
+                icon: <History className="shrink-0" size={iconSize} />,
             },
             {
                 name: dictionaries?.sidebar?.watchLater,
                 href: PageRoutes.WatchLater.Root,
-                icon: <Hourglass className="shrink-0" size={24} />,
+                icon: <Hourglass className="shrink-0" size={iconSize} />,
             },
         ],
     },
     {
-        title: "other",
+        title: "Other",
         links: [
 
             {
                 name: dictionaries?.sidebar?.settings,
                 href: PageRoutes.Settings.Root,
-                icon: <Settings className="shrink-0" size={24} />,
+                icon: <Settings className="shrink-0" size={iconSize} />,
             },
             {
                 name: dictionaries?.sidebar?.account,
@@ -57,13 +59,13 @@ export const getSideBarLinks = ({
                 icon: avatar
                     ? <ConfiguredImage
                         className="rounded-full transition duration-200"
-                        width={24}
-                        height={24}
+                        width={iconSize}
+                        height={iconSize}
                         src={avatar}
                         alt={"User avatar"}
                         unoptimized={true}
                     />
-                    : <CircleUser className="shrink-0" size={24} />,
+                    : <CircleUser className="shrink-0" size={iconSize} />,
             },
         ],
     },

@@ -39,7 +39,7 @@ export default async function Home() {
             />
             <ListAnimes
                 title={"Top 30 Anime"}
-                description={"Check the best series ever sorted by a score"}
+                description={"Check the best series sorted by a score"}
                 method={"FetchTopTitles"}
                 queryKey={"top"}
             />
