@@ -117,6 +117,7 @@ export default async function RootLayout({
                                     <Sidebar
                                         config={safeConfigValues}
                                         dictionaries={dictionaries}
+                                        accountInfo={parsedAccountInfoData}
                                     />
                                 </SidebarWrapper>
                                 <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">

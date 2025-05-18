@@ -119,6 +119,10 @@ export const PageRoutes = {
         Root: "/history",
         Pathname: "history",
     },
+    WatchLater: {
+        Root: "/watch-later",
+        Pathname: "watch-later",
+    },
     Library: {
         Root: "/library",
         Pathname: "library",

@@ -6,11 +6,27 @@ import Link from "next/link";
 export default function Sidebar({
     config,
     dictionaries,
+    accountInfo,
 }: {
     config: SafeConfigType;
     dictionaries: DictionariesType;
+    accountInfo: unknown;
 }) {
-    const sidebarItems = getSideBarLinks(dictionaries);
+    let avatar: string | undefined;
+
+    if (
+        typeof accountInfo === "object"
+        && accountInfo !== null
+        && "avatar" in accountInfo
+        && typeof accountInfo.avatar === "string"
+    ) {
+        avatar = accountInfo.avatar;
+    }
+
+    const sidebarItems = getSideBarLinks({
+        dictionaries,
+        avatar,
+    });
 
     return (
         <>
