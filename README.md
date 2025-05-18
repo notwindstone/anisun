@@ -56,6 +56,10 @@ Comparison with the anisun v4
 [![Pagespeed Insights Screenshot #1](/public/psi/pagespeed-insights-1.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-1.png)
 [![Pagespeed Insights Screenshot #2](/public/psi/pagespeed-insights-2.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-2.png)
 
+// 18.05.2025 audit --- commit 27c6476c566c324a4c289abf673ec924e62b6ece
+
+[![Pagespeed Insights Screenshot #1](/public/psi/psi-18-05-2025.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/psi-18-05-2025.png)
+
 ## ⚙️ Tech Stack
 
 ## ⭐ Features
