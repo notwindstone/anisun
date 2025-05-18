@@ -93,10 +93,6 @@ export const OAuth2Routes = {
 };
 export const PageRoutes = {
     Root: "/",
-    Settings: {
-        Root: "/settings",
-        Pathname: "settings",
-    },
     Profile: {
         Root: "/profile",
         Pathname: "profile",

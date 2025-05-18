@@ -1,6 +1,6 @@
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
-import { CircleUser, History, Hourglass, House, Library, Settings } from "lucide-react";
+import { CircleUser, History, Hourglass, House, Library } from "lucide-react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 const iconSize = 20;
@@ -47,12 +47,6 @@ export const getSideBarLinks = ({
     {
         title: "Other",
         links: [
-
-            {
-                name: dictionaries?.sidebar?.settings,
-                href: PageRoutes.Settings.Root,
-                icon: <Settings className="shrink-0" size={iconSize} />,
-            },
             {
                 name: dictionaries?.sidebar?.account,
                 href: PageRoutes.Account.Root,
