@@ -29,14 +29,11 @@ export default function Sidebar({
     });
 
     return (
-        <>
+        <div className="flex flex-col gap-2 w-full">
             {
                 sidebarItems.map(({ title, links }) => {
                     return (
                         <div key={title} className="flex flex-col gap-2 w-full">
-                            <p className="mt-4 text-neutral-700 dark:text-neutral-300 font-medium px-2">
-                                {title}
-                            </p>
                             {
                                 links.map((link) => {
                                     return (
@@ -46,7 +43,9 @@ export default function Sidebar({
                                             prefetch
                                             href={link.href}
                                             key={link.href}
-                                            className="flex flex-nowrap items-center overflow-clip w-full p-2 bg-amber-500 rounded-md"
+                                            className="hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-clip w-full p-2 rounded-md"
+                                            aria-label={link.name}
+                                            title={link.name}
                                         >
                                             <div className="flex justify-center items-center w-6 shrink-0">
                                                 {link.icon}
@@ -62,7 +61,6 @@ export default function Sidebar({
                     );
                 })
             }
-            {JSON.stringify(config)}
-        </>
+        </div>
     );
 }
