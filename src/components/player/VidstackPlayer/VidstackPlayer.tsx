@@ -89,7 +89,7 @@ export default function VidstackPlayer({
                 ref={reference}
                 src={videoSrc}
                 title={searchParameters.get("title") ?? undefined}
-                className="!rounded-none !overflow-clip"
+                className="!rounded-none !overflow-clip !border-none"
                 viewType="video"
                 aspectRatio={"16 / 9"}
             >
