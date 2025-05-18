@@ -12,6 +12,11 @@ export default function Sidebar({
     dictionaries: DictionariesType;
     accountInfo: unknown;
 }) {
+    // these values update only on server-side refetch
+    // so we can't track sidebar `expanded` value
+    // because it updates on the client-side
+    // but a `position` is updated using a POST query to the server
+    const { layout: { sidebar: { position } } } = config;
     let avatar: string | undefined;
 
     if (
@@ -43,15 +48,22 @@ export default function Sidebar({
                                             prefetch
                                             href={link.href}
                                             key={link.href}
-                                            className="hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-clip w-full p-2 rounded-md"
+                                            className="hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
                                             aria-label={link.name}
                                             title={link.name}
+                                            style={{
+                                                flexDirection: position === "right"
+                                                    ? "row-reverse"
+                                                    : "row",
+                                            }}
                                         >
                                             <div className="flex justify-center items-center w-6 shrink-0">
                                                 {link.icon}
                                             </div>
-                                            <p className="pl-2 line-clamp-1">
+                                            <p className="line-clamp-1">
+                                                <span className="px-1" />
                                                 {link.name}
+                                                <span className="px-1" />
                                             </p>
                                         </Link>
                                     );

@@ -31,7 +31,7 @@ export default async function Page() {
                 <LocaleSwitcher />
             </div>
             <p className="text-lg leading-none pt-2">
-                Select accent color
+                Select an accent color
             </p>
             <div className="flex flex-wrap gap-2">
                 <PaletteChanger
@@ -40,7 +40,7 @@ export default async function Page() {
                 />
             </div>
             <p className="text-lg leading-none pt-2">
-                Select layout color
+                Select a layout color and configuration
             </p>
             <div className="flex flex-wrap gap-2">
                 <PaletteChanger
