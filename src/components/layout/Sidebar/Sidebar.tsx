@@ -2,6 +2,9 @@ import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import Link from "next/link";
+import { Locales } from "@/constants/localization";
+
+const locales = new Set<string>(Locales);
 
 export default function Sidebar({
     config,
@@ -48,7 +51,7 @@ export default function Sidebar({
                                             prefetch
                                             href={link.href}
                                             key={link.href}
-                                            className="hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
+                                            className="dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
                                             aria-label={link.name}
                                             title={link.name}
                                             style={{
