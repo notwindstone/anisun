@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# caddy reverse-proxy
+Caddyfile
+
 # public folder
 /public/sw.js
 
