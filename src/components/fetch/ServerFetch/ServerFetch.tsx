@@ -2,7 +2,7 @@
 
 import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
 import { AnimeLRUCache, MiscLRUCache } from "@/lib/cache/LRUCaches";
-import { ServerFetchTimeout } from "@/constants/app";
+import { ServerFetchErrorCount, ServerFetchTimeout } from "@/constants/app";
 import { Getters } from "@/lib/anime/getters";
 import React from "react";
 import { AnimeType } from "@/types/Anime/Anime.type";
@@ -57,7 +57,7 @@ export default async function ServerFetch({
     let data;
 
     try {
-        if (errorCount >= 3) {
+        if (errorCount >= ServerFetchErrorCount) {
             return clientReactNode;
         }
 

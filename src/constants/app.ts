@@ -20,3 +20,4 @@ export const getFooterItems = (dictionaries: DictionariesType) => ({
     ],
 });
 export const ServerFetchTimeout = 3000;
+export const ServerFetchErrorCount = 5;

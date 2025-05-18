@@ -5,6 +5,8 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 
+type textSizeType = `${"" | "sm:"}text-${"xs" | "sm" | "md" | "lg" | "xl" | "2xl"}`;
+
 export default function Badge({
     children,
     isScore,
@@ -14,7 +16,7 @@ export default function Badge({
     children: React.ReactNode;
     isScore?: boolean;
     score?: number;
-    textSize?: `text-${"xs" | "sm" | "md" | "lg" | "xl" | "2xl"}`;
+    textSize?: textSizeType | `${textSizeType} ${textSizeType}`;
 }) {
     const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
     let scoreBadgeColorClassName;

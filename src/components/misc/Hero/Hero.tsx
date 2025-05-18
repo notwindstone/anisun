@@ -16,7 +16,7 @@ export default function Hero({
     return (
         <>
             <div className="flex flex-col gap-4">
-                <div className="relative overflow-clip w-full h-full aspect-video">
+                <div className="relative overflow-clip w-full h-full aspect-video sm:aspect-auto sm:h-128">
                     <Suspense fallback={
                         <SkeletonHeroCard theme={theme} base={base} />
                     }>

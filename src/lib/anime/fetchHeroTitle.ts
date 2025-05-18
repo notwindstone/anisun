@@ -13,6 +13,7 @@ const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<A
                 id
                 idMal
                 title { english native romaji }
+                description
                 meanScore
                 averageScore
                 coverImage {
