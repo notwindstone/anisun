@@ -2,9 +2,6 @@ import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import Link from "next/link";
-import { Locales } from "@/constants/localization";
-
-const locales = new Set<string>(Locales);
 
 export default function Sidebar({
     config,
