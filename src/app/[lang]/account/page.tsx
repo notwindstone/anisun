@@ -8,7 +8,7 @@ import Divider from "@/components/base/Divider/Divider";
 
 export default async function Page() {
     return (
-        <div className="flex flex-col pb-4 px-4 gap-4">
+        <div className="flex flex-col pb-4 px-4 gap-4 mx-auto max-w-384">
             <p className="text-2xl font-medium leading-none pt-8">
                 Account
             </p>

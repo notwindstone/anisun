@@ -58,6 +58,7 @@ export default function SmallCard({
                     src={data?.coverImage?.extraLarge}
                     alt={`${data?.title?.romaji} anime's poster`}
                     unoptimized={isImageUnoptimized ?? false}
+                    sizes={"(max-width: 640px) 108px, (max-width: 1024px) 144px, 320px"}
                 />
                 <div
                     className="text-black absolute w-full h-full"

@@ -9,7 +9,6 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
 import Badge from "@/components/base/Badge/Badge";
-import { useMediaQuery } from "@mantine/hooks";
 
 export default function HeroCard({
     data,
@@ -21,7 +20,6 @@ export default function HeroCard({
         data: AnimeType;
     }>(ClientFetchDataContext);
     const currentData = data ?? animeData;
-    const matches = useMediaQuery('(min-width: 640px)');
 
     if (currentData !== undefined && Array.isArray(currentData)) {
         return;
@@ -35,9 +33,7 @@ export default function HeroCard({
         "",
     );
 
-    const image = matches
-        ? currentData?.coverImage?.medium ?? currentData?.coverImage?.extraLarge
-        : currentData?.coverImage?.extraLarge;
+    const image = currentData?.coverImage?.extraLarge;
     const score = Number(currentData?.averageScore) / 10;
     const redirectURLAnimeName =
         // eslint-disable-next-line unicorn/no-abusive-eslint-disable
@@ -65,6 +61,7 @@ export default function HeroCard({
     return (
         <Link className="select-none group" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
             <ConfiguredImage
+                priority
                 className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-sm sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
                 style={{
                     objectPosition: "100% 20%",
@@ -73,7 +70,7 @@ export default function HeroCard({
                 src={image}
                 alt={`${name} anime's poster`}
                 unoptimized={false}
-                priority
+                sizes={"(max-width: 640px) 256px, 144px"}
             />
             <div
                 className="text-black absolute w-full h-full"
