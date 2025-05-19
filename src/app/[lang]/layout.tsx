@@ -19,6 +19,7 @@ import { cookies } from "next/headers";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
 import Footer from "@/components/layout/Footer/Footer";
+import Head from "next/head";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -97,6 +98,9 @@ export default async function RootLayout({
 
     return (
         <html lang={lang}>
+            <Head>
+                <meta name="darkreader-lock" />
+            </Head>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >

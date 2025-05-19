@@ -6,14 +6,6 @@ const nextConfig: NextConfig = {
         minimumCacheTTL: 60 * 60 * 24, // 24 hours
         remotePatterns: [
             {
-                protocol: "http",
-                hostname: "localhost",
-            },
-            {
-                protocol: "https",
-                hostname: "anime.tatar",
-            },
-            {
                 protocol: "https",
                 hostname: "s4.anilist.co",
             },
