@@ -5,7 +5,7 @@ export default function ShikimoriLibrary({
 }: {
     list: "planned";
 }) {
-
+    console.log(list);
 
     return (
         <>
