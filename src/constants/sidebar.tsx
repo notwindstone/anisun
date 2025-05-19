@@ -1,6 +1,6 @@
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
-import { CircleUser, History, Hourglass, House, Library } from "lucide-react";
+import { CircleUser, History, House, Library } from "lucide-react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 const iconSize = 20;
@@ -36,11 +36,6 @@ export const getSideBarLinks = ({
                 name: dictionaries?.sidebar?.history,
                 href: PageRoutes.History.Root,
                 icon: <History className="shrink-0" size={iconSize} />,
-            },
-            {
-                name: dictionaries?.sidebar?.watchLater,
-                href: PageRoutes.WatchLater.Root,
-                icon: <Hourglass className="shrink-0" size={iconSize} />,
             },
         ],
     },

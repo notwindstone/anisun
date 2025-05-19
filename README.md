@@ -1,27 +1,10 @@
-> [!IMPORTANT]
-> Work in progress...
-
-credits for logo
-
-https://x.com/ahiru_tokotoko/status/1568517301737242625
-
-## To-Do
-
-* Shikimori, MAL and AniList integrations
-* Next.js 15 for frontend
-* Rewrite everything
-* more
-
-tech stack
-next.js, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-immer, vidstack.js, kodikwrapper, zustand
-
 <div align="center">
 
-<img width="160" height="160" align="center" src="public/favicon.webp">
+<img width="160" height="160" align="center" src="public/favicon.webp" alt="Favicon">
 
 # [anisun (rebooted)](https://anisun.vercel.app)
 
-### A web app for watching anime built with next.js
+A web app for watching anime built with next.js
 
 <p align="center">
 <strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/README_russian.md">Русский</a>
@@ -32,6 +15,13 @@ next.js, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-i
 </div>
 
 ## 📱 Screenshots
+
+<div align="center">
+<img src="public/screenshots/home-page-desktop.webp" width="49%" alt="Home page desktop screenshot (desktop, dark theme)">
+<img src="public/screenshots/home-page-desktop-light.webp" width="49%" alt="Home page desktop screenshot (desktop, light theme)">
+<img src="public/screenshots/home-page-mobile.webp" width="32%" alt="Home page desktop screenshot (mobile, dark theme)">
+<img src="public/screenshots/home-page-mobile-light.webp" width="32%" alt="Home page desktop screenshot (mobile, light theme)">
+</div>
 
 ### More screenshots
 
@@ -45,26 +35,55 @@ next.js, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-i
 
 ## ⚡ Performance
 
-PageSpeed Insights
+* Using as few libraries as possible
+* UI streaming thanks to React Suspense
+* Data caching both on the server (using [LRU cache](https://www.npmjs.com/package/quick-lru) & Next.js internal cache) and client
+* User config management using cookies for the instant config load
+* Preferring CSS over JS styles
+* Memoizing only those components that truly need it
+* Using Server Actions instead of API routes when possible
+* Image optimization and caching for the home page
+* Sidebar & mobile navbar routes prefetching 
 
-Web Page Size Checker
+...and a lot of other optimizations
 
-Comparison with the anisun v4
+### PageSpeed Insights
 
-// 04.05.2025 audit --- commit c355bb2bd6ce411b462bcadee93edc3ebf876102
+<details>
+<summary>Expand</summary>
 
-[![Pagespeed Insights Screenshot #1](/public/psi/pagespeed-insights-1.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-1.png)
-[![Pagespeed Insights Screenshot #2](/public/psi/pagespeed-insights-2.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/pagespeed-insights-2.png)
+<div align="center">
+<img src="public/psi/psi-desktop-audit.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
+</div>
 
-// 18.05.2025 audit --- commit 27c6476c566c324a4c289abf673ec924e62b6ece
+</details>
 
-[![Pagespeed Insights Screenshot #1](/public/psi/psi-18-05-2025.png)](https://github.com/notwindstone/Anisun/blob/v5/public/psi/psi-18-05-2025.png)
+### Web page size
 
-## ⚙️ Tech Stack
+<details>
+<summary>Expand</summary>
+
+<div align="center">
+<img src="public/psi/web-page-size.webp" alt="">
+</div>
+
+</details>
 
 ## ⭐ Features
 
-i'm using as few libraries as i can
+* Lightspeed ⚡
+* 
+
+
+## ⚙️ Tech Stack
+
+* [Next.js 15](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
+* [TailwindCSS](https://tailwindcss.com/) for the UI
+* An async state management using [Tanstack Query](https://tanstack.com/query/latest)
+* [Mantine Hooks](https://mantine.dev/hooks/package/) for the general usage
+* Fetching the data from Kodik (an anime media database) thanks to [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper)
+* A video player based on [Vidstack.js](https://www.vidstack.io/) and [HLS.js](https://github.com/video-dev/hls.js)
+* [Quick LRU](https://www.npmjs.com/package/quick-lru) for the in-memory cache
 
 ## ⬇️ Self-Hosting
 
@@ -116,3 +135,21 @@ Contributions are welcome!
 > Anisun does not host any files, it merely links to 3rd party services.
 > Legal issues should be taken up with the file hosts and providers.
 > Anisun is not responsible for any media files shown by the video providers.
+
+
+> [!IMPORTANT]
+> Work in progress...
+
+credits for logo
+
+https://x.com/ahiru_tokotoko/status/1568517301737242625
+
+## To-Do
+
+* Shikimori, MAL and AniList integrations
+* Next.js 15 for frontend
+* Rewrite everything
+* more
+
+tech stack
+next.js, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-immer, vidstack.js, kodikwrapper, zustand

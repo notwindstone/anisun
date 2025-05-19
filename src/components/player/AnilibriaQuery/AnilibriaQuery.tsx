@@ -35,9 +35,16 @@ export default function AnilibriaQuery() {
         return <>error</>;
     }
 
-    function handleMediaSelect(url: string) {
+    function handleMediaSelect({
+        url,
+        title,
+    }: {
+        url: string;
+        title: string;
+    }) {
         const parameters = new URLSearchParams(searchParameters);
         parameters.set("mediaSrc", url);
+        parameters.set("title", title);
         replace(`${pathname}?${parameters.toString()}`);
     }
 
@@ -55,9 +62,10 @@ export default function AnilibriaQuery() {
                                 {anime.names.ru}
                             </div>
                             <Button
-                                onClick={() => handleMediaSelect(
-                                    `https://cache.libria.fun${anime.player.list?.["1"].hls.fhd}`,
-                                )}
+                                onClick={() => handleMediaSelect({
+                                    url: `https://cache.libria.fun${anime.player.list?.["1"].hls.fhd}`,
+                                    title: anime.names.en,
+                                })}
                                 label={anime.names.en}
                             >
                                 go
