@@ -1,7 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import { X } from "lucide-react";
+
 export default function DarkReaderNotify() {
-    const t1 = performance.now();
+    const [showed, setShowed] = useState(true);
+
     if (typeof document === "undefined") {
         return;
     }
@@ -26,16 +30,25 @@ export default function DarkReaderNotify() {
     if (!("darkreaderMode" in documentNode.dataset)) {
         return;
     }
-    const t2 = performance.now();
-    console.log(t2 - t1);
+
+    if (!showed) {
+        return;
+    }
 
     return (
-        <div className="z-10000 px-2 py-1 border border-white fixed bottom-8 left-8 bg-black rounded-md text-white max-w-64 text-pretty">
-            <span className="opacity-70 text-sm">
-                Seems like your web app is not working properly...
-            </span>
-            <div>
-                Try disabling the <strong>Dark Reader</strong> extension for this website.
+        <div className="z-10000 px-2 py-1 border border-white fixed bottom-8 left-8 bg-black rounded-md text-white max-w-64 flex gap-2">
+            <div className="text-pretty">
+                <span className="opacity-70 text-sm">
+                    Seems like your web app is not working properly...
+                </span>
+                <div>
+                    Try disabling the <strong>Dark Reader</strong> extension for this website.
+                </div>
+            </div>
+            <div className="py-1">
+                <button className="flex justify-center items-center w-8 h-8 rounded-md transition-colors bg-transparent hover:bg-neutral-800 cursor-pointer" onClick={() => setShowed(false)}>
+                    <X size={20} />
+                </button>
             </div>
         </div>
     );
