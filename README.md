@@ -36,7 +36,7 @@ A web app for watching anime built with next.js
 ## ⚡ Performance
 
 * Using as few libraries as possible
-* UI streaming thanks to React Suspense
+* React Suspense for the seamless UI streaming
 * Data caching both on the server (using [LRU cache](https://www.npmjs.com/package/quick-lru) & Next.js internal cache) and client
 * User config management using cookies for the instant config load
 * Preferring CSS over JS styles
@@ -71,7 +71,7 @@ A web app for watching anime built with next.js
 
 ## ⭐ Features
 
-* Lightspeed ⚡
+* 
 * 
 
 
@@ -95,7 +95,7 @@ A web app for watching anime built with next.js
 
 #### Production
 
-running this app in `bun run build` & `bun run start` is not enough.
+running this app with `bun run build` & `bun run start` is not enough.
 
 You need to install a reverse-proxy like Caddy.
 
@@ -150,6 +150,3 @@ https://x.com/ahiru_tokotoko/status/1568517301737242625
 * Next.js 15 for frontend
 * Rewrite everything
 * more
-
-tech stack
-next.js, typescript, tailwind, mantine-hooks, drizzle orm, tanstack query, use-immer, vidstack.js, kodikwrapper, zustand

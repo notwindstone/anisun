@@ -13,7 +13,7 @@ export const InitialConfig: SafeConfigType = {
     },
     layout: {
         sidebar: {
-            expanded: true,
+            expanded: false,
             position: SidebarLeftPosition,
         },
     },

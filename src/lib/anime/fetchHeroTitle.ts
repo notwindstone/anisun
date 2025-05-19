@@ -18,6 +18,7 @@ const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<A
                 averageScore
                 coverImage {
                     extraLarge
+                    medium
                 }
                 genres
                 relations {

@@ -9,6 +9,7 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
 import Badge from "@/components/base/Badge/Badge";
+import { useMediaQuery } from "@mantine/hooks";
 
 export default function HeroCard({
     data,
@@ -20,6 +21,7 @@ export default function HeroCard({
         data: AnimeType;
     }>(ClientFetchDataContext);
     const currentData = data ?? animeData;
+    const matches = useMediaQuery('(min-width: 640px)');
 
     if (currentData !== undefined && Array.isArray(currentData)) {
         return;
@@ -33,7 +35,9 @@ export default function HeroCard({
         "",
     );
 
-    const image = currentData?.coverImage?.extraLarge;
+    const image = matches
+        ? currentData?.coverImage?.medium ?? currentData?.coverImage?.extraLarge
+        : currentData?.coverImage?.extraLarge;
     const score = Number(currentData?.averageScore) / 10;
     const redirectURLAnimeName =
         // eslint-disable-next-line unicorn/no-abusive-eslint-disable
