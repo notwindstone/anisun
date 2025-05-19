@@ -13,7 +13,7 @@ export default function SkeletonHeroCard({
 }) {
     return (
         <div
-            className="w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2 sm:w-192 sm:justify-center sm:items-start sm:pl-[8%] sm:gap-4"
+            className="w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2 sm:w-[75%] sm:justify-center sm:items-start sm:max-w-320 sm:mx-auto sm:gap-4"
         >
             <div className="flex flex-wrap justify-center gap-2">
                 {
