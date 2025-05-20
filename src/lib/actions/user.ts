@@ -24,7 +24,9 @@ export async function getUser({
         user = getUniversalUser({
             user: data,
         });
-    } catch {
+    } catch (error) {
+        console.error("user.ts getUniversalUser error:", error);
+
         return undefined;
     }
 

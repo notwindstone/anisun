@@ -50,7 +50,9 @@ const fetchUpcomingNextSeasonTitles = async (options?: Partial<Request> | undefi
 
     try {
         data = await response.json();
-    } catch {
+    } catch (error) {
+        console.error("fetchUpcomingNextSeasonTitles.ts error:", error);
+
         throw new Error("Something went wrong");
     }
 

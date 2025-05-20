@@ -51,7 +51,9 @@ const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<A
 
     try {
         data = await response.json();
-    } catch {
+    } catch (error) {
+        console.error("fetchHeroTitle.ts error:", error);
+
         throw new Error("Something went wrong");
     }
 

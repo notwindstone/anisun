@@ -6,7 +6,9 @@ const fetchAnilibriaVideo = async (anilibriaId: number): Promise<any> => {
     try {
         const response = await fetch(`https://api.anilibria.tv/v3/title?id=${anilibriaId}`);
         anime = await response.json();
-    } catch {
+    } catch (error) {
+        console.error("fetchAnilibriaVideo.ts error:", error);
+
         return undefined;
     }
 

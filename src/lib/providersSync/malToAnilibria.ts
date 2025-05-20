@@ -17,6 +17,8 @@ export default async function malToAnilibria({
 
         animes = await response.json();
     } catch {
+        console.error("malToAnilibria.ts error:", error);
+
         return undefined;
     }
 

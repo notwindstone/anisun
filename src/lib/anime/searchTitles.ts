@@ -57,7 +57,9 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
 
     try {
         data = await response.json();
-    } catch {
+    } catch (error) {
+        console.error("searchTitles.ts error:", error);
+
         throw new Error("Something went wrong");
     }
 

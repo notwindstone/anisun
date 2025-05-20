@@ -50,7 +50,9 @@ const fetchTopTitles = async (options?: Partial<Request> | undefined): Promise<
 
     try {
         data = await response.json();
-    } catch {
+    } catch (error) {
+        console.error("fetchTopTitles.ts error:", error);
+
         throw new Error("Something went wrong");
     }
 

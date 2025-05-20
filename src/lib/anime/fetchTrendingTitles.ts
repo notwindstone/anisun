@@ -50,7 +50,9 @@ const fetchTrendingTitles = async (options?: Partial<Request> | undefined): Prom
 
     try {
         data = await response.json();
-    } catch {
+    } catch (error) {
+        console.error("fetchTrendingTitles.ts error:", error);
+
         throw new Error("Something went wrong");
     }
 

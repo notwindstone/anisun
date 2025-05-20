@@ -46,6 +46,8 @@ export async function handleCallback({
         tokens = await provider.validateAuthorizationCode(code);
         accessToken = tokens.accessToken();
     } catch (error) {
+        console.error("handleCallback.ts OAuth2 error:", error);
+
         if (error instanceof arctic.OAuth2RequestError) {
             // Invalid authorization code, credentials, or redirect URI
             return PageRoutes.Account.Segment + ErrorStrings.OAuth2.RequestError.Label;
