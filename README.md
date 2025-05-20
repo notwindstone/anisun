@@ -42,7 +42,7 @@ A web app for watching anime built with next.js
 * Preferring CSS over JS styles
 * Memoizing only those components that truly need it
 * Using Server Actions instead of API routes when possible
-* Image optimization and caching for the home page
+* Image optimization (built-in [sharp](https://www.npmjs.com/package/sharp) & specified properties) and caching for the home page
 * Sidebar & mobile navbar routes prefetching 
 
 ...and a lot of other optimizations
@@ -69,10 +69,10 @@ A web app for watching anime built with next.js
 
 </details>
 
-## ⭐ Features
+## ⭐ should be the features in the future
 
-* 
-* 
+* Seamless Anilist, Shikimori and MAL integration
+* Kodik, Anilibria, Sovetromantica, Consumet APIs for the media streaming
 
 
 ## ⚙️ Tech Stack
@@ -80,7 +80,7 @@ A web app for watching anime built with next.js
 * [Next.js 15](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
 * [TailwindCSS](https://tailwindcss.com/) for the UI
 * An async state management using [Tanstack Query](https://tanstack.com/query/latest)
-* [Mantine Hooks](https://mantine.dev/hooks/package/) for the general usage
+* [Mantine Hooks](https://mantine.dev/hooks/package/) for general usage on the frontend
 * Fetching the data from Kodik (an anime media database) thanks to [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper)
 * A video player based on [Vidstack.js](https://www.vidstack.io/) and [HLS.js](https://github.com/video-dev/hls.js)
 * [Quick LRU](https://www.npmjs.com/package/quick-lru) for the in-memory cache
