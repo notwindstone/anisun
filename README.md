@@ -150,3 +150,5 @@ https://x.com/ahiru_tokotoko/status/1568517301737242625
 * Next.js 15 for frontend
 * Rewrite everything
 * more
+
+https://github.com/consumet/api.consumet.org
