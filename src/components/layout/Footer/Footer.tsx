@@ -41,7 +41,7 @@ export default function Footer({
                                         column.links?.map((link) => {
                                             return (
                                                 <a
-                                                    className="text-sm text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
+                                                    className="text-sm w-fit text-neutral-500 dark:text-neutral-400 hover:text-neutral-800 dark:hover:text-neutral-200 transition-colors"
                                                     href={link.url}
                                                     target="_blank"
                                                     key={link.name}

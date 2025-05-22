@@ -9,17 +9,20 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
 import Badge from "@/components/base/Badge/Badge";
+import { DefaultLocale } from "@/constants/localization";
+import translate from "@/utils/misc/translate";
 
 export default function HeroCard({
     data,
 }: {
     data?: Array<AnimeType> | AnimeType | undefined;
 }) {
-    const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const { dictionaries, data: { theme, colors: { base } } } = useContext(ConfigsContext);
     const { data: animeData } = useContext<{
         data: AnimeType;
     }>(ClientFetchDataContext);
     const currentData = data ?? animeData;
+    const locale = dictionaries?.metadata.locale ?? DefaultLocale;
 
     if (currentData !== undefined && Array.isArray(currentData)) {
         return;
@@ -99,19 +102,34 @@ export default function HeroCard({
 
                             return (
                                 <Badge textSize="sm:text-xl text-md" key={genre}>
-                                    {genre}
+                                    {
+                                        translate({
+                                            text: genre,
+                                            locale: locale,
+                                        })
+                                    }
                                 </Badge>
                             );
                         })
                     }
                 </div>
                 <p className="text-2xl sm:text-4xl text-black dark:text-white text-pretty text-center font-medium sm:text-start">
-                    {name}
+                    {
+                        translate({
+                            text: name,
+                            locale: locale,
+                        })
+                    }
                 </p>
                 <p
                     className="hidden sm:block text-xl text-neutral-800 dark:text-neutral-300 text-pretty text-start"
                 >
-                    {description}
+                    {
+                        translate({
+                            text: description,
+                            locale: locale,
+                        })
+                    }
                 </p>
             </div>
         </Link>

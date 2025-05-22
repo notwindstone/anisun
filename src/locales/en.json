@@ -1,5 +1,6 @@
 {
   "metadata": {
+    "locale": "en",
     "title": "Home | Anisun",
     "description": "A web app for watching anime built with next.js",
     "languages": {

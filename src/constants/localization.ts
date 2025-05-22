@@ -1,4 +1,5 @@
 import { Locale } from "@/i18n-config";
+import UwuifierInstance from "uwuifier";
 
 export const CookieLocaleKey = "locale";
 export const DefaultLocale = "en";
@@ -22,3 +23,4 @@ export const LocaleItems: Record<Locale, {
         icon: "✧",
     },
 };
+export const Uwuifier = new UwuifierInstance();

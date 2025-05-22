@@ -6,8 +6,15 @@ import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import SearchedAnimes from "@/components/search/SearchedAnimes/SearchedAnimes";
 import ListAnimes from "@/components/misc/ListAnimes/ListAnimes";
+import type { Locale } from "@/i18n-config";
+import { HomePageItems } from "@/constants/translated";
 
-export default async function Home() {
+export default async function Home({
+    params,
+}: {
+    params: Promise<{ lang: Locale }>;
+}) {
+    const { lang } = await params;
     const configs = await getCookie({
         key: CookieConfigKey,
     });
@@ -25,24 +32,19 @@ export default async function Home() {
             <div className="w-full h-2" />
             <SearchedAnimes />
             <div className="w-full h-4" />
-            <ListAnimes
-                title={"Trending Now"}
-                description={"Watch the currently popular titles"}
-                method={"FetchTrendingTitles"}
-                queryKey={"trending"}
-            />
-            <ListAnimes
-                title={"Upcoming Next Season"}
-                description={"Explore the animes that are going to be released soon"}
-                method={"FetchUpcomingNextSeasonTitles"}
-                queryKey={"upcoming"}
-            />
-            <ListAnimes
-                title={"Top 30 Anime"}
-                description={"Check the best series sorted by a score"}
-                method={"FetchTopTitles"}
-                queryKey={"top"}
-            />
+            {
+                HomePageItems.map((item) => {
+                    return (
+                        <ListAnimes
+                            key={item.title.en}
+                            title={item.title[lang]}
+                            description={item.description[lang]}
+                            method={item.method}
+                            queryKey={item.queryKey}
+                        />
+                    );
+                })
+            }
         </div>
     );
 }

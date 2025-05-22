@@ -6,6 +6,8 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Badge from "@/components/base/Badge/Badge";
+import { DefaultLocale } from "@/constants/localization";
+import translate from "@/utils/misc/translate";
 
 export default function SmallCard({
     data,
@@ -16,7 +18,8 @@ export default function SmallCard({
     isGrid?: boolean;
     isImageUnoptimized?: boolean;
 }) {
-    const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const { dictionaries, data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const locale = dictionaries?.metadata.locale ?? DefaultLocale;
 
     const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";
     const status = data?.status ?? "";
@@ -71,7 +74,12 @@ export default function SmallCard({
                         {
                             (status === "FINISHED" || status === "RELEASING") && (
                                 <Badge textSize="text-xs">
-                                    {status}
+                                    {
+                                        translate({
+                                            text: status,
+                                            locale: locale,
+                                        })
+                                    }
                                 </Badge>
                             )
                         }
@@ -84,7 +92,12 @@ export default function SmallCard({
                         </Badge>
                     </div>
                     <p className="text-md text-black dark:text-white text-pretty font-medium drop-shadow-sm line-clamp-3">
-                        {name}
+                        {
+                            translate({
+                                text: name,
+                                locale: locale,
+                            })
+                        }
                     </p>
                 </div>
             </Link>
