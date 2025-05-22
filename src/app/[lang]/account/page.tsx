@@ -6,7 +6,7 @@ import OAuth2Links from "@/components/misc/OAuth2Links/OAuth2Links";
 import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
 import Divider from "@/components/base/Divider/Divider";
 import type { Locale } from "@/i18n-config";
-import {AccountPageItems} from "@/constants/translated";
+import { AccountPageItems } from "@/constants/translated";
 
 export default async function Page({
     params,
