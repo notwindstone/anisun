@@ -24,7 +24,8 @@
     "nextjs-toploader": "^3.8.16",
     "quick-lru": "^7.0.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "uwuifier": "^4.2.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -1,90 +1,91 @@
 {
   "metadata": {
-    "title": "Home | Anisun",
-    "description": "create next",
+    "title": "home | anisun",
+    "description": "",
     "languages": {
-      "en": "English",
-      "ru": "Русский"
+      "en": "engwish",
+      "ru": "русский",
+      "uwu": "u-uwu"
     }
   },
-  "greetings": "hello",
-  "server": "This is server-side rendered text.",
+  "greetings": "",
+  "server": "",
   "sidebar": {
-    "home": "Home",
-    "history": "History",
-    "library": "Library",
-    "account": "Account"
+    "home": "home",
+    "history": "histowy",
+    "library": "wibwawy",
+    "account": "account"
   },
   "footer": {
-    "description": "This site does not store any files on our server, we are linked to the media which is hosted on 3rd party services.",
+    "description": "this site does not store any files o-on ouw sewver, w-we a-are w-winked to the media which is h-hosted on 3wd pawty sewvices.",
     "about": {
-      "title": "About",
+      "title": "about",
       "links": [
         {
-          "name": "Source Code",
+          "name": "souwce code",
           "url": "https://github.com/notwindstone/anisun"
         },
         {
-          "name": "Github Issues",
+          "name": "g-github i-issues",
           "url": "https://github.com/notwindstone/anisun/issues"
         },
         {
-          "name": "Contribute",
+          "name": "contwibute",
           "url": "https://github.com/notwindstone/anisun/pulls"
         }
       ]
     },
     "contact": {
-      "title": "Contact",
+      "title": "contact",
       "links": [
         {
-          "name": "on Telegram",
+          "name": "on tewegwam",
           "url": "https://t.me/windst1"
         },
         {
-          "name": "on Discord",
+          "name": "on discowd",
           "url": "https://discord.com/users/510709295814279168"
         },
         {
-          "name": "on Github",
+          "name": "on github",
           "url": "https://github.com/notwindstone/"
         }
       ]
     }
   },
   "appearance": {
-    "slate": "Slate",
-    "gray": "Gray",
-    "zinc": "Zinc",
-    "neutral": "Neutral",
-    "stone": "Stone",
-    "red": "Red",
-    "orange": "Orange",
-    "amber": "Amber",
-    "yellow": "Yellow",
-    "lime": "Lime",
-    "green": "Green",
-    "emerald": "Emerald",
-    "teal": "Teal",
-    "cyan": "Cyan",
-    "sky": "Sky",
-    "blue": "Blue",
-    "indigo": "Indigo",
-    "violet": "Violet",
-    "purple": "Purple",
-    "fuchsia": "Fuchsia",
-    "pink": "Pink",
-    "rose": "Rose"
+    "slate": "swate",
+    "gray": "gway",
+    "zinc": "zinc",
+    "neutral": "neutwaw",
+    "stone": "stone",
+    "red": "wed",
+    "orange": "owange",
+    "amber": "ambew",
+    "yellow": "yewwow",
+    "lime": "wime",
+    "green": "gween",
+    "emerald": "emewawd",
+    "teal": "teaw",
+    "cyan": "cyan",
+    "sky": "sky",
+    "blue": "bwue",
+    "indigo": "indigo",
+    "violet": "viowet",
+    "purple": "puwpwe",
+    "fuchsia": "fuchsia",
+    "pink": "pink",
+    "rose": "wose"
   },
   "aria": {
-    "toggleColorScheme": "Toggle app color scheme",
-    "changePaletteColor": "Set palette color to",
-    "switchLayout": "Switch app layout",
-    "toggleSidebar": "Toggle sidebar",
-    "searchAnimes": "Search anime titles",
-    "filterAnimes": "Filter anime titles"
+    "toggleColorScheme": "toggle app cowow scheme",
+    "changePaletteColor": "set p-pawette cowow t-to",
+    "switchLayout": "switch app wayout",
+    "toggleSidebar": "toggle sidebaw",
+    "searchAnimes": "s-seawch anime titles",
+    "filterAnimes": "fiwtew anime titles"
   },
   "misc": {
-    "searchAnimes": "Search anime..."
+    "searchAnimes": "seawch a-anime..."
   }
 }

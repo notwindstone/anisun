@@ -4,11 +4,12 @@
     "description": "create next",
     "languages": {
       "en": "English",
-      "ru": "Русский"
+      "ru": "Русский",
+      "uwu": "UwU"
     }
   },
   "greetings": "hello",
-  "server": "This is server-side rendered text.",
+  "server": "This is a server-side rendered text.",
   "sidebar": {
     "home": "Home",
     "history": "History",
