@@ -73,6 +73,7 @@ A web app for watching anime built with next.js
 
 * Seamless Anilist, Shikimori and MAL integration
 * Kodik, Anilibria, Sovetromantica, Consumet APIs for the media streaming
+* Localization
 
 
 ## ⚙️ Tech Stack

@@ -1,15 +1,13 @@
 {
   "metadata": {
     "title": "home | anisun",
-    "description": "",
+    "description": "a web app fow watching anime buiwt with next.js ☆⌒ヽ(*\"､^*)chu",
     "languages": {
       "en": "engwish",
       "ru": "русский",
       "uwu": "u-uwu"
     }
   },
-  "greetings": "",
-  "server": "",
   "sidebar": {
     "home": "home",
     "history": "histowy",

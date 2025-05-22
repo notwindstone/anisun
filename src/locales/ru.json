@@ -1,15 +1,13 @@
 {
   "metadata": {
     "title": "Главная | Anisun",
-    "description": "создать next",
+    "description": "Веб-сайт для просмотра аниме, написанный на next.js",
     "languages": {
       "en": "English",
       "ru": "Русский",
       "uwu": "UwU"
     }
   },
-  "greetings": "srfdf",
-  "server": "Это генерируемый на сервере текст.",
   "sidebar": {
     "home": "Главная",
     "history": "История",

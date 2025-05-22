@@ -1,15 +1,13 @@
 {
   "metadata": {
     "title": "Home | Anisun",
-    "description": "create next",
+    "description": "A web app for watching anime built with next.js",
     "languages": {
       "en": "English",
       "ru": "Русский",
       "uwu": "UwU"
     }
   },
-  "greetings": "hello",
-  "server": "This is a server-side rendered text.",
   "sidebar": {
     "home": "Home",
     "history": "History",
