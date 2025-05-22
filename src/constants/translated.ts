@@ -51,3 +51,40 @@ export const HomePageItems: Array<{
         queryKey: "top",
     },
 ];
+export const AccountPageItems: Record<Locale, {
+    accountTitle: string,
+    accountDescription: string,
+    settingsTitle: string,
+    settingsDescription: string,
+    languageTitle: string,
+    accentColorTitle: string,
+    layoutConfigTitle: string,
+}> = {
+    en: {
+        accountTitle: "Account",
+        accountDescription: "Sign in using your favourite anime social website",
+        settingsTitle: "Settings",
+        settingsDescription: "Manage your settings",
+        languageTitle: "Select your language",
+        accentColorTitle: "Select an accent color",
+        layoutConfigTitle: "Select a layout color and configuration",
+    },
+    ru: {
+        accountTitle: "Аккаунт",
+        accountDescription: "Войдите с помощью любимых трекеров аниме",
+        settingsTitle: "Настройки",
+        settingsDescription: "Управляйте конфигурацией приложения",
+        languageTitle: "Выбрать язык",
+        accentColorTitle: "Выбрать акцентный цвет",
+        layoutConfigTitle: "Выбрать цвет фона и настройки лайаута",
+    },
+    uwu: {
+        accountTitle: "account",
+        accountDescription: "sign in u-using youw favouwite anime sociaw website",
+        settingsTitle: "settings",
+        settingsDescription: "manage y-youw settings",
+        languageTitle: "sewect youw wanguage",
+        accentColorTitle: "sewect an accent cowow",
+        layoutConfigTitle: "s-sewect a wayout cowow and configuwation",
+    },
+};

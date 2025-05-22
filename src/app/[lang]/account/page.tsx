@@ -5,33 +5,41 @@ import LocaleSwitcher from "@/components/layout/LocaleSwitcher/LocaleSwitcher";
 import OAuth2Links from "@/components/misc/OAuth2Links/OAuth2Links";
 import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
 import Divider from "@/components/base/Divider/Divider";
+import type { Locale } from "@/i18n-config";
+import {AccountPageItems} from "@/constants/translated";
 
-export default async function Page() {
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ lang: Locale }>;
+}) {
+    const { lang } = await params;
+
     return (
         <div className="flex flex-col pb-4 px-4 gap-4 mx-auto max-w-384">
             <p className="text-2xl font-medium leading-none pt-8">
-                Account
+                {AccountPageItems[lang].accountTitle}
             </p>
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                Sign in using your favourite anime social website
+                {AccountPageItems[lang].accountDescription}
             </p>
             <Divider />
             <OAuth2Links />
             <p className="text-2xl font-medium leading-none pt-8">
-                Settings
+                {AccountPageItems[lang].settingsTitle}
             </p>
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                Manage your settings
+                {AccountPageItems[lang].settingsDescription}
             </p>
             <Divider />
             <p className="text-lg leading-none pt-2">
-                Select your language
+                {AccountPageItems[lang].languageTitle}
             </p>
             <div className="flex flex-wrap gap-2">
                 <LocaleSwitcher />
             </div>
             <p className="text-lg leading-none pt-2">
-                Select an accent color
+                {AccountPageItems[lang].accentColorTitle}
             </p>
             <div className="flex flex-wrap gap-2">
                 <PaletteChanger
@@ -40,7 +48,7 @@ export default async function Page() {
                 />
             </div>
             <p className="text-lg leading-none pt-2">
-                Select a layout color and configuration
+                {AccountPageItems[lang].layoutConfigTitle}
             </p>
             <div className="flex flex-wrap gap-2">
                 <PaletteChanger
