@@ -33,10 +33,14 @@ export default function VidstackPlayer({
     const reference = useRef<MediaPlayerInstance>(null);
 
     const currentTime = useMediaState('currentTime', reference);
+    const duration = useMediaState('duration', reference);
     const error = useMediaState('error', reference);
     const controlsVisible = useMediaState('controlsVisible', reference);
     const isPlayingMediaState = useMediaState('playing', reference);
     const playerWidth = useMediaState('width', reference);
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const isTheLastTenSeconds = (duration - currentTime) <= 10;
 
     const [isSeeked, setIsSeeked] = useState<"forward" | "backward" | undefined>();
     const [beforeSeekTime, setBeforeSeekTime] = useState(currentTime);
@@ -185,6 +189,7 @@ export default function VidstackPlayer({
             </MediaPlayer>
         ),
         [
+            localControlsClassName,
             beforeSeekTime,
             isSeeked,
             isPlayingMediaState,

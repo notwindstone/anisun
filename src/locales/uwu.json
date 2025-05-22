@@ -1,0 +1,90 @@
+{
+  "metadata": {
+    "title": "Home | Anisun",
+    "description": "create next",
+    "languages": {
+      "en": "English",
+      "ru": "Русский"
+    }
+  },
+  "greetings": "hello",
+  "server": "This is server-side rendered text.",
+  "sidebar": {
+    "home": "Home",
+    "history": "History",
+    "library": "Library",
+    "account": "Account"
+  },
+  "footer": {
+    "description": "This site does not store any files on our server, we are linked to the media which is hosted on 3rd party services.",
+    "about": {
+      "title": "About",
+      "links": [
+        {
+          "name": "Source Code",
+          "url": "https://github.com/notwindstone/anisun"
+        },
+        {
+          "name": "Github Issues",
+          "url": "https://github.com/notwindstone/anisun/issues"
+        },
+        {
+          "name": "Contribute",
+          "url": "https://github.com/notwindstone/anisun/pulls"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "links": [
+        {
+          "name": "on Telegram",
+          "url": "https://t.me/windst1"
+        },
+        {
+          "name": "on Discord",
+          "url": "https://discord.com/users/510709295814279168"
+        },
+        {
+          "name": "on Github",
+          "url": "https://github.com/notwindstone/"
+        }
+      ]
+    }
+  },
+  "appearance": {
+    "slate": "Slate",
+    "gray": "Gray",
+    "zinc": "Zinc",
+    "neutral": "Neutral",
+    "stone": "Stone",
+    "red": "Red",
+    "orange": "Orange",
+    "amber": "Amber",
+    "yellow": "Yellow",
+    "lime": "Lime",
+    "green": "Green",
+    "emerald": "Emerald",
+    "teal": "Teal",
+    "cyan": "Cyan",
+    "sky": "Sky",
+    "blue": "Blue",
+    "indigo": "Indigo",
+    "violet": "Violet",
+    "purple": "Purple",
+    "fuchsia": "Fuchsia",
+    "pink": "Pink",
+    "rose": "Rose"
+  },
+  "aria": {
+    "toggleColorScheme": "Toggle app color scheme",
+    "changePaletteColor": "Set palette color to",
+    "switchLayout": "Switch app layout",
+    "toggleSidebar": "Toggle sidebar",
+    "searchAnimes": "Search anime titles",
+    "filterAnimes": "Filter anime titles"
+  },
+  "misc": {
+    "searchAnimes": "Search anime..."
+  }
+}

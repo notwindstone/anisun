@@ -67,7 +67,6 @@ export default async function RootLayout({
     const dictionaries = await getDictionary(lang);
 
     const cookieStore = await cookies();
-
     const configs = await getCookie({
         store: cookieStore,
         key: CookieConfigKey,
