@@ -2,7 +2,7 @@
 
 <img width="160" height="160" align="center" src="public/favicon.webp" alt="Favicon">
 
-# [anisun (rebooted)](https://anisun.vercel.app)
+# [anisun (rebooted)](https://anime.tatar)
 
 A web app for watching anime built with next.js
 
