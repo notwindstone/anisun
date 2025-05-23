@@ -8,6 +8,6 @@ export default function translate({
     locale: string;
 }): string {
     return locale === "uwu"
-        ? Uwuifier.uwuifySentence(text)
+        ? Uwuifier.uwuifySentence(text.toLowerCase())
         : text;
 }
