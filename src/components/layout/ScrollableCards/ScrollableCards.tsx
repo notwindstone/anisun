@@ -29,7 +29,7 @@ export default function ScrollableCards({
         const scrollLeft = element.scrollLeft;
         const startPos = {
             left: element.scrollLeft,
-            x: event.clientX,
+            x:    event.clientX,
         };
 
         // typescript is going nuts here if i specify only React.MouseEvent

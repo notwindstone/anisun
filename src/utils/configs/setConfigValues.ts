@@ -11,10 +11,10 @@ export default async function setConfigValues({
     configs: SafeConfigType | undefined;
 }) {
     await setCookie({
-        key: CookieConfigKey,
-        value: JSON.stringify(configs),
+        key:       CookieConfigKey,
+        value:     JSON.stringify(configs),
         expiresAt: getRelativeDate({ days: 365 }),
-        httpOnly: false,
+        httpOnly:  false,
     });
 }
 
@@ -26,8 +26,8 @@ export function setConfigValuesClient({
     setCookiesClient(CookieConfigKey, configs, {
         httpOnly: false,
         sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        expires: getRelativeDate({ days: 365 }),
-        path: "/",
+        secure:   process.env.NODE_ENV === "production",
+        expires:  getRelativeDate({ days: 365 }),
+        path:     "/",
     });
 }

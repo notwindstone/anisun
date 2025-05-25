@@ -12,11 +12,11 @@ export default function AnimatedGradientText({
     const { data: { colors: { accent } } } = useContext(ConfigsContext);
     const gradientFrom = parseTailwindColor({
         color: accent,
-        step: 700,
+        step:  700,
     });
     const gradientTo = parseTailwindColor({
         color: accent,
-        step: 400,
+        step:  400,
     });
 
     return (
@@ -24,8 +24,8 @@ export default function AnimatedGradientText({
             className={`animate-gradient text-2xl font-bold text-transparent leading-none`}
             style={{
                 backgroundImage: `linear-gradient(to right,${gradientFrom},${gradientTo},${gradientFrom})`,
-                backgroundClip: "text",
-                backgroundSize: "200% auto",
+                backgroundClip:  "text",
+                backgroundSize:  "200% auto",
             }}
         >
             {children}

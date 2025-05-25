@@ -7,7 +7,7 @@ export const AnilibriaSearchContext = createContext<{
     search: string;
     setSearch: Dispatch<SetStateAction<string>>;
 }>({
-    search: "",
+    search:    "",
     setSearch: () => {},
 });
 
@@ -24,7 +24,7 @@ export function AnilibriaSearchProvider({
 
     return (
         <AnilibriaSearchContext.Provider value={{
-            search: debounced,
+            search:    debounced,
             setSearch: setDebounced,
         }}>
             {children}

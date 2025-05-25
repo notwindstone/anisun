@@ -36,12 +36,12 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
     };
 
     const response = await fetch('https://graphql.anilist.co', {
-        method: 'POST',
+        method:  'POST',
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            query: query,
+            query:     query,
             variables: JSON.stringify({
                 ...variables,
                 perPage: 32,

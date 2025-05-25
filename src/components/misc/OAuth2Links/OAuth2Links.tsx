@@ -12,7 +12,7 @@ const entries: entriesType = Object.keys(OAuth2Routes) as entriesType;
 export default async function OAuth2Links() {
     const cookieStore = await cookies();
     const accessToken = await getCookie({
-        key: AccessTokenCookieKey,
+        key:   AccessTokenCookieKey,
         store: cookieStore,
     });
 

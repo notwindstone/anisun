@@ -20,11 +20,11 @@ export default function AppWrapper({
             backgroundColor: theme === DarkThemeKey
                 ? parseTailwindColor({
                     color: base,
-                    step: 950,
+                    step:  950,
                 })
                 : parseTailwindColor({
                     color: base,
-                    step: 50,
+                    step:  50,
                 }),
             color: theme === DarkThemeKey
                 ? "var(--dark-foreground)"

@@ -23,6 +23,6 @@ export function getUniversalUser({
 }): UserType {
     return {
         username: getUsername(user),
-        avatar: getAvatar(user),
+        avatar:   getAvatar(user),
     };
 }

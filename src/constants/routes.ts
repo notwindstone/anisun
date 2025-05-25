@@ -2,42 +2,42 @@ import { AnimesQueryParameters } from "@/constants/shikimori";
 import { AnilistIcon, MALIcon, ShikimoriIcon } from "@/constants/icons";
 
 export const APIRoutes = {
-    Root: "/api",
+    Root:   "/api",
     OAuth2: {
-        Root: "/oauth2",
+        Root:     "/oauth2",
         Pathname: "oauth2",
-        Segment: "/oauth2/",
-        Login: {
-            Root: "/login",
-            Pathname: "login",
-            Segment: "/login/",
+        Segment:  "/oauth2/",
+        Login:    {
+            Root:      "/login",
+            Pathname:  "login",
+            Segment:   "/login/",
             Shikimori: {
-                Root: "/shikimori",
+                Root:     "/shikimori",
                 Pathname: "shikimori",
             },
             Anilist: {
-                Root: "/anilist",
+                Root:     "/anilist",
                 Pathname: "anilist",
             },
             MAL: {
-                Root: "/mal",
+                Root:     "/mal",
                 Pathname: "mal",
             },
         },
         Callback: {
-            Root: "/callback",
-            Pathname: "callback",
-            Segment: "/callback/",
+            Root:      "/callback",
+            Pathname:  "callback",
+            Segment:   "/callback/",
             Shikimori: {
-                Root: "/shikimori",
+                Root:     "/shikimori",
                 Pathname: "shikimori",
             },
             Anilist: {
-                Root: "/anilist",
+                Root:     "/anilist",
                 Pathname: "anilist",
             },
             MAL: {
-                Root: "/mal",
+                Root:     "/mal",
                 Pathname: "mal",
             },
         },
@@ -46,18 +46,18 @@ export const APIRoutes = {
 export const RemoteRoutes = {
     Shikimori: {
         V1: {
-            Root: "https://shikimori.one/api",
+            Root:  "https://shikimori.one/api",
             Users: {
-                Root: "/users",
+                Root:     "/users",
                 Pathname: "users",
-                Segment: "/users/",
-                WhoAmI: {
-                    Root: "/whoami",
+                Segment:  "/users/",
+                WhoAmI:   {
+                    Root:     "/whoami",
                     Pathname: "whoami",
                 },
             },
         },
-        V2: {},
+        V2:      {},
         GraphQL: {},
     },
     MALToAnilibriaID: {
@@ -75,58 +75,58 @@ export const OAuth2Routes = {
         _FetchUser: RemoteRoutes.Shikimori.V1.Root
             + RemoteRoutes.Shikimori.V1.Users.Root
             + RemoteRoutes.Shikimori.V1.Users.WhoAmI.Root,
-        __Icon:      ShikimoriIcon,
-        __Name:      "Shikimori",
+        __Icon: ShikimoriIcon,
+        __Name: "Shikimori",
     },
     Anilist: {
-        Login:      loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
-        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
-        __Icon:      AnilistIcon,
-        __Name:      "AniList",
+        Login:    loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
+        Callback: callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
+        __Icon:   AnilistIcon,
+        __Name:   "AniList",
     },
     MAL: {
-        Login:      loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
-        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
-        __Icon:      MALIcon,
-        __Name:      "MyAnimeList",
+        Login:    loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
+        Callback: callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
+        __Icon:   MALIcon,
+        __Name:   "MyAnimeList",
     },
 };
 export const PageRoutes = {
-    Root: "/",
+    Root:    "/",
     Profile: {
-        Root: "/profile",
+        Root:     "/profile",
         Pathname: "profile",
         // Segment property is available only for deeply nested pages
         // For example, /profile/[username] has another nested page
-        Segment: "/profile/",
-        Params: {
+        Segment:  "/profile/",
+        Params:   {
             Username: "username",
         },
     },
     Anime: {
-        Root: "/anime",
+        Root:     "/anime",
         Pathname: "anime",
-        Segment: "/anime/",
-        Params: {
+        Segment:  "/anime/",
+        Params:   {
             Series: "series",
         },
     },
     History: {
-        Root: "/history",
+        Root:     "/history",
         Pathname: "history",
     },
     Library: {
-        Root: "/library",
-        Pathname: "library",
-        Segment: "/library/",
+        Root:         "/library",
+        Pathname:     "library",
+        Segment:      "/library/",
         // refer to https://shikimori.one/api/doc/graphql
         SearchParams: AnimesQueryParameters,
     },
     Account: {
-        Root: "/account",
+        Root:     "/account",
         Pathname: "account",
-        Segment: "/account/",
-        Params: {
+        Segment:  "/account/",
+        Params:   {
             Error: "error",
         },
     },

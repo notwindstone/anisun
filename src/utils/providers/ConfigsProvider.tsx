@@ -12,9 +12,9 @@ export const ConfigsContext = createContext<{
     optimisticallyUpdate: Dispatch<SetStateAction<ParsedConfigType>> | undefined;
     dictionaries: DictionariesType;
 }>({
-    data: InitialConfig,
+    data:                 InitialConfig,
     optimisticallyUpdate: undefined,
-    dictionaries: undefined,
+    dictionaries:         undefined,
 });
 
 export function ConfigsProvider({
@@ -33,9 +33,9 @@ export function ConfigsProvider({
 
     return (
         <ConfigsContext.Provider value={{
-            data: safeConfigsState,
+            data:                 safeConfigsState,
             optimisticallyUpdate: setConfigsState,
-            dictionaries: dictionaries,
+            dictionaries:         dictionaries,
         }}>
             {children}
         </ConfigsContext.Provider>

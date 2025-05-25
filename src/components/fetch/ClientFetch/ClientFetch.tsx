@@ -22,7 +22,7 @@ export default function ClientFetch({
 }) {
     const { isPending, error, data } = useQuery({
         queryKey: queryKey,
-        queryFn: async () => await Getters[method](fetchArguments),
+        queryFn:  async () => await Getters[method](fetchArguments),
     });
 
     if (isPending) {

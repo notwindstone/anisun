@@ -19,7 +19,7 @@ export default function VideoClientQuery({
     const searchParameters = useSearchParams();
     const { isPending, error, data } = useQuery({
         queryKey: queryKey,
-        queryFn: async () => await VideoGetters[method](fetchArguments),
+        queryFn:  async () => await VideoGetters[method](fetchArguments),
     });
 
     useEffect(() => {

@@ -61,11 +61,11 @@ export default function MobileNavbar({
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
                             color: base,
-                            step: 900,
+                            step:  900,
                         })
                         : parseTailwindColor({
                             color: base,
-                            step: 100,
+                            step:  100,
                         }),
                 }}
             >
@@ -81,7 +81,7 @@ export default function MobileNavbar({
                                     style={focused === item.href ? {
                                         color: parseTailwindColor({
                                             color: accent,
-                                            step: 500,
+                                            step:  500,
                                         }),
                                     } : undefined}
                                     href={item.href}

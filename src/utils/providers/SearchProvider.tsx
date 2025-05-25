@@ -10,7 +10,7 @@ export const SearchContext = createContext<{
 }>({
     data: {
         search: "",
-        type: "name",
+        type:   "name",
     },
     setData: () => {},
 });
@@ -26,7 +26,7 @@ export function SearchProvider({
 
     return (
         <SearchContext.Provider value={{
-            data: debounced,
+            data:    debounced,
             setData: setDebounced,
         }}>
             {children}

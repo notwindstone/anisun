@@ -37,7 +37,7 @@ export default function SmallCard({
 
     const baseColor = [ ...parseTailwindColor({
         color: base,
-        step: theme === DarkThemeKey
+        step:  theme === DarkThemeKey
             ? 950
             : 50,
     }) ];
@@ -76,7 +76,7 @@ export default function SmallCard({
                                 <Badge textSize="text-xs">
                                     {
                                         translate({
-                                            text: status,
+                                            text:   status,
                                             locale: locale,
                                         })
                                     }
@@ -94,7 +94,7 @@ export default function SmallCard({
                     <p className="text-md text-black dark:text-white text-pretty font-medium drop-shadow-sm line-clamp-3">
                         {
                             translate({
-                                text: name,
+                                text:   name,
                                 locale: locale,
                             })
                         }

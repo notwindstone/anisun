@@ -6,10 +6,10 @@ export const LightThemeKey = "light";
 export const SidebarLeftPosition = "left";
 export const SidebarRightPosition = "right";
 export const InitialConfig: SafeConfigType = {
-    theme: DarkThemeKey,
+    theme:  DarkThemeKey,
     colors: {
         accent: "rose",
-        base: "neutral",
+        base:   "neutral",
     },
     layout: {
         sidebar: {

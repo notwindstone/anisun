@@ -61,7 +61,7 @@ export default function Cards({
 
     const colorFirstArray = [ ...parseTailwindColor({
         color: base,
-        step: theme === DarkThemeKey
+        step:  theme === DarkThemeKey
             ? 950
             : 50,
     }) ];

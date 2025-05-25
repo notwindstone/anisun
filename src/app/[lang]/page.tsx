@@ -19,7 +19,7 @@ export default async function Home({
         key: CookieConfigKey,
     });
     const parsedConfigData = readCookiesData<ParsedConfigType>({
-        data: configs,
+        data:         configs,
         fallbackData: InitialConfig,
     });
     const { theme, colors: { base } } = getSafeConfigValues({

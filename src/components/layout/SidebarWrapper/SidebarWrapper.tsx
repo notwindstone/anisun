@@ -19,11 +19,11 @@ const icons: {
     }
 } = {
     "left": {
-        "true": <PanelLeftClose />,
+        "true":  <PanelLeftClose />,
         "false": <PanelLeftOpen />,
     },
     "right": {
-        "true": <PanelLeftOpen />,
+        "true":  <PanelLeftOpen />,
         "false": <PanelLeftClose />,
     },
 };
@@ -51,15 +51,15 @@ export default function SidebarWrapper({
             <div
                 className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-colors duration-200 overflow-hidden"
                 style={{
-                    width: expanded ? 256 : 56,
+                    width:           expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
                             color: base,
-                            step: 900,
+                            step:  900,
                         })
                         : parseTailwindColor({
                             color: base,
-                            step: 100,
+                            step:  100,
                         }),
                 }}
             >

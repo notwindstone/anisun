@@ -10,10 +10,10 @@ export async function GET(): Promise<Response> {
     const url = shikimori.createAuthorizationURL(state);
 
     cookieStore.set("state", state, {
-        secure: process.env.NODE_ENV === "production",
-        path: "/",
+        secure:   process.env.NODE_ENV === "production",
+        path:     "/",
         httpOnly: true,
-        maxAge: 60 * 10,
+        maxAge:   60 * 10,
     });
 
     return redirect(url.toString());

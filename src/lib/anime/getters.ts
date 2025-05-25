@@ -8,11 +8,11 @@ import fetchAnilibriaVideo from "@/lib/anime/fetchAnilibriaVideo";
 // TODO implement a GraphQL query builder
 // A workaround for passing methods from server to the client
 export const Getters = {
-    FetchHeroTitle: fetchHeroTitle,
-    FetchTrendingTitles: fetchTrendingTitles,
+    FetchHeroTitle:                fetchHeroTitle,
+    FetchTrendingTitles:           fetchTrendingTitles,
     FetchUpcomingNextSeasonTitles: fetchUpcomingNextSeasonTitles,
-    FetchTopTitles: fetchTopTitles,
-    SearchTitles: searchTitles,
+    FetchTopTitles:                fetchTopTitles,
+    SearchTitles:                  searchTitles,
 };
 export const VideoGetters = {
     FetchAnilibriaVideo: fetchAnilibriaVideo,

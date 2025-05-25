@@ -51,7 +51,7 @@ export default function HeroCard({
 
     const gradientColorTwo = parseTailwindColor({
         color: base,
-        step: theme === DarkThemeKey
+        step:  theme === DarkThemeKey
             ? 950
             : 50,
     });
@@ -104,7 +104,7 @@ export default function HeroCard({
                                 <Badge textSize="sm:text-xl text-md" key={genre}>
                                     {
                                         translate({
-                                            text: genre,
+                                            text:   genre,
                                             locale: locale,
                                         })
                                     }
@@ -116,7 +116,7 @@ export default function HeroCard({
                 <p className="text-2xl sm:text-4xl text-black dark:text-white text-pretty text-center font-medium sm:text-start">
                     {
                         translate({
-                            text: name,
+                            text:   name,
                             locale: locale,
                         })
                     }
@@ -126,7 +126,7 @@ export default function HeroCard({
                 >
                     {
                         translate({
-                            text: description,
+                            text:   description,
                             locale: locale,
                         })
                     }

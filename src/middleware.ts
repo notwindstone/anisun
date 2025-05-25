@@ -81,9 +81,9 @@ export async function middleware(request: NextRequest) {
         response.cookies.set(CookieLocaleKey, JSON.stringify(locale), {
             httpOnly: false,
             sameSite: "lax",
-            secure: process.env.NODE_ENV === "production",
-            expires: getRelativeDate({ days: 365 }),
-            path: "/",
+            secure:   process.env.NODE_ENV === "production",
+            expires:  getRelativeDate({ days: 365 }),
+            path:     "/",
         });
 
         return response;

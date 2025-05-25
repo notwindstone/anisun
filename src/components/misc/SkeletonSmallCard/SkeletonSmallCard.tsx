@@ -30,7 +30,7 @@ export default function SkeletonSmallCard({
                                         style={{
                                             backgroundColor: parseTailwindColor({
                                                 color: base,
-                                                step: theme === DarkThemeKey
+                                                step:  theme === DarkThemeKey
                                                     ? 800
                                                     : 200,
                                             }),
@@ -50,7 +50,7 @@ export default function SkeletonSmallCard({
                                         style={{
                                             backgroundColor: parseTailwindColor({
                                                 color: base,
-                                                step: theme === DarkThemeKey
+                                                step:  theme === DarkThemeKey
                                                     ? 800
                                                     : 200,
                                             }),

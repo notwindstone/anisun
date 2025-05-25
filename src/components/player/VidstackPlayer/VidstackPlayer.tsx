@@ -107,8 +107,8 @@ export default function VidstackPlayer({
                                 className={`${localControlsClassName} flex justify-center items-center bg-transparent transition duration-200 ease-out hover:scale-110 hover:bg-[#fff3] hover:cursor-pointer active:scale-110 active:bg-[#fff3] mr-2`}
                                 style={{
                                     borderRadius: isPlayerCompact ? "100%" : 8,
-                                    width: isPlayerCompact ? 96 : 40,
-                                    height: isPlayerCompact ? 96 : 40,
+                                    width:        isPlayerCompact ? 96 : 40,
+                                    height:       isPlayerCompact ? 96 : 40,
                                 }}
                                 onClick={async () => {
                                     if (!reference.current) {
@@ -159,12 +159,12 @@ export default function VidstackPlayer({
                             style={
                                 isPlayerCompact ? {
                                     display: controlsVisible ? "flex" : "none",
-                                    top: 4,
-                                    left: 4,
+                                    top:     4,
+                                    left:    4,
                                 } : {
                                     display: controlsVisible ? "flex" : "none",
-                                    bottom: 10,
-                                    right: 96,
+                                    bottom:  10,
+                                    right:   96,
                                 }
                             }
                         >

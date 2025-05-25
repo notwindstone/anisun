@@ -22,7 +22,7 @@ export default function AnilibriaSearch() {
                 style={{
                     background: parseTailwindColor({
                         color: base,
-                        step: theme === DarkThemeKey
+                        step:  theme === DarkThemeKey
                             ? 900
                             : 200,
                     }),

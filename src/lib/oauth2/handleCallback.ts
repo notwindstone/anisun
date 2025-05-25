@@ -68,25 +68,25 @@ export async function handleCallback({
     const cookieStore = await cookies();
 
     await setCookie({
-        store: cookieStore,
-        key: AccessTokenCookieKey,
-        value: accessToken,
+        store:     cookieStore,
+        key:       AccessTokenCookieKey,
+        value:     accessToken,
         expiresAt: getRelativeDate({ days: 30 }),
-        httpOnly: true,
+        httpOnly:  true,
     });
     await setCookie({
-        store: cookieStore,
-        key: AccessTokenProviderCookieKey,
-        value: providerName,
+        store:     cookieStore,
+        key:       AccessTokenProviderCookieKey,
+        value:     providerName,
         expiresAt: getRelativeDate({ days: 30 }),
-        httpOnly: true,
+        httpOnly:  true,
     });
     await setCookie({
-        store: cookieStore,
-        key: AccountInfoCookieKey,
-        value: JSON.stringify(user),
+        store:     cookieStore,
+        key:       AccountInfoCookieKey,
+        value:     JSON.stringify(user),
         expiresAt: getRelativeDate({ days: 30 }),
-        httpOnly: false,
+        httpOnly:  false,
     });
 
     return PageRoutes.Account.Root;

@@ -79,10 +79,10 @@ export default function getSafeConfigValues({
     config: ParsedConfigType;
 }): SafeConfigType {
     return {
-        theme: getThemeColor(config),
+        theme:  getThemeColor(config),
         colors: {
             accent: getAccentColor(config),
-            base: getBaseColor(config),
+            base:   getBaseColor(config),
         },
         layout: {
             sidebar: getSidebarProperties(config),

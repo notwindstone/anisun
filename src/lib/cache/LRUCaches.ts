@@ -6,9 +6,9 @@ import { getTimeDifference } from "@/utils/misc/getTimeDifference";
 // refer to https://github.com/vercel/next.js/discussions/59509 (no i'm not implementing that)
 export const AnimeLRUCache = new QuickLRU<string, AnimeType | Array<AnimeType>>({
     maxSize: 5000,
-    maxAge: getTimeDifference({ days: 1 }),
+    maxAge:  getTimeDifference({ days: 1 }),
 });
 export const MiscLRUCache = new QuickLRU<string, number>({
     maxSize: 50,
-    maxAge: getTimeDifference({ minutes: 3 }),
+    maxAge:  getTimeDifference({ minutes: 3 }),
 });

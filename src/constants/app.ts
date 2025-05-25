@@ -8,7 +8,7 @@ export const AccessTokenProviderCookieKey = "tokenProvider";
 export const AccountInfoCookieKey = "accountInfo";
 export const getFooterItems = (dictionaries: DictionariesType) => ({
     description: dictionaries?.footer?.description,
-    columns: [
+    columns:     [
         {
             title: dictionaries?.footer?.about?.title,
             links: dictionaries?.footer?.about?.links,

@@ -43,13 +43,13 @@ export default function Badge({
                 style={isScore ? undefined : {
                     backgroundColor: parseTailwindColor({
                         color: base,
-                        step: theme === DarkThemeKey
+                        step:  theme === DarkThemeKey
                             ? 900
                             : 100,
                     }),
                     color: parseTailwindColor({
                         color: base,
-                        step: theme === DarkThemeKey
+                        step:  theme === DarkThemeKey
                             ? 300
                             : 800,
                     }),

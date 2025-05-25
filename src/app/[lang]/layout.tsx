@@ -23,12 +23,12 @@ import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotif
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
-    subsets: ["latin"],
+    subsets:  ["latin"],
 });
 
 const geistMono = Geist_Mono({
     variable: "--font-geist-mono",
-    subsets: ["latin"],
+    subsets:  ["latin"],
 });
 
 export async function generateMetadata({
@@ -45,7 +45,7 @@ export async function generateMetadata({
         icons: "/favicon.webp",
         title: {
             template: `%s | ${AppName.toLowerCase()}`,
-            default: title,
+            default:  title,
         },
         description,
     };
@@ -69,22 +69,22 @@ export default async function RootLayout({
     const cookieStore = await cookies();
     const configs = await getCookie({
         store: cookieStore,
-        key: CookieConfigKey,
+        key:   CookieConfigKey,
     });
     const accountInfo = await getCookie({
         store: cookieStore,
-        key: AccountInfoCookieKey,
+        key:   AccountInfoCookieKey,
     });
 
     const parsedConfigData = readCookiesData<ParsedConfigType>({
-        data: configs,
+        data:         configs,
         fallbackData: InitialConfig,
     });
     const parsedAccountInfoData = readCookiesData<UserType | unknown>({
-        data: accountInfo,
+        data:         accountInfo,
         fallbackData: {
             username: "",
-            avatar: "",
+            avatar:   "",
         },
     });
 

@@ -40,9 +40,9 @@ export async function setCookie({
     cookieStore.set(key, value, {
         httpOnly: httpOnly,
         sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        expires: expiresAt,
-        path: "/",
+        secure:   process.env.NODE_ENV === "production",
+        expires:  expiresAt,
+        path:     "/",
     });
 }
 
@@ -58,8 +58,8 @@ export async function deleteCookie({
     cookieStore.set(key, "", {
         httpOnly: false,
         sameSite: "lax",
-        secure: process.env.NODE_ENV === "production",
-        maxAge: 0,
-        path: "/",
+        secure:   process.env.NODE_ENV === "production",
+        maxAge:   0,
+        path:     "/",
     });
 }

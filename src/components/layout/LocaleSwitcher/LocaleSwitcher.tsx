@@ -10,10 +10,10 @@ import Button from "@/components/base/Button/Button";
 
 const handleLocaleSwitch = async (locale: Locale) => {
     await setCookie({
-        key: CookieLocaleKey,
-        value: JSON.stringify(locale),
+        key:       CookieLocaleKey,
+        value:     JSON.stringify(locale),
         expiresAt: getRelativeDate({ days: 365 }),
-        httpOnly: false,
+        httpOnly:  false,
     });
 };
 

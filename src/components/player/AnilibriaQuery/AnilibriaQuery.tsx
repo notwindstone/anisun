@@ -14,7 +14,7 @@ export default function AnilibriaQuery() {
     const { search } = useContext(AnilibriaSearchContext);
     const { isPending, error, data } = useQuery({
         queryKey: ["anime", "anilibria", search],
-        queryFn: async () => {
+        queryFn:  async () => {
             if (!search) {
                 return [];
             }
@@ -52,7 +52,7 @@ export default function AnilibriaQuery() {
         <>
             {
                 // TODO lol this is a mess
-                // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+                 
                 // eslint-disable-next-line
                 // @ts-ignore
                 data.map((anime) => {
@@ -63,7 +63,7 @@ export default function AnilibriaQuery() {
                             </div>
                             <Button
                                 onClick={() => handleMediaSelect({
-                                    url: `https://cache.libria.fun${anime.player.list?.["1"].hls.fhd}`,
+                                    url:   `https://cache.libria.fun${anime.player.list?.["1"].hls.fhd}`,
                                     title: anime.names.en,
                                 })}
                                 label={anime.names.en}

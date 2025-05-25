@@ -9,7 +9,7 @@ import { DarkThemeKey } from "@/constants/configs";
 import { SearchContext } from "@/utils/providers/SearchProvider";
 
 const icons = {
-    id: "ID",
+    id:   "ID",
     name: "Name",
 };
 
@@ -29,7 +29,7 @@ export default function SearchBar() {
                 style={{
                     background: parseTailwindColor({
                         color: base,
-                        step: theme === DarkThemeKey
+                        step:  theme === DarkThemeKey
                             ? 900
                             : 200,
                     }),
@@ -47,7 +47,7 @@ export default function SearchBar() {
 
                         setData({
                             search: value,
-                            type: searchType,
+                            type:   searchType,
                         });
                     }}
                     placeholder={dictionaries?.misc?.searchAnimes}

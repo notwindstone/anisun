@@ -32,7 +32,7 @@ export default function getButtonColor({
                 : "black";
             background = parseTailwindColor({
                 color: base,
-                step: theme === DarkThemeKey
+                step:  theme === DarkThemeKey
                     ? 800
                     : 200,
             });
@@ -49,7 +49,7 @@ export default function getButtonColor({
             foreground = "white";
             background = parseTailwindColor({
                 color: accent,
-                step: 600,
+                step:  600,
             });
             break;
         }
