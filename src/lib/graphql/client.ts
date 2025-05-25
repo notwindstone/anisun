@@ -4,6 +4,56 @@ import { VariablesType } from "@/types/Anime/Variables.type";
 import { QueryParametersType } from "@/constants/anilist";
 import IsKeyInObject from "@/types/Utils/IsKeyInObject";
 
+/*
+ * why does typescript accept this shit
+ * but throw an error if i write
+ *
+ * type ErrorNode = Record<string, ErrorNode>;
+ */
+type ShittyNode = {
+    children: Record<string, ShittyNode>;
+};
+
+function formatArrayToGraphQLString(entries: string[]) {
+    const root: ShittyNode = { children: {} };
+
+    for (const entry of entries) {
+        const parts = entry.split(".");
+        let currentNode = root;
+
+        for (const part of parts) {
+            if (currentNode.children[part] === undefined) {
+                currentNode.children[part] = { children: {} };
+            }
+
+            currentNode = currentNode.children[part];
+        }
+    }
+
+    function generateString(nodeChildren: Record<string, ShittyNode>) {
+        const parts: Array<string> = [];
+        const nodeChildrenKeys = Object.keys(nodeChildren);
+
+        for (const key of nodeChildrenKeys) {
+            const childNode = nodeChildren[key];
+
+            if (Object.keys(childNode.children).length === 0) {
+                parts.push(key);
+
+                continue;
+            }
+
+            const inner = generateString(childNode.children);
+
+            parts.push(`${key} {${inner}}`);
+        }
+
+        return parts.join(" ");
+    }
+
+    return generateString(root.children);
+}
+
 export const GraphQLClient = {
     Anilist: ({
         operation,
@@ -51,67 +101,14 @@ export const GraphQLClient = {
 
         const templateMediaQueryParameters = templateMediaQueryParametersArray.join(", ");
         const templateQueryVariables = templateQueryVariablesArray.join(", ");
-
-        const fieldMap = new Map<string, {
-            children: Set<string> | undefined;
-            value: string;
-            root: string;
-            isRoot: boolean;
-        }>();
-        const fieldQueriesObject: Record<string, string> = {};
-
-        for (const field of fields) {
-            const queryFields = field.split(".");
-            let partIndex = queryFields.length - 1;
-
-            fieldQueriesObject[queryFields[0]] = queryFields.length > 1
-                ? `${queryFields[0]} {`
-                : queryFields[0];
-
-            while (queryFields[partIndex] !== undefined) {
-                const part = queryFields[partIndex];
-                const nextPart = queryFields[partIndex + 1];
-                const fieldChildren = fieldMap.get(part)?.children ?? new Set<string>();
-
-                fieldChildren.add(nextPart);
-                fieldMap.set(part, {
-                    children: fieldChildren,
-                    value:    part,
-                    root:     queryFields[0],
-                    isRoot:   partIndex === 0,
-                });
-
-                partIndex--;
-            }
-        }
-
-        const fieldMapValues = fieldMap.values();
-
-        for (const field of fieldMapValues) {
-            const { value, children, root, isRoot } = field;
-            const fieldQueryObject = fieldQueriesObject[root];
-
-            if (isRoot) {
-                continue;
-            }
-
-            if (children === undefined) {
-                fieldQueriesObject[root] = fieldQueryObject + `${value}`;
-
-                continue;
-            }
-
-            fieldQueriesObject[root] = fieldQueryObject + `${value}`;
-        }
-
-        console.log(fieldMap, fieldQueriesObject);
+        const templateQueryFields = formatArrayToGraphQLString(fields);
 
         let templateQuery: string;
         let queryVariables: string;
 
         switch (operation) {
             case "Page.Media": {
-                templateQuery = `query(${templateQueryVariables}, $perPage: Int, $page: Int) { Page(perPage: $perPage, page: $page) { media(${templateMediaQueryParameters}) { ${fields.join(" ")} } } }`;
+                templateQuery = `query(${templateQueryVariables}, $perPage: Int, $page: Int) { Page(perPage: $perPage, page: $page) { media(${templateMediaQueryParameters}) { ${templateQueryFields} } } }`;
                 queryVariables = JSON.stringify({
                     ...pageVariables,
                     ...mediaVariables,
@@ -120,7 +117,7 @@ export const GraphQLClient = {
                 break;
             }
             default: {
-                templateQuery = `query(${templateQueryVariables}) { Media(${templateMediaQueryParameters}) { ${fields.join(" ")} } }`;
+                templateQuery = `query(${templateQueryVariables}) { Media(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
                 queryVariables = JSON.stringify({
                     ...mediaVariables,
                 });
