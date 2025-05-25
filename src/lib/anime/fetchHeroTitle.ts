@@ -29,12 +29,7 @@ const fetchHeroTitle = async (options?: Partial<Request> | undefined): Promise<A
             }
         }
     `;
-    const something = GraphQLClient.Anilist({
-        operation: "Media(type: ANIME)",
-        variables: {},
-        fields: ["id", "status"],
-    });
-console.log(something);
+
     const response = await fetch('https://graphql.anilist.co', {
         method: 'POST',
         headers: {

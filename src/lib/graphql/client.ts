@@ -1,5 +1,8 @@
 import { GraphQLBuilderResponseType } from "@/types/General/GraphQLBuilderResponse.type";
 import { QueryType } from "@/types/Anime/Query.type";
+import { VariablesType } from "@/types/Anime/Variables.type";
+import { QueryParametersType } from "@/constants/anilist";
+import IsKeyInObject from "@/types/Utils/IsKeyInObject";
 
 export const GraphQLClient = {
     Anilist: ({
@@ -7,34 +10,69 @@ export const GraphQLClient = {
         fields,
         variables,
     }: {
-        operation: "Page.Media" | "Media";
+        operation: "Media";
         fields: Array<QueryType>;
         variables: {
-            page?: {
+            page?: undefined;
+            media: VariablesType;
+        };
+    } | {
+        operation: "Page.Media";
+        fields: Array<QueryType>;
+        variables: {
+            page: {
                 perPage: number;
                 page: number;
             },
-            media: Record<string, string>;
+            media: VariablesType;
         };
     }): GraphQLBuilderResponseType<string, string> => {
+        const mediaVariables = variables.media;
+        const pageVariables = variables?.page;
+
+        const templateMediaQueryParametersArray: Array<string> = [];
+        const templateQueryVariablesArray: Array<string> = [];
+
+        for (const key of Object.keys(mediaVariables)) {
+            if (IsKeyInObject<typeof QueryParametersType>(key, QueryParametersType)) {
+                const keyType = QueryParametersType[key];
+                const queryParameter = `${key}: $${key}`;
+                const queryVariable = `$${key}: ${keyType}`;
+
+                templateMediaQueryParametersArray.push(queryParameter);
+                templateQueryVariablesArray.push(queryVariable);
+            }
+        }
+
+        const templateMediaQueryParameters = templateMediaQueryParametersArray.join(", ");
+        const templateQueryVariables = templateQueryVariablesArray.join(", ");
+
         let templateQuery: string;
+        let queryVariables: string;
 
         switch (operation) {
             case "Page.Media": {
                 templateQuery = `query($mediaType: MediaType, $perPage: Int, $page: Int) { Page(perPage: $perPage, page: $page) { media(type: $mediaType) { ${fields.join(" ")} } } }`;
+                queryVariables = JSON.stringify({
+                    ...pageVariables,
+                    ...mediaVariables,
+                });
 
                 break;
             }
             default: {
-                templateQuery = `query($mediaType: MediaType) { Media(type: $mediaType) { ${fields.join(" ")} } }`;
+                templateQuery = `query(${templateQueryVariables}) { Media(${templateMediaQueryParameters}) { ${fields.join(" ")} } }`;
+                queryVariables = JSON.stringify({
+                    ...mediaVariables,
+                });
 
                 break;
             }
         }
 
         return {
-            query: templateQuery,
-            variables: JSON.stringify(variables),
+            query:     templateQuery,
+            variables: queryVariables,
         };
     },
     Shikimori: {},
