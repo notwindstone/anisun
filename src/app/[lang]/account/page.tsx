@@ -25,7 +25,7 @@ export default async function Page({
                 idMal: 52_991,
             },
         },
-        fields: ["id", "idMal", "title.romaji", "status"],
+        fields: ["id", "idMal", "title.romaji", "status", "stats.scoreDistribution.amount", "stats.scoreDistribution.score"],
     });
     console.log(something);
 
