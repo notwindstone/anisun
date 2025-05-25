@@ -6,7 +6,7 @@ import IsKeyInObject from "@/types/Utils/IsKeyInObject";
 
 /*
  * why does typescript accept this shit
- * but throw an error if i write
+ * but throws an error if i write
  *
  * type ErrorNode = Record<string, ErrorNode>;
  */
