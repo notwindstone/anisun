@@ -14,32 +14,33 @@ export default async function Page({
     params: Promise<{ lang: Locale }>;
 }) {
     const { lang } = await params;
+    const accountPageItems = AccountPageItems[lang];
 
     return (
         <div className="flex flex-col pb-4 px-4 gap-4 mx-auto max-w-384">
             <p className="text-2xl font-medium leading-none pt-8">
-                {AccountPageItems[lang].accountTitle}
+                {accountPageItems.accountTitle}
             </p>
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                {AccountPageItems[lang].accountDescription}
+                {accountPageItems.accountDescription}
             </p>
             <Divider />
             <OAuth2Links />
             <p className="text-2xl font-medium leading-none pt-8">
-                {AccountPageItems[lang].settingsTitle}
+                {accountPageItems.settingsTitle}
             </p>
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                {AccountPageItems[lang].settingsDescription}
+                {accountPageItems.settingsDescription}
             </p>
             <Divider />
             <p className="text-lg leading-none pt-2">
-                {AccountPageItems[lang].languageTitle}
+                {accountPageItems.languageTitle}
             </p>
             <div className="flex flex-wrap gap-2">
                 <LocaleSwitcher />
             </div>
             <p className="text-lg leading-none pt-2">
-                {AccountPageItems[lang].accentColorTitle}
+                {accountPageItems.accentColorTitle}
             </p>
             <div className="flex flex-wrap gap-2">
                 <PaletteChanger
@@ -48,7 +49,7 @@ export default async function Page({
                 />
             </div>
             <p className="text-lg leading-none pt-2">
-                {AccountPageItems[lang].layoutConfigTitle}
+                {accountPageItems.layoutConfigTitle}
             </p>
             <div className="flex flex-wrap gap-2">
                 <PaletteChanger

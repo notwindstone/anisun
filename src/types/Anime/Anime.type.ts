@@ -1,6 +1,5 @@
-export type AnimeType = {
+export type AnimeType = Partial<{
     id:                         number;
-} & Partial<{
     airingSchedule:             string // should change;
     averageScore:               number;
     bannerImage:                string;
