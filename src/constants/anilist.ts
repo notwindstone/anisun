@@ -6,6 +6,7 @@ export const ParameterType = {
     MediaType:   "MediaType",
     MediaFormat: "MediaFormat",
     MediaStatus: "MediaStatus",
+    MediaSort:   "[MediaSort]",
 };
 export const QueryParametersType = {
     id:           ParameterType.Int,
@@ -26,4 +27,5 @@ export const QueryParametersType = {
     averageScore: ParameterType.Int,
     popularity:   ParameterType.Int,
     search:       ParameterType.String,
+    sort:         ParameterType.MediaSort,
 };

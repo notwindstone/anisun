@@ -1,43 +1,49 @@
 import { AnimeType } from "@/types/Anime/Anime.type";
+import { GraphQLClient } from "@/lib/graphql/client";
+import { getNextSeason } from "@/utils/misc/getNextSeason";
 
-// TODO implement a GraphQL query builder
+const currentAnimeYear = (new Date).getFullYear();
+const { query, variables } = GraphQLClient.Anilist({
+    operation: "Page.Media",
+    variables: {
+        page: {
+            page:    1,
+            perPage: 30,
+        },
+        media: {
+            type:       "ANIME",
+            sort:       "POPULARITY_DESC",
+            seasonYear: currentAnimeYear,
+            season:     getNextSeason(),
+        },
+    },
+    fields: [
+        "id",
+        "idMal",
+        "title.english",
+        "title.native",
+        "title.romaji",
+        "status",
+        "meanScore",
+        "averageScore",
+        "coverImage.extraLarge",
+        "relations.nodes.title.english",
+        "relations.nodes.title.native",
+        "relations.nodes.title.romaji",
+    ],
+});
+
 const fetchUpcomingNextSeasonTitles = async (options?: Partial<Request> | undefined): Promise<
     Array<AnimeType>
 > => {
-    const query = `
-        query($perPage: Int) {
-            Page(perPage: $perPage) {
-                media(sort: POPULARITY_DESC, seasonYear: 2025, season: SUMMER, type: ANIME) {
-                    id
-                    idMal
-                    status
-                    title { english native romaji }
-                    meanScore
-                    genres
-                    averageScore
-                    coverImage {
-                        extraLarge
-                    }
-                    relations {
-                        nodes {
-                            title { english native romaji }
-                        }
-                    }
-                }
-            }
-        }
-    `;
-
     const response = await fetch('https://graphql.anilist.co', {
-        method: 'POST',
+        method:  "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
-            query: query,
-            variables: JSON.stringify({
-                perPage: 32,
-            }),
+            query,
+            variables,
         }),
         ...options,
     });

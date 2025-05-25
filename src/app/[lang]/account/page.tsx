@@ -7,7 +7,6 @@ import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
 import Divider from "@/components/base/Divider/Divider";
 import type { Locale } from "@/i18n-config";
 import { AccountPageItems } from "@/constants/translated";
-import { GraphQLClient } from "@/lib/graphql/client";
 
 export default async function Page({
     params,
@@ -16,18 +15,6 @@ export default async function Page({
 }) {
     const { lang } = await params;
     const accountPageItems = AccountPageItems[lang];
-
-    const something = GraphQLClient.Anilist({
-        operation: "Media",
-        variables: {
-            media: {
-                type:  "ANIME",
-                idMal: 52_991,
-            },
-        },
-        fields: ["id", "idMal", "title.romaji", "status", "stats.scoreDistribution.amount", "stats.scoreDistribution.score"],
-    });
-    console.log(something);
 
     return (
         <div className="flex flex-col pb-4 px-4 gap-4 mx-auto max-w-384">
