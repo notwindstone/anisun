@@ -1,3 +1,22 @@
+import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { QueryType } from "@/types/Anime/Query.type";
+
+// If it's January 1, then ofc there will be no good animes
+// that were released on January 1, so we go back 30 days before.
+export const CurrentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
+export const GeneralFields: Array<QueryType> = [
+    "id",
+    "idMal",
+    "title.english",
+    "title.native",
+    "title.romaji",
+    "meanScore",
+    "averageScore",
+    "coverImage.extraLarge",
+    "relations.nodes.title.english",
+    "relations.nodes.title.native",
+    "relations.nodes.title.romaji",
+];
 export const ParameterType = {
     Int:         "Int",
     String:      "String",

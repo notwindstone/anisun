@@ -60,6 +60,11 @@ export const RemoteRoutes = {
         V2:      {},
         GraphQL: {},
     },
+    Anilist: {
+        GraphQL: {
+            Root: "https://graphql.anilist.co",
+        },
+    },
     MALToAnilibriaID: {
         Data: "https://raw.githubusercontent.com/qt-kaneko/MALibria/db/mapped.json",
     },
