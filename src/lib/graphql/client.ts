@@ -14,7 +14,7 @@ type ShittyNode = {
     children: Record<string, ShittyNode>;
 };
 
-function formatArrayToGraphQLString(entries: string[]) {
+function formatArrayToGraphQLFields(entries: string[]) {
     const root: ShittyNode = { children: {} };
 
     for (const entry of entries) {
@@ -101,7 +101,7 @@ export const GraphQLClient = {
 
         const templateMediaQueryParameters = templateMediaQueryParametersArray.join(", ");
         const templateQueryVariables = templateQueryVariablesArray.join(", ");
-        const templateQueryFields = formatArrayToGraphQLString(fields);
+        const templateQueryFields = formatArrayToGraphQLFields(fields);
 
         let templateQuery: string;
         let queryVariables: string;
