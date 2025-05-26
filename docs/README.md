@@ -91,32 +91,85 @@ A web app for watching anime written in next.js with speed in mind
 
 ### Vercel
 
+<details>
+<summary>Expand steps</summary>
 
+Click the button
+
+[![Vercel](https://vercel.com/button)](https://vercel.com/new/clone?s=https%3A%2F%2Fgithub.com%2Fnotwindstone%2Fanisun)
+
+Navigate to **Project** -> **Settings** -> **Environment Variables** and then add values to the following keys:
+
+1. `NODE_ENV` = `production`
+2. `HOST_URL` = `https://your-domain-here.vercel.app`
+
+3. (Optional) `SHIKIMORI_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with Shikimori
+4. (Optional) `SHIKIMORI_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with Shikimori
+
+5. (Optional) `ANILIST_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with Anilist
+6. (Optional) `ANILIST_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with Anilist
+
+7. (Optional) `MAL_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with MyAnimeList
+8. (Optional) `MAL_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with MyAnimeList
+
+9. (Optional) `NEXT_PUBLIC_KODIK_TOKEN` = `yourOwnPublicKey` - get your own token from http://kodik.cc/ (you need to contact them via email). Only if you want to enable the Kodik player
+
+Note: LRU cache might not work as expected, because serverless environments tend to spin down on low load.
+
+</details>
 
 ### Local
 
 If you don't want to use a vercel/netlify/other serverless environment.
 
-#### Termux
-
 #### Preparations
+
+<details>
+<summary>Expand steps</summary>
+
+You need to install:
+
+- Node.js
+- A package manager for node.js (e.g. [bun](https://bun.sh/))
+- Git
+
+After successful installation clone this repository by running:
+
+```bash
+git clone https://github.com/notwindstone/anisun
+```
+
+Now you can install all project dependencies with `bun i`
+
+</details>
 
 #### Development
 
+You can run this app in development mode using `bun dev`
+
+It will be much slower than the production build, because development mode is intended to use only for development, it builds everything on-demand and supports Hot Module Replacement (HMR).
+
+#### Termux
+
+To run this project in development mode, use `bun run dev:termux`
+
 #### Production
 
-`bun run build` & `bun run start` is not production-ready.
+Build this app by running `bun run build`
 
-You need to install a reverse-proxy like Caddy.
+Now you can start it by `bun run start`
 
-#### Website URL
+But it is not production-ready yet. You need to install a reverse-proxy like Caddy first.
+
+After you installed Caddy, you need to rename `Caddyfile.example` in the root of repository to `Caddyfile` and change `example.com` in the file to your domain (`anime.tatar` in my case). Then just restart it by running `caddy stop` and `caddy start` in the terminal.
+
+Be sure you are running `caddy start` in the repository directory, otherwise it Caddy will not use your configuration file.
 
 ## 💬 Contact
 
 ### Directly
 
 * [Telegram - @windst1](https://t.me/windst1)
-
 * [Discord - @notwindstone](https://discord.com/users/510709295814279168)
 
 ### Through our Discord server
@@ -133,7 +186,19 @@ Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## ❤️ Credits
 
+* [zvshka](https://github.com/zvshka) for his help with the project
+* `cos` for his help with the UI
+* [Kodik](http://kodik.cc/)
+* [Anilist API](https://docs.anilist.co/)
+* [MyAnimeList API](https://myanimelist.net/apiconfig/references/api/v2)
+* [Shikimori API](https://shikimori.one/api/doc/graphql)
+* [Consumet API](https://github.com/consumet/api.consumet.org)
+* [Anilibria API](https://github.com/anilibria/docs)
+* [SovetRomantica API](https://sovetromantica.com/)
+
 ## 📜 License
+
+[![GitHub](https://img.shields.io/github/license/notwindstone/Anisun?style=for-the-badge)](https://github.com/notwindstone/Anisun/blob/main/LICENSE)
 
 ## ❗ Disclaimer
 

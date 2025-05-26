@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:termux": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "concurrently --raw \"bun lint:eslint\" \"bun lint:ts\"",
