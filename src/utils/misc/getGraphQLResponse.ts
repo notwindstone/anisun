@@ -8,7 +8,7 @@ const getGraphQLResponse = async <T extends object>({
     query: string;
     variables: string;
     options?: Partial<Request> | undefined;
-}): Promise<T | Error> => {
+}): Promise<T> => {
     const response = await fetch(url, {
         method:  "POST",
         headers: {
@@ -25,7 +25,15 @@ const getGraphQLResponse = async <T extends object>({
         throw new Error("Something went wrong");
     }
 
-    let data: T;
+    let data: {
+        data: {
+            Page: {
+                media: T;
+            }
+        } | {
+            Media: T;
+        }
+    };
 
     try {
         data = await response.json();
@@ -35,7 +43,11 @@ const getGraphQLResponse = async <T extends object>({
         throw new Error("Something went wrong");
     }
 
-    return data;
+    if ("Page" in data.data) {
+        return data.data.Page.media;
+    }
+
+    return data.data.Media;
 };
 
 export default getGraphQLResponse;

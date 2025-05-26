@@ -3,9 +3,11 @@ import { GraphQLClient } from "@/lib/graphql/client";
 import { RemoteRoutes } from "@/constants/routes";
 import { GeneralFields } from "@/constants/anilist";
 import { getNextSeason } from "@/utils/misc/getNextSeason";
+import { AnimeType } from "@/types/Anime/Anime.type";
 
-const GetUpcomingNextSeasonTitles = getGraphQLResponse({
-    url: RemoteRoutes.Anilist.GraphQL.Root,
+const GetUpcomingNextSeasonTitles = (options?: Partial<Request> | undefined) => getGraphQLResponse<Array<AnimeType>>({
+    url:     RemoteRoutes.Anilist.GraphQL.Root,
+    options: options,
     ...GraphQLClient.Anilist({
         operation: "Page.Media",
         variables: {
