@@ -1,6 +1,6 @@
 <div align="center">
 
-<img width="160" height="160" align="center" src="public/favicon.webp" alt="Favicon">
+<img width="160" height="160" align="center" src="../public/favicon.webp" alt="Favicon">
 
 # [anisun (rebooted)](https://anime.tatar)
 
@@ -17,10 +17,10 @@ A web app for watching anime written in next.js with speed in mind
 ## 📱 Screenshots
 
 <div align="center">
-<img src="public/screenshots/home-page-desktop.webp" width="49%" alt="Home page desktop screenshot (desktop, dark theme)">
-<img src="public/screenshots/home-page-desktop-light.webp" width="49%" alt="Home page desktop screenshot (desktop, light theme)">
-<img src="public/screenshots/home-page-mobile.webp" width="32%" alt="Home page desktop screenshot (mobile, dark theme)">
-<img src="public/screenshots/home-page-mobile-light.webp" width="32%" alt="Home page desktop screenshot (mobile, light theme)">
+<img src="../public/screenshots/home-page-desktop.webp" width="49%" alt="Home page desktop screenshot (desktop, dark theme)">
+<img src="../public/screenshots/home-page-desktop-light.webp" width="49%" alt="Home page desktop screenshot (desktop, light theme)">
+<img src="../public/screenshots/home-page-mobile.webp" width="32%" alt="Home page desktop screenshot (mobile, dark theme)">
+<img src="../public/screenshots/home-page-mobile-light.webp" width="32%" alt="Home page desktop screenshot (mobile, light theme)">
 </div>
 
 ### More screenshots
@@ -54,7 +54,7 @@ A web app for watching anime written in next.js with speed in mind
 <summary>Expand</summary>
 
 <div align="center">
-<img src="public/psi/psi-desktop-audit.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
+<img src="../public/psi/psi-desktop-audit.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
 </div>
 
 </details>
@@ -65,7 +65,7 @@ A web app for watching anime written in next.js with speed in mind
 <summary>Expand</summary>
 
 <div align="center">
-<img src="public/psi/web-page-size.webp" alt="">
+<img src="../public/psi/web-page-size.webp" alt="">
 </div>
 
 </details>
@@ -125,7 +125,7 @@ You need to install a reverse-proxy like Caddy.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Check [CONTRIBUTING.md](./CONTRIBUTING.md)
+Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## ⭐️ Star History
 
