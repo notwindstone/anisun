@@ -10,6 +10,7 @@ import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Locales } from "@/constants/localization";
+import {useContextSelector} from "use-context-selector";
 
 const locales = new Set<string>(Locales);
 
@@ -26,7 +27,12 @@ export default function MobileNavbar({
     const { data: {
         theme,
         colors: { base, accent },
-    }, dictionaries } = useContext(ConfigsContext);
+    }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            data:         value.data,
+            dictionaries: value.dictionaries,
+        };
+    });
     const matches = useMediaQuery('(min-width: 640px)');
 
     useEffect(() => {

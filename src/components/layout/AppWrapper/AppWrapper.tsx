@@ -1,16 +1,16 @@
 "use client";
 
-import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import { useContextSelector } from "use-context-selector";
 
 export default function AppWrapper({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
-    const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => value.data);
     const darkThemeClass = theme === DarkThemeKey
         ? "dark"
         : "light";

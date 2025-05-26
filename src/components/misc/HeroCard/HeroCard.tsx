@@ -11,16 +11,20 @@ import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvide
 import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";
 import translate from "@/utils/misc/translate";
+import {useContextSelector} from "use-context-selector";
 
 export default function HeroCard({
     data,
 }: {
     data?: Array<AnimeType> | AnimeType | undefined;
 }) {
-    const { dictionaries, data: { theme, colors: { base } } } = useContext(ConfigsContext);
-    const { data: animeData } = useContext<{
-        data: AnimeType;
-    }>(ClientFetchDataContext);
+    const { dictionaries, data: { theme, colors: { base } } } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            dictionaries: value.dictionaries,
+            data:         value.data,
+        };
+    });
+    const animeData: AnimeType = useContextSelector(ClientFetchDataContext, (value) => value.data);
     const currentData = data ?? animeData;
     const locale = dictionaries?.metadata.locale ?? DefaultLocale;
 

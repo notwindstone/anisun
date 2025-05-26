@@ -8,6 +8,7 @@ import { DarkThemeKey } from "@/constants/configs";
 import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";
 import translate from "@/utils/misc/translate";
+import {useContextSelector} from "use-context-selector";
 
 export default function SmallCard({
     data,
@@ -18,7 +19,12 @@ export default function SmallCard({
     isGrid?: boolean;
     isImageUnoptimized?: boolean;
 }) {
-    const { dictionaries, data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const { dictionaries, data: { theme, colors: { base } } } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            dictionaries: value.dictionaries,
+            data:         value.data,
+        };
+    });
     const locale = dictionaries?.metadata.locale ?? DefaultLocale;
 
     const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";

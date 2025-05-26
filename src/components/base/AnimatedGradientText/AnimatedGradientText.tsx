@@ -1,15 +1,15 @@
 "use client";
 
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
-import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { useContextSelector } from "use-context-selector";
 
 export default function AnimatedGradientText({
     children,
 }: {
     children: string;
 }) {
-    const { data: { colors: { accent } } } = useContext(ConfigsContext);
+    const { colors: { accent } } = useContextSelector(ConfigsContext, (value) => value.data);
     const gradientFrom = parseTailwindColor({
         color: accent,
         step:  700,

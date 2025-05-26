@@ -25,6 +25,8 @@
     "quick-lru": "^7.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "scheduler": "^0.26.0",
+    "use-context-selector": "^2.0.0",
     "uwuifier": "^4.2.2"
   },
   "devDependencies": {

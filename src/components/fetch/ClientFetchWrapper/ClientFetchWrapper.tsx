@@ -4,6 +4,7 @@ import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
 import { useContext } from "react";
 import { SearchContext } from "@/utils/providers/SearchProvider";
 import Cards from "@/components/misc/Cards/Cards";
+import {useContextSelector} from "use-context-selector";
 
 export default function ClientFetchWrapper({
     children,
@@ -12,7 +13,7 @@ export default function ClientFetchWrapper({
     children: React.ReactNode;
     isGrid?: boolean;
 }) {
-    const { data: search } = useContext(SearchContext);
+    const search = useContextSelector(SearchContext, (value) => value.data);
 
     return (
         <>

@@ -25,7 +25,6 @@ export default function VidstackPlayer({
 }: {
     videoSrc?: string;
 }) {
-
     const searchParameters = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();

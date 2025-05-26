@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
+import { createContext } from "use-context-selector";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";

@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
+import {useContextSelector} from "use-context-selector";
 
 type textSizeType = `${"" | "sm:"}text-${"xs" | "sm" | "md" | "lg" | "xl" | "2xl"}`;
 
@@ -18,7 +19,7 @@ export default function Badge({
     score?: number;
     textSize?: textSizeType | `${textSizeType} ${textSizeType}`;
 }) {
-    const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => value.data);
     let scoreBadgeColorClassName;
 
     if (!isScore || score === undefined) {

@@ -7,6 +7,7 @@ import Button from "@/components/base/Button/Button";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { SearchContext } from "@/utils/providers/SearchProvider";
+import {useContextSelector} from "use-context-selector";
 
 const icons = {
     id:   "ID",
@@ -14,8 +15,13 @@ const icons = {
 };
 
 export default function SearchBar() {
-    const { data: { theme, colors: { base } }, dictionaries } = useContext(ConfigsContext);
-    const { setData } = useContext(SearchContext);
+    const { data: { theme, colors: { base } }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            data:         value.data,
+            dictionaries: value.dictionaries,
+        };
+    });
+    const setData = useContextSelector(SearchContext, (value) => value.setData);
     const reference = useRef<HTMLInputElement>(null);
     const [searchType, setSearchType] = useState<"id" | "name">("name");
 

@@ -7,6 +7,7 @@ import { Moon, Sun } from "lucide-react";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import Button from "@/components/base/Button/Button";
+import {useContextSelector} from "use-context-selector";
 
 function switchTheme({
     currentConfig,
@@ -26,7 +27,13 @@ function switchTheme({
 }
 
 export default function ColorSchemeChanger() {
-    const { data: config, optimisticallyUpdate, dictionaries } = useContext(ConfigsContext);
+    const { config, optimisticallyUpdate, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            config:               value.data,
+            optimisticallyUpdate: value.optimisticallyUpdate,
+            dictionaries:         value.dictionaries,
+        };
+    });
 
     return (
         <>

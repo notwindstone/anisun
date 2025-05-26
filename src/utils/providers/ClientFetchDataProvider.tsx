@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext } from "react";
+import { createContext } from "use-context-selector";
 
 export const ClientFetchDataContext = createContext<{
     /* eslint-disable @typescript-eslint/no-explicit-any */

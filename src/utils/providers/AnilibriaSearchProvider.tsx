@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
+import { createContext } from "use-context-selector";
 import { useDebouncedState } from "@mantine/hooks";
 
 export const AnilibriaSearchContext = createContext<{

@@ -11,6 +11,7 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import ScrollableCards from "@/components/layout/ScrollableCards/ScrollableCards";
+import {useContextSelector} from "use-context-selector";
 
 const placeholderArray = Array.from({ length: 16 });
 
@@ -51,10 +52,15 @@ export default function Cards({
     search?: string;
     data?: AnimeType | Array<AnimeType>;
 }) {
-    const { data: animeData } = useContext(ClientFetchDataContext);
-    const { data: { theme, colors: { base } } } = useContext(ConfigsContext);
+    const animeData = useContextSelector(ClientFetchDataContext, (value) => value.data);
+    const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            theme:  value.data.theme,
+            colors: value.data.colors,
+        };
+    });
     const currentData = data ?? animeData;
-
+console.log("re-rendered Cards");
     if (data !== undefined && !Array.isArray(currentData)) {
         return;
     }

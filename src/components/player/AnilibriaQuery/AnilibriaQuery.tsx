@@ -6,12 +6,13 @@ import { AnilibriaSearchContext } from "@/utils/providers/AnilibriaSearchProvide
 import Button from "@/components/base/Button/Button";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
+import {useContextSelector} from "use-context-selector";
 
 export default function AnilibriaQuery() {
     const searchParameters = useSearchParams();
     const pathname = usePathname();
     const { replace } = useRouter();
-    const { search } = useContext(AnilibriaSearchContext);
+    const search = useContextSelector(AnilibriaSearchContext, (value) => value.search);
     const { isPending, error, data } = useQuery({
         queryKey: ["anime", "anilibria", search],
         queryFn:  async () => {

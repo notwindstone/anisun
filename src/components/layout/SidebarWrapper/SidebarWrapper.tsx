@@ -1,6 +1,5 @@
 "use client";
 
-import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, SidebarRightPosition } from "@/constants/configs";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
@@ -12,6 +11,8 @@ import { AppName } from "@/constants/app";
 import Link from "next/link";
 import { useMediaQuery } from "@mantine/hooks";
 import Favicon from "@/components/base/Favicon/Favicon";
+import { useContextSelector } from "use-context-selector";
+import { useState } from "react";
 
 const icons: {
     [key: string]: {
@@ -31,15 +32,22 @@ const icons: {
 export default function SidebarWrapper({
     children,
     serverSideSidebarPosition,
+    serverSideSidebarExpanded,
 }: Readonly<{
     children: React.ReactNode;
     serverSideSidebarPosition: "left" | "right";
+    serverSideSidebarExpanded: boolean;
 }>) {
-    const { data: config, data: {
+    const { config, config: {
         theme,
         colors: { base },
-        layout: { sidebar: { expanded } },
-    }, dictionaries, optimisticallyUpdate } = useContext(ConfigsContext);
+    }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            config:       value.data,
+            dictionaries: value.dictionaries,
+        };
+    });
+    const [expanded, setExpanded] = useState<boolean>(serverSideSidebarExpanded);
     const matches = useMediaQuery('(min-width: 640px)');
 
     if (matches === false) {
@@ -94,18 +102,7 @@ export default function SidebarWrapper({
                             style: "base",
                         }}
                         onClick={() => {
-                            optimisticallyUpdate?.((state) => {
-                                return {
-                                    ...state,
-                                    layout: {
-                                        ...state?.layout,
-                                        sidebar: {
-                                            ...state?.layout?.sidebar,
-                                            expanded: !state?.layout?.sidebar?.expanded,
-                                        },
-                                    },
-                                };
-                            });
+                            setExpanded((state) => !state);
 
                             setConfigValuesClient({
                                 configs: {

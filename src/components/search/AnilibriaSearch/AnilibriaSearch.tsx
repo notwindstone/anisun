@@ -1,17 +1,23 @@
 "use client";
 
-import { useContext, useRef } from "react";
+import { useRef } from "react";
 import { AnilibriaSearchContext } from "@/utils/providers/AnilibriaSearchProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { SearchIcon } from "lucide-react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { useContextSelector } from "use-context-selector";
 
 export default function AnilibriaSearch() {
-    const { data: { theme, colors: { base } }, dictionaries } = useContext(ConfigsContext);
+    const { data: { theme, colors: { base } }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            data:         value.data,
+            dictionaries: value.dictionaries,
+        };
+    });
     const reference = useRef<HTMLInputElement>(null);
-    const { search, setSearch } = useContext(AnilibriaSearchContext);
-
+    const { search, setSearch } = useContextSelector(AnilibriaSearchContext, (value) => value);
+console.log('re-rendered anilibria search')
     return (
         <>
             <div

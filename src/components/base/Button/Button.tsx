@@ -4,6 +4,7 @@ import { ButtonHTMLAttributes, useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { ButtonStylesType } from "@/types/Appearance/ButtonStyles.type";
 import getButtonColor from "@/utils/appearance/getButtonColor";
+import {useContextSelector} from "use-context-selector";
 
 export default function Button({
     children,
@@ -22,7 +23,7 @@ export default function Button({
         style?: ButtonStylesType;
     };
 } & ButtonHTMLAttributes<HTMLButtonElement>): React.ReactNode {
-    const { data: { theme, colors } } = useContext(ConfigsContext);
+    const { theme, colors } = useContextSelector(ConfigsContext, (value) => value.data);
     const appendClassNames = custom?.appendClassNames ?? "";
     const style = custom?.style ?? "default";
     const { foreground, background } = getButtonColor({

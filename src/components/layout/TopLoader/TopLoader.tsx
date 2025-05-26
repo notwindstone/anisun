@@ -1,12 +1,12 @@
 "use client";
 
 import NextTopLoader from "nextjs-toploader";
-import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import { useContextSelector } from "use-context-selector";
 
 export default function TopLoader() {
-    const { data: { colors: { accent } } } = useContext(ConfigsContext);
+    const { colors: { accent } } = useContextSelector(ConfigsContext, (value) => value.data);
     const color = parseTailwindColor({
         color: accent,
         step:  600,

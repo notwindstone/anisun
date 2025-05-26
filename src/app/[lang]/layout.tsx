@@ -113,7 +113,10 @@ export default async function RootLayout({
                                  * Sidebar is server-side
                                  */
                                 }
-                                <SidebarWrapper serverSideSidebarPosition={safeConfigValues.layout.sidebar.position}>
+                                <SidebarWrapper
+                                    serverSideSidebarExpanded={safeConfigValues.layout.sidebar.expanded}
+                                    serverSideSidebarPosition={safeConfigValues.layout.sidebar.position}
+                                >
                                     <Sidebar
                                         config={safeConfigValues}
                                         dictionaries={dictionaries}

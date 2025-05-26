@@ -11,6 +11,7 @@ import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import Button from "@/components/base/Button/Button";
 import { Check } from "lucide-react";
+import {useContextSelector} from "use-context-selector";
 
 function changePalette({
     currentConfig,
@@ -56,7 +57,13 @@ export default function PaletteChanger({
     colors: Array<BaseColorsType | AccentColorsType>;
     propertyKey: "base" | "accent";
 }) {
-    const { data: config, optimisticallyUpdate, dictionaries } = useContext(ConfigsContext);
+    const { config, optimisticallyUpdate, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            config:               value.data,
+            optimisticallyUpdate: value.optimisticallyUpdate,
+            dictionaries:         value.dictionaries,
+        };
+    });
 
     function switchColor(color: PaletteType) {
         optimisticallyUpdate?.((state) => {

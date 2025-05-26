@@ -10,6 +10,7 @@ import Button from "@/components/base/Button/Button";
 import { useRouter } from "nextjs-toploader/app";
 import { useTopLoader } from "nextjs-toploader";
 import { useThrottledCallback } from "@mantine/hooks";
+import {useContextSelector} from "use-context-selector";
 
 function switchLayout({
     currentConfig,
@@ -36,7 +37,13 @@ function switchLayout({
 
 export default function LayoutChanger() {
     const [pending, setPending] = useState(false);
-    const { data: config, optimisticallyUpdate, dictionaries } = useContext(ConfigsContext);
+    const { config, optimisticallyUpdate, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            config:               value.data,
+            optimisticallyUpdate: value.optimisticallyUpdate,
+            dictionaries:         value.dictionaries,
+        };
+    });
     const router = useRouter();
     const loader = useTopLoader();
 
