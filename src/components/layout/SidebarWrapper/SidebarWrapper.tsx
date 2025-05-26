@@ -103,7 +103,6 @@ export default function SidebarWrapper({
                         }}
                         onClick={() => {
                             setExpanded((state) => !state);
-
                             setConfigValuesClient({
                                 configs: {
                                     ...config,
@@ -111,7 +110,7 @@ export default function SidebarWrapper({
                                         ...config.layout,
                                         sidebar: {
                                             ...config.layout.sidebar,
-                                            expanded: !config.layout.sidebar.expanded,
+                                            expanded: !expanded,
                                         },
                                     },
                                 },

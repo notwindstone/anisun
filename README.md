@@ -38,6 +38,7 @@ A web app for watching anime built with next.js
 * Using as few libraries as possible
 * React Suspense for the seamless UI streaming
 * Data caching both on the server (using [LRU cache](https://www.npmjs.com/package/quick-lru) & Next.js internal cache) and client
+* Optimized [React Contexts](https://www.npmjs.com/package/use-context-selector)
 * User config management using cookies for the instant config load
 * Preferring CSS over JS styles
 * Memoizing only those components that truly need it
