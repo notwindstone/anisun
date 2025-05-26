@@ -8,6 +8,7 @@ import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { InitialConfig } from "@/constants/configs";
 
+/** Sidebar's `expanded` value is valid only on the first load. It's not being updated on expansion */
 export const ConfigsContext = createContext<{
     data: SafeConfigType;
     optimisticallyUpdate: Dispatch<SetStateAction<ParsedConfigType>> | undefined;

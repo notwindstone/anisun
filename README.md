@@ -4,7 +4,7 @@
 
 # [anisun (rebooted)](https://anime.tatar)
 
-A web app for watching anime built with next.js
+A web app for watching anime written in next.js with speed in mind 
 
 <p align="center">
 <strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/README_russian.md">Русский</a>
@@ -70,12 +70,11 @@ A web app for watching anime built with next.js
 
 </details>
 
-## ⭐ should be the features in the future
+## ⭐ Features
 
 * Seamless Anilist, Shikimori and MAL integration
 * Kodik, Anilibria, Sovetromantica, Consumet APIs for the media streaming
 * Localization
-
 
 ## ⚙️ Tech Stack
 
@@ -86,10 +85,19 @@ A web app for watching anime built with next.js
 * Fetching the data from Kodik (an anime media database) thanks to [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper)
 * A video player based on [Vidstack.js](https://www.vidstack.io/) and [HLS.js](https://github.com/video-dev/hls.js)
 * [Quick LRU](https://www.npmjs.com/package/quick-lru) for the in-memory cache
+* OAuth2 authorization using [arctic.js](https://arcticjs.dev/)
 
 ## ⬇️ Self-Hosting
 
+### Vercel
+
+
+
 ### Local
+
+If you don't want to use a vercel/netlify/other serverless environment.
+
+#### Termux
 
 #### Preparations
 
@@ -97,15 +105,11 @@ A web app for watching anime built with next.js
 
 #### Production
 
-running this app with `bun run build` & `bun run start` is not enough.
+`bun run build` & `bun run start` is not production-ready.
 
 You need to install a reverse-proxy like Caddy.
 
 #### Website URL
-
-### Vercel
-
-### Termux
 
 ## 💬 Contact
 
@@ -121,7 +125,7 @@ You need to install a reverse-proxy like Caddy.
 
 ## 🤝 Contributing
 
-Contributions are welcome!
+Contributions are welcome! Check [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 ## ⭐️ Star History
 
@@ -138,19 +142,12 @@ Contributions are welcome!
 > Legal issues should be taken up with the file hosts and providers.
 > Anisun is not responsible for any media files shown by the video providers.
 
+## To-Do
 
-> [!IMPORTANT]
-> Work in progress...
-
-credits for logo
+ask about using this logo
 
 https://x.com/ahiru_tokotoko/status/1568517301737242625
 
-## To-Do
-
 * Shikimori, MAL and AniList integrations
-* Next.js 15 for frontend
-* Rewrite everything
-* more
 
 https://github.com/consumet/api.consumet.org
