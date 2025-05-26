@@ -49,7 +49,7 @@ export default function SidebarWrapper({
     return (
         <>
             <div
-                className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-colors duration-200 overflow-hidden"
+                className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition transition-[width] duration-200 overflow-hidden"
                 style={{
                     width:           expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
