@@ -3,14 +3,14 @@
 import { useMediaQuery } from "@mantine/hooks";
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Locales } from "@/constants/localization";
-import {useContextSelector} from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 const locales = new Set<string>(Locales);
 

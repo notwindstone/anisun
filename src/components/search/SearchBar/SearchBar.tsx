@@ -1,13 +1,13 @@
 "use client";
 
-import { useContext, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { ListFilter, SearchIcon } from "lucide-react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import Button from "@/components/base/Button/Button";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { SearchContext } from "@/utils/providers/SearchProvider";
-import {useContextSelector} from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 const icons = {
     id:   "ID",

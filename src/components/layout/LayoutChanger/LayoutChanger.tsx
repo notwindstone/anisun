@@ -1,6 +1,6 @@
 "use client";
 
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { SidebarRightPosition } from "@/constants/configs";
 import { ArrowLeftRight } from "lucide-react";
@@ -10,7 +10,7 @@ import Button from "@/components/base/Button/Button";
 import { useRouter } from "nextjs-toploader/app";
 import { useTopLoader } from "nextjs-toploader";
 import { useThrottledCallback } from "@mantine/hooks";
-import {useContextSelector} from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 function switchLayout({
     currentConfig,

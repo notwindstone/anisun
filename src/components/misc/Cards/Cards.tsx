@@ -1,6 +1,5 @@
 "use client";
 
-import { useContext } from "react";
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
@@ -11,7 +10,7 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import ScrollableCards from "@/components/layout/ScrollableCards/ScrollableCards";
-import {useContextSelector} from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 const placeholderArray = Array.from({ length: 16 });
 
@@ -60,7 +59,7 @@ export default function Cards({
         };
     });
     const currentData = data ?? animeData;
-console.log("re-rendered Cards");
+
     if (data !== undefined && !Array.isArray(currentData)) {
         return;
     }

@@ -1,10 +1,9 @@
 "use client";
 
 import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
-import { useContext } from "react";
 import { SearchContext } from "@/utils/providers/SearchProvider";
 import Cards from "@/components/misc/Cards/Cards";
-import {useContextSelector} from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 export default function ClientFetchWrapper({
     children,

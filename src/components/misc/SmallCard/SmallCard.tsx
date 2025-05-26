@@ -1,14 +1,13 @@
 import { AnimeType } from "@/types/Anime/Anime.type";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import Link from "next/link";
-import { useContext } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";
 import translate from "@/utils/misc/translate";
-import {useContextSelector} from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 export default function SmallCard({
     data,

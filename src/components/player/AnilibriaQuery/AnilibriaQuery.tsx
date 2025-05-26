@@ -1,12 +1,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useContext } from "react";
 import { AnilibriaSearchContext } from "@/utils/providers/AnilibriaSearchProvider";
 import Button from "@/components/base/Button/Button";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useRouter } from "nextjs-toploader/app";
-import {useContextSelector} from "use-context-selector";
+import { useContextSelector } from "use-context-selector";
 
 export default function AnilibriaQuery() {
     const searchParameters = useSearchParams();

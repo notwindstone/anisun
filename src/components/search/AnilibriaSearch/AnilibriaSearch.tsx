@@ -17,7 +17,7 @@ export default function AnilibriaSearch() {
     });
     const reference = useRef<HTMLInputElement>(null);
     const { search, setSearch } = useContextSelector(AnilibriaSearchContext, (value) => value);
-console.log('re-rendered anilibria search')
+
     return (
         <>
             <div
