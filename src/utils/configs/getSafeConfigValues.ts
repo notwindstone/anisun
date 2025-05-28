@@ -73,6 +73,7 @@ const getSidebarProperties = (config: ParsedConfigType): {
     };
 };
 
+/** Sidebar values update only on server request */
 export default function getSafeConfigValues({
     config,
 }: {
