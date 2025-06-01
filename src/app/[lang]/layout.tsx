@@ -15,11 +15,12 @@ import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { AccountInfoCookieKey, AppName } from "@/constants/app";
 import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
 import Footer from "@/components/layout/Footer/Footer";
 import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotify";
+import {userAgent} from "next/server";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -94,6 +95,21 @@ export default async function RootLayout({
     const layoutClassNames = safeConfigValues.layout.sidebar.position === SidebarLeftPosition
         ? "flex-col sm:flex-row"
         : "flex-col sm:flex-row-reverse";
+
+    const headersList = await headers();
+    const { browser, cpu, os, engine, device } = userAgent({
+        headers: headersList,
+    });
+
+    console.log(
+        "\n",
+        "New Request ---",
+        `Browser: ${browser?.name} ${browser?.version} ---`,
+        `CPU: ${cpu?.architecture} ---`,
+        `OS: ${os?.name} ${os?.version} ---`,
+        `Engine: ${engine?.name} ${engine?.version} ---`,
+        `Device: ${device?.type} ${device?.model} ${device?.vendor}`,
+    );
 
     return (
         <html lang={lang}>
