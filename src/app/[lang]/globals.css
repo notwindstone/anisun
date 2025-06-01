@@ -3,6 +3,11 @@
 /*
  * Custom utilities
  */
+@utility transition-sidebar {
+  transition-property: width, color, background-color;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function) /* cubic-bezier(0.4, 0, 0.2, 1) */);
+  transition-duration: var(--tw-duration, var(--default-transition-duration) /* 150ms */);
+}
 @utility scrollbar-hidden {
   -ms-overflow-style: none;
   scrollbar-width: none;

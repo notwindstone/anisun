@@ -59,7 +59,7 @@ export default function SidebarWrapper({
             <div
                 // WebStorm says that `transition-[width]` is already applied by `transition`
                 // That's a lie.
-                className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition transition-[width] duration-200 overflow-hidden"
+                className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-sidebar duration-200 overflow-hidden"
                 style={{
                     width:           expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
