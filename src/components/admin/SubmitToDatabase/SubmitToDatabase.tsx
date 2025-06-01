@@ -12,18 +12,23 @@ export default function SubmitToDatabase({
 }) {
     const [MALData, setMALData] = useState("");
     const [anilibriaData, setAnilibriaData] = useState("");
-    const [isLoading, setIsLoading] = useState(false);
+    const [status, setStatus] = useState<"success" | "loading" | "none" | "error">("none");
     const [databaseData, setDatabaseData] = useState("");
+
+    const isMALIDLessThanAnilibriaID = Number(MALData) < Number(anilibriaData);
 
     return (
         <>
+            <p className={`px-2 py-1 w-fit text-black ${status === "error" ? "bg-red-300 animate-pulse text-3xl" : "bg-neutral-300"}`}>
+                {status}
+            </p>
             <div className="flex gap-2 items-end flex-wrap">
                 <div className="flex flex-col gap-2">
                     <div className="text-lg">
                         MAL ID
                     </div>
                     <input
-                        className="p-2 bg-white border border-black rounded-md text-black"
+                        className={`focus:outline-none p-2 bg-white border border-black rounded-md text-black ${isMALIDLessThanAnilibriaID && "ring-2 ring-red-300"}`}
                         value={MALData}
                         onChange={(event) => {
                             const value = Number(event?.target?.value);
@@ -45,7 +50,7 @@ export default function SubmitToDatabase({
                         Anilibria ID
                     </div>
                     <input
-                        className="p-2 bg-white border border-black rounded-md text-black"
+                        className={`focus:outline-none p-2 bg-white border border-black rounded-md text-black ${isMALIDLessThanAnilibriaID && "ring-2 ring-red-300"}`}
                         value={anilibriaData}
                         onChange={(event) => {
                             const value = Number(event?.target?.value);
@@ -65,13 +70,13 @@ export default function SubmitToDatabase({
                 <div className="flex gap-2">
                     <button
                         className="p-2 bg-white border border-black rounded-md text-black hover:cursor-pointer active:cursor-default disabled:cursor-not-allowed"
-                        disabled={isLoading}
+                        disabled={status === "loading"}
                         onClick={async () => {
-                            if (isLoading) {
+                            if (status === "loading") {
                                 return;
                             }
 
-                            setIsLoading(true);
+                            setStatus("none");
 
                             const result = await writeToAnilibriaSyncDB({
                                 idMal:       Number(MALData),
@@ -79,22 +84,33 @@ export default function SubmitToDatabase({
                                 accessToken,
                                 tokenProvider,
                             });
+                            const data = await getAnilibriaSyncDB({
+                                accessToken,
+                                tokenProvider,
+                            });
 
-                            alert(result);
-                            setIsLoading(false);
+                            setDatabaseData(JSON.stringify(data));
+                            setStatus(result === "Success"
+                                ? "success"
+                                : "error");
+
+                            if (result === "Success") {
+                                setMALData("");
+                                setAnilibriaData("");
+                            }
                         }}
                     >
                         Submit
                     </button>
                     <button
                         className="p-2 bg-white border border-black rounded-md text-black hover:cursor-pointer active:cursor-default disabled:cursor-not-allowed"
-                        disabled={isLoading}
+                        disabled={status === "loading"}
                         onClick={async () => {
-                            if (isLoading) {
+                            if (status === "loading") {
                                 return;
                             }
 
-                            setIsLoading(true);
+                            setStatus("loading");
 
                             const result = await writeToAnilibriaSyncDB({
                                 idMal:       Number(MALData),
@@ -103,23 +119,41 @@ export default function SubmitToDatabase({
                                 accessToken,
                                 tokenProvider,
                             });
-
-                            alert(result);
-                            setIsLoading(false);
-                        }}
-                    >
-                        Remove
-                    </button>
-                    <button
-                        className="p-2 bg-white border border-black rounded-md text-black hover:cursor-pointer active:cursor-default disabled:cursor-not-allowed"
-                        disabled={isLoading}
-                        onClick={async () => {
                             const data = await getAnilibriaSyncDB({
                                 accessToken,
                                 tokenProvider,
                             });
 
                             setDatabaseData(JSON.stringify(data));
+                            setStatus(result === "Success"
+                                ? "success"
+                                : "error");
+
+                            if (result === "Success") {
+                                setMALData("");
+                                setAnilibriaData("");
+                            }
+                        }}
+                    >
+                        Remove
+                    </button>
+                    <button
+                        className="p-2 bg-white border border-black rounded-md text-black hover:cursor-pointer active:cursor-default disabled:cursor-not-allowed"
+                        disabled={status === "loading"}
+                        onClick={async () => {
+                            if (status === "loading") {
+                                return;
+                            }
+
+                            setStatus("loading");
+
+                            const data = await getAnilibriaSyncDB({
+                                accessToken,
+                                tokenProvider,
+                            });
+
+                            setDatabaseData(JSON.stringify(data));
+                            setStatus("success");
                         }}
                     >
                         Refetch
