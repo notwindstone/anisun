@@ -85,6 +85,7 @@
     "filterAnimes": "fiwtew anime titles"
   },
   "misc": {
-    "searchAnimes": "seawch a-anime..."
+    "searchAnimes": "seawch a-anime...",
+    "signOut": "sign out"
   }
 }

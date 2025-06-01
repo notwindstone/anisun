@@ -4,12 +4,18 @@ import { cookies } from "next/headers";
 import { getCookie } from "@/lib/actions/cookies";
 import { AccessTokenCookieKey } from "@/constants/app";
 import OAuth2LogOut from "@/components/misc/OAuth2LogOut/OAuth2LogOut";
+import translate from "@/utils/misc/translate";
+import { Locale } from "@/i18n-config";
 
 type entriesType = Array<keyof typeof OAuth2Routes>;
 
 const entries: entriesType = Object.keys(OAuth2Routes) as entriesType;
 
-export default async function OAuth2Links() {
+export default async function OAuth2Links({
+    lang,
+}: {
+    lang: Locale;
+}) {
     const cookieStore = await cookies();
     const accessToken = await getCookie({
         key:   AccessTokenCookieKey,
@@ -36,7 +42,12 @@ export default async function OAuth2Links() {
                                             {Icon}
                                         </div>
                                         <p>
-                                            {Name}
+                                            {
+                                                translate({
+                                                    text:   Name,
+                                                    locale: lang,
+                                                })
+                                            }
                                         </p>
                                     </Button>
                                 </a>

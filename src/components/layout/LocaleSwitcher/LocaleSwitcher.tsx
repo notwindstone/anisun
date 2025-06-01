@@ -7,6 +7,8 @@ import { setCookie } from "@/lib/actions/cookies";
 import { getRelativeDate } from "@/utils/misc/getRelativeDate";
 import { CookieLocaleKey, LocaleItems } from "@/constants/localization";
 import Button from "@/components/base/Button/Button";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 const handleLocaleSwitch = async (locale: Locale) => {
     await setCookie({
@@ -18,6 +20,7 @@ const handleLocaleSwitch = async (locale: Locale) => {
 };
 
 export default function LocaleSwitcher() {
+    const dictionaries = useContextSelector(ConfigsContext, (value) => value.dictionaries);
     const pathname = usePathname();
     const currentLocale = pathname.split("/")[1];
     const redirectedPathname = (locale: Locale) => {
@@ -57,7 +60,7 @@ export default function LocaleSwitcher() {
                                     {icon}
                                 </div>
                                 <p>
-                                    {name}
+                                    {dictionaries?.metadata?.languages?.[locale]}
                                 </p>
                             </Button>
                         </Link>

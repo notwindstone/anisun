@@ -85,6 +85,7 @@
     "filterAnimes": "Filter anime titles"
   },
   "misc": {
-    "searchAnimes": "Search anime..."
+    "searchAnimes": "Search anime...",
+    "signOut": "Sign out"
   }
 }

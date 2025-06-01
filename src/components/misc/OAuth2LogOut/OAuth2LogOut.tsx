@@ -5,8 +5,12 @@ import { LogOut } from "lucide-react";
 import { deleteCookie } from "@/lib/actions/cookies";
 import { AccessTokenCookieKey } from "@/constants/app";
 import { deleteCookie as deleteClientCookies } from "cookies-next";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function OAuth2LogOut() {
+    const signOut = useContextSelector(ConfigsContext, (value) => value.dictionaries?.misc?.signOut);
+
     return (
         <>
             <Button
@@ -26,7 +30,7 @@ export default function OAuth2LogOut() {
                     <LogOut />
                 </div>
                 <p>
-                    Sign out
+                    {signOut}
                 </p>
             </Button>
         </>

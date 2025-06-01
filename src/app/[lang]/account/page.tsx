@@ -25,7 +25,7 @@ export default async function Page({
                 {accountPageItems.accountDescription}
             </p>
             <Divider />
-            <OAuth2Links />
+            <OAuth2Links lang={lang} />
             <p className="text-2xl font-medium leading-none pt-8">
                 {accountPageItems.settingsTitle}
             </p>
