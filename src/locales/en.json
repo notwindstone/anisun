@@ -9,6 +9,12 @@
       "uwu": "UwU"
     }
   },
+  "notFound": {
+    "title": "Oops!",
+    "subtitle": "Page not found",
+    "description": "The page you are looking for might have been removed, had its name changed or is temporarily unavailable.",
+    "link": "Go to homepage"
+  },
   "sidebar": {
     "home": "Home",
     "history": "History",

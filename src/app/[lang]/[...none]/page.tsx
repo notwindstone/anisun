@@ -7,9 +7,9 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 
 export default function Page() {
-    const { dictionaries, accent, theme } = useContextSelector(ConfigsContext, (value) => {
+    const { translations, accent, theme } = useContextSelector(ConfigsContext, (value) => {
         return {
-            dictionaries: value.dictionaries,
+            translations: value.dictionaries?.notFound,
             accent:       value.data.colors.accent,
             theme:        value.data.theme,
         };
@@ -27,13 +27,13 @@ export default function Page() {
                     }),
                 }}
             >
-                Oops!
+                {translations?.title}
             </p>
             <p className="text-xl sm:text-3xl font-bold">
-                Page not found
+                {translations?.subtitle}
             </p>
             <p className="text-md sm:text-lg">
-                The page you are looking for might have been removed, had its name changed or is temporarily unavailable.
+                {translations?.description}
             </p>
             <Link
                 prefetch
@@ -46,7 +46,7 @@ export default function Page() {
                     }),
                 }}
             >
-                Go to homepage
+                {translations?.link}
             </Link>
         </div>
     );

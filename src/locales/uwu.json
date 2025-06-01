@@ -9,6 +9,12 @@
       "uwu": "u-uwu"
     }
   },
+  "notFound": {
+    "title": "oops",
+    "subtitle": "page n-not f-found",
+    "description": "the page you a-are wooking fow might have been wemoved...  had its name changed ow is tempowawiwy unavaiwable",
+    "link": "go to h-homepage"
+  },
   "sidebar": {
     "home": "home",
     "history": "histowy",
@@ -16,7 +22,7 @@
     "account": "account"
   },
   "footer": {
-    "description": "this site does not store any files o-on ouw sewver, w-we a-are w-winked to the media which is h-hosted on 3wd pawty sewvices.",
+    "description": "this site does not store any files o-on ouw sewver, w-we a-are w-winked to the media which is h-hosted on 3wd pawty sewvices",
     "about": {
       "title": "about",
       "links": [
