@@ -24,6 +24,7 @@ export default function SearchBar() {
     const setData = useContextSelector(SearchContext, (value) => value.setData);
     const reference = useRef<HTMLInputElement>(null);
     const [searchType, setSearchType] = useState<"id" | "name">("name");
+    const [isError, setIsError] = useState(false);
 
     return (
         <div className="px-4 w-full mx-auto max-w-384 flex flex-nowrap gap-2">
@@ -31,7 +32,7 @@ export default function SearchBar() {
                 onClick={() => {
                     reference.current?.focus();
                 }}
-                className="focus-within:ring-2 ring-black dark:ring-white rounded-md flex flex-nowrap items-center overflow-clip h-10 gap-0 cursor-text transition w-full"
+                className={`focus-within:ring-2 rounded-md flex flex-nowrap items-center overflow-clip h-10 gap-0 cursor-text transition w-full ${isError ? "ring-red-500 dark:ring-red-400" : "ring-black dark:ring-white"}`}
                 style={{
                     background: parseTailwindColor({
                         color: base,
@@ -45,16 +46,23 @@ export default function SearchBar() {
                     <SearchIcon size={18} />
                 </div>
                 <input
-                    defaultValue={""}
+                    type="text"
+                    defaultValue=""
                     ref={reference}
                     className="w-full h-full text-sm focus:outline-none"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                        setIsError(false);
+
                         const value = event.currentTarget.value.trim();
 
                         setData({
                             search: value,
                             type:   searchType,
                         });
+
+                        if (searchType === "id" && /[^0-9]/.test(value)) {
+                            setIsError(true);
+                        }
                     }}
                     placeholder={dictionaries?.misc?.searchAnimes}
                     title={dictionaries?.aria?.searchAnimes}
@@ -64,6 +72,7 @@ export default function SearchBar() {
                     onClick={() => {
                         let changedSearchType: "id" | "name";
 
+                        setIsError(false);
                         setSearchType((state) => {
                             if (state === "id") {
                                 changedSearchType = "name";
