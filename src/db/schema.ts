@@ -4,3 +4,7 @@ export const MALToAnilibriaSchema = sqliteTable('malToAnilibria', {
     idMal:       integer().notNull(),
     idAnilibria: integer().notNull(),
 });
+export const MALToSovetRomanticaSchema = sqliteTable('malToSovetRomantica', {
+    idMal:            integer().notNull(),
+    idSovetRomantica: integer().notNull(),
+});

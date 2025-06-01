@@ -12,7 +12,13 @@ const fetchAnilibriaVideo = async (anilibriaId: number): Promise<any> => {
         return undefined;
     }
 
-    return "https://cache.libria.fun" + anime?.player?.list?.["1"]?.hls?.fhd;
+    const playerURL = anime?.player?.list?.["1"]?.hls?.fhd;
+
+    if (!playerURL) {
+        return undefined;
+    }
+
+    return "https://cache.libria.fun" + playerURL;
 };
 
 export default fetchAnilibriaVideo;
