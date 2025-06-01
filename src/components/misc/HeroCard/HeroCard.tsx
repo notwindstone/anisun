@@ -68,7 +68,7 @@ export default function HeroCard({
         <Link className="select-none group w-full" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
             <ConfiguredImage
                 priority
-                className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-sm sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
+                className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-md sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
                 style={{
                     objectPosition: "100% 20%",
                 }}

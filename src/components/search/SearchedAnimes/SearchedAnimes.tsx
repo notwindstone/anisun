@@ -8,9 +8,11 @@ export default function SearchedAnimes() {
         <>
             <SearchProvider>
                 <SearchBar />
-                <ClientFetchWrapper isGrid>
-                    <Cards isImageUnoptimized isGrid />
-                </ClientFetchWrapper>
+                <div className="max-w-384 w-full mx-auto">
+                    <ClientFetchWrapper isGrid>
+                        <Cards isImageUnoptimized isGrid />
+                    </ClientFetchWrapper>
+                </div>
             </SearchProvider>
         </>
     );
