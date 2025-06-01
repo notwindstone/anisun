@@ -20,7 +20,7 @@ import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
 import Footer from "@/components/layout/Footer/Footer";
 import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotify";
-import {userAgent} from "next/server";
+import { userAgent } from "next/server";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
