@@ -103,7 +103,6 @@ export default async function RootLayout({
     const currentDate = new Date();
 
     console.log(
-        "\n",
         `[${currentDate.toLocaleTimeString()}, ${currentDate.toDateString()}]:`,
         "request -",
         `${browser?.name} ${browser?.version},`,
