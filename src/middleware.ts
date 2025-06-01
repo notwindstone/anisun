@@ -48,6 +48,12 @@ export async function middleware(request: NextRequest) {
     const pathname = request.nextUrl.pathname;
     const searchParameters = request.nextUrl.searchParams;
 
+    console.log(
+        `Current Pathname: ${pathname};`,
+        `User Agent: ${request.headers.get("user-agent")}`,
+        "\n",
+    );
+
     // // `/_next/` and `/api/` are ignored by the watcher, but we need to ignore files in `public` manually.
     // // If you have one
     // if (

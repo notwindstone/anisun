@@ -23,11 +23,11 @@ export default function Badge({
 
     if (!isScore || score === undefined) {
         scoreBadgeColorClassName = "";
-    } else if (score >= 8.75) {
+    } else if (score >= 8.7) {
         scoreBadgeColorClassName = "bg-indigo-700";
-    } else if (score >= 8) {
+    } else if (score >= 7.5) {
         scoreBadgeColorClassName = "bg-green-700";
-    } else if (score >= 6.5) {
+    } else if (score >= 6) {
         scoreBadgeColorClassName = "bg-yellow-700";
     } else {
         scoreBadgeColorClassName = "bg-red-700";
