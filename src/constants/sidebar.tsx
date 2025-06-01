@@ -1,6 +1,6 @@
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
-import { CircleUser, History, House, Library } from "lucide-react";
+import { CircleUser, History, House, Library, ShieldAlert } from "lucide-react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 const iconSize = 20;
@@ -8,15 +8,18 @@ const iconSize = 20;
 export const getSideBarLinks = ({
     dictionaries,
     avatar,
+    username,
 }: {
     dictionaries: DictionariesType;
     avatar: string | undefined;
+    username: string | undefined;
 }): Array<{
     title: string;
     links: Array<{
         name: string | undefined;
         href: string;
         icon: React.ReactNode;
+        hidden?: boolean | undefined;
     }>;
 }> => [
     {
@@ -36,6 +39,14 @@ export const getSideBarLinks = ({
                 name: dictionaries?.sidebar?.history,
                 href: PageRoutes.History.Root,
                 icon: <History className="shrink-0" size={iconSize} />,
+            },
+            // check if user is "admin" (or is pretending to be)
+            // ofc works only for one person (me)
+            {
+                name:   "admin",
+                href:   PageRoutes.Admin.Root,
+                icon:   <ShieldAlert className="shrink-0" size={iconSize} />,
+                hidden: username !== "windstone",
             },
         ],
     },

@@ -17,7 +17,9 @@ export default function Sidebar({
     // because it updates on the client-side
     // but a `position` is updated using a POST query to the server
     const { layout: { sidebar: { position } } } = config;
+
     let avatar: string | undefined;
+    let username: string | undefined;
 
     if (
         typeof accountInfo === "object"
@@ -28,9 +30,19 @@ export default function Sidebar({
         avatar = accountInfo.avatar;
     }
 
+    if (
+        typeof accountInfo === "object"
+        && accountInfo !== null
+        && "username" in accountInfo
+        && typeof accountInfo.username === "string"
+    ) {
+        username = accountInfo.username;
+    }
+
     const sidebarItems = getSideBarLinks({
         dictionaries,
         avatar,
+        username,
     });
 
     return (
@@ -41,6 +53,10 @@ export default function Sidebar({
                         <div key={title} className="flex flex-col gap-2 w-full">
                             {
                                 links.map((link) => {
+                                    if (link.hidden) {
+                                        return;
+                                    }
+
                                     return (
                                         <Link
                                             // `null` by default, which means only static routes gonna fully prefetch

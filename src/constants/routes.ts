@@ -135,4 +135,9 @@ export const PageRoutes = {
             Error: "error",
         },
     },
+    Admin: {
+        Root:     "/admin",
+        Pathname: "admin",
+        Segment:  "/admin/",
+    },
 };
