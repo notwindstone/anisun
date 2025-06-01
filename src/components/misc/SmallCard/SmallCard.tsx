@@ -24,6 +24,11 @@ export default function SmallCard({
             data:         value.data,
         };
     });
+
+    if (data?.idMal === null) {
+        return;
+    }
+
     const locale = dictionaries?.metadata.locale ?? DefaultLocale;
 
     const name = data?.title?.romaji ?? data?.title?.english ?? data?.title?.native ?? "none";
