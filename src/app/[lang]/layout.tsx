@@ -97,18 +97,19 @@ export default async function RootLayout({
         : "flex-col sm:flex-row-reverse";
 
     const headersList = await headers();
-    const { browser, cpu, os, engine, device } = userAgent({
+    const { browser, cpu, os, device } = userAgent({
         headers: headersList,
     });
+    const currentDate = new Date();
 
     console.log(
         "\n",
-        "New Request ---",
-        `Browser: ${browser?.name} ${browser?.version} ---`,
-        `CPU: ${cpu?.architecture} ---`,
-        `OS: ${os?.name} ${os?.version} ---`,
-        `Engine: ${engine?.name} ${engine?.version} ---`,
-        `Device: ${device?.type} ${device?.model} ${device?.vendor}`,
+        `[${currentDate.toLocaleTimeString()}, ${currentDate.toDateString()}]:`,
+        "request -",
+        `${browser?.name} ${browser?.version},`,
+        `${cpu?.architecture},`,
+        `${os?.name} ${os?.version},`,
+        `${device?.type}`,
     );
 
     return (
