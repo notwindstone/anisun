@@ -7,9 +7,11 @@ import { AccessTokenCookieKey } from "@/constants/app";
 import { deleteCookie as deleteClientCookies } from "cookies-next";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { useState } from "react";
 
 export default function OAuth2LogOut() {
     const signOut = useContextSelector(ConfigsContext, (value) => value.dictionaries?.misc?.signOut);
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <>
@@ -17,13 +19,21 @@ export default function OAuth2LogOut() {
                 custom={{
                     style: "base",
                 }}
+                disabled={isLoading}
                 label={"Sign out from your account"}
                 onClick={async () => {
+                    if (isLoading) {
+                        return;
+                    }
+
+                    setIsLoading(true);
+
                     await deleteCookie({
                         key: AccessTokenCookieKey,
                     });
 
                     deleteClientCookies("locale");
+                    setIsLoading(false);
                 }}
             >
                 <div className="fill-black dark:fill-white">
