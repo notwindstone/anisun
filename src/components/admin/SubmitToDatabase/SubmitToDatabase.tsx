@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { getAnilibriaSyncDB, writeToAnilibriaSyncDB } from "@/lib/actions/admin";
 
 export default function SubmitToDatabase({
@@ -13,12 +13,33 @@ export default function SubmitToDatabase({
     const [MALData, setMALData] = useState("");
     const [anilibriaData, setAnilibriaData] = useState("");
     const [status, setStatus] = useState<"success" | "loading" | "none" | "error">("none");
-    const [databaseData, setDatabaseData] = useState("");
+    const [databaseData, setDatabaseData] = useState<Array<{
+        idMal: number;
+        idAnilibria: number;
+    }> | "loading" | "Error" | "Not allowed">("loading");
 
-    const isMALIDLessThanAnilibriaID = Number(MALData) < Number(anilibriaData);
+    const isMALIDLessThanAnilibriaID = Number(MALData) < Number(anilibriaData) && (Number(MALData) !== 0 || Number.isNaN(Number(MALData)));
+
+    useEffect(() => {
+        (async () => {
+            const data = await getAnilibriaSyncDB({
+                accessToken,
+                tokenProvider,
+            });
+
+            setDatabaseData(data);
+        })();
+    }, [accessToken, tokenProvider]);
 
     return (
         <>
+            <p className="w-fit px-2 py-1 bg-neutral-700">
+                {
+                    typeof databaseData === "object"
+                        ? databaseData.length
+                        : 0
+                }
+            </p>
             <p className={`px-2 py-1 w-fit text-black ${status === "error" ? "bg-red-300 animate-pulse text-3xl" : "bg-neutral-300"}`}>
                 {status}
             </p>
@@ -89,7 +110,7 @@ export default function SubmitToDatabase({
                                 tokenProvider,
                             });
 
-                            setDatabaseData(JSON.stringify(data));
+                            setDatabaseData(data);
                             setStatus(result === "Success"
                                 ? "success"
                                 : "error");
@@ -124,7 +145,7 @@ export default function SubmitToDatabase({
                                 tokenProvider,
                             });
 
-                            setDatabaseData(JSON.stringify(data));
+                            setDatabaseData(data);
                             setStatus(result === "Success"
                                 ? "success"
                                 : "error");
@@ -152,7 +173,7 @@ export default function SubmitToDatabase({
                                 tokenProvider,
                             });
 
-                            setDatabaseData(JSON.stringify(data));
+                            setDatabaseData(data);
                             setStatus("success");
                         }}
                     >
@@ -161,7 +182,19 @@ export default function SubmitToDatabase({
                 </div>
             </div>
             <div>
-                {databaseData}
+                {
+                    typeof databaseData === "object"
+                        ? JSON.stringify(
+                            (() => {
+                                const temporary = [ ...databaseData ];
+
+                                temporary.reverse();
+
+                                return temporary;
+                            })(),
+                        )
+                        : databaseData
+                }
             </div>
         </>
     );
