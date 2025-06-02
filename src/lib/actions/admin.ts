@@ -1,7 +1,7 @@
 "use server";
 
 import database from "@/db";
-import { MALToAnilibriaSchema } from "@/db/schema";
+import { MALToAnilibriaSchema, MALToSovetRomanticaSchema } from "@/db/schema";
 import { OAuth2Routes } from "@/constants/routes";
 import { eq } from "drizzle-orm";
 
@@ -92,6 +92,47 @@ export async function getAnilibriaSyncDB({
 
     try {
         data = await database.select().from(MALToAnilibriaSchema);
+    } catch {
+        return "Error";
+    }
+
+    return data;
+}
+
+export async function getSovetRomanticaSyncDB({
+    accessToken,
+    tokenProvider,
+}: {
+    accessToken: string;
+    tokenProvider: string;
+}) {
+    console.log(tokenProvider);
+    let user;
+
+    try {
+        const data = await fetch(OAuth2Routes.Shikimori._FetchUser, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+            },
+            next: {
+                revalidate: 60 * 30, // 30 minutes cache
+            },
+        });
+
+        user = await data.json();
+    } catch {
+        return "Error";
+    }
+
+    // my shikimori account id
+    if (user.id !== 1_452_707) {
+        return "Not allowed";
+    }
+
+    let data;
+
+    try {
+        data = await database.select().from(MALToSovetRomanticaSchema);
     } catch {
         return "Error";
     }

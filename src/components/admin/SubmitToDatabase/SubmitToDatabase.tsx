@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { getAnilibriaSyncDB, writeToAnilibriaSyncDB } from "@/lib/actions/admin";
+import { getAnilibriaSyncDB, getSovetRomanticaSyncDB, writeToAnilibriaSyncDB } from "@/lib/actions/admin";
 
 export default function SubmitToDatabase({
     accessToken,
@@ -16,6 +16,9 @@ export default function SubmitToDatabase({
     const [databaseData, setDatabaseData] = useState<Array<{
         idMal: number;
         idAnilibria: number;
+    } | {
+        idMal: number;
+        idSovetRomantica: number;
     }> | "loading" | "Error" | "Not allowed">("loading");
 
     const isMALIDLessThanAnilibriaID = Number(MALData) < Number(anilibriaData) && (Number(MALData) !== 0 || Number.isNaN(Number(MALData)));
@@ -177,7 +180,28 @@ export default function SubmitToDatabase({
                             setStatus("success");
                         }}
                     >
-                        Refetch
+                        Refetch Anilibria
+                    </button>
+                    <button
+                        className="p-2 bg-white border border-black rounded-md text-black hover:cursor-pointer active:cursor-default disabled:cursor-not-allowed"
+                        disabled={status === "loading"}
+                        onClick={async () => {
+                            if (status === "loading") {
+                                return;
+                            }
+
+                            setStatus("loading");
+
+                            const data = await getSovetRomanticaSyncDB({
+                                accessToken,
+                                tokenProvider,
+                            });
+
+                            setDatabaseData(data);
+                            setStatus("success");
+                        }}
+                    >
+                        Refetch SovetRomantica
                     </button>
                 </div>
             </div>
