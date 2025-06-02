@@ -2,8 +2,9 @@
 
 import database from "@/db";
 import { MALToAnilibriaSchema, MALToSovetRomanticaSchema } from "@/db/schema";
-import { OAuth2Routes } from "@/constants/routes";
 import { eq } from "drizzle-orm";
+import { validateUser } from "@/lib/actions/user";
+import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 
 export async function writeToAnilibriaSyncDB({
     idMal,
@@ -15,42 +16,35 @@ export async function writeToAnilibriaSyncDB({
     idMal: number;
     idAnilibria: number;
     accessToken: string;
-    tokenProvider: string;
+    tokenProvider: OAuth2ProvidersType;
     isRemove?: boolean | undefined;
 }) {
-    console.log(tokenProvider);
-    let user;
+    const user = await validateUser({
+        accessToken,
+        tokenProvider,
+    });
 
-    try {
-        const data = await fetch(OAuth2Routes.Shikimori._FetchUser, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-            next: {
-                revalidate: 60 * 30, // 30 minutes cache
-            },
-        });
-
-        user = await data.json();
-    } catch {
+    if (user === "error") {
         return "Error";
     }
 
-    // my shikimori account id
-    if (user.id !== 1_452_707) {
+    if (user === "user") {
         return "Not allowed";
     }
 
-    try {
-        // eslint-disable-next-line
-        if (isRemove) {
+    if (isRemove) {
+        try {
             await database.delete(MALToAnilibriaSchema).where(eq(MALToAnilibriaSchema.idMal, idMal));
-        } else {
-            await database.insert(MALToAnilibriaSchema).values({
-                idAnilibria,
-                idMal,
-            });
+        } catch {
+            return "Error";
         }
+    }
+
+    try {
+        await database.insert(MALToAnilibriaSchema).values({
+            idAnilibria,
+            idMal,
+        });
     } catch {
         return "Error";
     }
@@ -58,40 +52,32 @@ export async function writeToAnilibriaSyncDB({
     return "Success";
 }
 
-export async function getAnilibriaSyncDB({
+async function getFromDB({
     accessToken,
     tokenProvider,
+    schema,
 }: {
     accessToken: string;
-    tokenProvider: string;
+    tokenProvider: OAuth2ProvidersType;
+    schema: typeof MALToSovetRomanticaSchema | typeof MALToAnilibriaSchema;
 }) {
-    console.log(tokenProvider);
-    let user;
+    const user = await validateUser({
+        accessToken,
+        tokenProvider,
+    });
 
-    try {
-        const data = await fetch(OAuth2Routes.Shikimori._FetchUser, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-            next: {
-                revalidate: 60 * 30, // 30 minutes cache
-            },
-        });
-
-        user = await data.json();
-    } catch {
+    if (user === "error") {
         return "Error";
     }
 
-    // my shikimori account id
-    if (user.id !== 1_452_707) {
+    if (user === "user") {
         return "Not allowed";
     }
 
     let data;
 
     try {
-        data = await database.select().from(MALToAnilibriaSchema);
+        data = await database.select().from(schema);
     } catch {
         return "Error";
     }
@@ -99,43 +85,30 @@ export async function getAnilibriaSyncDB({
     return data;
 }
 
+export async function getAnilibriaSyncDB({
+    accessToken,
+    tokenProvider,
+}: {
+    accessToken: string;
+    tokenProvider: OAuth2ProvidersType;
+}) {
+    return await getFromDB({
+        schema: MALToAnilibriaSchema,
+        tokenProvider,
+        accessToken,
+    });
+}
+
 export async function getSovetRomanticaSyncDB({
     accessToken,
     tokenProvider,
 }: {
     accessToken: string;
-    tokenProvider: string;
+    tokenProvider: OAuth2ProvidersType;
 }) {
-    console.log(tokenProvider);
-    let user;
-
-    try {
-        const data = await fetch(OAuth2Routes.Shikimori._FetchUser, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-            next: {
-                revalidate: 60 * 30, // 30 minutes cache
-            },
-        });
-
-        user = await data.json();
-    } catch {
-        return "Error";
-    }
-
-    // my shikimori account id
-    if (user.id !== 1_452_707) {
-        return "Not allowed";
-    }
-
-    let data;
-
-    try {
-        data = await database.select().from(MALToSovetRomanticaSchema);
-    } catch {
-        return "Error";
-    }
-
-    return data;
+    return await getFromDB({
+        schema: MALToSovetRomanticaSchema,
+        tokenProvider,
+        accessToken,
+    });
 }

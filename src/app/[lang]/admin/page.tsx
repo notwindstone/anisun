@@ -1,14 +1,27 @@
 import { cookies } from "next/headers";
 import { AccessTokenCookieKey, AccessTokenProviderCookieKey } from "@/constants/app";
-import { OAuth2Routes } from "@/constants/routes";
 import SubmitToDatabase from "@/components/admin/SubmitToDatabase/SubmitToDatabase";
+import { validateUser } from "@/lib/actions/user";
+import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
+
+const oauth2ProvidersArray: Array<OAuth2ProvidersType> = [
+    "mal", "anilist", "shikimori",
+];
+
+function getProvider(parsedTokenProvider: string) {
+    for (const provider of oauth2ProvidersArray) {
+        if (provider === parsedTokenProvider) {
+            return provider;
+        }
+    }
+}
 
 export default async function Page() {
     const cookieStore = await cookies();
     const accessToken = cookieStore.get(AccessTokenCookieKey)?.value;
-    const tokenProvider = cookieStore.get(AccessTokenProviderCookieKey)?.value;
+    const parsedTokenProvider = cookieStore.get(AccessTokenProviderCookieKey)?.value;
 
-    if (!accessToken || !tokenProvider) {
+    if (!accessToken || !parsedTokenProvider) {
         return (
             <>
                 <div className="p-4 max-w-384 mx-auto">
@@ -18,20 +31,24 @@ export default async function Page() {
         );
     }
 
-    let user;
+    const tokenProvider = getProvider(parsedTokenProvider);
 
-    try {
-        const data = await fetch(OAuth2Routes.Shikimori._FetchUser, {
-            headers: {
-                Authorization: `Bearer ${accessToken}`,
-            },
-            next: {
-                revalidate: 60 * 30, // 30 minutes cache
-            },
-        });
+    if (!tokenProvider) {
+        return (
+            <>
+                <div className="p-4 max-w-384 mx-auto">
+                    Did you tamper with cookies?
+                </div>
+            </>
+        );
+    }
 
-        user = await data.json();
-    } catch {
+    const user = await validateUser({
+        accessToken,
+        tokenProvider,
+    });
+
+    if (user === "error") {
         return (
             <>
                 <div className="p-4 max-w-384 mx-auto">
@@ -41,8 +58,7 @@ export default async function Page() {
         );
     }
 
-    // my shikimori account id
-    if (user.id !== 1_452_707) {
+    if (user === "user") {
         return (
             <>
                 <div className="p-4 max-w-384 mx-auto">

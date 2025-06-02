@@ -65,8 +65,19 @@ export const RemoteRoutes = {
             Root: "https://graphql.anilist.co",
         },
     },
-    MALToAnilibriaID: {
-        Data: "https://raw.githubusercontent.com/qt-kaneko/MALibria/db/mapped.json",
+    MAL: {
+        V2: {
+            Root:  "https://api.myanimelist.net/v2",
+            Users: {
+                Root:     "/users",
+                Pathname: "users",
+                Segment:  "/users/",
+                Me:       {
+                    Root:     "/@me",
+                    Pathname: "@me",
+                },
+            },
+        },
     },
 };
 
@@ -84,16 +95,25 @@ export const OAuth2Routes = {
         __Name: "Shikimori",
     },
     Anilist: {
-        Login:    loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
-        Callback: callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
-        __Icon:   AnilistIcon,
-        __Name:   "AniList",
+        Login:             loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
+        Callback:          callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
+        _FetchUserURL:     RemoteRoutes.Anilist.GraphQL.Root,
+        _FetchUserQuery:   JSON.stringify({ query: `query { Viewer { id name } }` }),
+        _FetchUserHeaders: {
+            "Content-Type": "application/json",
+            Accept:         "application/json",
+        },
+        __Icon: AnilistIcon,
+        __Name: "AniList",
     },
     MAL: {
-        Login:    loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
-        Callback: callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
-        __Icon:   MALIcon,
-        __Name:   "MyAnimeList",
+        Login:      loginBase       + APIRoutes.OAuth2.Login.MAL.Root,
+        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.MAL.Root,
+        _FetchUser: RemoteRoutes.MAL.V2.Root
+            + RemoteRoutes.MAL.V2.Users.Root
+            + RemoteRoutes.MAL.V2.Users.Me.Root,
+        __Icon: MALIcon,
+        __Name: "MyAnimeList",
     },
 };
 export const PageRoutes = {

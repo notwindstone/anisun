@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react";
 import { getAnilibriaSyncDB, getSovetRomanticaSyncDB, writeToAnilibriaSyncDB } from "@/lib/actions/admin";
+import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 
 export default function SubmitToDatabase({
     accessToken,
     tokenProvider,
 }: {
     accessToken: string;
-    tokenProvider: string;
+    tokenProvider: OAuth2ProvidersType;
 }) {
     const [MALData, setMALData] = useState("");
     const [anilibriaData, setAnilibriaData] = useState("");

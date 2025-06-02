@@ -2,6 +2,8 @@
 
 import { UserType } from "@/types/OAuth2/User.type";
 import { getUniversalUser } from "@/utils/oauth2/getUniversalUser";
+import { OAuth2Routes } from "@/constants/routes";
+import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 
 export async function getUser({
     accessToken,
@@ -31,4 +33,62 @@ export async function getUser({
     }
 
     return user;
+}
+export async function validateUser({
+    accessToken,
+    tokenProvider,
+}: {
+    accessToken: string;
+    tokenProvider: OAuth2ProvidersType;
+}): Promise<"error" | "user" | "admin"> {
+    let user;
+    let fetchURL;
+    let fetchHeaders = {};
+    let fetchBody = {};
+
+    switch (tokenProvider) {
+        case "shikimori": {
+            fetchURL = OAuth2Routes.Shikimori._FetchUser;
+
+            break;
+        }
+        case "anilist": {
+            fetchURL = OAuth2Routes.Anilist._FetchUserURL;
+            fetchHeaders = OAuth2Routes.Anilist._FetchUserHeaders;
+            fetchBody = {
+                body: OAuth2Routes.Anilist._FetchUserQuery,
+            };
+
+            break;
+        }
+        case "mal": {
+            fetchURL = OAuth2Routes.MAL._FetchUser;
+
+            break;
+        }
+    }
+
+    try {
+        const data = await fetch(fetchURL, {
+            headers: {
+                Authorization: `Bearer ${accessToken}`,
+                ...fetchHeaders,
+            },
+            next: {
+                revalidate: 60 * 30, // 30 minutes cache
+            },
+            ...fetchBody,
+        });
+
+        user = await data.json();
+    } catch {
+        return "error";
+    }
+
+    // my shikimori account id
+    if (user.id !== 1_452_707) {
+        return "user";
+    }
+
+    return "admin";
 }
