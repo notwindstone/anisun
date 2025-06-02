@@ -1,21 +1,15 @@
-import { RemoteRoutes } from "@/constants/routes";
-import { MALToAnilibriaType } from "@/types/Anime/MALToAnilibria.type";
+import database from "@/db";
+import { MALToAnilibriaSchema } from "@/db/schema";
 
 export default async function malToAnilibria({
     idMal,
 }: {
     idMal: number;
 }): Promise<number | undefined> {
-    let animes: Array<MALToAnilibriaType>;
+    let animes;
 
     try {
-        const response = await fetch(RemoteRoutes.MALToAnilibriaID.Data, {
-            next: {
-                revalidate: 60 * 60 * 24, // 24 hours
-            },
-        });
-
-        animes = await response.json();
+        animes = await database.select().from(MALToAnilibriaSchema);
     } catch (error) {
         console.error("malToAnilibria.ts error:", error);
 
@@ -23,8 +17,8 @@ export default async function malToAnilibria({
     }
 
     for (const anime of animes) {
-        if (anime.myanimelist_id == idMal) {
-            return anime.anilibria_id;
+        if (anime.idMal === idMal) {
+            return anime.idAnilibria;
         }
     }
 
