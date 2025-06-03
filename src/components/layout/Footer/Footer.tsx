@@ -20,13 +20,13 @@ export default function Footer({
                     <div className="flex flex-nowrap gap-4">
                         <Favicon />
                         <div className="flex flex-col gap-1 justify-center">
-                            <p className="text-xl font-medium leading-none flex items-center gap-2">
+                            <div className="text-xl font-medium leading-none flex items-center gap-2">
                                 {AppName}{
                                     currentGitCommitHash !== undefined && (
                                         <Badge textSize="text-xs">
                                             <a
                                                 className="hover:opacity-75 transition"
-                                                href="https://github.com/notwindstone/anisun/tree/f94ed4c"
+                                                href={`https://github.com/notwindstone/anisun/tree/${currentGitCommitHash}`}
                                                 target="_blank"
                                             >
                                                 {currentGitCommitHash}
@@ -34,7 +34,7 @@ export default function Footer({
                                         </Badge>
                                     )
                                 }
-                            </p>
+                            </div>
                             <Link href="/" className="text-sm leading-none text-neutral-500 dark:text-neutral-400 transition-colors hover:text-neutral-800 dark:hover:text-neutral-200">
                                 anime.tatar
                             </Link>
