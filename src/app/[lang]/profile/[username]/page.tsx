@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-    title: "sadf",
+    title: "Profile",
 };
 
 export default async function Page({

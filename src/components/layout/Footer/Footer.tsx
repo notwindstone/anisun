@@ -2,6 +2,7 @@ import { AppName, getFooterItems } from "@/constants/app";
 import Favicon from "@/components/base/Favicon/Favicon";
 import Link from "next/link";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
+import Badge from "@/components/base/Badge/Badge";
 
 export default function Footer({
     dictionaries,
@@ -9,6 +10,8 @@ export default function Footer({
     dictionaries: DictionariesType;
 }) {
     const footerItems = getFooterItems(dictionaries);
+    const currentGitCommitHash = process.env.GIT_COMMIT_HASH;
+    console.log(currentGitCommitHash);
 
     return (
         <>
@@ -16,9 +19,21 @@ export default function Footer({
                 <div className="flex flex-col gap-4">
                     <div className="flex flex-nowrap gap-4">
                         <Favicon />
-                        <div className="flex flex-col justify-center">
-                            <p className="text-xl font-medium leading-none">
-                                {AppName}
+                        <div className="flex flex-col gap-1 justify-center">
+                            <p className="text-xl font-medium leading-none flex items-center gap-2">
+                                {AppName}{
+                                    currentGitCommitHash !== undefined && (
+                                        <Badge textSize="text-xs">
+                                            <a
+                                                className="hover:opacity-75 transition"
+                                                href="https://github.com/notwindstone/anisun/tree/f94ed4c"
+                                                target="_blank"
+                                            >
+                                                {currentGitCommitHash}
+                                            </a>
+                                        </Badge>
+                                    )
+                                }
                             </p>
                             <Link href="/" className="text-sm leading-none text-neutral-500 dark:text-neutral-400 transition-colors hover:text-neutral-800 dark:hover:text-neutral-200">
                                 anime.tatar

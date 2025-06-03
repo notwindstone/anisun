@@ -11,11 +11,9 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 // and the anime data will load instantly on the client.
 // If there is no cache, a user will see a loading state (skeleton).
 // If there is an error while getting the data server-side,
-// data will be fetched client-side using Tanstack Query. But:
-// server doesn't know if client-side successfully fetched anime data
-// so it will refetch on every page render that contains this component.
-// That's why i implemented an error counter: if there is more than
-// 3 errors (in the last 3 minutes), just let the client handle everything.
+// data will be fetched client-side using Tanstack Query.
+// If there is more than 3 errors in the last 3 minutes,
+// just let the client handle everything.
 export default async function ServerFetch({
     children,
     queryKey,

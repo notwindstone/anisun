@@ -3,9 +3,9 @@
   "version": "5.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "GIT_COMMIT_HASH=$(git rev-parse --short HEAD) next dev --turbopack",
     "dev:termux": "next dev",
-    "build": "next build",
+    "build": "GIT_COMMIT_HASH=$(git rev-parse --short HEAD) next build",
     "start": "next start",
     "lint": "concurrently --raw \"bun lint:eslint\" \"bun lint:ts\"",
     "lint:eslint": "next lint",

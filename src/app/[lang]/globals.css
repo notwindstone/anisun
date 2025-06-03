@@ -29,7 +29,7 @@
   max-width: calc(1 / 4 * 100% - 12px);
 }
 @utility flex-max-w-1/6 {
-  max-width: calc(1 / 6 * 100% - 13.5px);
+  max-width: calc(1 / 6 * 100% - 14px);
 }
 
 /*

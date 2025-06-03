@@ -2,9 +2,12 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     /* config options here */
+    env: {
+        GIT_COMMIT_HASH: process.env.GIT_COMMIT_HASH,
+    },
     images: {
         minimumCacheTTL: 60 * 60 * 24, // 24 hours
-        remotePatterns: [
+        remotePatterns:  [
             {
                 protocol: "https",
                 hostname: "s4.anilist.co",
