@@ -22,7 +22,7 @@
     "account": "account"
   },
   "footer": {
-    "description": "all matewiaw on this site i-is pwesented fow i-infowmationaw puwposes o-onwy.\nthis site does n-not store a-any files on ouw s-sewver, we are winked to the media which i-is hosted on 3wd pawty s-sewvices.\nin cases of copywight infwingement〜☆  pwease c-contact the sewvices stowing the media files ow contact us by emaiw:",
+    "description": "all matewiaw on this site i-is pwesented fow i-infowmationaw puwposes o-onwy.\n\nthis site does n-not store a-any files on ouw s-sewver, we are winked to the media which i-is hosted on 3wd pawty s-sewvices.\n\nin cases of copywight infwingement〜☆  pwease c-contact the sewvices stowing the media files ow contact us by emaiw:",
     "about": {
       "title": "about",
       "links": [
@@ -84,18 +84,18 @@
   },
   "player": {
     "uncached": {
-      "title": "Fetching...",
-      "description": "Fetching data from Anilibria."
+      "title": "fetching...",
+      "description": "fetching data fwom aniwibwia"
     },
     "cached": {
-      "title": "Loading...",
-      "description": "Getting anime from the cache."
+      "title": "woading...",
+      "description": "getting anime fwom the c-cache"
     },
     "mapping": {
-      "title": "Mapping...",
-      "description": "Getting anime id from a mapped database."
+      "title": "m-mapping...",
+      "description": "getting anime id fwom a mapped database"
     },
-    "selectCached": "Select cached"
+    "selectCached": "sewect cached"
   },
   "aria": {
     "toggleColorScheme": "toggle app cowow scheme",

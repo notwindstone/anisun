@@ -22,7 +22,7 @@
     "account": "Account"
   },
   "footer": {
-    "description": "All material on this site is presented for informational purposes only.\nThis site does not store any files on our server, we are linked to the media which is hosted on 3rd party services.\nIn cases of copyright infringement, please contact the services storing the media files or contact us by email:",
+    "description": "All material on this site is presented for informational purposes only.\n\nThis site does not store any files on our server, we are linked to the media which is hosted on 3rd party services.\n\nIn cases of copyright infringement, please contact the services storing the media files or contact us by email:",
     "about": {
       "title": "About",
       "links": [
