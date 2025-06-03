@@ -1,4 +1,10 @@
 export const ErrorStrings = {
+    Player: {
+        UnableToFind: {
+            Label:       "no_video",
+            Description: "Unable to find a player url",
+        },
+    },
     OAuth2: {
         BrowserChanged: {
             Label:       "browser_changed",

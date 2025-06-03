@@ -82,6 +82,17 @@
     "pink": "pink",
     "rose": "wose"
   },
+  "player": {
+    "uncached": {
+      "title": "Fetching...",
+      "description": "Fetching data from Anilibria..."
+    },
+    "cached": {
+      "title": "Loading...",
+      "description": "Getting anime from the cache..."
+    },
+    "selectCached": "Select cached"
+  },
   "aria": {
     "toggleColorScheme": "toggle app cowow scheme",
     "changePaletteColor": "set p-pawette cowow t-to",

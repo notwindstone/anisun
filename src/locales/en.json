@@ -82,6 +82,17 @@
     "pink": "Pink",
     "rose": "Rose"
   },
+  "player": {
+    "uncached": {
+      "title": "Fetching...",
+      "description": "Fetching data from Anilibria..."
+    },
+    "cached": {
+      "title": "Loading...",
+      "description": "Getting anime from the cache..."
+    },
+    "selectCached": "Select cached"
+  },
   "aria": {
     "toggleColorScheme": "Toggle app color scheme",
     "changePaletteColor": "Set palette color to",

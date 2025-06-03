@@ -12,7 +12,7 @@ export default function AnilibriaQuery() {
     const pathname = usePathname();
     const { replace } = useRouter();
     const search = useContextSelector(AnilibriaSearchContext, (value) => value.search);
-    const { isPending, error, data } = useQuery({
+    const { isPending, error, data, failureCount } = useQuery({
         queryKey: ["anime", "anilibria", search],
         queryFn:  async () => {
             if (!search) {
@@ -27,7 +27,7 @@ export default function AnilibriaQuery() {
     });
 
     if (isPending) {
-        return <>loading</>;
+        return <>loading{failureCount}</>;
     }
 
     console.log(data);
@@ -43,8 +43,10 @@ export default function AnilibriaQuery() {
         title: string;
     }) {
         const parameters = new URLSearchParams(searchParameters);
+
         parameters.set("mediaSrc", url);
         parameters.set("title", title);
+
         replace(`${pathname}?${parameters.toString()}`);
     }
 
@@ -52,7 +54,6 @@ export default function AnilibriaQuery() {
         <>
             {
                 // TODO lol this is a mess
-                 
                 // eslint-disable-next-line
                 // @ts-ignore
                 data.map((anime) => {

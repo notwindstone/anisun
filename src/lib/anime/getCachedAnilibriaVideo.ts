@@ -2,12 +2,18 @@
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { ErrorStrings } from "@/constants/errors";
 
-const fetchAnilibriaVideo = async (anilibriaId: number): Promise<any> => {
+const getCachedAnilibriaVideo = async (anilibriaId: number): Promise<any> => {
     let anime;
 
     try {
-        const response = await fetch(`https://api.anilibria.tv/v3/title?id=${anilibriaId}`);
-        anime = await response.json();
+        const response = await fetch(`/cached/anilibria.json`);
+        const body = await response.json();
+
+        // TODO
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        anime = body.find((cachedAnime: any) => {
+            return cachedAnime.id === anilibriaId;
+        });
     } catch (error) {
         console.error("fetchAnilibriaVideo.ts error:", error);
 
@@ -23,4 +29,4 @@ const fetchAnilibriaVideo = async (anilibriaId: number): Promise<any> => {
     return "https://cache.libria.fun" + playerURL;
 };
 
-export default fetchAnilibriaVideo;
+export default getCachedAnilibriaVideo;

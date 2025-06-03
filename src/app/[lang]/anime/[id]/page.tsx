@@ -18,12 +18,14 @@ export default async function Page({
 
     return (
         <>
-            <VideoFetch
-                idMal={idMal}
-                selectedPlayer={"anilibria"}
-                mediaSrc={search?.mediaSrc}
-                title={search?.title ?? ""}
-            />
+            <div className="z-1000 sticky sm:static top-0">
+                <VideoFetch
+                    idMal={idMal}
+                    selectedPlayer={"anilibria"}
+                    mediaSrc={search?.mediaSrc}
+                    title={search?.title ?? ""}
+                />
+            </div>
         </>
     );
 }

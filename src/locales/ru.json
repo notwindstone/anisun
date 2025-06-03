@@ -82,6 +82,17 @@
     "pink": "Розовый",
     "rose": "Цвет розы"
   },
+  "player": {
+    "uncached": {
+      "title": "Fetching...",
+      "description": "Fetching data from Anilibria..."
+    },
+    "cached": {
+      "title": "Loading...",
+      "description": "Getting anime from the cache..."
+    },
+    "selectCached": "Select cached"
+  },
   "aria": {
     "toggleColorScheme": "Переключить тему приложения",
     "changePaletteColor": "Поменять акцентный цвет приложения на",
