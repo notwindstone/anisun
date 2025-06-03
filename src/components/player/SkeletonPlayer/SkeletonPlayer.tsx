@@ -10,8 +10,10 @@ import { usePathname, useSearchParams } from "next/navigation";
 
 export default function SkeletonPlayer({
     status = "uncached",
+    failureCount,
 }: {
     status?: "cached" | "uncached" | undefined;
+    failureCount?: number;
 }) {
     const { translations, colors, theme } = useContextSelector(ConfigsContext, (value) => ({
         translations: value.dictionaries?.player,
@@ -48,6 +50,10 @@ export default function SkeletonPlayer({
                 </p>
                 <p className="leading-none opacity-60 text-sm sm:text-lg">
                     {translations?.[status]?.description}
+                    {" "}
+                    {(failureCount !== undefined && failureCount >= 1) && (
+                        `Retry number ${failureCount}`
+                    )}
                 </p>
                 {
                     status === "uncached" && (

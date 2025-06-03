@@ -24,7 +24,7 @@ export default function VideoClientQuery({
     const status = searchParameters.get("status") === "cached"
         ? "cached"
         : "uncached";
-    const { isPending, error, data } = useQuery({
+    const { isPending, error, data, failureCount } = useQuery({
         queryKey: queryKey,
         queryFn:  async () => {
             // ignore cache status property if we are fetching not from anilibria api
@@ -82,10 +82,10 @@ export default function VideoClientQuery({
 
     }, [data, searchParameters, pathname]);
 
-    if (isPending) {
+    if (!isPending) {
         return (
             <>
-                <SkeletonPlayer status={status} />
+                <SkeletonPlayer status={status} failureCount={failureCount} />
             </>
         );
     }
