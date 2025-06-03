@@ -56,6 +56,13 @@ export default function VideoClientQuery({
 
             return result;
         },
+        retry: ((failureCount, error) => {
+            if (error?.message === unableToFind.Description) {
+                return false;
+            }
+
+            return failureCount <= 3;
+        }),
     });
 
     useEffect(() => {
