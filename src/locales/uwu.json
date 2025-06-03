@@ -85,11 +85,15 @@
   "player": {
     "uncached": {
       "title": "Fetching...",
-      "description": "Fetching data from Anilibria..."
+      "description": "Fetching data from Anilibria."
     },
     "cached": {
       "title": "Loading...",
-      "description": "Getting anime from the cache..."
+      "description": "Getting anime from the cache."
+    },
+    "mapping": {
+      "title": "Mapping...",
+      "description": "Getting anime id from a mapped database."
     },
     "selectCached": "Select cached"
   },

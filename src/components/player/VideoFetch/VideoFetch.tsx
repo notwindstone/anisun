@@ -1,5 +1,6 @@
 import { Suspense } from "react";
 import AnilibriaVideo from "@/components/player/AnilibriaVideo/AnilibriaVideo";
+import SkeletonPlayer from "@/components/player/SkeletonPlayer/SkeletonPlayer";
 
 export default function VideoFetch({
     idMal,
@@ -18,7 +19,7 @@ export default function VideoFetch({
         case "anilibria": {
             player = (
                 <Suspense fallback={
-                    <>loading...</>
+                    <SkeletonPlayer status="mapping" />
                 }>
                     <AnilibriaVideo
                         idMal={idMal}

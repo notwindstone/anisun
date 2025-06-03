@@ -1,7 +1,7 @@
-// TODO
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { ErrorStrings } from "@/constants/errors";
 
+// TODO
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const getCachedAnilibriaVideo = async (anilibriaId: number): Promise<any> => {
     let anime;
 

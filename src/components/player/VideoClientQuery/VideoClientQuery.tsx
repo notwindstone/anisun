@@ -82,7 +82,7 @@ export default function VideoClientQuery({
 
     }, [data, searchParameters, pathname]);
 
-    if (!isPending) {
+    if (isPending) {
         return (
             <>
                 <SkeletonPlayer status={status} failureCount={failureCount} />

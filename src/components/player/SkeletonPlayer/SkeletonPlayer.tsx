@@ -12,7 +12,7 @@ export default function SkeletonPlayer({
     status = "uncached",
     failureCount,
 }: {
-    status?: "cached" | "uncached" | undefined;
+    status?: "cached" | "uncached" | "mapping" | undefined;
     failureCount?: number;
 }) {
     const { translations, colors, theme } = useContextSelector(ConfigsContext, (value) => ({
