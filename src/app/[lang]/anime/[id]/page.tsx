@@ -1,4 +1,5 @@
 import VideoFetch from "@/components/player/VideoFetch/VideoFetch";
+import { VideoPlayerType } from "@/types/Anime/VideoPlayer.type";
 
 export default async function Page({
     params,
@@ -16,12 +17,32 @@ export default async function Page({
     const search = await searchParams;
     const idMal = Number(id);
 
+    let selectedPlayer: VideoPlayerType;
+
+    switch (search?.selectedPlayer) {
+        case "anilibria": {
+            selectedPlayer = "anilibria";
+
+            break;
+        }
+        case "sovetromantica": {
+            selectedPlayer = "sovetromantica";
+
+            break;
+        }
+        default: {
+            selectedPlayer = "kodik";
+
+            break;
+        }
+    }
+
     return (
         <>
             <div className="z-1000 sticky sm:static top-0">
                 <VideoFetch
                     idMal={idMal}
-                    selectedPlayer={"anilibria"}
+                    selectedPlayer={selectedPlayer}
                     mediaSrc={search?.mediaSrc}
                     title={search?.title ?? ""}
                 />

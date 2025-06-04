@@ -1,6 +1,8 @@
 import { Suspense } from "react";
 import AnilibriaVideo from "@/components/player/AnilibriaVideo/AnilibriaVideo";
 import SkeletonPlayer from "@/components/player/SkeletonPlayer/SkeletonPlayer";
+import { VideoPlayerType } from "@/types/Anime/VideoPlayer.type";
+import KodikPlayer from "@/components/player/KodikPlayer/KodikPlayer";
 
 export default function VideoFetch({
     idMal,
@@ -9,7 +11,7 @@ export default function VideoFetch({
     title,
 }: {
     idMal: number;
-    selectedPlayer: string;
+    selectedPlayer: VideoPlayerType;
     title: string;
     mediaSrc?: string;
 }) {
@@ -27,6 +29,16 @@ export default function VideoFetch({
                         title={title}
                     />
                 </Suspense>
+            );
+
+            break;
+        }
+        case "sovetromantica": {
+            break;
+        }
+        default: {
+            player = (
+                <KodikPlayer idMal={idMal} />
             );
 
             break;
