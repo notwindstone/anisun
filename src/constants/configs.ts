@@ -1,4 +1,5 @@
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
+import { UserType } from "@/types/OAuth2/User.type";
 
 export const CookieConfigKey = "configs";
 export const DarkThemeKey = "dark";
@@ -17,4 +18,8 @@ export const InitialConfig: SafeConfigType = {
             position: SidebarLeftPosition,
         },
     },
+};
+export const PlaceholderAccount: UserType = {
+    username: "",
+    avatar:   "",
 };

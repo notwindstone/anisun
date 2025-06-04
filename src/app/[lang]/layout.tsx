@@ -10,8 +10,6 @@ import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
-import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
-import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
 import { AccountInfoCookieKey, AppName } from "@/constants/app";
 import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
 import { cookies, headers } from "next/headers";
@@ -21,6 +19,7 @@ import Footer from "@/components/layout/Footer/Footer";
 import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotify";
 import { userAgent } from "next/server";
 import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
+import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -89,8 +88,8 @@ export default async function RootLayout({
         },
     });
 
-    const safeConfigValues = getSafeConfigValues({
-        config: parsedConfigData,
+    const safeAccountValues = getSafeAccountData({
+        account: parsedAccountInfoData,
     });
 
     const headersList = await headers();
@@ -99,6 +98,7 @@ export default async function RootLayout({
     });
     const currentDate = new Date();
 
+    // log requests
     console.log(
         `[${currentDate.toLocaleTimeString()}, ${currentDate.toDateString()}]:`,
         "request -",
@@ -117,19 +117,7 @@ export default async function RootLayout({
                     <ConfigsProvider configs={parsedConfigData} dictionaries={dictionaries}>
                         <SidebarConfigProvider configs={parsedConfigData?.layout?.sidebar}>
                             <AppWrapper>
-                                {
-                                /*
-                                 * SidebarWrapper is client-side
-                                 * Sidebar is server-side
-                                 */
-                                }
-                                <SidebarWrapper>
-                                    <Sidebar
-                                        config={safeConfigValues}
-                                        dictionaries={dictionaries}
-                                        accountInfo={parsedAccountInfoData}
-                                    />
-                                </SidebarWrapper>
+                                <Sidebar accountInfo={safeAccountValues} />
                                 <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
                                     {children}
                                     <Footer dictionaries={dictionaries} />

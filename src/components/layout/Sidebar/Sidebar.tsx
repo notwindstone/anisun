@@ -1,44 +1,59 @@
-import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import { getSideBarLinks } from "@/constants/sidebar";
-import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
+"use client";
+
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { DarkThemeKey, SidebarRightPosition } from "@/constants/configs";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import Button from "@/components/base/Button/Button";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
+import AnimatedGradientText from "@/components/base/AnimatedGradientText/AnimatedGradientText";
+import { AppName } from "@/constants/app";
 import Link from "next/link";
+import { useMediaQuery } from "@mantine/hooks";
+import Favicon from "@/components/base/Favicon/Favicon";
+import { useContextSelector } from "use-context-selector";
+import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
+import { UserType } from "@/types/OAuth2/User.type";
+import { getSideBarLinks } from "@/constants/sidebar";
+
+const icons: {
+    [key: string]: {
+        [key: string]: React.ReactNode;
+    }
+} = {
+    "left": {
+        "true":  <PanelLeftClose />,
+        "false": <PanelLeftOpen />,
+    },
+    "right": {
+        "true":  <PanelLeftOpen />,
+        "false": <PanelLeftClose />,
+    },
+};
 
 export default function Sidebar({
-    config,
-    dictionaries,
     accountInfo,
-}: {
-    config: SafeConfigType;
-    dictionaries: DictionariesType;
-    accountInfo: unknown;
-}) {
-    // these values update only on server-side refetch
-    // so we can't track sidebar `expanded` value
-    // because it updates on the client-side
-    // but a `position` is updated using a POST query to the server
-    const { layout: { sidebar: { position } } } = config;
+}: Readonly<{
+    accountInfo: UserType;
+}>) {
+    const { config, config: {
+        theme,
+        colors: { base },
+    }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            config:       value.data,
+            dictionaries: value.dictionaries,
+        };
+    });
+    const { data: sidebarConfig, optimisticallyUpdate: optimisticallyUpdateSidebar } = useContextSelector(SidebarConfigContext, (value) => value,
+    );
+    const matches = useMediaQuery('(min-width: 640px)');
 
-    let avatar: string | undefined;
-    let username: string | undefined;
-
-    if (
-        typeof accountInfo === "object"
-        && accountInfo !== null
-        && "avatar" in accountInfo
-        && typeof accountInfo.avatar === "string"
-    ) {
-        avatar = accountInfo.avatar;
+    if (matches === false) {
+        return;
     }
 
-    if (
-        typeof accountInfo === "object"
-        && accountInfo !== null
-        && "username" in accountInfo
-        && typeof accountInfo.username === "string"
-    ) {
-        username = accountInfo.username;
-    }
-
+    const { avatar, username } = accountInfo;
     const sidebarItems = getSideBarLinks({
         dictionaries,
         avatar,
@@ -46,49 +61,123 @@ export default function Sidebar({
     });
 
     return (
-        <div className="flex flex-col gap-2 w-full">
-            {
-                sidebarItems.map(({ title, links }) => {
-                    return (
-                        <div key={title} className="flex flex-col gap-2 w-full">
-                            {
-                                links.map((link) => {
-                                    if (link.hidden) {
-                                        return;
-                                    }
+        <>
+            <div
+                className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-sidebar duration-200 overflow-hidden"
+                style={{
+                    width:           sidebarConfig.expanded ? 256 : 56,
+                    backgroundColor: theme === DarkThemeKey
+                        ? parseTailwindColor({
+                            color: base,
+                            step:  900,
+                        })
+                        : parseTailwindColor({
+                            color: base,
+                            step:  100,
+                        }),
+                }}
+            >
+                <div
+                    className="flex w-full items-center justify-between"
+                    style={{
+                        flexDirection: sidebarConfig.position === SidebarRightPosition
+                            ? "row-reverse"
+                            : "row",
+                    }}
+                >
+                    {
+                        sidebarConfig.expanded && (
+                            <Link
+                                className="flex gap-4 items-center select-none"
+                                href="/"
+                                style={{
+                                    flexDirection: sidebarConfig.position === SidebarRightPosition
+                                        ? "row-reverse"
+                                        : "row",
+                                }}
+                            >
+                                <Favicon />
+                                <AnimatedGradientText>
+                                    {AppName.toUpperCase()}
+                                </AnimatedGradientText>
+                            </Link>
+                        )
+                    }
+                    <Button
+                        custom={{
+                            style: "base",
+                        }}
+                        onClick={() => {
+                            optimisticallyUpdateSidebar?.((state) => {
+                                return {
+                                    ...state,
+                                    expanded: !state?.expanded,
+                                };
+                            });
 
-                                    return (
-                                        <Link
-                                            // `null` by default, which means only static routes gonna fully prefetch
-                                            // `true` allows for the full dynamic route prefetch
-                                            prefetch
-                                            href={link.href}
-                                            key={link.href}
-                                            className="dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
-                                            aria-label={link.name}
-                                            title={link.name}
-                                            style={{
-                                                flexDirection: position === "right"
-                                                    ? "row-reverse"
-                                                    : "row",
-                                            }}
-                                        >
-                                            <div className="flex justify-center items-center w-6 shrink-0">
-                                                {link.icon}
-                                            </div>
-                                            <p className="line-clamp-1">
-                                                <span className="px-1" />
-                                                {link.name}
-                                                <span className="px-1" />
-                                            </p>
-                                        </Link>
-                                    );
-                                })
-                            }
-                        </div>
-                    );
-                })
-            }
-        </div>
+                            setConfigValuesClient({
+                                configs: {
+                                    ...config,
+                                    layout: {
+                                        ...config.layout,
+                                        sidebar: {
+                                            ...config.layout.sidebar,
+                                            expanded: !sidebarConfig.expanded,
+                                        },
+                                    },
+                                },
+                            });
+                        }}
+                        label={dictionaries?.aria?.toggleSidebar as string}
+                    >
+                        {icons?.[sidebarConfig.position]?.[sidebarConfig.expanded.toString()]}
+                    </Button>
+                </div>
+                <div className="flex flex-col gap-2 w-full">
+                    {
+                        sidebarItems.map(({ title, links }) => {
+                            return (
+                                <div key={title} className="flex flex-col gap-2 w-full">
+                                    {
+                                        links.map((link) => {
+                                            if (link.hidden) {
+                                                return;
+                                            }
+
+                                            return (
+                                                <Link
+                                                    // `null` by default, which means only static routes gonna fully prefetch
+                                                    // `true` allows for the full dynamic route prefetch
+                                                    prefetch
+                                                    href={link.href}
+                                                    key={link.href}
+                                                    className="dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
+                                                    aria-label={link.name}
+                                                    title={link.name}
+                                                    style={{
+                                                        flexDirection: sidebarConfig.position === SidebarRightPosition
+                                                            ? "row-reverse"
+                                                            : "row",
+                                                    }}
+                                                >
+                                                    <div className="flex justify-center items-center w-6 shrink-0">
+                                                        {link.icon}
+                                                    </div>
+                                                    <p className="line-clamp-1">
+                                                        <span className="px-1" />
+                                                        {link.name}
+                                                        <span className="px-1" />
+                                                    </p>
+                                                </Link>
+                                            );
+                                        })
+                                    }
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            </div>
+        </>
     );
 }
