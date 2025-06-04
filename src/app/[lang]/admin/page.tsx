@@ -25,7 +25,7 @@ export default async function Page() {
         return (
             <>
                 <div className="p-4 max-w-384 mx-auto">
-                    You are not supposed to be here.
+                    You are not supposed to be here. Sign in first.
                 </div>
             </>
         );
