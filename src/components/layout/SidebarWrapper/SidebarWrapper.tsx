@@ -12,7 +12,7 @@ import Link from "next/link";
 import { useMediaQuery } from "@mantine/hooks";
 import Favicon from "@/components/base/Favicon/Favicon";
 import { useContextSelector } from "use-context-selector";
-import { useState } from "react";
+import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
 
 const icons: {
     [key: string]: {
@@ -31,12 +31,8 @@ const icons: {
 
 export default function SidebarWrapper({
     children,
-    serverSideSidebarPosition,
-    serverSideSidebarExpanded,
 }: Readonly<{
     children: React.ReactNode;
-    serverSideSidebarPosition: "left" | "right";
-    serverSideSidebarExpanded: boolean;
 }>) {
     const { config, config: {
         theme,
@@ -47,7 +43,8 @@ export default function SidebarWrapper({
             dictionaries: value.dictionaries,
         };
     });
-    const [expanded, setExpanded] = useState<boolean>(serverSideSidebarExpanded);
+    const { data: sidebarConfig, optimisticallyUpdate: optimisticallyUpdateSidebar } = useContextSelector(SidebarConfigContext, (value) => value,
+    );
     const matches = useMediaQuery('(min-width: 640px)');
 
     if (matches === false) {
@@ -59,7 +56,7 @@ export default function SidebarWrapper({
             <div
                 className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-sidebar duration-200 overflow-hidden"
                 style={{
-                    width:           expanded ? 256 : 56,
+                    width:           sidebarConfig.expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
                             color: base,
@@ -74,18 +71,18 @@ export default function SidebarWrapper({
                 <div
                     className="flex w-full items-center justify-between"
                     style={{
-                        flexDirection: serverSideSidebarPosition === SidebarRightPosition
+                        flexDirection: sidebarConfig.position === SidebarRightPosition
                             ? "row-reverse"
                             : "row",
                     }}
                 >
                     {
-                        expanded && (
+                        sidebarConfig.expanded && (
                             <Link
                                 className="flex gap-4 items-center select-none"
                                 href="/"
                                 style={{
-                                    flexDirection: serverSideSidebarPosition === SidebarRightPosition
+                                    flexDirection: sidebarConfig.position === SidebarRightPosition
                                         ? "row-reverse"
                                         : "row",
                                 }}
@@ -102,7 +99,13 @@ export default function SidebarWrapper({
                             style: "base",
                         }}
                         onClick={() => {
-                            setExpanded((state) => !state);
+                            optimisticallyUpdateSidebar?.((state) => {
+                                return {
+                                    ...state,
+                                    expanded: !state?.expanded,
+                                };
+                            });
+
                             setConfigValuesClient({
                                 configs: {
                                     ...config,
@@ -110,7 +113,7 @@ export default function SidebarWrapper({
                                         ...config.layout,
                                         sidebar: {
                                             ...config.layout.sidebar,
-                                            expanded: !expanded,
+                                            expanded: !sidebarConfig.expanded,
                                         },
                                     },
                                 },
@@ -118,7 +121,7 @@ export default function SidebarWrapper({
                         }}
                         label={dictionaries?.aria?.toggleSidebar as string}
                     >
-                        {icons?.[serverSideSidebarPosition]?.[expanded.toString()]}
+                        {icons?.[sidebarConfig.position]?.[sidebarConfig.expanded.toString()]}
                     </Button>
                 </div>
                 {children}

@@ -3,11 +3,10 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ConfigsProvider } from "@/utils/providers/ConfigsProvider";
 import { getCookie } from "@/lib/actions/cookies";
-import TopLoader from "@/components/layout/TopLoader/TopLoader";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import { CookieConfigKey, InitialConfig, SidebarLeftPosition } from "@/constants/configs";
+import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
@@ -21,6 +20,7 @@ import { UserType } from "@/types/OAuth2/User.type";
 import Footer from "@/components/layout/Footer/Footer";
 import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotify";
 import { userAgent } from "next/server";
+import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -92,9 +92,6 @@ export default async function RootLayout({
     const safeConfigValues = getSafeConfigValues({
         config: parsedConfigData,
     });
-    const layoutClassNames = safeConfigValues.layout.sidebar.position === SidebarLeftPosition
-        ? "flex-col sm:flex-row"
-        : "flex-col sm:flex-row-reverse";
 
     const headersList = await headers();
     const { browser, cpu, os, device } = userAgent({
@@ -118,21 +115,15 @@ export default async function RootLayout({
             >
                 <TanstackQueryProviders>
                     <ConfigsProvider configs={parsedConfigData} dictionaries={dictionaries}>
-                        <AppWrapper>
-                            <TopLoader />
-                            <main
-                                className={`w-full h-[100svh] flex flex-nowrap gap-0 ${layoutClassNames}`}
-                            >
+                        <SidebarConfigProvider configs={parsedConfigData?.layout?.sidebar}>
+                            <AppWrapper>
                                 {
                                 /*
                                  * SidebarWrapper is client-side
                                  * Sidebar is server-side
                                  */
                                 }
-                                <SidebarWrapper
-                                    serverSideSidebarExpanded={safeConfigValues.layout.sidebar.expanded}
-                                    serverSideSidebarPosition={safeConfigValues.layout.sidebar.position}
-                                >
+                                <SidebarWrapper>
                                     <Sidebar
                                         config={safeConfigValues}
                                         dictionaries={dictionaries}
@@ -146,8 +137,8 @@ export default async function RootLayout({
                                 <MobileNavbar
                                     accountInfo={parsedAccountInfoData}
                                 />
-                            </main>
-                        </AppWrapper>
+                            </AppWrapper>
+                        </SidebarConfigProvider>
                     </ConfigsProvider>
                 </TanstackQueryProviders>
                 <DarkReaderNotify />

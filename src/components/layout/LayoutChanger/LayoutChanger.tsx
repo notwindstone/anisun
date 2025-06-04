@@ -7,10 +7,8 @@ import { ArrowLeftRight } from "lucide-react";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import Button from "@/components/base/Button/Button";
-import { useRouter } from "nextjs-toploader/app";
-import { useTopLoader } from "nextjs-toploader";
-import { useThrottledCallback } from "@mantine/hooks";
 import { useContextSelector } from "use-context-selector";
+import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
 
 function switchLayout({
     currentConfig,
@@ -37,44 +35,32 @@ function switchLayout({
 
 export default function LayoutChanger() {
     const [pending, setPending] = useState(false);
-    const { config, optimisticallyUpdate, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+    const { config, dictionaries } = useContextSelector(ConfigsContext, (value) => {
         return {
-            config:               value.data,
-            optimisticallyUpdate: value.optimisticallyUpdate,
-            dictionaries:         value.dictionaries,
+            config:       value.data,
+            dictionaries: value.dictionaries,
         };
     });
-    const router = useRouter();
-    const loader = useTopLoader();
+    const { optimisticallyUpdate: optimisticallyUpdateSidebar } = useContextSelector(SidebarConfigContext, (value) => value,
+    );
 
-    const throttledSwitcher = useThrottledCallback(() => {
+    const handleSwitch = () => {
         setPending(true);
-        loader.start();
 
-        optimisticallyUpdate?.((state) => {
+        optimisticallyUpdateSidebar?.((state) => {
             return {
                 ...state,
-                layout: {
-                    ...state?.layout,
-                    sidebar: {
-                        ...state?.layout?.sidebar,
-                        position: state?.layout?.sidebar?.position === SidebarRightPosition
-                            ? "left"
-                            : "right",
-                    },
-                },
+                position: state?.position === SidebarRightPosition
+                    ? "left"
+                    : "right",
             };
         });
 
         switchLayout({
             currentConfig: config,
         });
-
-        loader.start();
-        router.refresh();
-
         setPending(false);
-    }, 500);
+    };
 
     return (
         <>
@@ -83,7 +69,7 @@ export default function LayoutChanger() {
                     appendClassNames: pending ? "ring-2 hidden sm:flex" : "hidden sm:flex",
                 }}
                 disabled={pending}
-                onClick={() => throttledSwitcher()}
+                onClick={handleSwitch}
                 label={dictionaries?.aria?.switchLayout as string}
             >
                 <ArrowLeftRight />
