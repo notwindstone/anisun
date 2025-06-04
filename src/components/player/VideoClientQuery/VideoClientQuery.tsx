@@ -25,7 +25,7 @@ export default function VideoClientQuery({
         ? "cached"
         : "uncached";
     const { isPending, error, data, failureCount } = useQuery({
-        queryKey: queryKey,
+        queryKey: [...queryKey, status],
         queryFn:  async () => {
             // ignore cache status property if we are fetching not from anilibria api
             if (!method.toLowerCase().includes("anilibria")) {
