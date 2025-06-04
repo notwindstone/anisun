@@ -34,38 +34,40 @@ export default function SkeletonPlayer({
 
     return (
         <>
-            <div
-                className="flex flex-col gap-4 items-center justify-center aspect-video w-full animate-pulse"
-                style={{
-                    backgroundColor: parseTailwindColor({
-                        color: colors.base,
-                        step:  theme === DarkThemeKey
-                            ? 900
-                            : 200,
-                    }),
-                }}
-            >
-                <p className="leading-none text-xl sm:text-4xl font-semibold">
-                    {translations?.[status]?.title}
-                </p>
-                <p className="leading-none opacity-60 text-sm sm:text-lg">
-                    {translations?.[status]?.description}
-                    {" "}
-                    {(failureCount !== undefined && failureCount >= 1) && (
-                        `Retry number ${failureCount}`
-                    )}
-                </p>
-                {
-                    status === "uncached" && (
-                        <Button
-                            onClick={() => replaceState("cached")}
-                            custom={{ style: "base" }}
-                            label={translations?.selectCached as string}
-                        >
-                            {translations?.selectCached}
-                        </Button>
-                    )
-                }
+            <div className="flex w-full aspect-video bg-white dark:bg-black">
+                <div
+                    className="flex flex-col gap-4 items-center justify-center h-full w-full animate-pulse"
+                    style={{
+                        backgroundColor: parseTailwindColor({
+                            color: colors.base,
+                            step:  theme === DarkThemeKey
+                                ? 900
+                                : 200,
+                        }),
+                    }}
+                >
+                    <p className="leading-none text-xl sm:text-4xl font-semibold">
+                        {translations?.[status]?.title}
+                    </p>
+                    <p className="leading-none opacity-60 text-sm sm:text-lg">
+                        {translations?.[status]?.description}
+                        {" "}
+                        {(failureCount !== undefined && failureCount >= 1) && (
+                            `Retry number ${failureCount}`
+                        )}
+                    </p>
+                    {
+                        status === "uncached" && (
+                            <Button
+                                onClick={() => replaceState("cached")}
+                                custom={{ style: "base" }}
+                                label={translations?.selectCached as string}
+                            >
+                                {translations?.selectCached}
+                            </Button>
+                        )
+                    }
+                </div>
             </div>
         </>
     );

@@ -20,7 +20,7 @@ export default function KodikPlayer({
         );
     }
 
-    if (error) {
+    if (error || !data?.link) {
         return (
             <>
                 sosi
@@ -29,10 +29,12 @@ export default function KodikPlayer({
     }
 
     return (
-        <iframe
-            className="aspect-video w-full border-none rounded-none"
-            src={data?.link}
-            allow="autoplay *; fullscreen *"
-        />
+        <>
+            <iframe
+                className="aspect-video w-full border-none rounded-none"
+                src={data.link}
+                allow="autoplay *; fullscreen *"
+            />
+        </>
     );
 }
