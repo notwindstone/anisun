@@ -70,8 +70,9 @@ export default function LayoutChanger() {
             currentConfig: config,
         });
 
+        loader.start();
         router.refresh();
-        loader.done();
+
         setPending(false);
     }, 500);
 
