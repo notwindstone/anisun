@@ -22,6 +22,7 @@
     "cookies-next": "^5.1.0",
     "drizzle-orm": "^0.44.1",
     "hls.js": "^1.6.2",
+    "kodikwrapper": "^3.0.5",
     "lucide-react": "^0.487.0",
     "negotiator": "^1.0.0",
     "next": "15.2.4",
