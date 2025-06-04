@@ -8,6 +8,7 @@ export default async function getKodikPlayer({
     idMal,
 }: {
     idMal: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
 }): Promise<any> {
     const result = await KodikClient.search({
         shikimori_id: idMal,

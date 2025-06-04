@@ -72,8 +72,8 @@ A web app for watching anime written in next.js with speed in mind
 
 ## ⭐ Features
 
+* Extension-based
 * Seamless Anilist, Shikimori and MAL integration
-* Kodik, Anilibria, Sovetromantica, Consumet APIs for the media streaming
 * Localization
 
 ## ⚙️ Tech Stack
