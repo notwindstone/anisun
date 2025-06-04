@@ -94,7 +94,7 @@ export default function VidstackPlayer({
                 title={searchParameters.get("title") ?? undefined}
                 className="!rounded-none !overflow-clip !border-none"
                 viewType="video"
-                aspectRatio={"16 / 9"}
+                aspectRatio="16 / 9"
             >
                 <MediaProvider />
                 <DefaultAudioLayout icons={defaultLayoutIcons} />

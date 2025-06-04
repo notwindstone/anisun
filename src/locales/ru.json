@@ -85,7 +85,7 @@
   "player": {
     "uncached": {
       "title": "Получение данных...",
-      "description": "Извлечение данных из Anilibria."
+      "description": "Извлечение данных из выбранного сервиса."
     },
     "cached": {
       "title": "Чтение данных...",
@@ -93,7 +93,7 @@
     },
     "mapping": {
       "title": "Поиск аниме...",
-      "description": "Синхронизация MyAnimeList ID и Anilibria ID."
+      "description": "Сопоставление MyAnimeList ID и ID выбранного сервиса."
     },
     "selectCached": "Взять из кэша"
   },

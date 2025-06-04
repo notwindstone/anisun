@@ -85,7 +85,7 @@
   "player": {
     "uncached": {
       "title": "Fetching...",
-      "description": "Fetching data from Anilibria."
+      "description": "Fetching data from selected provider."
     },
     "cached": {
       "title": "Loading...",
