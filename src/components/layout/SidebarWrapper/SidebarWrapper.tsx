@@ -50,7 +50,7 @@ export default function SidebarWrapper({
     if (matches === false) {
         return;
     }
-
+console.log(sidebarConfig);
     return (
         <>
             <div

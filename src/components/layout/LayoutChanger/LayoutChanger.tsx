@@ -41,7 +41,7 @@ export default function LayoutChanger() {
             dictionaries: value.dictionaries,
         };
     });
-    const { optimisticallyUpdate: optimisticallyUpdateSidebar } = useContextSelector(SidebarConfigContext, (value) => value,
+    const { data: sidebarConfig, optimisticallyUpdate: optimisticallyUpdateSidebar } = useContextSelector(SidebarConfigContext, (value) => value,
     );
 
     const handleSwitch = () => {
@@ -57,7 +57,16 @@ export default function LayoutChanger() {
         });
 
         switchLayout({
-            currentConfig: config,
+            currentConfig: {
+                ...config,
+                layout: {
+                    ...config.layout,
+                    sidebar: {
+                        ...config.layout.sidebar,
+                        ...sidebarConfig,
+                    },
+                },
+            },
         });
         setPending(false);
     };
