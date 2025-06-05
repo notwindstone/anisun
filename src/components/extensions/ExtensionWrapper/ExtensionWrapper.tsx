@@ -10,7 +10,7 @@ export default function ExtensionWrapper({
     url: string;
 }) {
     return (
-        <div id="extensions-root-please-work">
+        <div id="extensions-root-id">
             <RemoteComponent url={url} idMal={idMal} />
         </div>
     );
