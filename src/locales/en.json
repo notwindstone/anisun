@@ -85,7 +85,7 @@
   "player": {
     "uncached": {
       "title": "Fetching...",
-      "description": "Fetching data from selected provider."
+      "description": "Fetching data from the selected provider."
     },
     "cached": {
       "title": "Loading...",

@@ -21,26 +21,47 @@ export default function ExtensionWrapper({
     return (
         <ErrorBoundary errorComponent={() => {
             return (
-                <div className="bg-black text-white">
-                    Error happened.
+                <div
+                    className="flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-900"
+                >
+                    <p className="leading-none text-xl sm:text-4xl font-semibold">
+                        Error...
+                    </p>
+                    <p className="leading-none opacity-60 text-sm sm:text-lg">
+                        Failed to render your extension.
+                    </p>
                 </div>
             );
         }}>
             <Suspense fallback={
-                <div className="bg-black text-white">
-                    Loading...
+                <div
+                    className="flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-900 animate-pulse"
+                >
+                    <p className="leading-none text-xl sm:text-4xl font-semibold">
+                        Waiting...
+                    </p>
+                    <p className="leading-none opacity-60 text-sm sm:text-lg">
+                        Fetching data from the extension.
+                    </p>
                 </div>
             }>
-                <div id="extensions-root-id" className="relative w-full overflow-clip aspect-video">
-                    <p className="bg-black text-white">
-                        Your extension is loading...
-                    </p>
-                    <Button
-                        onClick={refresh}
-                        label="reset the extension"
+                <div id="extensions-root-id" className="relative w-full overflow-hidden aspect-video">
+                    <div
+                        className="flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-900 animate-pulse"
                     >
-                        Reset
-                    </Button>
+                        <p className="leading-none text-xl sm:text-4xl font-semibold">
+                            Loading...
+                        </p>
+                        <p className="leading-none opacity-60 text-sm sm:text-lg px-2 text-center">
+                            Your extension is loading. If it&apos;s taking too long, try resetting it.
+                        </p>
+                        <Button
+                            onClick={refresh}
+                            label="reset the extension"
+                        >
+                            Reset
+                        </Button>
+                    </div>
                     <RemoteComponent url={url} />
                 </div>
             </Suspense>

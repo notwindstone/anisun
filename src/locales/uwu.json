@@ -85,7 +85,7 @@
   "player": {
     "uncached": {
       "title": "fetching...",
-      "description": "fetching data fwom sewected pwovider"
+      "description": "fetching data fwom the sewected pwovider"
     },
     "cached": {
       "title": "woading...",

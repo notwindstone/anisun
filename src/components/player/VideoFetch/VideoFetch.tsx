@@ -23,7 +23,6 @@ export default function VideoFetch({
                     <SkeletonPlayer status="mapping" />
                 }>
                     <AnilibriaVideo
-                        idMal={idMal}
                         mediaSrc={mediaSrc}
                         title={title}
                     />
@@ -41,7 +40,7 @@ export default function VideoFetch({
         }
         default: {
             player = (
-                <KodikPlayer idMal={idMal} />
+                <KodikPlayer />
             );
 
             break;
