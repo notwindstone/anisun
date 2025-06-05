@@ -7,6 +7,7 @@ import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
 import Divider from "@/components/base/Divider/Divider";
 import type { Locale } from "@/i18n-config";
 import { AccountPageItems } from "@/constants/translated";
+import Temporary from "@/app/[lang]/account/temporary";
 
 export default async function Page({
     params,
@@ -58,6 +59,16 @@ export default async function Page({
                 />
                 <ColorSchemeChanger />
                 <LayoutChanger />
+            </div>
+            <p className="text-2xl font-medium leading-none pt-8">
+                Extensions<span className="pl-1 opacity-60 text-sm align-top">βeta</span>
+            </p>
+            <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
+                Anisun is a content-browser now, just like Tachiyomi!
+            </p>
+            <Divider />
+            <div>
+                <Temporary />
             </div>
         </div>
     );
