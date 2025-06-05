@@ -1,10 +1,10 @@
 "use client";
 
-import RemoteComponent from "@/components/extensions/RemoteComponent/RemoteComponent";
-import { Suspense } from "react";
+import { Suspense, useMemo } from "react";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Button from "@/components/base/Button/Button";
 import ExtensionSkeleton from "@/components/extensions/ExtensionSkeleton/ExtensionSkeleton";
+import { createRemoteComponent } from "@paciolan/remote-component";
 
 function refresh() {
     if (globalThis === undefined) {
@@ -19,6 +19,11 @@ export default function ExtensionWrapper({
 }: {
     url: string;
 }) {
+    const RemoteComponent = useMemo(
+        () => createRemoteComponent(),
+        [url],
+    );
+
     return (
         <ErrorBoundary errorComponent={() => {
             return (

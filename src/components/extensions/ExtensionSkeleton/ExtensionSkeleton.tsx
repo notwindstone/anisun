@@ -16,7 +16,7 @@ export default function ExtensionSkeleton({
             <p className="leading-none text-xl sm:text-4xl font-semibold">
                 {title}
             </p>
-            <p className="leading-none opacity-60 text-sm sm:text-lg px-2 text-center">
+            <p className="leading-none opacity-60 text-sm sm:text-lg px-2 text-center text-balance">
                 {description}
             </p>
             {children}

@@ -1,44 +1,29 @@
-import VideoFetch from "@/components/player/VideoFetch/VideoFetch";
-import { VideoPlayerType } from "@/types/Anime/VideoPlayer.type";
+import { cookies } from "next/headers";
+import { ExtensionsCookieKey } from "@/constants/app";
+import readCookiesData from "@/utils/configs/readCookiesData";
+import ExtensionsFetch from "@/components/extensions/ExtensionsFetch/ExtensionsFetch";
 
 export default async function Page({
     searchParams,
 }: {
     searchParams?: Promise<{
-        selectedPlayer?: string;
-        mediaSrc?: string;
-        title?: string;
+        selectedExtension?: string;
     }>;
 }) {
     const search = await searchParams;
-
-    let selectedPlayer: VideoPlayerType;
-
-    switch (search?.selectedPlayer) {
-        case "anilibria": {
-            selectedPlayer = "anilibria";
-
-            break;
-        }
-        case "sovetromantica": {
-            selectedPlayer = "sovetromantica";
-
-            break;
-        }
-        default: {
-            selectedPlayer = "kodik";
-
-            break;
-        }
-    }
+    const cookieStore = await cookies();
+    const extensions = cookieStore.get(ExtensionsCookieKey);
+    const parsedExtensions: unknown[] = readCookiesData({
+        data:         extensions,
+        fallbackData: [],
+    });
 
     return (
         <>
             <div className="z-1000 sticky sm:static top-0">
-                <VideoFetch
-                    selectedPlayer={selectedPlayer}
-                    mediaSrc={search?.mediaSrc}
-                    title={search?.title ?? ""}
+                <ExtensionsFetch
+                    extensions={parsedExtensions}
+                    selectedExtension={search?.selectedExtension as string}
                 />
             </div>
         </>
