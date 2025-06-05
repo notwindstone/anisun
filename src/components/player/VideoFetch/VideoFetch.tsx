@@ -3,6 +3,7 @@ import AnilibriaVideo from "@/components/player/AnilibriaVideo/AnilibriaVideo";
 import SkeletonPlayer from "@/components/player/SkeletonPlayer/SkeletonPlayer";
 import { VideoPlayerType } from "@/types/Anime/VideoPlayer.type";
 import KodikPlayer from "@/components/player/KodikPlayer/KodikPlayer";
+import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
 
 export default function VideoFetch({
     idMal,
@@ -34,9 +35,9 @@ export default function VideoFetch({
             break;
         }
         case "sovetromantica": {
-            //player = (
-            //    <ExtensionWrapper idMal={idMal} url={"/shitty.js"} />
-            //gi);
+            player = (
+                <ExtensionWrapper idMal={idMal} url={"/shitty.js"} />
+            );
 
             break;
         }

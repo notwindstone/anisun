@@ -16,6 +16,7 @@
     "@formatjs/intl-localematcher": "^0.6.1",
     "@libsql/client": "^0.15.8",
     "@mantine/hooks": "^7.17.5",
+    "@paciolan/remote-component": "^2.13.0",
     "@tanstack/react-query": "^5.71.10",
     "@vidstack/react": "^1.12.13",
     "arctic": "^3.6.0",

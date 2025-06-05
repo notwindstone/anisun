@@ -1,5 +1,7 @@
 "use client";
 
+import RemoteComponent from "@/components/extensions/RemoteComponent/RemoteComponent";
+
 export default function ExtensionWrapper({
     idMal,
     url,
@@ -8,9 +10,8 @@ export default function ExtensionWrapper({
     url: string;
 }) {
     return (
-        <>
-            {idMal}
-            {url}
-        </>
+        <div id="extensions-root-please-work">
+            <RemoteComponent url={url} idMal={idMal} />
+        </div>
     );
 }
