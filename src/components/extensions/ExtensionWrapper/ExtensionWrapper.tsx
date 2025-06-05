@@ -4,6 +4,7 @@ import RemoteComponent from "@/components/extensions/RemoteComponent/RemoteCompo
 import { Suspense } from "react";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Button from "@/components/base/Button/Button";
+import ExtensionSkeleton from "@/components/extensions/ExtensionSkeleton/ExtensionSkeleton";
 
 function refresh() {
     if (globalThis === undefined) {
@@ -21,47 +22,32 @@ export default function ExtensionWrapper({
     return (
         <ErrorBoundary errorComponent={() => {
             return (
-                <div
-                    className="flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-900"
-                >
-                    <p className="leading-none text-xl sm:text-4xl font-semibold">
-                        Error...
-                    </p>
-                    <p className="leading-none opacity-60 text-sm sm:text-lg">
-                        Failed to render your extension.
-                    </p>
-                </div>
+                <ExtensionSkeleton
+                    title="Error..."
+                    description="Failed to render your extension."
+                />
             );
         }}>
             <Suspense fallback={
-                <div
-                    className="flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-900 animate-pulse"
-                >
-                    <p className="leading-none text-xl sm:text-4xl font-semibold">
-                        Waiting...
-                    </p>
-                    <p className="leading-none opacity-60 text-sm sm:text-lg">
-                        Fetching data from the extension.
-                    </p>
-                </div>
+                <ExtensionSkeleton
+                    title="Waiting..."
+                    description="Fetching data from the extension."
+                    shouldPulse
+                />
             }>
                 <div id="extensions-root-id" className="relative w-full overflow-hidden aspect-video">
-                    <div
-                        className="flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-900 animate-pulse"
+                    <ExtensionSkeleton
+                        title="Loading..."
+                        description="Your extension is loading. If it's taking too long, try resetting it."
+                        shouldPulse
                     >
-                        <p className="leading-none text-xl sm:text-4xl font-semibold">
-                            Loading...
-                        </p>
-                        <p className="leading-none opacity-60 text-sm sm:text-lg px-2 text-center">
-                            Your extension is loading. If it&apos;s taking too long, try resetting it.
-                        </p>
                         <Button
                             onClick={refresh}
                             label="reset the extension"
                         >
                             Reset
                         </Button>
-                    </div>
+                    </ExtensionSkeleton>
                     <RemoteComponent url={url} />
                 </div>
             </Suspense>
