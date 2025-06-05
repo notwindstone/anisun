@@ -24,7 +24,7 @@ export default function Temporary() {
                         },
                         {
                             name: "anilibria",
-                            url:  "https://github.com/ame-chan-lol/anisun-anilibria-extension/raw/refs/heads/main/dist/bundle.js",
+                            url:  "https://raw.githubusercontent.com/ame-chan-lol/anisun-anilibria-extension/refs/heads/main/dist/bundle.js",
                         },
                     ]),
                     expiresAt: getRelativeDate({ days: 365 }),
@@ -35,7 +35,7 @@ export default function Temporary() {
             }}
             label={"add two extensions"}
         >
-            try it
+            try it (temporary button)
         </Button>
     );
 }
