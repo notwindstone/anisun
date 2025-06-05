@@ -6,12 +6,10 @@ import KodikPlayer from "@/components/player/KodikPlayer/KodikPlayer";
 import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
 
 export default function VideoFetch({
-    idMal,
     selectedPlayer,
     mediaSrc,
     title,
 }: {
-    idMal: number;
     selectedPlayer: VideoPlayerType;
     title: string;
     mediaSrc?: string;
@@ -36,7 +34,7 @@ export default function VideoFetch({
         }
         case "sovetromantica": {
             player = (
-                <ExtensionWrapper idMal={idMal} url={"/shitty.js"} />
+                <ExtensionWrapper url={"/shitty.js"} />
             );
 
             break;
