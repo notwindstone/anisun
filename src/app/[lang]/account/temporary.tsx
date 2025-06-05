@@ -20,7 +20,7 @@ export default function Temporary() {
                     value: JSON.stringify([
                         {
                             name: "kodik",
-                            url:  "https://github.com/ame-chan-lol/anisun-kodik-extension/raw/refs/heads/main/dist/bundle.js",
+                            url:  "https://raw.githubusercontent.com/ame-chan-lol/anisun-kodik-extension/refs/heads/main/dist/bundle.js",
                         },
                         {
                             name: "anilibria",
