@@ -1,13 +1,15 @@
 <div align="center">
 
+<p>Looking for the previous version? Check <a href="https://github.com/notwindstone/anisun/tree/v4">v4</a> branch</p>
+
 <img width="160" height="160" align="center" src="../public/favicon.webp" alt="Favicon">
 
 # [anisun (rebooted)](https://anime.tatar)
 
-An extension-based web app for exploring anime written in next.js with speed in mind 
+An extension-based web app for exploring anime. Written in next.js with speed in mind 
 
 <p align="center">
-<strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/README_russian.md">Русский</a>
+<strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/docs/README_russian.md">Русский</a>
 </p>
 
 [![GitHub Repo stars](https://img.shields.io/github/stars/notwindstone/Anisun?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/notwindstone/Anisun/stargazers)
@@ -170,6 +172,8 @@ After you have installed Caddy, you need to rename `Caddyfile.example` in the ro
 
 Be sure you are running `caddy start` in the repository directory, otherwise Caddy will not use your configuration file.
 
+With Caddy you can also use a Cloudflare proxied DNS for DDoS protection, you just need to set `SSL/TLS` encryption mode to `Full (Strict)` and point A-record to your host machine IP.
+
 </details>
 
 ## 🤝 Contributing
@@ -215,7 +219,7 @@ why tf webpack microfrontend module federation runtime is so complicated bruuh. 
 i also tried [importmaps](https://www.mercedes-benz.io/blog/2023-01-05-you-might-not-need-module-federation-orchestrate-your-microfrontends-at-runtime-with-import-maps) but it didn't really work. maybe i should figure out what exactly should i pass as a file, because i just passed a transpiled react code
 
 [@paciolan/remote-component](https://www.npmjs.com/package/@paciolan/remote-component) was easy to setup and use, i managed to use not only built-in react hooks, but even some packages from npm, like lucide-react or material ui icons. tho tanstack query didn't work, because remote-component's starter kit is really outdated
-// update a day later: i dropped remote-component-starter and configured building stuff from scratch and managed to make a project on react and even vue that will bundle every dependency smoothly
+// update a day later: i dropped remote-component-starter and configured building stuff from scratch and managed to make a project on react and even vue that will bundle every dependency smoothly, which will work in the project
 
 ask about using this logo
 
