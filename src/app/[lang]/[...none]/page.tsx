@@ -17,7 +17,7 @@ export default function Page() {
     const isDark = theme === DarkThemeKey;
 
     return (
-        <div className="flex flex-col justify-center items-center p-4 mx-auto max-w-384 w-full h-[100svh] gap-4 text-balance text-center text-black dark:text-white">
+        <div id="extensions-root-page-id" className="flex flex-col justify-center items-center p-4 mx-auto max-w-384 w-full h-[100svh] gap-4 text-balance text-center text-black dark:text-white">
             <p
                 className="text-6xl sm:text-9xl font-black pb-2 sm:pb-4"
                 style={{

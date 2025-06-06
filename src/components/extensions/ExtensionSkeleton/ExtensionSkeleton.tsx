@@ -11,7 +11,7 @@ export default function ExtensionSkeleton({
 }) {
     return (
         <div
-            className={`flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-900 ${shouldPulse ? "animate-pulse" : ""}`}
+            className={`flex flex-col gap-4 items-center justify-center h-full w-full bg-neutral-200 dark:bg-neutral-800 ${shouldPulse ? "animate-pulse" : ""}`}
         >
             <p className="leading-none text-xl sm:text-4xl font-semibold">
                 {title}
