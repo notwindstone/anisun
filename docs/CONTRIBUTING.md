@@ -4,13 +4,17 @@
 
 I would love to see any contributions from you! Whether it's adding a new feature, localization or even just fixing a typo.
 
+I mainly need help with extensions: both themselves and with their loading implementation. I'm currently using [Remote Components](https://github.com/Paciolan/remote-component) as a loader, but I plan to switch to [Webpack Module Federation Runtime](https://module-federation.io/guide/basic/runtime.html) in the future. I would appreciate any help with Module Federation.
+
+You can write your extensions in any JS framework, tho it might be better to use React to reduce the bundle size, since React is passed to the remote component as a shared dependency.
+
 ## Code Formatting
 
 All files are formatted with `eslint` using the configuration in `eslint.config.mjs`. Ensure it is run on changed files before committing, otherwise the project will not build.
 
 ## Commits
 
-I recommend to use these guidelines for your commits (not enforced tho).
+I recommend to use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for your commits (not enforced tho), a summary of which is given below.
 
 ### Naming Format
 
@@ -45,5 +49,4 @@ Examples:
 ### Guidelines
 
 - Use imperative mood, e.g., "feat: add feature" instead of "feat: adding feature" or "feat: added feature".
-- Avoid ending with a period.
 - Consider doing **atomic** commits (one feature/change at a time).
