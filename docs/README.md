@@ -83,8 +83,8 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 
 ## ⭐ Features
 
-* Extensions
-* Seamless Anilist, Shikimori and MAL integration
+* (WIP) Extensions
+* (WIP) Seamless Anilist, Shikimori and MAL integration
 * Localization
 * Theme customization
 
