@@ -35,7 +35,7 @@ An extension-based web app for exploring anime written in next.js with speed in 
 
 ## 🧩 Extensions
 
-* Do **not** use iframes
+* They are **not** using iframes
 * Can be written in any JS framework
 * Can implement their own pages
 * Users don't have any extensions by default
