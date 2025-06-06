@@ -28,16 +28,14 @@ export default function Page() {
         }
     }
 
-    if (extensionURLs.length > 0) {
-        const pathnameWithoutLocale = pathname.split("/").slice(2).join("/");
+    const pathnameWithoutLocale = pathname.split("/").slice(2).join("/");
 
-        if (extensionURLs.includes(pathnameWithoutLocale)) {
-            return (
-                <div id="extensions-root-page-id" className="relative w-full">
-                    <p>There goes your extension.</p>
-                </div>
-            );
-        }
+    if (extensionURLs.includes(pathnameWithoutLocale)) {
+        return (
+            <div id="extensions-root-page-id" className="relative w-full">
+                <p>There goes your extension.</p>
+            </div>
+        );
     }
 
     return (
@@ -61,8 +59,8 @@ export default function Page() {
             </p>
             <Link
                 prefetch
-                className={`text-center text-balance flex gap-2 items-center py-1 px-2 sm:py-2 sm:px-4 rounded-md font-bold text-md sm:text-lg text-white dark:text-black transition dark:hover:brightness-125 dark:focus:brightness-125 hover:brightness-85 focus:brightness-85 mt-2`}
-                href={"/"}
+                className="text-center text-balance flex gap-2 items-center py-1 px-2 sm:py-2 sm:px-4 rounded-md font-bold text-md sm:text-lg text-white dark:text-black transition dark:hover:brightness-125 dark:focus:brightness-125 hover:brightness-85 focus:brightness-85 mt-2"
+                href="/"
                 style={{
                     backgroundColor: parseTailwindColor({
                         color: accent,
