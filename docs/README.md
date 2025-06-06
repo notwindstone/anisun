@@ -4,7 +4,7 @@
 
 # [anisun (rebooted)](https://anime.tatar)
 
-A web app for watching anime written in next.js with speed in mind 
+An extension-based web app for exploring anime written in next.js with speed in mind 
 
 <p align="center">
 <strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/README_russian.md">Русский</a>
@@ -33,13 +33,22 @@ A web app for watching anime written in next.js with speed in mind
 
 </details>
 
+## 🧩 Extensions
+
+* Do **not** use iframes
+* Can be written in any JS framework
+* Can implement their own pages
+* Users don't have any extensions by default
+
+Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
+
 ## ⚡ Performance
 
 * Using as few libraries as possible
 * React Suspense for the seamless UI streaming
 * Data caching both on the server (using [LRU cache](https://www.npmjs.com/package/quick-lru) & Next.js internal cache) and client
 * Optimized [React Contexts](https://www.npmjs.com/package/use-context-selector)
-* User config management using cookies for the instant config load
+* Instant user config load while SSR
 * Preferring CSS over JS styles
 * Memoizing only those components that truly need it
 * Using Server Actions instead of API routes when possible
@@ -72,9 +81,10 @@ A web app for watching anime written in next.js with speed in mind
 
 ## ⭐ Features
 
-* Extension-based
+* Extensions
 * Seamless Anilist, Shikimori and MAL integration
 * Localization
+* Theme customization
 
 ## ⚙️ Tech Stack
 
@@ -86,6 +96,7 @@ A web app for watching anime written in next.js with speed in mind
 * A video player based on [Vidstack.js](https://www.vidstack.io/) and [HLS.js](https://github.com/video-dev/hls.js)
 * [Quick LRU](https://www.npmjs.com/package/quick-lru) for the in-memory cache
 * OAuth2 authorization using [arctic.js](https://arcticjs.dev/)
+* Extensions using [Remote Components](https://github.com/Paciolan/remote-component)
 
 ## ⬇️ Self-Hosting
 
@@ -120,12 +131,12 @@ Note: LRU cache might not work as expected, because serverless environments tend
 
 ### Local
 
+<details>
+<summary>Expand steps</summary>
+
 If you don't want to use a vercel/netlify/other serverless environment.
 
 #### Preparations
-
-<details>
-<summary>Expand steps</summary>
 
 You need to install:
 
@@ -140,8 +151,6 @@ git clone https://github.com/notwindstone/anisun
 ```
 
 Now you can install all project dependencies with `bun i`
-
-</details>
 
 #### Development
 
@@ -164,6 +173,8 @@ But it is not production-ready yet. You need to install a reverse-proxy like Cad
 After you installed Caddy, you need to rename `Caddyfile.example` in the root of repository to `Caddyfile` and change `example.com` in the file to your domain (`anime.tatar` in my case). Then just restart it by running `caddy stop` and `caddy start` in the terminal.
 
 Be sure you are running `caddy start` in the repository directory, otherwise it Caddy will not use your configuration file.
+
+</details>
 
 ## 💬 Contact
 
@@ -188,13 +199,9 @@ Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 * [zvshka](https://github.com/zvshka) for his help with the project
 * `cos` for his help with the UI
-* [Kodik](http://kodik.cc/)
 * [Anilist API](https://docs.anilist.co/)
 * [MyAnimeList API](https://myanimelist.net/apiconfig/references/api/v2)
 * [Shikimori API](https://shikimori.one/api/doc/graphql)
-* [Consumet API](https://github.com/consumet/api.consumet.org)
-* [Anilibria API](https://github.com/anilibria/docs)
-* [SovetRomantica API](https://sovetromantica.com/)
 
 ## 📜 License
 
@@ -203,17 +210,16 @@ Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 ## ❗ Disclaimer
 
 > [!IMPORTANT]
-> Anisun does not host any files, it merely links to 3rd party services.
-> Legal issues should be taken up with the file hosts and providers.
-> Anisun is not responsible for any media files shown by the video providers.
+> The developer of this application does not have any affiliation with the content providers available, and this application hosts zero content.
 
-## To-Do
+## some shit that i will remove later
 
 why tf webpack microfrontend module federation runtime is so complicated bruuh. i managed to implement remote loading simple react component, but i cant fucking use any react hooks and i don't know what to do with this shit
 
-i tried [importmaps](https://www.mercedes-benz.io/blog/2023-01-05-you-might-not-need-module-federation-orchestrate-your-microfrontends-at-runtime-with-import-maps) but it didn't really work. maybe i should figure out what exactly should i pass as a file, because i just passed a transpiled react code
+i also tried [importmaps](https://www.mercedes-benz.io/blog/2023-01-05-you-might-not-need-module-federation-orchestrate-your-microfrontends-at-runtime-with-import-maps) but it didn't really work. maybe i should figure out what exactly should i pass as a file, because i just passed a transpiled react code
 
 [@paciolan/remote-component](https://www.npmjs.com/package/@paciolan/remote-component) was easy to setup and use, i managed to use not only built-in react hooks, but even some packages from npm, like lucide-react or material ui icons. tho tanstack query didn't work, because remote-component's starter kit is really outdated
+// update a day later: i dropped remote-component-starter and configured building stuff from scratch and managed to make a project on react and even vue that will bundle every dependency smoothly
 
 ask about using this logo
 
