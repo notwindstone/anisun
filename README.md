@@ -1,6 +1,4 @@
-this app is currently being rewritten from scratch using as few libraries as possible (and other optimizations) to achieve insane speeds :3
-
-you can see the progress on [anime.tatar](https://anime.tatar/) or on the [github](https://github.com/notwindstone/anisun/tree/v5).
+check the new version at [anime.tatar](https://anime.tatar/) or on the [github](https://github.com/notwindstone/anisun/tree/v5).
 
 <div align="center">
 
