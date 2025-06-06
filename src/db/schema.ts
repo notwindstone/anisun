@@ -1,8 +1,8 @@
 import {text, json, pgTable, boolean} from "drizzle-orm/pg-core";
-import {sqliteTable, text as sqliteText, integer as sqliteInteger} from "drizzle-orm/sqlite-core";
+//import {sqliteTable, text as sqliteText, integer as sqliteInteger} from "drizzle-orm/sqlite-core";
 
 const getCommentsTableSchema = () => {
-    /*switch (process.env.DATABASE_TYPE!) {
+    switch (process.env.DATABASE_TYPE!) {
         case "postgresql":
         case "neon":
             return pgTable("comments", {
@@ -21,7 +21,8 @@ const getCommentsTableSchema = () => {
                 isDeleted: boolean("isDeleted").default(false).notNull(),
                 isEdited: boolean("isEdited").default(false).notNull(),
             });
-        case "sqlite":*/
+            /*
+        case "sqlite":
             return sqliteTable("comments", {
                 uuid: sqliteText("uuid").primaryKey(),
                 parentuuid: sqliteText("parentuuid"),
@@ -38,9 +39,10 @@ const getCommentsTableSchema = () => {
                 isDeleted: sqliteInteger("isDeleted").default(0).notNull(),
                 isEdited: sqliteInteger("isEdited").default(0).notNull(),
             });
-        /*default:
+            */
+        default:
             throw new Error("blah blah");
-    }*/
+    }
 };
 
 export const parseCommentsTableSchema = () => {
