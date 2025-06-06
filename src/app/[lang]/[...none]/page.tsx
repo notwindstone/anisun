@@ -5,6 +5,8 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
+import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { usePathname } from "next/navigation";
 
 export default function Page() {
     const { translations, accent, theme } = useContextSelector(ConfigsContext, (value) => {
@@ -14,10 +16,32 @@ export default function Page() {
             theme:        value.data.theme,
         };
     });
+    const extensions = useContextSelector(ExtensionsContext, (value) => value.data);
+    const pathname = usePathname();
+
     const isDark = theme === DarkThemeKey;
+    const extensionURLs = [];
+
+    for (const extension of extensions) {
+        for (const page of extension.pages) {
+            extensionURLs.push(page);
+        }
+    }
+
+    if (extensionURLs.length > 0) {
+        const pathnameWithoutLocale = pathname.split("/").slice(2).join("/");
+
+        if (extensionURLs.includes(pathnameWithoutLocale)) {
+            return (
+                <div id="extensions-root-page-id" className="relative w-full">
+                    <p>There goes your extension.</p>
+                </div>
+            );
+        }
+    }
 
     return (
-        <div id="extensions-root-page-id" className="flex flex-col justify-center items-center p-4 mx-auto max-w-384 w-full h-[100svh] gap-4 text-balance text-center text-black dark:text-white">
+        <div className="flex flex-col justify-center items-center p-4 mx-auto max-w-384 w-full min-h-[100svh] gap-4 text-balance text-center text-black dark:text-white">
             <p
                 className="text-6xl sm:text-9xl font-black pb-2 sm:pb-4"
                 style={{

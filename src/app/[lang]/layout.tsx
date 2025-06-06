@@ -10,7 +10,7 @@ import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
-import {AccountInfoCookieKey, AppName, ExtensionsCookieKey} from "@/constants/app";
+import { AccountInfoCookieKey, AppName, ExtensionsCookieKey } from "@/constants/app";
 import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
 import { cookies, headers } from "next/headers";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
@@ -21,6 +21,7 @@ import { userAgent } from "next/server";
 import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 import getSafeExtensionsValues from "@/utils/configs/getSafeExtensionsValues";
+import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -128,17 +129,18 @@ export default async function RootLayout({
                 <TanstackQueryProviders>
                     <ConfigsProvider configs={parsedConfigData} dictionaries={dictionaries}>
                         <SidebarConfigProvider configs={parsedConfigData?.layout?.sidebar}>
-
-                            <AppWrapper>
-                                <Sidebar accountInfo={safeAccountValues} />
-                                <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
-                                    {children}
-                                    <Footer dictionaries={dictionaries} />
-                                </div>
-                                <MobileNavbar
-                                    accountInfo={parsedAccountInfoData}
-                                />
-                            </AppWrapper>
+                            <ExtensionsProvider extensions={safeExtensionsValues}>
+                                <AppWrapper>
+                                    <Sidebar accountInfo={safeAccountValues} />
+                                    <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
+                                        {children}
+                                        <Footer dictionaries={dictionaries} />
+                                    </div>
+                                    <MobileNavbar
+                                        accountInfo={parsedAccountInfoData}
+                                    />
+                                </AppWrapper>
+                            </ExtensionsProvider>
                         </SidebarConfigProvider>
                     </ConfigsProvider>
                 </TanstackQueryProviders>
