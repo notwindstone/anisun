@@ -2,9 +2,8 @@ import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 
 export { default as ImagePlaceholder } from "@/../public/frieren-no-image.webp";
 export const AppName = "Anisun";
-export const FaviconBlurredBase64 = "data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mOsnHzhPwAGRgLdclRpkwAAAABJRU5ErkJggg==";
 
-export const ExtensionsCookieKey = "extensions";
+export const ExtensionsLocalStorageKey = "@anisun/extensions";
 export const AccessTokenCookieKey = "accessToken";
 export const AccessTokenProviderCookieKey = "tokenProvider";
 export const AccountInfoCookieKey = "accountInfo";

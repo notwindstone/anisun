@@ -7,7 +7,6 @@ import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
 import Divider from "@/components/base/Divider/Divider";
 import type { Locale } from "@/i18n-config";
 import { AccountPageItems } from "@/constants/translated";
-import Temporary from "@/app/[lang]/account/temporary";
 
 export default async function Page({
     params,
@@ -27,7 +26,7 @@ export default async function Page({
             </p>
             <Divider />
             <div>
-                <Temporary />
+                todo
             </div>
             <p className="text-2xl font-medium leading-none pt-8">
                 {accountPageItems.accountTitle}

@@ -10,7 +10,7 @@ import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
-import { AccountInfoCookieKey, AppName, ExtensionsCookieKey } from "@/constants/app";
+import { AccountInfoCookieKey, AppName } from "@/constants/app";
 import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
 import { cookies, headers } from "next/headers";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
@@ -20,7 +20,6 @@ import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotif
 import { userAgent } from "next/server";
 import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
-import getSafeExtensionsValues from "@/utils/configs/getSafeExtensionsValues";
 import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
 
 const geistSans = Geist({
@@ -77,10 +76,6 @@ export default async function RootLayout({
         store: cookieStore,
         key:   AccountInfoCookieKey,
     });
-    const extensions = await getCookie({
-        store: cookieStore,
-        key:   ExtensionsCookieKey,
-    });
 
     const parsedConfigData = readCookiesData<ParsedConfigType>({
         data:         configs,
@@ -93,16 +88,9 @@ export default async function RootLayout({
             avatar:   "",
         },
     });
-    const parsedExtensions: unknown[] = readCookiesData({
-        data:         extensions,
-        fallbackData: [],
-    });
 
     const safeAccountValues = getSafeAccountData({
         account: parsedAccountInfoData,
-    });
-    const safeExtensionsValues = getSafeExtensionsValues({
-        parsedExtensions,
     });
 
     const headersList = await headers();
@@ -129,7 +117,7 @@ export default async function RootLayout({
                 <TanstackQueryProviders>
                     <ConfigsProvider configs={parsedConfigData} dictionaries={dictionaries}>
                         <SidebarConfigProvider configs={parsedConfigData?.layout?.sidebar}>
-                            <ExtensionsProvider extensions={safeExtensionsValues}>
+                            <ExtensionsProvider>
                                 <AppWrapper>
                                     <Sidebar accountInfo={safeAccountValues} />
                                     <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">

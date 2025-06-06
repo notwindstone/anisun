@@ -15,7 +15,9 @@ export default function getSafeExtensionsValues({
         if (
             !("name" in extension) ||
             !("url" in extension) ||
-            !("pages" in extension)
+            !("pages" in extension) ||
+            !("version" in extension) ||
+            !("author" in extension)
         ) {
             continue;
         }
@@ -31,9 +33,11 @@ export default function getSafeExtensionsValues({
         }
 
         validExtensions.push({
-            name:  extension.name as string,
-            url:   extension.url as string,
-            pages: stringPages,
+            name:    extension.name as string,
+            url:     extension.url as string,
+            pages:   stringPages,
+            author:  extension.author as string,
+            version: extension.version as string,
         });
     }
 

@@ -1,14 +1,16 @@
 "use client";
 
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { createContext } from "use-context-selector";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
+import { ExtensionsLocalStorageKey } from "@/constants/app";
+import getSafeExtensionsValues from "@/utils/configs/getSafeExtensionsValues";
 
 export const ExtensionsContext = createContext<{
-    data: Array<ExtensionType>;
+    data: Array<ExtensionType> | undefined;
     optimisticallyUpdate: Dispatch<
         SetStateAction<
-            Array<ExtensionType>
+            Array<ExtensionType> | undefined
         >
     > | undefined;
 }>({
@@ -18,12 +20,38 @@ export const ExtensionsContext = createContext<{
 
 export function ExtensionsProvider({
     children,
-    extensions,
 }: {
     children: React.ReactNode;
-    extensions: Array<ExtensionType>;
 }) {
-    const [extensionsState, setExtensionsState] = useState<Array<ExtensionType>>(extensions);
+    const [extensionsState, setExtensionsState] = useState<Array<ExtensionType> | undefined>();
+
+    useEffect(() => {
+        const storedExtensions = localStorage.getItem(ExtensionsLocalStorageKey);
+
+        if (!storedExtensions) {
+            localStorage.setItem(ExtensionsLocalStorageKey, JSON.stringify([]));
+
+            return;
+        }
+
+        let parsedExtensions: unknown;
+
+        try {
+            parsedExtensions = JSON.parse(storedExtensions);
+        } catch {
+            parsedExtensions = [];
+        }
+
+        if (!Array.isArray(parsedExtensions)) {
+            return;
+        }
+
+        const extensions = getSafeExtensionsValues({
+            parsedExtensions,
+        });
+
+        setExtensionsState(extensions);
+    }, []);
 
     return (
         <ExtensionsContext.Provider value={{

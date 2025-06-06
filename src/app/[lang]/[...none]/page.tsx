@@ -7,37 +7,18 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import { usePathname } from "next/navigation";
+import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
+import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 
-export default function Page() {
-    const { translations, accent, theme } = useContextSelector(ConfigsContext, (value) => {
-        return {
-            translations: value.dictionaries?.notFound,
-            accent:       value.data.colors.accent,
-            theme:        value.data.theme,
-        };
-    });
-    const extensions = useContextSelector(ExtensionsContext, (value) => value.data);
-    const pathname = usePathname();
-
-    const isDark = theme === DarkThemeKey;
-    const extensionURLs = [];
-
-    for (const extension of extensions) {
-        for (const page of extension.pages) {
-            extensionURLs.push(page);
-        }
-    }
-
-    const pathnameWithoutLocale = pathname.split("/").slice(2).join("/");
-
-    if (extensionURLs.includes(pathnameWithoutLocale)) {
-        return (
-            <div id="extensions-root-page-id" className="relative w-full">
-                <p>There goes your extension.</p>
-            </div>
-        );
-    }
-
+const NotFoundComponent = ({
+    translations,
+    accent,
+    isDark,
+}: {
+    translations: NonNullable<DictionariesType>["notFound"] | undefined;
+    accent: PaletteType;
+    isDark: boolean;
+}) => {
     return (
         <div className="flex flex-col justify-center items-center p-4 mx-auto max-w-384 w-full min-h-[100svh] gap-4 text-balance text-center text-black dark:text-white">
             <p
@@ -71,5 +52,54 @@ export default function Page() {
                 {translations?.link}
             </Link>
         </div>
+    );
+};
+
+export default function Page() {
+    const { translations, accent, theme } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            translations: value.dictionaries?.notFound,
+            accent:       value.data.colors.accent,
+            theme:        value.data.theme,
+        };
+    });
+    const extensions = useContextSelector(ExtensionsContext, (value) => value.data);
+    const pathname = usePathname();
+    const isDark = theme === DarkThemeKey;
+
+    if (extensions === undefined) {
+        return (
+            <NotFoundComponent
+                translations={translations}
+                accent={accent}
+                isDark={isDark}
+            />
+        );
+    }
+
+    const extensionURLs = [];
+
+    for (const extension of extensions) {
+        for (const page of extension.pages) {
+            extensionURLs.push(page);
+        }
+    }
+
+    const pathnameWithoutLocale = pathname.split("/").slice(2).join("/");
+
+    if (extensionURLs.includes(pathnameWithoutLocale)) {
+        return (
+            <div id="extensions-root-page-id" className="relative w-full">
+                <p>There goes your extension.</p>
+            </div>
+        );
+    }
+
+    return (
+        <NotFoundComponent
+            translations={translations}
+            accent={accent}
+            isDark={isDark}
+        />
     );
 }
