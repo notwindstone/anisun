@@ -1,3 +1,7 @@
+this app is currently being rewritten from scratch using as few libraries as possible (and other optimizations) to achieve insane speeds :3
+
+you can see the progress on [anime.tatar](https://anime.tatar/) or on the [github](https://github.com/notwindstone/anisun/tree/v5).
+
 <div align="center">
 
 <img width="160" height="160" align="center" src="public/favicon.png">
@@ -5,8 +9,6 @@
 # [Anisun](https://anisun.vercel.app)
 
 ### A web app for watching anime built with Next.js and Mantine UI
-
-I plan to start a complete rewrite of this app within the week. You can check the progress here: [v5 branch](https://github.com/notwindstone/anisun/tree/v5) 
 
 <p align="center">
 <strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/README_russian.md">Русский</a>
