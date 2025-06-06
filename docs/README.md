@@ -92,8 +92,6 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 * [TailwindCSS](https://tailwindcss.com/) for the UI
 * An async state management using [Tanstack Query](https://tanstack.com/query/latest)
 * [Mantine Hooks](https://mantine.dev/hooks/package/) for general usage on the frontend
-* Fetching the data from Kodik (an anime media database) thanks to [KodikWrapper](https://github.com/thedvxchsquad/kodikwrapper)
-* A video player based on [Vidstack.js](https://www.vidstack.io/) and [HLS.js](https://github.com/video-dev/hls.js)
 * [Quick LRU](https://www.npmjs.com/package/quick-lru) for the in-memory cache
 * OAuth2 authorization using [arctic.js](https://arcticjs.dev/)
 * Extensions using [Remote Components](https://github.com/Paciolan/remote-component)
@@ -122,8 +120,6 @@ Navigate to **Project** -> **Settings** -> **Environment Variables** and then ad
 
 7. (Optional) `MAL_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with MyAnimeList
 8. (Optional) `MAL_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with MyAnimeList
-
-9. (Optional) `NEXT_PUBLIC_KODIK_TOKEN` = `yourOwnPublicKey` - get your own token from http://kodik.cc/ (you need to contact them via email). Only if you want to enable the Kodik player
 
 Note: LRU cache might not work as expected, because serverless environments tend to spin down on low load.
 
@@ -170,11 +166,15 @@ Now you can start it by `bun run start`
 
 But it is not production-ready yet. You need to install a reverse-proxy like Caddy first.
 
-After you installed Caddy, you need to rename `Caddyfile.example` in the root of repository to `Caddyfile` and change `example.com` in the file to your domain (`anime.tatar` in my case). Then just restart it by running `caddy stop` and `caddy start` in the terminal.
+After you have installed Caddy, you need to rename `Caddyfile.example` in the root of repository to `Caddyfile` and change `example.com` in the file to your domain (`anime.tatar` in my case). Then just restart it by running `caddy stop` and `caddy start` in the terminal.
 
-Be sure you are running `caddy start` in the repository directory, otherwise it Caddy will not use your configuration file.
+Be sure you are running `caddy start` in the repository directory, otherwise Caddy will not use your configuration file.
 
 </details>
+
+## 🤝 Contributing
+
+Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## 💬 Contact
 
@@ -186,10 +186,6 @@ Be sure you are running `caddy start` in the repository directory, otherwise it 
 ### Through our Discord server
 
 * [Discord - department of type safety](https://discord.gg/JhmkZDScfg)
-
-## 🤝 Contributing
-
-Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## ⭐️ Star History
 
