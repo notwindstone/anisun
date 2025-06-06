@@ -1,7 +1,7 @@
 import type {Metadata, Viewport} from "next";
 import { Inter } from "next/font/google";
 import React from "react";
-import {ColorSchemeScript, createTheme, Group, MantineProvider} from "@mantine/core";
+import {Anchor, ColorSchemeScript, createTheme, Group, MantineProvider} from "@mantine/core";
 import '@mantine/core/styles.css';
 import '@mantine/carousel/styles.css';
 import {Notifications} from "@mantine/notifications";
@@ -116,6 +116,11 @@ export default async function RootLayout({
                                         <NavigationControl />
                                     </SideBar>
                                     <div className="app-wrapper">
+                                        <div style={{ padding: "8px 16px", borderRadius: 8, marginTop: 16, marginRight: 24, position: "absolute", top: 0, right: 0, zIndex: 60000, backgroundColor: "black" }}>
+                                            <Anchor target="_blank" style={{ color: "white" }} href="https://anime.tatar">
+                                                Visit the new version of this app
+                                            </Anchor>
+                                        </div>
                                         <Main>
                                             {children}
                                         </Main>
