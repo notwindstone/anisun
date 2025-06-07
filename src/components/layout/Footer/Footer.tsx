@@ -41,7 +41,7 @@ export default function Footer({
                         </div>
                     </div>
                     <div className="text-neutral-500 dark:text-neutral-400 whitespace-pre-wrap">
-                        {footerItems.description}{' '}<a href="mailto:copyrights@anime.tatar" className="transition text-neutral-800 dark:text-neutral-200 hover:underline">copyrights@anime.tatar</a>
+                        {footerItems.description}
                     </div>
                 </div>
                 <div className="flex gap-2 flex-nowrap items-start w-full lg:w-fit lg:min-w-[25%]">
