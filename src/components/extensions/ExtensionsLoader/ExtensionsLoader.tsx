@@ -8,7 +8,6 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import Badge from "@/components/base/Badge/Badge";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import LoadedExtension from "@/components/extensions/LoadedExtension/LoadedExtension";
 
