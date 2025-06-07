@@ -10,6 +10,8 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import Badge from "@/components/base/Badge/Badge";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { X } from "lucide-react";
+import Link from "next/link";
 
 export default function LoadExtension() {
     const { base, theme } = useContextSelector(ConfigsContext, (value) => {
@@ -25,47 +27,89 @@ export default function LoadExtension() {
 
     return (
         <div className="flex flex-col gap-2">
-            what about importing a pack of extensions?
-            <div className="transition p-4 dark:bg-neutral-900 bg-neutral-200 rounded-md flex flex-col gap-4">
+            todo: implement importing a pack of extensions
+            <div className="transition p-4 dark:bg-neutral-900 bg-neutral-100 rounded-md flex flex-col gap-4">
                 <p className="leading-none">
                     Plugins installed: {extensions?.length ?? 0}
                 </p>
                 {
                     extensions?.map((extension) => {
+                        const isTrusted = extension.url.startsWith("https://raw.githubusercontent.com/notwindstone");
+
                         return (
-                            <div className="flex flex-col" key={extension.url}>
-                                <p className="text-sm">
-                                    Name:{" "}<span className="text-sm opacity-60">{extension.name}</span>
-                                </p>
-                                <p className="text-sm">
-                                    Author:{" "}<span className="text-sm opacity-60">{extension.author}</span>
-                                </p>
-                                <p className="text-sm">
-                                    Version:{" "}<span className="text-sm opacity-60">{extension.version}</span>
-                                </p>
-                                <p className="text-sm">
-                                    URL:{" "}<span className="text-sm opacity-60">{extension.url}</span>
-                                </p>
-                                <p className="text-sm">
-                                    Pages:{" "}<span className="text-sm opacity-60">{extension.pages.map((page) => `/${page} `).toString()}</span>
-                                </p>
+                            <div key={extension.url} className="flex flex-nowrap justify-between items-start">
+                                <div className="flex flex-col">
+                                    <p className="text-sm">
+                                        Name:
+                                        {" "}
+                                        <span className="text-sm opacity-60">{extension.name}</span>
+                                        {" "}
+                                        {
+                                            isTrusted ? (
+                                                <span className="text-sm dark:text-green-400 text-green-500">Official</span>
+                                            ) : (
+                                                <span className="text-sm dark:text-yellow-400 text-yellow-500">Unofficial</span>
+                                            )
+                                        }
+                                    </p>
+                                    <p className="text-sm">
+                                        Author:
+                                        {" "}
+                                        <span className="text-sm opacity-60">{extension.author}</span>
+                                    </p>
+                                    <p className="text-sm">
+                                        Version:{" "}<span className="text-sm opacity-60">{extension.version}</span>
+                                    </p>
+                                    <p className="text-sm">
+                                        URL:{" "}<span className="text-sm opacity-60">{extension.url}</span>
+                                    </p>
+                                    {
+                                        extension.pages.length > 0 && (
+                                            <p className="text-sm">
+                                                <span className="text-sky-400">Pages:</span>
+                                                {" "}
+                                                {extension.pages.map((page) => {
+                                                    const pageLink = `/${page}`;
+
+                                                    return (
+                                                        <Link key={page} href={pageLink} className="text-sm opacity-60 transition hover:opacity-80">
+                                                            {pageLink}
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </p>
+                                        )
+                                    }
+                                </div>
+                                <Button
+                                    onClick={() => {
+                                        const newExtensions = extensions.filter((filteringExtension) => filteringExtension.url !== extension.url);
+
+                                        localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
+                                        setExtensions?.(newExtensions);
+                                    }}
+                                    custom={{ style: "base" }}
+                                    label={"remove extension"}
+                                >
+                                    <X size={16} />
+                                </Button>
                             </div>
                         );
                     })
                 }
             </div>
-            <div className="flex gap-2">
+            <div className="flex flex-wrap w-full gap-2">
                 <div
                     onClick={() => {
                         reference.current?.focus();
                     }}
-                    className={`px-4 focus-within:ring-2 rounded-md flex flex-nowrap items-center overflow-clip h-10 gap-0 cursor-text transition w-fit ${status === "error" ? "ring-red-500 dark:ring-red-400" : "ring-black dark:ring-white"}`}
+                    className={`px-4 focus-within:ring-2 rounded-md flex flex-nowrap items-center overflow-clip h-10 gap-0 cursor-text transition flex-1 ${status === "error" ? "ring-red-500 dark:ring-red-400" : "ring-black dark:ring-white"}`}
                     style={{
                         background: parseTailwindColor({
                             color: base,
                             step:  theme === DarkThemeKey
                                 ? 900
-                                : 200,
+                                : 100,
                         }),
                     }}
                 >
@@ -73,7 +117,7 @@ export default function LoadExtension() {
                         type="text"
                         value={input}
                         ref={reference}
-                        className="w-96 max-w-full h-full text-sm focus:outline-none"
+                        className="w-full h-full text-sm focus:outline-none"
                         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                             setStatus("stale");
                             setInput(event.target.value.trim());
@@ -124,6 +168,7 @@ export default function LoadExtension() {
                                 safelyParsedExtension,
                             ];
                         });
+                        setInput("");
                         setStatus("success");
                     }}
                     label="load extension"
