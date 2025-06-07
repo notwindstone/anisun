@@ -27,9 +27,19 @@ export default function ExtensionsFetch({
         );
     }
 
-    const selectedValidExtension = extensions.find(
+    const filteredExtensions = extensions.filter((filteringExtension) => filteringExtension.isDisabled !== true);
+
+    if (filteredExtensions.length === 0) {
+        return (
+            <>
+                all extensions are disabled
+            </>
+        );
+    }
+
+    const selectedValidExtension = filteredExtensions.find(
         (currentExtension) => currentExtension.name === selectedExtension,
-    ) ?? extensions[0];
+    ) ?? filteredExtensions[0];
 
     return (
         <>
