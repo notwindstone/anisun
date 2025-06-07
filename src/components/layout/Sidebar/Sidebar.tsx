@@ -60,10 +60,32 @@ export default function Sidebar({
         username,
     });
 
+    const toggleSidebar = () => {
+        optimisticallyUpdateSidebar?.((state) => {
+            return {
+                ...state,
+                expanded: !state?.expanded,
+            };
+        });
+
+        setConfigValuesClient({
+            configs: {
+                ...config,
+                layout: {
+                    ...config.layout,
+                    sidebar: {
+                        ...config.layout.sidebar,
+                        expanded: !sidebarConfig.expanded,
+                    },
+                },
+            },
+        });
+    };
+
     return (
         <>
             <div
-                className="hidden sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-sidebar duration-200 overflow-hidden"
+                className="hidden relative sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-sidebar duration-200 overflow-x-hidden overflow-y-auto"
                 style={{
                     width:           sidebarConfig.expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
@@ -77,6 +99,10 @@ export default function Sidebar({
                         }),
                 }}
             >
+                <button
+                    onClick={toggleSidebar}
+                    className="absolute right-0 top-0 bottom-0 w-2  cursor-w-resize transition z-100 border-r border-transparent opacity-20 delay-200 duration-300 hover:border-neutral-500"
+                />
                 <div
                     className="flex w-full items-center justify-between"
                     style={{
@@ -107,27 +133,7 @@ export default function Sidebar({
                         custom={{
                             style: "base",
                         }}
-                        onClick={() => {
-                            optimisticallyUpdateSidebar?.((state) => {
-                                return {
-                                    ...state,
-                                    expanded: !state?.expanded,
-                                };
-                            });
-
-                            setConfigValuesClient({
-                                configs: {
-                                    ...config,
-                                    layout: {
-                                        ...config.layout,
-                                        sidebar: {
-                                            ...config.layout.sidebar,
-                                            expanded: !sidebarConfig.expanded,
-                                        },
-                                    },
-                                },
-                            });
-                        }}
+                        onClick={toggleSidebar}
                         label={dictionaries?.aria?.toggleSidebar as string}
                     >
                         {icons?.[sidebarConfig.position]?.[sidebarConfig.expanded.toString()]}

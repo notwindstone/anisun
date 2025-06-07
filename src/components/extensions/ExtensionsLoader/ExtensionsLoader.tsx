@@ -82,7 +82,7 @@ export default function ExtensionsLoader() {
                             setStatus("stale");
                             setInput(event.target.value.trim());
                         }}
-                        placeholder="extension data url..."
+                        placeholder="Load extension manifest from URL..."
                     />
                 </div>
                 <Button
