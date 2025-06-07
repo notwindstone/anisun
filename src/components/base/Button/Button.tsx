@@ -35,7 +35,7 @@ export default function Button({
     return (
         <>
             <button
-                className={`text-white flex items-center gap-2 rounded-md p-2 cursor-pointer transition duration-200 disabled:opacity-60 disabled:cursor-default hover:brightness-105 dark:hover:brightness-125 focus:ring-2 ring-black dark:ring-white ${appendClassNames}`}
+                className={`text-white flex items-center gap-2 rounded-md p-2 cursor-pointer transition duration-200 disabled:opacity-60 disabled:hover:brightness-100 disabled:cursor-not-allowed hover:brightness-105 dark:hover:brightness-125 focus:ring-2 ring-black dark:ring-white ${appendClassNames}`}
                 style={{
                     color: foreground,
                     background,

@@ -6,6 +6,7 @@ import { ExtensionType } from "@/types/Extensions/Extension.type";
 import { useContextSelector } from "use-context-selector";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import { useState } from "react";
+import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 export default function LoadedExtension({
     extension,
@@ -99,12 +100,24 @@ export default function LoadedExtension({
                     localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensionsOrder));
                     setExtensions?.(newExtensionsOrder);
                 }}
-                className={`p-1 rounded-md transition-colors flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.isDisabled ? "opacity-40" : ""}`}
+                className={`p-1 rounded-md transition flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.isDisabled ? "opacity-40" : ""}`}
             >
                 <div className="flex gap-4 items-center">
-                    <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
-                        <Blocks size={24} />
-                    </div>
+                    {
+                        extension.logo === "" ? (
+                            <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
+                                <Blocks size={24} />
+                            </div>
+                        ) : (
+                            <ConfiguredImage
+                                className="transition w-10 h-10 object-cover rounded-md text-[9px] overflow-clip"
+                                width={40}
+                                height={40}
+                                alt={`${extension.name} logo`}
+                                src={extension.logo}
+                            />
+                        )
+                    }
                     <div className="flex flex-col gap-1">
                         <p className="leading-none font-medium">
                             {extension.name}
@@ -128,7 +141,7 @@ export default function LoadedExtension({
 
                             return (
                                 <Link
-                                    className={`text-sm rounded-md py-1 px-2 bg-[theme(colors.sky.400/.2)] text-sky-500 transition hover:opacity-50 ${extension.isDisabled ? "pointer-events-none" : ""}`}
+                                    className={`text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] text-sky-500 transition hover:opacity-50 ${extension.isDisabled ? "pointer-events-none" : ""}`}
                                     onClick={(event) => {
                                         event.stopPropagation();
                                     }}
