@@ -23,23 +23,35 @@ export default function getSafeExtensionsValues({
             continue;
         }
 
-        if (!Array.isArray(extension.pages)) {
+        let extensionWithAllProperties: typeof extension & {
+            isDisabled?: boolean | undefined;
+        } = extension;
+
+        if (!("isDisabled" in extension)) {
+            extensionWithAllProperties = {
+                ...extension,
+                isDisabled: false,
+            };
+        }
+
+        if (!Array.isArray(extensionWithAllProperties.pages)) {
             continue;
         }
 
         const stringPages = [];
 
-        for (const page of extension.pages) {
+        for (const page of extensionWithAllProperties.pages) {
             stringPages.push(page as string);
         }
 
         validExtensions.push({
-            logo:    extension.logo as string,
-            name:    extension.name as string,
-            url:     extension.url as string,
-            pages:   stringPages,
-            author:  extension.author as string,
-            version: extension.version as string,
+            logo:       extensionWithAllProperties.logo as string,
+            name:       extensionWithAllProperties.name as string,
+            url:        extensionWithAllProperties.url as string,
+            pages:      stringPages,
+            author:     extensionWithAllProperties.author as string,
+            version:    extensionWithAllProperties.version as string,
+            isDisabled: extensionWithAllProperties.isDisabled,
         });
     }
 
