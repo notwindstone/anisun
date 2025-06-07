@@ -1,6 +1,4 @@
 import searchTitles from "@/lib/anime/searchTitles";
-import fetchAnilibriaVideo from "@/lib/anime/fetchAnilibriaVideo";
-import getCachedAnilibriaVideo from "@/lib/anime/getCachedAnilibriaVideo";
 import GetTopTitles from "@/lib/anime/getTopTitles";
 import GetHeroTitle from "@/lib/anime/getHeroTitle";
 import GetTrendingTitles from "@/lib/anime/getTrendingTitles";
@@ -13,8 +11,4 @@ export const Getters = {
     FetchUpcomingNextSeasonTitles: GetUpcomingNextSeasonTitles,
     FetchTopTitles:                GetTopTitles,
     SearchTitles:                  searchTitles,
-};
-export const VideoGetters = {
-    FetchAnilibriaVideo:     fetchAnilibriaVideo,
-    GetCachedAnilibriaVideo: getCachedAnilibriaVideo,
 };

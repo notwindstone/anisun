@@ -25,6 +25,7 @@ export async function handleCallback({
     };
     providerName: OAuth2ProvidersType;
     fetchUserProfile: (accessToken: string) => Promise<Response>;
+    // return the URL we need to redirect the user to
 }): Promise<string> {
     let tokens;
     let accessToken;

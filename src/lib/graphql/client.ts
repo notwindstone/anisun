@@ -4,12 +4,6 @@ import { VariablesType } from "@/types/Anime/Variables.type";
 import { QueryParametersType } from "@/constants/anilist";
 import IsKeyInObject from "@/types/Utils/IsKeyInObject";
 
-/*
- * why does typescript accept this shit
- * but throws an error if i write
- *
- * type ErrorNode = Record<string, ErrorNode>;
- */
 type ShittyNode = {
     children: Record<string, ShittyNode>;
 };
