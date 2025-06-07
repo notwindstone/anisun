@@ -7,6 +7,9 @@ import { useContextSelector } from "use-context-selector";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import { useState } from "react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { DarkThemeKey } from "@/constants/configs";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 
 export default function LoadedExtension({
     extension,
@@ -15,9 +18,17 @@ export default function LoadedExtension({
     extension: ExtensionType;
     index: number;
 }) {
+    const { base, theme } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            base:  value.data.colors.base,
+            theme: value.data.theme,
+        };
+    });
     const { data: extensions, optimisticallyUpdate: setExtensions } = useContextSelector(ExtensionsContext, (value) => value);
     // avoid miss clicks
     const [toDelete, setToDelete] = useState(false);
+    const isDark = theme === DarkThemeKey;
+    const isDefault = index === 0;
 
     const deleteButton = (
         <Button
@@ -80,7 +91,7 @@ export default function LoadedExtension({
         </Button>
     );
     const isTrusted = extension.url.startsWith("https://raw.githubusercontent.com/notwindstone");
-    const selectedClassNames = index === 0 ? "bg-neutral-200 dark:bg-neutral-800" : "hover:cursor-pointer hover:bg-[theme(colors.neutral.200/.3)] dark:hover:bg-[theme(colors.neutral.800/.5)] pointer-events-auto";
+    const selectedClassNames = isDefault ? "" : "hover:cursor-pointer hover:bg-[theme(colors.black/.025)] dark:hover:bg-[theme(colors.white/.025)] pointer-events-auto";
 
     return (
         <div key={extension.url} className="select-none flex gap-2 items-center w-full">
@@ -90,7 +101,7 @@ export default function LoadedExtension({
                         return;
                     }
 
-                    if (index === 0) {
+                    if (isDefault) {
                         return;
                     }
 
@@ -101,6 +112,14 @@ export default function LoadedExtension({
                     setExtensions?.(newExtensionsOrder);
                 }}
                 className={`p-1 rounded-md transition flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.isDisabled ? "opacity-40" : ""}`}
+                style={
+                    isDefault ? ({
+                        backgroundColor: parseTailwindColor({
+                            color: base,
+                            step:  isDark ? 800 : 200,
+                        }),
+                    }) : undefined
+                }
             >
                 <div className="flex gap-4 items-center">
                     {
@@ -129,7 +148,7 @@ export default function LoadedExtension({
                 </div>
                 <div className="flex gap-2 items-center">
                     {
-                        index === 0 && (
+                        isDefault && (
                             <div className="text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] transition-colors dark:text-white text-black">
                                 default
                             </div>

@@ -9,8 +9,9 @@ import LoadedExtension from "@/components/extensions/LoadedExtension/LoadedExten
 import ExtensionsLoadFromURL from "@/components/extensions/ExtensionsLoadFromURL/ExtensionsLoadFromURL";
 
 export default function ExtensionsLoader() {
-    const { theme, accent } = useContextSelector(ConfigsContext, (value) => {
+    const { base, theme, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
+            base:   value.data.colors.base,
             theme:  value.data.theme,
             accent: value.data.colors.accent,
         };
@@ -19,7 +20,15 @@ export default function ExtensionsLoader() {
 
     return (
         <div className="flex flex-col gap-2">
-            <div className="transition p-4 dark:bg-neutral-900 bg-neutral-100 rounded-md flex flex-col gap-4">
+            <div
+                className="transition p-4 rounded-md flex flex-col gap-4"
+                style={{
+                    backgroundColor: parseTailwindColor({
+                        color: base,
+                        step:  theme === DarkThemeKey ? 900 : 100,
+                    }),
+                }}
+            >
                 <div className="flex justify-between">
                     <p className="leading-none text-lg font-medium">
                         Installed
