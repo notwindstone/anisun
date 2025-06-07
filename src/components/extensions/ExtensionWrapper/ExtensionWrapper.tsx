@@ -56,19 +56,27 @@ export default function ExtensionWrapper({
                     />
                 </div>
             }>
-                <div id={isCustomPage ? "extensions-custom-page-id-dont-use" : "extensions-root-id"} className="relative w-full overflow-hidden aspect-video">
-                    <ExtensionSkeleton
-                        title="Loading..."
-                        description="Your extension is loading. If it's taking too long, try resetting it."
-                        shouldPulse
-                    >
-                        <Button
-                            onClick={refresh}
-                            label="reset the extension"
-                        >
-                            Reset
-                        </Button>
-                    </ExtensionSkeleton>
+                <div id={isCustomPage ? "extensions-custom-page-id-dont-use" : "extensions-root-id"} className={`relative w-full overflow-hidden ${isCustomPage ? "" : "aspect-video"}`}>
+                    {
+                        isCustomPage ? (
+                            <div className="text-lg mx-auto font-semibold">
+                                Loading your extension.
+                            </div>
+                        ) : (
+                            <ExtensionSkeleton
+                                title="Loading..."
+                                description="Your extension is loading. If it's taking too long, try resetting it."
+                                shouldPulse
+                            >
+                                <Button
+                                    onClick={refresh}
+                                    label="reset the extension"
+                                >
+                                    Reset
+                                </Button>
+                            </ExtensionSkeleton>
+                        )
+                    }
                     <RemoteComponent url={url} />
                 </div>
             </Suspense>
