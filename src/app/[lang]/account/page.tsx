@@ -26,9 +26,7 @@ export default async function Page({
                 Anisun is a content-browser now, just like Tachiyomi!
             </p>
             <Divider />
-            <div>
-                <LoadExtension />
-            </div>
+            <LoadExtension />
             <p className="text-2xl font-medium leading-none pt-8">
                 {accountPageItems.accountTitle}
             </p>
