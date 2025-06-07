@@ -88,6 +88,10 @@ export default function Page() {
     const pluginsByPage = [];
 
     for (const extension of extensions) {
+        if (extension?.isDisabled) {
+            continue;
+        }
+
         for (const page of extension.pages) {
             pluginsByPage.push({
                 page,

@@ -7,7 +7,7 @@ import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
 import Divider from "@/components/base/Divider/Divider";
 import type { Locale } from "@/i18n-config";
 import { AccountPageItems } from "@/constants/translated";
-import LoadExtension from "@/components/extensions/LoadExtension/LoadExtension";
+import ExtensionsLoader from "@/components/extensions/ExtensionsLoader/ExtensionsLoader";
 
 export default async function Page({
     params,
@@ -67,7 +67,7 @@ export default async function Page({
                 Anisun is a content-browser now, just like Tachiyomi!
             </p>
             <Divider />
-            <LoadExtension />
+            <ExtensionsLoader />
         </div>
     );
 }

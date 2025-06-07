@@ -1,10 +1,11 @@
 import Button from "@/components/base/Button/Button";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
-import { Blocks, X } from "lucide-react";
+import { Blocks, Ellipsis, ToggleLeft, ToggleRight, X } from "lucide-react";
 import Link from "next/link";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
 import { useContextSelector } from "use-context-selector";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { useState } from "react";
 
 export default function LoadedExtension({
     extension,
@@ -14,19 +15,67 @@ export default function LoadedExtension({
     index: number;
 }) {
     const { data: extensions, optimisticallyUpdate: setExtensions } = useContextSelector(ExtensionsContext, (value) => value);
+    // avoid miss clicks
+    const [toDelete, setToDelete] = useState(false);
 
     const deleteButton = (
         <Button
-            onDoubleClick={() => {
+            onClick={() => {
+                if (!toDelete) {
+                    setToDelete(true);
+
+                    const timeout = setTimeout(() => {
+                        setToDelete(false);
+                    }, 2000);
+
+                    return () => clearTimeout(timeout);
+                }
+
                 const newExtensions = extensions?.filter((filteringExtension) => filteringExtension.url !== extension.url);
 
                 localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
                 setExtensions?.(newExtensions);
             }}
-            custom={{ style: "transparent" }}
+            custom={{ style: "base" }}
             label={"remove extension"}
         >
-            <X size={24} />
+            {
+                toDelete ? (
+                    <X size={24} />
+                ) : (
+                    <Ellipsis size={24} />
+                )
+            }
+        </Button>
+    );
+    const disableButton = (
+        <Button
+            onClick={() => {
+                const filteredExtensions = [...(extensions ?? [])];
+
+                for (const filteringExtension of filteredExtensions) {
+                    if (filteringExtension.url === extension.url) {
+                        filteringExtension.isDisabled = !extension.isDisabled;
+                    }
+                }
+
+                const newExtensions = [
+                    ...filteredExtensions,
+                ];
+
+                localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
+                setExtensions?.(newExtensions);
+            }}
+            custom={{ style: "base" }}
+            label={"disable extension"}
+        >
+            {
+                extension.isDisabled ? (
+                    <ToggleLeft size={24} />
+                ) : (
+                    <ToggleRight size={24} />
+                )
+            }
         </Button>
     );
     const isTrusted = extension.url.startsWith("https://raw.githubusercontent.com/notwindstone");
@@ -36,6 +85,10 @@ export default function LoadedExtension({
         <div key={extension.url} className="select-none flex gap-2 items-center w-full">
             <div
                 onClick={() => {
+                    if (extension.isDisabled) {
+                        return;
+                    }
+
                     if (index === 0) {
                         return;
                     }
@@ -46,7 +99,7 @@ export default function LoadedExtension({
                     localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensionsOrder));
                     setExtensions?.(newExtensionsOrder);
                 }}
-                className={`p-1 rounded-md transition-colors flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames}`}
+                className={`p-1 rounded-md transition-colors flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.isDisabled ? "opacity-40" : ""}`}
             >
                 <div className="flex gap-4 items-center">
                     <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
@@ -75,7 +128,7 @@ export default function LoadedExtension({
 
                             return (
                                 <Link
-                                    className="text-sm rounded-md py-1 px-2 bg-[theme(colors.sky.400/.2)] text-sky-500 transition hover:opacity-50"
+                                    className={`text-sm rounded-md py-1 px-2 bg-[theme(colors.sky.400/.2)] text-sky-500 transition hover:opacity-50 ${extension.isDisabled ? "pointer-events-none" : ""}`}
                                     onClick={(event) => {
                                         event.stopPropagation();
                                     }}
@@ -99,6 +152,7 @@ export default function LoadedExtension({
                     </div>
                 </div>
             </div>
+            {disableButton}
             {deleteButton}
         </div>
     );

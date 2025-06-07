@@ -12,7 +12,7 @@ import Badge from "@/components/base/Badge/Badge";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import LoadedExtension from "@/components/extensions/LoadedExtension/LoadedExtension";
 
-export default function LoadExtension() {
+export default function ExtensionsLoader() {
     const { base, theme, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
             base:   value.data.colors.base,
@@ -27,7 +27,6 @@ export default function LoadExtension() {
 
     return (
         <div className="flex flex-col gap-2">
-            todo: implement importing a pack of extensions
             <div className="transition p-4 dark:bg-neutral-900 bg-neutral-100 rounded-md flex flex-col gap-4">
                 <div className="flex justify-between">
                     <p className="leading-none text-lg font-medium">
@@ -137,27 +136,6 @@ export default function LoadExtension() {
                 >
                     Load
                 </Button>
-                {
-                    status === "error" && (
-                        <Badge appendClassNames="flex justify-center items-center">
-                            Error
-                        </Badge>
-                    )
-                }
-                {
-                    status === "success" && (
-                        <Badge appendClassNames="flex justify-center items-center">
-                            Success
-                        </Badge>
-                    )
-                }
-                {
-                    status === "has" && (
-                        <Badge appendClassNames="flex justify-center items-center">
-                            Already installed
-                        </Badge>
-                    )
-                }
             </div>
         </div>
     );

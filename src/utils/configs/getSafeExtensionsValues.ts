@@ -13,6 +13,7 @@ export default function getSafeExtensionsValues({
         }
 
         if (
+            !("logo" in extension) ||
             !("name" in extension) ||
             !("url" in extension) ||
             !("pages" in extension) ||
@@ -33,6 +34,7 @@ export default function getSafeExtensionsValues({
         }
 
         validExtensions.push({
+            logo:    extension.logo as string,
             name:    extension.name as string,
             url:     extension.url as string,
             pages:   stringPages,
