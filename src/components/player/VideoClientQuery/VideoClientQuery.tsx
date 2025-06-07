@@ -1,7 +1,6 @@
 "use client";
 
 import VidstackPlayer from "@/components/player/VidstackPlayer/VidstackPlayer";
-import { VideoGetters } from "@/lib/anime/getters";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
@@ -16,7 +15,7 @@ export default function VideoClientQuery({
     fetchArguments,
 }: {
     queryKey: Array<string>;
-    method: keyof typeof VideoGetters;
+    method: string;
     fetchArguments: number;
 }) {
     const pathname = usePathname();
@@ -27,32 +26,7 @@ export default function VideoClientQuery({
     const { isPending, error, data, failureCount } = useQuery({
         queryKey: [...queryKey, status],
         queryFn:  async () => {
-            // ignore cache status property if we are fetching not from anilibria api
-            if (!method.toLowerCase().includes("anilibria")) {
-                const result = await VideoGetters[method](fetchArguments);
-
-                if (result === unableToFind.Label) {
-                    throw new Error(unableToFind.Description);
-                }
-
-                return result;
-            }
-
-            if (status === "uncached") {
-                const result = await VideoGetters[method](fetchArguments);
-
-                if (result === unableToFind.Label) {
-                    throw new Error(unableToFind.Description);
-                }
-
-                return result;
-            }
-
-            const result = await VideoGetters["GetCachedAnilibriaVideo"](fetchArguments);
-
-            if (result === unableToFind.Label) {
-                throw new Error(unableToFind.Description);
-            }
+            const result = method + fetchArguments;
 
             return result;
         },
