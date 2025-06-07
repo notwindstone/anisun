@@ -7,6 +7,7 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import LoadedExtension from "@/components/extensions/LoadedExtension/LoadedExtension";
 import ExtensionsLoadFromURL from "@/components/extensions/ExtensionsLoadFromURL/ExtensionsLoadFromURL";
+import ExtensionsBrowser from "@/components/extensions/ExtensionsBrowser/ExtensionsBrowser";
 
 export default function ExtensionsLoader() {
     const { base, theme, accent } = useContextSelector(ConfigsContext, (value) => {
@@ -59,6 +60,7 @@ export default function ExtensionsLoader() {
                 }
             </div>
             <ExtensionsLoadFromURL />
+            <ExtensionsBrowser />
         </div>
     );
 }
