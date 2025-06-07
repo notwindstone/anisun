@@ -9,6 +9,8 @@ import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import { usePathname } from "next/navigation";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
+import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
+import { useEffect, useState } from "react";
 
 const NotFoundComponent = ({
     translations,
@@ -19,8 +21,14 @@ const NotFoundComponent = ({
     accent: PaletteType;
     isDark: boolean;
 }) => {
+    const [opacity, setOpacity] = useState(0);
+
+    useEffect(() => {
+        setOpacity(1);
+    }, []);
+
     return (
-        <div className="flex flex-col justify-center items-center p-4 mx-auto max-w-384 w-full min-h-[100svh] gap-4 text-balance text-center text-black dark:text-white">
+        <div className="transition duration-500 flex flex-col justify-center items-center p-4 mx-auto max-w-384 w-full min-h-[100svh] gap-4 text-balance text-center text-black dark:text-white" style={{ opacity }}>
             <p
                 className="text-6xl sm:text-9xl font-black pb-2 sm:pb-4"
                 style={{
@@ -77,24 +85,28 @@ export default function Page() {
         );
     }
 
-    const extensionURLs = [];
+    const pluginsByPage = [];
 
     for (const extension of extensions) {
         for (const page of extension.pages) {
-            extensionURLs.push(page);
+            pluginsByPage.push({
+                page,
+                url: extension.url,
+            });
         }
     }
 
     const pathnameWithoutLocale = pathname.split("/").slice(2).join("/");
 
-    if (extensionURLs.includes(pathnameWithoutLocale)) {
-        return (
-            <div id="extensions-root-page-id" className="relative w-full">
-                <p>There goes your extension.</p>
-            </div>
-        );
+    for (const plugin of pluginsByPage) {
+        if (plugin.page === pathnameWithoutLocale) {
+            return (
+                <div id="extensions-root-page-id" className="relative w-full">
+                    <ExtensionWrapper url={plugin.url} isCustomPage />
+                </div>
+            );
+        }
     }
-
     return (
         <NotFoundComponent
             translations={translations}

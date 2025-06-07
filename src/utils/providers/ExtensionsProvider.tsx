@@ -29,7 +29,7 @@ export function ExtensionsProvider({
         const storedExtensions = localStorage.getItem(ExtensionsLocalStorageKey);
 
         if (!storedExtensions) {
-            localStorage.setItem(ExtensionsLocalStorageKey, JSON.stringify([]));
+            localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify([]));
 
             return;
         }

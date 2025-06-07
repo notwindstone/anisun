@@ -7,7 +7,7 @@ export default function DarkReaderNotify() {
     const [showed, setShowed] = useState(true);
 
     useEffect(() => {
-        const darkReaderLocalStorage = localStorage.getItem("dark-reader-hide");
+        const darkReaderLocalStorage = localStorage?.getItem("dark-reader-hide");
 
         if (darkReaderLocalStorage === "hide") {
             setShowed(false);

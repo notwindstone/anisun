@@ -24,8 +24,10 @@ function refresh() {
 
 export default function ExtensionWrapper({
     url,
+    isCustomPage,
 }: {
     url: string;
+    isCustomPage?: boolean;
 }) {
     // if a remote component doesn't return anything, but just manually injects itself to the relative root node
     // then we need to recreate it every time url changes to avoid buggy af behaviour
@@ -54,7 +56,7 @@ export default function ExtensionWrapper({
                     />
                 </div>
             }>
-                <div id="extensions-root-id" className="relative w-full overflow-hidden aspect-video">
+                <div id={isCustomPage ? "extensions-custom-page-id-dont-use" : "extensions-root-id"} className="relative w-full overflow-hidden aspect-video">
                     <ExtensionSkeleton
                         title="Loading..."
                         description="Your extension is loading. If it's taking too long, try resetting it."
