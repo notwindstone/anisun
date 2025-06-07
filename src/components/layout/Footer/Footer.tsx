@@ -11,7 +11,6 @@ export default function Footer({
 }) {
     const footerItems = getFooterItems(dictionaries);
     const currentGitCommitHash = process.env.GIT_COMMIT_HASH;
-    console.log(currentGitCommitHash);
 
     return (
         <>
