@@ -25,6 +25,7 @@ export default function LoadExtension() {
 
     return (
         <div className="flex flex-col gap-2">
+            what about importing a pack of extensions?
             <div className="transition p-4 dark:bg-neutral-900 bg-neutral-200 rounded-md flex flex-col gap-4">
                 <p className="leading-none">
                     Plugins installed: {extensions?.length ?? 0}

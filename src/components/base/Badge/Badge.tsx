@@ -41,7 +41,7 @@ export default function Badge({
     return (
         scoreIsNotZero && hasText ? (
             <p
-                className={`transition-colors duration-200 rounded-md ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName} ${appendClassNames ?? " "}`}
+                className={`transition-colors duration-200 rounded-md ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName} ${appendClassNames ? `${appendClassNames}` : ""}`}
                 style={isScore ? undefined : {
                     backgroundColor: parseTailwindColor({
                         color: base,
