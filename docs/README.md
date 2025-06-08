@@ -194,10 +194,6 @@ Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 * [Telegram - @windst1](https://t.me/windst1)
 * [Discord - @notwindstone](https://discord.com/users/510709295814279168)
 
-### Through our Discord server
-
-* [Discord - department of type safety](https://discord.gg/JhmkZDScfg)
-
 ## ⭐️ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/anisun&type=Date)](https://star-history.com/#notwindstone/anisun&Date)
