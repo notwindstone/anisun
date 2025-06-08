@@ -50,7 +50,7 @@ export default function ExtensionsLoadFromURL() {
                 show && (
                     <>
                         <p className="text-sm text-red-500 dark:text-red-400">
-                            Loading extensions from untrusted sources might be dangerous. I am not responsible for their actions.
+                            Loading extensions from untrusted sources might be dangerous. I am not responsible for their behaviour.
                         </p>
                         <div className="flex flex-wrap w-full gap-2">
                             <div
