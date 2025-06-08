@@ -1,6 +1,6 @@
 <div align="center">
 
-<p>Looking for the previous version? Check <a href="https://github.com/notwindstone/anisun/tree/v4">v4</a> branch</p>
+<p>Looking for the previous version? Check the <a href="https://github.com/notwindstone/anisun/tree/v4">v4</a> branch</p>
 
 <img width="160" height="160" align="center" src="../public/favicon.webp" alt="Favicon">
 
@@ -31,6 +31,13 @@ An extension-based web app for exploring anime. Written in next.js with speed in
 <summary>Expand</summary>
 
 <div align="center">
+
+<img src="../public/screenshots/extensions/accounts-page-extensions-with-disabled.png" width="49%" alt="Account page desktop screenshot with extensions disabled">
+<img src="../public/screenshots/extensions/accounts-page-extensions.png" width="49%" alt="Account page desktop screenshot with extensions enabled">
+<img src="../public/screenshots/extensions/anime-trailers-example-extension.png" width="49%" alt="Anime Trailers extension desktop screenshot">
+<img src="../public/screenshots/extensions/svelte-example-extension.png" width="49%" alt="Svelte Example extension desktop screenshot">
+<img src="../public/screenshots/extensions/vue-example-extension.png" width="49%" alt="Vue Example extension desktop screenshot">
+
 </div>
 
 </details>
@@ -83,8 +90,8 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 
 ## ⭐ Features
 
-* (WIP) Extensions
-* (WIP) Seamless Anilist, Shikimori and MAL integration
+* Extensions (need to implement extensions browser)
+* Seamless Anilist, Shikimori and MAL integration (only auth part is done)
 * Localization
 * Theme customization
 
