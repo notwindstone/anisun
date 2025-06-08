@@ -145,7 +145,7 @@ export default function LoadedExtension({
                     }
                     <div className="flex flex-col gap-1">
                         <p className="leading-none font-medium">
-                            {extension.name}
+                            {extension.displayName}
                         </p>
                         <p className="leading-none opacity-60 text-xs">
                             @{extension.author}

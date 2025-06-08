@@ -24,8 +24,9 @@ export default function getSafeExtensionsValues({
         }
 
         let extensionWithAllProperties: typeof extension & {
-            isDisabled?: boolean | undefined;
-            areStyles?: boolean | undefined;
+            isDisabled?:  boolean | undefined;
+            areStyles?:   boolean | undefined;
+            displayName?: string | undefined;
         } = extension;
 
         if (!("isDisabled" in extension)) {
@@ -42,6 +43,13 @@ export default function getSafeExtensionsValues({
             };
         }
 
+        if (!("displayName" in extension)) {
+            extensionWithAllProperties = {
+                ...extensionWithAllProperties,
+                displayName: extension.name as string,
+            };
+        }
+
         if (!Array.isArray(extensionWithAllProperties.pages)) {
             continue;
         }
@@ -53,14 +61,15 @@ export default function getSafeExtensionsValues({
         }
 
         validExtensions.push({
-            logo:       extensionWithAllProperties.logo as string,
-            name:       extensionWithAllProperties.name as string,
-            url:        extensionWithAllProperties.url as string,
-            pages:      stringPages,
-            author:     extensionWithAllProperties.author as string,
-            version:    extensionWithAllProperties.version as string,
-            areStyles:  extensionWithAllProperties.areStyles,
-            isDisabled: extensionWithAllProperties.isDisabled,
+            logo:        extensionWithAllProperties.logo as string,
+            displayName: extensionWithAllProperties.displayName as string,
+            name:        extensionWithAllProperties.name as string,
+            url:         extensionWithAllProperties.url as string,
+            pages:       stringPages,
+            author:      extensionWithAllProperties.author as string,
+            version:     extensionWithAllProperties.version as string,
+            areStyles:   extensionWithAllProperties.areStyles,
+            isDisabled:  extensionWithAllProperties.isDisabled,
         });
     }
 
