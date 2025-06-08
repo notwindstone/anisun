@@ -62,7 +62,7 @@ export default function ExtensionsLoader() {
             <ExtensionsBrowser />
             {
                 // disable URL loader for production builds
-                process.env.NODE_ENV === "test" && (
+                process.env.NODE_ENV !== "development" && (
                     <ExtensionsLoadFromURL />
                 )
             }
