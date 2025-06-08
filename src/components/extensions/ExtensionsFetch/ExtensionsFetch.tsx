@@ -27,7 +27,9 @@ export default function ExtensionsFetch({
         );
     }
 
-    const filteredExtensions = extensions.filter((filteringExtension) => filteringExtension.isDisabled !== true);
+    const filteredExtensions = extensions.filter(
+        (filteringExtension) => (filteringExtension.isDisabled !== true) && (filteringExtension.areStyles !== true),
+    );
 
     if (filteredExtensions.length === 0) {
         return (

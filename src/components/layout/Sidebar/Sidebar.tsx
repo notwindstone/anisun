@@ -100,6 +100,7 @@ export default function Sidebar({
                 }}
             >
                 <button
+                    aria-label="toggle sidebar"
                     onClick={toggleSidebar}
                     className="absolute right-0 top-0 bottom-0 w-2  cursor-w-resize transition z-100 border-r border-transparent opacity-20 delay-200 duration-300 hover:border-neutral-500"
                 />

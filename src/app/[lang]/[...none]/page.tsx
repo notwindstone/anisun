@@ -92,6 +92,10 @@ export default function Page() {
             continue;
         }
 
+        if (extension?.areStyles) {
+            continue;
+        }
+
         for (const page of extension.pages) {
             pluginsByPage.push({
                 page,

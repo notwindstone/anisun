@@ -146,11 +146,18 @@ export default function LoadedExtension({
                         </p>
                     </div>
                 </div>
-                <div className="flex gap-2 items-center">
+                <div className="flex flex-wrap gap-2 items-center">
                     {
-                        isDefault && (
+                        (isDefault && !extension.areStyles) && (
                             <div className="text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] transition-colors dark:text-white text-black">
                                 default
+                            </div>
+                        )
+                    }
+                    {
+                        extension.areStyles && (
+                            <div className="text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] transition-colors dark:text-white text-black">
+                                styles
                             </div>
                         )
                     }

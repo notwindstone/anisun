@@ -20,7 +20,7 @@ export default function CSSExtensionsLoader() {
     }
 
     return (
-        <div id="extensions-css-loader-id" className="relative w-0 h-0">
+        <div id="extensions-css-loader-id" className="relative w-0 h-0 overflow-clip">
             {
                 filteredExtensions.map((extensionToUse) => (
                     <ExtensionWrapper key={extensionToUse.url} url={extensionToUse.url} />
