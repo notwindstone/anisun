@@ -1,8 +1,0 @@
-.root {
-    padding: 0;
-    border-radius: var(--mantine-radius-md);
-}
-
-.label {
-    font-size: rem(18px);
-}

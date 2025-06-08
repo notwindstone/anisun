@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "locale": "ru",
+    "title": "Главная | Anisun",
+    "description": "Веб-сайт для просмотра аниме, написанный на next.js",
+    "languages": {
+      "en": "English",
+      "ru": "Русский",
+      "uwu": "UwU"
+    }
+  },
+  "notFound": {
+    "title": "Ой!",
+    "subtitle": "Страница не найдена",
+    "description": "Страница, которая была открыта, не существует, либо её название было изменено, либо она временно недоступна.",
+    "link": "Вернуться домой"
+  },
+  "sidebar": {
+    "home": "Главная",
+    "history": "История",
+    "library": "Библиотека",
+    "account": "Аккаунт"
+  },
+  "footer": {
+    "description": "Разработчик этого веб-сайта никак не связан с создаваемыми для него плагинами, и этот сайт не размещает какой-либо контент.",
+    "about": {
+      "title": "О сайте",
+      "links": [
+        {
+          "name": "Исходный код",
+          "url": "https://github.com/notwindstone/anisun"
+        },
+        {
+          "name": "Github Issues",
+          "url": "https://github.com/notwindstone/anisun/issues"
+        },
+        {
+          "name": "Внести вклад",
+          "url": "https://github.com/notwindstone/anisun/pulls"
+        }
+      ]
+    },
+    "contact": {
+      "title": "Связаться",
+      "links": [
+        {
+          "name": "в Telegram",
+          "url": "https://t.me/windst1"
+        },
+        {
+          "name": "в Discord",
+          "url": "https://discord.com/users/510709295814279168"
+        },
+        {
+          "name": "на Github",
+          "url": "https://github.com/notwindstone/"
+        }
+      ]
+    }
+  },
+  "appearance": {
+    "slate": "Сланцевый",
+    "gray": "Серый",
+    "zinc": "Цинково-серый",
+    "neutral": "Нейтральный",
+    "stone": "Каменно-серый",
+    "red": "Красный",
+    "orange": "Оранжевый",
+    "amber": "Янтарный",
+    "yellow": "Жёлтый",
+    "lime": "Лаймовый",
+    "green": "Зелёный",
+    "emerald": "Изумрудный",
+    "teal": "Бирюзовый",
+    "cyan": "Голубой",
+    "sky": "Небесный",
+    "blue": "Синий",
+    "indigo": "Индиго",
+    "violet": "Фиолетовый",
+    "purple": "Пурпурный",
+    "fuchsia": "Фуксия",
+    "pink": "Розовый",
+    "rose": "Цвет розы"
+  },
+  "player": {
+    "uncached": {
+      "title": "Получение данных...",
+      "description": "Извлечение данных из выбранного сервиса."
+    },
+    "cached": {
+      "title": "Чтение данных...",
+      "description": "Поиск аниме по кэшу."
+    },
+    "mapping": {
+      "title": "Поиск аниме...",
+      "description": "Сопоставление MyAnimeList ID и ID выбранного сервиса."
+    },
+    "selectCached": "Взять из кэша"
+  },
+  "aria": {
+    "toggleColorScheme": "Переключить тему приложения",
+    "changePaletteColor": "Поменять акцентный цвет приложения на",
+    "switchLayout": "Переключить лайаут приложения",
+    "toggleSidebar": "Изменить ширину боковой панели",
+    "searchAnimes": "Поиск аниме тайтлов",
+    "filterAnimes": "Отфильтровать аниме тайтлы"
+  },
+  "misc": {
+    "searchAnimes": "Поиск аниме...",
+    "signOut": "Выйти"
+  }
+}

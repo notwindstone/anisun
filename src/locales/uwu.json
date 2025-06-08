@@ -1,0 +1,112 @@
+{
+  "metadata": {
+    "locale": "uwu",
+    "title": "home | anisun",
+    "description": "a web app fow watching anime buiwt with next.js ☆⌒ヽ(*\"､^*)chu",
+    "languages": {
+      "en": "engwish",
+      "ru": "русский",
+      "uwu": "u-uwu"
+    }
+  },
+  "notFound": {
+    "title": "oops",
+    "subtitle": "page n-not f-found",
+    "description": "the page you a-are wooking fow might have been wemoved...  had its name changed ow is tempowawiwy unavaiwable",
+    "link": "go to h-homepage"
+  },
+  "sidebar": {
+    "home": "home",
+    "history": "histowy",
+    "library": "wibwawy",
+    "account": "account"
+  },
+  "footer": {
+    "description": "the d-devewopew o-of t-this appwication does not have any a-affiwiation w-with the content pwoviders avaiwableO.o and this appwication hosts z-zewo content.",
+    "about": {
+      "title": "about",
+      "links": [
+        {
+          "name": "souwce code",
+          "url": "https://github.com/notwindstone/anisun"
+        },
+        {
+          "name": "g-github i-issues",
+          "url": "https://github.com/notwindstone/anisun/issues"
+        },
+        {
+          "name": "contwibute",
+          "url": "https://github.com/notwindstone/anisun/pulls"
+        }
+      ]
+    },
+    "contact": {
+      "title": "contact",
+      "links": [
+        {
+          "name": "on tewegwam",
+          "url": "https://t.me/windst1"
+        },
+        {
+          "name": "on discowd",
+          "url": "https://discord.com/users/510709295814279168"
+        },
+        {
+          "name": "on github",
+          "url": "https://github.com/notwindstone/"
+        }
+      ]
+    }
+  },
+  "appearance": {
+    "slate": "swate",
+    "gray": "gway",
+    "zinc": "zinc",
+    "neutral": "neutwaw",
+    "stone": "stone",
+    "red": "wed",
+    "orange": "owange",
+    "amber": "ambew",
+    "yellow": "yewwow",
+    "lime": "wime",
+    "green": "gween",
+    "emerald": "emewawd",
+    "teal": "teaw",
+    "cyan": "cyan",
+    "sky": "sky",
+    "blue": "bwue",
+    "indigo": "indigo",
+    "violet": "viowet",
+    "purple": "puwpwe",
+    "fuchsia": "fuchsia",
+    "pink": "pink",
+    "rose": "wose"
+  },
+  "player": {
+    "uncached": {
+      "title": "fetching...",
+      "description": "fetching data fwom the sewected pwovider"
+    },
+    "cached": {
+      "title": "woading...",
+      "description": "getting anime fwom the c-cache"
+    },
+    "mapping": {
+      "title": "m-mapping...",
+      "description": "getting anime id fwom a mapped database"
+    },
+    "selectCached": "sewect cached"
+  },
+  "aria": {
+    "toggleColorScheme": "toggle app cowow scheme",
+    "changePaletteColor": "set p-pawette cowow t-to",
+    "switchLayout": "switch app wayout",
+    "toggleSidebar": "toggle sidebaw",
+    "searchAnimes": "s-seawch anime titles",
+    "filterAnimes": "fiwtew anime titles"
+  },
+  "misc": {
+    "searchAnimes": "seawch a-anime...",
+    "signOut": "sign out"
+  }
+}
