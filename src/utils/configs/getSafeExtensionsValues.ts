@@ -24,21 +24,13 @@ export default function getSafeExtensionsValues({
         }
 
         let extensionWithAllProperties: typeof extension & {
-            isDisabled?:  boolean | undefined;
             areStyles?:   boolean | undefined;
             displayName?: string | undefined;
         } = extension;
 
-        if (!("isDisabled" in extension)) {
-            extensionWithAllProperties = {
-                ...extension,
-                isDisabled: true,
-            };
-        }
-
         if (!("areStyles" in extension)) {
             extensionWithAllProperties = {
-                ...extensionWithAllProperties,
+                ...extension,
                 areStyles: false,
             };
         }
@@ -69,7 +61,7 @@ export default function getSafeExtensionsValues({
             author:      extensionWithAllProperties.author as string,
             version:     extensionWithAllProperties.version as string,
             areStyles:   extensionWithAllProperties.areStyles,
-            isDisabled:  extensionWithAllProperties.isDisabled,
+            isDisabled:  true,
         });
     }
 
