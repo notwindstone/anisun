@@ -1,6 +1,6 @@
 import Button from "@/components/base/Button/Button";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
-import { Blocks, Ellipsis, ToggleLeft, ToggleRight, X } from "lucide-react";
+import { Blocks, Ellipsis, Palette, ToggleLeft, ToggleRight, X } from "lucide-react";
 import Link from "next/link";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
 import { useContextSelector } from "use-context-selector";
@@ -125,7 +125,13 @@ export default function LoadedExtension({
                     {
                         extension.logo === "" ? (
                             <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
-                                <Blocks size={24} />
+                                {
+                                    extension.areStyles ? (
+                                        <Palette size={24} />
+                                    ) : (
+                                        <Blocks size={24} />
+                                    )
+                                }
                             </div>
                         ) : (
                             <ConfiguredImage
@@ -151,13 +157,6 @@ export default function LoadedExtension({
                         (isDefault && !extension.areStyles) && (
                             <div className="text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] transition-colors dark:text-white text-black">
                                 default
-                            </div>
-                        )
-                    }
-                    {
-                        extension.areStyles && (
-                            <div className="text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] transition-colors dark:text-white text-black">
-                                styles
                             </div>
                         )
                     }
