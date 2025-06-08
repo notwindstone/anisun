@@ -32,7 +32,7 @@ export default function getSafeExtensionsValues({
         if (!("isDisabled" in extension)) {
             extensionWithAllProperties = {
                 ...extension,
-                isDisabled: false,
+                isDisabled: true,
             };
         }
 
