@@ -94,6 +94,17 @@ export default function LoadedExtension({
             }
         </Button>
     );
+    const extensionIcon = (
+        <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
+            {
+                extension.areStyles ? (
+                    <Palette size={24} />
+                ) : (
+                    <Blocks size={24} />
+                )
+            }
+        </div>
+    );
     const isTrusted = extension.url.startsWith("https://raw.githubusercontent.com/notwindstone");
     const selectedClassNames = isDefault ? "" : "hover:cursor-pointer hover:bg-[theme(colors.black/.025)] dark:hover:bg-[theme(colors.white/.025)] pointer-events-auto";
 
@@ -115,7 +126,7 @@ export default function LoadedExtension({
                     localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensionsOrder));
                     setExtensions?.(newExtensionsOrder);
                 }}
-                className={`p-1 rounded-md transition flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.isDisabled ? "opacity-40" : ""}`}
+                className={`relative p-1 rounded-md transition flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.isDisabled ? "opacity-40" : ""}`}
                 style={
                     isDefault ? ({
                         backgroundColor: parseTailwindColor({
@@ -125,19 +136,16 @@ export default function LoadedExtension({
                     }) : undefined
                 }
             >
+                {
+                    extension.areStyles && (
+                        <div className="absolute left-5 -top-3 scale-60 opacity-50">
+                            {extensionIcon}
+                        </div>
+                    )
+                }
                 <div className="flex gap-4 items-center">
                     {
-                        extension.logo === "" ? (
-                            <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
-                                {
-                                    extension.areStyles ? (
-                                        <Palette size={24} />
-                                    ) : (
-                                        <Blocks size={24} />
-                                    )
-                                }
-                            </div>
-                        ) : (
+                        extension.logo === "" ? extensionIcon : (
                             <ConfiguredImage
                                 className="transition w-10 h-10 object-cover rounded-md text-[9px] overflow-clip"
                                 width={40}

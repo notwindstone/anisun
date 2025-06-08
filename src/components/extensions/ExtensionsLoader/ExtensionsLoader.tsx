@@ -45,7 +45,7 @@ export default function ExtensionsLoader() {
                                     : 500,
                             }),
                         }}>
-                            {extensions?.length ?? 0}
+                            {extensions?.length ?? "?"}
                         </span>
                     </p>
                 </div>
@@ -59,8 +59,8 @@ export default function ExtensionsLoader() {
                     ))
                 }
             </div>
-            <ExtensionsLoadFromURL />
             <ExtensionsBrowser />
+            <ExtensionsLoadFromURL />
         </div>
     );
 }
