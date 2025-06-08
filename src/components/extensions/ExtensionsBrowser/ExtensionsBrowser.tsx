@@ -16,6 +16,8 @@ export default function ExtensionsBrowser() {
 
     return (
         <div className="flex">
+            {JSON.stringify(extensions)}
+            {accent}
             <div
                 className="transition p-4 rounded-md flex flex-col gap-4 w-full"
                 style={{
