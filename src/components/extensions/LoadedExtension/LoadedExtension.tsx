@@ -77,6 +77,10 @@ export default function LoadedExtension({
 
                 localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
                 setExtensions?.(newExtensions);
+
+                if (extension.isDisabled && extension.areStyles) {
+                    location.reload();
+                }
             }}
             custom={{ style: "base" }}
             label={"disable extension"}
