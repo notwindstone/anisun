@@ -16,7 +16,7 @@ export default function ExtensionsBrowser() {
     });
     const extensions = useContextSelector(ExtensionsContext, (value) => value.data);
     const [show, setShow] = useState(false);
-
+    console.log(extensions, accent);
     return (
         <div className="flex items-center flex-col gap-2 w-full">
             <div
