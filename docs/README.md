@@ -215,16 +215,7 @@ Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 > [!IMPORTANT]
 > The developer of this application does not have any affiliation with the content providers available, and this application hosts zero content.
 
-## some shit that i will remove later
-
-why tf webpack microfrontend module federation runtime is so complicated bruuh. i managed to implement remote loading simple react component, but i cant fucking use any react hooks and i don't know what to do with this shit
-
-i also tried [importmaps](https://www.mercedes-benz.io/blog/2023-01-05-you-might-not-need-module-federation-orchestrate-your-microfrontends-at-runtime-with-import-maps) but it didn't really work. maybe i should figure out what exactly should i pass as a file, because i just passed a transpiled react code
-
-[@paciolan/remote-component](https://www.npmjs.com/package/@paciolan/remote-component) was easy to setup and use, i managed to use not only built-in react hooks, but even some packages from npm, like lucide-react or material ui icons. tho tanstack query didn't work, because remote-component's starter kit is really outdated
-// update a day later: i dropped remote-component-starter and configured building stuff from scratch and managed to make a project on react and even vue that will bundle every dependency smoothly, which will work in the project
-
-ask about using this logo
+~~ask about using this logo~~ (waiting for response)
 
 https://x.com/ahiru_tokotoko/status/1568517301737242625
 
