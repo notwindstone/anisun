@@ -25,12 +25,20 @@ export default function getSafeExtensionsValues({
 
         let extensionWithAllProperties: typeof extension & {
             isDisabled?: boolean | undefined;
+            areStyles?: boolean | undefined;
         } = extension;
 
         if (!("isDisabled" in extension)) {
             extensionWithAllProperties = {
                 ...extension,
                 isDisabled: false,
+            };
+        }
+
+        if (!("areStyles" in extension)) {
+            extensionWithAllProperties = {
+                ...extensionWithAllProperties,
+                areStyles: false,
             };
         }
 
@@ -51,6 +59,7 @@ export default function getSafeExtensionsValues({
             pages:      stringPages,
             author:     extensionWithAllProperties.author as string,
             version:    extensionWithAllProperties.version as string,
+            areStyles:  extensionWithAllProperties.areStyles,
             isDisabled: extensionWithAllProperties.isDisabled,
         });
     }

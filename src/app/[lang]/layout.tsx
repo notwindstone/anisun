@@ -21,6 +21,7 @@ import { userAgent } from "next/server";
 import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
+import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSSExtensionsLoader";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -128,6 +129,7 @@ export default async function RootLayout({
                                         accountInfo={parsedAccountInfoData}
                                     />
                                 </AppWrapper>
+                                <CSSExtensionsLoader />
                             </ExtensionsProvider>
                         </SidebarConfigProvider>
                     </ConfigsProvider>
