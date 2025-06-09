@@ -85,7 +85,7 @@ export default function Sidebar({
     return (
         <>
             <div
-                className="hidden relative sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-sidebar duration-200 overflow-x-hidden overflow-y-auto"
+                className="sidebar__wrapper hidden relative sm:flex flex-col gap-6 items-start justify-start p-2 shrink-0 h-full transition-sidebar duration-200 overflow-x-hidden overflow-y-auto"
                 style={{
                     width:           sidebarConfig.expanded ? 256 : 56,
                     backgroundColor: theme === DarkThemeKey
@@ -102,10 +102,10 @@ export default function Sidebar({
                 <button
                     aria-label="toggle sidebar"
                     onClick={toggleSidebar}
-                    className="absolute right-0 top-0 bottom-0 w-2  cursor-w-resize transition z-100 border-r border-transparent opacity-20 delay-200 duration-300 hover:border-neutral-500"
+                    className="sidebar__toggleable-border absolute right-0 top-0 bottom-0 w-2  cursor-w-resize transition z-100 border-r border-transparent opacity-20 delay-200 duration-300 hover:border-neutral-500"
                 />
                 <div
-                    className="flex w-full items-center justify-between"
+                    className="sidebar__title-wrapper flex w-full items-center justify-between"
                     style={{
                         flexDirection: sidebarConfig.position === SidebarRightPosition
                             ? "row-reverse"
@@ -140,11 +140,11 @@ export default function Sidebar({
                         {icons?.[sidebarConfig.position]?.[sidebarConfig.expanded.toString()]}
                     </Button>
                 </div>
-                <div className="flex flex-col gap-2 w-full">
+                <div className="sidebar__sections-wrapper flex flex-col gap-2 w-full">
                     {
                         sidebarItems.map(({ title, links }) => {
                             return (
-                                <div key={title} className="flex flex-col gap-2 w-full">
+                                <div key={title} className="sidebar__links-wrapper flex flex-col gap-2 w-full">
                                     {
                                         links.map((link) => {
                                             if (link.hidden) {
@@ -158,7 +158,7 @@ export default function Sidebar({
                                                     prefetch
                                                     href={link.href}
                                                     key={link.href}
-                                                    className="dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
+                                                    className="sidebar__link dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
                                                     aria-label={link.name}
                                                     title={link.name}
                                                     style={{
