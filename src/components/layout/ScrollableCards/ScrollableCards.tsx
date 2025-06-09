@@ -107,7 +107,7 @@ export default function ScrollableCards({
                     {children}
                 </div>
                 <div
-                    className="absolute left-0 w-4 h-full z-10"
+                    className="scrollableCardsShadow absolute left-0 w-4 h-full z-10"
                     style={{
                         backgroundImage: `linear-gradient(
                         to right,
@@ -117,7 +117,7 @@ export default function ScrollableCards({
                     }}
                 />
                 <div
-                    className="absolute right-0 w-4 h-full z-10"
+                    className="scrollableCardsShadow absolute right-0 w-4 h-full z-10"
                     style={{
                         backgroundImage: `linear-gradient(
                         to left,
