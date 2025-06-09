@@ -50,6 +50,18 @@ export function ExtensionsProvider({
             parsedExtensions,
         });
 
+        // disable all plugins on /reset page navigation
+        if (location !== undefined && location.pathname.startsWith("/reset")) {
+            localStorage.setItem(ExtensionsLocalStorageKey, JSON.stringify(
+                extensions.map((extension) => ({
+                    ...extension,
+                    isDisabled: true,
+                })),
+            ));
+
+            return;
+        }
+
         setExtensionsState(extensions);
     }, []);
 
