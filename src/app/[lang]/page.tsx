@@ -1,4 +1,4 @@
-import Hero from "@/components/misc/Hero/Hero";
+import Hero from "@/components/layout/Hero/Hero";
 import { getCookie } from "@/lib/actions/cookies";
 import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";

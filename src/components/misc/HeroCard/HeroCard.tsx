@@ -65,10 +65,10 @@ export default function HeroCard({
     const gradientColorOne = gradientColorOneArray.join("");
 
     return (
-        <Link className="select-none group w-full" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
+        <Link className="hero__wrapper select-none group w-full" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
             <ConfiguredImage
                 priority
-                className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-md sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
+                className="hero__poster-image object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-md sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
                 style={{
                     objectPosition: "100% 20%",
                 }}
@@ -79,7 +79,7 @@ export default function HeroCard({
                 sizes={"(max-width: 640px) 256px, 144px"}
             />
             <div
-                className="text-black absolute w-full h-full"
+                className="hero__poster-shadow text-black absolute w-full h-full"
                 style={{
                     backgroundImage: `linear-gradient(
                         to bottom,
@@ -88,7 +88,7 @@ export default function HeroCard({
                     )`,
                 }}
             />
-            <div className="absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2 sm:gap-4 sm:flex-col sm:w-[75%] sm:max-w-320 sm:mx-auto sm:justify-center sm:items-start sm:relative">
+            <div className="hero__poster-info absolute w-full h-full flex flex-col justify-end items-center p-4 text-white gap-2 sm:gap-4 sm:flex-col sm:w-[75%] sm:max-w-320 sm:mx-auto sm:justify-center sm:items-start sm:relative">
                 <div className="flex flex-wrap justify-center gap-2">
                     <Badge textSize="sm:text-xl text-md" score={score} isScore>
                         {
