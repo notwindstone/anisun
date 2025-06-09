@@ -7,7 +7,7 @@ import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { ArrowDownToLine, Blocks, Palette } from "lucide-react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
-import {DarkThemeKey} from "@/constants/configs";
+import { DarkThemeKey } from "@/constants/configs";
 
 export default function BrowsingExtension({
     extension,
