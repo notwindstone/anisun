@@ -29,6 +29,7 @@ export default function LoadedExtension({
     const [toDelete, setToDelete] = useState(false);
     const isDark = theme === DarkThemeKey;
     const isDefault = index === 0;
+    const isDisabled = extension.isDisabled;
 
     const deleteButton = (
         <Button
@@ -47,6 +48,10 @@ export default function LoadedExtension({
 
                 localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
                 setExtensions?.(newExtensions);
+
+                if (!isDisabled && extension.areStyles) {
+                    location.reload();
+                }
             }}
             custom={{ style: "base" }}
             label={"remove extension"}
@@ -78,7 +83,7 @@ export default function LoadedExtension({
                 localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
                 setExtensions?.(newExtensions);
 
-                if (extension.isDisabled && extension.areStyles) {
+                if (!isDisabled && extension.areStyles) {
                     location.reload();
                 }
             }}
