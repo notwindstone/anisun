@@ -22,6 +22,7 @@ import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
 import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSSExtensionsLoader";
+import ExtensionsLoader from "@/components/extensions/ExtensionsLoader/ExtensionsLoader";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -63,9 +64,26 @@ export default async function RootLayout({
     params,
 }: Readonly<{
     children: React.ReactNode;
-    params: Promise<{ lang: Locale }>;
+    params: Promise<{ lang: Locale | "safe" }>;
 }>) {
     const { lang } = await params;
+
+    if (lang === "safe") {
+        return (
+            <html lang={lang}>
+                <body
+                    className={`${geistSans.variable} ${geistMono.variable} text-white antialiased`}
+                >
+                    <ExtensionsProvider>
+                        <div className="flex mx-auto w-fit">
+                            <ExtensionsLoader />
+                        </div>
+                    </ExtensionsProvider>
+                </body>
+            </html>
+        );
+    }
+
     const dictionaries = await getDictionary(lang);
 
     const cookieStore = await cookies();
