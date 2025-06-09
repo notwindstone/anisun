@@ -25,7 +25,7 @@ export default function ExtensionsLoadFromURL() {
     return (
         <div className="flex items-center flex-col w-full gap-2">
             <div
-                className="rounded-md w-fit"
+                className="transition-colors rounded-md w-fit"
                 style={{
                     background: parseTailwindColor({
                         color: base,
@@ -97,6 +97,7 @@ export default function ExtensionsLoadFromURL() {
                                         safelyParsedExtension = getSafeExtensionsValues({
                                             parsedExtensions: [body],
                                         })[0];
+                                        safelyParsedExtension.isDisabled = true;
                                     } catch {
                                         setStatus("error");
 

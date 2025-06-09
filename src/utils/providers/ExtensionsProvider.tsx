@@ -46,10 +46,6 @@ export function ExtensionsProvider({
             return;
         }
 
-        const extensions = getSafeExtensionsValues({
-            parsedExtensions,
-        });
-
         // disable all plugins on /reset page navigation
         if (location !== undefined && location.pathname.startsWith("/reset")) {
             localStorage.setItem(ExtensionsLocalStorageKey, JSON.stringify(
@@ -62,12 +58,16 @@ export function ExtensionsProvider({
             return;
         }
 
-        setExtensionsState(extensions);
+        setExtensionsState(parsedExtensions);
     }, []);
+
+    const extensions = getSafeExtensionsValues({
+        parsedExtensions: extensionsState ?? [],
+    });
 
     return (
         <ExtensionsContext.Provider value={{
-            data:                 extensionsState,
+            data:                 extensions,
             optimisticallyUpdate: setExtensionsState,
         }}>
             {children}
