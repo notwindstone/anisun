@@ -34,7 +34,7 @@ export default function BrowsingExtension({
 
     return (
         <div
-            className="transition flex-max-w-1/2 sm:flex-max-w-1/3 lg:flex-max-w-1/4 w-full flex flex-col p-4 rounded-md"
+            className="transition flex-1/2 xs:flex-1/3 sm:flex-1/4 lg:flex-1/5 w-full flex flex-col p-4 rounded-md"
             style={{
                 backgroundColor: parseTailwindColor({
                     color: base,
@@ -63,7 +63,7 @@ export default function BrowsingExtension({
             </p>
             {
                 extension.pages.length > 0 && (
-                    <p className="leading-none opacity-80 text-sm">
+                    <p className="leading-none opacity-80 text-sm mb-4">
                         Has custom pages
                     </p>
                 )

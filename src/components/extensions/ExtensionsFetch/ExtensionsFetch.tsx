@@ -22,11 +22,11 @@ export default function ExtensionsFetch({
 
     if (extensions.length === 0) {
         return (
-            <div>
+            <div className="flex gap-1">
                 <p>
-                    No extensions found. Install them from
+                    No extensions found. Install them from the
                 </p>
-                <Link href="/account">
+                <Link className="text-sky-500 dark:text-sky-400 underline" href="/account">
                     Accounts page
                 </Link>
             </div>
