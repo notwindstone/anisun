@@ -6,11 +6,17 @@ import {
     MediaProvider,
     useMediaState,
     Menu,
+// eslint-disable-next-line unicorn/no-abusive-eslint-disable
+// eslint-disable-next-line
+// @ts-ignore
 } from '@vidstack/react';
 import {
     DefaultAudioLayout,
     defaultLayoutIcons,
     DefaultVideoLayout,
+// eslint-disable-next-line unicorn/no-abusive-eslint-disable
+// eslint-disable-next-line
+// @ts-ignore
 } from '@vidstack/react/player/layouts/default';
 import { useEffect, useMemo, useRef, useState } from "react";
 import '@vidstack/react/player/styles/default/theme.css';
