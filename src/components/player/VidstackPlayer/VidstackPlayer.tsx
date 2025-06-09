@@ -193,6 +193,7 @@ export default function VidstackPlayer({
             isSeeked,
             isPlayingMediaState,
             isPlayerCompact,
+            isTheLastTenSeconds,
             controlsVisible,
             videoSrc,
             searchParameters,
