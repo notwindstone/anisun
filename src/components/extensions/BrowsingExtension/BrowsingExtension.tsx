@@ -34,7 +34,7 @@ export default function BrowsingExtension({
 
     return (
         <div
-            className="transition flex-1/2 xs:flex-1/3 sm:flex-1/4 lg:flex-1/5 w-full flex flex-col p-4 rounded-md"
+            className="transition shrink-0 flex-1/2 xs:flex-1/3 sm:flex-1/4 lg:flex-1/5 w-full flex flex-col p-4 rounded-md"
             style={{
                 backgroundColor: parseTailwindColor({
                     color: base,
@@ -56,7 +56,7 @@ export default function BrowsingExtension({
                 }
             </div>
             <p className="text-md leading-none font-medium text-balance mb-1">
-                {extension.displayName}
+                {extension.displayName} {extension.areStyles ? "🎨" : ""}
             </p>
             <p className="leading-none text-sm opacity-60 mb-4">
                 @{extension.author}
@@ -69,8 +69,8 @@ export default function BrowsingExtension({
                 )
             }
             <div className="flex items-end flex-1">
-                <div className="flex justify-between items-center w-full">
-                    <p className="leading-none opacity-80 text-sm">
+                <div className="flex gap-2 justify-between items-center w-full">
+                    <p className="leading-none opacity-80 text-sm break-all">
                         {extension.version}
                     </p>
                     <Button
