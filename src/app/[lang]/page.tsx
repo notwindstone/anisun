@@ -29,7 +29,7 @@ export default async function Home({
     return (
         <div>
             <Hero theme={theme} base={base} />
-            <div className="w-full h-2" />
+            <div className="w-full h-4" />
             <SearchedAnimes />
             <div className="w-full h-4" />
             {
