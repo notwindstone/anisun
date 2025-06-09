@@ -3,6 +3,7 @@
 import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
 import { useContextSelector } from "use-context-selector";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import Link from "next/link";
 
 export default function ExtensionsFetch({
     selectedExtension,
@@ -21,9 +22,14 @@ export default function ExtensionsFetch({
 
     if (extensions.length === 0) {
         return (
-            <>
-                download some extensions bro
-            </>
+            <div>
+                <p>
+                    No extensions found. Install them from
+                </p>
+                <Link href="/account">
+                    Accounts page
+                </Link>
+            </div>
         );
     }
 
