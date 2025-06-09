@@ -5,6 +5,7 @@ import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import { useEffect, useState } from "react";
 import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
 import { usePathname } from "next/navigation";
+import StylesheetsGC from "@/components/extensions/StylesheetsGC/StylesheetsGC";
 
 export default function CSSExtensionsLoader() {
     const extensions = useContextSelector(ExtensionsContext, (value) => value.data);
@@ -47,6 +48,7 @@ export default function CSSExtensionsLoader() {
                     />
                 ))
             }
+            <StylesheetsGC />
         </div>
     );
 }
