@@ -1,6 +1,6 @@
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
-import { CircleUser, History, House, Library, ShieldAlert } from "lucide-react";
+import { CircleUser, House, Library, ShieldAlert } from "lucide-react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 const iconSize = 20;
@@ -34,11 +34,6 @@ export const getSideBarLinks = ({
                 name: dictionaries?.sidebar?.library,
                 href: PageRoutes.Library.Root,
                 icon: <Library className="shrink-0" size={iconSize} />,
-            },
-            {
-                name: dictionaries?.sidebar?.history,
-                href: PageRoutes.History.Root,
-                icon: <History className="shrink-0" size={iconSize} />,
             },
             // check if user is "admin" (or is pretending to be)
             // ofc works only for one person (me)

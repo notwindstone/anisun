@@ -136,10 +136,6 @@ export const PageRoutes = {
             Series: "series",
         },
     },
-    History: {
-        Root:     "/history",
-        Pathname: "history",
-    },
     Library: {
         Root:         "/library",
         Pathname:     "library",
