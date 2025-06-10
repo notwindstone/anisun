@@ -8,7 +8,7 @@ export default async function Page() {
                 home
             </Link>
             <p>
-                your history. only 3000 items will be shown
+                your history. only 2000 items will be shown
             </p>
             <HistoryWrapper />
         </div>

@@ -6,6 +6,9 @@ export const AppName = "Anisun";
 export const ExtensionsLocalStorageKey = "@anisun/extensions";
 export const HistoryLocalStorageKey = "@anisun/history";
 
+export const HistoryEntriesLimit = 2000;
+export const HistoryEntriesCountOnPage = 50;
+
 export const AccessTokenCookieKey = "accessToken";
 export const AccessTokenProviderCookieKey = "tokenProvider";
 export const AccountInfoCookieKey = "accountInfo";

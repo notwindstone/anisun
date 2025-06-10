@@ -134,9 +134,9 @@ export default async function RootLayout({
                             </ExtensionsProvider>
                         </SidebarConfigProvider>
                     </ConfigsProvider>
+                    <HistoryLogger />
                 </TanstackQueryProviders>
                 <DarkReaderNotify />
-                <HistoryLogger />
             </body>
         </html>
     );

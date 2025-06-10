@@ -2,22 +2,40 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
-import { HistoryLocalStorageKey } from "@/constants/app";
+import { HistoryEntriesLimit, HistoryLocalStorageKey } from "@/constants/app";
+import { useQuery } from "@tanstack/react-query";
+import { AnimeType } from "@/types/Anime/Anime.type";
+import getAnimePageQueryKey from "@/utils/misc/getAnimePageQueryKey";
 
-// log anime pages
+// log anime pages only with data that have loaded
 export default function HistoryLogger(): React.ReactNode {
     const pathname = usePathname();
+
+    const pathnames = pathname.split("/");
+    const idMal = Number(pathnames.at(-1) ?? 0);
+
+    const { data, isPending, error } = useQuery({
+        queryKey: getAnimePageQueryKey(idMal),
+        queryFn:  () => {},
+        enabled:  false,
+    });
 
     useEffect(() => {
         if (!pathname.includes("anime")) {
             return;
         }
 
-        const pathnames = pathname.split("/");
-        const idMal = pathnames.at(-1);
+        if (isPending) {
+            return;
+        }
+
+        if (error) {
+            return;
+        }
+
 
         const storedHistory = localStorage?.getItem(HistoryLocalStorageKey) ?? "[]";
-        let parsedHistory: Array<unknown>;
+        let parsedHistory: Array<AnimeType | unknown>;
 
         try {
             parsedHistory = JSON.parse(storedHistory);
@@ -30,12 +48,14 @@ export default function HistoryLogger(): React.ReactNode {
             date: new Date(),
         });
 
-        if (parsedHistory.length > 3000) {
-            parsedHistory.shift();
+        if (parsedHistory.length > HistoryEntriesLimit) {
+            const toRemove = parsedHistory.length - HistoryEntriesLimit;
+
+            parsedHistory.splice(0, toRemove);
         }
 
         localStorage?.setItem(HistoryLocalStorageKey, JSON.stringify(parsedHistory));
-    }, [pathname]);
+    }, [pathname, idMal, data, isPending, error]);
 
     return;
 }
