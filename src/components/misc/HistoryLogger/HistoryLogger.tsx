@@ -30,6 +30,10 @@ export default function HistoryLogger(): React.ReactNode {
             date: new Date(),
         });
 
+        if (parsedHistory.length > 3000) {
+            parsedHistory.shift();
+        }
+
         localStorage?.setItem(HistoryLocalStorageKey, JSON.stringify(parsedHistory));
     }, [pathname]);
 
