@@ -22,6 +22,7 @@ import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
 import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSSExtensionsLoader";
+import HistoryLogger from "@/components/misc/HistoryLogger/HistoryLogger";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -135,6 +136,7 @@ export default async function RootLayout({
                     </ConfigsProvider>
                 </TanstackQueryProviders>
                 <DarkReaderNotify />
+                <HistoryLogger />
             </body>
         </html>
     );

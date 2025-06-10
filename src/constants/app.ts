@@ -4,6 +4,8 @@ export { default as ImagePlaceholder } from "@/../public/frieren-no-image.webp";
 export const AppName = "Anisun";
 
 export const ExtensionsLocalStorageKey = "@anisun/extensions";
+export const HistoryLocalStorageKey = "@anisun/history";
+
 export const AccessTokenCookieKey = "accessToken";
 export const AccessTokenProviderCookieKey = "tokenProvider";
 export const AccountInfoCookieKey = "accountInfo";
