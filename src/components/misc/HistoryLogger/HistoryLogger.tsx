@@ -14,10 +14,15 @@ export default function HistoryLogger(): React.ReactNode {
     const pathnames = pathname.split("/");
     const idMal = Number(pathnames.at(-1) ?? 0);
 
+    // we define a query with the same queryKey on the anime page
+    // that will overwrite values here
     const { data, isPending, error } = useQuery({
         queryKey: getAnimePageQueryKey(idMal),
-        queryFn:  () => {},
-        enabled:  false,
+        queryFn:  () => ({
+            // key property here to tell that data is not loaded
+            loading: true,
+        }),
+        enabled: false,
     });
 
     useEffect(() => {
@@ -33,6 +38,9 @@ export default function HistoryLogger(): React.ReactNode {
             return;
         }
 
+        if (data?.loading) {
+            return;
+        }
 
         const storedHistory = localStorage?.getItem(HistoryLocalStorageKey) ?? "[]";
         let parsedHistory: Array<AnimeType | unknown>;
@@ -44,7 +52,7 @@ export default function HistoryLogger(): React.ReactNode {
         }
 
         parsedHistory.push({
-            idMal,
+            ...data,
             date: new Date(),
         });
 

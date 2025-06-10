@@ -1,7 +1,7 @@
 import { SearchType } from "@/types/Anime/Search.type";
 import { AnimeType } from "@/types/Anime/Anime.type";
 
-// TODO implement a GraphQL query builder
+// TODO refactor
 const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
     Array<AnimeType>
 > => {
@@ -28,7 +28,7 @@ const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
             }
         }
     `;
-    
+
     const variables = options?.type === "name" ? {
         search: options?.search,
     } : {

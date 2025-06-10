@@ -5,6 +5,8 @@ import { usePagination } from "@mantine/hooks";
 import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 import Button from "@/components/base/Button/Button";
 import { HistoryEntriesCountOnPage } from "@/constants/app";
+import GridCards from "@/components/layout/GridCards/GridCards";
+import SmallCard from "@/components/misc/SmallCard/SmallCard";
 
 export default function HistoryLoader({
     history,
@@ -70,22 +72,31 @@ export default function HistoryLoader({
     );
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col w-full gap-4">
             {paginationComponent}
-            {
-                history.slice(
-                    (page - 1) * HistoryEntriesCountOnPage,
-                    ((page - 1) * HistoryEntriesCountOnPage) + HistoryEntriesCountOnPage,
-                ).map((historyEntry) => {
-                    return (
-                        <div
-                            key={historyEntry.idMal}
-                        >
-                            {historyEntry.idMal}
-                        </div>
-                    );
-                })
-            }
+            <GridCards disablePadding>
+                {
+                    history.slice(
+                        (page - 1) * HistoryEntriesCountOnPage,
+                        ((page - 1) * HistoryEntriesCountOnPage) + HistoryEntriesCountOnPage,
+                    ).map((historyEntry) => {
+                        return (
+                            <SmallCard
+                                // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+                                // eslint-disable-next-line
+                                // @ts-ignore
+                                key={`${historyEntry.idMal}_${historyEntry.date}`}
+                                // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+                                // eslint-disable-next-line
+                                // @ts-ignore
+                                data={historyEntry}
+                                isGrid
+                                isImageUnoptimized
+                            />
+                        );
+                    })
+                }
+            </GridCards>
             {paginationComponent}
         </div>
     );

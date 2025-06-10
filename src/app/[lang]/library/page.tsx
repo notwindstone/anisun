@@ -3,7 +3,7 @@ import HistoryWrapper from "@/components/misc/HistoryWrapper/HistoryWrapper";
 
 export default async function Page() {
     return (
-        <div className="flex items-center p-4 gap-4">
+        <div className="flex flex-col p-4 gap-4">
             <Link href={"/"}>
                 home
             </Link>

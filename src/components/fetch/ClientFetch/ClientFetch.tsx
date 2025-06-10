@@ -14,11 +14,11 @@ export default function ClientFetch({
     fetchArguments,
 }: {
     children: React.ReactNode;
-    queryKey: Array<string>
+    queryKey: Array<string | number>
     method: keyof typeof Getters;
     pendingUI: React.ReactNode;
     errorUI: React.ReactNode;
-    fetchArguments?: SearchType;
+    fetchArguments?: { idMal?: string } | SearchType;
 }) {
     const { isPending, error, data } = useQuery({
         queryKey: queryKey,
