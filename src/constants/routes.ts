@@ -118,16 +118,6 @@ export const OAuth2Routes = {
 };
 export const PageRoutes = {
     Root:    "/",
-    Profile: {
-        Root:     "/profile",
-        Pathname: "profile",
-        // Segment property is available only for deeply nested pages
-        // For example, /profile/[username] has another nested page
-        Segment:  "/profile/",
-        Params:   {
-            Username: "username",
-        },
-    },
     Anime: {
         Root:     "/anime",
         Pathname: "anime",

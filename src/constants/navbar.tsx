@@ -1,6 +1,6 @@
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
-import {Blocks, CircleUser, House, Library} from "lucide-react";
+import { Blocks, CircleUser, House, Library } from "lucide-react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 export const getNavbarItems = ({
