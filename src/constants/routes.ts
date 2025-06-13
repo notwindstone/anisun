@@ -136,6 +136,10 @@ export const PageRoutes = {
             Series: "series",
         },
     },
+    Extensions: {
+        Root:     "/extensions",
+        Pathname: "extensions",
+    },
     Library: {
         Root:         "/library",
         Pathname:     "library",
@@ -154,6 +158,5 @@ export const PageRoutes = {
     Admin: {
         Root:     "/admin",
         Pathname: "admin",
-        Segment:  "/admin/",
     },
 };

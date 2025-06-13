@@ -18,6 +18,7 @@
   "sidebar": {
     "home": "home",
     "library": "wibwawy",
+    "extensions": "extensions",
     "account": "account"
   },
   "footer": {

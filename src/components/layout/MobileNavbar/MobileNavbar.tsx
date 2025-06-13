@@ -62,7 +62,7 @@ export default function MobileNavbar({
     return (
         <>
             <div
-                className="flex flex-row flex-nowrap px-8 py-1 justify-between sm:hidden transition-colors duration-200 overflow-hidden w-full h-16"
+                className="flex flex-row flex-nowrap py-1 justify-between sm:hidden transition-colors duration-200 overflow-hidden w-full h-16"
                 style={{
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
@@ -83,7 +83,7 @@ export default function MobileNavbar({
                                     // `null` by default, which means only static routes gonna fully prefetch
                                     // `true` allows for the full dynamic route prefetch
                                     prefetch
-                                    className="flex flex-col gap-1 text-sm items-center justify-center transition hover:brightness-125 dark:hover:brightness-75 w-24"
+                                    className="flex flex-col gap-1 text-xs xxs:text-sm items-center justify-center transition hover:brightness-125 dark:hover:brightness-75 w-24"
                                     style={focused === item.href ? {
                                         color: parseTailwindColor({
                                             color: accent,

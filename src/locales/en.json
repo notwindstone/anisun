@@ -18,6 +18,7 @@
   "sidebar": {
     "home": "Home",
     "library": "Library",
+    "extensions": "Extensions",
     "account": "Account"
   },
   "footer": {

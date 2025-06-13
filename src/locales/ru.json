@@ -18,6 +18,7 @@
   "sidebar": {
     "home": "Главная",
     "library": "Библиотека",
+    "extensions": "Расширения",
     "account": "Аккаунт"
   },
   "footer": {

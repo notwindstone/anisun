@@ -38,6 +38,7 @@
 @theme {
   /* sm is 40rem */
   --breakpoint-xs: 30rem;
+  --breakpoint-xxs: 20rem;
   --animate-gradient: gradient 3s linear infinite;
 
   @keyframes gradient {
