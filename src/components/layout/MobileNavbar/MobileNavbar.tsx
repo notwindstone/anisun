@@ -87,7 +87,7 @@ export default function MobileNavbar({
                                     style={focused === item.href ? {
                                         color: parseTailwindColor({
                                             color: accent,
-                                            step:  500,
+                                            step:  theme === DarkThemeKey ? 400 : 500,
                                         }),
                                     } : undefined}
                                     href={item.href}

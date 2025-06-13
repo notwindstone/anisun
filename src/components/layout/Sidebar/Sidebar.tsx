@@ -15,6 +15,7 @@ import { useContextSelector } from "use-context-selector";
 import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
 import { UserType } from "@/types/OAuth2/User.type";
 import { getSideBarLinks } from "@/constants/sidebar";
+import { usePathname } from "next/navigation";
 
 const icons: {
     [key: string]: {
@@ -38,7 +39,7 @@ export default function Sidebar({
 }>) {
     const { config, config: {
         theme,
-        colors: { base },
+        colors: { base, accent },
     }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
         return {
             config:       value.data,
@@ -48,6 +49,11 @@ export default function Sidebar({
     const { data: sidebarConfig, optimisticallyUpdate: optimisticallyUpdateSidebar } = useContextSelector(SidebarConfigContext, (value) => value,
     );
     const matches = useMediaQuery('(min-width: 640px)');
+    // "/lang/route/another-route"
+    const pathname = usePathname();
+    // ["", "lang", "route", "another-route"]
+    const pathnames = pathname.split("/");
+    const pathnameRoot = `/${pathnames[2] ?? ""}`;
 
     if (matches === false) {
         return;
@@ -165,6 +171,19 @@ export default function Sidebar({
                                                         flexDirection: sidebarConfig.position === SidebarRightPosition
                                                             ? "row-reverse"
                                                             : "row",
+                                                        // spread all object values
+                                                        ...(
+                                                            pathnameRoot === link.href ? {
+                                                                backgroundColor: parseTailwindColor({
+                                                                    color: base,
+                                                                    step:  theme === DarkThemeKey ? 800 : 200,
+                                                                }),
+                                                                color: parseTailwindColor({
+                                                                    color: accent,
+                                                                    step:  theme === DarkThemeKey ? 400 : 500,
+                                                                }),
+                                                            } : {}
+                                                        ),
                                                     }}
                                                 >
                                                     <div className="flex justify-center items-center w-6 shrink-0">
