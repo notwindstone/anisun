@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Metadata } from "next";
 import Divider from "@/components/base/Divider/Divider";
 import ExtensionsLoader from "@/components/extensions/ExtensionsLoader/ExtensionsLoader";
