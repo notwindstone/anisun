@@ -6,11 +6,11 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { useEffect, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
-import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { Locales } from "@/constants/localization";
 import { useContextSelector } from "use-context-selector";
+import MobileNavbarButton from "@/components/layout/MobileNavbarButton/MobileNavbarButton";
 
 const locales = new Set<string>(Locales);
 
@@ -26,7 +26,7 @@ export default function MobileNavbar({
     const [focused, setFocused] = useState<string>(pathname);
     const { data: {
         theme,
-        colors: { base, accent },
+        colors: { base },
     }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
         return {
             data:         value.data,
@@ -62,7 +62,7 @@ export default function MobileNavbar({
     return (
         <>
             <div
-                className="flex flex-row flex-nowrap py-1 justify-between sm:hidden transition-colors duration-200 overflow-hidden w-full h-16"
+                className="flex flex-row flex-nowrap px-2 py-1 justify-between sm:hidden transition-colors duration-200 overflow-hidden w-full h-20"
                 style={{
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
@@ -78,27 +78,12 @@ export default function MobileNavbar({
                 {
                     navbarItems.map((item) => {
                         return (
-                            <React.Fragment key={item.href}>
-                                <Link
-                                    // `null` by default, which means only static routes gonna fully prefetch
-                                    // `true` allows for the full dynamic route prefetch
-                                    prefetch
-                                    className="flex flex-col gap-1 text-xs xxs:text-sm items-center justify-center transition hover:brightness-125 dark:hover:brightness-75 w-24"
-                                    style={focused === item.href ? {
-                                        color: parseTailwindColor({
-                                            color: accent,
-                                            step:  theme === DarkThemeKey ? 400 : 500,
-                                        }),
-                                    } : undefined}
-                                    href={item.href}
-                                    onClick={() => setFocused(item.href)}
-                                >
-                                    {item.icon}
-                                    <p className="text-center leading-none">
-                                        {item.name}
-                                    </p>
-                                </Link>
-                            </React.Fragment>
+                            <MobileNavbarButton
+                                key={item.href}
+                                item={item}
+                                focused={focused}
+                                setFocused={setFocused}
+                            />
                         );
                     })
                 }
