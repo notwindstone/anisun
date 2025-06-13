@@ -62,7 +62,7 @@ export default function MobileNavbar({
     return (
         <>
             <div
-                className="flex flex-row flex-nowrap px-2 py-1 justify-between sm:hidden transition-colors duration-200 overflow-hidden w-full h-20"
+                className="mobile-navbar__wrapper flex flex-row flex-nowrap px-2 py-1 justify-between sm:hidden transition-colors duration-200 overflow-hidden w-full h-20"
                 style={{
                     backgroundColor: theme === DarkThemeKey
                         ? parseTailwindColor({
