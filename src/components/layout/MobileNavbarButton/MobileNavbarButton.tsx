@@ -56,7 +56,7 @@ export default function MobileNavbarButton({
             // `null` by default, which means only static routes gonna fully prefetch
             // `true` allows for the full dynamic route prefetch
             prefetch
-            className="shrink-0 flex flex-col gap-2 text-xs xxs:text-sm items-center justify-center hover:brightness-125 dark:hover:brightness-75 w-24"
+            className="shrink-0 flex flex-col gap-2 text-xs xxs:text-sm items-center justify-center hover:brightness-125 dark:hover:brightness-75 w-16 xxs:w-20"
             style={{
                 ...(
                     focused === item.href ? {
