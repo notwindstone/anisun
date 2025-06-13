@@ -17,17 +17,17 @@ export const getNavbarItems = ({
     {
         name: dictionaries?.sidebar?.home,
         href: PageRoutes.Root,
-        icon: <House className="transition duration-300 shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
+        icon: <House className="shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
     },
     {
         name: dictionaries?.sidebar?.library,
         href: PageRoutes.Library.Root,
-        icon: <Library className="transition duration-300 shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
+        icon: <Library className="shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
     },
     {
         name: dictionaries?.sidebar?.extensions,
         href: PageRoutes.Extensions.Root,
-        icon: <Blocks className="transition duration-300 shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
+        icon: <Blocks className="shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
     },
     {
         name: dictionaries?.sidebar?.account,
@@ -41,6 +41,6 @@ export const getNavbarItems = ({
                 alt={"User avatar"}
                 unoptimized={true}
             />
-            : <CircleUser className="transition duration-300 shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
+            : <CircleUser className="shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
     },
 ];
