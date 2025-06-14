@@ -6,6 +6,11 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
 
+const navbarBackgroundWidth = {
+    opened: 80,
+    closed: 48,
+};
+
 export default function MobileNavbarButton({
     item,
     focused,
@@ -23,7 +28,7 @@ export default function MobileNavbarButton({
             data: value.data,
         };
     });
-    const [backgroundWidth, setBackgroundWidth] = useState(48);
+    const [backgroundWidth, setBackgroundWidth] = useState(navbarBackgroundWidth.opened);
     // `oklch(percent number number)`
     const backgroundColorArray = [ ...parseTailwindColor({
         color: accent,
@@ -37,12 +42,12 @@ export default function MobileNavbarButton({
     const backgroundColor = backgroundColorArray.join("");
 
     useEffect(() => {
-        setBackgroundWidth(48);
+        setBackgroundWidth(navbarBackgroundWidth.closed);
 
         // Jetpack Compose UI like transition doesn't work without a timeout
         const timeout = setTimeout(() => {
             if (focused === item.href) {
-                setBackgroundWidth(80);
+                setBackgroundWidth(navbarBackgroundWidth.opened);
 
                 return;
             }
