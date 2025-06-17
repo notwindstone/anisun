@@ -19,10 +19,10 @@ An extension-based web app for exploring anime. Written in next.js with speed in
 ## 📱 Screenshots
 
 <div align="center">
-<img src="../public/screenshots/home-page-desktop.webp" width="49%" alt="Home page desktop screenshot (desktop, dark theme)">
-<img src="../public/screenshots/home-page-desktop-light.webp" width="49%" alt="Home page desktop screenshot (desktop, light theme)">
-<img src="../public/screenshots/home-page-mobile.webp" width="32%" alt="Home page desktop screenshot (mobile, dark theme)">
-<img src="../public/screenshots/home-page-mobile-light.webp" width="32%" alt="Home page desktop screenshot (mobile, light theme)">
+<img src="screenshots/home-page-desktop.webp" width="49%" alt="Home page desktop screenshot (desktop, dark theme)">
+<img src="screenshots/home-page-desktop-light.webp" width="49%" alt="Home page desktop screenshot (desktop, light theme)">
+<img src="screenshots/home-page-mobile.webp" width="32%" alt="Home page desktop screenshot (mobile, dark theme)">
+<img src="screenshots/home-page-mobile-light.webp" width="32%" alt="Home page desktop screenshot (mobile, light theme)">
 </div>
 
 ### More screenshots
@@ -32,11 +32,11 @@ An extension-based web app for exploring anime. Written in next.js with speed in
 
 <div align="center">
 
-<img src="../public/screenshots/extensions/accounts-page-extensions-with-disabled.png" width="49%" alt="Account page desktop screenshot with extensions disabled">
-<img src="../public/screenshots/extensions/accounts-page-extensions.png" width="49%" alt="Account page desktop screenshot with extensions enabled">
-<img src="../public/screenshots/extensions/anime-trailers-example-extension.png" width="49%" alt="Anime Trailers extension desktop screenshot">
-<img src="../public/screenshots/extensions/svelte-example-extension.png" width="49%" alt="Svelte Example extension desktop screenshot">
-<img src="../public/screenshots/extensions/vue-example-extension.png" width="49%" alt="Vue Example extension desktop screenshot">
+<img src="screenshots/extensions/accounts-page-extensions-with-disabled.png" width="49%" alt="Account page desktop screenshot with extensions disabled">
+<img src="screenshots/extensions/accounts-page-extensions.png" width="49%" alt="Account page desktop screenshot with extensions enabled">
+<img src="screenshots/extensions/anime-trailers-example-extension.png" width="49%" alt="Anime Trailers extension desktop screenshot">
+<img src="screenshots/extensions/svelte-example-extension.png" width="49%" alt="Svelte Example extension desktop screenshot">
+<img src="screenshots/extensions/vue-example-extension.png" width="49%" alt="Vue Example extension desktop screenshot">
 
 </div>
 
@@ -72,7 +72,7 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 <summary>Expand</summary>
 
 <div align="center">
-<img src="../public/psi/psi-desktop-audit.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
+<img src="psi/psi-desktop-audit.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
 </div>
 
 </details>
@@ -83,7 +83,7 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 <summary>Expand</summary>
 
 <div align="center">
-<img src="../public/psi/web-page-size.webp" alt="">
+<img src="psi/web-page-size.webp" alt="">
 </div>
 
 </details>
