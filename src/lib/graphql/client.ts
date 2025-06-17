@@ -50,78 +50,84 @@ function formatArrayToGraphQLFields(entries: string[]) {
 
 export const GraphQLClient = {
     Anilist: ({
-        operation,
-        fields,
-        variables,
+        queries,
     }: {
-        operation: "Media";
-        fields: Array<QueryType>;
-        variables: {
-            page?: undefined;
-            media: VariablesType;
-        };
-    } | {
-        operation: "Page.Media";
-        fields: Array<QueryType>;
-        variables: {
-            page: {
-                perPage: number;
-                page: number;
-            },
-            media: VariablesType;
-        };
+        queries: Array<{
+            alias:     string;
+            name:      "Media" | "Page.Media";
+            fields:    Array<QueryType>;
+            variables: {
+                page: {
+                    perPage: number;
+                    page:    number;
+                } | "placeholder";
+                media: VariablesType;
+            };
+        }>;
     }): GraphQLBuilderResponseType<string, string> => {
-        const mediaVariables = variables.media;
-        const pageVariables = variables?.page;
+        const allVariables: Array<string> = [];
 
-        const templateMediaQueryParametersArray: Array<string> = [];
-        const templateQueryVariablesArray: Array<string> = [];
+        for (const query of queries) {
+            const { alias, name, variables, fields } = query;
 
-        for (const key of Object.keys(mediaVariables)) {
-            // Type guards
-            if (IsKeyInObject<typeof QueryParametersType>(key, QueryParametersType)) {
-                const keyType = QueryParametersType[key];
+            const mediaVariables = variables.media;
+            const pageVariables = variables.page === "placeholder" ? variables.page : {};
 
-                // param: $param
-                const queryParameter = `${key}: $${key}`;
+            const templateMediaQueryParametersArray: Array<string> = [];
+            const templateQueryVariablesArray: Array<string> = [];
 
-                // $param: ParamType
-                const queryVariable = `$${key}: ${keyType}`;
+            for (const key of Object.keys(mediaVariables)) {
+                // Type guards
+                if (IsKeyInObject<typeof QueryParametersType>(key, QueryParametersType)) {
+                    const keyType = QueryParametersType[key];
 
-                templateMediaQueryParametersArray.push(queryParameter);
-                templateQueryVariablesArray.push(queryVariable);
+                    // param: $param
+                    const queryParameter = `${key}: $${key}`;
+
+                    // $param: ParamType
+                    const queryVariable = `$${key}: ${keyType}`;
+
+                    templateMediaQueryParametersArray.push(queryParameter);
+                    templateQueryVariablesArray.push(queryVariable);
+                }
             }
+
+            const templateMediaQueryParameters = templateMediaQueryParametersArray.join(", ");
+            const templateQueryVariables = templateQueryVariablesArray.join(", ");
+            const templateQueryFields = formatArrayToGraphQLFields(fields);
+
+            const queryVariables: string = JSON.stringify({
+                ...pageVariables,
+                ...mediaVariables,
+            });
+            const initialQueryStrings = {
+                start: `query(${templateQueryVariables}, $perPage: Int, $page: Int) {`,
+                end:   "}",
+            };
         }
 
-        const templateMediaQueryParameters = templateMediaQueryParametersArray.join(", ");
-        const templateQueryVariables = templateQueryVariablesArray.join(", ");
-        const templateQueryFields = formatArrayToGraphQLFields(fields);
+        let templateQuery: string = "";
 
-        let templateQuery: string;
-        let queryVariables: string;
+        for (const operation of operations) {
+            const alias = operation.alias;
+            const name = operation.name;
 
-        switch (operation) {
-            case "Page.Media": {
-                templateQuery = `query(${templateQueryVariables}, $perPage: Int, $page: Int) { Page(perPage: $perPage, page: $page) { media(${templateMediaQueryParameters}) { ${templateQueryFields} } } }`;
-                queryVariables = JSON.stringify({
-                    ...pageVariables,
-                    ...mediaVariables,
-                });
+            switch (name) {
+                case "Page.Media": {
+                    templateQuery = templateQuery + `${aliasedQuery}Page(perPage: $perPage, page: $page) { media(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
 
-                break;
-            }
-            default: {
-                templateQuery = `query(${templateQueryVariables}) { Media(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
-                queryVariables = JSON.stringify({
-                    ...mediaVariables,
-                });
+                    break;
+                }
+                default: {
+                    templateQuery = templateQuery + `${aliasedQuery}Media(${templateMediaQueryParameters}) { ${templateQueryFields} }`;
 
-                break;
+                    break;
+                }
             }
         }
 
         return {
-            query:     templateQuery,
+            query:     `${initialQueryStrings.start} ${templateQuery} ${initialQueryStrings.end}`,
             variables: queryVariables,
         };
     },
