@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { Trash2, X } from "lucide-react";
 
-export default function DarkReaderNotify() {
+export default function DarkReaderNotify(): React.ReactNode {
     const [showed, setShowed] = useState(true);
 
     useEffect(() => {

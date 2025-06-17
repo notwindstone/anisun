@@ -6,9 +6,13 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
 
-const navbarBackgroundWidth = {
-    opened: 80,
-    closed: 48,
+const navbarBackground = {
+    opened: {
+        width: 80,
+    },
+    closed: {
+        width: 48,
+    },
 };
 
 export default function MobileNavbarButton({
@@ -28,7 +32,9 @@ export default function MobileNavbarButton({
             data: value.data,
         };
     });
-    const [backgroundWidth, setBackgroundWidth] = useState(navbarBackgroundWidth.opened);
+    const [backgroundProperties, setBackgroundProperties] = useState<{
+        width:      number;
+    }>(navbarBackground.opened);
     // `oklch(percent number number)`
     const backgroundColorArray = [ ...parseTailwindColor({
         color: accent,
@@ -42,12 +48,12 @@ export default function MobileNavbarButton({
     const backgroundColor = backgroundColorArray.join("");
 
     useEffect(() => {
-        setBackgroundWidth(navbarBackgroundWidth.closed);
+        setBackgroundProperties(navbarBackground.closed);
 
         // Jetpack Compose UI like transition doesn't work without a timeout
         const timeout = setTimeout(() => {
             if (focused === item.href) {
-                setBackgroundWidth(navbarBackgroundWidth.opened);
+                setBackgroundProperties(navbarBackground.opened);
 
                 return;
             }
@@ -78,7 +84,7 @@ export default function MobileNavbarButton({
             <div
                 className="mobile-navbar__button-icon flex h-fit py-1 justify-center items-center rounded-full transition-sidebar duration-300"
                 style={{
-                    width: backgroundWidth,
+                    width: backgroundProperties.width,
                     ...(
                         focused === item.href ? {
                             backgroundColor,
