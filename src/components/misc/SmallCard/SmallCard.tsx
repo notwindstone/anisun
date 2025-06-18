@@ -110,7 +110,7 @@ export default function SmallCard({
                     </div>
                     <div className="w-full flex flex-col gap-1">
                         {
-                            currentEpisode && (
+                            (currentEpisode !== undefined && currentEpisode !== null) && (
                                 <Badge
                                     appendClassNames="w-fit invert"
                                     textSize="text-xs"
@@ -120,7 +120,7 @@ export default function SmallCard({
                             )
                         }
                         {
-                            currentSeason && (
+                            (currentSeason !== undefined && currentEpisode !== null) && (
                                 <Badge
                                     appendClassNames="w-fit invert"
                                     textSize="text-xs"
