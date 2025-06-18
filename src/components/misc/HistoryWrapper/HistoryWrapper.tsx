@@ -2,16 +2,28 @@
 
 import { HistoryLocalStorageKey } from "@/constants/app";
 import HistoryLoader from "@/components/misc/HistoryLoader/HistoryLoader";
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 export default function HistoryWrapper(): React.ReactNode {
-    const [loaded, setLoaded] = useState(false);
+    const { data, isPending, error } = useQuery({
+        queryKey: ["anime", "history", "localStorage"],
+        queryFn:  () => {
+            const historyString = localStorage?.getItem(HistoryLocalStorageKey) ?? "[]";
 
-    useEffect(() => {
-        setLoaded(true);
-    }, []);
+            let parsedHistory: Array<unknown>;
 
-    if (!loaded) {
+            try {
+                parsedHistory = JSON.parse(historyString);
+            } catch {
+                parsedHistory = [];
+            }
+
+            // first elements will be most recent
+            return parsedHistory.reverse();
+        },
+    });
+
+    if (isPending) {
         return (
             <HistoryLoader
                 isPending
@@ -25,22 +37,23 @@ export default function HistoryWrapper(): React.ReactNode {
         );
     }
 
-    const historyString = localStorage?.getItem(HistoryLocalStorageKey) ?? "[]";
-
-    let parsedHistory: Array<unknown>;
-
-    try {
-        parsedHistory = JSON.parse(historyString);
-    } catch {
-        parsedHistory = [];
+    if (error) {
+        return (
+            <HistoryLoader
+                isError
+                history={
+                    Array
+                        .from({
+                            length: 12,
+                        }, (_, z) => z)
+                }
+            />
+        );
     }
-
-    // first elements will be most recent
-    const reversedHistory = parsedHistory.reverse();
 
     return (
         <HistoryLoader
-            history={reversedHistory}
+            history={data}
         />
     );
 }

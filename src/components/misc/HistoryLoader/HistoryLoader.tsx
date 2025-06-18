@@ -10,13 +10,16 @@ import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
 
 export default function HistoryLoader({
     history,
     isPending,
+    isError,
 }: {
     history: Array<unknown>;
     isPending?: boolean;
+    isError?: boolean;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -82,13 +85,19 @@ export default function HistoryLoader({
         </div>
     );
 
-    if (isPending) {
+    if (isPending || isError) {
         return (
             <div className="flex flex-col w-full gap-4">
                 {paginationComponent}
                 <GridCards disablePadding>
                     {
                         history.map((historyEntry) => {
+                            if (isError) {
+                                return (
+                                    <ErrorSmallCard key={`${historyEntry}`} isGrid />
+                                );
+                            }
+
                             return (
                                 <SkeletonSmallCard
                                     key={`${historyEntry}`}
