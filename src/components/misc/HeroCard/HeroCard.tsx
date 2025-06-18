@@ -5,12 +5,12 @@ import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
 import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";
 import translate from "@/utils/misc/translate";
 import { useContextSelector } from "use-context-selector";
+import HeroCardImage from "@/components/misc/HeroCardImage/HeroCardImage";
 
 export default function HeroCard({
     data,
@@ -62,17 +62,10 @@ export default function HeroCard({
 
     return (
         <Link className="hero__wrapper select-none group w-full" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
-            <ConfiguredImage
-                priority
-                className="hero__poster-image object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75 sm:blur-md sm:brightness-50 sm:scale-110 sm:group-hover:brightness-50 sm:group-hover:scale-115"
-                style={{
-                    objectPosition: "100% 20%",
-                }}
-                fill
-                src={image}
-                alt={`${name} anime's poster`}
-                unoptimized={false}
-                sizes={"(max-width: 640px) 256px, 144px"}
+            <HeroCardImage
+                image={image}
+                name={name}
+                idMal={data?.idMal}
             />
             <div
                 className="hero__poster-shadow text-black absolute w-full h-full"
