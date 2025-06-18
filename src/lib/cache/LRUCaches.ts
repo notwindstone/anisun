@@ -4,7 +4,12 @@ import { getTimeDifference } from "@/utils/misc/getTimeDifference";
 
 // in-memory cache doesn't work in api routes tho
 // refer to https://github.com/vercel/next.js/discussions/59509 (no i'm not implementing that)
-export const AnimeLRUCache = new QuickLRU<string, AnimeType | Array<AnimeType>>({
+export const AnimeLRUCache = new QuickLRU<
+    string,
+    AnimeType | Array<AnimeType> | Record<
+        string, AnimeType | Array<AnimeType>
+    >
+>({
     maxSize: 5000,
     maxAge:  getTimeDifference({ days: 1 }),
 });

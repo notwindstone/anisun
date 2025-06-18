@@ -4,56 +4,14 @@ import { VariablesType } from "@/types/Anime/Variables.type";
 import { ParameterType, QueryParametersType } from "@/constants/anilist";
 import IsKeyInObject from "@/types/Utils/IsKeyInObject";
 import capitalizeWord from "@/utils/misc/capitalizeWord";
-
-type ShittyNode = {
-    children: Record<string, ShittyNode>;
-};
-
-function formatArrayToGraphQLFields(entries: string[]) {
-    const root: ShittyNode = { children: {} };
-
-    for (const entry of entries) {
-        const parts = entry.split(".");
-        let currentNode = root;
-
-        for (const part of parts) {
-            if (currentNode.children[part] === undefined) {
-                currentNode.children[part] = { children: {} };
-            }
-
-            currentNode = currentNode.children[part];
-        }
-    }
-
-    function generateString(nodeChildren: Record<string, ShittyNode>) {
-        const parts: Array<string> = [];
-        const nodeChildrenKeys = Object.keys(nodeChildren);
-
-        for (const key of nodeChildrenKeys) {
-            const childNode = nodeChildren[key];
-
-            if (Object.keys(childNode.children).length === 0) {
-                parts.push(key);
-
-                continue;
-            }
-
-            const inner = generateString(childNode.children);
-
-            parts.push(`${key} {${inner}}`);
-        }
-
-        return parts.join(" ");
-    }
-
-    return generateString(root.children);
-}
+import formatArrayToGraphQLFields from "@/utils/misc/formatArrayToGraphQLFields";
 
 export const GraphQLClient = {
     Anilist: ({
         queries,
     }: {
         queries: Array<{
+            /** A query name that will be used both in response and request body */
             alias:     string;
             name:      "Media" | "Page.Media";
             fields:    Array<QueryType>;
@@ -155,11 +113,6 @@ export const GraphQLClient = {
         const queryVariables = JSON.stringify({
             ...allPageVariable,
             ...allMediaVariables,
-        });
-
-        console.log({
-            query:     queryBody,
-            variables: queryVariables,
         });
 
         return {

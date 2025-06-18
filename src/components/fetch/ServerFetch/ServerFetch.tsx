@@ -5,7 +5,7 @@ import { AnimeLRUCache, MiscLRUCache } from "@/lib/cache/LRUCaches";
 import { ServerFetchErrorCount, ServerFetchTimeout } from "@/constants/app";
 import { Getters } from "@/lib/anime/getters";
 import React from "react";
-import { AnimeType } from "@/types/Anime/Anime.type";
+import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
 
 // Because of the cache getting data requires just 1-3ms,
 // and the anime data will load instantly on the client.
@@ -22,7 +22,6 @@ export default async function ServerFetch({
     errorUI,
     cacheQueryKey,
     cacheErrorKey,
-    dataIsArray,
     renderChildrenWithData,
 }: {
     children: React.ReactNode;
@@ -32,11 +31,10 @@ export default async function ServerFetch({
     errorUI: React.ReactNode;
     cacheQueryKey: string;
     cacheErrorKey: string;
-    dataIsArray: boolean;
     renderChildrenWithData: ({
         data,
     }: {
-        data?: AnimeType | Array<AnimeType>;
+        data?: Awaited<ReturnType<typeof getGraphQLResponse>>;
     }) => React.ReactNode;
 }) {
     const clientReactNode = (
@@ -77,8 +75,6 @@ export default async function ServerFetch({
 
     if (
         data === undefined
-        || (dataIsArray && !Array.isArray(data))
-        || (!dataIsArray && Array.isArray(data))
     ) {
         return;
     }

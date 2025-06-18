@@ -1,14 +1,14 @@
-import Hero from "@/components/layout/Hero/Hero";
 import { getCookie } from "@/lib/actions/cookies";
 import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
-import SearchedAnimes from "@/components/search/SearchedAnimes/SearchedAnimes";
-import ListAnimes from "@/components/misc/ListAnimes/ListAnimes";
 import type { Locale } from "@/i18n-config";
-import { HomePageItems } from "@/constants/translated";
-import GetHomePageTitles from "@/lib/anime/getHomePageTitles";
+import ServerFetch from "@/components/fetch/ServerFetch/ServerFetch";
+import { Suspense } from "react";
+import HomeTitles from "@/components/layout/HomeTitles/HomeTitles";
+import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import HomeTitlesClient from "@/components/layout/HomeTitlesClient/HomeTitlesClient";
 
 export default async function Home({
     params,
@@ -27,27 +27,55 @@ export default async function Home({
         config: parsedConfigData,
     });
 
-    console.log(GetHomePageTitles());
-
     return (
         <div>
-            <Hero theme={theme} base={base} />
-            <div className="w-full h-4" />
-            <SearchedAnimes />
-            <div className="w-full h-4" />
-            {
-                HomePageItems.map((item) => {
-                    return (
-                        <ListAnimes
-                            key={item.title.en}
-                            title={item.title[lang]}
-                            description={item.description[lang]}
-                            method={item.method}
-                            queryKey={item.queryKey}
+            <Suspense fallback={
+                <HomeTitles
+                    lang={lang}
+                    base={base}
+                    theme={theme}
+                    status="pending"
+                />
+            }>
+                <ServerFetch
+                    renderChildrenWithData={
+                        ({
+                            data,
+                        }: {
+                            data?: Awaited<ReturnType<typeof getGraphQLResponse>>;
+                        }) => (
+                            <HomeTitles
+                                lang={lang}
+                                base={base}
+                                theme={theme}
+                                data={data}
+                            />
+                        )
+                    }
+                    queryKey={["anime", "home"]}
+                    method="FetchHomePageTitles"
+                    pendingUI={
+                        <HomeTitles
+                            lang={lang}
+                            base={base}
+                            theme={theme}
+                            status="pending"
                         />
-                    );
-                })
-            }
+                    }
+                    errorUI={
+                        <HomeTitles
+                            lang={lang}
+                            base={base}
+                            theme={theme}
+                            status="error"
+                        />
+                    }
+                    cacheErrorKey="home/error"
+                    cacheQueryKey="home/anime"
+                >
+                    <HomeTitlesClient />
+                </ServerFetch>
+            </Suspense>
         </div>
     );
 }
