@@ -8,20 +8,26 @@ const GetHeroTitle = (options?: Partial<Request> | undefined) => getGraphQLRespo
     url:     RemoteRoutes.Anilist.GraphQL.Root,
     options: options,
     ...GraphQLClient.Anilist({
-        operation: "Media",
-        variables: {
-            media: {
-                type:       "ANIME",
-                seasonYear: CurrentAnimeYear,
-                status:     "RELEASING",
-                sort:       "POPULARITY_DESC",
-                format:     "TV",
+        queries: [
+            {
+                alias:     "Media",
+                name:      "Media",
+                variables: {
+                    page:  {},
+                    media: {
+                        type:       "ANIME",
+                        seasonYear: CurrentAnimeYear,
+                        status:     "RELEASING",
+                        sort:       "POPULARITY_DESC",
+                        format:     "TV",
+                    },
+                },
+                fields: [
+                    ...GeneralFields,
+                    "description",
+                    "genres",
+                ],
             },
-        },
-        fields: [
-            ...GeneralFields,
-            "description",
-            "genres",
         ],
     }),
 });

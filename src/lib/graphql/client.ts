@@ -60,7 +60,7 @@ export const GraphQLClient = {
                 page: {
                     perPage: number;
                     page:    number;
-                } | object;
+                } | Record<string, never>;
                 media: VariablesType;
             };
         }>;
@@ -154,6 +154,11 @@ export const GraphQLClient = {
         const queryVariables = JSON.stringify({
             ...allPageVariable,
             ...allMediaVariables,
+        });
+
+        console.log({
+            query:     queryBody,
+            variables: queryVariables,
         });
 
         return {

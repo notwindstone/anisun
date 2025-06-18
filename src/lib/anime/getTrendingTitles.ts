@@ -8,20 +8,25 @@ const GetTrendingTitles = (options?: Partial<Request> | undefined) => getGraphQL
     url:     RemoteRoutes.Anilist.GraphQL.Root,
     options: options,
     ...GraphQLClient.Anilist({
-        operation: "Page.Media",
-        variables: {
-            page: {
-                page:    1,
-                perPage: 30,
+        queries: [
+            {
+                alias:     "Page",
+                name:      "Page.Media",
+                variables: {
+                    page: {
+                        page:    1,
+                        perPage: 30,
+                    },
+                    media: {
+                        type: "ANIME",
+                        sort: "TRENDING_DESC",
+                    },
+                },
+                fields: [
+                    ...GeneralFields,
+                    "status",
+                ],
             },
-            media: {
-                type: "ANIME",
-                sort: "TRENDING_DESC",
-            },
-        },
-        fields: [
-            ...GeneralFields,
-            "status",
         ],
     }),
 });

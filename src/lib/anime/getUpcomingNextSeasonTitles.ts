@@ -9,22 +9,27 @@ const GetUpcomingNextSeasonTitles = (options?: Partial<Request> | undefined) => 
     url:     RemoteRoutes.Anilist.GraphQL.Root,
     options: options,
     ...GraphQLClient.Anilist({
-        operation: "Page.Media",
-        variables: {
-            page: {
-                page:    1,
-                perPage: 30,
+        queries: [
+            {
+                alias:     "Page",
+                name:      "Page.Media",
+                variables: {
+                    page: {
+                        page:    1,
+                        perPage: 30,
+                    },
+                    media: {
+                        type:       "ANIME",
+                        sort:       "POPULARITY_DESC",
+                        seasonYear: (new Date).getFullYear(),
+                        season:     getNextSeason(),
+                    },
+                },
+                fields: [
+                    ...GeneralFields,
+                    "status",
+                ],
             },
-            media: {
-                type:       "ANIME",
-                sort:       "POPULARITY_DESC",
-                seasonYear: (new Date).getFullYear(),
-                season:     getNextSeason(),
-            },
-        },
-        fields: [
-            ...GeneralFields,
-            "status",
         ],
     }),
 });

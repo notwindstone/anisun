@@ -9,22 +9,28 @@ const FetchCurrentAnime = (
     url:     RemoteRoutes.Anilist.GraphQL.Root,
     options: options,
     ...GraphQLClient.Anilist({
-        operation: "Media",
-        variables: {
-            media: {
-                type:  "ANIME",
-                idMal: Number(options?.idMal ?? 0),
+        queries: [
+            {
+                alias:     "Media",
+                name:      "Media",
+                variables: {
+                    page:  {},
+                    media: {
+                        type:  "ANIME",
+                        idMal: Number(options?.idMal ?? 0),
+                    },
+                },
+                fields: [
+                    "id",
+                    "idMal",
+                    "title.romaji",
+                    "title.native",
+                    "title.english",
+                    "coverImage.extraLarge",
+                    "averageScore",
+                    "episodes",
+                ],
             },
-        },
-        fields: [
-            "id",
-            "idMal",
-            "title.romaji",
-            "title.native",
-            "title.english",
-            "coverImage.extraLarge",
-            "averageScore",
-            "episodes",
         ],
     }),
 });
