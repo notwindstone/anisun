@@ -1,7 +1,7 @@
 import { GraphQLBuilderResponseType } from "@/types/General/GraphQLBuilderResponse.type";
 import { QueryType } from "@/types/Anime/Query.type";
 import { VariablesType } from "@/types/Anime/Variables.type";
-import { QueryParametersType } from "@/constants/anilist";
+import { ParameterType, QueryParametersType } from "@/constants/anilist";
 import IsKeyInObject from "@/types/Utils/IsKeyInObject";
 
 type ShittyNode = {
@@ -60,74 +60,104 @@ export const GraphQLClient = {
                 page: {
                     perPage: number;
                     page:    number;
-                } | "placeholder";
+                } | object;
                 media: VariablesType;
             };
         }>;
     }): GraphQLBuilderResponseType<string, string> => {
-        const allVariables: Array<string> = [];
+        let allMediaVariables: Partial<VariablesType> = {};
+        let allPageVariable = {};
+        const templateQueryVariablesArray: Array<string> = [];
+        const templateQueryBodyOperationsArray: Array<string> = [];
 
         for (const query of queries) {
-            const { alias, name, variables, fields } = query;
+            const { alias, name, fields, variables } = query;
+            const capitalizedAlias = alias.charAt(0).toUpperCase() + alias.slice(1);
 
-            const mediaVariables = variables.media;
-            const pageVariables = variables.page === "placeholder" ? variables.page : {};
+            const currentMediaVariables = variables.media;
+            const currentPageVariables = variables?.page;
+
+            // make sure to not overwrite query variables
+            const aliasedCurrentMediaVariables = Object.fromEntries(
+                Object.entries(currentMediaVariables).map(([key, value]) => (
+                    [`${key}${capitalizedAlias}`, value]
+                )),
+            );
+            const aliasedCurrentPageVariables = Object.fromEntries(
+                Object.entries(currentPageVariables).map(([key, value]) => (
+                    [`${key}${capitalizedAlias}`, value]
+                )),
+            );
+
+            allMediaVariables = {
+                ...allMediaVariables,
+                ...aliasedCurrentMediaVariables,
+            };
+            allPageVariable = {
+                ...allPageVariable,
+                ...aliasedCurrentPageVariables,
+            };
 
             const templateMediaQueryParametersArray: Array<string> = [];
-            const templateQueryVariablesArray: Array<string> = [];
 
-            for (const key of Object.keys(mediaVariables)) {
+            for (const key of Object.keys(currentMediaVariables)) {
                 // Type guards
                 if (IsKeyInObject<typeof QueryParametersType>(key, QueryParametersType)) {
                     const keyType = QueryParametersType[key];
+                    const aliasedKeyName = `${key}${capitalizedAlias}`;
 
                     // param: $param
-                    const queryParameter = `${key}: $${key}`;
+                    const queryParameter = `${key}: $${aliasedKeyName}`;
 
                     // $param: ParamType
-                    const queryVariable = `$${key}: ${keyType}`;
+                    const queryVariable = `$${aliasedKeyName}: ${keyType}`;
 
                     templateMediaQueryParametersArray.push(queryParameter);
                     templateQueryVariablesArray.push(queryVariable);
                 }
             }
 
+            for (const key of Object.keys(currentPageVariables)) {
+                const keyType = ParameterType.Int;
+                const aliasedKeyName = `${key}${capitalizedAlias}`;
+
+                // $param: ParamType
+                const queryVariable = `$${aliasedKeyName}: ${keyType}`;
+
+                templateQueryVariablesArray.push(queryVariable);
+            }
+
             const templateMediaQueryParameters = templateMediaQueryParametersArray.join(", ");
-            const templateQueryVariables = templateQueryVariablesArray.join(", ");
             const templateQueryFields = formatArrayToGraphQLFields(fields);
 
-            const queryVariables: string = JSON.stringify({
-                ...pageVariables,
-                ...mediaVariables,
-            });
-            const initialQueryStrings = {
-                start: `query(${templateQueryVariables}, $perPage: Int, $page: Int) {`,
-                end:   "}",
-            };
-        }
-
-        let templateQuery: string = "";
-
-        for (const operation of operations) {
-            const alias = operation.alias;
-            const name = operation.name;
+            let templateQuery: string;
 
             switch (name) {
                 case "Page.Media": {
-                    templateQuery = templateQuery + `${aliasedQuery}Page(perPage: $perPage, page: $page) { media(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
+                    templateQuery = `${capitalizedAlias}: Page(perPage: $perPage${capitalizedAlias}, page: $page${capitalizedAlias}) { media(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
 
                     break;
                 }
                 default: {
-                    templateQuery = templateQuery + `${aliasedQuery}Media(${templateMediaQueryParameters}) { ${templateQueryFields} }`;
+                    templateQuery = `${capitalizedAlias}: Media(${templateMediaQueryParameters}) { ${templateQueryFields} }`;
 
                     break;
                 }
             }
+
+            templateQueryBodyOperationsArray.push(templateQuery);
         }
 
+        const templateQueryVariables = templateQueryVariablesArray.join(", ");
+
+        const queryBody = `query(${templateQueryVariables}) { ${templateQueryBodyOperationsArray.join(" ")} }`;
+        const queryVariables = JSON.stringify({
+            ...allPageVariable,
+            ...allMediaVariables,
+        });
+
         return {
-            query:     `${initialQueryStrings.start} ${templateQuery} ${initialQueryStrings.end}`,
+            query:     queryBody,
             variables: queryVariables,
         };
     },
