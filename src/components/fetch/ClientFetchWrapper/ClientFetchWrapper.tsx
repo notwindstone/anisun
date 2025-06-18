@@ -2,7 +2,7 @@
 
 import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
 import { SearchContext } from "@/utils/providers/SearchProvider";
-import Cards from "@/components/misc/Cards/Cards";
+import Cards from "@/components/layout/Cards/Cards";
 import { useContextSelector } from "use-context-selector";
 
 export default function ClientFetchWrapper({

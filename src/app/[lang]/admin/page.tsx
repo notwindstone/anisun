@@ -2,19 +2,7 @@ import { cookies } from "next/headers";
 import { AccessTokenCookieKey, AccessTokenProviderCookieKey } from "@/constants/app";
 import SubmitToDatabase from "@/components/admin/SubmitToDatabase/SubmitToDatabase";
 import { validateUser } from "@/lib/actions/user";
-import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
-
-const oauth2ProvidersArray: Array<OAuth2ProvidersType> = [
-    "mal", "anilist", "shikimori",
-];
-
-function getProvider(parsedTokenProvider: string) {
-    for (const provider of oauth2ProvidersArray) {
-        if (provider === parsedTokenProvider) {
-            return provider;
-        }
-    }
-}
+import getAccessTokenProvider from "@/utils/oauth2/getAccessTokenProvider";
 
 export default async function Page() {
     const cookieStore = await cookies();
@@ -31,7 +19,7 @@ export default async function Page() {
         );
     }
 
-    const tokenProvider = getProvider(parsedTokenProvider);
+    const tokenProvider = getAccessTokenProvider(parsedTokenProvider);
 
     if (!tokenProvider) {
         return (

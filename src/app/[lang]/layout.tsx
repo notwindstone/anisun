@@ -83,6 +83,7 @@ export default async function RootLayout({
         data:         configs,
         fallbackData: InitialConfig,
     });
+    // yeah ik that `any_type | unknown` becomes just `unknown`
     const parsedAccountInfoData = readCookiesData<UserType | unknown>({
         data:         accountInfo,
         fallbackData: {
