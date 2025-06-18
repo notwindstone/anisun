@@ -1,6 +1,6 @@
 "use client";
 
-import { usePathname } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { HistoryEntriesLimit, HistoryLocalStorageKey } from "@/constants/app";
 import { useQuery } from "@tanstack/react-query";
@@ -10,6 +10,7 @@ import getAnimePageQueryKey from "@/utils/misc/getAnimePageQueryKey";
 // log anime pages only with data that have loaded
 export default function HistoryLogger(): React.ReactNode {
     const pathname = usePathname();
+    const searchParameters = useSearchParams();
 
     const pathnames = pathname.split("/");
     const idMal = Number(pathnames.at(-1) ?? 0);
@@ -19,8 +20,10 @@ export default function HistoryLogger(): React.ReactNode {
     const { data, isPending, error } = useQuery({
         queryKey: getAnimePageQueryKey(idMal),
         queryFn:  () => ({
-            // key property here to tell that data is not loaded
-            loading: true,
+            Current: {
+                // key property here to tell that data is not loaded
+                loading: true,
+            },
         }),
         enabled: false,
     });
@@ -38,7 +41,7 @@ export default function HistoryLogger(): React.ReactNode {
             return;
         }
 
-        if (data?.loading) {
+        if (data?.Current?.loading) {
             return;
         }
 
@@ -51,8 +54,13 @@ export default function HistoryLogger(): React.ReactNode {
             parsedHistory = [];
         }
 
+        const currentEpisode = searchParameters.get("episode");
+        const currentSeason = searchParameters.get("season");
+
         parsedHistory.push({
-            ...data,
+            ...data?.Current,
+            currentEpisode,
+            currentSeason,
             date: new Date(),
         });
 
@@ -63,7 +71,7 @@ export default function HistoryLogger(): React.ReactNode {
         }
 
         localStorage?.setItem(HistoryLocalStorageKey, JSON.stringify(parsedHistory));
-    }, [pathname, idMal, data, isPending, error]);
+    }, [pathname, searchParameters, idMal, data, isPending, error]);
 
     return;
 }

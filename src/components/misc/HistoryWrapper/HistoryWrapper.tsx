@@ -15,7 +15,12 @@ export default function HistoryWrapper(): React.ReactNode {
         return (
             <HistoryLoader
                 isPending
-                history={[1,2,3,4,5,6]}
+                history={
+                    Array
+                        .from({
+                            length: 12,
+                        }, (_, z) => z)
+                }
             />
         );
     }

@@ -14,7 +14,10 @@ export default function SmallCard({
     isGrid,
     isImageUnoptimized,
 }: {
-    data: AnimeType;
+    data: AnimeType & Partial<{
+        currentEpisode: number;
+        currentSeason:  number;
+    }>;
     isGrid?: boolean;
     isImageUnoptimized?: boolean;
 }) {
@@ -55,6 +58,10 @@ export default function SmallCard({
     const posterDarkEffect = `${baseColor.join("")} / 0.5)`;
 
     const gridClassNames = isGrid ? "w-full flex-max-w-1/2 xs:flex-max-w-1/3 lg:flex-max-w-1/4 xl:flex-max-w-1/6" : "h-full";
+
+    // for history entries
+    const currentEpisode = data?.currentEpisode;
+    const currentSeason = data?.currentSeason;
 
     return (
         <>
@@ -101,14 +108,36 @@ export default function SmallCard({
                             }
                         </Badge>
                     </div>
-                    <p className="text-md text-black dark:text-white text-pretty font-medium drop-shadow-sm line-clamp-3">
+                    <div className="w-full flex flex-col gap-1">
                         {
-                            translate({
-                                text:   name,
-                                locale: locale,
-                            })
+                            currentEpisode && (
+                                <Badge
+                                    appendClassNames="w-fit invert"
+                                    textSize="text-xs"
+                                >
+                                    {`${currentEpisode} / ${data?.episodes ?? "?"}`}
+                                </Badge>
+                            )
                         }
-                    </p>
+                        {
+                            currentSeason && (
+                                <Badge
+                                    appendClassNames="w-fit invert"
+                                    textSize="text-xs"
+                                >
+                                    {`SEASON ${currentSeason}`}
+                                </Badge>
+                            )
+                        }
+                        <p className="text-md text-black dark:text-white text-pretty font-medium drop-shadow-sm line-clamp-3">
+                            {
+                                translate({
+                                    text:   name,
+                                    locale: locale,
+                                })
+                            }
+                        </p>
+                    </div>
                 </div>
             </Link>
         </>
