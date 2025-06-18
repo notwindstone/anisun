@@ -3,6 +3,7 @@ import { QueryType } from "@/types/Anime/Query.type";
 import { VariablesType } from "@/types/Anime/Variables.type";
 import { ParameterType, QueryParametersType } from "@/constants/anilist";
 import IsKeyInObject from "@/types/Utils/IsKeyInObject";
+import capitalizeWord from "@/utils/misc/capitalizeWord";
 
 type ShittyNode = {
     children: Record<string, ShittyNode>;
@@ -72,7 +73,7 @@ export const GraphQLClient = {
 
         for (const query of queries) {
             const { alias, name, fields, variables } = query;
-            const capitalizedAlias = alias.charAt(0).toUpperCase() + alias.slice(1);
+            const capitalizedAlias = capitalizeWord(alias);
 
             const currentMediaVariables = variables.media;
             const currentPageVariables = variables?.page;

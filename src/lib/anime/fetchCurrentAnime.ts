@@ -11,7 +11,7 @@ const FetchCurrentAnime = (
     ...GraphQLClient.Anilist({
         queries: [
             {
-                alias:     "Media",
+                alias:     "current",
                 name:      "Media",
                 variables: {
                     page:  {},

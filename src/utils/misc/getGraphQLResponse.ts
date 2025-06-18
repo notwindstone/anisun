@@ -8,7 +8,14 @@ const getGraphQLResponse = async <T extends object>({
     query: string;
     variables: string;
     options?: Partial<Request> | undefined;
-}): Promise<T> => {
+}): Promise<
+        Record<
+            string,
+            (T | {
+                media: Array<T>;
+            })
+        >
+    > => {
     const response = await fetch(url, {
         method:  "POST",
         headers: {
@@ -26,13 +33,13 @@ const getGraphQLResponse = async <T extends object>({
     }
 
     let data: {
-        data: {
-            Page: {
-                media: T;
-            }
-        } | {
-            Media: T;
-        }
+        data:
+            Record<
+                string,
+                (T | {
+                    media: Array<T>;
+                })
+            >;
     };
 
     try {
@@ -43,11 +50,7 @@ const getGraphQLResponse = async <T extends object>({
         throw new Error("Something went wrong");
     }
 
-    if ("Page" in data.data) {
-        return data.data.Page.media;
-    }
-
-    return data.data.Media;
+    return data.data;
 };
 
 export default getGraphQLResponse;

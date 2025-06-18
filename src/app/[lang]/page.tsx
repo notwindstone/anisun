@@ -8,6 +8,7 @@ import SearchedAnimes from "@/components/search/SearchedAnimes/SearchedAnimes";
 import ListAnimes from "@/components/misc/ListAnimes/ListAnimes";
 import type { Locale } from "@/i18n-config";
 import { HomePageItems } from "@/constants/translated";
+import GetHomePageTitles from "@/lib/anime/getHomePageTitles";
 
 export default async function Home({
     params,
@@ -25,6 +26,8 @@ export default async function Home({
     const { theme, colors: { base } } = getSafeConfigValues({
         config: parsedConfigData,
     });
+
+    console.log(GetHomePageTitles());
 
     return (
         <div>
