@@ -33,7 +33,7 @@ export default async function OAuth2Links({
                             return (
                                 <a key={entry} href={Login}>
                                     <Button
-                                        disabled
+                                        disabled={entry === "MAL"}
                                         custom={{
                                             style: "base",
                                         }}

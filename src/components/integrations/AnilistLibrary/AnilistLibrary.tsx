@@ -13,7 +13,7 @@ export default function AnilistLibrary({
     const { data, isPending, error } = useQuery({
         queryKey: ["anime", tokenProvider, "library"],
         queryFn:  async () => {
-            
+            return accessToken;
         },
     });
 
