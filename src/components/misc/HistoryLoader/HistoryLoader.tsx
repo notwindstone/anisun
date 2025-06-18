@@ -7,12 +7,23 @@ import Button from "@/components/base/Button/Button";
 import { HistoryEntriesCountOnPage } from "@/constants/app";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
+import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function HistoryLoader({
     history,
+    isPending,
 }: {
     history: Array<unknown>;
+    isPending?: boolean;
 }) {
+    const { theme, base } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            theme: value.data.theme,
+            base:  value.data.colors.base,
+        };
+    });
     const [page, onChange] = useState(1);
     const pagination = usePagination({
         total: Math.ceil(history.length / HistoryEntriesCountOnPage),
@@ -70,6 +81,29 @@ export default function HistoryLoader({
             </Button>
         </div>
     );
+
+    if (isPending) {
+        return (
+            <div className="flex flex-col w-full gap-4">
+                {paginationComponent}
+                <GridCards disablePadding>
+                    {
+                        history.map((historyEntry) => {
+                            return (
+                                <SkeletonSmallCard
+                                    key={`${historyEntry}`}
+                                    isGrid
+                                    theme={theme}
+                                    base={base}
+                                />
+                            );
+                        })
+                    }
+                </GridCards>
+                {paginationComponent}
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col w-full gap-4">

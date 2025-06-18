@@ -12,7 +12,12 @@ export default function HistoryWrapper(): React.ReactNode {
     }, []);
 
     if (!loaded) {
-        return;
+        return (
+            <HistoryLoader
+                isPending
+                history={[1,2,3,4,5,6]}
+            />
+        );
     }
 
     const historyString = localStorage?.getItem(HistoryLocalStorageKey) ?? "[]";
@@ -25,9 +30,12 @@ export default function HistoryWrapper(): React.ReactNode {
         parsedHistory = [];
     }
 
+    // first elements will be most recent
+    const reversedHistory = parsedHistory.reverse();
+
     return (
         <HistoryLoader
-            history={parsedHistory}
+            history={reversedHistory}
         />
     );
 }
