@@ -3,7 +3,12 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 
 // TODO refactor
 const searchTitles = async (options: Partial<SearchType> | undefined): Promise<
-    Array<AnimeType>
+    Record<
+        string,
+        (AnimeType | {
+            media: Array<AnimeType>;
+        })
+    >
 > => {
     const query = `
         query($search: String, $idMal: Int, $perPage: Int) {

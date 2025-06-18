@@ -6,6 +6,7 @@ import Cards from "@/components/misc/Cards/Cards";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { Locale } from "@/i18n-config";
 import ErrorHeroCard from "@/components/misc/ErrorHeroCard/ErrorHeroCard";
+import HeroCard from "@/components/misc/HeroCard/HeroCard";
 
 export default function HomeTitles({
     lang,
@@ -82,9 +83,60 @@ export default function HomeTitles({
         );
     }
 
+    let heroData;
+
+    // convince typescript that we are safe to use `Hero` property
+    if (
+        data !== undefined &&
+        "Hero" in data &&
+        !("media" in data.Hero)
+    ) {
+        heroData = data.Hero;
+    }
+
     return (
         <>
-            {JSON.stringify(data)}
+            <div className="flex flex-col gap-4">
+                <div className="relative overflow-clip w-full h-full aspect-video sm:aspect-auto sm:h-128">
+                    <HeroCard data={heroData} />
+                </div>
+            </div>
+            <div className="w-full h-4" />
+            <SearchedAnimes />
+            <div className="w-full h-4" />
+            {
+                HomePageItems.map((item) => {
+                    let listData;
+
+                    // convince typescript that we are safe to use item's property
+                    if (data === undefined) {
+                        return;
+                    }
+
+                    if (!(item.property in data)) {
+                        return;
+                    }
+
+                    const currentData = data[item.property];
+
+                    if ("media" in currentData) {
+                        listData = currentData.media;
+                    }
+
+                    return (
+                        <div key={item.title.en} className="flex flex-col gap-4 mx-auto max-w-384">
+                            <div />
+                            <p className="text-2xl font-medium leading-none px-4">
+                                {item.title[lang]}
+                            </p>
+                            <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none px-4">
+                                {item.description[lang]}
+                            </p>
+                            <Cards data={listData} />
+                        </div>
+                    );
+                })
+            }
         </>
     );
 }

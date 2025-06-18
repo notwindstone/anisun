@@ -73,9 +73,7 @@ export default async function ServerFetch({
         return clientReactNode;
     }
 
-    if (
-        data === undefined
-    ) {
+    if (data === undefined) {
         return;
     }
 

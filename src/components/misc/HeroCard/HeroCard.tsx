@@ -15,7 +15,7 @@ import { useContextSelector } from "use-context-selector";
 export default function HeroCard({
     data,
 }: {
-    data?: Array<AnimeType> | AnimeType | undefined;
+    data?: AnimeType | undefined;
 }) {
     const { dictionaries, data: { theme, colors: { base } } } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -26,10 +26,6 @@ export default function HeroCard({
     const animeData: AnimeType = useContextSelector(ClientFetchDataContext, (value) => value.data);
     const currentData = data ?? animeData;
     const locale = dictionaries?.metadata.locale ?? DefaultLocale;
-
-    if (currentData !== undefined && Array.isArray(currentData)) {
-        return;
-    }
 
     const name = currentData?.title?.romaji ?? currentData?.title?.english ?? currentData?.title?.native ?? "none";
 

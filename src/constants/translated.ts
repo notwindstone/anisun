@@ -1,12 +1,10 @@
 // For server-side translations without async .json files import
 import { Locale } from "@/i18n-config";
-import { Getters } from "@/lib/anime/getters";
 
 export const HomePageItems: Array<{
     title: Record<Locale, string>;
     description: Record<Locale, string>;
-    method: keyof typeof Getters;
-    queryKey: string;
+    property: string;
 }> = [
     {
         title: {
@@ -19,8 +17,7 @@ export const HomePageItems: Array<{
             ru:  "Смотрите популярные на данный момент тайтлы",
             uwu: "watch the cuwwentwy p-popuwaw titles",
         },
-        method:   "FetchTrendingTitles",
-        queryKey: "trending",
+        property: "Trending",
     },
     {
         title: {
@@ -33,8 +30,7 @@ export const HomePageItems: Array<{
             ru:  "Они выйдут в ближайшее время",
             uwu: "expwowe the animes that are going to be weweased soon",
         },
-        method:   "FetchUpcomingNextSeasonTitles",
-        queryKey: "upcoming",
+        property: "Upcoming",
     },
     {
         title: {
@@ -47,8 +43,7 @@ export const HomePageItems: Array<{
             ru:  "Взгляните на лучшие тайтлы, отсортированные по рейтингу",
             uwu: "check the best sewies s-sowted b-by a score",
         },
-        method:   "FetchTopTitles",
-        queryKey: "top",
+        property: "Top",
     },
 ];
 export const AccountPageItems: Record<Locale, {

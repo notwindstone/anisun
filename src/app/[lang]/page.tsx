@@ -73,7 +73,7 @@ export default async function Home({
                     cacheErrorKey="home/error"
                     cacheQueryKey="home/anime"
                 >
-                    <HomeTitlesClient />
+                    <HomeTitlesClient lang={lang} />
                 </ServerFetch>
             </Suspense>
         </div>
