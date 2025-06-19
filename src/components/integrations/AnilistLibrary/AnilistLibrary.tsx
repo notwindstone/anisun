@@ -6,7 +6,7 @@ import { RemoteRoutes } from "@/constants/routes";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
 import { GraphQLClient } from "@/lib/graphql/client";
 import { VariablesType } from "@/types/Anime/Variables.type";
@@ -16,8 +16,11 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
+import Pagination from "@/components/layout/Pagination/Pagination";
+import { useSearchParams } from "next/navigation";
 
 const mediaListStatuses: Array<VariablesType["mediaListStatus"] | "ALL"> = ["COMPLETED", "CURRENT", "DROPPED", "PAUSED", "PLANNING", "REPEATING", "ALL"];
+const totalEntries = 12;
 
 export default function AnilistLibrary({
     username,
@@ -42,8 +45,12 @@ export default function AnilistLibrary({
             top:  number;
         };
     }>(null);
+    const searchParameters = useSearchParams();
+    const [page, onChange] = useState(
+        Number(searchParameters.get("page") || 1),
+    );
     const { data, isPending, error } = useQuery({
-        queryKey: ["anime", "library", tokenProvider, selectedList],
+        queryKey: ["anime", "library", tokenProvider, selectedList, page],
         queryFn:  async () => {
             const data = await getGraphQLResponse<{ mediaList: AnimeType }>({
                 accessToken,
@@ -55,8 +62,8 @@ export default function AnilistLibrary({
                             name:      "Page.MediaList",
                             variables: {
                                 page: {
-                                    page:    1,
-                                    perPage: 30,
+                                    page:    page,
+                                    perPage: totalEntries,
                                 },
                                 media: {
                                     type:     "ANIME",
@@ -87,12 +94,21 @@ export default function AnilistLibrary({
                 }),
             });
 
-            // eslint-disable-next-line unicorn/no-abusive-eslint-disable
-            // eslint-disable-next-line
-            // @ts-ignore
-            return data.Library.mediaList;
+            return data.Library;
         },
     });
+
+    useEffect(() => {
+        if (!globalThis) {
+            return;
+        }
+
+        const modifiedParameters = new URLSearchParams(searchParameters.toString());
+
+        modifiedParameters.set("page", page.toString());
+
+        globalThis.history.pushState({}, "", `?${modifiedParameters.toString()}`);
+    }, [searchParameters, page]);
 
     let cardsNode: React.ReactNode;
 
@@ -116,8 +132,13 @@ export default function AnilistLibrary({
         ));
     }
 
-    if (data) {
-        cardsNode = data.map((media: {
+    breakable: if (data !== undefined && "mediaList" in data) {
+        // should never occur
+        if (!Array.isArray(data.mediaList)) {
+            break breakable;
+        }
+
+        cardsNode = data.mediaList.map((media: {
             media: AnimeType;
             progress: number;
             score: number;
@@ -131,6 +152,7 @@ export default function AnilistLibrary({
                         ...anime,
                         currentEpisode: progress,
                         userScore:      score,
+                        greyOutScore:   true,
                     }}
                     isGrid
                     isImageUnoptimized
@@ -195,9 +217,15 @@ export default function AnilistLibrary({
                     }
                 </div>
             </div>
-            <GridCards disablePadding>
-                {cardsNode}
-            </GridCards>
+            <Pagination
+                total={30}
+                onChange={onChange}
+                page={page}
+            >
+                <GridCards disablePadding>
+                    {cardsNode}
+                </GridCards>
+            </Pagination>
         </>
     );
 }

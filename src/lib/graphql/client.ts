@@ -100,7 +100,7 @@ export const GraphQLClient = {
 
             switch (name) {
                 case "Page.MediaList": {
-                    templateQuery = `${capitalizedAlias}: Page(perPage: $perPage${capitalizedAlias}, page: $page${capitalizedAlias}) { mediaList(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
+                    templateQuery = `${capitalizedAlias}: Page(perPage: $perPage${capitalizedAlias}, page: $page${capitalizedAlias}) { pageInfo { hasNextPage } mediaList(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
 
                     break;
                 }

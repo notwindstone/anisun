@@ -18,6 +18,7 @@ export default function SmallCard({
         currentEpisode: number;
         currentSeason:  number;
         userScore:      number;
+        greyOutScore:   boolean;
     }>;
     isGrid?: boolean;
     isImageUnoptimized?: boolean;
@@ -108,7 +109,10 @@ export default function SmallCard({
                         <Badge
                             textSize="text-xs"
                             score={score}
-                            isScore
+                            // `isScore` is designed to make badge differently colored
+                            // based on the `score` property
+                            // if `greyOutScore` is true, we don't need it
+                            isScore={!data?.greyOutScore}
                             label="Other users' average score"
                         >
                             {
