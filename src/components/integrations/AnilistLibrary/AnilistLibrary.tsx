@@ -59,6 +59,8 @@ export default function AnilistLibrary({
     });
 
     const safeListCategories = data?.categories ?? mediaListStatuses;
+    const totalPages = Math.ceil((data?.lists?.[slicedData.index]?.entries?.length ?? 1) / totalEntries);
+    const safePage = Math.min(page, totalPages);
 
     // slice array with useEffect to improve performance
     useEffect(() => {
@@ -75,11 +77,11 @@ export default function AnilistLibrary({
         setSlicedData({
             index: selectedIndex,
             list:  data.lists[selectedIndex].entries.slice(
-                (page - 1) * totalEntries,
-                ((page - 1) * totalEntries) + totalEntries,
+                (safePage - 1) * totalEntries,
+                ((safePage - 1) * totalEntries) + totalEntries,
             ),
         });
-    }, [data, selectedList, page]);
+    }, [data, selectedList, safePage]);
 
     useEffect(() => {
         if (!globalThis) {
@@ -88,10 +90,10 @@ export default function AnilistLibrary({
 
         const modifiedParameters = new URLSearchParams(searchParameters.toString());
 
-        modifiedParameters.set("page", page.toString());
+        modifiedParameters.set("page", safePage.toString());
 
         globalThis.history.pushState({}, "", `?${modifiedParameters.toString()}`);
-    }, [searchParameters, page]);
+    }, [searchParameters, safePage]);
 
     let cardsNode: React.ReactNode;
 
@@ -156,11 +158,9 @@ export default function AnilistLibrary({
         <>
             {memoizedSegmentedControl}
             <Pagination
-                total={
-                    Math.ceil((data?.lists?.[slicedData.index]?.entries?.length ?? 1) / totalEntries)
-                }
+                total={totalPages}
                 onChange={onChange}
-                page={page}
+                page={safePage}
             >
                 <GridCards disablePadding>
                     {cardsNode}
