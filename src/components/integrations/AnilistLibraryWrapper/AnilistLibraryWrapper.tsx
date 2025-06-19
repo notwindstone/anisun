@@ -17,7 +17,7 @@ export default function AnilistLibraryWrapper({
     tokenProvider,
 }: {
     username: string;
-    accessToken: string;
+    accessToken: string | undefined;
     tokenProvider: OAuth2ProvidersType;
 }) {
     const searchParameters = useSearchParams();
