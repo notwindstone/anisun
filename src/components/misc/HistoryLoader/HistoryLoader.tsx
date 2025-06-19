@@ -63,6 +63,7 @@ export default function HistoryLoader({
     return (
         <div className="flex flex-col w-full gap-4">
             <Pagination
+                darker
                 total={Math.ceil(history.length / HistoryEntriesCountOnPage)}
                 onChange={onChange}
                 page={page}

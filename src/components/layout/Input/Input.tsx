@@ -8,9 +8,13 @@ import { SetStateAction, useRef } from "react";
 export default function Input({
     setSearch,
     placeholder,
+    appendClassNames,
+    defaultValue,
 }: {
     setSearch:   (value: SetStateAction<string>) => void;
     placeholder: string;
+    appendClassNames?: string;
+    defaultValue?: string;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -26,7 +30,7 @@ export default function Input({
                 onClick={() => {
                     reference.current?.focus();
                 }}
-                className="focus-within:ring-2 rounded-md flex flex-nowrap items-center overflow-clip h-10 gap-0 cursor-text transition w-full ring-black dark:ring-white"
+                className={`focus-within:ring-2 rounded-md flex flex-nowrap items-center overflow-clip h-10 gap-0 cursor-text transition w-full ring-black dark:ring-white ${appendClassNames ?? ""}`}
                 style={{
                     background: parseTailwindColor({
                         color: base,
@@ -41,7 +45,7 @@ export default function Input({
                 </div>
                 <input
                     type="text"
-                    defaultValue=""
+                    defaultValue={defaultValue ?? ""}
                     ref={reference}
                     className="w-full h-full text-sm focus:outline-none"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {

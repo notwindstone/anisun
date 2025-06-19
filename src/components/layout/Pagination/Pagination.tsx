@@ -3,11 +3,13 @@ import { ChevronLeft, ChevronRight, Ellipsis } from "lucide-react";
 import Button from "@/components/base/Button/Button";
 
 export default function Pagination({
+    darker,
     total,
     page,
     onChange,
     children,
 }: {
+    darker?: boolean;
     total: number;
     page: number;
     onChange: (page: number) => void;
@@ -33,6 +35,7 @@ export default function Pagination({
             <Button
                 key={`${page}_${index}`}
                 custom={{
+                    darker,
                     style: pagination.active === page
                         ? "accent"
                         : "base",
@@ -51,6 +54,7 @@ export default function Pagination({
         <div className="flex gap-2 shrink-0 flex-wrap">
             <Button
                 custom={{
+                    darker,
                     style: "base",
                 }}
                 onClick={pagination.previous}
@@ -61,6 +65,7 @@ export default function Pagination({
             {paginationButtonComponent}
             <Button
                 custom={{
+                    darker,
                     style: "base",
                 }}
                 onClick={pagination.next}

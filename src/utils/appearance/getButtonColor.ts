@@ -5,6 +5,7 @@ import { DarkThemeKey } from "@/constants/configs";
 import { ButtonStylesType } from "@/types/Appearance/ButtonStyles.type";
 
 export default function getButtonColor({
+    darker,
     style,
     theme,
     colors: {
@@ -12,6 +13,7 @@ export default function getButtonColor({
         base,
     },
 }: {
+    darker?: boolean;
     style: ButtonStylesType;
     theme: "dark" | "light";
     colors: {
@@ -33,8 +35,8 @@ export default function getButtonColor({
             background = parseTailwindColor({
                 color: base,
                 step:  theme === DarkThemeKey
-                    ? 800
-                    : 200,
+                    ? (darker ? 900 : 800)
+                    : (darker ? 100 : 200),
             });
             break;
         }

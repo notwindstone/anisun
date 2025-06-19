@@ -17,6 +17,8 @@ export default function Button({
     label: string;
     /** Custom properties */
     custom?: {
+        /** Makes background darker/lighter depending on the theme */
+        darker?: boolean;
         /** Adds your own classes without overwriting current */
         appendClassNames?: string;
         /** Sets button style */
@@ -26,7 +28,9 @@ export default function Button({
     const { theme, colors } = useContextSelector(ConfigsContext, (value) => value.data);
     const appendClassNames = custom?.appendClassNames ?? "";
     const style = custom?.style ?? "default";
+    const darker = custom?.darker ?? false;
     const { foreground, background } = getButtonColor({
+        darker,
         theme,
         colors,
         style,

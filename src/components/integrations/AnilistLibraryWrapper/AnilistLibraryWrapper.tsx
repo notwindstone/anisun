@@ -8,6 +8,8 @@ import { RemoteRoutes } from "@/constants/routes";
 import { GraphQLClient } from "@/lib/graphql/client";
 import AnilistLibrary from "@/components/integrations/AnilistLibrary/AnilistLibrary";
 import { LibraryChunkSize } from "@/constants/app";
+import { useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 
 export default function AnilistLibraryWrapper({
     username,
@@ -18,8 +20,10 @@ export default function AnilistLibraryWrapper({
     accessToken: string;
     tokenProvider: OAuth2ProvidersType;
 }) {
+    const searchParameters = useSearchParams();
+    const usernameFromParameters = searchParameters.get("username") || username;
     const { data: queryData, isPending, error } = useQuery({
-        queryKey: ["anime", "library", tokenProvider],
+        queryKey: ["anime", "library", tokenProvider, usernameFromParameters],
         queryFn:  async () => {
             const data = await getGraphQLResponse<{ media: AnimeType }>({
                 accessToken,
@@ -33,7 +37,7 @@ export default function AnilistLibraryWrapper({
                                 page:  {},
                                 media: {
                                     type:     "ANIME",
-                                    userName: username,
+                                    userName: usernameFromParameters,
                                 },
                             },
                             fields: `
@@ -139,20 +143,25 @@ export default function AnilistLibraryWrapper({
         },
     });
 
-    return (
+    return useMemo(() => (
         <>
             <div />
             <p className="text-2xl font-medium leading-none">
                 Library
             </p>
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                Browse your Anilist library
+                {
+                    username === usernameFromParameters
+                        ? "Browse your Anilist library"
+                        : `Browse ${usernameFromParameters}'s Anilist library`
+                }
             </p>
             <AnilistLibrary
                 data={queryData}
                 isPending={isPending}
                 error={error}
+                username={usernameFromParameters}
             />
         </>
-    );
+    ), [queryData, isPending, error, usernameFromParameters]);
 }

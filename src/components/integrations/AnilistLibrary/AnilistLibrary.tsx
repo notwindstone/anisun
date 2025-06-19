@@ -21,6 +21,7 @@ export default function AnilistLibrary({
     data,
     isPending,
     error,
+    username,
 }: {
     data: {
         categories: Array<string>,
@@ -35,6 +36,7 @@ export default function AnilistLibrary({
     } | undefined;
     isPending: boolean;
     error: Error | null;
+    username: string;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -45,7 +47,7 @@ export default function AnilistLibrary({
     const searchParameters = useSearchParams();
 
     const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState<string>("", 500);
-    const [debouncedSearch, setDebouncedSearch] = useDebouncedState<string>(searchParameters.get("search") ?? "", 200);
+    const [debouncedSearch, setDebouncedSearch] = useDebouncedState<string>(searchParameters.get("search") ?? "", 100);
 
     const [page, onChange] = useState(
         Number(searchParameters.get("page") || 1),
@@ -242,14 +244,30 @@ export default function AnilistLibrary({
         <>
             {memoizedSegmentedControl}
             <Pagination
+                darker
                 total={slicedData.total}
                 onChange={onChange}
                 page={safePage}
             >
-                <Input
-                    setSearch={setDebouncedSearch}
-                    placeholder="Search anime..."
-                />
+                <div className="flex gap-2 shrink-0 flex-wrap">
+                    <Input
+                        setSearch={setDebouncedSearch}
+                        placeholder="Search anime..."
+                        appendClassNames="flex-1 shrink-0 min-w-40"
+                    />
+                    <Input
+                        defaultValue={username}
+                        setSearch={(value) => {
+                            const modifiedParameters = new URLSearchParams(searchParameters.toString());
+
+                            modifiedParameters.set("username", value.toString());
+
+                            setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
+                        }}
+                        placeholder="Use different username..."
+                        appendClassNames="flex-1 shrink-0 min-w-40"
+                    />
+                </div>
                 <GridCards disablePadding>
                     {cardsNode}
                 </GridCards>
