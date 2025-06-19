@@ -77,7 +77,7 @@ export default function ExtensionWrapper({
                             </ExtensionSkeleton>
                         )
                     }
-                    <RemoteComponent url={"/bundle.js"} />
+                    <RemoteComponent url={url} />
                 </div>
             </Suspense>
         </ErrorBoundary>
