@@ -13,6 +13,7 @@ import { useSearchParams } from "next/navigation";
 import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
 import { LibraryChunkSize } from "@/constants/app";
 import { useDebouncedState } from "@mantine/hooks";
+import Input from "@/components/layout/Input/Input";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 
@@ -42,7 +43,9 @@ export default function AnilistLibrary({
         };
     });
     const searchParameters = useSearchParams();
+
     const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState<string>("", 500);
+    const [debouncedSearch, setDebouncedSearch] = useDebouncedState<string>(searchParameters.get("search") ?? "", 200);
 
     const [page, onChange] = useState(
         Number(searchParameters.get("page") || 1),
@@ -51,6 +54,7 @@ export default function AnilistLibrary({
         searchParameters.get("list") ?? undefined,
     );
     const [slicedData, setSlicedData] = useState<{
+        total: number;
         index: number;
         list:  Array<{
             media: AnimeType;
@@ -58,15 +62,14 @@ export default function AnilistLibrary({
             score: number;
         }>;
     }>({
+        total: 0,
         index: 0,
         list:  [],
     });
 
     const safeListCategories = data?.categories ?? mediaListStatuses;
-    const totalPages = Math.ceil((data?.lists?.[slicedData.index]?.total ?? 1) / LibraryChunkSize);
-    const safePage = Math.min(page, totalPages);
+    const safePage = Math.min(page, slicedData.total);
 
-    // slice array with useEffect to improve performance
     useEffect(() => {
         if (!data) {
             return;
@@ -78,11 +81,68 @@ export default function AnilistLibrary({
             selectedIndex = 0;
         }
 
+        if (debouncedSearch !== "") {
+            const currentEntries = data.lists[selectedIndex].entries;
+
+            const selectedChunksCount = Object.keys(currentEntries).length;
+            const foundAnimesNotFlat: Array<Array<{
+                media: AnimeType;
+                progress: number;
+                score: number;
+            }>> = [];
+
+            for (let chunkIndex = 0; chunkIndex < selectedChunksCount; chunkIndex++) {
+                const chunkedAnimes = currentEntries?.[chunkIndex];
+                const filteredAnimes = chunkedAnimes?.filter((chunkedAnime) => {
+                    const currentMedia = chunkedAnime?.media;
+                    const isInEnglish = currentMedia?.title?.english?.toLowerCase()?.includes(debouncedSearch);
+                    const isInRomaji = currentMedia?.title?.romaji?.toLowerCase()?.includes(debouncedSearch);
+                    const isInNative = currentMedia?.title?.native?.toLowerCase()?.includes(debouncedSearch);
+
+                    return isInEnglish || isInRomaji || isInNative;
+                });
+
+                if (filteredAnimes.length > 0) {
+                    foundAnimesNotFlat.push(filteredAnimes);
+                }
+            }
+
+            const flattenedFoundAnimes = foundAnimesNotFlat.flat();
+
+            let newChunksIndex = 0;
+            const newChunks: Record<number, Array<{
+                media: AnimeType;
+                progress: number;
+                score: number;
+            }>> = {};
+
+            for (const anime of flattenedFoundAnimes) {
+                const chunkIndex = Math.floor(newChunksIndex / LibraryChunkSize);
+
+                if (!newChunks[chunkIndex]) {
+                    newChunks[chunkIndex] = [];
+                }
+
+                newChunks[chunkIndex].push(anime);
+
+                newChunksIndex++;
+            }
+
+            setSlicedData({
+                total: Object.keys(newChunks).length,
+                index: selectedIndex,
+                list:  newChunks[safePage - 1],
+            });
+
+            return;
+        }
+
         setSlicedData({
+            total: Math.ceil((data?.lists?.[selectedIndex]?.total ?? 1) / LibraryChunkSize),
             index: selectedIndex,
             list:  data.lists[selectedIndex].entries[safePage - 1],
         });
-    }, [data, selectedList, safePage]);
+    }, [data, selectedList, safePage, debouncedSearch]);
 
     // page writing to debounced searchParams state
     useEffect(() => {
@@ -93,11 +153,19 @@ export default function AnilistLibrary({
         const modifiedParameters = new URLSearchParams(searchParameters.toString());
 
         modifiedParameters.set("page", safePage.toString());
-        modifiedParameters.set("list", (selectedList ?? "").toString());
+
+        if (selectedList) {
+            modifiedParameters.set("list", selectedList.toString());
+        }
+
+        if (debouncedSearch !== "") {
+            modifiedParameters.set("search", debouncedSearch);
+        }
 
         setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
-    }, [searchParameters, selectedList, setDebouncedSearchParameters, safePage]);
+    }, [searchParameters, debouncedSearch, selectedList, setDebouncedSearchParameters, safePage]);
 
+    // updating states in search parameters
     useEffect(() => {
         globalThis.history.pushState({}, "", debouncedSearchParameters);
     }, [debouncedSearchParameters]);
@@ -174,10 +242,14 @@ export default function AnilistLibrary({
         <>
             {memoizedSegmentedControl}
             <Pagination
-                total={totalPages}
+                total={slicedData.total}
                 onChange={onChange}
                 page={safePage}
             >
+                <Input
+                    setSearch={setDebouncedSearch}
+                    placeholder="Search anime..."
+                />
                 <GridCards disablePadding>
                     {cardsNode}
                 </GridCards>

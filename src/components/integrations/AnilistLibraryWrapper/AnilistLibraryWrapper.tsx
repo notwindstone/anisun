@@ -73,6 +73,7 @@ export default function AnilistLibraryWrapper({
                 };
             }
 
+            // slice anime entries into chunks to improve performance
             const categories = [];
             const allChunkedLists = [];
 
