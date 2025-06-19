@@ -1,11 +1,11 @@
 import HistoryWrapper from "@/components/misc/HistoryWrapper/HistoryWrapper";
-import AnilistLibrary from "@/components/integrations/AnilistLibrary/AnilistLibrary";
 import { AccessTokenCookieKey, AccessTokenProviderCookieKey, AccountInfoCookieKey } from "@/constants/app";
 import { cookies } from "next/headers";
 import getAccessTokenProvider from "@/utils/oauth2/getAccessTokenProvider";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import { UserType } from "@/types/OAuth2/User.type";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
+import AnilistLibraryWrapper from "@/components/integrations/AnilistLibraryWrapper/AnilistLibraryWrapper";
 
 export default async function Page() {
     const cookieStore = await cookies();
@@ -34,7 +34,7 @@ export default async function Page() {
     switch (tokenProvider) {
         case "anilist": {
             providerLibrary = (
-                <AnilistLibrary
+                <AnilistLibraryWrapper
                     username={safeAccountValues.username}
                     accessToken={accessToken}
                     tokenProvider={tokenProvider}
@@ -44,7 +44,7 @@ export default async function Page() {
         }
         case "mal": {
             providerLibrary = (
-                <AnilistLibrary
+                <AnilistLibraryWrapper
                     username={safeAccountValues.username}
                     accessToken={accessToken}
                     tokenProvider={tokenProvider}
@@ -54,7 +54,7 @@ export default async function Page() {
         }
         case "shikimori": {
             providerLibrary = (
-                <AnilistLibrary
+                <AnilistLibraryWrapper
                     username={safeAccountValues.username}
                     accessToken={accessToken}
                     tokenProvider={tokenProvider}

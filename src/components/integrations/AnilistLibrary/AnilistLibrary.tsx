@@ -1,15 +1,10 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
-import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
-import { RemoteRoutes } from "@/constants/routes";
+import React from "react";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import { useEffect, useRef, useState } from "react";
-import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
-import { GraphQLClient } from "@/lib/graphql/client";
-import { VariablesType } from "@/types/Anime/Variables.type";
 import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
@@ -19,17 +14,20 @@ import { DarkThemeKey } from "@/constants/configs";
 import Pagination from "@/components/layout/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
 
-const mediaListStatuses: Array<VariablesType["mediaListStatus"] | "ALL"> = ["COMPLETED", "CURRENT", "DROPPED", "PAUSED", "PLANNING", "REPEATING", "ALL"];
-const totalEntries = 12;
+const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
+const totalEntries = 18;
 
 export default function AnilistLibrary({
-    username,
-    accessToken,
-    tokenProvider,
+    data,
+    isPending,
+    error,
 }: {
-    username: string;
-    accessToken: string;
-    tokenProvider: OAuth2ProvidersType;
+    data: {
+        categories: Array<string>,
+        lists:      Array<any>,
+    } | undefined;
+    isPending: boolean;
+    error: Error | null;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -37,7 +35,6 @@ export default function AnilistLibrary({
             base:  value.data.colors.base,
         };
     });
-    const [selectedList, setSelectedList] = useState<VariablesType["mediaListStatus"] | "ALL" | undefined>();
     const currentButtonWidth = useRef<{
         width:  number;
         offset: {
@@ -46,57 +43,45 @@ export default function AnilistLibrary({
         };
     }>(null);
     const searchParameters = useSearchParams();
+
     const [page, onChange] = useState(
         Number(searchParameters.get("page") || 1),
     );
-    const { data, isPending, error } = useQuery({
-        queryKey: ["anime", "library", tokenProvider, selectedList, page],
-        queryFn:  async () => {
-            const data = await getGraphQLResponse<{ mediaList: AnimeType }>({
-                accessToken,
-                url: RemoteRoutes.Anilist.GraphQL.Root,
-                ...GraphQLClient.Anilist({
-                    queries: [
-                        {
-                            alias:     "library",
-                            name:      "Page.MediaList",
-                            variables: {
-                                page: {
-                                    page:    page,
-                                    perPage: totalEntries,
-                                },
-                                media: {
-                                    type:     "ANIME",
-                                    userName: username,
-                                    ...((selectedList === "ALL" || selectedList === undefined) ? {} : {
-                                        mediaListStatus: selectedList,
-                                    }),
-                                },
-                            },
-                            fields: `
-                                progress
-                                score
-                                media {
-                                  id
-                                  idMal
-                                  coverImage { extraLarge }
-                                  averageScore
-                                  episodes
-                                  status
-                                  title {
-                                    romaji
-                                    english
-                                  }
-                                }
-                            `,
-                        },
-                    ],
-                }),
-            });
-
-            return data.Library;
-        },
+    const [selectedList, setSelectedList] = useState<string | undefined>();
+    const [slicedData, setSlicedData] = useState<{
+        index: number;
+        list:  Array<{
+            media: AnimeType;
+            progress: number;
+            score: number;
+        }>;
+    }>({
+        index: 0,
+        list:  [],
     });
+
+    const safeListCategories = data?.categories ?? mediaListStatuses;
+
+    // slice array with useEffect to improve performance
+    useEffect(() => {
+        if (!data) {
+            return;
+        }
+
+        let selectedIndex = data.categories.indexOf(selectedList ?? "");
+
+        if (selectedIndex === -1) {
+            selectedIndex = 0;
+        }
+
+        setSlicedData({
+            index: selectedIndex,
+            list:  data.lists[selectedIndex].entries.slice(
+                (page - 1) * totalEntries,
+                ((page - 1) * totalEntries) + totalEntries,
+            ),
+        });
+    }, [data, selectedList, page]);
 
     useEffect(() => {
         if (!globalThis) {
@@ -113,7 +98,7 @@ export default function AnilistLibrary({
     let cardsNode: React.ReactNode;
 
     if (isPending) {
-        cardsNode = mediaListStatuses.map((mediaListStatus) => (
+        cardsNode = safeListCategories.map((mediaListStatus) => (
             <SkeletonSmallCard
                 key={mediaListStatus}
                 isGrid
@@ -124,7 +109,7 @@ export default function AnilistLibrary({
     }
 
     if (error) {
-        cardsNode = mediaListStatuses.map((mediaListStatus) => (
+        cardsNode = safeListCategories.map((mediaListStatus) => (
             <ErrorSmallCard
                 key={mediaListStatus}
                 isGrid
@@ -132,13 +117,13 @@ export default function AnilistLibrary({
         ));
     }
 
-    breakable: if (data !== undefined && "mediaList" in data) {
+    breakable: if (data !== undefined) {
         // should never occur
-        if (!Array.isArray(data.mediaList)) {
+        if (!Array.isArray(slicedData.list)) {
             break breakable;
         }
 
-        cardsNode = data.mediaList.map((media: {
+        cardsNode = slicedData.list.map((media: {
             media: AnimeType;
             progress: number;
             score: number;
@@ -163,13 +148,6 @@ export default function AnilistLibrary({
 
     return (
         <>
-            <div />
-            <p className="text-2xl font-medium leading-none">
-                Library
-            </p>
-            <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                Browse your Anilist library
-            </p>
             <div className="flex gap-2 shrink-0 flex-wrap">
                 <div
                     className="w-fit relative rounded-md flex gap-2 p-1 overflow-hidden shrink-0 flex-wrap"
@@ -194,31 +172,50 @@ export default function AnilistLibrary({
                         }}
                     />
                     {
-                        mediaListStatuses.map((mediaListStatus) => {
+                        safeListCategories.map((mediaListStatus, index) => {
                             return (
-                                <button
-                                    onClick={(event) => {
-                                        currentButtonWidth.current = {
-                                            width:  event.currentTarget.clientWidth,
-                                            offset: {
-                                                left: event.currentTarget.offsetLeft - 4,
-                                                top:  event.currentTarget.offsetTop - 4,
-                                            },
-                                        };
-                                        setSelectedList(mediaListStatus);
-                                    }}
-                                    className="z-10 flex rounded-md py-1 px-2 h-8 cursor-pointer transition-[opacity] duration-300 opacity-80 hover:opacity-100"
-                                    key={mediaListStatus}
-                                >
-                                    {mediaListStatus}
-                                </button>
+                                <React.Fragment key={mediaListStatus}>
+                                    {
+                                        index > 0 && (
+
+                                            <div
+                                                className="h-8 w-[1px]"
+                                                style={{
+                                                    backgroundColor: parseTailwindColor({
+                                                        color: base,
+                                                        step:  theme === DarkThemeKey
+                                                            ? 800 : 200,
+                                                    }),
+                                                }}
+                                            />
+                                        )
+                                    }
+                                    <button
+                                        onClick={(event) => {
+                                            currentButtonWidth.current = {
+                                                width:  event.currentTarget.clientWidth,
+                                                offset: {
+                                                    left: event.currentTarget.offsetLeft - 4,
+                                                    top:  event.currentTarget.offsetTop - 4,
+                                                },
+                                            };
+                                            setSelectedList(mediaListStatus);
+                                        }}
+                                        className="z-10 flex rounded-md py-1 px-2 h-8 cursor-pointer transition-[opacity] duration-300 opacity-80 hover:opacity-100"
+                                    >
+                                        {mediaListStatus}
+                                    </button>
+                                </React.Fragment>
+
                             );
                         })
                     }
                 </div>
             </div>
             <Pagination
-                total={30}
+                total={
+                    Math.ceil((data?.lists?.[slicedData.index]?.entries?.length ?? 1) / totalEntries)
+                }
                 onChange={onChange}
                 page={page}
             >

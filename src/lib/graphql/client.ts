@@ -13,7 +13,7 @@ export const GraphQLClient = {
         queries: Array<{
             /** A query name that will be used both in response and request body */
             alias:     string;
-            name:      "Media" | "Page.Media" | "Page.MediaList";
+            name:      "Media" | "Page.Media" | "MediaListCollection";
             fields:    Array<QueryType> | string;
             variables: {
                 page: {
@@ -68,7 +68,7 @@ export const GraphQLClient = {
                     // param: $param
                     let queryParameter = `${key}: $${aliasedKeyName}`;
 
-                    if (name === "Page.MediaList" && key === "mediaListStatus") {
+                    if (name === "MediaListCollection" && key === "mediaListStatus") {
                         // `MediaStatus` and `MediaListStatus` share the same names
                         queryParameter = `status: $${aliasedKeyName}`;
                     }
@@ -99,8 +99,8 @@ export const GraphQLClient = {
             let templateQuery: string;
 
             switch (name) {
-                case "Page.MediaList": {
-                    templateQuery = `${capitalizedAlias}: Page(perPage: $perPage${capitalizedAlias}, page: $page${capitalizedAlias}) { pageInfo { hasNextPage } mediaList(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
+                case "MediaListCollection": {
+                    templateQuery = `${capitalizedAlias}: MediaListCollection(${templateMediaQueryParameters}) { ${templateQueryFields} }`;
 
                     break;
                 }
