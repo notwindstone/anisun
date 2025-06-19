@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useMemo } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { useEffect, useState } from "react";
 import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
@@ -13,6 +12,7 @@ import Pagination from "@/components/layout/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
 import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
 import { LibraryChunkSize } from "@/constants/app";
+import { useDebouncedState } from "@mantine/hooks";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 
@@ -42,6 +42,7 @@ export default function AnilistLibrary({
         };
     });
     const searchParameters = useSearchParams();
+    const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState("", 500);
 
     const [page, onChange] = useState(
         Number(searchParameters.get("page") || 1),
@@ -81,6 +82,7 @@ export default function AnilistLibrary({
         });
     }, [data, selectedList, safePage]);
 
+    // page writing to debounced searchParams state
     useEffect(() => {
         if (!globalThis) {
             return;
@@ -90,8 +92,12 @@ export default function AnilistLibrary({
 
         modifiedParameters.set("page", safePage.toString());
 
-        globalThis.history.pushState({}, "", `?${modifiedParameters.toString()}`);
-    }, [searchParameters, safePage]);
+        setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
+    }, [searchParameters, setDebouncedSearchParameters, safePage]);
+
+    useEffect(() => {
+        globalThis.history.pushState({}, "", debouncedSearchParameters);
+    }, [debouncedSearchParameters]);
 
     let cardsNode: React.ReactNode;
 
