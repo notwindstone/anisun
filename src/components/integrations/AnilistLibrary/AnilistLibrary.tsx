@@ -2,11 +2,21 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
-import { OAuth2Routes } from "@/constants/routes";
+import { RemoteRoutes } from "@/constants/routes";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import { useState } from "react";
+import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import { GraphQLClient } from "@/lib/graphql/client";
+import Badge from "@/components/base/Badge/Badge";
+import { VariablesType } from "@/types/Anime/Variables.type";
+import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
+
+const mediaListStatuses: Array<VariablesType["mediaListStatus"] | "ALL"> = ["COMPLETED", "CURRENT", "DROPPED", "PAUSED", "PLANNING", "REPEATING", "ALL"];
 
 export default function AnilistLibrary({
     accessToken,
@@ -15,51 +25,104 @@ export default function AnilistLibrary({
     accessToken: string;
     tokenProvider: OAuth2ProvidersType;
 }) {
-    const [selectedList, setSelectedList] = useState<"COMPLETED" | "PLANNING" | "ALL" | "other shit">("ALL");
+    const { theme, base } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            theme: value.data.theme,
+            base:  value.data.colors.base,
+        };
+    });
+    const [selectedList, setSelectedList] = useState<VariablesType["mediaListStatus"] | "ALL">("ALL");
     const { data, isPending, error } = useQuery({
-        queryKey: ["anime", tokenProvider, "library"],
+        queryKey: ["anime", "library", tokenProvider, selectedList],
         queryFn:  async () => {
-            const response = await fetch(OAuth2Routes.Anilist._FetchUserURL, {
-                method:  "POST",
-                headers: {
-                    Authorization: `Bearer ${accessToken}`,
-                    ...OAuth2Routes.Anilist._FetchUserHeaders,
-                },
-                body: JSON.stringify({
-                    query: `
-                        query {
-                          Page(perPage: 30) {
-                            mediaList(userName: "windstone", type: ANIME${selectedList === "ALL" ? "" : `, status: ${selectedList}`}) {
-                              progress
-                              media {
-                                id
-                                idMal
-                                coverImage { extraLarge }
-                                averageScore
-                                episodes
-                                title {
-                                  romaji
-                                  english
+            const data = await getGraphQLResponse<{ mediaList: AnimeType }>({
+                accessToken,
+                url: RemoteRoutes.Anilist.GraphQL.Root,
+                ...GraphQLClient.Anilist({
+                    queries: [
+                        {
+                            alias:     "library",
+                            name:      "Page.MediaList",
+                            variables: {
+                                page: {
+                                    page:    1,
+                                    perPage: 30,
+                                },
+                                media: {
+                                    type:     "ANIME",
+                                    userName: "windstone",
+                                    ...(selectedList === "ALL" ? {} : {
+                                        mediaListStatus: selectedList,
+                                    }),
+                                },
+                            },
+                            fields: `
+                                progress
+                                media {
+                                  id
+                                  idMal
+                                  coverImage { extraLarge }
+                                  averageScore
+                                  episodes
+                                  title {
+                                    romaji
+                                    english
+                                  }
                                 }
-                              }
-                            }
-                          }
-                        }
-                    `,
+                            `,
+                        },
+                    ],
                 }),
             });
-            const body = await response.json();
 
-            return body.data.Page.mediaList;
+            // eslint-disable-next-line unicorn/no-abusive-eslint-disable
+            // eslint-disable-next-line
+            // @ts-ignore
+            return data.Library.mediaList;
         },
     });
 
+    let cardsNode: React.ReactNode;
+
     if (isPending) {
-        return;
+        cardsNode = mediaListStatuses.map((mediaListStatus) => (
+            <SkeletonSmallCard
+                key={mediaListStatus}
+                isGrid
+                theme={theme}
+                base={base}
+            />
+        ));
     }
 
     if (error) {
-        return;
+        cardsNode = mediaListStatuses.map((mediaListStatus) => (
+            <ErrorSmallCard
+                key={mediaListStatus}
+                isGrid
+            />
+        ));
+    }
+
+    if (data) {
+        cardsNode = data.map((media: {
+            media: AnimeType;
+            progress: number;
+        }, index: number) => {
+            const { media: anime, progress } = media;
+
+            return (
+                <SmallCard
+                    key={`${anime.id}_${index}`}
+                    data={{
+                        ...anime,
+                        currentEpisode: progress,
+                    }}
+                    isGrid
+                    isImageUnoptimized
+                />
+            );
+        });
     }
 
     return (
@@ -72,29 +135,22 @@ export default function AnilistLibrary({
                 Browse your Anilist library
             </p>
             <div className="flex gap-2">
-                {selectedList}
-            </div>
-            <GridCards disablePadding>
                 {
-                    data.map((media: {
-                        media: AnimeType;
-                        progress: number;
-                    }, index: number) => {
-                        const { media: anime, progress } = media;
-
+                    mediaListStatuses.map((mediaListStatus) => {
                         return (
-                            <SmallCard
-                                key={`${anime.id}_${index}`}
-                                data={{
-                                    ...anime,
-                                    currentEpisode: progress,
-                                }}
-                                isGrid
-                                isImageUnoptimized
-                            />
+                            <Badge
+                                appendClassNames={`${selectedList === mediaListStatus ? "invert cursor-pointer" : "cursor-pointer"}`}
+                                onClick={() => setSelectedList(mediaListStatus)}
+                                key={mediaListStatus}
+                            >
+                                {mediaListStatus}
+                            </Badge>
                         );
                     })
                 }
+            </div>
+            <GridCards disablePadding>
+                {cardsNode}
             </GridCards>
         </>
     );

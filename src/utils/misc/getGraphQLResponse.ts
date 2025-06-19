@@ -3,11 +3,13 @@ const getGraphQLResponse = async <T extends object>({
     query,
     variables,
     options,
+    accessToken,
 }: {
     url: string;
     query: string;
     variables: string;
     options?: Partial<Request> | undefined;
+    accessToken?: string;
 }): Promise<
         Record<
             string,
@@ -20,6 +22,9 @@ const getGraphQLResponse = async <T extends object>({
         method:  "POST",
         headers: {
             "Content-Type": "application/json",
+            ...(accessToken === undefined ? {} : {
+                "Authorization": `Bearer ${accessToken}`,
+            }),
         },
         body: JSON.stringify({
             query,

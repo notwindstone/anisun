@@ -13,12 +13,14 @@ export default function Badge({
     score,
     textSize = "text-md",
     appendClassNames,
+    onClick,
 }: {
     children: React.ReactNode;
     isScore?: boolean;
     score?: number;
     textSize?: textSizeType | `${textSizeType} ${textSizeType}`;
     appendClassNames?: string;
+    onClick?: React.MouseEventHandler<HTMLDivElement>;
 }) {
     const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => value.data);
     let scoreBadgeColorClassName;
@@ -56,6 +58,7 @@ export default function Badge({
                             : 800,
                     }),
                 }}
+                onClick={onClick}
             >
                 {children}
             </p>

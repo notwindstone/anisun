@@ -13,8 +13,8 @@ export const GraphQLClient = {
         queries: Array<{
             /** A query name that will be used both in response and request body */
             alias:     string;
-            name:      "Media" | "Page.Media";
-            fields:    Array<QueryType>;
+            name:      "Media" | "Page.Media" | "Page.MediaList";
+            fields:    Array<QueryType> | string;
             variables: {
                 page: {
                     perPage: number;
@@ -66,7 +66,12 @@ export const GraphQLClient = {
                     const aliasedKeyName = `${key}${capitalizedAlias}`;
 
                     // param: $param
-                    const queryParameter = `${key}: $${aliasedKeyName}`;
+                    let queryParameter = `${key}: $${aliasedKeyName}`;
+
+                    if (name === "Page.MediaList" && key === "mediaListStatus") {
+                        // `MediaStatus` and `MediaListStatus` share the same names
+                        queryParameter = `status: $${aliasedKeyName}`;
+                    }
 
                     // $param: ParamType
                     const queryVariable = `$${aliasedKeyName}: ${keyType}`;
@@ -87,11 +92,18 @@ export const GraphQLClient = {
             }
 
             const templateMediaQueryParameters = templateMediaQueryParametersArray.join(", ");
-            const templateQueryFields = formatArrayToGraphQLFields(fields);
+            const templateQueryFields = typeof fields === "string"
+                ? fields
+                : formatArrayToGraphQLFields(fields);
 
             let templateQuery: string;
 
             switch (name) {
+                case "Page.MediaList": {
+                    templateQuery = `${capitalizedAlias}: Page(perPage: $perPage${capitalizedAlias}, page: $page${capitalizedAlias}) { mediaList(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
+
+                    break;
+                }
                 case "Page.Media": {
                     templateQuery = `${capitalizedAlias}: Page(perPage: $perPage${capitalizedAlias}, page: $page${capitalizedAlias}) { media(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
 

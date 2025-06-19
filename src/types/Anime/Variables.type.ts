@@ -20,4 +20,7 @@ export type VariablesType = {
     averageScore: number;
     popularity: number;
     search: string;
+    // MediaList
+    userName: string;
+    mediaListStatus: "COMPLETED" | "CURRENT" | "DROPPED" | "PAUSED" | "PLANNING" | "REPEATING";
 }>;
