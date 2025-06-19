@@ -62,6 +62,16 @@ export default async function Page() {
             );
             break;
         }
+        default: {
+            providerLibrary = (
+                <AnilistLibraryWrapper
+                    username={safeAccountValues.username}
+                    accessToken={accessToken}
+                    tokenProvider={tokenProvider}
+                />
+            );
+            break;
+        }
     }
 
     return (
