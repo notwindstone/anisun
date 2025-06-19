@@ -6,10 +6,9 @@ import { RemoteRoutes } from "@/constants/routes";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
 import { GraphQLClient } from "@/lib/graphql/client";
-import Badge from "@/components/base/Badge/Badge";
 import { VariablesType } from "@/types/Anime/Variables.type";
 import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
@@ -32,6 +31,13 @@ export default function AnilistLibrary({
         };
     });
     const [selectedList, setSelectedList] = useState<VariablesType["mediaListStatus"] | "ALL">("ALL");
+    const currentButtonWidth = useRef<{
+        width:  number;
+        offset: {
+            left: number;
+            top:  number;
+        };
+    }>(null);
     const { data, isPending, error } = useQuery({
         queryKey: ["anime", "library", tokenProvider, selectedList],
         queryFn:  async () => {
@@ -134,20 +140,38 @@ export default function AnilistLibrary({
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
                 Browse your Anilist library
             </p>
-            <div className="flex gap-2">
-                {
-                    mediaListStatuses.map((mediaListStatus) => {
-                        return (
-                            <Badge
-                                appendClassNames={`${selectedList === mediaListStatus ? "invert cursor-pointer" : "cursor-pointer"}`}
-                                onClick={() => setSelectedList(mediaListStatus)}
-                                key={mediaListStatus}
-                            >
-                                {mediaListStatus}
-                            </Badge>
-                        );
-                    })
-                }
+            <div className="flex gap-2 shrink-0 flex-wrap">
+                <div className="w-fit relative rounded-md flex gap-2 bg-neutral-900 p-1 overflow-hidden shrink-0 flex-wrap">
+                    <span
+                        className="transition-segmented-control duration-300 absolute bg-neutral-800 h-8 rounded-md"
+                        style={{
+                            width:     currentButtonWidth.current?.width ?? 0,
+                            transform: `translateX(${currentButtonWidth.current?.offset?.left ?? 0}px) translateY(${currentButtonWidth.current?.offset?.top ?? 0}px)`,
+                        }}
+                    />
+                    {
+                        mediaListStatuses.map((mediaListStatus) => {
+                            return (
+                                <button
+                                    onClick={(event) => {
+                                        currentButtonWidth.current = {
+                                            width:  event.currentTarget.clientWidth,
+                                            offset: {
+                                                left: event.currentTarget.offsetLeft - 4,
+                                                top:  event.currentTarget.offsetTop - 4,
+                                            },
+                                        };
+                                        setSelectedList(mediaListStatus);
+                                    }}
+                                    className="z-10 flex rounded-md py-1 px-2 h-8 cursor-pointer transition-[opacity] duration-300 opacity-80 hover:opacity-100"
+                                    key={mediaListStatus}
+                                >
+                                    {mediaListStatus}
+                                </button>
+                            );
+                        })
+                    }
+                </div>
             </div>
             <GridCards disablePadding>
                 {cardsNode}
