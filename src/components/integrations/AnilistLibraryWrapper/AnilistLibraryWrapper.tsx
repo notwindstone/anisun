@@ -76,6 +76,17 @@ export default function AnilistLibraryWrapper({
             const categories = [];
             const allChunkedLists = [];
 
+            // contains every anime entry from the list (there might be duplicates)
+            const allAnimeEntriesInChunks: Record<number, Array<{
+                media: AnimeType;
+                progress: number;
+                score: number;
+            }>> = [];
+
+            // for `allAnimeEntriesInChunks`
+            let globalIndex = 0;
+            let totalAnimes = 0;
+
             for (const entry of data.Library.lists) {
                 categories.push(entry.name);
 
@@ -88,14 +99,23 @@ export default function AnilistLibraryWrapper({
 
                 for (const anime of entry.entries) {
                     const chunkIndex = Math.floor(index / LibraryChunkSize);
+                    // for `allAnimeEntriesInChunks`
+                    const globalChunkIndex = Math.floor(globalIndex / LibraryChunkSize);
+
+                    if (!allAnimeEntriesInChunks[globalChunkIndex]) {
+                        allAnimeEntriesInChunks[globalChunkIndex] = [];
+                    }
 
                     if (!currentChunks[chunkIndex]) {
                         currentChunks[chunkIndex] = [];
                     }
 
+                    allAnimeEntriesInChunks[globalChunkIndex].push(anime);
                     currentChunks[chunkIndex].push(anime);
 
                     index++;
+                    globalIndex++;
+                    totalAnimes++;
                 }
 
                 allChunkedLists.push({
@@ -103,6 +123,13 @@ export default function AnilistLibraryWrapper({
                     entries: currentChunks,
                 });
             }
+
+            // to display `allAnimeEntriesInChunks`
+            categories.push("Merged");
+            allChunkedLists.push({
+                total:   totalAnimes,
+                entries: allAnimeEntriesInChunks,
+            });
 
             return {
                 categories: categories,

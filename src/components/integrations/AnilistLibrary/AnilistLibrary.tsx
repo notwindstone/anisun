@@ -127,12 +127,20 @@ export default function AnilistLibrary({
             break breakable;
         }
 
+        const animeSet = new Set<number | undefined>([]);
+
         cardsNode = slicedData.list.map((media: {
             media: AnimeType;
             progress: number;
             score: number;
         }, index: number) => {
             const { media: anime, progress, score } = media;
+
+            if (animeSet.has(anime?.id)) {
+                return;
+            }
+
+            animeSet.add(anime?.id);
 
             return (
                 <SmallCard
