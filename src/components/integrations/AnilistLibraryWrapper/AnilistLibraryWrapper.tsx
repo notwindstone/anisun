@@ -7,6 +7,7 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import { RemoteRoutes } from "@/constants/routes";
 import { GraphQLClient } from "@/lib/graphql/client";
 import AnilistLibrary from "@/components/integrations/AnilistLibrary/AnilistLibrary";
+import { LibraryChunkSize } from "@/constants/app";
 
 export default function AnilistLibraryWrapper({
     username,
@@ -17,7 +18,7 @@ export default function AnilistLibraryWrapper({
     accessToken: string;
     tokenProvider: OAuth2ProvidersType;
 }) {
-    const { data, isPending, error } = useQuery({
+    const { data: queryData, isPending, error } = useQuery({
         queryKey: ["anime", "library", tokenProvider],
         queryFn:  async () => {
             const data = await getGraphQLResponse<{ media: AnimeType }>({
@@ -73,14 +74,39 @@ export default function AnilistLibraryWrapper({
             }
 
             const categories = [];
+            const allChunkedLists = [];
 
             for (const entry of data.Library.lists) {
                 categories.push(entry.name);
+
+                let index = 0;
+                const currentChunks: Record<number, Array<{
+                    media: AnimeType;
+                    progress: number;
+                    score: number;
+                }>> = {};
+
+                for (const anime of entry.entries) {
+                    const chunkIndex = Math.floor(index / LibraryChunkSize);
+
+                    if (!currentChunks[chunkIndex]) {
+                        currentChunks[chunkIndex] = [];
+                    }
+
+                    currentChunks[chunkIndex].push(anime);
+
+                    index++;
+                }
+
+                allChunkedLists.push({
+                    total:   entry.entries.length,
+                    entries: currentChunks,
+                });
             }
 
             return {
                 categories: categories,
-                lists:      data.Library.lists,
+                lists:      allChunkedLists,
             };
         },
     });
@@ -95,7 +121,7 @@ export default function AnilistLibraryWrapper({
                 Browse your Anilist library
             </p>
             <AnilistLibrary
-                data={data}
+                data={queryData}
                 isPending={isPending}
                 error={error}
             />

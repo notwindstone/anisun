@@ -12,9 +12,9 @@ import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/layout/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
 import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
+import { LibraryChunkSize } from "@/constants/app";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
-const totalEntries = 18;
 
 export default function AnilistLibrary({
     data,
@@ -24,11 +24,12 @@ export default function AnilistLibrary({
     data: {
         categories: Array<string>,
         lists:      Array<{
-            entries: Array<{
+            total:   number;
+            entries: Record<number, Array<{
                 media: AnimeType;
                 progress: number;
                 score: number;
-            }>;
+            }>>;
         }>,
     } | undefined;
     isPending: boolean;
@@ -59,7 +60,7 @@ export default function AnilistLibrary({
     });
 
     const safeListCategories = data?.categories ?? mediaListStatuses;
-    const totalPages = Math.ceil((data?.lists?.[slicedData.index]?.entries?.length ?? 1) / totalEntries);
+    const totalPages = Math.ceil((data?.lists?.[slicedData.index]?.total ?? 1) / LibraryChunkSize);
     const safePage = Math.min(page, totalPages);
 
     // slice array with useEffect to improve performance
@@ -76,10 +77,7 @@ export default function AnilistLibrary({
 
         setSlicedData({
             index: selectedIndex,
-            list:  data.lists[selectedIndex].entries.slice(
-                (safePage - 1) * totalEntries,
-                ((safePage - 1) * totalEntries) + totalEntries,
-            ),
+            list:  data.lists[selectedIndex].entries[safePage - 1],
         });
     }, [data, selectedList, safePage]);
 
