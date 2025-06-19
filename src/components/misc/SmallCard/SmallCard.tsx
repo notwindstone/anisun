@@ -17,6 +17,7 @@ export default function SmallCard({
     data: AnimeType & Partial<{
         currentEpisode: number;
         currentSeason:  number;
+        userScore:      number;
     }>;
     isGrid?: boolean;
     isImageUnoptimized?: boolean;
@@ -59,9 +60,10 @@ export default function SmallCard({
 
     const gridClassNames = isGrid ? "w-full flex-max-w-1/2 xs:flex-max-w-1/3 lg:flex-max-w-1/4 xl:flex-max-w-1/6" : "h-full";
 
-    // for history entries
+    // for additional entries
     const currentEpisode = data?.currentEpisode;
     const currentSeason = data?.currentSeason;
+    const userScore = data?.userScore;
 
     return (
         <>
@@ -90,7 +92,10 @@ export default function SmallCard({
                     <div className="w-full flex flex-wrap justify-between gap-1">
                         {
                             (status === "FINISHED" || status === "RELEASING") && (
-                                <Badge textSize="text-xs">
+                                <Badge
+                                    textSize="text-xs"
+                                    label="Current anime status"
+                                >
                                     {
                                         translate({
                                             text:   status,
@@ -100,7 +105,12 @@ export default function SmallCard({
                                 </Badge>
                             )
                         }
-                        <Badge textSize="text-xs" score={score} isScore>
+                        <Badge
+                            textSize="text-xs"
+                            score={score}
+                            isScore
+                            label="Other users' average score"
+                        >
                             {
                                 // Cast this variable to a string
                                 // because it might be NaN
@@ -110,10 +120,24 @@ export default function SmallCard({
                     </div>
                     <div className="w-full flex flex-col gap-1">
                         {
+                            (userScore !== undefined && userScore !== null) && (
+                                <Badge
+                                    isScore
+                                    score={userScore}
+                                    appendClassNames="w-fit"
+                                    textSize="text-xs"
+                                    label="Your score"
+                                >
+                                    {userScore}
+                                </Badge>
+                            )
+                        }
+                        {
                             (currentEpisode !== undefined && currentEpisode !== null) && (
                                 <Badge
                                     appendClassNames="w-fit invert"
                                     textSize="text-xs"
+                                    label="Total episodes watched"
                                 >
                                     {`${currentEpisode} / ${data?.episodes ?? "?"}`}
                                 </Badge>
@@ -124,6 +148,7 @@ export default function SmallCard({
                                 <Badge
                                     appendClassNames="w-fit invert"
                                     textSize="text-xs"
+                                    label="Season that you watched"
                                 >
                                     {`SEASON ${currentSeason}`}
                                 </Badge>

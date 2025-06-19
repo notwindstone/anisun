@@ -14,6 +14,7 @@ export default function Badge({
     textSize = "text-md",
     appendClassNames,
     onClick,
+    label,
 }: {
     children: React.ReactNode;
     isScore?: boolean;
@@ -21,6 +22,7 @@ export default function Badge({
     textSize?: textSizeType | `${textSizeType} ${textSizeType}`;
     appendClassNames?: string;
     onClick?: React.MouseEventHandler<HTMLDivElement>;
+    label?: string;
 }) {
     const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => value.data);
     let scoreBadgeColorClassName;
@@ -43,6 +45,8 @@ export default function Badge({
     return (
         scoreIsNotZero && hasText ? (
             <p
+                title={label}
+                aria-label={label}
                 className={`transition-colors duration-200 rounded-md ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName} ${appendClassNames ? `${appendClassNames}` : ""}`}
                 style={isScore ? undefined : {
                     backgroundColor: parseTailwindColor({

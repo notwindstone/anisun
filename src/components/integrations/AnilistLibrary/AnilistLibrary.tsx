@@ -14,13 +14,17 @@ import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmall
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import { DarkThemeKey } from "@/constants/configs";
 
 const mediaListStatuses: Array<VariablesType["mediaListStatus"] | "ALL"> = ["COMPLETED", "CURRENT", "DROPPED", "PAUSED", "PLANNING", "REPEATING", "ALL"];
 
 export default function AnilistLibrary({
+    username,
     accessToken,
     tokenProvider,
 }: {
+    username: string;
     accessToken: string;
     tokenProvider: OAuth2ProvidersType;
 }) {
@@ -30,7 +34,7 @@ export default function AnilistLibrary({
             base:  value.data.colors.base,
         };
     });
-    const [selectedList, setSelectedList] = useState<VariablesType["mediaListStatus"] | "ALL">("ALL");
+    const [selectedList, setSelectedList] = useState<VariablesType["mediaListStatus"] | "ALL" | undefined>();
     const currentButtonWidth = useRef<{
         width:  number;
         offset: {
@@ -56,20 +60,22 @@ export default function AnilistLibrary({
                                 },
                                 media: {
                                     type:     "ANIME",
-                                    userName: "windstone",
-                                    ...(selectedList === "ALL" ? {} : {
+                                    userName: username,
+                                    ...((selectedList === "ALL" || selectedList === undefined) ? {} : {
                                         mediaListStatus: selectedList,
                                     }),
                                 },
                             },
                             fields: `
                                 progress
+                                score
                                 media {
                                   id
                                   idMal
                                   coverImage { extraLarge }
                                   averageScore
                                   episodes
+                                  status
                                   title {
                                     romaji
                                     english
@@ -114,8 +120,9 @@ export default function AnilistLibrary({
         cardsNode = data.map((media: {
             media: AnimeType;
             progress: number;
+            score: number;
         }, index: number) => {
-            const { media: anime, progress } = media;
+            const { media: anime, progress, score } = media;
 
             return (
                 <SmallCard
@@ -123,6 +130,7 @@ export default function AnilistLibrary({
                     data={{
                         ...anime,
                         currentEpisode: progress,
+                        userScore:      score,
                     }}
                     isGrid
                     isImageUnoptimized
@@ -141,10 +149,24 @@ export default function AnilistLibrary({
                 Browse your Anilist library
             </p>
             <div className="flex gap-2 shrink-0 flex-wrap">
-                <div className="w-fit relative rounded-md flex gap-2 bg-neutral-900 p-1 overflow-hidden shrink-0 flex-wrap">
+                <div
+                    className="w-fit relative rounded-md flex gap-2 p-1 overflow-hidden shrink-0 flex-wrap"
+                    style={{
+                        backgroundColor: parseTailwindColor({
+                            color: base,
+                            step:  theme === DarkThemeKey
+                                ? 900 : 100,
+                        }),
+                    }}
+                >
                     <span
-                        className="transition-segmented-control duration-300 absolute bg-neutral-800 h-8 rounded-md"
+                        className="transition-segmented-control duration-300 absolute h-8 rounded-md"
                         style={{
+                            backgroundColor: parseTailwindColor({
+                                color: base,
+                                step:  theme === DarkThemeKey
+                                    ? 800 : 200,
+                            }),
                             width:     currentButtonWidth.current?.width ?? 0,
                             transform: `translateX(${currentButtonWidth.current?.offset?.left ?? 0}px) translateY(${currentButtonWidth.current?.offset?.top ?? 0}px)`,
                         }}

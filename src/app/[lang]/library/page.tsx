@@ -1,13 +1,31 @@
 import HistoryWrapper from "@/components/misc/HistoryWrapper/HistoryWrapper";
 import AnilistLibrary from "@/components/integrations/AnilistLibrary/AnilistLibrary";
-import { AccessTokenCookieKey, AccessTokenProviderCookieKey } from "@/constants/app";
+import { AccessTokenCookieKey, AccessTokenProviderCookieKey, AccountInfoCookieKey } from "@/constants/app";
 import { cookies } from "next/headers";
 import getAccessTokenProvider from "@/utils/oauth2/getAccessTokenProvider";
+import readCookiesData from "@/utils/configs/readCookiesData";
+import { UserType } from "@/types/OAuth2/User.type";
+import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 
 export default async function Page() {
     const cookieStore = await cookies();
+
     const accessToken = cookieStore.get(AccessTokenCookieKey)?.value ?? "";
     const parsedTokenProvider = cookieStore.get(AccessTokenProviderCookieKey)?.value ?? "";
+    const accountInfo = cookieStore.get(AccountInfoCookieKey);
+
+    // yeah ik that `any_type | unknown` becomes just `unknown`
+    const parsedAccountInfoData = readCookiesData<UserType | unknown>({
+        data:         accountInfo,
+        fallbackData: {
+            username: "",
+            avatar:   "",
+        },
+    });
+
+    const safeAccountValues = getSafeAccountData({
+        account: parsedAccountInfoData,
+    });
 
     const tokenProvider = getAccessTokenProvider(parsedTokenProvider);
 
@@ -17,6 +35,7 @@ export default async function Page() {
         case "anilist": {
             providerLibrary = (
                 <AnilistLibrary
+                    username={safeAccountValues.username}
                     accessToken={accessToken}
                     tokenProvider={tokenProvider}
                 />
@@ -26,6 +45,7 @@ export default async function Page() {
         case "mal": {
             providerLibrary = (
                 <AnilistLibrary
+                    username={safeAccountValues.username}
                     accessToken={accessToken}
                     tokenProvider={tokenProvider}
                 />
@@ -35,6 +55,7 @@ export default async function Page() {
         case "shikimori": {
             providerLibrary = (
                 <AnilistLibrary
+                    username={safeAccountValues.username}
                     accessToken={accessToken}
                     tokenProvider={tokenProvider}
                 />
