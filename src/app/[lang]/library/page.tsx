@@ -10,7 +10,7 @@ import AnilistLibraryWrapper from "@/components/integrations/AnilistLibraryWrapp
 export default async function Page() {
     const cookieStore = await cookies();
 
-    const accessToken = cookieStore.get(AccessTokenCookieKey)?.value ?? "";
+    const accessToken = cookieStore.get(AccessTokenCookieKey)?.value;
     const parsedTokenProvider = cookieStore.get(AccessTokenProviderCookieKey)?.value ?? "";
     const accountInfo = cookieStore.get(AccountInfoCookieKey);
 
