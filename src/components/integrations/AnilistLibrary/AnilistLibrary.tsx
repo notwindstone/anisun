@@ -42,12 +42,14 @@ export default function AnilistLibrary({
         };
     });
     const searchParameters = useSearchParams();
-    const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState("", 500);
+    const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState<string>("", 500);
 
     const [page, onChange] = useState(
         Number(searchParameters.get("page") || 1),
     );
-    const [selectedList, setSelectedList] = useState<string | undefined>();
+    const [selectedList, setSelectedList] = useState<string | undefined>(
+        searchParameters.get("list") ?? undefined,
+    );
     const [slicedData, setSlicedData] = useState<{
         index: number;
         list:  Array<{
@@ -91,9 +93,10 @@ export default function AnilistLibrary({
         const modifiedParameters = new URLSearchParams(searchParameters.toString());
 
         modifiedParameters.set("page", safePage.toString());
+        modifiedParameters.set("list", (selectedList ?? "").toString());
 
         setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
-    }, [searchParameters, setDebouncedSearchParameters, safePage]);
+    }, [searchParameters, selectedList, setDebouncedSearchParameters, safePage]);
 
     useEffect(() => {
         globalThis.history.pushState({}, "", debouncedSearchParameters);
@@ -162,9 +165,10 @@ export default function AnilistLibrary({
     const memoizedSegmentedControl = useMemo(() => (
         <SegmentedControl
             list={safeListCategories}
+            selected={selectedList}
             selectList={setSelectedList}
         />
-    ), [safeListCategories, setSelectedList]);
+    ), [safeListCategories, selectedList, setSelectedList]);
 
     return (
         <>

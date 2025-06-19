@@ -1,14 +1,16 @@
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { createRef, Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function SegmentedControl({
     list,
+    selected,
     selectList,
 }: {
     list: Array<string>;
+    selected: string | undefined;
     selectList: Dispatch<SetStateAction<string | undefined>>;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
@@ -17,13 +19,47 @@ export default function SegmentedControl({
             base:  value.data.colors.base,
         };
     });
+    const references= useMemo(
+        () => Array.from({ length: list.length }).map(() => createRef<HTMLButtonElement>()),
+        [list],
+    );
     const [currentButtonWidth, setCurrentButtonWidth] = useState<{
         width:  number;
         offset: {
             left: number;
             top:  number;
         };
-    }>();
+    }>({
+        width:  0,
+        offset: {
+            left: 0,
+            top:  0,
+        },
+    });
+    const [dynamicTransitionClassName, setDynamicTransitionClassName] = useState<"duration-0" | "transition-segmented-control duration-300">("duration-0");
+
+    useEffect(() => {
+        const filteredReference = references.find((reference) => reference.current?.textContent === selected);
+
+        setCurrentButtonWidth({
+            width:  Number(filteredReference?.current?.clientWidth || 0),
+            offset: {
+                left: Number(filteredReference?.current?.offsetLeft || 0) - 4,
+                top:  Number(filteredReference?.current?.offsetTop || 0) - 4,
+            },
+        });
+
+        // don't show transitions on initial render
+        if (dynamicTransitionClassName === "transition-segmented-control duration-300") {
+            return;
+        }
+
+        if (currentButtonWidth.width === 0) {
+            return;
+        }
+
+        setDynamicTransitionClassName("transition-segmented-control duration-300");
+    }, [references, currentButtonWidth.width, dynamicTransitionClassName, selected]);
 
     return (
         <>
@@ -39,7 +75,7 @@ export default function SegmentedControl({
                     }}
                 >
                     <span
-                        className="transition-segmented-control duration-300 absolute h-8 rounded-md"
+                        className={`absolute h-8 rounded-md ${dynamicTransitionClassName}`}
                         style={{
                             backgroundColor: parseTailwindColor({
                                 color: base,
@@ -70,16 +106,8 @@ export default function SegmentedControl({
                                         )
                                     }
                                     <button
-                                        onClick={(event) => {
-                                            setCurrentButtonWidth({
-                                                width:  event.currentTarget.clientWidth,
-                                                offset: {
-                                                    left: event.currentTarget.offsetLeft - 4,
-                                                    top:  event.currentTarget.offsetTop - 4,
-                                                },
-                                            });
-                                            selectList(mediaListStatus);
-                                        }}
+                                        ref={references[index]}
+                                        onClick={() => selectList(mediaListStatus)}
                                         className="z-10 flex rounded-md py-1 px-2 h-8 cursor-pointer transition-[opacity] duration-300 opacity-80 hover:opacity-100"
                                     >
                                         {mediaListStatus}
