@@ -67,7 +67,7 @@ export default async function Page() {
                 <AnilistLibraryWrapper
                     username={safeAccountValues.username}
                     accessToken={accessToken}
-                    tokenProvider={tokenProvider}
+                    tokenProvider={"anilist"}
                 />
             );
             break;
