@@ -95,7 +95,7 @@ export default function SmallCard({
                             (status === "FINISHED" || status === "RELEASING") && (
                                 <Badge
                                     textSize="text-xs"
-                                    label="Current anime status"
+                                    label="Anime status"
                                 >
                                     {
                                         translate({
@@ -114,6 +114,7 @@ export default function SmallCard({
                             // if `greyOutScore` is true, we don't need it
                             isScore={!data?.greyOutScore}
                             label="Other users' average score"
+                            labelPosition="left"
                         >
                             {
                                 // Cast this variable to a string
