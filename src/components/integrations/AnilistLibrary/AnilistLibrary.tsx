@@ -1,18 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
-import { DarkThemeKey } from "@/constants/configs";
 import Pagination from "@/components/layout/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
+import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 const totalEntries = 18;
@@ -24,7 +23,13 @@ export default function AnilistLibrary({
 }: {
     data: {
         categories: Array<string>,
-        lists:      Array<any>,
+        lists:      Array<{
+            entries: Array<{
+                media: AnimeType;
+                progress: number;
+                score: number;
+            }>;
+        }>,
     } | undefined;
     isPending: boolean;
     error: Error | null;
@@ -35,13 +40,6 @@ export default function AnilistLibrary({
             base:  value.data.colors.base,
         };
     });
-    const currentButtonWidth = useRef<{
-        width:  number;
-        offset: {
-            left: number;
-            top:  number;
-        };
-    }>(null);
     const searchParameters = useSearchParams();
 
     const [page, onChange] = useState(
@@ -146,72 +144,17 @@ export default function AnilistLibrary({
         });
     }
 
+    // optimizations
+    const memoizedSegmentedControl = useMemo(() => (
+        <SegmentedControl
+            list={safeListCategories}
+            selectList={setSelectedList}
+        />
+    ), [safeListCategories, setSelectedList]);
+
     return (
         <>
-            <div className="flex gap-2 shrink-0 flex-wrap">
-                <div
-                    className="w-fit relative rounded-md flex gap-2 p-1 overflow-hidden shrink-0 flex-wrap"
-                    style={{
-                        backgroundColor: parseTailwindColor({
-                            color: base,
-                            step:  theme === DarkThemeKey
-                                ? 900 : 100,
-                        }),
-                    }}
-                >
-                    <span
-                        className="transition-segmented-control duration-300 absolute h-8 rounded-md"
-                        style={{
-                            backgroundColor: parseTailwindColor({
-                                color: base,
-                                step:  theme === DarkThemeKey
-                                    ? 800 : 200,
-                            }),
-                            width:     currentButtonWidth.current?.width ?? 0,
-                            transform: `translateX(${currentButtonWidth.current?.offset?.left ?? 0}px) translateY(${currentButtonWidth.current?.offset?.top ?? 0}px)`,
-                        }}
-                    />
-                    {
-                        safeListCategories.map((mediaListStatus, index) => {
-                            return (
-                                <React.Fragment key={mediaListStatus}>
-                                    {
-                                        index > 0 && (
-
-                                            <div
-                                                className="h-8 w-[1px]"
-                                                style={{
-                                                    backgroundColor: parseTailwindColor({
-                                                        color: base,
-                                                        step:  theme === DarkThemeKey
-                                                            ? 800 : 200,
-                                                    }),
-                                                }}
-                                            />
-                                        )
-                                    }
-                                    <button
-                                        onClick={(event) => {
-                                            currentButtonWidth.current = {
-                                                width:  event.currentTarget.clientWidth,
-                                                offset: {
-                                                    left: event.currentTarget.offsetLeft - 4,
-                                                    top:  event.currentTarget.offsetTop - 4,
-                                                },
-                                            };
-                                            setSelectedList(mediaListStatus);
-                                        }}
-                                        className="z-10 flex rounded-md py-1 px-2 h-8 cursor-pointer transition-[opacity] duration-300 opacity-80 hover:opacity-100"
-                                    >
-                                        {mediaListStatus}
-                                    </button>
-                                </React.Fragment>
-
-                            );
-                        })
-                    }
-                </div>
-            </div>
+            {memoizedSegmentedControl}
             <Pagination
                 total={
                     Math.ceil((data?.lists?.[slicedData.index]?.entries?.length ?? 1) / totalEntries)
