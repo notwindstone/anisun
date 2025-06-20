@@ -15,6 +15,7 @@ export default function Badge({
     appendClassNames,
     onClick,
     label,
+    labelHover,
     labelPosition = "right",
 }: {
     children: React.ReactNode;
@@ -24,6 +25,7 @@ export default function Badge({
     appendClassNames?: string;
     onClick?: React.MouseEventHandler<HTMLDivElement>;
     label?: string;
+    labelHover?: string;
     labelPosition?: "left" | "right" | "top" | "bottom";
 }) {
     const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => value.data);
@@ -54,6 +56,7 @@ export default function Badge({
                     "data-tooltip-top":    labelPosition === "top",
                 }) }
                 data-tooltip={label}
+                data-tooltip-hover={labelHover}
                 aria-label={label}
                 className={`transition-colors duration-200 rounded-md ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName} ${appendClassNames ? `${appendClassNames}` : ""}`}
                 style={isScore ? undefined : {
@@ -72,7 +75,10 @@ export default function Badge({
                 }}
                 onClick={onClick}
             >
-                {children}
+                {
+                    // `label` is used to display text using CSS styles
+                    label ? "" : children
+                }
             </p>
         ) : undefined
     );

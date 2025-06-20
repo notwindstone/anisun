@@ -95,7 +95,11 @@ export default function SmallCard({
                             (status === "FINISHED" || status === "RELEASING") && (
                                 <Badge
                                     textSize="text-xs"
-                                    label="Anime status"
+                                    label={translate({
+                                        text:   status,
+                                        locale: locale,
+                                    })}
+                                    labelHover="Anime status"
                                 >
                                     {
                                         translate({
@@ -113,7 +117,8 @@ export default function SmallCard({
                             // based on the `score` property
                             // if `greyOutScore` is true, we don't need it
                             isScore={!data?.greyOutScore}
-                            label="Other users' average score"
+                            label={score.toString()}
+                            labelHover="Anilist average score"
                             labelPosition="left"
                         >
                             {
@@ -131,7 +136,8 @@ export default function SmallCard({
                                     score={userScore}
                                     appendClassNames="w-fit"
                                     textSize="text-xs"
-                                    label="Your score"
+                                    label={userScore.toString()}
+                                    labelHover="Your score"
                                 >
                                     {userScore}
                                 </Badge>
@@ -142,7 +148,8 @@ export default function SmallCard({
                                 <Badge
                                     appendClassNames="w-fit invert"
                                     textSize="text-xs"
-                                    label="Total episodes watched"
+                                    label={`${currentEpisode} / ${data?.episodes ?? "?"}`}
+                                    labelHover="Total episodes watched"
                                 >
                                     {`${currentEpisode} / ${data?.episodes ?? "?"}`}
                                 </Badge>
@@ -153,7 +160,8 @@ export default function SmallCard({
                                 <Badge
                                     appendClassNames="w-fit invert"
                                     textSize="text-xs"
-                                    label="Season that you watched"
+                                    label={`SEASON ${currentSeason}`}
+                                    labelHover="Season that you watched"
                                 >
                                     {`SEASON ${currentSeason}`}
                                 </Badge>
