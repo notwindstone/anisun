@@ -11,10 +11,9 @@ import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/layout/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
 import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
-import { LibraryChunkSize } from "@/constants/app";
 import { useDebouncedState } from "@mantine/hooks";
 import Input from "@/components/layout/Input/Input";
-import simpleMatch from "@/utils/misc/simpleMatch";
+import getCurrentAnimeChunk from "@/utils/misc/getCurrentAnimeChunk";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 
@@ -60,9 +59,9 @@ export default function AnilistLibrary({
         total: number;
         index: number;
         list:  Array<{
-            media: AnimeType;
+            media:    AnimeType;
             progress: number;
-            score: number;
+            score:    number;
         }>;
     }>({
         total: 0,
@@ -74,94 +73,16 @@ export default function AnilistLibrary({
     const safePage = Math.min(page, slicedData.total);
 
     useEffect(() => {
-        const t1 = performance.now();
         if (!data) {
             return;
         }
 
-        let selectedIndex = data.categories.indexOf(selectedList ?? "");
-
-        if (selectedIndex === -1) {
-            selectedIndex = 0;
-        }
-
-        if (debouncedSearch !== "") {
-            const currentEntries = data.lists[selectedIndex].entries;
-
-            const selectedChunksCount = Object.keys(currentEntries).length;
-            const foundAnimesNotFlat: Array<Array<{
-                media: AnimeType;
-                progress: number;
-                score: number;
-            }>> = [];
-            const lowerCasedSearch = debouncedSearch.toLowerCase();
-
-            for (let chunkIndex = 0; chunkIndex < selectedChunksCount; chunkIndex++) {
-                const chunkedAnimes = currentEntries?.[chunkIndex];
-                const filteredAnimes = chunkedAnimes?.filter((chunkedAnime) => {
-                    const currentMedia = chunkedAnime?.media;
-
-                    const englishTitle = currentMedia?.title?.english?.toLowerCase() ?? "";
-                    const romajiTitle = currentMedia?.title?.romaji?.toLowerCase() ?? "";
-                    const japaneseTitle = currentMedia?.title?.native?.toLowerCase() ?? "";
-
-                    const isInEnglish = simpleMatch(
-                        englishTitle,
-                        lowerCasedSearch,
-                    );
-                    const isInRomaji = simpleMatch(
-                        romajiTitle,
-                        lowerCasedSearch,
-                    );
-                    const isInNative = simpleMatch(
-                        japaneseTitle,
-                        lowerCasedSearch,
-                    );
-
-                    return isInEnglish || isInRomaji || isInNative;
-                });
-
-                if (filteredAnimes.length > 0) {
-                    foundAnimesNotFlat.push(filteredAnimes);
-                }
-            }
-
-            const flattenedFoundAnimes = foundAnimesNotFlat.flat();
-
-            let newChunksIndex = 0;
-            const newChunks: Record<number, Array<{
-                media: AnimeType;
-                progress: number;
-                score: number;
-            }>> = {};
-
-            for (const anime of flattenedFoundAnimes) {
-                const chunkIndex = Math.floor(newChunksIndex / LibraryChunkSize);
-
-                if (!newChunks[chunkIndex]) {
-                    newChunks[chunkIndex] = [];
-                }
-
-                newChunks[chunkIndex].push(anime);
-
-                newChunksIndex++;
-            }
-
-            setSlicedData({
-                total: Object.keys(newChunks).length,
-                index: selectedIndex,
-                list:  newChunks[safePage - 1],
-            });
-            const t2 = performance.now();
-            console.log(t2 - t1, "ms");
-            return;
-        }
-
-        setSlicedData({
-            total: Math.ceil((data?.lists?.[selectedIndex]?.total ?? 1) / LibraryChunkSize),
-            index: selectedIndex,
-            list:  data.lists[selectedIndex].entries[safePage - 1],
-        });
+        setSlicedData(getCurrentAnimeChunk({
+            data,
+            debouncedSearch,
+            selectedList,
+            safePage,
+        }));
     }, [data, selectedList, safePage, debouncedSearch]);
 
     // page writing to debounced searchParams state
@@ -269,6 +190,7 @@ export default function AnilistLibrary({
             >
                 <div className="flex gap-2 shrink-0 flex-wrap">
                     <Input
+                        defaultValue={debouncedSearch}
                         setSearch={setDebouncedSearch}
                         placeholder="Search anime..."
                         appendClassNames="flex-1 shrink-0 min-w-40"
