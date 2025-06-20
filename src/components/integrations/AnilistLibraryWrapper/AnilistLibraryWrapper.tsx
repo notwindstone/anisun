@@ -40,28 +40,20 @@ export default function AnilistLibraryWrapper({
                                     userName: usernameFromParameters,
                                 },
                             },
-                            fields: `
-                                hasNextChunk
-                                lists {
-                                  name
-                                  entries {
-                                    progress
-                                    score
-                                    media {
-                                      id
-                                      idMal
-                                      coverImage { extraLarge }
-                                      averageScore
-                                      episodes
-                                      status
-                                      title {
-                                        romaji
-                                        english
-                                      }
-                                    }
-                                  }
-                                }
-                            `,
+                            fields: [
+                                "hasNextChunk",
+                                "lists.name",
+                                "lists.entries.progress",
+                                "lists.entries.score",
+                                "lists.entries.media.id",
+                                "lists.entries.media.idMal",
+                                "lists.entries.media.coverImage.extraLarge",
+                                "lists.entries.media.averageScore",
+                                "lists.entries.media.episodes",
+                                "lists.entries.media.status",
+                                "lists.entries.media.title.english",
+                                "lists.entries.media.title.romaji",
+                            ],
                         },
                     ],
                 }),

@@ -156,4 +156,23 @@ export type QueryType =
 
     | "type"
     | "updatedAt"
-    | "volumes";
+    | "volumes"
+
+    // `Users` fields
+    | "name"
+    | "avatar.large"
+    | "avatar.medium"
+
+    // `MediaListCollection` fields
+    | "hasNextChunk"
+    | "lists.name"
+    | "lists.entries.progress"
+    | "lists.entries.score"
+    | "lists.entries.media.id"
+    | "lists.entries.media.idMal"
+    | "lists.entries.media.coverImage.extraLarge"
+    | "lists.entries.media.averageScore"
+    | "lists.entries.media.episodes"
+    | "lists.entries.media.status"
+    | "lists.entries.media.title.romaji"
+    | "lists.entries.media.title.english";

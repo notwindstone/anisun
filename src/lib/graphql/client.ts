@@ -13,7 +13,7 @@ export const GraphQLClient = {
         queries: Array<{
             /** A query name that will be used both in response and request body */
             alias:     string;
-            name:      "Media" | "Page.Media" | "MediaListCollection";
+            name:      "Media" | "Page.Media" | "Page.Users" | "MediaListCollection";
             fields:    Array<QueryType> | string;
             variables: {
                 page: {
@@ -101,6 +101,11 @@ export const GraphQLClient = {
             switch (name) {
                 case "MediaListCollection": {
                     templateQuery = `${capitalizedAlias}: MediaListCollection(${templateMediaQueryParameters}) { ${templateQueryFields} }`;
+
+                    break;
+                }
+                case "Page.Users": {
+                    templateQuery = `${capitalizedAlias}: Page(perPage: $perPage${capitalizedAlias}, page: $page${capitalizedAlias}) { users(${templateMediaQueryParameters}) { ${templateQueryFields} } }`;
 
                     break;
                 }
