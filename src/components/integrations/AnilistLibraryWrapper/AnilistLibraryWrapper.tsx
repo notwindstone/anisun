@@ -7,9 +7,9 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import { RemoteRoutes } from "@/constants/routes";
 import { GraphQLClient } from "@/lib/graphql/client";
 import AnilistLibrary from "@/components/integrations/AnilistLibrary/AnilistLibrary";
-import { LibraryChunkSize } from "@/constants/app";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
+import divideMediaListCollectionToChunks from "@/utils/misc/divideMediaListCollectionToChunks";
 
 export default function AnilistLibraryWrapper({
     username,
@@ -67,79 +67,9 @@ export default function AnilistLibraryWrapper({
                 }),
             });
 
-            if (
-                !("lists" in data.Library) ||
-                !Array.isArray(data.Library.lists)
-            ) {
-                return {
-                    categories: [],
-                    lists:      [],
-                };
-            }
-
-            // slice anime entries into chunks to improve performance
-            const categories = [];
-            const allChunkedLists = [];
-
-            // contains every anime entry from the list (there might be duplicates)
-            const allAnimeEntriesInChunks: Record<number, Array<{
-                media: AnimeType;
-                progress: number;
-                score: number;
-            }>> = [];
-
-            // for `allAnimeEntriesInChunks`
-            let globalIndex = 0;
-            let totalAnimes = 0;
-
-            for (const entry of data.Library.lists) {
-                categories.push(entry.name);
-
-                let index = 0;
-                const currentChunks: Record<number, Array<{
-                    media: AnimeType;
-                    progress: number;
-                    score: number;
-                }>> = {};
-
-                for (const anime of entry.entries) {
-                    const chunkIndex = Math.floor(index / LibraryChunkSize);
-                    // for `allAnimeEntriesInChunks`
-                    const globalChunkIndex = Math.floor(globalIndex / LibraryChunkSize);
-
-                    if (!allAnimeEntriesInChunks[globalChunkIndex]) {
-                        allAnimeEntriesInChunks[globalChunkIndex] = [];
-                    }
-
-                    if (!currentChunks[chunkIndex]) {
-                        currentChunks[chunkIndex] = [];
-                    }
-
-                    allAnimeEntriesInChunks[globalChunkIndex].push(anime);
-                    currentChunks[chunkIndex].push(anime);
-
-                    index++;
-                    globalIndex++;
-                    totalAnimes++;
-                }
-
-                allChunkedLists.push({
-                    total:   entry.entries.length,
-                    entries: currentChunks,
-                });
-            }
-
-            // to display `allAnimeEntriesInChunks`
-            categories.push("Merged");
-            allChunkedLists.push({
-                total:   totalAnimes,
-                entries: allAnimeEntriesInChunks,
+            return divideMediaListCollectionToChunks({
+                data,
             });
-
-            return {
-                categories: categories,
-                lists:      allChunkedLists,
-            };
         },
     });
 
@@ -163,5 +93,5 @@ export default function AnilistLibraryWrapper({
                 username={usernameFromParameters}
             />
         </>
-    ), [queryData, isPending, error, usernameFromParameters]);
+    ), [queryData, isPending, error, username, usernameFromParameters]);
 }
