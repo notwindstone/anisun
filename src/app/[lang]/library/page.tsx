@@ -65,7 +65,7 @@ export default async function Page() {
         default: {
             providerLibrary = (
                 <AnilistLibraryWrapper
-                    username={safeAccountValues.username}
+                    username={"windstone"}
                     accessToken={accessToken}
                     tokenProvider={"anilist"}
                 />
