@@ -14,6 +14,7 @@ import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedCont
 import { LibraryChunkSize } from "@/constants/app";
 import { useDebouncedState } from "@mantine/hooks";
 import Input from "@/components/layout/Input/Input";
+import simpleMatch from "@/utils/misc/simpleMatch";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 
@@ -73,6 +74,7 @@ export default function AnilistLibrary({
     const safePage = Math.min(page, slicedData.total);
 
     useEffect(() => {
+        const t1 = performance.now();
         if (!data) {
             return;
         }
@@ -92,14 +94,29 @@ export default function AnilistLibrary({
                 progress: number;
                 score: number;
             }>> = [];
+            const lowerCasedSearch = debouncedSearch.toLowerCase();
 
             for (let chunkIndex = 0; chunkIndex < selectedChunksCount; chunkIndex++) {
                 const chunkedAnimes = currentEntries?.[chunkIndex];
                 const filteredAnimes = chunkedAnimes?.filter((chunkedAnime) => {
                     const currentMedia = chunkedAnime?.media;
-                    const isInEnglish = currentMedia?.title?.english?.toLowerCase()?.includes(debouncedSearch);
-                    const isInRomaji = currentMedia?.title?.romaji?.toLowerCase()?.includes(debouncedSearch);
-                    const isInNative = currentMedia?.title?.native?.toLowerCase()?.includes(debouncedSearch);
+
+                    const englishTitle = currentMedia?.title?.english?.toLowerCase() ?? "";
+                    const romajiTitle = currentMedia?.title?.romaji?.toLowerCase() ?? "";
+                    const japaneseTitle = currentMedia?.title?.native?.toLowerCase() ?? "";
+
+                    const isInEnglish = simpleMatch(
+                        englishTitle,
+                        lowerCasedSearch,
+                    );
+                    const isInRomaji = simpleMatch(
+                        romajiTitle,
+                        lowerCasedSearch,
+                    );
+                    const isInNative = simpleMatch(
+                        japaneseTitle,
+                        lowerCasedSearch,
+                    );
 
                     return isInEnglish || isInRomaji || isInNative;
                 });
@@ -135,7 +152,8 @@ export default function AnilistLibrary({
                 index: selectedIndex,
                 list:  newChunks[safePage - 1],
             });
-
+            const t2 = performance.now();
+            console.log(t2 - t1, "ms");
             return;
         }
 
