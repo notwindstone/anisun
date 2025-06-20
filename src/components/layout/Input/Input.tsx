@@ -36,7 +36,7 @@ export default function Input({
                         color: base,
                         step:  theme === DarkThemeKey
                             ? 900
-                            : 200,
+                            : 100,
                     }),
                 }}
             >
