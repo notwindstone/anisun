@@ -162,6 +162,7 @@ export type QueryType =
     | "name"
     | "avatar.large"
     | "avatar.medium"
+    | "createdAt"
 
     // `MediaListCollection` fields
     | "hasNextChunk"

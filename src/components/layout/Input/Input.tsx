@@ -17,7 +17,7 @@ export default function Input({
     placeholder:       string;
     appendClassNames?: string;
     defaultValue?:     string;
-    dropdown?:         Array<React.ReactNode>;
+    dropdown?:         React.ReactNode;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -70,7 +70,7 @@ export default function Input({
                 {
                     (dropdown !== undefined) && (
                         <div
-                            className="rounded-md transition z-300 absolute top-12 flex flex-col gap-2 w-full h-10 p-2"
+                            className="cursor-default rounded-md transition z-300 absolute top-12 flex flex-col gap-2 w-full min-h-10 p-2 overflow-clip"
                             style={{
                                 background: parseTailwindColor({
                                     color: base,

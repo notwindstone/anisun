@@ -1,6 +1,5 @@
-export type VariablesType = {
+export type VariablesType = Partial<{
     type: "ANIME" | "MANGA";
-} & Partial<{
     id: number;
     idMal: number;
     season: "WINTER" | "SPRING" | "SUMMER" | "FALL";

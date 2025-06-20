@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, useCallback, SetStateAction } from "react";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
@@ -14,6 +14,7 @@ import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedCont
 import { useDebouncedState } from "@mantine/hooks";
 import Input from "@/components/layout/Input/Input";
 import getCurrentAnimeChunk from "@/utils/misc/getCurrentAnimeChunk";
+import AnilistUsernamesDropdown from "@/components/integrations/AnilistUsernamesDropdown/AnilistUsernamesDropdown";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 
@@ -178,6 +179,16 @@ export default function AnilistLibrary({
             selectList={setSelectedList}
         />
     ), [safeListCategories, selectedList, setSelectedList]);
+    const memoizedUsernameSet = useCallback(
+        (value: SetStateAction<string>) => {
+            const modifiedParameters = new URLSearchParams(searchParameters.toString());
+
+            modifiedParameters.set("username", value.toString());
+
+            setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
+        },
+        [searchParameters, setDebouncedSearchParameters],
+    );
 
     return (
         <>
@@ -198,16 +209,15 @@ export default function AnilistLibrary({
                     <div className="relative flex-1 shrink-0 min-w-40">
                         <Input
                             defaultValue={username}
-                            setSearch={(value) => {
-                                const modifiedParameters = new URLSearchParams(searchParameters.toString());
-
-                                modifiedParameters.set("username", value.toString());
-
-                                setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
-                            }}
+                            setSearch={memoizedUsernameSet}
                             placeholder="Use different username..."
                             appendClassNames="flex-1 shrink-0 min-w-40"
-                            dropdown={[(<div key={1}>shit</div>)]}
+                            dropdown={(
+                                <AnilistUsernamesDropdown
+                                    search={username}
+                                    setSearch={memoizedUsernameSet}
+                                />
+                            )}
                         />
                     </div>
                 </div>

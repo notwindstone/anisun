@@ -1,5 +1,5 @@
 const placeholderArray = [ "w-18", "w-8" ];
-const placeholderNamesArray = [ "w-28", "w-20" ];
+const placeholderNamesArray = [ "min-w-28", "w-20" ];
 
 export default function ErrorSmallCard({
     isGrid,
@@ -32,8 +32,14 @@ export default function ErrorSmallCard({
                                 return (
                                     <div
                                         key={`${widthClassName}_${index}`}
-                                        className={`bg-[theme(colors.red.500/.10)] dark:bg-[theme(colors.red.400/.10)] rounded-md ${widthClassName} h-5`}
-                                    />
+                                        className={`bg-[theme(colors.red.500/.10)] dark:bg-[theme(colors.red.400/.10)] rounded-md ${widthClassName} min-h-5 text-xs flex items-center px-1`}
+                                    >
+                                        {
+                                            index === 0
+                                                ? "Maybe waiting will help you."
+                                                : ""
+                                        }
+                                    </div>
                                 );
                             })
                         }
