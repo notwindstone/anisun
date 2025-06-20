@@ -195,18 +195,21 @@ export default function AnilistLibrary({
                         placeholder="Search anime..."
                         appendClassNames="flex-1 shrink-0 min-w-40"
                     />
-                    <Input
-                        defaultValue={username}
-                        setSearch={(value) => {
-                            const modifiedParameters = new URLSearchParams(searchParameters.toString());
+                    <div className="relative flex-1 shrink-0 min-w-40">
+                        <Input
+                            defaultValue={username}
+                            setSearch={(value) => {
+                                const modifiedParameters = new URLSearchParams(searchParameters.toString());
 
-                            modifiedParameters.set("username", value.toString());
+                                modifiedParameters.set("username", value.toString());
 
-                            setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
-                        }}
-                        placeholder="Use different username..."
-                        appendClassNames="flex-1 shrink-0 min-w-40"
-                    />
+                                setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
+                            }}
+                            placeholder="Use different username..."
+                            appendClassNames="flex-1 shrink-0 min-w-40"
+                            dropdown={[(<div key={1}>shit</div>)]}
+                        />
+                    </div>
                 </div>
                 <GridCards disablePadding>
                     {cardsNode}
