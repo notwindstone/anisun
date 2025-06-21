@@ -214,9 +214,9 @@ export default function AnilistLibrary({
 
             modifiedParameters.set("username", value.toString());
 
-            setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
+            globalThis.history.pushState({}, "", `?${modifiedParameters.toString()}`);
         },
-        [searchParameters, setDebouncedSearchParameters],
+        [searchParameters],
     );
     const memoizedSetUsernameState = useCallback(
         (value: SetStateAction<string>) => setDebouncedUsername(value),
