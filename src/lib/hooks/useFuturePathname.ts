@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { usePathname } from "next/navigation";
 import makeObservable from "@/utils/misc/makeObservable";
 
 // initialize kinda persistent storage
@@ -13,6 +14,7 @@ const futurePathnameStore = makeObservable("/");
  * `setFuturePathname` should be fired in `onNavigate` property of the `Link`
  * */
 export default function useFuturePathname() {
+    const pathname = usePathname();
     const [futurePathnameState, setFuturePathnameState] = useState(futurePathnameStore.get());
 
     useEffect(() => {
@@ -22,6 +24,10 @@ export default function useFuturePathname() {
     const setFuturePathname = useMemo(() => {
         return (pathname: string) => futurePathnameStore.set(pathname);
     }, []);
+
+    useEffect(() => {
+        setFuturePathname(pathname);
+    }, [setFuturePathname, pathname]);
 
     return {
         futurePathname: futurePathnameState,
