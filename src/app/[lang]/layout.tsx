@@ -45,7 +45,7 @@ export async function generateMetadata({
     const { metadata: { title, description } } = await getDictionary(lang);
 
     return {
-        icons: "/favicon.webp",
+        icons: "/ai-slop.webp",
         title: {
             template: `%s | ${AppName.toLowerCase()}`,
             default:  title,
