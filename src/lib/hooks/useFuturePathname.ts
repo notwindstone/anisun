@@ -6,7 +6,7 @@ import makeObservable from "@/utils/misc/makeObservable";
 // initialize kinda persistent storage
 const futurePathnameStore = makeObservable({
     path: "/",
-    date: new Date(),
+    date: Date.now(),
 });
 
 /**
@@ -24,7 +24,7 @@ export default function useFuturePathname() {
 
     const setFuturePathname = useMemo(
         () => {
-            return (pathname: { path: string, date: Date }) => futurePathnameStore.set(pathname);
+            return (pathname: { path: string, date: number }) => futurePathnameStore.set(pathname);
         },
         [],
     );
