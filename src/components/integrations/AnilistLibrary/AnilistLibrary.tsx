@@ -122,7 +122,12 @@ export default function AnilistLibrary({
     useEffect(() => {
         // sometimes (thanks to `debouncedSearchParameters`) this shit fires at the same time as the routing.
         // if the user's device is loading another page too long, then it could lead to overwriting the redirect path
-        if (futurePathname !== PageRoutes.Library.Root) {
+        if (
+            futurePathname.path !== PageRoutes.Library.Root &&
+            // don't change search params if last navigation initialized less than 510ms ago
+            // 510ms just for the reserve
+            ((new Date()) - futurePathname.date) <= 510
+        ) {
             return;
         }
 
