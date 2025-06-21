@@ -5,6 +5,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
+import useFuturePathname from "@/lib/hooks/useFuturePathname";
 
 const navbarBackground = {
     opened: {
@@ -35,6 +36,8 @@ export default function MobileNavbarButton({
     const [backgroundProperties, setBackgroundProperties] = useState<{
         width:      number;
     }>(navbarBackground.opened);
+    const { setFuturePathname } = useFuturePathname();
+
     // `oklch(percent number number)`
     const backgroundColorArray = [ ...parseTailwindColor({
         color: accent,
@@ -79,7 +82,10 @@ export default function MobileNavbarButton({
                 ),
             }}
             href={item.href}
-            onClick={() => setFocused(item.href)}
+            onClick={() => {
+                setFuturePathname(item.href);
+                setFocused(item.href);
+            }}
         >
             <div
                 className="mobile-navbar__button-icon flex h-fit py-1 justify-center items-center rounded-full transition-sidebar duration-300"

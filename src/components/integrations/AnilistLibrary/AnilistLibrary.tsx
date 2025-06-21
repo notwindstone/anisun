@@ -15,6 +15,8 @@ import { useDebouncedState } from "@mantine/hooks";
 import Input from "@/components/layout/Input/Input";
 import getCurrentAnimeChunk from "@/utils/misc/getCurrentAnimeChunk";
 import AnilistUsernamesDropdown from "@/components/integrations/AnilistUsernamesDropdown/AnilistUsernamesDropdown";
+import useFuturePathname from "@/lib/hooks/useFuturePathname";
+import { PageRoutes } from "@/constants/routes";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 
@@ -46,6 +48,7 @@ export default function AnilistLibrary({
         };
     });
     const searchParameters = useSearchParams();
+    const { futurePathname } = useFuturePathname();
 
     const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState<string>("", 500, {
         leading: true,
@@ -114,8 +117,14 @@ export default function AnilistLibrary({
 
     // updating states in search parameters
     useEffect(() => {
+        // sometimes (thanks to `debouncedSearchParameters`) this shit fires at the same time as the routing.
+        // if the user's device is loading another page too long, then it could lead to overwriting the redirect path
+        if (futurePathname !== PageRoutes.Library.Root) {
+            return;
+        }
+
         globalThis.history.pushState({}, "", debouncedSearchParameters);
-    }, [debouncedSearchParameters]);
+    }, [futurePathname, debouncedSearchParameters]);
 
     let cardsNode: React.ReactNode;
 
