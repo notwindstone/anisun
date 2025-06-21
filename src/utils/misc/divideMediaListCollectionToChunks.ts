@@ -1,8 +1,8 @@
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { LibraryChunkSize } from "@/constants/app";
 
 export default function divideMediaListCollectionToChunks({
     data,
+    passedChunkSize,
 }: {
     data: Record<string, {
         media: AnimeType
@@ -11,6 +11,7 @@ export default function divideMediaListCollectionToChunks({
             media: AnimeType
         }[]
     }>;
+    passedChunkSize: number;
 }) {
     if (
         !("lists" in data.Library) ||
@@ -48,9 +49,9 @@ export default function divideMediaListCollectionToChunks({
         }>> = {};
 
         for (const anime of entry.entries) {
-            const chunkIndex = Math.floor(index / LibraryChunkSize);
+            const chunkIndex = Math.floor(index / passedChunkSize);
             // for `allAnimeEntriesInChunks`
-            const globalChunkIndex = Math.floor(globalIndex / LibraryChunkSize);
+            const globalChunkIndex = Math.floor(globalIndex / passedChunkSize);
 
             if (!allAnimeEntriesInChunks[globalChunkIndex]) {
                 allAnimeEntriesInChunks[globalChunkIndex] = [];

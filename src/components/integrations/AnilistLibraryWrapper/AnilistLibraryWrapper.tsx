@@ -10,6 +10,8 @@ import AnilistLibrary from "@/components/integrations/AnilistLibrary/AnilistLibr
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
 import divideMediaListCollectionToChunks from "@/utils/misc/divideMediaListCollectionToChunks";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function AnilistLibraryWrapper({
     username,
@@ -22,6 +24,7 @@ export default function AnilistLibraryWrapper({
 }) {
     const searchParameters = useSearchParams();
     const usernameFromParameters = searchParameters.get("username") || username;
+    const chunkSize = useContextSelector(ConfigsContext, (value) => value.data.library.libraryEntriesOnThePage);
     const { data: queryData, isPending, error } = useQuery({
         queryKey: ["anime", "library", tokenProvider, usernameFromParameters],
         queryFn:  async () => {
@@ -61,6 +64,7 @@ export default function AnilistLibraryWrapper({
 
             return divideMediaListCollectionToChunks({
                 data,
+                passedChunkSize: chunkSize,
             });
         },
     });
@@ -83,7 +87,8 @@ export default function AnilistLibraryWrapper({
                 isPending={isPending}
                 error={error}
                 username={usernameFromParameters}
+                passedChunkSize={chunkSize}
             />
         </>
-    ), [queryData, isPending, error, username, usernameFromParameters]);
+    ), [chunkSize, queryData, isPending, error, username, usernameFromParameters]);
 }

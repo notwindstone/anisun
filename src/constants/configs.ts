@@ -18,6 +18,10 @@ export const InitialConfig: SafeConfigType = {
             position: SidebarLeftPosition,
         },
     },
+    library: {
+        libraryEntriesOnThePage: 18,
+        historyEntriesOnThePage: 48,
+    },
 };
 export const PlaceholderAccount: UserType = {
     username: "",

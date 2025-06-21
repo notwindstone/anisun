@@ -25,6 +25,7 @@ export default function AnilistLibrary({
     isPending,
     error,
     username,
+    passedChunkSize,
 }: {
     data: {
         categories: Array<string>,
@@ -40,6 +41,7 @@ export default function AnilistLibrary({
     isPending: boolean;
     error: Error | null;
     username: string;
+    passedChunkSize: number;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -91,8 +93,9 @@ export default function AnilistLibrary({
             debouncedSearch,
             selectedList,
             safePage,
+            passedChunkSize,
         }));
-    }, [data, selectedList, safePage, debouncedSearch]);
+    }, [data, selectedList, safePage, debouncedSearch, passedChunkSize]);
 
     // page writing to debounced searchParams state
     useEffect(() => {

@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { HistoryEntriesCountOnPage } from "@/constants/app";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
@@ -11,10 +10,12 @@ import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/layout/Pagination/Pagination";
 
 export default function HistoryLoader({
+    passedChunkSize,
     history,
     isPending,
     isError,
 }: {
+    passedChunkSize: number;
     history: Array<unknown>;
     isPending?: boolean;
     isError?: boolean;
@@ -31,7 +32,7 @@ export default function HistoryLoader({
         return (
             <div className="flex flex-col w-full gap-4">
                 <Pagination
-                    total={Math.ceil(history.length / HistoryEntriesCountOnPage)}
+                    total={Math.ceil(history.length / passedChunkSize)}
                     onChange={onChange}
                     page={page}
                 >
@@ -64,15 +65,15 @@ export default function HistoryLoader({
         <div className="flex flex-col w-full gap-4">
             <Pagination
                 darker
-                total={Math.ceil(history.length / HistoryEntriesCountOnPage)}
+                total={Math.ceil(history.length / passedChunkSize)}
                 onChange={onChange}
                 page={page}
             >
                 <GridCards disablePadding>
                     {
                         history.slice(
-                            (page - 1) * HistoryEntriesCountOnPage,
-                            ((page - 1) * HistoryEntriesCountOnPage) + HistoryEntriesCountOnPage,
+                            (page - 1) * passedChunkSize,
+                            ((page - 1) * passedChunkSize) + passedChunkSize,
                         ).map((historyEntry) => {
                             return (
                                 <SmallCard

@@ -10,6 +10,7 @@ import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
+import { EntriesMaxSize } from "@/constants/app";
 
 // Yeah, this is a mess, typescript is diabolical
 const getThemeColor = (config: ParsedConfigType): "light" | "dark" => {
@@ -72,6 +73,26 @@ const getSidebarProperties = (config: ParsedConfigType): {
         expanded: expanded,
     };
 };
+const getEntries = (config: ParsedConfigType): {
+    libraryEntriesOnThePage: number;
+    historyEntriesOnThePage: number;
+} => {
+    const libraryEntries = config?.library?.libraryEntriesOnThePage;
+    const historyEntries = config?.library?.historyEntriesOnThePage;
+
+    if (typeof libraryEntries !== "number" || typeof historyEntries !== "number") {
+        return InitialConfig.library;
+    }
+
+    if (!Number.isInteger(libraryEntries) || !Number.isInteger(historyEntries)) {
+        return InitialConfig.library;
+    }
+
+    return {
+        libraryEntriesOnThePage: Math.min(libraryEntries, EntriesMaxSize),
+        historyEntriesOnThePage: Math.min(historyEntries, EntriesMaxSize),
+    };
+};
 
 /** Sidebar values update only on server request */
 export default function getSafeConfigValues({
@@ -88,5 +109,6 @@ export default function getSafeConfigValues({
         layout: {
             sidebar: getSidebarProperties(config),
         },
+        library: getEntries(config),
     };
 }

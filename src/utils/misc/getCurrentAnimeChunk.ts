@@ -1,12 +1,12 @@
 import { AnimeType } from "@/types/Anime/Anime.type";
 import simpleMatch from "@/utils/misc/simpleMatch";
-import { LibraryChunkSize } from "@/constants/app";
 
 export default function getCurrentAnimeChunk({
     data,
     selectedList,
     debouncedSearch,
     safePage,
+    passedChunkSize,
 }: {
     data: {
         categories: Array<string>,
@@ -22,6 +22,7 @@ export default function getCurrentAnimeChunk({
     selectedList:    string | undefined;
     debouncedSearch: string;
     safePage:        number;
+    passedChunkSize: number;
 }): {
     total: number;
     index: number;
@@ -88,7 +89,7 @@ export default function getCurrentAnimeChunk({
         }>> = {};
 
         for (const anime of flattenedFoundAnimes) {
-            const chunkIndex = Math.floor(newChunksIndex / LibraryChunkSize);
+            const chunkIndex = Math.floor(newChunksIndex / passedChunkSize);
 
             if (!newChunks[chunkIndex]) {
                 newChunks[chunkIndex] = [];
@@ -107,7 +108,7 @@ export default function getCurrentAnimeChunk({
     }
 
     return {
-        total: Math.ceil((data?.lists?.[selectedIndex]?.total ?? 1) / LibraryChunkSize),
+        total: Math.ceil((data?.lists?.[selectedIndex]?.total ?? 1) / passedChunkSize),
         index: selectedIndex,
         list:  data.lists[selectedIndex].entries[safePage - 1],
     };

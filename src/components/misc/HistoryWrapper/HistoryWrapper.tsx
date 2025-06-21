@@ -3,8 +3,11 @@
 import { HistoryLocalStorageKey } from "@/constants/app";
 import HistoryLoader from "@/components/misc/HistoryLoader/HistoryLoader";
 import { useQuery } from "@tanstack/react-query";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function HistoryWrapper(): React.ReactNode {
+    const chunkSize = useContextSelector(ConfigsContext, (value) => value.data.library.historyEntriesOnThePage);
     const { data, isPending, error } = useQuery({
         queryKey: ["anime", "history", "localStorage"],
         queryFn:  () => {
@@ -26,6 +29,7 @@ export default function HistoryWrapper(): React.ReactNode {
     if (isPending) {
         return (
             <HistoryLoader
+                passedChunkSize={chunkSize}
                 isPending
                 history={
                     Array
@@ -40,6 +44,7 @@ export default function HistoryWrapper(): React.ReactNode {
     if (error) {
         return (
             <HistoryLoader
+                passedChunkSize={chunkSize}
                 isError
                 history={
                     Array
@@ -53,6 +58,7 @@ export default function HistoryWrapper(): React.ReactNode {
 
     return (
         <HistoryLoader
+            passedChunkSize={chunkSize}
             history={data}
         />
     );

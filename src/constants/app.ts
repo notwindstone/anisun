@@ -7,9 +7,8 @@ export const ExtensionsLocalStorageKey = "@anisun/extensions";
 export const HistoryLocalStorageKey = "@anisun/history";
 
 export const HistoryEntriesLimit = 2000;
-export const HistoryEntriesCountOnPage = 50;
 
-export const LibraryChunkSize = 18;
+export const EntriesMaxSize = 600;
 
 export const AccessTokenCookieKey = "accessToken";
 export const AccessTokenProviderCookieKey = "tokenProvider";
