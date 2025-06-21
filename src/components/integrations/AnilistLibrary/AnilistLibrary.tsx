@@ -126,7 +126,7 @@ export default function AnilistLibrary({
             futurePathname.path !== PageRoutes.Library.Root &&
             // don't change search params if last navigation initialized less than 510ms ago
             // 510ms just for the reserve
-            ((new Date()) - futurePathname.date) <= 510
+            ((Date.now()) - futurePathname.date) <= 510
         ) {
             return;
         }
