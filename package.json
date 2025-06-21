@@ -23,11 +23,11 @@
     "drizzle-orm": "^0.44.1",
     "lucide-react": "^0.487.0",
     "negotiator": "^1.0.0",
-    "next": "15.2.4",
+    "next": "15.3.4",
     "nextjs-toploader": "^3.8.16",
     "quick-lru": "^7.0.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
     "scheduler": "^0.26.0",
     "use-context-selector": "^2.0.0",
     "uwuifier": "^4.2.2"
@@ -37,15 +37,19 @@
     "@tailwindcss/postcss": "^4",
     "@types/negotiator": "^0.6.3",
     "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6",
     "concurrently": "^9.1.2",
     "dotenv": "^16.5.0",
     "drizzle-kit": "^0.31.1",
     "eslint": "^9",
-    "eslint-config-next": "15.2.4",
+    "eslint-config-next": "15.3.4",
     "eslint-plugin-unicorn": "^58.0.0",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "@types/react": "19.1.8",
+    "@types/react-dom": "19.1.6"
   }
 }
