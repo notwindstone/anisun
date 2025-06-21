@@ -5,6 +5,10 @@ import { RemoteRoutes } from "@/constants/routes";
 import { GraphQLClient } from "@/lib/graphql/client";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { SetStateAction, useState } from "react";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import { DarkThemeKey } from "@/constants/configs";
 
 const placeholderArray = [1, 2, 3, 4, 5, 6];
 
@@ -16,6 +20,12 @@ export default function AnilistUsernamesDropdown({
     setSearch: (search: SetStateAction<string>) => void;
 }): React.ReactNode {
     const [focused, setFocused] = useState<string>("");
+    const { theme, base } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            theme: value.data.theme,
+            base:  value.data.colors.base,
+        };
+    });
     const { data, isPending, error } = useQuery<Array<{
         name?:      string;
         createdAt?: string;
@@ -69,7 +79,14 @@ export default function AnilistUsernamesDropdown({
                     placeholderArray.map((item) => {
                         return (
                             <div
-                                className="animate-pulse rounded-md w-full h-12 bg-neutral-800"
+                                className="animate-pulse rounded-md w-full h-12"
+                                style={{
+                                    backgroundColor: parseTailwindColor({
+                                        color: base,
+                                        step:  theme === DarkThemeKey
+                                            ? 800 : 200,
+                                    }),
+                                }}
                                 key={item}
                             />
                         );
@@ -98,7 +115,7 @@ export default function AnilistUsernamesDropdown({
                     return (
                         <button
                             disabled={focused === user?.name}
-                            className="transition cursor-pointer flex flex-nowrap gap-2 p-2 rounded-md hover:bg-neutral-800 disabled:opacity-60 disabled:hover:bg-transparent"
+                            className="transition cursor-pointer flex flex-nowrap gap-2 p-2 rounded-md hover:bg-[theme(colors.black/.1)] dark:hover:bg-[theme(colors.white/.1)] disabled:opacity-60 disabled:hover:bg-transparent disabled:cursor-not-allowed"
                             onClick={() => {
                                 setFocused(user?.name ?? "");
                                 setSearch(user?.name ?? "");

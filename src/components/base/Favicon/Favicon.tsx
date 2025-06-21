@@ -1,4 +1,4 @@
-import favicon from "@/../public/favicon-x128.jpg";
+import favicon from "@/../public/favicon-x256.webp";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 
 export default function Favicon() {
