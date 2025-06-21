@@ -145,6 +145,7 @@ export default function AnilistLibrary({
             break breakable;
         }
 
+        // handle duplicates
         const animeSet = new Set<number | undefined>([]);
 
         cardsNode = slicedData.list.map((media: {
