@@ -85,7 +85,7 @@ export default function MobileNavbarButton({
             onClick={() => {
                 setFuturePathname({
                     path: item.href,
-                    date: Date.now,
+                    date: Date.now(),
                 });
                 setFocused(item.href);
             }}
