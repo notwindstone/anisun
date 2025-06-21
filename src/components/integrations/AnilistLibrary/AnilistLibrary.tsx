@@ -47,8 +47,13 @@ export default function AnilistLibrary({
     });
     const searchParameters = useSearchParams();
 
-    const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState<string>("", 500);
+    const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState<string>("", 500, {
+        leading: true,
+    });
     const [debouncedSearch, setDebouncedSearch] = useDebouncedState<string>(searchParameters.get("search") ?? "", 100);
+    const [debouncedUsername, setDebouncedUsername] = useDebouncedState<string>(searchParameters.get("username") ?? "", 300, {
+        leading: true,
+    });
 
     const [page, onChange] = useState(
         Number(searchParameters.get("page") || 1),
@@ -179,7 +184,7 @@ export default function AnilistLibrary({
             selectList={setSelectedList}
         />
     ), [safeListCategories, selectedList, setSelectedList]);
-    const memoizedUsernameSet = useCallback(
+    const memoizedSetUsernameSearchParameters = useCallback(
         (value: SetStateAction<string>) => {
             const modifiedParameters = new URLSearchParams(searchParameters.toString());
 
@@ -188,6 +193,10 @@ export default function AnilistLibrary({
             setDebouncedSearchParameters(`?${modifiedParameters.toString()}`);
         },
         [searchParameters, setDebouncedSearchParameters],
+    );
+    const memoizedSetUsernameState = useCallback(
+        (value: SetStateAction<string>) => setDebouncedUsername(value),
+        [setDebouncedUsername],
     );
 
     return (
@@ -209,13 +218,13 @@ export default function AnilistLibrary({
                     <div className="relative flex-1 shrink-0 min-w-40">
                         <Input
                             defaultValue={username}
-                            setSearch={memoizedUsernameSet}
+                            setSearch={memoizedSetUsernameState}
                             placeholder="Use different username..."
                             appendClassNames="flex-1 shrink-0 min-w-40"
                             dropdown={(
                                 <AnilistUsernamesDropdown
-                                    search={username}
-                                    setSearch={memoizedUsernameSet}
+                                    search={debouncedUsername}
+                                    setSearch={memoizedSetUsernameSearchParameters}
                                 />
                             )}
                         />
