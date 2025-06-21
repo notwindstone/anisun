@@ -24,7 +24,7 @@ export default function useFuturePathname() {
 
     const setFuturePathname = useMemo(
         () => {
-            return (pathname: {{ path: string, date: Date }) => futurePathnameStore.set(pathname);
+            return (pathname: ({ path: string, date: Date }) => futurePathnameStore.set(pathname);
         },
         [],
     );
