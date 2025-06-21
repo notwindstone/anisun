@@ -118,7 +118,7 @@ export default function SmallCard({
                             // if `greyOutScore` is true, we don't need it
                             isScore={!data?.greyOutScore}
                             label={score.toString()}
-                            labelHover="Anilist average score"
+                            labelHover="Others' score"
                             labelPosition="left"
                         >
                             {
