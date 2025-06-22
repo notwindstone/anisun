@@ -31,7 +31,7 @@ export default function Badge({
     const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => value.data);
     let scoreBadgeColorClassName;
 
-    if (greyBgOut || !isScore || score === undefined) {
+    if (!isScore || score === undefined) {
         scoreBadgeColorClassName = "";
     } else if (score >= 8.7) {
         scoreBadgeColorClassName = "bg-indigo-700";
@@ -53,7 +53,7 @@ export default function Badge({
                 data-tooltip-hover={labelHover}
                 aria-label={label}
                 className={`transition-colors duration-200 rounded-md ${textSize} px-2 py-1 leading-none ${scoreBadgeColorClassName} ${appendClassNames ? `${appendClassNames}` : ""}`}
-                style={isScore ? undefined : {
+                style={(isScore && !greyBgOut) ? undefined : {
                     backgroundColor: parseTailwindColor({
                         color: base,
                         step:  theme === DarkThemeKey
