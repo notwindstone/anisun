@@ -8,7 +8,7 @@ export const HistoryLocalStorageKey = "@anisun/history";
 
 export const HistoryEntriesLimit = 2000;
 
-export const EntriesMaxSize = 600;
+export const EntriesMaxSize = 300;
 
 export const AccessTokenCookieKey = "accessToken";
 export const AccessTokenProviderCookieKey = "tokenProvider";

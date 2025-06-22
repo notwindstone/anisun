@@ -151,6 +151,7 @@ export default function AnilistLibrary({
         cardsNode = safeListCategories.map((mediaListStatus) => (
             <ErrorSmallCard
                 key={mediaListStatus}
+                passedMessage={error?.message}
                 isGrid
             />
         ));

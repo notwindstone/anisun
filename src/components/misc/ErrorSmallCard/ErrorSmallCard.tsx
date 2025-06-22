@@ -3,8 +3,10 @@ const placeholderNamesArray = [ "min-w-28", "w-20" ];
 
 export default function ErrorSmallCard({
     isGrid,
+    passedMessage,
 }: {
     isGrid?: boolean;
+    passedMessage?: string;
 }) {
     const gridClassNames = isGrid ? "w-full flex-max-w-1/2 xs:flex-max-w-1/3 lg:flex-max-w-1/4 xl:flex-max-w-1/6" : "";
 
@@ -29,6 +31,12 @@ export default function ErrorSmallCard({
                     <div className="flex flex-col gap-1">
                         {
                             placeholderNamesArray.map((widthClassName, index) => {
+                                let errorMessage = "Maybe waiting will help you.";
+
+                                if (passedMessage === "User not found.") {
+                                    errorMessage = passedMessage;
+                                }
+
                                 return (
                                     <div
                                         key={`${widthClassName}_${index}`}
@@ -36,7 +44,7 @@ export default function ErrorSmallCard({
                                     >
                                         {
                                             index === 0
-                                                ? "Maybe waiting will help you."
+                                                ? errorMessage
                                                 : ""
                                         }
                                     </div>

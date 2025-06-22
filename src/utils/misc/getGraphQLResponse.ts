@@ -33,6 +33,10 @@ const getGraphQLResponse = async <T extends object>({
         ...options,
     });
 
+    if (response.status === 404) {
+        throw new Error("User not found");
+    }
+
     if (!response.ok) {
         throw new Error("Something went wrong");
     }
