@@ -34,6 +34,8 @@ const geistMono = Geist_Mono({
     subsets:  ["latin"],
 });
 
+// since Next.js 15.2 `generateMetadata` does not block initial render
+// because metadata will be streamed into HTML
 export async function generateMetadata({
     params,
 }: {

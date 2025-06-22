@@ -111,15 +111,15 @@ export default function SmallCard({
                             )
                         }
                         <Badge
+                            isScore
+                            greyBgOut={data?.greyOutScore}
                             textSize="text-xs"
                             score={score}
                             // `isScore` is designed to make badge differently colored
                             // based on the `score` property
                             // if `greyOutScore` is true, we don't need it
-                            isScore={!data?.greyOutScore}
                             label={score.toString()}
                             labelHover="Others' score"
-                            labelPosition="left"
                         >
                             {
                                 // Cast this variable to a string

@@ -16,22 +16,22 @@ export default function Badge({
     onClick,
     label,
     labelHover,
-    labelPosition = "right",
+    greyBgOut,
 }: {
-    children: React.ReactNode;
-    isScore?: boolean;
-    score?: number;
-    textSize?: textSizeType | `${textSizeType} ${textSizeType}`;
+    children:          React.ReactNode;
+    isScore?:          boolean;
+    score?:            number;
+    textSize?:         textSizeType | `${textSizeType} ${textSizeType}`;
     appendClassNames?: string;
-    onClick?: React.MouseEventHandler<HTMLDivElement>;
-    label?: string;
-    labelHover?: string;
-    labelPosition?: "left" | "right" | "top" | "bottom";
+    onClick?:          React.MouseEventHandler<HTMLDivElement>;
+    label?:            string;
+    labelHover?:       string;
+    greyBgOut?:        boolean;
 }) {
     const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => value.data);
     let scoreBadgeColorClassName;
 
-    if (!isScore || score === undefined) {
+    if (greyBgOut || !isScore || score === undefined) {
         scoreBadgeColorClassName = "";
     } else if (score >= 8.7) {
         scoreBadgeColorClassName = "bg-indigo-700";
@@ -49,12 +49,6 @@ export default function Badge({
     return (
         scoreIsNotZero && hasText ? (
             <p
-                { ...(label === undefined ? {} : {
-                    "data-tooltip-left":   labelPosition === "left",
-                    "data-tooltip-right":  labelPosition === "right",
-                    "data-tooltip-bottom": labelPosition === "bottom",
-                    "data-tooltip-top":    labelPosition === "top",
-                }) }
                 data-tooltip={label}
                 data-tooltip-hover={labelHover}
                 aria-label={label}
