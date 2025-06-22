@@ -1,5 +1,10 @@
 import HistoryWrapper from "@/components/misc/HistoryWrapper/HistoryWrapper";
-import { AccessTokenCookieKey, AccessTokenProviderCookieKey, AccountInfoCookieKey } from "@/constants/app";
+import {
+    AccessTokenCookieKey,
+    AccessTokenProviderCookieKey,
+    AccountInfoCookieKey,
+    DefaultUsername,
+} from "@/constants/app";
 import { cookies } from "next/headers";
 import getAccessTokenProvider from "@/utils/oauth2/getAccessTokenProvider";
 import readCookiesData from "@/utils/configs/readCookiesData";
@@ -65,7 +70,7 @@ export default async function Page() {
         default: {
             providerLibrary = (
                 <AnilistLibraryWrapper
-                    username={"windstone"}
+                    username={DefaultUsername}
                     accessToken={accessToken}
                     tokenProvider={"anilist"}
                 />

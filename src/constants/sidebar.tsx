@@ -2,6 +2,7 @@ import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PageRoutes } from "@/constants/routes";
 import { Blocks, CircleUser, House, Library, ShieldAlert } from "lucide-react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
+import { DefaultUsername } from "@/constants/app";
 
 const iconSize = 20;
 
@@ -46,7 +47,7 @@ export const getSideBarLinks = ({
                 name:   "admin",
                 href:   PageRoutes.Admin.Root,
                 icon:   <ShieldAlert className="shrink-0" size={iconSize} />,
-                hidden: username !== "windstone",
+                hidden: username !== DefaultUsername,
             },
         ],
     },

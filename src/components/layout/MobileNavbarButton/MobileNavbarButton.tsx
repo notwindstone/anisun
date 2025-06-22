@@ -5,7 +5,7 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
-import useFuturePathname from "@/lib/hooks/useFuturePathname";
+import useFuturePathname from "@/utils/hooks/useFuturePathname";
 
 const navbarBackground = {
     opened: {

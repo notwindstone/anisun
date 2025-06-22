@@ -2,6 +2,7 @@ import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 
 export { default as ImagePlaceholder } from "@/../public/frieren-no-image.webp";
 export const AppName = "Anisun";
+export const DefaultUsername = "windstone";
 
 export const ExtensionsLocalStorageKey = "@anisun/extensions";
 export const HistoryLocalStorageKey = "@anisun/history";

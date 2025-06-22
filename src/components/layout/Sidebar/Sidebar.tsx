@@ -16,7 +16,7 @@ import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
 import { UserType } from "@/types/OAuth2/User.type";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { usePathname } from "next/navigation";
-import useFuturePathname from "@/lib/hooks/useFuturePathname";
+import useFuturePathname from "@/utils/hooks/useFuturePathname";
 
 const icons: {
     [key: string]: {
