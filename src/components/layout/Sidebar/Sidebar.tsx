@@ -16,6 +16,7 @@ import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
 import { UserType } from "@/types/OAuth2/User.type";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { usePathname } from "next/navigation";
+import useFuturePathname from "@/lib/hooks/useFuturePathname";
 
 const icons: {
     [key: string]: {
@@ -37,6 +38,7 @@ export default function Sidebar({
 }: Readonly<{
     accountInfo: UserType;
 }>) {
+    const { setFuturePathname } = useFuturePathname();
     const { config, config: {
         theme,
         colors: { base, accent },
@@ -184,6 +186,12 @@ export default function Sidebar({
                                                                 }),
                                                             } : {}
                                                         ),
+                                                    }}
+                                                    onClick={() => {
+                                                        setFuturePathname({
+                                                            path: link.href,
+                                                            date: Date.now(),
+                                                        });
                                                     }}
                                                 >
                                                     <div className="flex justify-center items-center w-6 shrink-0">

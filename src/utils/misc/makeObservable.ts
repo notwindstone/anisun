@@ -20,7 +20,8 @@ export default function makeObservable(target: unknown) {
         }
     }
 
-    function subscribe(listenerFunction: (value: unknown) => void) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    function subscribe(listenerFunction: (value: any) => void) {
         listeners.push(listenerFunction);
 
         // should be fired on the component unmount (when used in useEffect)

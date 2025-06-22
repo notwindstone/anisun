@@ -123,15 +123,9 @@ export default function AnilistLibrary({
         // sometimes (thanks to `debouncedSearchParameters`) this shit fires at the same time as the routing.
         // if the user's device is loading another page too long, then it could lead to overwriting the redirect path
         if (
-            // eslint-disable-next-line unicorn/no-abusive-eslint-disable
-            // eslint-disable-next-line
-            // @ts-ignore
             futurePathname.path !== PageRoutes.Library.Root &&
             // don't change search params if last navigation initialized less than 510ms ago
             // 510ms just for the reserve
-            // eslint-disable-next-line unicorn/no-abusive-eslint-disable
-            // eslint-disable-next-line
-            // @ts-ignore
             ((Date.now()) - futurePathname.date) <= 510
         ) {
             return;
