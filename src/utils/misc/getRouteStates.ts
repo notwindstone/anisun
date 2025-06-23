@@ -1,8 +1,6 @@
-import { getNavbarItems } from "@/constants/navbar";
+import { RouteType } from "@/types/General/Route.type";
 
-type pathnameType = ReturnType<typeof getNavbarItems>[0]["href"];
-
-const safePathnames: Array<pathnameType> = ["/", "/admin", "/anime", "/account", "/library", "/extensions"];
+const safePathnames: Array<RouteType> = ["/", "/admin", "/anime", "/account", "/library", "/extensions"];
 
 export default function getRouteState({
     state,
@@ -10,19 +8,19 @@ export default function getRouteState({
     currentPathname,
 }: {
     state: Record<
-        pathnameType,
+        RouteType,
         Record<string, string>
     >;
     searchParameters: URLSearchParams;
     currentPathname:  string;
 }): Record<
-    pathnameType,
+    RouteType,
     Record<string, string>
 > {
     // typescript is insane...
     const pathnameData: {
         safe: boolean;
-        path: pathnameType;
+        path: RouteType;
     } = {
         safe: false,
         path: "/",
