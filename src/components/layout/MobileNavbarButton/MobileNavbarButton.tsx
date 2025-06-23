@@ -1,7 +1,7 @@
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState, useRef } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
@@ -26,6 +26,8 @@ export default function MobileNavbarButton({
     focused: string;
     setFocused: Dispatch<SetStateAction<string>>;
 }) {
+    const renderReference = useRef(1);
+    console.log(`${item.name} re-rendered ${renderReference.current++} times`);
     const { data: {
         theme,
         colors: { accent },
