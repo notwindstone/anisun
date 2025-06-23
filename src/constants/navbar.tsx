@@ -11,12 +11,12 @@ export const getNavbarItems = ({
     avatar: string | undefined;
 }): Array<{
     name: string | undefined;
-    href: string;
+    href: typeof PageRoutes[keyof typeof PageRoutes]["Root"];
     icon: React.ReactNode;
 }> => [
     {
         name: dictionaries?.sidebar?.home,
-        href: PageRoutes.Root,
+        href: PageRoutes.Home.Root,
         icon: <House className="shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
     },
     {

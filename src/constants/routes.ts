@@ -117,7 +117,10 @@ export const OAuth2Routes = {
     },
 };
 export const PageRoutes = {
-    Root:  "/",
+    Home: {
+        Root:     "/",
+        Pathname: "",
+    },
     Anime: {
         Root:     "/anime",
         Pathname: "anime",
@@ -149,4 +152,4 @@ export const PageRoutes = {
         Root:     "/admin",
         Pathname: "admin",
     },
-};
+} as const;

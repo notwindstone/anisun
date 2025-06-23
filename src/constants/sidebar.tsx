@@ -18,7 +18,7 @@ export const getSideBarLinks = ({
     title: string;
     links: Array<{
         name: string | undefined;
-        href: string;
+        href: typeof PageRoutes[keyof typeof PageRoutes]["Root"];
         icon: React.ReactNode;
         hidden?: boolean | undefined;
     }>;
@@ -28,7 +28,7 @@ export const getSideBarLinks = ({
         links: [
             {
                 name: dictionaries?.sidebar?.home,
-                href: PageRoutes.Root,
+                href: PageRoutes.Home.Root,
                 icon: <House className="shrink-0" size={iconSize} />,
             },
             {
