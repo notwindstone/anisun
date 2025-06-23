@@ -99,22 +99,14 @@ export default function getCurrentAnimeChunk({
 
             newChunksIndex++;
         }
-console.log(1, {
-    total: Object.keys(newChunks).length,
-    index: selectedIndex,
-    list:  newChunks[safePage - 1],
-})
+
         return {
             total: Object.keys(newChunks).length,
             index: selectedIndex,
             list:  newChunks[safePage - 1],
         };
     }
-console.log(2, {
-    total: Math.ceil((data?.lists?.[selectedIndex]?.total ?? 1) / passedChunkSize),
-    index: selectedIndex,
-    list:  data.lists[selectedIndex].entries[safePage - 1],
-})
+
     return {
         total: Math.ceil((data?.lists?.[selectedIndex]?.total ?? 1) / passedChunkSize),
         index: selectedIndex,

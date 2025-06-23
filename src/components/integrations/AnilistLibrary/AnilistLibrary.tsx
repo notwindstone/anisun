@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useMemo, useCallback, SetStateAction } from "react";
+import React, { useEffect, useState, useMemo, useCallback, SetStateAction, useLayoutEffect } from "react";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/misc/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
@@ -81,9 +81,16 @@ export default function AnilistLibrary({
     });
 
     const safeListCategories = data?.categories ?? mediaListStatuses;
-    const safePage = Math.min(page, slicedData.total);
+    const safePage = Math.max(
+        // handle `0` values
+        1,
+        // handle total data pages
+        Math.min(page, slicedData.total),
+    );
 
-    useEffect(() => {
+    // here i use `useLayoutEffect` instead of `useEffect` to get
+    // rid of an almost unnoticeable delay between showing anime entries
+    useLayoutEffect(() => {
         if (!data) {
             return;
         }
