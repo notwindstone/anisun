@@ -1,0 +1,53 @@
+import { getNavbarItems } from "@/constants/navbar";
+
+type pathnameType = ReturnType<typeof getNavbarItems>[0]["href"];
+
+const safePathnames: Array<pathnameType> = ["/", "/admin", "/anime", "/account", "/library", "/extensions"];
+
+export default function getRouteState({
+    state,
+    searchParameters,
+    currentPathname,
+}: {
+    state: Record<
+        pathnameType,
+        Record<string, string>
+    >;
+    searchParameters: URLSearchParams;
+    currentPathname:  string;
+}): Record<
+    pathnameType,
+    Record<string, string>
+> {
+    // typescript is insane...
+    const pathnameData: {
+        safe: boolean;
+        path: pathnameType;
+    } = {
+        safe: false,
+        path: "/",
+    };
+
+    for (const safePathname of safePathnames) {
+        if (safePathname === `/${currentPathname}`) {
+            pathnameData.safe = true;
+            pathnameData.path = safePathname;
+        }
+    }
+
+    if (!pathnameData.safe) {
+        return state;
+    }
+
+    const searchParametersObject: Record<string, string> = {};
+
+    for (const [key, value] of searchParameters.entries()) {
+        searchParametersObject[key] = value;
+    }
+
+    const newState = { ...state };
+
+    newState[pathnameData.path] = searchParametersObject;
+
+    return newState;
+}

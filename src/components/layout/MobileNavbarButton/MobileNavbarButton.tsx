@@ -7,8 +7,9 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
 import useFuturePathname from "@/utils/hooks/useFuturePathname";
 import { usePathname, useSearchParams } from "next/navigation";
+import getRouteState from "@/utils/misc/getRouteStates";
+import { InitialRouteStates } from "@/constants/app";
 
-const safePathnames: Array<ReturnType<typeof getNavbarItems>[0]["href"]> = ["/", "/admin", "/anime", "/account", "/library", "/extensions"];
 const navbarBackground = {
     opened: {
         width: 80,
@@ -41,14 +42,7 @@ export default function MobileNavbarButton({
     const [queriesStore, setQueriesStore] = useState<Record<
         typeof item.href,
         Record<string, string>
-    >>({
-        "/":           {},
-        "/account":    {},
-        "/admin":      {},
-        "/library":    {},
-        "/extensions": {},
-        "/anime":      {},
-    });
+    >>(InitialRouteStates);
     const currentPathname = usePathname().split("/").slice(2).join("/");
     const searchParameters = useSearchParams();
     const { setFuturePathname } = useFuturePathname();
@@ -81,39 +75,11 @@ export default function MobileNavbarButton({
     }, [focused, item.href]);
 
     useEffect(() => {
-        // typescript is insane...
-        const pathnameData: {
-            safe: boolean;
-            path: typeof item.href;
-        } = {
-            safe: false,
-            path: "/",
-        };
-
-        for (const safePathname of safePathnames) {
-            if (safePathname === `/${currentPathname}`) {
-                pathnameData.safe = true;
-                pathnameData.path = safePathname;
-            }
-        }
-
-        if (!pathnameData.safe) {
-            return;
-        }
-
-        const searchParametersObject: Record<string, string> = {};
-
-        for (const [key, value] of searchParameters.entries()) {
-            searchParametersObject[key] = value;
-        }
-
-        setQueriesStore((state) => {
-            const newState = { ...state };
-
-            newState[pathnameData.path] = searchParametersObject;
-
-            return newState;
-        });
+        setQueriesStore((state) => getRouteState({
+            state,
+            currentPathname,
+            searchParameters,
+        }));
     }, [item, currentPathname, searchParameters]);
 
     return (
