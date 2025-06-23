@@ -61,6 +61,7 @@ export default function Input({
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
 
+                        setDropdownOpened(true);
                         setSearch(value);
                     }}
                     placeholder={placeholder}

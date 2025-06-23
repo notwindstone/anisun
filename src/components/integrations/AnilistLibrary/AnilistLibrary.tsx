@@ -12,7 +12,7 @@ import Pagination from "@/components/layout/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
 import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
 import { useDebouncedState } from "@mantine/hooks";
-import Input from "@/components/layout/Input/Input";
+import Input from "@/components/base/Input/Input";
 import getCurrentAnimeChunk from "@/utils/misc/getCurrentAnimeChunk";
 import AnilistUsernamesDropdown from "@/components/integrations/AnilistUsernamesDropdown/AnilistUsernamesDropdown";
 import useFuturePathname from "@/utils/hooks/useFuturePathname";
