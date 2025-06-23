@@ -20,20 +20,26 @@ const getGraphQLResponse = async <T extends object>({
             })
         >
     > => {
-    const response = await fetch(url, {
-        method:  "POST",
-        headers: {
-            "Content-Type": "application/json",
-            ...(accessToken === undefined ? {} : {
-                "Authorization": `Bearer ${accessToken}`,
+    let response: Response;
+
+    try {
+        response = await fetch(url, {
+            method:  "POST",
+            headers: {
+                "Content-Type": "application/json",
+                ...(accessToken === undefined ? {} : {
+                    "Authorization": `Bearer ${accessToken}`,
+                }),
+            },
+            body: JSON.stringify({
+                query,
+                variables,
             }),
-        },
-        body: JSON.stringify({
-            query,
-            variables,
-        }),
-        ...options,
-    });
+            ...options,
+        });
+    } catch {
+        throw new Error("Anilist responses are shitty af. You are probably hitting their rate-limits");
+    }
 
     if (response.status === 404) {
         throw new Error(ErrorStrings.Fetch.UnableToFind.Label);

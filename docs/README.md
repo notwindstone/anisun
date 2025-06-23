@@ -215,10 +215,4 @@ Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 > [!IMPORTANT]
 > The developer of this application does not have any affiliation with the content providers available, and this application hosts zero content.
 
-~~ask about using this logo~~ (waiting for response)
-
-https://x.com/ahiru_tokotoko/status/1568517301737242625
-
-* Shikimori, MAL and AniList integrations
-
 https://github.com/consumet/api.consumet.org

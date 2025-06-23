@@ -100,7 +100,7 @@ export default function AnilistUsernamesDropdown({
         return (
             <>
                 <div
-                    className="flex justify-center items-center rounded-md w-full h-12 text-sm text-center text-balance"
+                    className="flex justify-center items-center rounded-md w-full min-h-12 text-xs xs:text-sm text-center text-balance"
                 >
                     An error occurred: {error?.message}. Maybe waiting will help you.
                 </div>
@@ -131,7 +131,7 @@ export default function AnilistUsernamesDropdown({
                                     height={32}
                                 />
                             </div>
-                            <div className="flex text-sm items-start flex-col gap-1">
+                            <div className="flex text-sm items-start flex-col gap-1 text-start break-all">
                                 <p className="leading-none">
                                     {user?.name}
                                 </p>
