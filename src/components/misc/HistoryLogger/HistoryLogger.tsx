@@ -6,11 +6,13 @@ import { HistoryEntriesLimit, HistoryLocalStorageKey } from "@/constants/app";
 import { useQuery } from "@tanstack/react-query";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import getAnimePageQueryKey from "@/utils/misc/getAnimePageQueryKey";
+import getRouteState from "@/utils/misc/getRouteStates";
+import useQueriesStore from "@/utils/stores/useQueriesStore";
 
-// log anime pages only with data that have loaded
 export default function HistoryLogger(): React.ReactNode {
     const pathname = usePathname();
     const searchParameters = useSearchParams();
+    const setQueriesState = useQueriesStore((state) => state.setQueriesState);
 
     const pathnames = pathname.split("/");
     const idMal = Number(pathnames.at(-1) ?? 0);
@@ -28,6 +30,18 @@ export default function HistoryLogger(): React.ReactNode {
         enabled: false,
     });
 
+    // log all routes and their search params to implement a states storage
+    useEffect(() => {
+        const currentPathname = pathnames.slice(2).join("");
+
+        setQueriesState(getRouteState({
+            currentPathname,
+            searchParameters,
+        }));
+    }, [pathnames, searchParameters, setQueriesState]);
+
+
+    // log anime pages only with data that have loaded
     useEffect(() => {
         if (!pathname.includes("anime")) {
             return;

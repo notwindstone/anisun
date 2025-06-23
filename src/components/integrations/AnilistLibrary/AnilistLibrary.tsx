@@ -103,6 +103,10 @@ export default function AnilistLibrary({
             return;
         }
 
+        if (safePage === 0) {
+            return;
+        }
+
         const modifiedParameters = new URLSearchParams(searchParameters.toString());
 
         modifiedParameters.set("page", safePage.toString());

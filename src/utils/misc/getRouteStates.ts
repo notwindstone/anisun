@@ -1,16 +1,19 @@
 import { RouteType } from "@/types/General/Route.type";
 
 const safePathnames: Array<RouteType> = ["/", "/admin", "/anime", "/account", "/library", "/extensions"];
+const placeholderState: Record<
+    string,
+    Record<string, string>
+> = {
+    "/admin": {
+        "placeholder": "true",
+    },
+};
 
 export default function getRouteState({
-    state,
     searchParameters,
     currentPathname,
 }: {
-    state: Record<
-        RouteType,
-        Record<string, string>
-    >;
     searchParameters: URLSearchParams;
     currentPathname:  string;
 }): Record<
@@ -34,7 +37,7 @@ export default function getRouteState({
     }
 
     if (!pathnameData.safe) {
-        return state;
+        return placeholderState;
     }
 
     const searchParametersObject: Record<string, string> = {};
@@ -43,7 +46,10 @@ export default function getRouteState({
         searchParametersObject[key] = value;
     }
 
-    const newState = { ...state };
+    const newState: Record<
+        string,
+        Record<string, string>
+    > = {};
 
     newState[pathnameData.path] = searchParametersObject;
 

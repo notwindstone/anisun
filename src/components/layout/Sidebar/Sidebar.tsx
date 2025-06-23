@@ -17,6 +17,7 @@ import { UserType } from "@/types/OAuth2/User.type";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { usePathname } from "next/navigation";
 import useFuturePathname from "@/utils/stores/useFuturePathname";
+import useQueriesStore from "@/utils/stores/useQueriesStore";
 
 const icons: {
     [key: string]: {
@@ -39,6 +40,7 @@ export default function Sidebar({
     accountInfo: UserType;
 }>) {
     const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
+    const queriesState = useQueriesStore((state) => state.queriesState);
     const { config, config: {
         theme,
         colors: { base, accent },
@@ -166,6 +168,7 @@ export default function Sidebar({
                                                     prefetch
                                                     href={{
                                                         pathname: link.href,
+                                                        query:    queriesState[link.href],
                                                     }}
                                                     key={link.href}
                                                     className="sidebar__link dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"

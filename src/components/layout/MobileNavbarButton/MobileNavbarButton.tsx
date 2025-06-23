@@ -5,10 +5,8 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
-import { usePathname, useSearchParams } from "next/navigation";
-import getRouteState from "@/utils/misc/getRouteStates";
-import { InitialRouteStates } from "@/constants/app";
 import useFuturePathname from "@/utils/stores/useFuturePathname";
+import useQueriesStore from "@/utils/stores/useQueriesStore";
 
 const navbarBackground = {
     opened: {
@@ -39,12 +37,7 @@ export default function MobileNavbarButton({
     const [backgroundProperties, setBackgroundProperties] = useState<{
         width:      number;
     }>(navbarBackground.opened);
-    const [queriesStore, setQueriesStore] = useState<Record<
-        typeof item.href,
-        Record<string, string>
-    >>(InitialRouteStates);
-    const currentPathname = usePathname().split("/").slice(2).join("/");
-    const searchParameters = useSearchParams();
+    const queriesState = useQueriesStore((state) => state.queriesState);
     const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
 
     // `oklch(percent number number)`
@@ -74,14 +67,6 @@ export default function MobileNavbarButton({
         return () => clearTimeout(timeout);
     }, [focused, item.href]);
 
-    useEffect(() => {
-        setQueriesStore((state) => getRouteState({
-            state,
-            currentPathname,
-            searchParameters,
-        }));
-    }, [item, currentPathname, searchParameters]);
-
     return (
         <Link
             // `null` by default, which means only static routes gonna fully prefetch
@@ -100,7 +85,7 @@ export default function MobileNavbarButton({
             }}
             href={{
                 pathname: item.href,
-                query:    queriesStore[item.href],
+                query:    queriesState[item.href],
             }}
             onClick={() => {
                 setFuturePathname({

@@ -6,7 +6,7 @@ type futurePathnameType = {
 };
 
 const useFuturePathname = create<{
-    futurePathname: futurePathnameType;
+    futurePathname:    futurePathnameType;
     setFuturePathname: (path: futurePathnameType) => void;
 }>()((set) => ({
     futurePathname: {
