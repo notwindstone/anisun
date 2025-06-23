@@ -1,4 +1,9 @@
 export const ErrorStrings = {
+    Fetch: {
+        UnableToFind: {
+            Label: "User not found.",
+        },
+    },
     Player: {
         UnableToFind: {
             Label:       "no_video",

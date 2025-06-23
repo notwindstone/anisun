@@ -1,3 +1,5 @@
+import { ErrorStrings } from "@/constants/errors";
+
 const placeholderArray = [ "w-18", "w-8" ];
 const placeholderNamesArray = [ "min-w-28", "w-20" ];
 
@@ -33,7 +35,7 @@ export default function ErrorSmallCard({
                             placeholderNamesArray.map((widthClassName, index) => {
                                 let errorMessage = "Maybe waiting will help you.";
 
-                                if (passedMessage === "User not found.") {
+                                if (passedMessage === ErrorStrings.Fetch.UnableToFind.Label) {
                                     errorMessage = passedMessage;
                                 }
 

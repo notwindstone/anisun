@@ -1,3 +1,5 @@
+import { ErrorStrings } from "@/constants/errors";
+
 const getGraphQLResponse = async <T extends object>({
     url,
     query,
@@ -34,7 +36,7 @@ const getGraphQLResponse = async <T extends object>({
     });
 
     if (response.status === 404) {
-        throw new Error("User not found");
+        throw new Error(ErrorStrings.Fetch.UnableToFind.Label);
     }
 
     if (!response.ok) {
