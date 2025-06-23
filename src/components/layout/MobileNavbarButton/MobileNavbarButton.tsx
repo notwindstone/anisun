@@ -5,10 +5,10 @@ import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
-import useFuturePathname from "@/utils/hooks/useFuturePathname";
 import { usePathname, useSearchParams } from "next/navigation";
 import getRouteState from "@/utils/misc/getRouteStates";
 import { InitialRouteStates } from "@/constants/app";
+import useFuturePathname from "@/utils/stores/useFuturePathname";
 
 const navbarBackground = {
     opened: {
@@ -45,7 +45,7 @@ export default function MobileNavbarButton({
     >>(InitialRouteStates);
     const currentPathname = usePathname().split("/").slice(2).join("/");
     const searchParameters = useSearchParams();
-    const { setFuturePathname } = useFuturePathname();
+    const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
 
     // `oklch(percent number number)`
     const backgroundColorArray = [ ...parseTailwindColor({

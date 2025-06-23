@@ -15,8 +15,8 @@ import { useDebouncedState } from "@mantine/hooks";
 import Input from "@/components/base/Input/Input";
 import getCurrentAnimeChunk from "@/utils/misc/getCurrentAnimeChunk";
 import AnilistUsernamesDropdown from "@/components/integrations/AnilistUsernamesDropdown/AnilistUsernamesDropdown";
-import useFuturePathname from "@/utils/hooks/useFuturePathname";
 import { PageRoutes } from "@/constants/routes";
+import useFuturePathname from "@/utils/stores/useFuturePathname";
 
 const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
 
@@ -50,7 +50,7 @@ export default function AnilistLibrary({
         };
     });
     const searchParameters = useSearchParams();
-    const { futurePathname } = useFuturePathname();
+    const futurePathname = useFuturePathname((state) => state.futurePathname);
 
     const [debouncedSearchParameters, setDebouncedSearchParameters] = useDebouncedState<string>("", 500, {
         leading: true,

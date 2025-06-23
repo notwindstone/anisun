@@ -7,7 +7,7 @@ import Button from "@/components/base/Button/Button";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import AnimatedGradientText from "@/components/base/AnimatedGradientText/AnimatedGradientText";
-import { AppName, InitialRouteStates } from "@/constants/app";
+import { AppName } from "@/constants/app";
 import Link from "next/link";
 import { useMediaQuery } from "@mantine/hooks";
 import Favicon from "@/components/base/Favicon/Favicon";
@@ -15,11 +15,8 @@ import { useContextSelector } from "use-context-selector";
 import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
 import { UserType } from "@/types/OAuth2/User.type";
 import { getSideBarLinks } from "@/constants/sidebar";
-import { usePathname, useSearchParams } from "next/navigation";
-import useFuturePathname from "@/utils/hooks/useFuturePathname";
-import { useEffect, useState } from "react";
-import { RouteType } from "@/types/General/Route.type";
-import getRouteState from "@/utils/misc/getRouteStates";
+import { usePathname } from "next/navigation";
+import useFuturePathname from "@/utils/stores/useFuturePathname";
 
 const icons: {
     [key: string]: {
@@ -41,7 +38,7 @@ export default function Sidebar({
 }: Readonly<{
     accountInfo: UserType;
 }>) {
-    const { setFuturePathname } = useFuturePathname();
+    const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
     const { config, config: {
         theme,
         colors: { base, accent },
@@ -59,19 +56,6 @@ export default function Sidebar({
     // ["", "lang", "route", "another-route"]
     const pathnames = pathname.split("/");
     const pathnameRoot = `/${pathnames[2] ?? ""}`;
-    const [queriesStore, setQueriesStore] = useState<Record<
-        RouteType,
-        Record<string, string>
-    >>(InitialRouteStates);
-    const searchParameters = useSearchParams();
-
-    useEffect(() => {
-        setQueriesStore((state) => getRouteState({
-            state,
-            currentPathname: pathnames[2] ?? "",
-            searchParameters,
-        }));
-    }, [pathnames, searchParameters]);
 
     if (matches === false) {
         return;
@@ -182,7 +166,6 @@ export default function Sidebar({
                                                     prefetch
                                                     href={{
                                                         pathname: link.href,
-                                                        query:    queriesStore[link.href],
                                                     }}
                                                     key={link.href}
                                                     className="sidebar__link dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
