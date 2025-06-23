@@ -2,7 +2,7 @@ import ExtensionsFetch from "@/components/extensions/ExtensionsFetch/ExtensionsF
 import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
 import React from "react";
 import getAnimePageQueryKey from "@/utils/misc/getAnimePageQueryKey";
-import AnimeInfo from "@/components/misc/AnimeInfo/AnimeInfo";
+import AnimeInfo from "@/components/layout/AnimeInfo/AnimeInfo";
 
 export default async function Page({
     params,

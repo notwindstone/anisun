@@ -1,4 +1,4 @@
-import HistoryWrapper from "@/components/misc/HistoryWrapper/HistoryWrapper";
+import HistoryWrapper from "@/components/layout/HistoryWrapper/HistoryWrapper";
 import {
     AccessTokenCookieKey,
     AccessTokenProviderCookieKey,

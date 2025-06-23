@@ -1,7 +1,7 @@
 "use client";
 
 import { HistoryLocalStorageKey } from "@/constants/app";
-import HistoryLoader from "@/components/misc/HistoryLoader/HistoryLoader";
+import HistoryLoader from "@/components/layout/HistoryLoader/HistoryLoader";
 import { useQuery } from "@tanstack/react-query";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
