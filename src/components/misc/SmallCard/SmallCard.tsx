@@ -74,9 +74,6 @@ export default function SmallCard({
             >
                 <ConfiguredImage
                     className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75"
-                    style={{
-                        objectPosition: "100% 20%",
-                    }}
                     fill
                     src={data?.coverImage?.extraLarge}
                     alt={`${data?.title?.romaji} anime's poster`}
