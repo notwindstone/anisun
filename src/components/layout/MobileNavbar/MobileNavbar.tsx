@@ -1,9 +1,8 @@
 "use client";
 
-import { useMediaQuery } from "@mantine/hooks";
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
 import React from "react";
@@ -15,52 +14,43 @@ import MobileNavbarButton from "@/components/layout/MobileNavbarButton/MobileNav
 const locales = new Set<string>(Locales);
 
 export default function MobileNavbar({
-    accountInfo,
+    navbarItems,
 }: {
-    accountInfo: unknown;
+    navbarItems: ReturnType<typeof getNavbarItems>;
 }) {
+    const renderReference = useRef(1);
+    console.log(`%c MobileNavbar re-rendered ${renderReference.current++} times`, "font-size: 24px;");
     const pathname = usePathname()
         .split("/")
         .filter((word) => !locales.has(word))
         .join("/") || "/";
     const [focused, setFocused] = useState<string>(pathname);
-    const { data: {
-        theme,
-        colors: { base },
-    }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+    const { theme, base, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
-            data:         value.data,
-            dictionaries: value.dictionaries,
+            theme:  value.data.theme,
+            base:   value.data.colors.base,
+            accent: value.data.colors.accent,
         };
     });
-    const matches = useMediaQuery('(min-width: 640px)');
+
+    // `oklch(percent number number)`
+    const backgroundColorArray = [ ...parseTailwindColor({
+        color: accent,
+        step:  theme === DarkThemeKey ? 400 : 500,
+    }) ];
+
+    // remove `)`
+    backgroundColorArray.pop();
+    backgroundColorArray.push(" / 0.15)");
+
+    const backgroundColor = backgroundColorArray.join("");
 
     useEffect(() => {
         setFocused(pathname);
     }, [pathname]);
 
-    if (matches === true) {
-        return;
-    }
-
-    let avatar: string | undefined;
-
-    if (
-        typeof accountInfo === "object"
-        && accountInfo !== null
-        && "avatar" in accountInfo
-        && typeof accountInfo.avatar === "string"
-    ) {
-        avatar = accountInfo.avatar;
-    }
-
-    const navbarItems = getNavbarItems({
-        dictionaries,
-        avatar,
-    });
-
-    return (
-        <>
+    return useMemo(
+        () => (
             <div
                 className="mobile-navbar__wrapper flex flex-row flex-nowrap px-2 py-1 justify-between sm:hidden transition-colors duration-200 overflow-hidden w-full h-20"
                 style={{
@@ -83,11 +73,13 @@ export default function MobileNavbar({
                                 item={item}
                                 focused={focused}
                                 setFocused={setFocused}
+                                backgroundColor={backgroundColor}
                             />
                         );
                     })
                 }
             </div>
-        </>
+        ),
+        [backgroundColor, theme, base, focused, setFocused, navbarItems],
     );
 }

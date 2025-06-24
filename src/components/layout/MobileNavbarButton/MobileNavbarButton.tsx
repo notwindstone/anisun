@@ -21,38 +21,26 @@ export default function MobileNavbarButton({
     item,
     focused,
     setFocused,
+    backgroundColor,
 }: {
     item: ReturnType<typeof getNavbarItems>[0];
     focused: string;
     setFocused: Dispatch<SetStateAction<string>>;
+    backgroundColor: string;
 }) {
     const renderReference = useRef(1);
-    console.log(`${item.name} re-rendered ${renderReference.current++} times`);
-    const { data: {
-        theme,
-        colors: { accent },
-    } } = useContextSelector(ConfigsContext, (value) => {
+    console.log(`${item.name} Button re-rendered ${renderReference.current++} times`);
+    const { theme, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
-            data: value.data,
+            theme:  value.data.theme,
+            accent: value.data.colors.accent,
         };
     });
     const [backgroundProperties, setBackgroundProperties] = useState<{
-        width:      number;
+        width: number;
     }>(navbarBackground.opened);
     const queriesState = useQueriesStore((state) => state.queriesState);
     const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
-
-    // `oklch(percent number number)`
-    const backgroundColorArray = [ ...parseTailwindColor({
-        color: accent,
-        step:  theme === DarkThemeKey ? 400 : 500,
-    }) ];
-
-    // remove `)`
-    backgroundColorArray.pop();
-    backgroundColorArray.push(" / 0.15)");
-
-    const backgroundColor = backgroundColorArray.join("");
 
     useEffect(() => {
         setBackgroundProperties(navbarBackground.closed);
@@ -98,7 +86,7 @@ export default function MobileNavbarButton({
             }}
         >
             <div
-                className="mobile-navbar__button-icon flex h-fit py-1 justify-center items-center rounded-full transition-sidebar duration-300"
+                className="mobile-navbar__button-icon flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-300 will-change-auto"
                 style={{
                     width: backgroundProperties.width,
                     ...(

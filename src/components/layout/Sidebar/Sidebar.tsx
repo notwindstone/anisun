@@ -9,11 +9,9 @@ import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
 import AnimatedGradientText from "@/components/base/AnimatedGradientText/AnimatedGradientText";
 import { AppName } from "@/constants/app";
 import Link from "next/link";
-import { useMediaQuery } from "@mantine/hooks";
 import Favicon from "@/components/base/Favicon/Favicon";
 import { useContextSelector } from "use-context-selector";
 import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
-import { UserType } from "@/types/OAuth2/User.type";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { usePathname } from "next/navigation";
 import useFuturePathname from "@/utils/stores/useFuturePathname";
@@ -35,40 +33,28 @@ const icons: {
 };
 
 export default function Sidebar({
-    accountInfo,
-}: Readonly<{
-    accountInfo: UserType;
-}>) {
+    sidebarItems,
+}: {
+    sidebarItems: ReturnType<typeof getSideBarLinks>;
+}) {
     const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
     const queriesState = useQueriesStore((state) => state.queriesState);
     const { config, config: {
         theme,
         colors: { base, accent },
-    }, dictionaries } = useContextSelector(ConfigsContext, (value) => {
+    }, toggleSidebarText } = useContextSelector(ConfigsContext, (value) => {
         return {
-            config:       value.data,
-            dictionaries: value.dictionaries,
+            config:            value.data,
+            toggleSidebarText: value.dictionaries?.aria?.toggleSidebar,
         };
     });
     const { data: sidebarConfig, optimisticallyUpdate: optimisticallyUpdateSidebar } = useContextSelector(SidebarConfigContext, (value) => value,
     );
-    const matches = useMediaQuery('(min-width: 640px)');
     // "/lang/route/another-route"
     const pathname = usePathname();
     // ["", "lang", "route", "another-route"]
     const pathnames = pathname.split("/");
     const pathnameRoot = `/${pathnames[2] ?? ""}`;
-
-    if (matches === false) {
-        return;
-    }
-
-    const { avatar, username } = accountInfo;
-    const sidebarItems = getSideBarLinks({
-        dictionaries,
-        avatar,
-        username,
-    });
 
     const toggleSidebar = () => {
         optimisticallyUpdateSidebar?.((state) => {
@@ -145,7 +131,7 @@ export default function Sidebar({
                             style: "base",
                         }}
                         onClick={toggleSidebar}
-                        label={dictionaries?.aria?.toggleSidebar as string}
+                        label={toggleSidebarText as string}
                     >
                         {icons?.[sidebarConfig.position]?.[sidebarConfig.expanded.toString()]}
                     </Button>

@@ -8,10 +8,8 @@ import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import { CookieConfigKey, InitialConfig } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
-import Sidebar from "@/components/layout/Sidebar/Sidebar";
 import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
 import { AccountInfoCookieKey, AppName } from "@/constants/app";
-import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
 import { cookies, headers } from "next/headers";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
@@ -23,6 +21,8 @@ import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
 import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSSExtensionsLoader";
 import HistoryLogger from "@/components/misc/HistoryLogger/HistoryLogger";
+import MobileNavbarWrapper from "@/components/layout/MobileNavbarWrapper/MobileNavbarWrapper";
+import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -124,12 +124,12 @@ export default async function RootLayout({
                         <SidebarConfigProvider configs={parsedConfigData?.layout?.sidebar}>
                             <ExtensionsProvider>
                                 <AppWrapper>
-                                    <Sidebar accountInfo={safeAccountValues} />
+                                    <SidebarWrapper accountInfo={safeAccountValues} />
                                     <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
                                         {children}
                                         <Footer dictionaries={dictionaries} />
                                     </div>
-                                    <MobileNavbar
+                                    <MobileNavbarWrapper
                                         accountInfo={parsedAccountInfoData}
                                     />
                                 </AppWrapper>

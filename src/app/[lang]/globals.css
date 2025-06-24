@@ -13,6 +13,10 @@
 /*
  * Custom utilities
  */
+@utility transition-mobile-navbar-button {
+  transition-property: width, color, background-color;
+  transition-timing-function: var(--tw-ease, var(--default-transition-timing-function) /* cubic-bezier(0.4, 0, 0.2, 1) */);
+}
 @utility transition-sidebar {
   transition-property: width, color, background-color;
   transition-timing-function: var(--tw-ease, var(--default-transition-timing-function) /* cubic-bezier(0.4, 0, 0.2, 1) */);
