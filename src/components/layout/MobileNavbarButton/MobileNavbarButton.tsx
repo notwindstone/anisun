@@ -30,6 +30,7 @@ export default function MobileNavbarButton({
 }) {
     const renderReference = useRef(1);
     console.log(`${item.name} Button re-rendered ${renderReference.current++} times`);
+    const buttonReference = useRef<HTMLAnchorElement>(null);
     const { theme, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
             theme:  value.data.theme,
@@ -43,6 +44,7 @@ export default function MobileNavbarButton({
     const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
 
     useEffect(() => {
+        buttonReference.current?.blur?.();
         setBackgroundProperties(navbarBackground.closed);
 
         // Jetpack Compose UI like transition doesn't work without a timeout
@@ -62,7 +64,8 @@ export default function MobileNavbarButton({
             // `null` by default, which means only static routes gonna fully prefetch
             // `true` allows for the full dynamic route prefetch
             prefetch
-            className="mobile-navbar__button shrink-0 flex flex-col gap-2 text-xs xxs:text-sm items-center justify-center w-16 xxs:w-20"
+            ref={buttonReference}
+            className="mobile-navbar__button group shrink-0 flex flex-col gap-2 text-xs xxs:text-sm items-center justify-center w-16 xxs:w-20"
             style={{
                 ...(
                     focused === item.href ? {
@@ -77,16 +80,21 @@ export default function MobileNavbarButton({
                 pathname: item.href,
                 query:    queriesState[item.href],
             }}
+            // fires on click
             onClick={() => {
                 setFuturePathname({
                     path: item.href,
                     date: Date.now(),
                 });
+            }}
+            // fires after route is loaded
+            // this means that if user's internet is bad af, `onNavigate` will be delayed noticeably
+            onNavigate={() => {
                 setFocused(item.href);
             }}
         >
             <div
-                className="mobile-navbar__button-icon flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-300 will-change-auto"
+                className="mobile-navbar__button-icon relative flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-300 will-change-auto group-focus:before:opacity-100 before:opacity-0 before:transition-opacity before:duration-150 before:bg-[theme(colors.white/.03)] before:absolute before:top-0 before:left-[50%] before:translate-x-[-50%] before:w-20 before:h-full before:rounded-full"
                 style={{
                     width: backgroundProperties.width,
                     ...(
