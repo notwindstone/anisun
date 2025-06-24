@@ -19,11 +19,9 @@ export type ConfigType = {
     };
     /* TODO
 
-    extensions?: {
-        hydrationDelay?: number;
-    };
     other?: {
-        logo?: "non-ai" | "ai";
+        hydrationDelay?:             number;
+        logo?:                       "non-ai" | "ai";
     };
 
     */
