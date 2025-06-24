@@ -164,7 +164,7 @@ export default function SmallCard({
                                 </Badge>
                             )
                         }
-                        <p className="text-md text-black dark:text-white text-pretty font-medium drop-shadow-sm line-clamp-3">
+                        <p className="text-md text-black dark:text-white text-pretty font-medium line-clamp-3">
                             {
                                 translate({
                                     text:   name,
