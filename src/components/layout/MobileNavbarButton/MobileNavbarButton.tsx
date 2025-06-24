@@ -16,6 +16,7 @@ const navbarBackground = {
         width: 48,
     },
 };
+const optimisticallyRender = true;
 
 export default function MobileNavbarButton({
     item,
@@ -44,7 +45,10 @@ export default function MobileNavbarButton({
     const setFuturePathname = useFuturePathname((state) => state.setFuturePathname);
 
     useEffect(() => {
-        buttonReference.current?.blur?.();
+        if (!optimisticallyRender) {
+            buttonReference.current?.blur?.();
+        }
+
         setBackgroundProperties(navbarBackground.closed);
 
         // Jetpack Compose UI like transition doesn't work without a timeout
@@ -86,15 +90,25 @@ export default function MobileNavbarButton({
                     path: item.href,
                     date: Date.now(),
                 });
+
+                if (!optimisticallyRender) {
+                    return;
+                }
+
+                setFocused(item.href);
             }}
             // fires after route is loaded
             // this means that if user's internet is bad af, `onNavigate` will be delayed noticeably
             onNavigate={() => {
+                if (optimisticallyRender) {
+                    return;
+                }
+
                 setFocused(item.href);
             }}
         >
             <div
-                className="mobile-navbar__button-icon relative flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-300 will-change-auto group-focus:before:opacity-100 before:opacity-0 before:transition-opacity before:duration-150 before:bg-[theme(colors.white/.03)] before:absolute before:top-0 before:left-[50%] before:translate-x-[-50%] before:w-20 before:h-full before:rounded-full"
+                className={`mobile-navbar__button-icon relative flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-300 ${optimisticallyRender ? "" : "group-focus:before:opacity-100 before:opacity-0 before:transition-opacity before:duration-150 before:bg-[theme(colors.white/.03)] before:absolute before:top-0 before:left-[50%] before:translate-x-[-50%] before:w-20 before:h-full before:rounded-full"}`}
                 style={{
                     width: backgroundProperties.width,
                     ...(
