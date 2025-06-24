@@ -6,7 +6,6 @@ import React, {
     SetStateAction,
     useEffect,
     useState,
-    useRef,
     startTransition,
 } from "react";
 import { useContextSelector } from "use-context-selector";
@@ -35,8 +34,6 @@ export default function MobileNavbarButton({
     setFocused: Dispatch<SetStateAction<string>>;
     backgroundColor: string;
 }) {
-    const renderReference = useRef(1);
-    console.log(`${item.name} Button re-rendered ${renderReference.current++} times`);
     const { theme, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
             theme:  value.data.theme,
@@ -59,15 +56,9 @@ export default function MobileNavbarButton({
         }
 
         // Jetpack Compose UI like transition doesn't work without a timeout
-        //const timeout = setTimeout(() => {
         startTransition(() => {
             setBackgroundProperties(navbarBackground.opened);
         });
-
-        //    return;
-        //}, 0);
-
-        //return () => clearTimeout(timeout);
     }, [focused, item.href]);
 
     return (

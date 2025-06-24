@@ -98,6 +98,7 @@ export default async function RootLayout({
         account: parsedAccountInfoData,
     });
 
+    /** you can safely remove from here */
     const headersList = await headers();
     const { browser, cpu, os, device } = userAgent({
         headers: headersList,
@@ -113,6 +114,7 @@ export default async function RootLayout({
         `${os?.name} ${os?.version},`,
         `${device?.type}`,
     );
+    /** until here */
 
     return (
         <html lang={lang}>

@@ -2,7 +2,7 @@
 
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
 import React from "react";
@@ -18,8 +18,6 @@ export default function MobileNavbar({
 }: {
     navbarItems: ReturnType<typeof getNavbarItems>;
 }) {
-    const renderReference = useRef(1);
-    console.log(`%c MobileNavbar re-rendered ${renderReference.current++} times`, "font-size: 24px;");
     const pathname = usePathname()
         .split("/")
         .filter((word) => !locales.has(word))

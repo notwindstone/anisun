@@ -13,7 +13,6 @@ export default function MobileNavbarWrapper({
 }) {
     const matches = useMediaQuery('(min-width: 640px)');
     const dictionaries = useContextSelector(ConfigsContext, (value) => value.dictionaries);
-    console.log("%c MobileNavbarWrapper re-rendered", "font-size: 48px; background-color: black");
     if (matches === true) {
         return;
     }
