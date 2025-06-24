@@ -2,9 +2,6 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
     /* config options here */
-    experimental: {
-        reactCompiler: true,
-    },
     env: {
         GIT_COMMIT_HASH: process.env.GIT_COMMIT_HASH,
     },
