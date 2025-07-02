@@ -38,6 +38,8 @@ export async function writeToAnilibriaSyncDB({
         } catch {
             return "Error";
         }
+
+        return "Success";
     }
 
     try {
