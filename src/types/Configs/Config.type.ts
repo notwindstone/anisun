@@ -16,13 +16,10 @@ export type ConfigType = {
     library?: {
         libraryEntriesOnThePage?: number;
         historyEntriesOnThePage?: number;
-    };
-    /* TODO
-
+    }
     other?: {
-        hydrationDelay?:             number;
-        logo?:                       "non-ai" | "ai";
+        historyEnabled?: boolean;
+        hydrationDelay?: number;
+        logo?:           "non-ai" | "ai";
     };
-
-    */
 } | undefined;

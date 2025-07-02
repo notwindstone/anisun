@@ -47,7 +47,7 @@ export async function generateMetadata({
     const { metadata: { title, description } } = await getDictionary(lang);
 
     return {
-        icons: "/ai-slop.webp",
+        icons: "/favicon.webp",
         title: {
             template: `%s | ${AppName.toLowerCase()}`,
             default:  title,
@@ -98,7 +98,7 @@ export default async function RootLayout({
         account: parsedAccountInfoData,
     });
 
-    /** you can safely remove from here */
+    /** Requests logging */
     const headersList = await headers();
     const { browser, cpu, os, device } = userAgent({
         headers: headersList,
@@ -109,12 +109,12 @@ export default async function RootLayout({
     console.log(
         `[${currentDate.toLocaleTimeString()}, ${currentDate.toDateString()}]:`,
         "request -",
-        `${browser?.name} ${browser?.version},`,
-        `${cpu?.architecture},`,
-        `${os?.name} ${os?.version},`,
-        `${device?.type}`,
+        `${browser?.name ?? ""} ${browser?.version ?? ""},`,
+        `${cpu?.architecture ?? ""},`,
+        `${os?.name} ${os?.version ?? ""},`,
+        `${device?.type ?? ""}`,
     );
-    /** until here */
+    /** Ends here */
 
     return (
         <html lang={lang}>
@@ -138,8 +138,8 @@ export default async function RootLayout({
                                 <CSSExtensionsLoader />
                             </ExtensionsProvider>
                         </SidebarConfigProvider>
+                        <HistoryLogger />
                     </ConfigsProvider>
-                    <HistoryLogger />
                 </TanstackQueryProviders>
                 <DarkReaderNotify />
             </body>

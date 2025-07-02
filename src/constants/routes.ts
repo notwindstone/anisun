@@ -85,15 +85,6 @@ const loginBase = APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Logi
 const callbackBase = APIRoutes.Root + APIRoutes.OAuth2.Root + APIRoutes.OAuth2.Callback.Root;
 
 export const OAuth2Routes = {
-    Shikimori: {
-        Login:      loginBase       + APIRoutes.OAuth2.Login.Shikimori.Root,
-        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Shikimori.Root,
-        _FetchUser: RemoteRoutes.Shikimori.V1.Root
-            + RemoteRoutes.Shikimori.V1.Users.Root
-            + RemoteRoutes.Shikimori.V1.Users.WhoAmI.Root,
-        __Icon: ShikimoriIcon,
-        __Name: "Shikimori",
-    },
     Anilist: {
         Login:             loginBase       + APIRoutes.OAuth2.Login.Anilist.Root,
         Callback:          callbackBase    + APIRoutes.OAuth2.Callback.Anilist.Root,
@@ -105,6 +96,15 @@ export const OAuth2Routes = {
         },
         __Icon: AnilistIcon,
         __Name: "AniList",
+    },
+    Shikimori: {
+        Login:      loginBase       + APIRoutes.OAuth2.Login.Shikimori.Root,
+        Callback:   callbackBase    + APIRoutes.OAuth2.Callback.Shikimori.Root,
+        _FetchUser: RemoteRoutes.Shikimori.V1.Root
+            + RemoteRoutes.Shikimori.V1.Users.Root
+            + RemoteRoutes.Shikimori.V1.Users.WhoAmI.Root,
+        __Icon: ShikimoriIcon,
+        __Name: "Shikimori",
     },
     MAL: {
         Login:      loginBase       + APIRoutes.OAuth2.Login.MAL.Root,

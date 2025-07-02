@@ -8,8 +8,11 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import getAnimePageQueryKey from "@/utils/misc/getAnimePageQueryKey";
 import getRouteState from "@/utils/misc/getRouteStates";
 import useQueriesStore from "@/utils/stores/useQueriesStore";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 
 export default function HistoryLogger(): React.ReactNode {
+    const loggerEnabled = useContextSelector(ConfigsContext, (value) => value.data.other.historyEnabled);
     const pathname = usePathname();
     const searchParameters = useSearchParams();
     const setQueriesState = useQueriesStore((state) => state.setQueriesState);
@@ -43,6 +46,10 @@ export default function HistoryLogger(): React.ReactNode {
 
     // log anime pages only with data that have loaded
     useEffect(() => {
+        if (!loggerEnabled) {
+            return;
+        }
+
         if (!pathname.includes("anime")) {
             return;
         }

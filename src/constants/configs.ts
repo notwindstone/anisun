@@ -22,6 +22,11 @@ export const InitialConfig: SafeConfigType = {
         libraryEntriesOnThePage: 18,
         historyEntriesOnThePage: 48,
     },
+    other: {
+        historyEnabled: true,
+        hydrationDelay: 300,
+        logo:           "non-ai",
+    },
 };
 export const PlaceholderAccount: UserType = {
     username: "",

@@ -12,7 +12,7 @@ import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
 import { EntriesMaxSize } from "@/constants/app";
 
-// Yeah, this is a mess, typescript is diabolical
+// Yeah, this is a mess
 const getThemeColor = (config: ParsedConfigType): "light" | "dark" => {
     if (config?.theme === undefined) {
         return InitialConfig.theme;
@@ -54,10 +54,7 @@ const getBaseColor = (config: ParsedConfigType): BaseColorsType => {
 
     return InitialConfig.colors.base;
 };
-const getSidebarProperties = (config: ParsedConfigType): {
-    position: "left" | "right";
-    expanded: boolean;
-} => {
+const getSidebarProperties = (config: ParsedConfigType): SafeConfigType["layout"]["sidebar"] => {
     const position = config?.layout?.sidebar?.position;
     const expanded = config?.layout?.sidebar?.expanded ?? InitialConfig.layout.sidebar.expanded;
 
@@ -73,10 +70,7 @@ const getSidebarProperties = (config: ParsedConfigType): {
         expanded: expanded,
     };
 };
-const getEntries = (config: ParsedConfigType): {
-    libraryEntriesOnThePage: number;
-    historyEntriesOnThePage: number;
-} => {
+const getLibraryEntries = (config: ParsedConfigType): SafeConfigType["library"] => {
     const libraryEntries = config?.library?.libraryEntriesOnThePage;
     const historyEntries = config?.library?.historyEntriesOnThePage;
 
@@ -91,6 +85,28 @@ const getEntries = (config: ParsedConfigType): {
     return {
         libraryEntriesOnThePage: Math.min(libraryEntries, EntriesMaxSize),
         historyEntriesOnThePage: Math.min(historyEntries, EntriesMaxSize),
+    };
+};
+const getOtherProperties = (config: ParsedConfigType): SafeConfigType["other"] => {
+    const historyEnabled = config?.other?.historyEnabled ?? InitialConfig.other.historyEnabled;
+    const hydrationDelay = config?.other?.hydrationDelay;
+    const logo = config?.other?.logo;
+
+    if (
+        (logo !== "ai" && logo !== "non-ai") ||
+        typeof hydrationDelay !== "number"
+    ) {
+        return InitialConfig.other;
+    }
+
+    if (!Number.isInteger(hydrationDelay)) {
+        return InitialConfig.other;
+    }
+
+    return {
+        historyEnabled: historyEnabled,
+        hydrationDelay: hydrationDelay,
+        logo:           logo,
     };
 };
 
@@ -109,6 +125,7 @@ export default function getSafeConfigValues({
         layout: {
             sidebar: getSidebarProperties(config),
         },
-        library: getEntries(config),
+        library: getLibraryEntries(config),
+        other:   getOtherProperties(config),
     };
 }
