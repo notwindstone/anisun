@@ -42,6 +42,7 @@ export async function validateUser({
     tokenProvider: OAuth2ProvidersType;
 }): Promise<"error" | "user" | "admin"> {
     let user;
+    let fetchMethod = "GET";
     let fetchURL;
     let fetchHeaders = {};
     let fetchBody = {};
@@ -53,6 +54,7 @@ export async function validateUser({
             break;
         }
         case "anilist": {
+            fetchMethod = "POST";
             fetchURL = OAuth2Routes.Anilist._FetchUserURL;
             fetchHeaders = OAuth2Routes.Anilist._FetchUserHeaders;
             fetchBody = {
@@ -70,6 +72,7 @@ export async function validateUser({
 
     try {
         const data = await fetch(fetchURL, {
+            method:  fetchMethod,
             headers: {
                 Authorization: `Bearer ${accessToken}`,
                 ...fetchHeaders,
@@ -81,12 +84,14 @@ export async function validateUser({
         });
 
         user = await data.json();
-    } catch {
+    } catch (error: unknown) {
+        console.log(error);
+
         return "error";
     }
 
-    // my shikimori account id
-    if (user.id !== 1_452_707) {
+    // my shikimori & anilist account ids
+    if (user.id !== 1_452_707 && user.data.Viewer.id !== 7_302_037) {
         return "user";
     }
 
