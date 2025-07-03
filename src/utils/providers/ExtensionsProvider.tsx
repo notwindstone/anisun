@@ -25,6 +25,10 @@ export function ExtensionsProvider({
 }) {
     const [extensionsState, setExtensionsState] = useState<Array<ExtensionType> | undefined>();
 
+    const extensions = getSafeExtensionsValues({
+        parsedExtensions: extensionsState ?? [],
+    });
+
     useEffect(() => {
         const storedExtensions = localStorage.getItem(ExtensionsLocalStorageKey);
 
@@ -60,10 +64,6 @@ export function ExtensionsProvider({
 
         setExtensionsState(parsedExtensions);
     }, []);
-
-    const extensions = getSafeExtensionsValues({
-        parsedExtensions: extensionsState ?? [],
-    });
 
     return (
         <ExtensionsContext.Provider value={{

@@ -115,6 +115,7 @@ export default function Page() {
             );
         }
     }
+
     return (
         <NotFoundComponent
             translations={translations}
