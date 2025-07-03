@@ -28,7 +28,7 @@ export const getFooterItems = (dictionaries: DictionariesType) => ({
         },
     ],
 });
-export const ServerFetchTimeout = 3000;
+export const ServerFetchTimeout = 10_000;
 export const ServerFetchErrorCount = 5;
 export const InitialRouteStates = {
     "/":           {},
