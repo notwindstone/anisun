@@ -109,10 +109,10 @@ export default async function RootLayout({
     console.log(
         `[${currentDate.toLocaleTimeString()}, ${currentDate.toDateString()}]:`,
         "request -",
-        `${browser?.name ?? ""} ${browser?.version ?? ""},`,
-        `${cpu?.architecture ?? ""},`,
-        `${os?.name} ${os?.version ?? ""},`,
-        `${device?.type ?? ""}`,
+        ((browser?.name || browser?.version) ? `${browser?.name ?? ""} ${browser?.version ?? ""},` : ""),
+        (cpu?.architecture ? `${cpu.architecture},` : ""),
+        ((os?.name || os?.version) ? `${os?.name ?? ""} ${os?.version ?? ""},` : ""),
+        (device.type ? `${device.type ?? ""}` : ""),
     );
     /** Ends here */
 
