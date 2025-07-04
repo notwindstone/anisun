@@ -5,11 +5,12 @@ import { getNavbarItems } from "@/constants/navbar";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
+import { UserType } from "@/types/OAuth2/User.type";
 
 export default function MobileNavbarWrapper({
     accountInfo,
 }: {
-    accountInfo: unknown;
+    accountInfo: UserType;
 }) {
     const matches = useMediaQuery('(min-width: 640px)');
     const dictionaries = useContextSelector(ConfigsContext, (value) => value.dictionaries);
@@ -18,17 +19,7 @@ export default function MobileNavbarWrapper({
         return;
     }
 
-    let avatar: string | undefined;
-
-    if (
-        typeof accountInfo === "object"
-        && accountInfo !== null
-        && "avatar" in accountInfo
-        && typeof accountInfo.avatar === "string"
-    ) {
-        avatar = accountInfo.avatar;
-    }
-
+    const { avatar } = accountInfo;
     const navbarItems = getNavbarItems({
         dictionaries,
         avatar,

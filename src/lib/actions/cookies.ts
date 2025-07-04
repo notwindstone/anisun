@@ -22,6 +22,34 @@ export async function getCookie({
     return store.get(key);
 }
 
+export async function getCookiesArray({
+    keys,
+    store,
+}: {
+    keys: Array<string>;
+    store?: ReadonlyRequestCookies;
+}): Promise<Array<RequestCookie | undefined>> {
+    const storedCookies: Array<RequestCookie | undefined> = [];
+
+    // passing already defined cookieStore is faster
+    // than redefining it on every function call
+    if (!store) {
+        const cookieStore = await cookies();
+
+        for (const key of keys) {
+            storedCookies.push(cookieStore.get(key));
+        }
+
+        return storedCookies;
+    }
+
+    for (const key of keys) {
+        storedCookies.push(store.get(key));
+    }
+
+    return storedCookies;
+}
+
 export async function setCookie({
     key,
     value,

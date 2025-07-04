@@ -11,6 +11,7 @@ import readCookiesData from "@/utils/configs/readCookiesData";
 import { UserType } from "@/types/OAuth2/User.type";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 import AnilistLibraryWrapper from "@/components/integrations/AnilistLibraryWrapper/AnilistLibraryWrapper";
+import { PlaceholderAccount } from "@/constants/configs";
 
 export default async function Page() {
     const cookieStore = await cookies();
@@ -22,10 +23,7 @@ export default async function Page() {
     // yeah ik that `any_type | unknown` becomes just `unknown`
     const parsedAccountInfoData = readCookiesData<UserType | unknown>({
         data:         accountInfo,
-        fallbackData: {
-            username: "",
-            avatar:   "",
-        },
+        fallbackData: PlaceholderAccount,
     });
 
     const safeAccountValues = getSafeAccountData({

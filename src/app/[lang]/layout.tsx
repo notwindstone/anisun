@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ConfigsProvider } from "@/utils/providers/ConfigsProvider";
-import { getCookie } from "@/lib/actions/cookies";
+import { getCookiesArray } from "@/lib/actions/cookies";
 import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
-import { CookieConfigKey, InitialConfig } from "@/constants/configs";
+import { CookieConfigKey, InitialConfig, PlaceholderAccount } from "@/constants/configs";
 import readCookiesData from "@/utils/configs/readCookiesData";
 import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
 import { AccountInfoCookieKey, AppName } from "@/constants/app";
@@ -15,7 +15,6 @@ import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
 import Footer from "@/components/layout/Footer/Footer";
 import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotify";
-import { userAgent } from "next/server";
 import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
 import getSafeAccountData from "@/utils/configs/getSafeAccountData";
 import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
@@ -23,6 +22,7 @@ import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSS
 import HistoryLogger from "@/components/misc/HistoryLogger/HistoryLogger";
 import MobileNavbarWrapper from "@/components/layout/MobileNavbarWrapper/MobileNavbarWrapper";
 import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
+import logRequests from "@/utils/misc/logRequests";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -69,16 +69,14 @@ export default async function RootLayout({
     params: Promise<{ lang: Locale }>;
 }>) {
     const { lang } = await params;
+    const headersList = await headers();
+    const cookieStore = await cookies();
+
     const dictionaries = await getDictionary(lang);
 
-    const cookieStore = await cookies();
-    const configs = await getCookie({
+    const [configs, accountInfo] = await getCookiesArray({
+        keys:  [CookieConfigKey, AccountInfoCookieKey],
         store: cookieStore,
-        key:   CookieConfigKey,
-    });
-    const accountInfo = await getCookie({
-        store: cookieStore,
-        key:   AccountInfoCookieKey,
     });
 
     const parsedConfigData = readCookiesData<ParsedConfigType>({
@@ -88,33 +86,16 @@ export default async function RootLayout({
     // yeah ik that `any_type | unknown` becomes just `unknown`
     const parsedAccountInfoData = readCookiesData<UserType | unknown>({
         data:         accountInfo,
-        fallbackData: {
-            username: "",
-            avatar:   "",
-        },
+        fallbackData: PlaceholderAccount,
     });
 
     const safeAccountValues = getSafeAccountData({
         account: parsedAccountInfoData,
     });
 
-    /** Requests logging */
-    const headersList = await headers();
-    const { browser, cpu, os, device } = userAgent({
+    logRequests({
         headers: headersList,
     });
-    const currentDate = new Date();
-
-    // log requests
-    console.log(
-        `[${currentDate.toLocaleTimeString()}, ${currentDate.toDateString()}]:`,
-        "request -",
-        ((browser?.name || browser?.version) ? `${browser?.name ?? ""} ${browser?.version ?? ""},` : ""),
-        (cpu?.architecture ? `${cpu.architecture},` : ""),
-        ((os?.name || os?.version) ? `${os?.name ?? ""} ${os?.version ?? ""},` : ""),
-        (device.type ? `${device.type ?? ""}` : ""),
-    );
-    /** Ends here */
 
     return (
         <html lang={lang}>
@@ -131,9 +112,7 @@ export default async function RootLayout({
                                         {children}
                                         <Footer dictionaries={dictionaries} />
                                     </div>
-                                    <MobileNavbarWrapper
-                                        accountInfo={parsedAccountInfoData}
-                                    />
+                                    <MobileNavbarWrapper accountInfo={safeAccountValues} />
                                 </AppWrapper>
                                 <CSSExtensionsLoader />
                             </ExtensionsProvider>

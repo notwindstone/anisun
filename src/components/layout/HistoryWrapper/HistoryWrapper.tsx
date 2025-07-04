@@ -56,6 +56,14 @@ export default function HistoryWrapper(): React.ReactNode {
         );
     }
 
+    if (data?.length === 0) {
+        return (
+            <div>
+                No history yet. Try watching some anime first!
+            </div>
+        );
+    }
+
     return (
         <HistoryLoader
             passedChunkSize={chunkSize}
