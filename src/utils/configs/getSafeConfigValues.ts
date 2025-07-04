@@ -90,12 +90,8 @@ const getLibraryEntries = (config: ParsedConfigType): SafeConfigType["library"] 
 const getOtherProperties = (config: ParsedConfigType): SafeConfigType["other"] => {
     const historyEnabled = config?.other?.historyEnabled ?? InitialConfig.other.historyEnabled;
     const hydrationDelay = config?.other?.hydrationDelay;
-    const logo = config?.other?.logo;
 
-    if (
-        (logo !== "ai" && logo !== "non-ai") ||
-        typeof hydrationDelay !== "number"
-    ) {
+    if (typeof hydrationDelay !== "number") {
         return InitialConfig.other;
     }
 
@@ -106,7 +102,6 @@ const getOtherProperties = (config: ParsedConfigType): SafeConfigType["other"] =
     return {
         historyEnabled: historyEnabled,
         hydrationDelay: hydrationDelay,
-        logo:           logo,
     };
 };
 

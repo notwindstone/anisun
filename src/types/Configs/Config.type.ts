@@ -20,6 +20,5 @@ export type ConfigType = {
     other?: {
         historyEnabled?: boolean;
         hydrationDelay?: number;
-        logo?:           "non-ai" | "ai";
     };
 } | undefined;

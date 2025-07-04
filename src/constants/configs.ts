@@ -25,7 +25,6 @@ export const InitialConfig: SafeConfigType = {
     other: {
         historyEnabled: true,
         hydrationDelay: 300,
-        logo:           "non-ai",
     },
 };
 export const PlaceholderAccount: UserType = {
