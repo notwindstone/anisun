@@ -30,10 +30,7 @@ export default function HeroCard({
     const name = currentData?.title?.romaji ?? currentData?.title?.english ?? currentData?.title?.native ?? "none";
 
     const htmlDescription = currentData?.description ?? "";
-    const description = htmlDescription.replaceAll(
-        new RegExp("(<.*>|[(]Source.*)", "g"),
-        "",
-    );
+    const description = htmlDescription.replaceAll(/<\/?[^>]+(>|$)|\n(.*)/g, "");
 
     const image = currentData?.coverImage?.extraLarge;
     const score = Number(currentData?.averageScore) / 10;
