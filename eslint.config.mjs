@@ -18,14 +18,14 @@ const eslintConfig = [
     eslintPluginUnicorn.configs.recommended,
     {
         rules: {
-            semi:                      "error",
-            indent:                    ["error", 4, { "SwitchCase": 1 }],
-            curly:                     "error",
-            "object-curly-spacing":    ["error", "always"],
-            "comma-dangle":            ["error", "always-multiline"],
-            "arrow-parens":            ["error", "always"],
-            "key-spacing":             ["error", { "align": "value" }],
-            "unicorn/filename-case":   ["off"],
+            semi:                    "error",
+            indent:                  ["error", 4, { "SwitchCase": 1 }],
+            curly:                   "error",
+            "object-curly-spacing":  ["error", "always"],
+            "comma-dangle":          ["error", "always-multiline"],
+            "arrow-parens":          ["error", "always"],
+            "key-spacing":           ["error", { "align": "value" }],
+            "unicorn/filename-case": ["off"],
         },
     },
 ];
