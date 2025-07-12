@@ -47,8 +47,7 @@ function getQueryClient() {
     return browserQueryClient;
 }
 
-// eslint-disable-next-line
-export default function TanstackQueryProviders({ children }: any) {
+export default function TanstackQueryProviders({ children }: { children:  React.ReactNode }) {
     // NOTE: Avoid useState when initializing the query client if you don't
     //       have a suspense boundary between this and the code that may
     //       suspend because React will throw away the client on the initial

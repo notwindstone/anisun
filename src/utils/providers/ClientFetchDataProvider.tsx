@@ -3,8 +3,7 @@
 import { createContext } from "use-context-selector";
 
 export const ClientFetchDataContext = createContext<{
-    /* eslint-disable @typescript-eslint/no-explicit-any */
-    data: any;
+    data: unknown;
 }>({
     data: undefined,
 });

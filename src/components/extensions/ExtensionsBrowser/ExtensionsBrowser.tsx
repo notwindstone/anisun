@@ -4,6 +4,7 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { useQuery } from "@tanstack/react-query";
 import BrowsingExtension from "@/components/extensions/BrowsingExtension/BrowsingExtension";
+import { ExtensionType } from "@/types/Extensions/Extension.type";
 
 export default function ExtensionsBrowser() {
     const { data, isPending, error } = useQuery({
@@ -39,8 +40,7 @@ export default function ExtensionsBrowser() {
     }
 
     if (data) {
-        // eslint-disable-next-line
-        extensionsNode = data.map((extensionFromStore: any) => {
+        extensionsNode = data.map((extensionFromStore: ExtensionType) => {
             return (
                 <BrowsingExtension
                     key={extensionFromStore.url}
