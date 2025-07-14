@@ -9,18 +9,15 @@
     "start": "next start",
     "lint": "concurrently --raw \"bun lint:eslint\" \"bun lint:ts\"",
     "lint:eslint": "next lint",
-    "lint:ts": "tsc",
-    "push": "bunx drizzle-kit push"
+    "lint:ts": "tsc"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
-    "@libsql/client": "^0.15.8",
     "@mantine/hooks": "^7.17.5",
     "@paciolan/remote-component": "^2.13.0",
     "@tanstack/react-query": "^5.71.10",
     "arctic": "^3.6.0",
     "cookies-next": "^5.1.0",
-    "drizzle-orm": "^0.44.1",
     "lucide-react": "^0.487.0",
     "negotiator": "^1.0.0",
     "next": "15.3.4",
@@ -42,7 +39,6 @@
     "@types/react-dom": "19.1.6",
     "concurrently": "^9.1.2",
     "dotenv": "^16.5.0",
-    "drizzle-kit": "^0.31.1",
     "eslint": "^9",
     "eslint-config-next": "15.3.4",
     "eslint-plugin-unicorn": "^58.0.0",

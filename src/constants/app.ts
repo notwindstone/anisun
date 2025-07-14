@@ -33,7 +33,6 @@ export const ServerFetchErrorCount = 5;
 export const InitialRouteStates = {
     "/":           {},
     "/account":    {},
-    "/admin":      {},
     "/library":    {},
     "/extensions": {},
     "/anime":      {},
