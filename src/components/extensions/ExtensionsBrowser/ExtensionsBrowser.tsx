@@ -11,9 +11,12 @@ export default function ExtensionsBrowser() {
         queryKey: ["extensions", "browser"],
         queryFn:  async () => {
             const response = await fetch("https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/manifests.json");
-            const data = await response.json();
+            const data: unknown = await response.json();
 
-            // todo: make normal checks
+            if (!Array.isArray(data)) {
+                throw new TypeError("Not valid data");
+            }
+
             return data;
         },
     });
@@ -28,7 +31,7 @@ export default function ExtensionsBrowser() {
     let extensionsNode: React.ReactNode;
 
     if (isPending) {
-        extensionsNode = Array.from({ length: 3 }).map((_, index) => {
+        extensionsNode = Array.from({ length: 5 }).map((_, index) => {
             return (
                 <BrowsingExtension
                     loading

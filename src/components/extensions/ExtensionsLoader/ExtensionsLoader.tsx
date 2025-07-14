@@ -8,7 +8,7 @@ import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import LoadedExtension from "@/components/extensions/LoadedExtension/LoadedExtension";
 import ExtensionsLoadFromURL from "@/components/extensions/ExtensionsLoadFromURL/ExtensionsLoadFromURL";
 import ExtensionsBrowser from "@/components/extensions/ExtensionsBrowser/ExtensionsBrowser";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 
 export default function ExtensionsLoader() {
     const { base, theme, accent } = useContextSelector(ConfigsContext, (value) => {
@@ -21,7 +21,10 @@ export default function ExtensionsLoader() {
     const extensions = useContextSelector(ExtensionsContext, (value) => value.data);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    // useLayoutEffect blocks render, which is exactly what we need.
+    // with useEffect user will see loading state for a split second
+    // even if the page was already in CSR
+    useLayoutEffect(() => {
         // disable loading state in CSR
         setLoading(false);
     }, []);
