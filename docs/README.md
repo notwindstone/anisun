@@ -72,7 +72,7 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 <summary>Expand</summary>
 
 <div align="center">
-<img src="psi/psi-desktop-audit.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
+<img src="psi/psi-anime-tatar-home.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
 </div>
 
 </details>
