@@ -5,6 +5,10 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { useQuery } from "@tanstack/react-query";
 import BrowsingExtension from "@/components/extensions/BrowsingExtension/BrowsingExtension";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
+import Input from "@/components/base/Input/Input";
+import { useDebouncedState } from "@mantine/hooks";
+import { useEffect, useLayoutEffect, useState } from "react";
+import simpleMatch from "@/utils/misc/simpleMatch";
 
 export default function ExtensionsBrowser() {
     const { data, isPending, error } = useQuery({
@@ -17,7 +21,43 @@ export default function ExtensionsBrowser() {
                 throw new TypeError("Not valid data");
             }
 
-            return data;
+            return data
+                .sort(
+                    (a: unknown, b: unknown) => {
+                        // i wouldn't have this mess
+                        if (
+                            typeof a !== "object" ||
+                            a === null ||
+                            typeof b !== "object" ||
+                            b === null
+                        ) {
+                            return 0;
+                        }
+
+                        // if i have installed zod...
+                        if (
+                            !("name" in a) ||
+                            !("name" in b) ||
+                            typeof a.name !== "string" ||
+                            typeof b.name !== "string"
+                        ) {
+                            return 0;
+                        }
+
+                        const nameA = a.name.toLowerCase();
+                        const nameB = b.name.toLowerCase();
+
+                        if (nameA < nameB) {
+                            return -1;
+                        }
+
+                        if (nameA > nameB) {
+                            return 1;
+                        }
+
+                        return 0;
+                    },
+                );
         },
     });
     const { base, theme } = useContextSelector(ConfigsContext, (value) => {
@@ -27,6 +67,10 @@ export default function ExtensionsBrowser() {
             accent: value.data.colors.accent,
         };
     });
+    const [search, setSearch] = useDebouncedState("", 50, {
+        leading: true,
+    });
+    const [currentData, setCurrentData] = useState<Array<ExtensionType>>([]);
 
     let extensionsNode: React.ReactNode;
 
@@ -59,7 +103,7 @@ export default function ExtensionsBrowser() {
     }
 
     if (data) {
-        extensionsNode = data.map((extensionFromStore: ExtensionType) => {
+        extensionsNode = currentData.map((extensionFromStore: ExtensionType) => {
             return (
                 <BrowsingExtension
                     key={extensionFromStore.url}
@@ -68,6 +112,41 @@ export default function ExtensionsBrowser() {
             );
         });
     }
+
+    useLayoutEffect(() => {
+        if (!data) {
+            return;
+        }
+
+        setCurrentData(data);
+    }, [data]);
+
+    useEffect(() => {
+        if (!data) {
+            return;
+        }
+
+        if (search === "") {
+            setCurrentData(data);
+
+            return;
+        }
+
+        setCurrentData(data?.filter((extension: ExtensionType) => {
+            const name = extension?.displayName?.toLowerCase() ?? extension.name.toLowerCase();
+
+            // doesn't always work
+            // tho it's really performant comparing to fuzzy search
+            const unstableMatched = simpleMatch(
+                name,
+                search.toLowerCase(),
+            );
+
+            const contains = name.includes(search.toLowerCase());
+
+            return unstableMatched || contains;
+        }));
+    }, [search, data]);
 
     return (
         <div className="flex items-center flex-col gap-2 w-full">
@@ -80,19 +159,15 @@ export default function ExtensionsBrowser() {
                     }),
                 }}
             >
-                <div className="flex justify-between">
-                    <p className="leading-none text-lg font-medium">
-                        Extension Repository
-                    </p>
-                    <div className="flex gap-2">
-                        <p className="leading-none text-lg font-medium">
-                            Filter by...
-                        </p>
-                        <p className="leading-none text-lg font-medium">
-                            Search
-                        </p>
-                    </div>
-                </div>
+                <p className="leading-none text-lg font-medium">
+                    Extension Repository
+                </p>
+                <Input
+                    defaultValue=""
+                    setSearch={setSearch}
+                    placeholder="Search"
+                    appendClassNames="border"
+                />
                 <div className="flex flex-wrap gap-2">
                     {extensionsNode}
                 </div>
