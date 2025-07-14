@@ -1,6 +1,3 @@
-import database from "@/db";
-import { MALToAnilibriaSchema } from "@/db/schema";
-
 export default async function malToAnilibria({
     idMal,
 }: {
@@ -9,7 +6,21 @@ export default async function malToAnilibria({
     let animes;
 
     try {
-        animes = await database.select().from(MALToAnilibriaSchema);
+        const response = await fetch("https://raw.githubusercontent.com/notwindstone/MALToAnything/refs/heads/main/anilibria/anilibria-mapped.json", {
+            next: {
+                // 24 hours cache
+                revalidate: 60 * 60 * 24,
+            },
+        });
+        const data: unknown = await response.json();
+
+        if (!Array.isArray(data)) {
+            console.error("malToAnilibria.ts error:", "Anilibria Mappings Response returned invalid data");
+
+            return undefined;
+        }
+
+        animes = data;
     } catch (error) {
         console.error("malToAnilibria.ts error:", error);
 

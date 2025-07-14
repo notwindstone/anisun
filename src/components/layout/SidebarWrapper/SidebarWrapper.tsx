@@ -19,11 +19,10 @@ export default function SidebarWrapper({
         return;
     }
 
-    const { avatar, username } = accountInfo;
+    const { avatar } = accountInfo;
     const sidebarItems = getSideBarLinks({
         dictionaries,
         avatar,
-        username,
     });
 
     return (
