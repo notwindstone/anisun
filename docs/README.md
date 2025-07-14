@@ -1,70 +1,61 @@
 <div align="center">
 
-<p>Looking for the previous version? Check the <a href="https://github.com/notwindstone/anisun/tree/v4">v4</a> branch</p>
-
 <img width="160" height="160" align="center" src="../public/favicon.webp" alt="Favicon">
 
-# [anisun (rebooted)](https://anime.tatar)
+# [anisun](https://anime.tatar)
 
-An extension-based web app for exploring anime. Written in next.js with speed in mind 
+**An extension-based web app for exploring anime**
+
+The goal of this project is to replicate a Tachiyomi-like experience for watching anime on a website.
 
 <p align="center">
 <strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/docs/README_russian.md">Русский</a>
 </p>
 
-[![GitHub Repo stars](https://img.shields.io/github/stars/notwindstone/Anisun?label=Stars&style=for-the-badge&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMjI3LCA2Nik7Ii8%2BCjwvc3ZnPg%3D%3D&color=%23f8e444)](https://github.com/notwindstone/Anisun/stargazers)
+[![stars-badge]](https://github.com/notwindstone/anisun/stargazers)
+[![next-js-badge]](https://nextjs.org/)
+[![typescript-badge]](https://www.typescriptlang.org/)
 
 </div>
 
-## 📱 Screenshots
+## Screenshots
 
 <div align="center">
-<img src="screenshots/home-page-desktop.webp" width="49%" alt="Home page desktop screenshot (desktop, dark theme)">
-<img src="screenshots/home-page-desktop-light.webp" width="49%" alt="Home page desktop screenshot (desktop, light theme)">
-<img src="screenshots/home-page-mobile.webp" width="32%" alt="Home page desktop screenshot (mobile, dark theme)">
-<img src="screenshots/home-page-mobile-light.webp" width="32%" alt="Home page desktop screenshot (mobile, light theme)">
+    <img src="screenshots/anime-tatar-home-dark.webp" width="49%" alt="Home page screenshot (desktop, dark theme)">
+    <img src="screenshots/anime-tatar-home-light.webp" width="49%" alt="Home page screenshot (desktop, light theme)">
+    <img src="screenshots/anime-tatar-home-dark-mobile.webp" width="32%" alt="Home page screenshot (mobile, dark theme)">
+    <img src="screenshots/anime-tatar-home-light-mobile.webp" width="32%" alt="Home page screenshot (mobile, light theme)">
 </div>
 
-### More screenshots
+### More
 
 <details>
 <summary>Expand</summary>
 
 <div align="center">
-
-<img src="screenshots/extensions/accounts-page-extensions-with-disabled.png" width="49%" alt="Account page desktop screenshot with extensions disabled">
-<img src="screenshots/extensions/accounts-page-extensions.png" width="49%" alt="Account page desktop screenshot with extensions enabled">
-<img src="screenshots/extensions/anime-trailers-example-extension.png" width="49%" alt="Anime Trailers extension desktop screenshot">
-<img src="screenshots/extensions/svelte-example-extension.png" width="49%" alt="Svelte Example extension desktop screenshot">
-<img src="screenshots/extensions/vue-example-extension.png" width="49%" alt="Vue Example extension desktop screenshot">
-
+    <img src="screenshots/anime-tatar-library.webp" width="49%" alt="Library page screenshot (desktop, dark theme)">
+    <img src="screenshots/anime-tatar-extensions.webp" width="49%" alt="Extensions page screenshot (desktop, dark theme)">
+    <img src="screenshots/anime-tatar-account.webp" width="49%" alt="Account page screenshot (desktop, dark theme)">
+    <img src="screenshots/extensions/extension-anime-tatar-svelte.webp" width="49%" alt="Anime page screenshot with Example Svelte plugin (desktop, dark theme)">
+    <img src="screenshots/extensions/extension-anime-tatar-vue.webp" width="49%" alt="Anime page screenshot with Example Vue plugin (desktop, dark theme)">
+    <img src="screenshots/extensions/extension-anime-tatar-anime-trailers.webp" width="49%" alt="Anime page screenshot with Anime Trailers plugin (desktop, dark theme)">
+    <img src="screenshots/extensions/extension-anime-tatar-nso-theme.webp" width="49%" alt="Account page screenshot with NSO theme plugin (desktop, light theme)">
 </div>
 
 </details>
 
-## 🧩 Extensions
+## Features
 
-* They are **not** using iframes
-* Can be written in any JS framework
-* Can implement their own pages
-* Users don't have any extensions by default
+* Extensions
+* Anilist and Shikimori integrations
+* Search
+* History
+* Localization
+* Theme customization
 
-Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
+## Performance
 
-## ⚡ Performance
-
-* Using as few libraries as possible
-* React Suspense for the seamless UI streaming
-* Data caching both on the server (using [LRU cache](https://www.npmjs.com/package/quick-lru) & Next.js internal cache) and client
-* Optimized [React Contexts](https://www.npmjs.com/package/use-context-selector)
-* Instant user config load while SSR
-* Preferring CSS over JS styles
-* Memoizing only those components that truly need it
-* Using Server Actions instead of API routes when possible
-* Image optimization (built-in [sharp](https://www.npmjs.com/package/sharp) & specified properties) and caching for the home page
-* Sidebar & mobile navbar routes prefetching 
-
-...and a lot of other optimizations
+Even though this website is written in React, I think I still managed to achieve great performance. I tried to make it as smooth as possible while dealing with the monstrous re-rendering nature of React. It should work perfectly even on mobile phones both in Firefox and Chromium-based browsers.
 
 ### PageSpeed Insights
 
@@ -72,7 +63,15 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 <summary>Expand</summary>
 
 <div align="center">
-<img src="psi/psi-anime-tatar-home.webp" alt="PageSpeed Insights Audit screenshot (97 points out of 100 for performance)">
+
+![psi-home]
+
+![psi-library]
+
+![psi-extensions]
+
+![psi-account]
+
 </div>
 
 </details>
@@ -83,29 +82,14 @@ Visit [docs.anime.tatar](https://docs.anime.tatar/) for more info.
 <summary>Expand</summary>
 
 <div align="center">
-<img src="psi/web-page-size.webp" alt="">
+
+![web-page-size]
+
 </div>
 
 </details>
 
-## ⭐ Features
-
-* Extensions (need to implement extensions browser)
-* Seamless Anilist, Shikimori and MAL integration (only auth part is done)
-* Localization
-* Theme customization
-
-## ⚙️ Tech Stack
-
-* [Next.js 15](https://nextjs.org/) with [TypeScript](https://www.typescriptlang.org/)
-* [TailwindCSS](https://tailwindcss.com/) for the UI
-* An async state management using [Tanstack Query](https://tanstack.com/query/latest)
-* [Mantine Hooks](https://mantine.dev/hooks/package/) for general usage on the frontend
-* [Quick LRU](https://www.npmjs.com/package/quick-lru) for the in-memory cache
-* OAuth2 authorization using [arctic.js](https://arcticjs.dev/)
-* Extensions using [Remote Components](https://github.com/Paciolan/remote-component)
-
-## ⬇️ Self-Hosting
+## Self-Hosting
 
 ### Vercel
 
@@ -119,16 +103,13 @@ Click the button
 Navigate to **Project** -> **Settings** -> **Environment Variables** and then add values to the following keys:
 
 1. `NODE_ENV` = `production`
-2. `HOST_URL` = `https://your-domain-here.vercel.app`
+2. (Optional) `HOST_URL` = `https://your-domain-here.vercel.app` - change to your domain that you are going to use in the Shikimori/Anilist integrations
 
 3. (Optional) `SHIKIMORI_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with Shikimori
 4. (Optional) `SHIKIMORI_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with Shikimori
 
 5. (Optional) `ANILIST_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with Anilist
 6. (Optional) `ANILIST_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with Anilist
-
-7. (Optional) `MAL_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with MyAnimeList
-8. (Optional) `MAL_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with MyAnimeList
 
 Note: LRU cache might not work as expected, because serverless environments tend to spin down on low load.
 
@@ -157,11 +138,22 @@ git clone https://github.com/notwindstone/anisun
 
 Now you can install all project dependencies with `bun i`
 
+Before you build/start this project, create a `.env.local` file, follow the `.env.example` example file and fill in those environmental variables:
+
+1. `NODE_ENV` = `production` - for development builds change to `development`
+2. (Optional) `HOST_URL` = `https://your-ip-or-domain-here` - change to your domain that you are going to use in the Shikimori/Anilist integrations
+
+3. (Optional) `SHIKIMORI_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with Shikimori
+4. (Optional) `SHIKIMORI_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with Shikimori
+
+5. (Optional) `ANILIST_CLIENT_ID` = `yourOwnOAuth2ClientID` - only if you want to enable integration with Anilist
+6. (Optional) `ANILIST_SECRET_KEY` = `yourOwnOAuth2SecretKey` - only if you want to enable integration with Anilist
+
 #### Development
 
 You can run this app in development mode using `bun dev`
 
-It will be much slower than the production build, because development mode is intended to use only for development, it builds everything on-demand and supports Hot Module Replacement (HMR).
+It will be much slower than the production build, because development mode is intended to use only for development. It builds everything on-demand and supports Hot Module Replacement (HMR).
 
 #### Termux
 
@@ -173,7 +165,7 @@ Build this app by running `bun run build`
 
 Now you can start it by `bun run start`
 
-But it is not production-ready yet. You need to install a reverse-proxy like Caddy first.
+If you want to expose your website instance to others, then it is not production-ready yet. You need to install a reverse-proxy like Caddy first.
 
 After you have installed Caddy, you need to rename `Caddyfile.example` in the root of repository to `Caddyfile` and change `example.com` in the file to your domain (`anime.tatar` in my case). Then just restart it by running `caddy stop` and `caddy start` in the terminal.
 
@@ -183,36 +175,44 @@ With Caddy you can also use a Cloudflare proxied DNS for DDoS protection, you ju
 
 </details>
 
-## 🤝 Contributing
+## Contributing
 
 Contributions are welcome! Check [CONTRIBUTING.md](CONTRIBUTING.md)
 
-## 💬 Contact
-
-### Directly
+## Contact
 
 * [Telegram - @windst1](https://t.me/windst1)
-* [Discord - @notwindstone](https://discord.com/users/510709295814279168)
+* [Discord - @notwindstone](https://discord.com/users/510709295814279168) (I may respond slower)
 
-## ⭐️ Star History
+## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=notwindstone/anisun&type=Date)](https://star-history.com/#notwindstone/anisun&Date)
+[![star-history-chart]](https://star-history.com/#notwindstone/anisun&Date)
 
-## ❤️ Credits
+## License
+
+[![license-badge]](https://github.com/notwindstone/Anisun/blob/main/LICENSE)
+
+## Disclaimer
+
+The developer of this application does not have any affiliation with the content providers available, and this application hosts zero content.
+
+## Acknowledgments
 
 * [zvshka](https://github.com/zvshka) for his help with the project
 * `cos` for his help with the UI
 * [Anilist API](https://docs.anilist.co/)
-* [MyAnimeList API](https://myanimelist.net/apiconfig/references/api/v2)
 * [Shikimori API](https://shikimori.one/api/doc/graphql)
 
-## 📜 License
+<!-- variables -->
 
-[![GitHub](https://img.shields.io/github/license/notwindstone/Anisun?style=for-the-badge)](https://github.com/notwindstone/Anisun/blob/main/LICENSE)
+[stars-badge]: https://img.shields.io/github/stars/notwindstone/anisun?label=Stars&style=for-the-badge&color=%23f5c2e7&logo=data%3Aimage%2Fsvg%2Bxml%3Bbase64%2CPD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyBoZWlnaHQ9IjI0IiB2aWV3Qm94PSIwIC05NjAgOTYwIDk2MCIgd2lkdGg9IjI0IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDxwYXRoIGQ9Im0zNTQtMjQ3IDEyNi03NiAxMjYgNzctMzMtMTQ0IDExMS05Ni0xNDYtMTMtNTgtMTM2LTU4IDEzNS0xNDYgMTMgMTExIDk3LTMzIDE0M1pNMjMzLTgwbDY1LTI4MUw4MC01NTBsMjg4LTI1IDExMi0yNjUgMTEyIDI2NSAyODggMjUtMjE4IDE4OSA2NSAyODEtMjQ3LTE0OUwyMzMtODBabTI0Ny0zNTBaIiBzdHlsZT0iZmlsbDogcmdiKDI0NSwgMTk0LCAyMzEpOyIvPgo8L3N2Zz4%3D
+[next-js-badge]: https://img.shields.io/badge/Next-black?style=for-the-badge&logo=next.js&logoColor=white
+[typescript-badge]: https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white
+[license-badge]: https://img.shields.io/github/license/notwindstone/anisun?style=for-the-badge
+[star-history-chart]: https://api.star-history.com/svg?repos=notwindstone/anisun&type=Date
 
-## ❗ Disclaimer
-
-> [!IMPORTANT]
-> The developer of this application does not have any affiliation with the content providers available, and this application hosts zero content.
-
-https://github.com/consumet/api.consumet.org
+[psi-home]: psi/psi-anime-tatar-home.webp
+[psi-library]: psi/psi-anime-tatar-library.webp
+[psi-extensions]: psi/psi-anime-tatar-extensions.webp
+[psi-account]: psi/psi-anime-tatar-account.webp
+[web-page-size]: psi/web-page-size.webp
