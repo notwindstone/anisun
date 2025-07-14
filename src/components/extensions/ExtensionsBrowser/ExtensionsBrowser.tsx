@@ -28,14 +28,30 @@ export default function ExtensionsBrowser() {
     let extensionsNode: React.ReactNode;
 
     if (isPending) {
-        extensionsNode = (
-            <>loading...</>
-        );
+        extensionsNode = Array.from({ length: 3 }).map((_, index) => {
+            return (
+                <BrowsingExtension
+                    loading
+                    key={`${_}_${index}`}
+                    extension={{
+                        displayName: "Loading...",
+                        author:      "anisun",
+                        version:     "0.0",
+                        name:        "",
+                        url:         "",
+                        logo:        "",
+                        pages:       [],
+                    }}
+                />
+            );
+        });
     }
 
     if (error) {
         extensionsNode = (
-            <>error..</>
+            <div>
+                Error...
+            </div>
         );
     }
 

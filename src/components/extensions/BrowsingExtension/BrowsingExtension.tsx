@@ -11,8 +11,10 @@ import { DarkThemeKey } from "@/constants/configs";
 
 export default function BrowsingExtension({
     extension,
+    loading,
 }: {
     extension: ExtensionType;
+    loading?:  boolean;
 }) {
     const { base, theme } = useContextSelector(ConfigsContext, (value) => ({
         base:  value.data.colors.base,
@@ -74,10 +76,10 @@ export default function BrowsingExtension({
                         {extension.version}
                     </p>
                     <Button
-                        disabled={hasInstalled}
+                        disabled={hasInstalled || loading}
                         custom={{
                             appendClassNames: "h-fit",
-                            style:            hasInstalled ? "base" : "accent",
+                            style:            (hasInstalled || loading) ? "base" : "accent",
                         }}
                         onClick={() => {
                             const newExtension = {
