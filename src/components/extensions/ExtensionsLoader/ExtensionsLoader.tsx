@@ -8,6 +8,7 @@ import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import LoadedExtension from "@/components/extensions/LoadedExtension/LoadedExtension";
 import ExtensionsLoadFromURL from "@/components/extensions/ExtensionsLoadFromURL/ExtensionsLoadFromURL";
 import ExtensionsBrowser from "@/components/extensions/ExtensionsBrowser/ExtensionsBrowser";
+import { useEffect, useState } from "react";
 
 export default function ExtensionsLoader() {
     const { base, theme, accent } = useContextSelector(ConfigsContext, (value) => {
@@ -18,6 +19,12 @@ export default function ExtensionsLoader() {
         };
     });
     const extensions = useContextSelector(ExtensionsContext, (value) => value.data);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        // disable loading state in CSR
+        setLoading(false);
+    }, []);
 
     return (
         <div className="flex flex-col gap-2">
@@ -45,27 +52,54 @@ export default function ExtensionsLoader() {
                                     : 500,
                             }),
                         }}>
-                            {extensions?.length ?? "?"}
+                            {loading ? "?" : extensions?.length}
                         </span>
                     </p>
                 </div>
                 {
-                    extensions?.map((extension, index) => (
-                        <LoadedExtension
-                            key={extension.url}
-                            extension={extension}
-                            index={index}
-                        />
-                    ))
+                    loading
+                        ? Array.from({ length: 3 }).map((_, index) => (
+                            <div className="flex gap-2 items-center w-full" key={`${_}_${index}`}>
+                                <div
+                                    className="w-full h-10 my-1 rounded-md"
+                                    style={{
+                                        backgroundColor: parseTailwindColor({
+                                            color: base,
+                                            step:  theme === DarkThemeKey ? 800 : 200,
+                                        }),
+                                    }}
+                                />
+                                <div
+                                    className="shrink-0 w-10 h-10 rounded-md"
+                                    style={{
+                                        backgroundColor: parseTailwindColor({
+                                            color: base,
+                                            step:  theme === DarkThemeKey ? 800 : 200,
+                                        }),
+                                    }}
+                                />
+                                <div
+                                    className="shrink-0 w-10 h-10 rounded-md"
+                                    style={{
+                                        backgroundColor: parseTailwindColor({
+                                            color: base,
+                                            step:  theme === DarkThemeKey ? 800 : 200,
+                                        }),
+                                    }}
+                                />
+                            </div>
+                        ))
+                        : extensions?.map((extension, index) => (
+                            <LoadedExtension
+                                key={extension.url}
+                                extension={extension}
+                                index={index}
+                            />
+                        ))
                 }
             </div>
             <ExtensionsBrowser />
-            {
-                // disable URL loader for production builds
-                process.env.NODE_ENV === "development" && (
-                    <ExtensionsLoadFromURL />
-                )
-            }
+            <ExtensionsLoadFromURL />
         </div>
     );
 }

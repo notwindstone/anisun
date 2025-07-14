@@ -13,7 +13,7 @@ export default function Page() {
                 Extensions<span className="pl-1 opacity-60 text-sm align-top">βeta</span>
             </p>
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                Anisun is a content-browser now, just like Tachiyomi!
+                Explore various plugins that extend website functionality
             </p>
             <Divider />
             <ExtensionsLoader />
