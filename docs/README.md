@@ -46,10 +46,10 @@ The goal of this project is to replicate a Tachiyomi-like experience for watchin
 
 ## Features
 
-* Extensions
+* Extensions in JS (visit [docs.anime.tatar](https://docs.anime.tatar/) for more info)
 * Anilist and Shikimori integrations
-* Search
-* History
+* Search anime by filters
+* Watching history
 * Localization
 * Theme customization
 
