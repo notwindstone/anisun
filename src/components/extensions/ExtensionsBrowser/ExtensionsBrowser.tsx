@@ -60,7 +60,7 @@ export default function ExtensionsBrowser() {
                 );
         },
     });
-    const { base, theme } = useContextSelector(ConfigsContext, (value) => {
+    const { base, theme, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
             base:   value.data.colors.base,
             theme:  value.data.theme,
@@ -159,9 +159,25 @@ export default function ExtensionsBrowser() {
                     }),
                 }}
             >
-                <p className="leading-none text-lg font-medium">
-                    Extension Repository
-                </p>
+                <div className="flex justify-between">
+                    <p className="leading-none text-lg font-medium">
+                        Extension Repository
+                    </p>
+                    <p className="leading-none text-lg font-medium">
+                        Total:
+                        {" "}
+                        <span style={{
+                            color: parseTailwindColor({
+                                color: accent,
+                                step:  theme === DarkThemeKey
+                                    ? 400
+                                    : 500,
+                            }),
+                        }}>
+                            {data?.length ?? "?"}
+                        </span>
+                    </p>
+                </div>
                 <Input
                     defaultValue=""
                     setSearch={setSearch}
