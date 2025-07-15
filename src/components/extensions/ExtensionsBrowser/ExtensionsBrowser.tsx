@@ -166,7 +166,10 @@ export default function ExtensionsBrowser() {
                     defaultValue=""
                     setSearch={setSearch}
                     placeholder="Search"
-                    appendClassNames="border"
+                    steps={{
+                        dark:  800,
+                        light: 200,
+                    }}
                 />
                 <div className="flex flex-wrap gap-2">
                     {extensionsNode}

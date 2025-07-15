@@ -5,6 +5,7 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { SetStateAction, useRef, useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
+import { StepsType } from "@/types/TailwindCSS/Steps.type";
 
 export default function Input({
     setSearch,
@@ -12,12 +13,14 @@ export default function Input({
     appendClassNames,
     defaultValue,
     dropdown,
+    steps,
 }: {
     setSearch:         (value: SetStateAction<string>) => void;
     placeholder:       string;
     appendClassNames?: string;
     defaultValue?:     string;
     dropdown?:         React.ReactNode;
+    steps?:            { dark: StepsType, light: StepsType };
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -28,6 +31,10 @@ export default function Input({
     const reference = useRef<HTMLInputElement>(null);
     const dropdownReference = useClickOutside(() => setDropdownOpened(false));
     const [dropdownOpened, setDropdownOpened] = useState(false);
+    const safeColorSteps = {
+        dark:  steps?.dark ?? 900,
+        light: steps?.light ?? 100,
+    };
 
     return (
         <>
@@ -45,8 +52,8 @@ export default function Input({
                     background: parseTailwindColor({
                         color: base,
                         step:  theme === DarkThemeKey
-                            ? 900
-                            : 100,
+                            ? safeColorSteps.dark
+                            : safeColorSteps.light,
                     }),
                 }}
             >
@@ -76,8 +83,8 @@ export default function Input({
                                 background: parseTailwindColor({
                                     color: base,
                                     step:  theme === DarkThemeKey
-                                        ? 900
-                                        : 100,
+                                        ? safeColorSteps.dark
+                                        : safeColorSteps.light,
                                 }),
                                 opacity:    dropdownOpened ? 1 : 0,
                                 visibility: dropdownOpened ? "visible" : "hidden",

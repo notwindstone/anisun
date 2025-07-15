@@ -40,7 +40,7 @@ export default function BrowsingExtension({
             style={{
                 backgroundColor: parseTailwindColor({
                     color: base,
-                    step:  theme === DarkThemeKey ? 950 : 50,
+                    step:  theme === DarkThemeKey ? 800 : 200,
                 }),
             }}
         >
@@ -78,6 +78,7 @@ export default function BrowsingExtension({
                     <Button
                         disabled={hasInstalled || loading}
                         custom={{
+                            darker:           true,
                             appendClassNames: "h-fit",
                             style:            (hasInstalled || loading) ? "base" : "accent",
                         }}

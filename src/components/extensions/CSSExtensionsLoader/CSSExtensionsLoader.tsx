@@ -13,9 +13,10 @@ export default function CSSExtensionsLoader() {
     const [hydrated, setHydrated] = useState(false);
 
     useEffect(() => {
+        setHydrated(false);
+
         // fixing a hydration error by timing out the initial render?
         // yeah i'm cooked
-        // somehow a 200ms timeout gives an error while 300ms timeout works (seems like)
         const timeout = setTimeout(() => setHydrated(true), 300);
 
         return () => clearTimeout(timeout);
