@@ -3,7 +3,7 @@ import { DarkThemeKey } from "@/constants/configs";
 import { SearchIcon } from "lucide-react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import { SetStateAction, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
 import { StepsType } from "@/types/TailwindCSS/Steps.type";
 
@@ -14,13 +14,15 @@ export default function Input({
     defaultValue,
     dropdown,
     steps,
+    children,
 }: {
-    setSearch:         (value: SetStateAction<string>) => void;
+    setSearch:         (value: string) => void;
     placeholder:       string;
     appendClassNames?: string;
     defaultValue?:     string;
     dropdown?:         React.ReactNode;
     steps?:            { dark: StepsType, light: StepsType };
+    children?:         React.ReactNode;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -75,6 +77,7 @@ export default function Input({
                     title={placeholder}
                     aria-label={placeholder}
                 />
+                {children}
                 {
                     (dropdown !== undefined) && (
                         <div
