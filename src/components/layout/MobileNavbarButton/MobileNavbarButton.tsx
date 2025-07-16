@@ -61,12 +61,15 @@ export default function MobileNavbarButton({
         });
     }, [focused, item.href]);
 
+    const isTheSameRoute = focused === item.href;
+
     return (
         <Link
             // `null` by default, which means only static routes gonna fully prefetch
             // `true` allows for the full dynamic route prefetch
             prefetch
-            className="mobile-navbar__button group shrink-0 flex flex-col gap-2 text-xs xxs:text-sm items-center justify-center w-16 xxs:w-20"
+            aria-disabled={isTheSameRoute}
+            className={`mobile-navbar__button group shrink-0 flex flex-col gap-2 text-xs xxs:text-sm items-center justify-center w-16 xxs:w-20 ${isTheSameRoute ? "pointer-events-none" : ""}`}
             style={{
                 ...(
                     focused === item.href ? {
@@ -94,7 +97,7 @@ export default function MobileNavbarButton({
             }}
         >
             <div
-                className="mobile-navbar__button-icon relative flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-300"
+                className="mobile-navbar__button-icon relative flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-150"
                 style={{
                     width: backgroundProperties.width,
                     ...(
@@ -106,7 +109,7 @@ export default function MobileNavbarButton({
             >
                 {item.icon}
             </div>
-            <p className="mobile-navbar__button-text select-none text-center transition-colors duration-300 leading-none">
+            <p className="mobile-navbar__button-text select-none text-center transition-colors duration-150 leading-none">
                 {item.name}
             </p>
         </Link>

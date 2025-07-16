@@ -156,11 +156,11 @@ export default function Sidebar({
                                                     // `true` allows for the full dynamic route prefetch
                                                     prefetch
                                                     key={link.href}
-                                                    aria-disabled={isTheSameRoute}
                                                     href={{
                                                         pathname: link.href,
                                                         query:    queriesState[link.href],
                                                     }}
+                                                    aria-disabled={isTheSameRoute}
                                                     tabIndex={isTheSameRoute ? -1 : undefined}
                                                     className={`sidebar__link select-none dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md ${isTheSameRoute ? "pointer-events-none" : ""}`}
                                                     aria-label={link.name}
