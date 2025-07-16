@@ -54,6 +54,7 @@ export default function Sidebar({
     const pathname = usePathname();
     // ["", "lang", "route", "another-route"]
     const pathnames = pathname.split("/");
+    const pathnameWithoutLocale = `/${pathnames.slice(2).join("/")}`;
     const pathnameRoot = `/${pathnames[2] ?? ""}`;
 
     const toggleSidebar = () => {
@@ -147,17 +148,21 @@ export default function Sidebar({
                                                 return;
                                             }
 
+                                            const isTheSameRoute = link.href === pathnameWithoutLocale;
+
                                             return (
                                                 <Link
                                                     // `null` by default, which means only static routes gonna fully prefetch
                                                     // `true` allows for the full dynamic route prefetch
                                                     prefetch
+                                                    key={link.href}
+                                                    aria-disabled={isTheSameRoute}
                                                     href={{
                                                         pathname: link.href,
                                                         query:    queriesState[link.href],
                                                     }}
-                                                    key={link.href}
-                                                    className="sidebar__link dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md"
+                                                    tabIndex={isTheSameRoute ? -1 : undefined}
+                                                    className={`sidebar__link select-none dark:hover:bg-[#fff1] hover:bg-[#0001] transition-colors flex flex-nowrap items-center overflow-hidden w-full p-2 rounded-md ${isTheSameRoute ? "pointer-events-none" : ""}`}
                                                     aria-label={link.name}
                                                     title={link.name}
                                                     style={{

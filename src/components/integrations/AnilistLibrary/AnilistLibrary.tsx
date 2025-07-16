@@ -18,7 +18,7 @@ import AnilistUsernamesDropdown from "@/components/integrations/AnilistUsernames
 import { PageRoutes } from "@/constants/routes";
 import useFuturePathname from "@/utils/stores/useFuturePathname";
 
-const mediaListStatuses: Array<string> = ["Loading", "your", "lists.", "Please", "wait!"];
+const mediaListStatuses: Array<string> = ["Loading", "user", "lists.", "Please", "wait!"];
 
 export default function AnilistLibrary({
     data,

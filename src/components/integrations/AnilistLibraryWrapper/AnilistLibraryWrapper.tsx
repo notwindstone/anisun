@@ -76,11 +76,7 @@ export default function AnilistLibraryWrapper({
                 Library
             </p>
             <p className="text-md text-neutral-500 dark:text-neutral-400 leading-none">
-                {
-                    username === usernameFromParameters
-                        ? "Browse your Anilist library"
-                        : `Browse ${usernameFromParameters}'s Anilist library`
-                }
+                Browse {`${usernameFromParameters}'s`} Anilist library
             </p>
             <AnilistLibrary
                 data={queryData}
@@ -90,5 +86,5 @@ export default function AnilistLibraryWrapper({
                 passedChunkSize={chunkSize}
             />
         </>
-    ), [chunkSize, queryData, isPending, error, username, usernameFromParameters]);
+    ), [chunkSize, queryData, isPending, error, usernameFromParameters]);
 }

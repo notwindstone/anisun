@@ -134,7 +134,7 @@ export default function SmallCard({
                                     appendClassNames="w-fit"
                                     textSize="text-xs"
                                     label={userScore.toString()}
-                                    labelHover="Your score"
+                                    labelHover="User score"
                                 >
                                     {userScore}
                                 </Badge>
