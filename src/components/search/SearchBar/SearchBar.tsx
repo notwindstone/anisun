@@ -56,8 +56,9 @@ export default function SearchBar() {
                         const value = event.currentTarget.value.trim();
 
                         setData({
-                            search: value,
-                            type:   searchType,
+                            search:  value,
+                            type:    searchType,
+                            filters: {},
                         });
 
                         if (searchType === "id" && /[^0-9]/.test(value)) {

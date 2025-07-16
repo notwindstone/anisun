@@ -10,8 +10,11 @@ export const SearchContext = createContext<{
     setData: Dispatch<SetStateAction<SearchType>>;
 }>({
     data: {
-        search: "",
-        type:   "name",
+        search:  "",
+        type:    "name",
+        filters: {
+            status: "HIATUS",
+        },
     },
     setData: () => {},
 });
@@ -21,7 +24,11 @@ export function SearchProvider({
 }: {
     children: React.ReactNode;
 }) {
-    const [debounced, setDebounced] = useDebouncedState<SearchType>({ search: "", type: "name" }, 300, {
+    const [debounced, setDebounced] = useDebouncedState<SearchType>({
+        search:  "",
+        type:    "name",
+        filters: {},
+    }, 300, {
         leading: true,
     });
 

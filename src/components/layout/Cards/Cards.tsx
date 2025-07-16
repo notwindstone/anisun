@@ -134,7 +134,13 @@ export default function Cards({
     }
 
     if (currentData.length === 0) {
-        return;
+        return (
+            <div className="py-4 px-8">
+                <p className="text-center">
+                    Unfortunately, no anime was found.
+                </p>
+            </div>
+        );
     }
 
     return (
