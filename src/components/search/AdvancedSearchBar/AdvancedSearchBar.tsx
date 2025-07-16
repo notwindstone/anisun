@@ -13,7 +13,7 @@ const icons = {
     name: "Name",
 };
 
-export default function SearchBar() {
+export default function AdvancedSearchBar() {
     const dictionaries = useContextSelector(ConfigsContext, (value) => {
         return value.dictionaries;
     });
@@ -23,8 +23,10 @@ export default function SearchBar() {
 
     const memoizedModal = useMemo(
         () => (
-            <Modal>
-                <ListFilter />
+            <Modal
+                buttonChildren={<ListFilter />}
+            >
+                hello
             </Modal>
         ),
         [],
