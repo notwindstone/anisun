@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import GridCards from "@/components/layout/GridCards/GridCards";
-import SmallCard from "@/components/misc/SmallCard/SmallCard";
-import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
+import SmallCard from "@/components/layout/SmallCard/SmallCard";
+import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
+import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/layout/Pagination/Pagination";
 
 export default function HistoryLoader({

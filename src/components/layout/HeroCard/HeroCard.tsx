@@ -10,7 +10,7 @@ import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";
 import translate from "@/utils/misc/translate";
 import { useContextSelector } from "use-context-selector";
-import HeroCardImage from "@/components/misc/HeroCardImage/HeroCardImage";
+import HeroCardImage from "@/components/layout/HeroCardImage/HeroCardImage";
 
 export default function HeroCard({
     data,

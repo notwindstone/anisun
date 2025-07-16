@@ -2,6 +2,7 @@ import { UserType } from "@/types/OAuth2/User.type";
 import { OAuth2ProvidersUserType } from "@/types/OAuth2/OAuth2Providers.type";
 
 const getUsername = (user: OAuth2ProvidersUserType): string => {
+    // yeah, life without zod/arktype/ajv looks like this
     if (
         "data" in user && (
             typeof user.data === "object" &&

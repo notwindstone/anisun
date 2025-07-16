@@ -1,11 +1,11 @@
 import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
-import SkeletonHeroCard from "@/components/misc/SkeletonHeroCard/SkeletonHeroCard";
+import SkeletonHeroCard from "@/components/layout/SkeletonHeroCard/SkeletonHeroCard";
 import SearchedAnimes from "@/components/search/SearchedAnimes/SearchedAnimes";
 import { HomePageItems } from "@/constants/translated";
 import Cards from "@/components/layout/Cards/Cards";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { Locale } from "@/i18n-config";
-import ErrorHeroCard from "@/components/misc/ErrorHeroCard/ErrorHeroCard";
+import ErrorHeroCard from "@/components/layout/ErrorHeroCard/ErrorHeroCard";
 import HeroCard from "@/components/layout/HeroCard/HeroCard";
 
 export default function HomeTitles({

@@ -1,11 +1,11 @@
 "use client";
 
 import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
-import SmallCard from "@/components/misc/SmallCard/SmallCard";
+import SmallCard from "@/components/layout/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
+import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSmallCard";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
+import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
 import parseTailwindColor from "@/utils/configs/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import GridCards from "@/components/layout/GridCards/GridCards";
@@ -132,7 +132,7 @@ export default function Cards({
             </>
         );
     }
-    
+
     if (currentData.length === 0) {
         return;
     }

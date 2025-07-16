@@ -2,12 +2,12 @@
 
 import React, { useEffect, useState, useMemo, useCallback, SetStateAction, useLayoutEffect } from "react";
 import GridCards from "@/components/layout/GridCards/GridCards";
-import SmallCard from "@/components/misc/SmallCard/SmallCard";
+import SmallCard from "@/components/layout/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import SkeletonSmallCard from "@/components/misc/SkeletonSmallCard/SkeletonSmallCard";
+import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import ErrorSmallCard from "@/components/misc/ErrorSmallCard/ErrorSmallCard";
+import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/layout/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
 import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
