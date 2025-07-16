@@ -99,7 +99,7 @@ export default function Sidebar({
                 <button
                     aria-label="toggle sidebar"
                     onClick={toggleSidebar}
-                    className={`sidebar__toggleable-border absolute top-0 bottom-0 w-2  cursor-w-resize transition z-100 border-transparent opacity-20 delay-200 duration-300 hover:border-neutral-500 ${sidebarConfig.position === "left" ? "right-0 border-r" : "left-0 border-l"}`}
+                    className={`sidebar__toggleable-border absolute top-0 bottom-0 w-2  cursor-w-resize transition z-100 border-transparent opacity-20 duration-300 hover:border-neutral-500 ${sidebarConfig.position === "left" ? "right-0 border-r" : "left-0 border-l"}`}
                 />
                 <div
                     className="sidebar__title-wrapper flex w-full items-center justify-between"
