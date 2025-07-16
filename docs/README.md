@@ -55,7 +55,7 @@ The goal of this project is to replicate a Tachiyomi-like experience for watchin
 
 ## Performance
 
-Even though this website is written in React, I think I still managed to achieve great performance. I tried to make it as smooth as possible while dealing with the monstrous re-rendering nature of React. It should work perfectly even on mobile phones both in Firefox and Chromium-based browsers.
+Even though this website is written in React, I think I still managed to achieve great performance. I tried to make it as smooth as possible while dealing with the monstrous re-rendering nature of React. It should work perfectly on mobile phones too, both in Firefox and Chromium-based browsers.
 
 ### PageSpeed Insights
 

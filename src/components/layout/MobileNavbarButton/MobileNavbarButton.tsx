@@ -97,7 +97,7 @@ export default function MobileNavbarButton({
             }}
         >
             <div
-                className="mobile-navbar__button-icon relative flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-150"
+                className="mobile-navbar__button-icon relative flex h-fit py-1 justify-center items-center rounded-full transition-mobile-navbar-button duration-300"
                 style={{
                     width: backgroundProperties.width,
                     ...(
@@ -109,7 +109,7 @@ export default function MobileNavbarButton({
             >
                 {item.icon}
             </div>
-            <p className="mobile-navbar__button-text select-none text-center transition-colors duration-150 leading-none">
+            <p className="mobile-navbar__button-text select-none text-center transition-colors duration-300 leading-none">
                 {item.name}
             </p>
         </Link>
