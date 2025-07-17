@@ -1,3 +1,7 @@
+implement secure code evaluation with https://www.npmjs.com/package/shadowrealm-api
+
+___
+
 <div align="center">
 
 <img width="160" height="160" align="center" src="../public/favicon.webp" alt="Favicon">
