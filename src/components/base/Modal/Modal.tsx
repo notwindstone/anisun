@@ -2,7 +2,8 @@
 
 import Button from "@/components/base/Button/Button";
 import { useState } from "react";
-import {useClickOutside} from "@mantine/hooks";
+import { useClickOutside } from "@mantine/hooks";
+import ModalTransition from "@/components/base/ModalTransition/ModalTransition";
 
 export default function Modal({
     children,
@@ -15,7 +16,7 @@ export default function Modal({
     const modalReference = useClickOutside(() => setShow(false));
 
     return (
-        <>
+        <div ref={modalReference} className="sm:relative">
             <Button
                 onClick={() => {
                     setShow((state) => !state);
@@ -26,14 +27,13 @@ export default function Modal({
             </Button>
             {
                 show && (
-                    <div
-                        ref={modalReference}
-                        className="absolute top-[50%] left-[50%] bg-amber-950 p-16 -translate-x-[50%] -translate-y-[50%] z-1000"
+                    <ModalTransition
+                        hide={() => setShow(false)}
                     >
                         {children}
-                    </div>
+                    </ModalTransition>
                 )
             }
-        </>
+        </div>
     );
 }

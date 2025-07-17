@@ -5,11 +5,9 @@ import { SearchContext } from "@/utils/providers/SearchProvider";
 import Cards from "@/components/layout/Cards/Cards";
 import { useContextSelector } from "use-context-selector";
 
-export default function ClientFetchWrapper({
-    children,
+export default function ClientFetchWithSearchWrapper({
     isGrid,
 }: {
-    children: React.ReactNode;
     isGrid?: boolean;
 }) {
     const search = useContextSelector(SearchContext, (value) => value.data);
@@ -27,7 +25,11 @@ export default function ClientFetchWrapper({
                 }
                 fetchArguments={search}
             >
-                {children}
+                <Cards
+                    search={search.search}
+                    isImageUnoptimized
+                    isGrid
+                />
             </ClientFetch>
         </>
     );

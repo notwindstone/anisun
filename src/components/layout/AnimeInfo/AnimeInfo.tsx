@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 export default function AnimeInfo() {
     const data = useContextSelector(ClientFetchDataContext, (value) => value.data);
-    const [ratings, setRatings] = useState<string>("");
+    const [ratings/*, setRatings */] = useState<string>("");
 
     useEffect(() => {
         if (!data) {
