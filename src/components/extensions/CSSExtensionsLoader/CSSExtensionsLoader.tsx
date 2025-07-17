@@ -39,17 +39,20 @@ export default function CSSExtensionsLoader() {
     }
 
     return (
-        <div id="extensions-css-loader-id" className="relative w-0 h-0 overflow-clip">
-            {
-                filteredExtensions.map((extensionToUse) => (
-                    <ExtensionWrapper
-                        // extension mounts don't work when changing routes, so we re-render extensions every pathname change :noooo:
-                        key={`${pathname}_${extensionToUse.url}`}
-                        url={extensionToUse.url}
-                    />
-                ))
-            }
-            <StylesheetsGC />
-        </div>
+        <>
+            <div id="extensions-css-loader-id" className="relative w-0 h-0 overflow-clip">
+                {
+                    filteredExtensions.map((extensionToUse) => (
+                        <ExtensionWrapper
+                            isCSS
+                            // extension mounts don't work when changing routes, so we re-render extensions every pathname change :noooo:
+                            key={`${pathname}_${extensionToUse.url}`}
+                            url={extensionToUse.url}
+                        />
+                    ))
+                }
+                <StylesheetsGC />
+            </div>
+        </>
     );
 }
