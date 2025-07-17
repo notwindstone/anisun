@@ -107,6 +107,8 @@
   },
   "misc": {
     "searchAnimes": "Поиск аниме...",
+    "filters": "Фильтры",
+    "filtersDescription": "Show anime that fits selected criteria",
     "signOut": "Выйти"
   }
 }

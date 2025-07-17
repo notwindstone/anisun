@@ -107,6 +107,8 @@
   },
   "misc": {
     "searchAnimes": "seawch a-anime...",
+    "filters": "fiwtews",
+    "filtersDescription": "show anime t-that f-fits sewected cwitewia",
     "signOut": "sign out"
   }
 }

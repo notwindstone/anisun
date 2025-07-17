@@ -25,11 +25,14 @@ export default function AdvancedSearchBar() {
         () => (
             <Modal
                 buttonChildren={<ListFilter />}
+                label={dictionaries?.misc?.filters}
+                description={dictionaries?.misc?.filtersDescription}
+                shouldBeRelative={false}
             >
                 hello
             </Modal>
         ),
-        [],
+        [dictionaries?.misc?.filters, dictionaries?.misc?.filtersDescription],
     );
     const memoizedSearchAction = useCallback(
         (value: string) => {
@@ -74,7 +77,8 @@ export default function AdvancedSearchBar() {
     );
 
     return (
-        <div className="px-4 w-full mx-auto max-w-384 flex flex-nowrap gap-2">
+        // `sm:relative` here to link Modal with this element
+        <div className="px-4 w-full mx-auto max-w-384 flex flex-nowrap gap-2 sm:relative">
             <Input
                 defaultValue=""
                 setSearch={memoizedSearchAction}

@@ -8,15 +8,22 @@ import ModalTransition from "@/components/base/ModalTransition/ModalTransition";
 export default function Modal({
     children,
     buttonChildren,
+    label,
+    description,
+    shouldBeRelative,
 }: {
     children:       React.ReactNode;
     buttonChildren: React.ReactNode;
+    label:          string | undefined;
+    description:    string | undefined;
+    /** `false` if you define `relative` position on components that are higher in the tree */
+    shouldBeRelative: boolean;
 }) {
     const [show, setShow] = useState(false);
     const modalReference = useClickOutside(() => setShow(false));
 
     return (
-        <div ref={modalReference} className="sm:relative">
+        <div ref={modalReference} className={shouldBeRelative ? "sm:relative" : ""}>
             <Button
                 onClick={() => {
                     setShow((state) => !state);
@@ -29,6 +36,10 @@ export default function Modal({
                 show && (
                     <ModalTransition
                         hide={() => setShow(false)}
+                        // some prop drilling
+                        // should be ok, because these things don't update
+                        label={label}
+                        description={description}
                     >
                         {children}
                     </ModalTransition>
