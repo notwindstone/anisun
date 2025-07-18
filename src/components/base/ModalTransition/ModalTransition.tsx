@@ -77,9 +77,7 @@ export default function ModalTransition({
                         </Button>
                     </div>
                     <Divider />
-                    <div className="overflow-auto">
-                        {children}
-                    </div>
+                    {children}
                 </div>
             </div>
         </>
