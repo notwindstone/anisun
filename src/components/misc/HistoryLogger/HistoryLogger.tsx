@@ -92,7 +92,7 @@ export default function HistoryLogger(): React.ReactNode {
         }
 
         localStorage?.setItem(HistoryLocalStorageKey, JSON.stringify(parsedHistory));
-    }, [pathname, searchParameters, idMal, data, isPending, error]);
+    }, [loggerEnabled, pathname, searchParameters, idMal, data, isPending, error]);
 
     return;
 }
