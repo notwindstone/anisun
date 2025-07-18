@@ -29,7 +29,7 @@ export default function ModalTransition({
         modal:  string;
     }>({
         darken: "opacity-0",
-        modal:  "invisible opacity-0 translate-y-4",
+        modal:  "invisible opacity-0 sm:-translate-y-2 translate-y-4",
     });
 
     useEffect(() => {
@@ -59,10 +59,10 @@ export default function ModalTransition({
                 <div className="flex flex-col gap-4 p-4">
                     <div className="flex items-start justify-between gap-4">
                         <div className="flex flex-col">
-                            <p className="font-medium text-xl">
+                            <p className="font-medium text-lg">
                                 {label}
                             </p>
-                            <p className="opacity-60">
+                            <p className="opacity-60 text-sm">
                                 {description}
                             </p>
                         </div>

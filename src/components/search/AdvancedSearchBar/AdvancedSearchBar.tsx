@@ -7,6 +7,8 @@ import { SearchContext } from "@/utils/providers/SearchProvider";
 import { useContextSelector } from "use-context-selector";
 import Modal from "@/components/base/Modal/Modal";
 import Input from "@/components/base/Input/Input";
+import { useSearchParams } from "next/navigation";
+import SearchFilters from "@/components/search/SearchFilters/SearchFilters";
 
 const icons = {
     id:   "ID",
@@ -20,6 +22,7 @@ export default function AdvancedSearchBar() {
     const setData = useContextSelector(SearchContext, (value) => value.setData);
     const [searchType, setSearchType] = useState<"id" | "name">("name");
     const [isError, setIsError] = useState(false);
+    const searchParameters = useSearchParams();
 
     const memoizedModal = useMemo(
         () => (
@@ -29,7 +32,7 @@ export default function AdvancedSearchBar() {
                 description={dictionaries?.misc?.filtersDescription}
                 shouldBeRelative={false}
             >
-                hello
+                <SearchFilters />
             </Modal>
         ),
         [dictionaries?.misc?.filters, dictionaries?.misc?.filtersDescription],
