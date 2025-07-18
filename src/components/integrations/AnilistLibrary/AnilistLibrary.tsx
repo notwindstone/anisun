@@ -142,7 +142,7 @@ export default function AnilistLibrary({
             return;
         }
 
-        globalThis.history.pushState({}, "", debouncedSearchParameters);
+        globalThis.history.replaceState({}, "", debouncedSearchParameters);
     }, [futurePathname, debouncedSearchParameters]);
 
     let cardsNode: React.ReactNode;
@@ -220,7 +220,7 @@ export default function AnilistLibrary({
 
             modifiedParameters.set("username", value.toString());
 
-            globalThis.history.pushState({}, "", `?${modifiedParameters.toString()}`);
+            globalThis.history.replaceState({}, "", `?${modifiedParameters.toString()}`);
         },
         [searchParameters],
     );
