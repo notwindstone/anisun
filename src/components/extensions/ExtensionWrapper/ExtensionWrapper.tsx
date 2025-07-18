@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useMemo, useState } from "react";
+import { Suspense, useMemo } from "react";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Button from "@/components/base/Button/Button";
 import ExtensionSkeleton from "@/components/extensions/ExtensionSkeleton/ExtensionSkeleton";
@@ -23,44 +23,18 @@ function refresh() {
 }
 
 export default function ExtensionWrapper({
-    isCSS,
     url,
     isCustomPage,
 }: {
-    /** Experimental thing to possibly get rid of hydration issues */
-    isCSS?: boolean;
     url: string;
     isCustomPage?: boolean;
 }) {
-    const [/*scriptCode, setScriptCode*/] = useState<string>("console.log('Waiting for the CSS extensions...')");
     // if a remote component doesn't return anything, but just manually injects itself to the relative root node
     // then we need to recreate it every time url changes to avoid buggy af behaviour
     const RemoteComponent = useMemo(
         () => createRemoteComponent({ requires }),
         [url],
     );
-
-    useEffect(() => {
-        return;
-        if (!isCSS) {
-            return;
-        }
-
-        // unfortunately, script tags with `src={url}` don't work
-        // because response from the GitHub returns `text/plain` format
-        // that's why we manually fetch the code and pass it to the script tag
-        (async () => {
-            const response = await fetch(url);
-            const code = await response.text();
-
-            const script = document.createElement("script");
-
-            script.text = code;
-            script.type = "module";
-
-            document.head.append(script);
-        })();
-    }, [isCSS, url]);
 
     return (
         <>

@@ -44,7 +44,6 @@ export default function CSSExtensionsLoader() {
                 {
                     filteredExtensions.map((extensionToUse) => (
                         <ExtensionWrapper
-                            isCSS
                             // extension mounts don't work when changing routes, so we re-render extensions every pathname change :noooo:
                             key={`${pathname}_${extensionToUse.url}`}
                             url={extensionToUse.url}
