@@ -2,6 +2,7 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo } from "react";
 import { useDebouncedState } from "@mantine/hooks";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
+import Slider from "@/components/base/Slider/Slider";
 
 export default function SearchFilters() {
     const [debouncedFiltersState, setDebouncedFiltersState] = useDebouncedState<Record<string, string>>({}, 300);
@@ -64,7 +65,7 @@ export default function SearchFilters() {
     return useMemo(
         () => (
             <>
-                <div className="">
+                <div className="overscroll-y-none overflow-y-auto h-full">
                     <SelectWrapper
                         multiple
                         searchable
@@ -93,6 +94,31 @@ export default function SearchFilters() {
                             },
                         ]}
                     />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
+                    <Slider />
                 </div>
             </>
         ),

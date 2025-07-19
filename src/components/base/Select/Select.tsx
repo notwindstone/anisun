@@ -78,6 +78,7 @@ export default function Select({
                 }}
             >
                 <input
+                    placeholder={searchable ? "Search..." : ""}
                     readOnly={!searchable}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();

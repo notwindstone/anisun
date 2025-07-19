@@ -28,7 +28,7 @@ export default async function Home({
     });
 
     return (
-        <div>
+        <>
             <Suspense fallback={
                 <HomeTitles
                     lang={lang}
@@ -76,6 +76,6 @@ export default async function Home({
                     <HomeTitlesClient lang={lang} />
                 </ServerFetch>
             </Suspense>
-        </div>
+        </>
     );
 }
