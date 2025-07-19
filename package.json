@@ -31,6 +31,7 @@
     "zustand": "^5.0.5"
   },
   "devDependencies": {
+    "@csstools/postcss-oklab-function": "^4.0.10",
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
     "@types/negotiator": "^0.6.3",

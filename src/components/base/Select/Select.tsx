@@ -63,6 +63,8 @@ export default function Select({
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
 
+                        console.log(value);
+
                         setDropdownOpened(true);
                     }}
                     onClick={() => {

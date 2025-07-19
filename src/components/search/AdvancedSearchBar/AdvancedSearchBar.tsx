@@ -24,6 +24,8 @@ export default function AdvancedSearchBar() {
     const [isError, setIsError] = useState(false);
     const searchParameters = useSearchParams();
 
+    console.log(searchParameters);
+
     const memoizedModal = useMemo(
         () => (
             <Modal
