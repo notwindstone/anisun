@@ -7,6 +7,9 @@ export const DefaultUsername = "windstone";
 export const ExtensionsLocalStorageKey = "@anisun/extensions";
 export const HistoryLocalStorageKey = "@anisun/history";
 
+export const DarkReaderNotificationLocalStorageKey = "dark-reader-hide";
+export const OldBrowserNotificationLocalStorageKey = "unsupported-browser-hide";
+
 export const HistoryEntriesLimit = 2000;
 
 export const EntriesMaxSize = 300;

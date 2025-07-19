@@ -47,13 +47,14 @@ export const HomePageItems: Array<{
     },
 ];
 export const AccountPageItems: Record<Locale, {
-    accountTitle: string,
-    accountDescription: string,
-    settingsTitle: string,
+    accountTitle:        string,
+    accountDescription:  string,
+    settingsTitle:       string,
     settingsDescription: string,
-    languageTitle: string,
-    accentColorTitle: string,
-    layoutConfigTitle: string,
+    languageTitle:       string,
+    accentColorTitle:    string,
+    layoutConfigTitle:   string,
+    other:               string,
 }> = {
     en: {
         accountTitle:        "Account",
@@ -63,6 +64,7 @@ export const AccountPageItems: Record<Locale, {
         languageTitle:       "Select your language",
         accentColorTitle:    "Select an accent color",
         layoutConfigTitle:   "Select a layout color and configuration",
+        other:               "Other",
     },
     ru: {
         accountTitle:        "Аккаунт",
@@ -72,6 +74,7 @@ export const AccountPageItems: Record<Locale, {
         languageTitle:       "Выбрать язык",
         accentColorTitle:    "Выбрать акцентный цвет",
         layoutConfigTitle:   "Выбрать цвет фона и настройки лайаута",
+        other:               "Прочее",
     },
     uwu: {
         accountTitle:        "account",
@@ -81,5 +84,6 @@ export const AccountPageItems: Record<Locale, {
         languageTitle:       "sewect youw wanguage",
         accentColorTitle:    "sewect an accent cowow",
         layoutConfigTitle:   "s-sewect a wayout cowow and configuwation",
+        other:               "other",
     },
 };

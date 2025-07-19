@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { Trash2, X } from "lucide-react";
+import { OldBrowserNotificationLocalStorageKey } from "@/constants/app";
 
 export default function UnsupportedBrowserNotify(): React.ReactNode {
     const [showed, setShowed] = useState(true);
 
     useEffect(() => {
-        const unsupportedBrowserLocalStorage = localStorage?.getItem("unsupported-browser-hide");
+        const unsupportedBrowserLocalStorage = localStorage?.getItem(OldBrowserNotificationLocalStorageKey);
 
         if (unsupportedBrowserLocalStorage === "hide") {
             setShowed(false);
@@ -51,7 +52,7 @@ export default function UnsupportedBrowserNotify(): React.ReactNode {
                     className="flex justify-center items-center w-8 h-8 rounded-md transition-colors bg-transparent hover:bg-neutral-800 cursor-pointer"
                     onClick={() => {
                         setShowed(false);
-                        localStorage?.setItem("unsupported-browser-hide", "hide");
+                        localStorage?.setItem(OldBrowserNotificationLocalStorageKey, "hide");
                     }}
                     aria-label="Hide a notify about unsupported browser for all sessions"
                     title="Hide a notify about unsupported browser for all sessions"

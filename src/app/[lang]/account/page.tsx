@@ -7,6 +7,7 @@ import LayoutChanger from "@/components/layout/LayoutChanger/LayoutChanger";
 import Divider from "@/components/base/Divider/Divider";
 import type { Locale } from "@/i18n-config";
 import { AccountPageItems } from "@/constants/translated";
+import ClearNotificationsData from "@/components/misc/ClearNotificationsData/ClearNotificationsData";
 
 export default async function Page({
     params,
@@ -58,6 +59,12 @@ export default async function Page({
                 />
                 <ColorSchemeChanger />
                 <LayoutChanger />
+            </div>
+            <p className="text-lg leading-none pt-2">
+                {accountPageItems.other}
+            </p>
+            <div className="flex flex-wrap gap-2">
+                <ClearNotificationsData />
             </div>
         </div>
     );
