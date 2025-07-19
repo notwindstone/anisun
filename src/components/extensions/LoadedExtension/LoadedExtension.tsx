@@ -9,7 +9,7 @@ import { useState } from "react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
 export default function LoadedExtension({
     extension,

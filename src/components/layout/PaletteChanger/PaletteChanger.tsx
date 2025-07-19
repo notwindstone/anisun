@@ -7,7 +7,7 @@ import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import Button from "@/components/base/Button/Button";
 import { Check } from "lucide-react";
 import { useContextSelector } from "use-context-selector";
@@ -24,7 +24,7 @@ function changePalette({
     const newData: SafeConfigType = {
         ...currentConfig,
     };
-    
+
     switch (propertyKey) {
         case "accent": {
             for (const accentColor of AccentColors) {
@@ -32,7 +32,7 @@ function changePalette({
                     newData.colors.accent = color;
                 }
             }
-            
+
             break;
         }
         case "base": {
@@ -41,7 +41,7 @@ function changePalette({
                     newData.colors.base = color;
                 }
             }
-            
+
             break;
         }
     }

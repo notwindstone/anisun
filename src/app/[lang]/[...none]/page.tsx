@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
 import { usePathname } from "next/navigation";

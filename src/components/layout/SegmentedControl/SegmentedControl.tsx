@@ -1,4 +1,4 @@
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import React, { createRef, Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { useContextSelector } from "use-context-selector";

@@ -1,6 +1,6 @@
 "use client";
 
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { useContextSelector } from "use-context-selector";
 

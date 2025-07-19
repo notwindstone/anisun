@@ -6,7 +6,7 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSmallCard";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import GridCards from "@/components/layout/GridCards/GridCards";
 import ScrollableCards from "@/components/layout/ScrollableCards/ScrollableCards";

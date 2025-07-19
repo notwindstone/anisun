@@ -2,7 +2,7 @@
 
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, SidebarLeftPosition } from "@/constants/configs";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { useContextSelector } from "use-context-selector";
 import TopLoader from "@/components/layout/TopLoader/TopLoader";
 import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";

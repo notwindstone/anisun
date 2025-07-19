@@ -2,7 +2,7 @@ import { AnimeType } from "@/types/Anime/Anime.type";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import Link from "next/link";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";

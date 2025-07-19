@@ -1,4 +1,4 @@
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Button from "@/components/base/Button/Button";
 import getSafeExtensionsValues from "@/utils/configs/getSafeExtensionsValues";

@@ -2,7 +2,7 @@
 
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey, SidebarRightPosition } from "@/constants/configs";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import Button from "@/components/base/Button/Button";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 import { setConfigValuesClient } from "@/utils/configs/setConfigValues";

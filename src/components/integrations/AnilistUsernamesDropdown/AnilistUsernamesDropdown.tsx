@@ -7,7 +7,7 @@ import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { SetStateAction, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 
 const placeholderArray = [1, 2, 3, 4, 5, 6];

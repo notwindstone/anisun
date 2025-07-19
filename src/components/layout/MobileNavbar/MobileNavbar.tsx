@@ -1,7 +1,7 @@
 "use client";
 
 import { DarkThemeKey } from "@/constants/configs";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { useEffect, useMemo, useState } from "react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";

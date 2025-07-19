@@ -1,6 +1,6 @@
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
-import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { ButtonStylesType } from "@/types/Appearance/ButtonStyles.type";
 
