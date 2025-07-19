@@ -99,6 +99,13 @@ export default function Select({
                             ? (
                                 <>
                                     {
+                                        (searchable) && (selected.length > 0) && (
+                                            <Badge>
+                                                +{selected.length}
+                                            </Badge>
+                                        )
+                                    }
+                                    {
                                         (!searchable) && (selected[0] !== undefined) && (
                                             <Badge>
                                                 {foundOptionName}
@@ -106,7 +113,7 @@ export default function Select({
                                         )
                                     }
                                     {
-                                        (selected.length > 1) && (
+                                        (!searchable) && (selected.length > 1) && (
                                             <Badge>
                                                 +{selected.length - 1}
                                             </Badge>
