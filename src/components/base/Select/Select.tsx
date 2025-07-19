@@ -5,6 +5,7 @@ import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import Badge from "@/components/base/Badge/Badge";
 
 export default function Select({
     parameter,
@@ -40,15 +41,13 @@ export default function Select({
     const [selected, setSelected] = useState<string | Array<string>>(
         multiple ? [ options[0].value ] : options[0].value,
     );
-    const selectedOptionName = options.find(
-        (option) => {
-            if (Array.isArray(selected)) {
-                return selected.includes(option.value);
-            }
+    const foundOptionName = options.find((currentOption) => {
+        if (Array.isArray(selected)) {
+            return selected.includes(currentOption.value);
+        }
 
-            return option.value === selected;
-        },
-    )?.name ?? selected;
+        return selected === currentOption.value;
+    })?.name;
 
     useEffect(() => {
         callback({
@@ -77,11 +76,6 @@ export default function Select({
                 }}
             >
                 <input
-                    placeholder={
-                        Array.isArray(selectedOptionName)
-                            ? selectedOptionName[0]
-                            : selectedOptionName
-                    }
                     readOnly={!searchable}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
@@ -93,10 +87,38 @@ export default function Select({
                     onClick={() => {
                         setDropdownOpened((state) => !state);
                     }}
-                    className={`bg-inherit rounded-md text-sm cursor-pointer h-10 w-full pl-4 pr-12 appearance-none outline-none ${searchable ? "" : "caret-transparent dark:placeholder-white placeholder-black"}`}
+                    className={`bg-inherit rounded-md text-sm cursor-pointer h-10 w-full pl-2 pr-8 appearance-none outline-none ${searchable ? "" : "caret-transparent"}`}
                 />
+                <div className="absolute text-sm left-2 flex flex-nowrap gap-2 pointer-events-none">
+                    {
+                        Array.isArray(selected)
+                            ? (
+                                <>
+                                    {
+                                        (selected[0] !== undefined) && (
+                                            <Badge>
+                                                {foundOptionName}
+                                            </Badge>
+                                        )
+                                    }
+                                    {
+                                        (selected.length > 1) && (
+                                            <Badge>
+                                                +{selected.length - 1}
+                                            </Badge>
+                                        )
+                                    }
+                                </>
+                            )
+                            : (
+                                <Badge>
+                                    {foundOptionName}
+                                </Badge>
+                            )
+                    }
+                </div>
                 <ChevronDown
-                    className="absolute right-4 pointer-events-none"
+                    className="absolute right-2 pointer-events-none"
                     size={16}
                 />
                 <div
@@ -140,6 +162,10 @@ export default function Select({
 
                                             return [ ...unique ];
                                         });
+
+                                        if (!multiple) {
+                                            setDropdownOpened(false);
+                                        }
                                     }}
                                     { ...(isSelected ? {
                                         style: {

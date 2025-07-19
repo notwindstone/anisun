@@ -1,8 +1,8 @@
 import { ChevronDown } from "lucide-react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
 export default function NativeSelect({
     parameter,
@@ -46,7 +46,7 @@ export default function NativeSelect({
                 }}
             >
                 <select
-                    className="cursor-pointer min-w-48 pl-4 pr-12 h-10 flex bg-inherit rounded-md appearance-none text-sm outline-none"
+                    className="cursor-pointer min-w-48 pl-2 pr-8 h-10 flex bg-inherit rounded-md appearance-none text-sm outline-none"
                     onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                         const value = event.target.value;
 
@@ -70,7 +70,7 @@ export default function NativeSelect({
                     }
                 </select>
                 <ChevronDown
-                    className="absolute right-4 pointer-events-none"
+                    className="absolute right-2 pointer-events-none"
                     size={16}
                 />
             </div>

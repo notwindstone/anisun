@@ -1,12 +1,11 @@
 import { useSearchParams } from "next/navigation";
-import { useCallback } from "react";
+import { useCallback, useEffect, useMemo } from "react";
+import { useDebouncedState } from "@mantine/hooks";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 
 export default function SearchFilters() {
+    const [debouncedFiltersState, setDebouncedFiltersState] = useDebouncedState<Record<string, string>>({}, 300);
     const searchParameters = useSearchParams();
-
-    const searchParametersAsString = searchParameters.toString();
-
     const memoizedCallback = useCallback(
         ({
             parameter,
@@ -15,14 +14,31 @@ export default function SearchFilters() {
             parameter: string;
             value:     string;
         }) => {
-            const modifiedParameters = new URLSearchParams(searchParametersAsString);
+            setDebouncedFiltersState((state) => {
+                const updated: Record<string, string> = {
+                    ...state,
+                };
 
-            modifiedParameters.set(parameter, value);
+                updated[parameter] = value;
 
-            globalThis.history.replaceState({}, "", `?${modifiedParameters.toString()}`);
+                return updated;
+            });
         },
-        [searchParametersAsString],
+        [setDebouncedFiltersState],
     );
+
+    const searchParametersAsString = searchParameters.toString();
+
+    useEffect(() => {
+        const modifiedParameters = new URLSearchParams(searchParametersAsString);
+        const entries = Object.entries(debouncedFiltersState);
+
+        for (const [key, value] of entries) {
+            modifiedParameters.set(key, value);
+        }
+
+        globalThis.history.replaceState({}, "", `?${modifiedParameters.toString()}`);
+    }, [debouncedFiltersState, searchParametersAsString]);
 
     /**
      * Genres - MultiSelect (order by alphabet)
@@ -44,37 +60,40 @@ export default function SearchFilters() {
      * Censored (isAdult === false) - checkbox
      */
 
-    return (
-        <>
-            <div className="">
-                <SelectWrapper
-                    multiple
-                    parameter="sosal"
-                    callback={memoizedCallback}
-                    options={[
-                        {
-                            name:  "Shitass",
-                            value: "shit",
-                        },
-                        {
-                            name:  "Jackass",
-                            value: "jack",
-                        },
-                        {
-                            name:  "Fatass",
-                            value: "fat",
-                        },
-                        {
-                            name:  "Badass",
-                            value: "bad",
-                        },
-                        {
-                            name:  "Piss",
-                            value: "piss",
-                        },
-                    ]}
-                />
-            </div>
-        </>
+    return useMemo(
+        () => (
+            <>
+                <div className="">
+                    <SelectWrapper
+                        multiple
+                        parameter="sosal"
+                        callback={memoizedCallback}
+                        options={[
+                            {
+                                name:  "Shitass",
+                                value: "shit",
+                            },
+                            {
+                                name:  "Jackass",
+                                value: "jack",
+                            },
+                            {
+                                name:  "Fatass",
+                                value: "fat",
+                            },
+                            {
+                                name:  "Badass",
+                                value: "bad",
+                            },
+                            {
+                                name:  "Piss",
+                                value: "piss",
+                            },
+                        ]}
+                    />
+                </div>
+            </>
+        ),
+        [memoizedCallback],
     );
 }
