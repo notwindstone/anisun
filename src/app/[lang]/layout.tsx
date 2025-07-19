@@ -23,6 +23,7 @@ import HistoryLogger from "@/components/misc/HistoryLogger/HistoryLogger";
 import MobileNavbarWrapper from "@/components/layout/MobileNavbarWrapper/MobileNavbarWrapper";
 import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
 import logRequests from "@/utils/misc/logRequests";
+import UnsupportedBrowserNotify from "@/components/misc/UnsupportedBrowserNotify/UnsupportedBrowserNotify";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -120,6 +121,7 @@ export default async function RootLayout({
                         <HistoryLogger />
                     </ConfigsProvider>
                 </TanstackQueryProviders>
+                <UnsupportedBrowserNotify />
                 <DarkReaderNotify />
             </body>
         </html>
