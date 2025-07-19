@@ -1,4 +1,8 @@
 import { ChevronDown } from "lucide-react";
+import { useContextSelector } from "use-context-selector";
+import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import parseTailwindColor from "@/utils/configs/parseTailwindColor";
+import { DarkThemeKey } from "@/constants/configs";
 
 export default function NativeSelect({
     parameter,
@@ -18,13 +22,28 @@ export default function NativeSelect({
         value: string;
     }) => void,
 }) {
+    const { theme, base } = useContextSelector(ConfigsContext, (value) => {
+        return {
+            theme: value.data.theme,
+            base:  value.data.colors.base,
+        };
+    });
+
     return (
         <div className="flex flex-col gap-2">
             <p className="text-sm">
                 Select an option
             </p>
             <div
-                className="group relative rounded-md bg-neutral-200 dark:bg-neutral-800 w-fit flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
+                className="group relative rounded-md w-fit flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
+                style={{
+                    backgroundColor: parseTailwindColor({
+                        color: base,
+                        step:  theme === DarkThemeKey
+                            ? 800
+                            : 200,
+                    }),
+                }}
             >
                 <select
                     className="cursor-pointer min-w-48 pl-4 pr-12 h-10 flex bg-inherit rounded-md appearance-none text-sm outline-none"

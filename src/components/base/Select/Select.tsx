@@ -26,18 +26,19 @@ export default function Select({
     }) => void;
     searchable?: boolean;
 }) {
-    const { theme, base } = useContextSelector(ConfigsContext, (value) => {
+    const { theme, base, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
-            theme: value.data.theme,
-            base:  value.data.colors.base,
+            theme:  value.data.theme,
+            base:   value.data.colors.base,
+            accent: value.data.colors.accent,
         };
     });
     const dropdownReference = useClickOutside(() => setDropdownOpened(false));
     const [dropdownOpened, setDropdownOpened] = useState(false);
-    const [selected, setSelected] = useState<{
-        name:  string;
-        value: string;
-    }>(options[0]);
+    const [selected, setSelected] = useState<string>(options[0].value);
+    const selectedOptionName = options.find(
+        (option) => option.value === selected,
+    )?.name ?? selected;
 
     return (
         <div className="flex flex-col gap-2">
@@ -46,10 +47,18 @@ export default function Select({
             </p>
             <div
                 ref={dropdownReference}
-                className="group relative rounded-md bg-neutral-200 dark:bg-neutral-800 w-48 flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
+                className="group relative rounded-md w-48 flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
+                style={{
+                    backgroundColor: parseTailwindColor({
+                        color: base,
+                        step:  theme === DarkThemeKey
+                            ? 800
+                            : 200,
+                    }),
+                }}
             >
                 <input
-                    placeholder="Shitass"
+                    placeholder={selectedOptionName}
                     readOnly={!searchable}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
@@ -81,7 +90,24 @@ export default function Select({
                             return (
                                 <button
                                     key={option.value}
-                                    className="cursor-pointer flex w-full text-sm px-2 py-1 bg-transparent dark:hover:bg-[theme(colors.white/.08)] hover:bg-[theme(colors.black/.08)] transition-colors rounded-md"
+                                    className="cursor-pointer flex w-full text-sm px-2 py-1 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)]"
+                                    onClick={() => {
+                                        setSelected(option.value);
+                                        callback({
+                                            parameter,
+                                            value: option.value,
+                                        });
+                                    }}
+                                    { ...(selected === option.value ? {
+                                        style: {
+                                            color: parseTailwindColor({
+                                                color: accent,
+                                                step:  theme === DarkThemeKey
+                                                    ? 400
+                                                    : 500,
+                                            }),
+                                        },
+                                    } : {}) }
                                 >
                                     {option.name}
                                 </button>
