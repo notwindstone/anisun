@@ -34,6 +34,10 @@ export default function Select({
     });
     const dropdownReference = useClickOutside(() => setDropdownOpened(false));
     const [dropdownOpened, setDropdownOpened] = useState(false);
+    const [selected, setSelected] = useState<{
+        name:  string;
+        value: string;
+    }>(options[0]);
 
     return (
         <div className="flex flex-col gap-2">
@@ -62,7 +66,7 @@ export default function Select({
                     size={16}
                 />
                 <div
-                    className={`cursor-default rounded-md transition z-300 absolute top-12 flex flex-col gap-2 w-full min-h-10 p-2 overflow-clip duration-300 ${dropdownOpened ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}
+                    className={`cursor-default rounded-md transition z-300 absolute top-12 flex flex-col gap-0 w-full min-h-10 p-2 overflow-clip duration-300 ${dropdownOpened ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}
                     style={{
                         background: parseTailwindColor({
                             color: base,
@@ -72,7 +76,18 @@ export default function Select({
                         }),
                     }}
                 >
-                    helkjlaksjd
+                    {
+                        options.map((option) => {
+                            return (
+                                <button
+                                    key={option.value}
+                                    className="cursor-pointer flex w-full text-sm px-2 py-1 bg-transparent dark:hover:bg-[theme(colors.white/.08)] hover:bg-[theme(colors.black/.08)] transition-colors rounded-md"
+                                >
+                                    {option.name}
+                                </button>
+                            );
+                        })
+                    }
                 </div>
             </div>
         </div>
