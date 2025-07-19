@@ -101,7 +101,7 @@ export default function Select({
                                     {
                                         (searchable) && (selected.length > 0) && (
                                             <Badge>
-                                                +{selected.length}
+                                                {selected.length}
                                             </Badge>
                                         )
                                     }
@@ -133,7 +133,7 @@ export default function Select({
                     size={16}
                 />
                 <div
-                    className={`cursor-default rounded-md transition z-300 absolute top-12 flex flex-col gap-0 w-full min-h-10 max-h-64 p-2 overflow-x-clip overflow-y-auto duration-300 ${dropdownOpened ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}
+                    className={`cursor-default rounded-md transition z-3000 absolute top-12 flex flex-col gap-2 sm:gap-0 w-full min-h-10 max-h-64 p-2 overflow-x-clip overflow-y-auto duration-300 ${dropdownOpened ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}
                     style={{
                         background: parseTailwindColor({
                             color: base,
@@ -165,7 +165,7 @@ export default function Select({
                             return (
                                 <button
                                     key={option.value}
-                                    className="cursor-pointer flex justify-between items-center w-full text-sm px-2 py-1 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)] max-sm:focus:bg-[theme(colors.black/.08)] dark:max-sm:focus:bg-[theme(colors.white/.08)]"
+                                    className="cursor-pointer flex justify-between items-center w-full text-lg sm:text-sm px-2 py-1 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)] max-sm:focus:bg-[theme(colors.black/.08)] dark:max-sm:focus:bg-[theme(colors.white/.08)]"
                                     onClick={() => {
                                         setSelected((state) => {
                                             if (!multiple) {
