@@ -23,8 +23,7 @@ export default function Slider() {
             min={0}
             max="100"
             defaultValue="25"
-            className="range-native-customized [&::-moz-range-thumb]:border-inherit"
-            step="5"
+            className="range-native-customized [&::-moz-range-thumb]:border-inherit touch-none"
             style={{
                 color: parsedColor,
             }}
