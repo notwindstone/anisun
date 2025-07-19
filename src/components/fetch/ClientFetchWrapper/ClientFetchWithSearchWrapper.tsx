@@ -12,6 +12,10 @@ export default function ClientFetchWithSearchWrapper({
 }) {
     const search = useContextSelector(SearchContext, (value) => value.data);
 
+    if (search.search === "") {
+        return;
+    }
+
     return (
         <>
             <ClientFetch
