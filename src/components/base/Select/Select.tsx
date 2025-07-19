@@ -1,10 +1,10 @@
-import { ChevronDown } from "lucide-react";
+import { Check, ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import Badge from "@/components/base/Badge/Badge";
 
 export default function Select({
@@ -122,7 +122,7 @@ export default function Select({
                     size={16}
                 />
                 <div
-                    className={`cursor-default rounded-md transition z-300 absolute top-12 flex flex-col gap-0 w-full min-h-10 p-2 overflow-clip duration-300 ${dropdownOpened ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}
+                    className={`cursor-default rounded-md transition z-300 absolute top-12 flex flex-col gap-0 w-full min-h-10 max-h-64 p-2 overflow-x-clip overflow-y-auto duration-300 ${dropdownOpened ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"}`}
                     style={{
                         background: parseTailwindColor({
                             color: base,
@@ -143,7 +143,7 @@ export default function Select({
                             return (
                                 <button
                                     key={option.value}
-                                    className="cursor-pointer flex w-full text-sm px-2 py-1 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)]"
+                                    className="cursor-pointer flex justify-between items-center w-full text-sm px-2 py-1 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)] max-sm:focus:bg-[theme(colors.black/.08)] dark:max-sm:focus:bg-[theme(colors.white/.08)]"
                                     onClick={() => {
                                         setSelected((state) => {
                                             if (!multiple) {
@@ -178,7 +178,10 @@ export default function Select({
                                         },
                                     } : {}) }
                                 >
-                                    {option.name}
+                                    <span>
+                                        {option.name}
+                                    </span>
+                                    <Check className={`transition-opacity ${isSelected ? "opacity-100" : "opacity-0"}`} size={16} />
                                 </button>
                             );
                         })

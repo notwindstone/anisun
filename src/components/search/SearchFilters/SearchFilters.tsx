@@ -60,6 +60,7 @@ export default function SearchFilters() {
      * Censored (isAdult === false) - checkbox
      */
 
+    // basically never triggers on any of SearchFilters hooks
     return useMemo(
         () => (
             <>
