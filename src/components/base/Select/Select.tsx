@@ -6,6 +6,7 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import Badge from "@/components/base/Badge/Badge";
+import simpleMatch from "@/utils/misc/simpleMatch";
 
 export default function Select({
     parameter,
@@ -37,6 +38,7 @@ export default function Select({
         };
     });
     const dropdownReference = useClickOutside(() => setDropdownOpened(false));
+    const [currentSearch, setCurrentSearch] = useState<string>("");
     const [dropdownOpened, setDropdownOpened] = useState(false);
     const [selected, setSelected] = useState<string | Array<string>>(
         multiple ? [ options[0].value ] : options[0].value,
@@ -80,22 +82,24 @@ export default function Select({
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
 
-                        console.log(value);
+                        if (searchable) {
+                            setCurrentSearch(value);
+                        }
 
                         setDropdownOpened(true);
                     }}
                     onClick={() => {
                         setDropdownOpened((state) => !state);
                     }}
-                    className={`bg-inherit rounded-md text-sm cursor-pointer h-10 w-full pl-2 pr-8 appearance-none outline-none ${searchable ? "" : "caret-transparent"}`}
+                    className={`bg-inherit rounded-md text-sm cursor-pointer h-10 w-full pl-2 pr-18 appearance-none outline-none ${searchable ? "" : "caret-transparent"}`}
                 />
-                <div className="absolute text-sm left-2 flex flex-nowrap gap-2 pointer-events-none">
+                <div className={`absolute text-sm left-2 flex flex-nowrap gap-2 pointer-events-none ${searchable ? "left-auto right-8" : ""}`}>
                     {
                         Array.isArray(selected)
                             ? (
                                 <>
                                     {
-                                        (selected[0] !== undefined) && (
+                                        (!searchable) && (selected[0] !== undefined) && (
                                             <Badge>
                                                 {foundOptionName}
                                             </Badge>
@@ -138,6 +142,17 @@ export default function Select({
 
                             if (Array.isArray(selected)) {
                                 isSelected = selected.includes(option.value);
+                            }
+
+                            if (searchable && currentSearch !== "") {
+                                const nameMatches = simpleMatch(
+                                    option.name.toLowerCase(),
+                                    currentSearch.toLowerCase(),
+                                );
+
+                                if (!nameMatches) {
+                                    return;
+                                }
                             }
 
                             return (
