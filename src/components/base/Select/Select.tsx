@@ -1,5 +1,5 @@
 import { ChevronDown } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
@@ -11,6 +11,7 @@ export default function Select({
     options,
     callback,
     searchable,
+    multiple,
 }: {
     parameter: string;
     options:   Array<{
@@ -25,6 +26,7 @@ export default function Select({
         value:     string;
     }) => void;
     searchable?: boolean;
+    multiple?:   boolean;
 }) {
     const { theme, base, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -35,10 +37,27 @@ export default function Select({
     });
     const dropdownReference = useClickOutside(() => setDropdownOpened(false));
     const [dropdownOpened, setDropdownOpened] = useState(false);
-    const [selected, setSelected] = useState<string>(options[0].value);
+    const [selected, setSelected] = useState<string | Array<string>>(
+        multiple ? [ options[0].value ] : options[0].value,
+    );
     const selectedOptionName = options.find(
-        (option) => option.value === selected,
+        (option) => {
+            if (Array.isArray(selected)) {
+                return selected.includes(option.value);
+            }
+
+            return option.value === selected;
+        },
     )?.name ?? selected;
+
+    useEffect(() => {
+        callback({
+            parameter,
+            value: Array.isArray(selected)
+                ? JSON.stringify(selected)
+                : selected,
+        });
+    }, [callback, selected, parameter]);
 
     return (
         <div className="flex flex-col gap-2">
@@ -58,7 +77,11 @@ export default function Select({
                 }}
             >
                 <input
-                    placeholder={selectedOptionName}
+                    placeholder={
+                        Array.isArray(selectedOptionName)
+                            ? selectedOptionName[0]
+                            : selectedOptionName
+                    }
                     readOnly={!searchable}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
@@ -89,18 +112,36 @@ export default function Select({
                 >
                     {
                         options.map((option) => {
+                            let isSelected = selected === option.value;
+
+                            if (Array.isArray(selected)) {
+                                isSelected = selected.includes(option.value);
+                            }
+
                             return (
                                 <button
                                     key={option.value}
                                     className="cursor-pointer flex w-full text-sm px-2 py-1 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)]"
                                     onClick={() => {
-                                        setSelected(option.value);
-                                        callback({
-                                            parameter,
-                                            value: option.value,
+                                        setSelected((state) => {
+                                            if (!multiple) {
+                                                return option.value;
+                                            }
+
+                                            const unique = new Set(state);
+
+                                            if (unique.has(option.value)) {
+                                                unique.delete(option.value);
+
+                                                return [ ...unique ];
+                                            }
+
+                                            unique.add(option.value);
+
+                                            return [ ...unique ];
                                         });
                                     }}
-                                    { ...(selected === option.value ? {
+                                    { ...(isSelected ? {
                                         style: {
                                             color: parseTailwindColor({
                                                 color: accent,

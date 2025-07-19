@@ -48,6 +48,7 @@ export default function SearchFilters() {
         <>
             <div className="">
                 <SelectWrapper
+                    multiple
                     parameter="sosal"
                     callback={memoizedCallback}
                     options={[
