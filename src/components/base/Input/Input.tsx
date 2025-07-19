@@ -66,7 +66,7 @@ export default function Input({
                     type="text"
                     defaultValue={defaultValue ?? ""}
                     ref={reference}
-                    className="w-full h-full text-sm focus:outline-none"
+                    className="w-full h-full text-sm outline-none"
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         const value = event.currentTarget.value.trim();
 

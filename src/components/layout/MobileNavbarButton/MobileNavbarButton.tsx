@@ -16,7 +16,7 @@ import useQueriesStore from "@/utils/stores/useQueriesStore";
 
 const navbarBackground = {
     opened: {
-        width: 80,
+        width: 72,
     },
     closed: {
         width: 48,

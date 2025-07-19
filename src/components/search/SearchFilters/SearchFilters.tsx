@@ -1,19 +1,27 @@
-import Button from "@/components/base/Button/Button";
-import { ChevronDown } from "lucide-react";
-import { useRef } from "react";
+import { useSearchParams } from "next/navigation";
+import { useCallback } from "react";
+import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 
 export default function SearchFilters() {
-    const tempRef = useRef<HTMLSelectElement>(null);
-    const temporary = (
-        <Button label="shitass" onClick={() => {
-            //const modifiedParameters = new URLSearchParams(searchParameters.toString());
+    const searchParameters = useSearchParams();
 
-            //modifiedParameters.set("jackass", "sosal" + Math.random());
+    const searchParametersAsString = searchParameters.toString();
 
-            //globalThis.history.replaceState({}, "", `?${modifiedParameters.toString()}`);
-        }}>
-            Suck
-        </Button>
+    const memoizedCallback = useCallback(
+        ({
+            parameter,
+            value,
+        }: {
+            parameter: string;
+            value:     string;
+        }) => {
+            const modifiedParameters = new URLSearchParams(searchParametersAsString);
+
+            modifiedParameters.set(parameter, value);
+
+            globalThis.history.replaceState({}, "", `?${modifiedParameters.toString()}`);
+        },
+        [searchParametersAsString],
     );
 
     /**
@@ -39,34 +47,32 @@ export default function SearchFilters() {
     return (
         <>
             <div className="">
-                <p className="text-sm">
-                    Select an option
-                </p>
-                <div
-                    className="group relative rounded-md bg-neutral-200 dark:bg-neutral-800 w-fit flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
-                >
-                    <select
-                        ref={tempRef}
-                        className="w-full pl-4 pr-12 h-10 flex bg-inherit rounded-md appearance-none text-sm outline-none"
-                    >
+                <SelectWrapper
+                    parameter="sosal"
+                    callback={memoizedCallback}
+                    options={[
                         {
-                            ["Any", "United States", "Canada", "France"].map((key) => {
-                                return (
-                                    <option
-                                        key={key}
-                                        value={key}
-                                    >
-                                        {key}
-                                    </option>
-                                );
-                            })
-                        }
-                    </select>
-                    <ChevronDown
-                        className="absolute right-4 pointer-events-none"
-                        size={16}
-                    />
-                </div>
+                            name:  "Shitass",
+                            value: "shit",
+                        },
+                        {
+                            name:  "Jackass",
+                            value: "jack",
+                        },
+                        {
+                            name:  "Fatass",
+                            value: "fat",
+                        },
+                        {
+                            name:  "Badass",
+                            value: "bad",
+                        },
+                        {
+                            name:  "Piss",
+                            value: "piss",
+                        },
+                    ]}
+                />
             </div>
         </>
     );
