@@ -50,11 +50,11 @@
 @utility flex-max-w-1/6 {
   max-width: calc(1 / 6 * 100% - 14px);
 }
-@utility range-native-customized {
+@utility range-native-base {
   --local-border-width: 4px;
   --local-rounded:      16px;
-  --local-size:         20px;
-  --local-size-moz:     12px;
+  --local-size:         24px;
+  --local-size-moz:     16px;
 
   height: var(--local-size);
 
@@ -92,9 +92,6 @@
     border-width: var(--local-border-width);
     border-style: solid;
     background: white;
-
-    /*  slider progress  */
-    box-shadow: -409px 0 0 400px;
   }
 
   &::-moz-range-thumb {
@@ -103,10 +100,17 @@
     border-radius: var(--local-rounded);
     border-width: var(--local-border-width);
     border-style: solid;
-    background: white;
-
+  }
+}
+@utility range-native-progress {
+  &::-webkit-slider-thumb {
     /*  slider progress  */
-    box-shadow: -409px 0 0 400px;
+    box-shadow: -410px 0 0 400px;
+  }
+
+  &::-moz-range-thumb {
+    /*  slider progress  */
+    box-shadow: -410px 0 0 400px;
   }
 }
 

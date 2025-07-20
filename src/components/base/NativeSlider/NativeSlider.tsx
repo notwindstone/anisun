@@ -5,7 +5,7 @@ import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
-export default function Slider() {
+export default function NativeSlider() {
     const { accent, theme } = useContextSelector(ConfigsContext, (value) => ({
         accent: value.data.colors.accent,
         theme:  value.data.theme,
@@ -20,10 +20,7 @@ export default function Slider() {
     return (
         <input
             type="range"
-            min={0}
-            max="100"
-            defaultValue="25"
-            className="range-native-customized [&::-moz-range-thumb]:border-inherit touch-none"
+            className="range-native-base range-native-progress [&::-moz-range-thumb]:border-inherit touch-none"
             style={{
                 color: parsedColor,
             }}
