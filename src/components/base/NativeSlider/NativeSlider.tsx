@@ -20,7 +20,7 @@ export default function NativeSlider() {
     return (
         <input
             type="range"
-            className="range-native-base range-native-progress [&::-moz-range-thumb]:border-inherit touch-none"
+            className="w-full range-native-base range-native-progress touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-black dark:[&::-webkit-slider-runnable-track]:bg-white [&::-moz-range-track]:bg-black [&::-moz-range-track]:border-black dark:[&::-moz-range-track]:bg-white dark:[&::-moz-range-track]:border-white [&::-webkit-slider-thumb]:bg-black dark:[&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:bg-black dark:[&::-moz-range-thumb]:bg-white"
             style={{
                 color: parsedColor,
             }}

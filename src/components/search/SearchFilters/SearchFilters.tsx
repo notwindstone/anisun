@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useDebouncedState } from "@mantine/hooks";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
-import RangedSlider from "@/components/RangedSlider/RangedSlider";
+import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 
 export default function SearchFilters() {
     const [debouncedFiltersState, setDebouncedFiltersState] = useDebouncedState<Record<string, string>>({}, 300);
@@ -95,7 +95,13 @@ export default function SearchFilters() {
                             },
                         ]}
                     />
-                    <RangedSlider />
+                    <RangedSlider
+                        fixed={{
+                            min:  0,
+                            max:  150,
+                            step: 1,
+                        }}
+                    />
                     <NativeSlider />
                     <NativeSlider />
                     <NativeSlider />
