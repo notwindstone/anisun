@@ -5,9 +5,9 @@ import { ListFilter } from "lucide-react";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { SearchContext } from "@/utils/providers/SearchProvider";
 import { useContextSelector } from "use-context-selector";
+import { useSearchParams } from "next/navigation";
 import Modal from "@/components/base/Modal/Modal";
 import Input from "@/components/base/Input/Input";
-import { useSearchParams } from "next/navigation";
 import SearchFilters from "@/components/search/SearchFilters/SearchFilters";
 
 const icons = {
@@ -26,18 +26,21 @@ export default function AdvancedSearchBar() {
 
     console.log(searchParameters);
 
+    const filtersTitle = dictionaries?.misc?.filters;
+    const filtersDescription = dictionaries?.misc?.filtersDescription;
+
     const memoizedModal = useMemo(
         () => (
             <Modal
                 buttonChildren={<ListFilter />}
-                label={dictionaries?.misc?.filters}
-                description={dictionaries?.misc?.filtersDescription}
+                label={filtersTitle}
+                description={filtersDescription}
                 shouldBeRelative={false}
             >
                 <SearchFilters />
             </Modal>
         ),
-        [dictionaries?.misc?.filters, dictionaries?.misc?.filtersDescription],
+        [filtersTitle, filtersDescription],
     );
     const memoizedSearchAction = useCallback(
         (value: string) => {

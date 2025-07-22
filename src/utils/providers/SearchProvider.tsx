@@ -6,10 +6,18 @@ import { useDebouncedState } from "@mantine/hooks";
 import { SearchType } from "@/types/Anime/Search.type";
 
 export const SearchContext = createContext<{
-    data: SearchType;
+    mediaGenres: Array<string>;
+    mediaTags:   Array<Partial<{
+        name:        string;
+        category:    string;
+        description: string;
+    }>>;
+    data:    SearchType;
     setData: Dispatch<SetStateAction<SearchType>>;
 }>({
-    data: {
+    mediaGenres: [],
+    mediaTags:   [],
+    data:        {
         search:  "",
         type:    "name",
         filters: {
@@ -40,13 +48,12 @@ export function SearchProvider({
         leading: true,
     });
 
-    console.log(mediaTags);
-    console.log(mediaGenres);
-
     return (
         <SearchContext.Provider value={{
-            data:    debounced,
-            setData: setDebounced,
+            mediaGenres: mediaGenres ?? [],
+            mediaTags:   mediaTags ?? [],
+            data:        debounced,
+            setData:     setDebounced,
         }}>
             {children}
         </SearchContext.Provider>

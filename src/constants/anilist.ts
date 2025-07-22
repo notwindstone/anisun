@@ -51,3 +51,10 @@ export const QueryParametersType = {
     userName:        ParameterType.String,
     mediaListStatus: ParameterType.MediaListStatus,
 };
+export const AnilistMinimalQueryYear = 1940;
+export const DeltaYear = (new Date()).getFullYear() - AnilistMinimalQueryYear;
+export const AnilistQueryYears = Array
+    // we add 2 here, because we want to include current and the next year in the array too
+    .from({ length: DeltaYear + 2 })
+    .map((_, index) => index + AnilistMinimalQueryYear)
+    .reverse();

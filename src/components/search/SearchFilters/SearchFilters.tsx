@@ -1,14 +1,21 @@
 import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo } from "react";
 import { useDebouncedState } from "@mantine/hooks";
+import { useContextSelector } from "use-context-selector";
+import { SearchContext } from "@/utils/providers/SearchProvider";
+import { AnilistQueryYears } from "@/constants/anilist";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
-import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 
 export default function SearchFilters() {
+    const { genres, tags } = useContextSelector(SearchContext, (value) => ({
+        genres: value.mediaGenres,
+        tags:   value.mediaTags,
+    }));
     const [debouncedFiltersState, setDebouncedFiltersState] = useDebouncedState<Record<string, string>>({}, 300);
     const searchParameters = useSearchParams();
+
     const memoizedCallback = useCallback(
         ({
             parameter,
@@ -72,30 +79,20 @@ export default function SearchFilters() {
                     <SelectWrapper
                         multiple
                         searchable
-                        parameter="sosal"
+                        parameter="genre"
                         callback={memoizedCallback}
-                        options={[
-                            {
-                                name:  "Shitass",
-                                value: "shit",
-                            },
-                            {
-                                name:  "Jackass",
-                                value: "jack",
-                            },
-                            {
-                                name:  "Fatass",
-                                value: "fat",
-                            },
-                            {
-                                name:  "Badass",
-                                value: "bad",
-                            },
-                            {
-                                name:  "Piss",
-                                value: "piss",
-                            },
-                        ]}
+                        options={genres.map((genre) => ({
+                            name:  genre,
+                            value: genre,
+                        }))}
+                    />
+                    <SelectWrapper
+                        parameter="year"
+                        callback={memoizedCallback}
+                        options={AnilistQueryYears.map((year) => ({
+                            name:  year.toString(),
+                            value: year.toString(),
+                        }))}
                     />
                     <RangedSlider
                         fixed={{
@@ -107,6 +104,6 @@ export default function SearchFilters() {
                 </div>
             </>
         ),
-        [memoizedCallback],
+        [memoizedCallback, genres, tags],
     );
 }
