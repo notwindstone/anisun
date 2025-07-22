@@ -30,6 +30,13 @@ export default function RangedSlider({
         min: fixed.min,
         max: fixed.max,
     });
+    const [mobileActive, setMobileActive] = useState<{
+        left:  boolean;
+        right: boolean;
+    }>({
+        left:  false,
+        right: false,
+    });
 
     const handleMinimalChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -76,6 +83,18 @@ export default function RangedSlider({
             <div className="relative flex items-center justify-center h-6 touch-none overflow-x-clip">
                 <div className="absolute w-full h-6">
                     <input
+                        onTouchStart={() => setMobileActive((state) => ({
+                            ...state,
+                            left: true,
+                        }))}
+                        onTouchCancel={() => setMobileActive((state) => ({
+                            ...state,
+                            left: false,
+                        }))}
+                        onTouchEnd={() => setMobileActive((state) => ({
+                            ...state,
+                            left: false,
+                        }))}
                         className="peer/left dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
                         type="range"
                         value={current.min}
@@ -88,6 +107,18 @@ export default function RangedSlider({
                         }}
                     />
                     <input
+                        onTouchStart={() => setMobileActive((state) => ({
+                            ...state,
+                            right: true,
+                        }))}
+                        onTouchCancel={() => setMobileActive((state) => ({
+                            ...state,
+                            right: false,
+                        }))}
+                        onTouchEnd={() => setMobileActive((state) => ({
+                            ...state,
+                            right: false,
+                        }))}
                         className="peer/right dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
                         type="range"
                         value={current.max}
@@ -100,7 +131,7 @@ export default function RangedSlider({
                         }}
                     />
                     <div
-                        className="absolute peer-active/left:opacity-100 opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white"
+                        className={`absolute sm:peer-active/left:opacity-100 ${mobileActive.left ? "opacity-100" : ""} opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white`}
                         style={{
                             left: `${minimalPosition * 0.96}%`,
                         }}
@@ -108,7 +139,7 @@ export default function RangedSlider({
                         {current.min}
                     </div>
                     <div
-                        className="absolute peer-active/right:opacity-100 opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white"
+                        className={`absolute sm:peer-active/right:opacity-100 ${mobileActive.right ? "opacity-100" : ""} opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white`}
                         style={{
                             right: `${(100 - maximalPosition) * 0.96}%`,
                         }}

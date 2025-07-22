@@ -18,14 +18,21 @@ export default function NativeSlider() {
             : 500,
     });
     const [value, setValue] = useState<number>(0);
+    const [mobileActive, setMobileActive] = useState<boolean>(false);
 
     const currentPosition = (
-        (value - 0) / (100 - 0)
+        (value - 0) / (25 - 0)
     ) * 100;
 
     return (
         <div className="relative overflow-x-clip">
+            {mobileActive}
             <input
+                min={0}
+                max={25}
+                onTouchStart={() => setMobileActive(true)}
+                onTouchCancel={() => setMobileActive(false)}
+                onTouchEnd={() => setMobileActive(false)}
                 type="range"
                 className="peer w-full range-native-base range-native-progress touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-[#262626] dark:[&::-webkit-slider-runnable-track]:bg-[#e5e5e5] [&::-moz-range-track]:bg-[#262626] [&::-moz-range-track]:border-[#262626] dark:[&::-moz-range-track]:bg-[#e5e5e5] dark:[&::-moz-range-track]:border-[#e5e5e5] [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
                 value={value}
@@ -39,7 +46,7 @@ export default function NativeSlider() {
                 }}
             />
             <div
-                className="absolute peer-active:opacity-100 opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white"
+                className={`absolute sm:peer-active:opacity-100 ${mobileActive ? "opacity-100" : ""} opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white`}
                 style={{
                     left: currentPosition <= 50
                         ? `${currentPosition}%`
