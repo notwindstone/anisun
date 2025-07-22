@@ -6,7 +6,15 @@ import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import { useState } from "react";
 
-export default function NativeSlider() {
+export default function NativeSlider({
+    fixed,
+}: {
+    fixed: {
+        min:  number;
+        max:  number;
+        step: number;
+    };
+}) {
     const { accent, theme } = useContextSelector(ConfigsContext, (value) => ({
         accent: value.data.colors.accent,
         theme:  value.data.theme,
@@ -17,19 +25,20 @@ export default function NativeSlider() {
             ? 400
             : 500,
     });
-    const [value, setValue] = useState<number>(0);
+    const [value, setValue] = useState<number>(fixed.min);
     const [mobileActive, setMobileActive] = useState<boolean>(false);
 
     const currentPosition = (
-        (value - 0) / (25 - 0)
+        (value - fixed.min) / (fixed.max - fixed.min)
     ) * 100;
 
     return (
         <div className="relative overflow-x-clip">
             {mobileActive}
             <input
-                min={0}
-                max={25}
+                min={fixed.min}
+                max={fixed.max}
+                step={fixed.step}
                 onTouchStart={() => setMobileActive(true)}
                 onTouchCancel={() => setMobileActive(false)}
                 onTouchEnd={() => setMobileActive(false)}

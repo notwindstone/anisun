@@ -104,31 +104,6 @@ export default function SearchFilters() {
                             step: 1,
                         }}
                     />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
-                    <NativeSlider />
                 </div>
             </>
         ),
