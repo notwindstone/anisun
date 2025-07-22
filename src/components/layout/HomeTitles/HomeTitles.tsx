@@ -86,12 +86,31 @@ export default function HomeTitles({
     let heroData;
 
     // convince typescript that we are safe to use `Hero` property
+    // life without runtime validators is hard
     if (
         data !== undefined &&
         "Hero" in data &&
         !("media" in data.Hero)
     ) {
         heroData = data.Hero;
+    }
+
+    let genresData: Array<string> = [];
+    let tagsData: Array<Partial<{
+        name:        string;
+        category:    string;
+        description: string;
+    }>> = [];
+
+    if (
+        data !== undefined &&
+        "Genres" in data &&
+        Array.isArray(data.Genres) &&
+        "Tags" in data &&
+        Array.isArray(data.Tags)
+    ) {
+        genresData = data.Genres;
+        tagsData = data.Tags;
     }
 
     return (
@@ -102,7 +121,10 @@ export default function HomeTitles({
                 </div>
             </div>
             <div className="w-full h-4" />
-            <SearchedAnimes />
+            <SearchedAnimes
+                mediaGenres={genresData}
+                mediaTags={tagsData}
+            />
             <div className="w-full h-4" />
             {
                 HomePageItems.map((item) => {

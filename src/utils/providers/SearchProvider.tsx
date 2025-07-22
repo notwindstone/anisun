@@ -21,8 +21,16 @@ export const SearchContext = createContext<{
 
 export function SearchProvider({
     children,
+    mediaGenres,
+    mediaTags,
 }: {
     children: React.ReactNode;
+    mediaGenres?: Array<string>;
+    mediaTags?:   Array<Partial<{
+        name:        string;
+        category:    string;
+        description: string;
+    }>>;
 }) {
     const [debounced, setDebounced] = useDebouncedState<SearchType>({
         search:  "",
@@ -31,6 +39,9 @@ export function SearchProvider({
     }, 300, {
         leading: true,
     });
+
+    console.log(mediaTags)
+    console.log(mediaGenres)
 
     return (
         <SearchContext.Provider value={{

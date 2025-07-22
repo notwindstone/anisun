@@ -11,6 +11,28 @@ const GetHomePageTitles = (options?: Partial<Request> | undefined) => getGraphQL
     ...GraphQLClient.Anilist({
         queries: [
             {
+                alias:     "genres",
+                name:      "GenreCollection",
+                variables: {
+                    page:  {},
+                    media: {},
+                },
+                fields: [],
+            },
+            {
+                alias:     "tags",
+                name:      "MediaTagCollection",
+                variables: {
+                    page:  {},
+                    media: {},
+                },
+                fields: [
+                    "name",
+                    "category",
+                    "description",
+                ],
+            },
+            {
                 alias:     "hero",
                 name:      "Media",
                 variables: {

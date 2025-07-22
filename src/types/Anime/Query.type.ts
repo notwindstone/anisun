@@ -176,4 +176,7 @@ export type QueryType =
     | "lists.entries.media.episodes"
     | "lists.entries.media.status"
     | "lists.entries.media.title.romaji"
-    | "lists.entries.media.title.english";
+    | "lists.entries.media.title.english"
+
+    // `MediaTagCollection` fields
+    | "category";
