@@ -40,8 +40,8 @@ export function SearchProvider({
         leading: true,
     });
 
-    console.log(mediaTags)
-    console.log(mediaGenres)
+    console.log(mediaTags);
+    console.log(mediaGenres);
 
     return (
         <SearchContext.Provider value={{

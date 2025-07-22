@@ -76,7 +76,7 @@ export default function RangedSlider({
             <div className="relative flex items-center justify-center h-6 touch-none">
                 <div className="absolute w-full h-6">
                     <input
-                        className="dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-black dark:[&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:bg-black dark:[&::-moz-range-thumb]:bg-white"
+                        className="dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
                         type="range"
                         value={current.min}
                         min={fixed.min}
@@ -88,7 +88,7 @@ export default function RangedSlider({
                         }}
                     />
                     <input
-                        className="dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-black dark:[&::-webkit-slider-thumb]:bg-white [&::-moz-range-thumb]:bg-black dark:[&::-moz-range-thumb]:bg-white"
+                        className="dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
                         type="range"
                         value={current.max}
                         min={fixed.min}
@@ -101,7 +101,7 @@ export default function RangedSlider({
                     />
                 </div>
                 <div className="absolute w-[calc(100%-16px)] h-6">
-                    <div className="absolute w-full h-3 top-[50%] -translate-y-[50%] rounded-md dark:bg-white bg-black" />
+                    <div className="absolute w-full h-3 top-[50%] -translate-y-[50%] rounded-md dark:bg-[#e5e5e5] bg-[#262626]" />
                     <div
                         className="absolute h-full"
                         style={{

@@ -56,7 +56,7 @@ export default function ModalTransition({
                     }),
                 }}
             >
-                <div className="flex flex-col gap-4 py-4 h-full">
+                <div className="flex flex-col gap-4 pt-4 h-full">
                     <div className="flex items-start justify-between gap-4 px-4">
                         <div className="flex flex-col">
                             <p className="font-medium text-lg">

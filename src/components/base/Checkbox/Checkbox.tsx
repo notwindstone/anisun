@@ -21,7 +21,9 @@ export default function Checkbox() {
     });
     const notCheckedColor = parseTailwindColor({
         color: base,
-        step:  200,
+        step:  theme === DarkThemeKey
+            ? 200
+            : 800,
     });
 
     return (

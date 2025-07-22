@@ -67,7 +67,7 @@ export default function SearchFilters() {
     return useMemo(
         () => (
             <>
-                <div className="overscroll-y-none overflow-y-auto h-full px-4">
+                <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4">
                     <Checkbox />
                     <SelectWrapper
                         multiple
