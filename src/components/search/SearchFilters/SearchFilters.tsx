@@ -68,7 +68,7 @@ export default function SearchFilters() {
         () => (
             <>
                 <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4">
-                    <Checkbox />
+                    <Checkbox uniqueID="lol" />
                     <SelectWrapper
                         multiple
                         searchable

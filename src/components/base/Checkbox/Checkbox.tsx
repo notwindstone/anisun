@@ -5,7 +5,11 @@ import { Check } from "lucide-react";
 import { useState } from "react";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
-export default function Checkbox() {
+export default function Checkbox({
+    uniqueID,
+}: {
+    uniqueID: string;
+}) {
     const { base, accent, theme } = useContextSelector(ConfigsContext, (value) => ({
         base:   value.data.colors.base,
         accent: value.data.colors.accent,
@@ -28,8 +32,9 @@ export default function Checkbox() {
 
     return (
         <>
-            <div className="relative flex items-center justify-center w-fit">
+            <div className="relative flex gap-2 items-center w-fit">
                 <input
+                    id={uniqueID}
                     defaultChecked={checked}
                     onClick={() => setChecked((state) => !state)}
                     className="peer cursor-pointer w-6 h-6 transition appearance-none rounded-md"
@@ -39,9 +44,15 @@ export default function Checkbox() {
                             ? checkedColor : notCheckedColor,
                     }}
                 />
+                <label
+                    className="text-sm cursor-pointer"
+                    htmlFor={uniqueID}
+                >
+                    Enable this shit
+                </label>
                 <Check
                     size={16}
-                    className="peer-checked:opacity-100 opacity-0 transition-opacity absolute pointer-events-none text-white"
+                    className="peer-checked:opacity-100 opacity-0 mx-1 transition-opacity absolute pointer-events-none text-white"
                 />
             </div>
         </>

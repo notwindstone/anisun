@@ -19,19 +19,38 @@ export default function NativeSlider() {
     });
     const [value, setValue] = useState<number>(0);
 
+    const currentPosition = (
+        (value - 0) / (100 - 0)
+    ) * 100;
+
     return (
-        <input
-            type="range"
-            className="w-full range-native-base range-native-progress touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-[#262626] dark:[&::-webkit-slider-runnable-track]:bg-[#e5e5e5] [&::-moz-range-track]:bg-[#262626] [&::-moz-range-track]:border-[#262626] dark:[&::-moz-range-track]:bg-[#e5e5e5] dark:[&::-moz-range-track]:border-[#e5e5e5] [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
-            value={value}
-            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setValue(
-                    Number(event.target.value),
-                );
-            }}
-            style={{
-                color: parsedColor,
-            }}
-        />
+        <div className="relative overflow-x-clip">
+            <input
+                type="range"
+                className="peer w-full range-native-base range-native-progress touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-[#262626] dark:[&::-webkit-slider-runnable-track]:bg-[#e5e5e5] [&::-moz-range-track]:bg-[#262626] [&::-moz-range-track]:border-[#262626] dark:[&::-moz-range-track]:bg-[#e5e5e5] dark:[&::-moz-range-track]:border-[#e5e5e5] [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
+                value={value}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    setValue(
+                        Number(event.target.value),
+                    );
+                }}
+                style={{
+                    color: parsedColor,
+                }}
+            />
+            <div
+                className="absolute peer-active:opacity-100 opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white"
+                style={{
+                    left: currentPosition <= 50
+                        ? `${currentPosition}%`
+                        : "auto",
+                    right: currentPosition > 50
+                        ? `${100 - currentPosition}%`
+                        : "auto",
+                }}
+            >
+                {value}
+            </div>
+        </div>
     );
 }
