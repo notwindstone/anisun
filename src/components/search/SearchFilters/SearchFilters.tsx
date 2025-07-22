@@ -4,6 +4,7 @@ import { useDebouncedState } from "@mantine/hooks";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
+import Checkbox from "@/components/base/Checkbox/Checkbox";
 
 export default function SearchFilters() {
     const [debouncedFiltersState, setDebouncedFiltersState] = useDebouncedState<Record<string, string>>({}, 300);
@@ -67,6 +68,7 @@ export default function SearchFilters() {
         () => (
             <>
                 <div className="overscroll-y-none overflow-y-auto h-full px-4">
+                    <Checkbox />
                     <SelectWrapper
                         multiple
                         searchable
