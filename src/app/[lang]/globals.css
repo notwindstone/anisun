@@ -119,12 +119,12 @@
 @utility range-native-progress {
   &::-webkit-slider-thumb {
     /* slider progress */
-    box-shadow: -410px 0 0 400px;
+    box-shadow: -1410px 0 0 1400px;
   }
 
   &::-moz-range-thumb {
     /* slider progress */
-    box-shadow: -410px 0 0 400px;
+    box-shadow: -1410px 0 0 1400px;
   }
 }
 @utility dual-range-thumb-only {
