@@ -42,7 +42,7 @@ export default function Checkbox({
 
     return (
         <>
-            <div className="relative flex gap-2 items-center w-fit">
+            <div className="relative flex flex-nowrap gap-0 items-center w-fit">
                 <input
                     id={parameter}
                     defaultChecked={checked}
@@ -62,7 +62,7 @@ export default function Checkbox({
                     }}
                 />
                 <label
-                    className="text-sm cursor-pointer"
+                    className="pl-2 text-sm cursor-pointer"
                     htmlFor={parameter}
                 >
                     {label}

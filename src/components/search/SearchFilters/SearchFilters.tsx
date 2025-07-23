@@ -8,7 +8,7 @@ import {
     AnilistFormats,
     AnilistQueryYears,
     AnilistSeasons,
-    AnilistSourceMaterials,
+    AnilistSourceMaterials, CheckboxFilters, getSelectableFilters,
 } from "@/constants/anilist";
 import { AnyOption } from "@/constants/app";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
@@ -103,68 +103,37 @@ export default function SearchFilters() {
             <>
                 <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4 flex flex-col gap-4">
                     <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
-                        <SelectWrapper
-                            multiple
-                            searchable
-                            parameter="genre"
-                            label="Genres"
-                            callback={memoizedCallback}
-                            options={transformIntoDropdownOptions(genres, true)}
-                        />
-                        <SelectWrapper
-                            parameter="year"
-                            label="Year"
-                            callback={memoizedCallback}
-                            options={transformIntoDropdownOptions(AnilistQueryYears)}
-                        />
-                        <SelectWrapper
-                            parameter="season"
-                            label="Season"
-                            callback={memoizedCallback}
-                            options={transformIntoDropdownOptions(AnilistSeasons)}
-                        />
-                        <SelectWrapper
-                            parameter="format"
-                            label="Format"
-                            callback={memoizedCallback}
-                            options={transformIntoDropdownOptions(AnilistFormats)}
-                        />
-                        <SelectWrapper
-                            additionalClassNames="lg:col-span-2"
-                            parameter="status"
-                            label="Airing Status"
-                            callback={memoizedCallback}
-                            options={transformIntoDropdownOptions(AnilistAiringStatuses)}
-                        />
-                        <SelectWrapper
-                            additionalClassNames="lg:col-span-2"
-                            parameter="source"
-                            label="Source Material"
-                            callback={memoizedCallback}
-                            options={transformIntoDropdownOptions(AnilistSourceMaterials)}
-                        />
+                        {
+                            getSelectableFilters(genres).map((filter) => (
+                                <SelectWrapper
+                                    key={filter.parameter}
+                                    parameter={filter.parameter}
+                                    multiple={filter.multiple}
+                                    searchable={filter.searchable}
+                                    additionalClassNames={filter.additionalClassNames}
+                                    options={
+                                        transformIntoDropdownOptions(
+                                            filter.options,
+                                            filter.multiple,
+                                        )
+                                    }
+                                    callback={memoizedCallback}
+                                    label={filter.label}
+                                />
+                            ))
+                        }
                     </div>
                     <div className="flex flex-wrap gap-4">
-                        <Checkbox
-                            parameter="yearRange"
-                            label="Select Year Range"
-                            callback={memoizedCallback}
-                        />
-                        <Checkbox
-                            parameter="onlyShowMyAnime"
-                            label="Only Show My Anime"
-                            callback={memoizedCallback}
-                        />
-                        <Checkbox
-                            parameter="hideMyAnime"
-                            label="Hide My Anime"
-                            callback={memoizedCallback}
-                        />
-                        <Checkbox
-                            parameter="isAdult"
-                            label="Censored"
-                            callback={memoizedCallback}
-                        />
+                        {
+                            CheckboxFilters.map((filter) => (
+                                <Checkbox
+                                    key={filter.parameter}
+                                    parameter={filter.parameter}
+                                    label={filter.label}
+                                    callback={memoizedCallback}
+                                />
+                            ))
+                        }
                     </div>
                     <RangedSlider
                         fixed={{

@@ -209,3 +209,81 @@ export const AnilistSourceMaterials: Array<{
         value: "OTHER",
     },
 ];
+export const getSelectableFilters = (genres: Array<string>): Array<{
+    additionalClassNames: string;
+    multiple:             boolean;
+    searchable:           boolean;
+    parameter:            string;
+    label:                string;
+    options:              Array<string | number | { name: string; value: string; }>;
+}> => ([
+    {
+        additionalClassNames: "",
+        multiple:             true,
+        searchable:           true,
+        parameter:            "genre",
+        label:                "Genres",
+        options:              genres,
+    },
+    {
+        additionalClassNames: "",
+        multiple:             false,
+        searchable:           false,
+        parameter:            "year",
+        label:                "Year",
+        options:              AnilistQueryYears,
+    },
+    {
+        additionalClassNames: "",
+        multiple:             false,
+        searchable:           false,
+        parameter:            "season",
+        label:                "Season",
+        options:              AnilistSeasons,
+    },
+    {
+        additionalClassNames: "",
+        multiple:             false,
+        searchable:           false,
+        parameter:            "format",
+        label:                "Format",
+        options:              AnilistFormats,
+    },
+    {
+        additionalClassNames: "lg:col-span-2",
+        multiple:             false,
+        searchable:           false,
+        parameter:            "status",
+        label:                "Airing Status",
+        options:              AnilistAiringStatuses,
+    },
+    {
+        additionalClassNames: "lg:col-span-2",
+        multiple:             false,
+        searchable:           false,
+        parameter:            "source",
+        label:                "Source Material",
+        options:              AnilistSourceMaterials,
+    },
+]);
+export const CheckboxFilters: Array<{
+    parameter: string;
+    label:     string;
+}> = [
+    {
+        parameter: "yearRange",
+        label:     "Select Year Range",
+    },
+    {
+        parameter: "onlyShowMyAnime",
+        label:     "Only Show My Anime",
+    },
+    {
+        parameter: "hideMyAnime",
+        label:     "Hide My Anime",
+    },
+    {
+        parameter: "isAdult",
+        label:     "Censored",
+    },
+];
