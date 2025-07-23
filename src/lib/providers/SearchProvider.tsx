@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction } from "react";
 import { createContext } from "use-context-selector";
 import { useDebouncedState } from "@mantine/hooks";
 import { SearchType } from "@/types/Anime/Search.type";
+import { useSearchParams } from "next/navigation";
 
 export const SearchContext = createContext<{
     mediaGenres: Array<string>;
@@ -20,9 +21,7 @@ export const SearchContext = createContext<{
     data:        {
         search:  "",
         type:    "name",
-        filters: {
-            status: "HIATUS",
-        },
+        filters: {},
     },
     setData: () => {},
 });
@@ -40,10 +39,12 @@ export function SearchProvider({
         description: string;
     }>>;
 }) {
+    const searchParameters = useSearchParams();
+    const filtersAsObject = Object.fromEntries(searchParameters.entries());
     const [debounced, setDebounced] = useDebouncedState<SearchType>({
         search:  "",
         type:    "name",
-        filters: {},
+        filters: filtersAsObject,
     }, 300, {
         leading: true,
     });

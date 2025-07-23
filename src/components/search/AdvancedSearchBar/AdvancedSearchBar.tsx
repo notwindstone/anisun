@@ -5,7 +5,6 @@ import { ListFilter } from "lucide-react";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { SearchContext } from "@/lib/providers/SearchProvider";
 import { useContextSelector } from "use-context-selector";
-import { useSearchParams } from "next/navigation";
 import Modal from "@/components/base/Modal/Modal";
 import Input from "@/components/base/Input/Input";
 import SearchFilters from "@/components/search/SearchFilters/SearchFilters";
@@ -22,9 +21,6 @@ export default function AdvancedSearchBar() {
     const setData = useContextSelector(SearchContext, (value) => value.setData);
     const [searchType, setSearchType] = useState<"id" | "name">("name");
     const [isError, setIsError] = useState(false);
-    const searchParameters = useSearchParams();
-
-    console.log(searchParameters);
 
     const filtersTitle = dictionaries?.misc?.filters;
     const filtersDescription = dictionaries?.misc?.filtersDescription;
