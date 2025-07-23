@@ -3,10 +3,20 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useDebouncedState } from "@mantine/hooks";
 import { useContextSelector } from "use-context-selector";
 import { SearchContext } from "@/utils/providers/SearchProvider";
-import { AnilistQueryYears } from "@/constants/anilist";
+import { AnilistFormats, AnilistQueryYears, AnilistSeasons } from "@/constants/anilist";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
+
+const transformIntoDropdown = (data: Array<string | number>): Array<{
+    name:  string;
+    value: string;
+}> => {
+    return data.map((item) => ({
+        name:  item.toString(),
+        value: item.toString(),
+    }));
+};
 
 export default function SearchFilters() {
     const { genres, tags } = useContextSelector(SearchContext, (value) => ({
@@ -81,18 +91,22 @@ export default function SearchFilters() {
                         searchable
                         parameter="genre"
                         callback={memoizedCallback}
-                        options={genres.map((genre) => ({
-                            name:  genre,
-                            value: genre,
-                        }))}
+                        options={transformIntoDropdown(genres)}
                     />
                     <SelectWrapper
                         parameter="year"
                         callback={memoizedCallback}
-                        options={AnilistQueryYears.map((year) => ({
-                            name:  year.toString(),
-                            value: year.toString(),
-                        }))}
+                        options={transformIntoDropdown(AnilistQueryYears)}
+                    />
+                    <SelectWrapper
+                        parameter="season"
+                        callback={memoizedCallback}
+                        options={transformIntoDropdown(AnilistSeasons)}
+                    />
+                    <SelectWrapper
+                        parameter="format"
+                        callback={memoizedCallback}
+                        options={transformIntoDropdown(AnilistFormats)}
                     />
                     <RangedSlider
                         fixed={{
