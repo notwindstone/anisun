@@ -271,7 +271,7 @@ export const CheckboxFilters: Array<{
     label:     string;
 }> = [
     {
-        parameter: "yearRange",
+        parameter: "isRangedYear",
         label:     "Select Year Range",
     },
     {
@@ -285,5 +285,47 @@ export const CheckboxFilters: Array<{
     {
         parameter: "isAdult",
         label:     "Censored",
+    },
+];
+export const SliderFilters: Array<{
+    parameter: string;
+    label:     string;
+    fixed:     {
+        min:  number;
+        max:  number;
+        step: number;
+    };
+    additionalClassNames: string;
+}> = [
+    {
+        parameter: "yearRange",
+        label:     "Year Range",
+        fixed:     {
+            min:  1970,
+            // get the next year
+            max:  (new Date()).getFullYear() + 1,
+            step: 1,
+        },
+        additionalClassNames: "",
+    },
+    {
+        parameter: "episodes",
+        label:     "Episodes",
+        fixed:     {
+            min:  0,
+            max:  150,
+            step: 1,
+        },
+        additionalClassNames: "",
+    },
+    {
+        parameter: "duration",
+        label:     "Duration",
+        fixed:     {
+            min:  0,
+            max:  170,
+            step: 1,
+        },
+        additionalClassNames: "lg:col-span-1 sm:col-span-2",
     },
 ];

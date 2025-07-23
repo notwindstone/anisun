@@ -6,12 +6,26 @@ import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
 export default function RangedSlider({
     fixed,
+    parameter,
+    callback,
+    label,
+    additionalClassNames,
 }: {
     fixed: {
         min:  number;
         max:  number;
         step: number;
     };
+    parameter: string;
+    callback: ({
+        parameter,
+        value,
+    }: {
+        parameter: string;
+        value:     string;
+    }) => void;
+    label:                 string;
+    additionalClassNames?: string;
 }) {
     const { accent, theme } = useContextSelector(ConfigsContext, (value) => ({
         accent: value.data.colors.accent,
@@ -79,7 +93,10 @@ export default function RangedSlider({
     ) * 100;
 
     return (
-        <>
+        <div className={`flex flex-col gap-2 ${additionalClassNames}`}>
+            <p className="text-sm">
+                {label}
+            </p>
             <div className="relative flex items-center justify-center h-6 touch-none overflow-x-clip">
                 <div className="absolute w-full h-6">
                     <input
@@ -159,6 +176,6 @@ export default function RangedSlider({
                     />
                 </div>
             </div>
-        </>
+        </div>
     );
 }

@@ -3,13 +3,7 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useDebouncedState } from "@mantine/hooks";
 import { useContextSelector } from "use-context-selector";
 import { SearchContext } from "@/utils/providers/SearchProvider";
-import {
-    AnilistAiringStatuses,
-    AnilistFormats,
-    AnilistQueryYears,
-    AnilistSeasons,
-    AnilistSourceMaterials, CheckboxFilters, getSelectableFilters,
-} from "@/constants/anilist";
+import { CheckboxFilters, getSelectableFilters, SliderFilters } from "@/constants/anilist";
 import { AnyOption } from "@/constants/app";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
@@ -81,7 +75,7 @@ export default function SearchFilters() {
        Genres - MultiSelect (order by alphabet)
        Year - Select
        Enable Ranged Year - Checkbox
-     * Ranged Year - Ranged Slider
+       Ranged Year - Ranged Slider
      * Sort - Select
        Season - Select
        Format (TV, TV_SHORT, etc.) - MultiSelect
@@ -91,8 +85,8 @@ export default function SearchFilters() {
        Hide My Anime - Checkbox
      * Score - Slider
      * Limit - Slider
-     * Episode Duration - Ranged Slider
-     * Episodes - Ranged Slider
+       Episode Duration - Ranged Slider
+       Episodes - Ranged Slider
        Censored (isAdult === false) - checkbox
      * Tags/Themes - Categorize and show buttons
      */
@@ -135,13 +129,20 @@ export default function SearchFilters() {
                             ))
                         }
                     </div>
-                    <RangedSlider
-                        fixed={{
-                            min:  0,
-                            max:  150,
-                            step: 1,
-                        }}
-                    />
+                    <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2">
+                        {
+                            SliderFilters.map((filter) => (
+                                <RangedSlider
+                                    key={filter.parameter}
+                                    parameter={filter.parameter}
+                                    label={filter.label}
+                                    fixed={filter.fixed}
+                                    callback={memoizedCallback}
+                                    additionalClassNames={filter.additionalClassNames}
+                                />
+                            ))
+                        }
+                    </div>
                 </div>
             </>
         ),

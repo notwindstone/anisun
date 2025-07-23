@@ -4,6 +4,7 @@ import { useClickOutside } from "@mantine/hooks";
 import { DarkThemeKey } from "@/constants/configs";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { AnyOption } from "@/constants/app";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 import Badge from "@/components/base/Badge/Badge";
 import simpleMatch from "@/utils/misc/simpleMatch";
@@ -127,7 +128,7 @@ export default function Select({
                                 </>
                             )
                             : (
-                                <Badge>
+                                <Badge appendClassNames={`${selected === AnyOption.value ? "opacity-60" : ""}`}>
                                     {foundOptionName}
                                 </Badge>
                             )
