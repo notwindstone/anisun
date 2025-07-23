@@ -1,7 +1,8 @@
 import { AppName, getFooterItems } from "@/constants/app";
+import { UsersOnlineCountLRUCache } from "@/lib/cache/LRUCaches";
+import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import Favicon from "@/components/base/Favicon/Favicon";
 import Link from "next/link";
-import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import Badge from "@/components/base/Badge/Badge";
 
 export default function Footer({
@@ -11,6 +12,7 @@ export default function Footer({
 }) {
     const footerItems = getFooterItems(dictionaries);
     const currentGitCommitHash = process.env.GIT_COMMIT_HASH;
+    const totalUsersOnlineCurrently = UsersOnlineCountLRUCache.size;
 
     return (
         <>
@@ -33,8 +35,12 @@ export default function Footer({
                                         </Badge>
                                     )
                                 }
+                                <Badge textSize="text-xs">
+                                    <span className="text-green-500 pr-1">•</span>
+                                    <span>Online: {totalUsersOnlineCurrently}</span>
+                                </Badge>
                             </div>
-                            <Link href="/" className="text-sm leading-none text-neutral-500 dark:text-neutral-400 transition-colors hover:text-neutral-800 dark:hover:text-neutral-200">
+                            <Link href="/" className="w-fit text-sm leading-none text-neutral-500 dark:text-neutral-400 transition-colors hover:text-neutral-800 dark:hover:text-neutral-200">
                                 anime.tatar
                             </Link>
                         </div>

@@ -85,7 +85,7 @@ export async function validateUser({
 
         user = await data.json();
     } catch (error: unknown) {
-        console.log(error);
+        console.error("user validation error:", error);
 
         return "error";
     }

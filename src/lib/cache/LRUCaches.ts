@@ -18,7 +18,7 @@ export const MiscLRUCache = new QuickLRU<string, number>({
     maxSize: 50,
     maxAge:  getTimeDifference({ minutes: 3 }),
 });
-export const UsersOnlineCountLRUCache = new QuickLRU<string, string>({
+export const UsersOnlineCountLRUCache = new QuickLRU<string, number>({
     maxSize: 5000,
     maxAge:  getTimeDifference({ minutes: 1 }),
 });
