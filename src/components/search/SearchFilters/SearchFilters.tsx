@@ -80,28 +80,28 @@ export default function SearchFilters() {
     /**
        Genres - MultiSelect (order by alphabet)
        Year - Select
-     * Enable Ranged Year - Checkbox
+       Enable Ranged Year - Checkbox
      * Ranged Year - Ranged Slider
      * Sort - Select
        Season - Select
        Format (TV, TV_SHORT, etc.) - MultiSelect
        Airing Status - Select
        Source Material - Select
-     * Tags/Themes - Categorize and show buttons
-     * Only Show My Anime - Checkbox
-     * Hide My Anime - Checkbox
+       Only Show My Anime - Checkbox
+       Hide My Anime - Checkbox
      * Score - Slider
      * Limit - Slider
      * Episode Duration - Ranged Slider
      * Episodes - Ranged Slider
-     * Censored (isAdult === false) - checkbox
+       Censored (isAdult === false) - checkbox
+     * Tags/Themes - Categorize and show buttons
      */
 
     // basically never triggers on any of SearchFilters hooks
     return useMemo(
         () => (
             <>
-                <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4">
+                <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4 flex flex-col gap-4">
                     <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
                         <SelectWrapper
                             multiple
@@ -144,7 +144,28 @@ export default function SearchFilters() {
                             options={transformIntoDropdownOptions(AnilistSourceMaterials)}
                         />
                     </div>
-                    <Checkbox parameter="lol" />
+                    <div className="flex flex-wrap gap-4">
+                        <Checkbox
+                            parameter="yearRange"
+                            label="Select Year Range"
+                            callback={memoizedCallback}
+                        />
+                        <Checkbox
+                            parameter="onlyShowMyAnime"
+                            label="Only Show My Anime"
+                            callback={memoizedCallback}
+                        />
+                        <Checkbox
+                            parameter="hideMyAnime"
+                            label="Hide My Anime"
+                            callback={memoizedCallback}
+                        />
+                        <Checkbox
+                            parameter="isAdult"
+                            label="Censored"
+                            callback={memoizedCallback}
+                        />
+                    </div>
                     <RangedSlider
                         fixed={{
                             min:  0,

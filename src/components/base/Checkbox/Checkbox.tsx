@@ -7,8 +7,18 @@ import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
 export default function Checkbox({
     parameter,
+    callback,
+    label,
 }: {
     parameter: string;
+    callback: ({
+        parameter,
+        value,
+    }: {
+        parameter: string;
+        value:     string;
+    }) => void;
+    label: string;
 }) {
     const { base, accent, theme } = useContextSelector(ConfigsContext, (value) => ({
         base:   value.data.colors.base,
@@ -36,7 +46,14 @@ export default function Checkbox({
                 <input
                     id={parameter}
                     defaultChecked={checked}
-                    onClick={() => setChecked((state) => !state)}
+                    onClick={() => {
+                        callback({
+                            parameter,
+                            value: (!checked).toString(),
+                        });
+
+                        setChecked((state) => !state);
+                    }}
                     className="peer cursor-pointer w-6 h-6 transition appearance-none rounded-md"
                     type="checkbox"
                     style={{
@@ -48,7 +65,7 @@ export default function Checkbox({
                     className="text-sm cursor-pointer"
                     htmlFor={parameter}
                 >
-                    Enable this shit
+                    {label}
                 </label>
                 <Check
                     size={16}
