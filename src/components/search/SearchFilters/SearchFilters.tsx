@@ -3,19 +3,43 @@ import { useCallback, useEffect, useMemo } from "react";
 import { useDebouncedState } from "@mantine/hooks";
 import { useContextSelector } from "use-context-selector";
 import { SearchContext } from "@/utils/providers/SearchProvider";
-import { AnilistFormats, AnilistQueryYears, AnilistSeasons } from "@/constants/anilist";
+import {
+    AnilistAiringStatuses,
+    AnilistFormats,
+    AnilistQueryYears,
+    AnilistSeasons,
+    AnilistSourceMaterials,
+} from "@/constants/anilist";
+import { AnyOption } from "@/constants/app";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 
-const transformIntoDropdown = (data: Array<string | number>): Array<{
+type dropdownType = {
     name:  string;
     value: string;
-}> => {
-    return data.map((item) => ({
-        name:  item.toString(),
-        value: item.toString(),
-    }));
+};
+
+const transformIntoDropdown = (
+    data:      Array<string | number | dropdownType>,
+    multiple?: boolean,
+): Array<dropdownType> => {
+    const transformedData = data.map((item) => {
+        if (typeof item === "object") {
+            return item;
+        }
+
+        return {
+            name:  item.toString(),
+            value: item.toString(),
+        };
+    });
+
+    if (!multiple) {
+        transformedData.unshift(AnyOption);
+    }
+
+    return transformedData;
 };
 
 export default function SearchFilters() {
@@ -91,7 +115,7 @@ export default function SearchFilters() {
                         searchable
                         parameter="genre"
                         callback={memoizedCallback}
-                        options={transformIntoDropdown(genres)}
+                        options={transformIntoDropdown(genres, true)}
                     />
                     <SelectWrapper
                         parameter="year"
@@ -107,6 +131,16 @@ export default function SearchFilters() {
                         parameter="format"
                         callback={memoizedCallback}
                         options={transformIntoDropdown(AnilistFormats)}
+                    />
+                    <SelectWrapper
+                        parameter="status"
+                        callback={memoizedCallback}
+                        options={transformIntoDropdown(AnilistAiringStatuses)}
+                    />
+                    <SelectWrapper
+                        parameter="source"
+                        callback={memoizedCallback}
+                        options={transformIntoDropdown(AnilistSourceMaterials)}
                     />
                     <RangedSlider
                         fixed={{

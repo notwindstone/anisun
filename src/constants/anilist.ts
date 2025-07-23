@@ -4,6 +4,8 @@ import { SeasonType } from "@/types/Anime/Queries/Season.type";
 import { FormatType } from "@/types/Anime/Queries/Format.type";
 import { StatusType } from "@/types/Anime/Queries/Status.type";
 import { VariablesType } from "@/types/Anime/Variables.type";
+import { SourceType } from "@/types/Anime/Queries/Source.type";
+import { AnyOption } from "@/constants/app";
 
 // If it's January 1, then ofc there will be no good animes
 // that were released on January 1, so we go back 30 days before.
@@ -30,6 +32,7 @@ export const ParameterType = {
     MediaFormat:     "MediaFormat",
     MediaStatus:     "MediaStatus",
     MediaListStatus: "MediaListStatus",
+    MediaSource:     "MediaSource",
     MediaSort:       "[MediaSort]",
 };
 export const QueryParametersType: Record<keyof VariablesType, string> = {
@@ -52,6 +55,7 @@ export const QueryParametersType: Record<keyof VariablesType, string> = {
     popularity:      ParameterType.Int,
     search:          ParameterType.String,
     sort:            ParameterType.MediaSort,
+    source:          ParameterType.MediaSource,
     userName:        ParameterType.String,
     mediaListStatus: ParameterType.MediaListStatus,
 };
@@ -143,21 +147,66 @@ export const AnilistAiringStatuses: Array<{
 ];
 export const AnilistSourceMaterials: Array<{
     name:  string;
-    value: number;
+    value: SourceType;
 }> = [
-    "Original",
-    "Manga",
-    "Light Novel",
-    "Web Novel",
-    "Novel",
-    "Anime",
-    "Visual Novel",
-    "Video Game",
-    "Doujinshi",
-    "Comic",
-    "Live Action",
-    "Game",
-    "Multimedia Project",
-    "Picture Book",
-    "Other",
+    {
+        name:  "Original",
+        value: "ORIGINAL",
+    },
+    {
+        name:  "Manga",
+        value: "MANGA",
+    },
+    {
+        name:  "Light Novel",
+        value: "LIGHT_NOVEL",
+    },
+    {
+        name:  "Web Novel",
+        value: "WEB_NOVEL",
+    },
+    {
+        name:  "Novel",
+        value: "NOVEL",
+    },
+    {
+        name:  "Anime",
+        value: "ANIME",
+    },
+    {
+        name:  "Visual Novel",
+        value: "VISUAL_NOVEL",
+    },
+    {
+        name:  "Video Game",
+        value: "VIDEO_GAME",
+    },
+    {
+        name:  "Doujinshi",
+        value: "DOUJINSHI",
+    },
+    {
+        name:  "Comic",
+        value: "COMIC",
+    },
+    {
+        name:  "Live Action",
+        value: "LIVE_ACTION",
+    },
+    {
+        name:  "Game",
+        value: "GAME",
+    },
+    {
+        name:  "Multimedia Project",
+        value: "MULTIMEDIA_PROJECT",
+    },
+    {
+        name:  "Picture Book",
+        value: "PICTURE_BOOK",
+    },
+    {
+        name:  "Other",
+        value: "OTHER",
+    },
 ];

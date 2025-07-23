@@ -18,6 +18,11 @@ export const AccessTokenCookieKey = "accessToken";
 export const AccessTokenProviderCookieKey = "tokenProvider";
 export const AccountInfoCookieKey = "accountInfo";
 
+export const AnyOption = {
+    name:  "Any",
+    value: "any",
+};
+
 export const getFooterItems = (dictionaries: DictionariesType) => ({
     description: dictionaries?.footer?.description,
     columns:     [

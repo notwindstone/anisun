@@ -2,6 +2,7 @@ import { SeasonType } from "@/types/Anime/Queries/Season.type";
 import { FormatType } from "@/types/Anime/Queries/Format.type";
 import { StatusType } from "@/types/Anime/Queries/Status.type";
 import { SortType } from "@/types/Anime/Queries/Sort.type";
+import { SourceType } from "@/types/Anime/Queries/Source.type";
 
 export type VariablesType = Partial<{
     type:            "ANIME" | "MANGA";
@@ -23,6 +24,7 @@ export type VariablesType = Partial<{
     averageScore:    number;
     popularity:      number;
     search:          string;
+    source:          SourceType;
     // MediaList
     userName:        string;
     mediaListStatus: "COMPLETED" | "CURRENT" | "DROPPED" | "PAUSED" | "PLANNING" | "REPEATING";

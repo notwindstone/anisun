@@ -41,7 +41,7 @@ export default function Select({
     const [currentSearch, setCurrentSearch] = useState<string>("");
     const [dropdownOpened, setDropdownOpened] = useState(false);
     const [selected, setSelected] = useState<string | Array<string>>(
-        multiple ? [ options[0].value ] : options[0].value,
+        multiple ? [] : options[0].value,
     );
     const foundOptionName = options.find((currentOption) => {
         if (Array.isArray(selected)) {
@@ -100,7 +100,7 @@ export default function Select({
                             ? (
                                 <>
                                     {
-                                        (searchable) && (selected.length > 0) && (
+                                        (searchable) && (
                                             <Badge>
                                                 {selected.length}
                                             </Badge>
