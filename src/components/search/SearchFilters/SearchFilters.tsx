@@ -14,33 +14,7 @@ import { AnyOption } from "@/constants/app";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
-
-type dropdownType = {
-    name:  string;
-    value: string;
-};
-
-const transformIntoDropdown = (
-    data:      Array<string | number | dropdownType>,
-    multiple?: boolean,
-): Array<dropdownType> => {
-    const transformedData = data.map((item) => {
-        if (typeof item === "object") {
-            return item;
-        }
-
-        return {
-            name:  item.toString(),
-            value: item.toString(),
-        };
-    });
-
-    if (!multiple) {
-        transformedData.unshift(AnyOption);
-    }
-
-    return transformedData;
-};
+import transformIntoDropdownOptions from "@/utils/misc/transformIntoDropdownOptions";
 
 export default function SearchFilters() {
     const { genres, tags } = useContextSelector(SearchContext, (value) => ({
@@ -107,7 +81,7 @@ export default function SearchFilters() {
        Genres - MultiSelect (order by alphabet)
        Year - Select
      * Enable Ranged Year - Checkbox
-     * Ranged Year - Slider
+     * Ranged Year - Ranged Slider
      * Sort - Select
        Season - Select
        Format (TV, TV_SHORT, etc.) - MultiSelect
@@ -135,39 +109,39 @@ export default function SearchFilters() {
                             parameter="genre"
                             label="Genres"
                             callback={memoizedCallback}
-                            options={transformIntoDropdown(genres, true)}
+                            options={transformIntoDropdownOptions(genres, true)}
                         />
                         <SelectWrapper
                             parameter="year"
                             label="Year"
                             callback={memoizedCallback}
-                            options={transformIntoDropdown(AnilistQueryYears)}
+                            options={transformIntoDropdownOptions(AnilistQueryYears)}
                         />
                         <SelectWrapper
                             parameter="season"
                             label="Season"
                             callback={memoizedCallback}
-                            options={transformIntoDropdown(AnilistSeasons)}
+                            options={transformIntoDropdownOptions(AnilistSeasons)}
                         />
                         <SelectWrapper
                             parameter="format"
                             label="Format"
                             callback={memoizedCallback}
-                            options={transformIntoDropdown(AnilistFormats)}
+                            options={transformIntoDropdownOptions(AnilistFormats)}
                         />
                         <SelectWrapper
                             additionalClassNames="lg:col-span-2"
                             parameter="status"
                             label="Airing Status"
                             callback={memoizedCallback}
-                            options={transformIntoDropdown(AnilistAiringStatuses)}
+                            options={transformIntoDropdownOptions(AnilistAiringStatuses)}
                         />
                         <SelectWrapper
                             additionalClassNames="lg:col-span-2"
                             parameter="source"
                             label="Source Material"
                             callback={memoizedCallback}
-                            options={transformIntoDropdown(AnilistSourceMaterials)}
+                            options={transformIntoDropdownOptions(AnilistSourceMaterials)}
                         />
                     </div>
                     <Checkbox parameter="lol" />

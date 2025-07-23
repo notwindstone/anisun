@@ -208,7 +208,7 @@ export default function Select({
                                     <span className="text-start break-all leading-none">
                                         {option.name}
                                     </span>
-                                    <Check className={`transition-opacity ${isSelected ? "opacity-100" : "opacity-0"}`} size={16} />
+                                    <Check className={`transition-opacity ${(multiple && isSelected) ? "opacity-100" : "opacity-0"}`} size={16} />
                                 </button>
                             );
                         })
