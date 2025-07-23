@@ -6,9 +6,9 @@ import { useState } from "react";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
 export default function Checkbox({
-    uniqueID,
+    parameter,
 }: {
-    uniqueID: string;
+    parameter: string;
 }) {
     const { base, accent, theme } = useContextSelector(ConfigsContext, (value) => ({
         base:   value.data.colors.base,
@@ -34,7 +34,7 @@ export default function Checkbox({
         <>
             <div className="relative flex gap-2 items-center w-fit">
                 <input
-                    id={uniqueID}
+                    id={parameter}
                     defaultChecked={checked}
                     onClick={() => setChecked((state) => !state)}
                     className="peer cursor-pointer w-6 h-6 transition appearance-none rounded-md"
@@ -46,7 +46,7 @@ export default function Checkbox({
                 />
                 <label
                     className="text-sm cursor-pointer"
-                    htmlFor={uniqueID}
+                    htmlFor={parameter}
                 >
                     Enable this shit
                 </label>

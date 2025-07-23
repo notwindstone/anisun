@@ -8,6 +8,8 @@ export default function SelectWrapper({
     callback,
     searchable,
     multiple,
+    label,
+    additionalClassNames,
 }: {
     parameter: string;
     options:   Array<{
@@ -21,8 +23,10 @@ export default function SelectWrapper({
         parameter: string;
         value:     string;
     }) => void;
-    searchable?: boolean;
-    multiple?:   boolean;
+    searchable?:           boolean;
+    multiple?:             boolean;
+    label:                 string;
+    additionalClassNames?: string;
 }) {
     const isProbablyDesktop = useMediaQuery('(min-width: 640px)');
 
@@ -37,6 +41,8 @@ export default function SelectWrapper({
                 callback={callback}
                 searchable={searchable}
                 multiple={multiple}
+                label={label}
+                additionalClassNames={additionalClassNames}
             />
         );
     }
@@ -46,6 +52,8 @@ export default function SelectWrapper({
             parameter={parameter}
             options={options}
             callback={callback}
+            label={label}
+            additionalClassNames={additionalClassNames}
         />
     );
 }

@@ -14,6 +14,8 @@ export default function Select({
     callback,
     searchable,
     multiple,
+    label,
+    additionalClassNames,
 }: {
     parameter: string;
     options:   Array<{
@@ -27,8 +29,10 @@ export default function Select({
         parameter: string;
         value:     string;
     }) => void;
-    searchable?: boolean;
-    multiple?:   boolean;
+    searchable?:           boolean;
+    multiple?:             boolean;
+    label:                 string;
+    additionalClassNames?: string;
 }) {
     const { theme, base, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -61,13 +65,13 @@ export default function Select({
     }, [callback, selected, parameter]);
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className={`flex flex-col gap-2 ${additionalClassNames}`}>
             <p className="text-sm">
-                Select an option
+                {label}
             </p>
             <div
                 ref={dropdownReference}
-                className="group relative rounded-md w-48 flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
+                className="group relative rounded-md w-full flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
                 style={{
                     backgroundColor: parseTailwindColor({
                         color: base,
@@ -166,7 +170,7 @@ export default function Select({
                             return (
                                 <button
                                     key={option.value}
-                                    className="cursor-pointer flex justify-between items-center w-full text-lg sm:text-sm px-2 py-1 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)] max-sm:focus:bg-[theme(colors.black/.08)] dark:max-sm:focus:bg-[theme(colors.white/.08)]"
+                                    className="cursor-pointer flex justify-between items-center w-full text-lg sm:text-sm p-2 transition-colors rounded-md bg-transparent hover:bg-[theme(colors.black/.08)] dark:hover:bg-[theme(colors.white/.08)] max-sm:focus:bg-[theme(colors.black/.08)] dark:max-sm:focus:bg-[theme(colors.white/.08)]"
                                     onClick={() => {
                                         setSelected((state) => {
                                             if (!multiple) {
@@ -201,7 +205,7 @@ export default function Select({
                                         },
                                     } : {}) }
                                 >
-                                    <span>
+                                    <span className="text-start break-all leading-none">
                                         {option.name}
                                     </span>
                                     <Check className={`transition-opacity ${isSelected ? "opacity-100" : "opacity-0"}`} size={16} />

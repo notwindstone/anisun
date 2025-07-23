@@ -8,6 +8,8 @@ export default function NativeSelect({
     parameter,
     options,
     callback,
+    label,
+    additionalClassNames,
 }: {
     parameter: string;
     options:   Array<{
@@ -21,6 +23,8 @@ export default function NativeSelect({
         parameter:  string;
         value: string;
     }) => void,
+    label:                 string;
+    additionalClassNames?: string;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -30,12 +34,12 @@ export default function NativeSelect({
     });
 
     return (
-        <div className="flex flex-col gap-2">
+        <div className={`flex flex-col gap-2 ${additionalClassNames}`}>
             <p className="text-sm">
-                Select an option
+                {label}
             </p>
             <div
-                className="group relative rounded-md w-fit flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
+                className="group relative rounded-md w-full flex gap-2 flex-nowrap items-center transition ring-2 ring-transparent dark:focus-within:ring-white focus-within:ring-black"
                 style={{
                     backgroundColor: parseTailwindColor({
                         color: base,
@@ -46,7 +50,7 @@ export default function NativeSelect({
                 }}
             >
                 <select
-                    className="cursor-pointer min-w-48 pl-2 pr-8 h-10 flex bg-inherit rounded-md appearance-none text-sm outline-none"
+                    className="cursor-pointer w-full pl-2 pr-8 h-10 flex bg-inherit rounded-md appearance-none text-sm outline-none"
                     onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                         const value = event.target.value;
 

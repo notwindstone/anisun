@@ -5,7 +5,6 @@ import { FormatType } from "@/types/Anime/Queries/Format.type";
 import { StatusType } from "@/types/Anime/Queries/Status.type";
 import { VariablesType } from "@/types/Anime/Variables.type";
 import { SourceType } from "@/types/Anime/Queries/Source.type";
-import { AnyOption } from "@/constants/app";
 
 // If it's January 1, then ofc there will be no good animes
 // that were released on January 1, so we go back 30 days before.

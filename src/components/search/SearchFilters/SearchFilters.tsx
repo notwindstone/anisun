@@ -109,39 +109,49 @@ export default function SearchFilters() {
         () => (
             <>
                 <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4">
-                    <Checkbox uniqueID="lol" />
-                    <SelectWrapper
-                        multiple
-                        searchable
-                        parameter="genre"
-                        callback={memoizedCallback}
-                        options={transformIntoDropdown(genres, true)}
-                    />
-                    <SelectWrapper
-                        parameter="year"
-                        callback={memoizedCallback}
-                        options={transformIntoDropdown(AnilistQueryYears)}
-                    />
-                    <SelectWrapper
-                        parameter="season"
-                        callback={memoizedCallback}
-                        options={transformIntoDropdown(AnilistSeasons)}
-                    />
-                    <SelectWrapper
-                        parameter="format"
-                        callback={memoizedCallback}
-                        options={transformIntoDropdown(AnilistFormats)}
-                    />
-                    <SelectWrapper
-                        parameter="status"
-                        callback={memoizedCallback}
-                        options={transformIntoDropdown(AnilistAiringStatuses)}
-                    />
-                    <SelectWrapper
-                        parameter="source"
-                        callback={memoizedCallback}
-                        options={transformIntoDropdown(AnilistSourceMaterials)}
-                    />
+                    <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
+                        <SelectWrapper
+                            multiple
+                            searchable
+                            parameter="genre"
+                            label="Genres"
+                            callback={memoizedCallback}
+                            options={transformIntoDropdown(genres, true)}
+                        />
+                        <SelectWrapper
+                            parameter="year"
+                            label="Year"
+                            callback={memoizedCallback}
+                            options={transformIntoDropdown(AnilistQueryYears)}
+                        />
+                        <SelectWrapper
+                            parameter="season"
+                            label="Season"
+                            callback={memoizedCallback}
+                            options={transformIntoDropdown(AnilistSeasons)}
+                        />
+                        <SelectWrapper
+                            parameter="format"
+                            label="Format"
+                            callback={memoizedCallback}
+                            options={transformIntoDropdown(AnilistFormats)}
+                        />
+                        <SelectWrapper
+                            additionalClassNames="lg:col-span-2"
+                            parameter="status"
+                            label="Airing Status"
+                            callback={memoizedCallback}
+                            options={transformIntoDropdown(AnilistAiringStatuses)}
+                        />
+                        <SelectWrapper
+                            additionalClassNames="lg:col-span-2"
+                            parameter="source"
+                            label="Source Material"
+                            callback={memoizedCallback}
+                            options={transformIntoDropdown(AnilistSourceMaterials)}
+                        />
+                    </div>
+                    <Checkbox parameter="lol" />
                     <RangedSlider
                         fixed={{
                             min:  0,
