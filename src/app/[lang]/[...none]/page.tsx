@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
-import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import { usePathname } from "next/navigation";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";

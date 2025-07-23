@@ -1,8 +1,8 @@
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { SearchIcon } from "lucide-react";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { useRef, useState } from "react";
 import { useClickOutside } from "@mantine/hooks";
 import { StepsType } from "@/types/TailwindCSS/Steps.type";

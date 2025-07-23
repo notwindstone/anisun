@@ -1,14 +1,14 @@
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { useQuery } from "@tanstack/react-query";
 import BrowsingExtension from "@/components/extensions/BrowsingExtension/BrowsingExtension";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
 import Input from "@/components/base/Input/Input";
 import { useDebouncedState } from "@mantine/hooks";
 import { useEffect, useLayoutEffect, useState } from "react";
-import simpleMatch from "@/utils/misc/simpleMatch";
+import simpleMatch from "@/lib/misc/simpleMatch";
 
 export default function ExtensionsBrowser() {
     const { data, isPending, error } = useQuery({

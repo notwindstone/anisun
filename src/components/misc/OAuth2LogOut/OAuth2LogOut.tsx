@@ -5,7 +5,7 @@ import { LogOut } from "lucide-react";
 import { deleteCookie } from "@/lib/actions/cookies";
 import { AccessTokenCookieKey } from "@/constants/app";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { useState } from "react";
 
 export default function OAuth2LogOut() {

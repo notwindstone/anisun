@@ -1,4 +1,4 @@
-import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import getGraphQLResponse from "@/lib/misc/getGraphQLResponse";
 import { GraphQLClient } from "@/lib/graphql/client";
 import { RemoteRoutes } from "@/constants/routes";
 import { AnimeType } from "@/types/Anime/Anime.type";

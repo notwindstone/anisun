@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ConfigsProvider } from "@/utils/providers/ConfigsProvider";
+import { ConfigsProvider } from "@/lib/providers/ConfigsProvider";
 import { getCookiesArray } from "@/lib/actions/cookies";
-import TanstackQueryProviders from "@/utils/providers/TanstackQueryProviders/TanstackQueryProviders";
+import TanstackQueryProviders from "@/lib/providers/TanstackQueryProviders";
 import { i18n, type Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
 import { CookieConfigKey, InitialConfig, PlaceholderAccount } from "@/constants/configs";
-import readCookiesData from "@/utils/configs/readCookiesData";
+import readCookiesData from "@/lib/configs/readCookiesData";
 import AppWrapper from "@/components/layout/AppWrapper/AppWrapper";
 import { AccountInfoCookieKey, AppName } from "@/constants/app";
 import { cookies, headers } from "next/headers";
@@ -15,14 +15,14 @@ import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
 import { UserType } from "@/types/OAuth2/User.type";
 import Footer from "@/components/layout/Footer/Footer";
 import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotify";
-import { SidebarConfigProvider } from "@/utils/providers/SidebarConfigProvider";
-import getSafeAccountData from "@/utils/configs/getSafeAccountData";
-import { ExtensionsProvider } from "@/utils/providers/ExtensionsProvider";
+import { SidebarConfigProvider } from "@/lib/providers/SidebarConfigProvider";
+import getSafeAccountData from "@/lib/configs/getSafeAccountData";
+import { ExtensionsProvider } from "@/lib/providers/ExtensionsProvider";
 import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSSExtensionsLoader";
 import HistoryLogger from "@/components/misc/HistoryLogger/HistoryLogger";
 import MobileNavbarWrapper from "@/components/layout/MobileNavbarWrapper/MobileNavbarWrapper";
 import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
-import handleRequests from "@/utils/misc/handleRequests";
+import handleRequests from "@/lib/misc/handleRequests";
 import UnsupportedBrowserNotify from "@/components/misc/UnsupportedBrowserNotify/UnsupportedBrowserNotify";
 
 const geistSans = Geist({

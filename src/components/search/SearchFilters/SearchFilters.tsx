@@ -2,13 +2,13 @@ import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useDebouncedValue } from "@mantine/hooks";
 import { useContextSelector } from "use-context-selector";
-import { SearchContext } from "@/utils/providers/SearchProvider";
+import { SearchContext } from "@/lib/providers/SearchProvider";
 import { CheckboxFilters, getSelectableFilters, SliderFilters } from "@/constants/anilist";
 import { AnyOption } from "@/constants/app";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
-import transformIntoDropdownOptions from "@/utils/misc/transformIntoDropdownOptions";
+import transformIntoDropdownOptions from "@/lib/misc/transformIntoDropdownOptions";
 
 export default function SearchFilters() {
     const { genres, tags } = useContextSelector(SearchContext, (value) => ({

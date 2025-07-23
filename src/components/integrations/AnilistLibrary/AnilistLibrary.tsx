@@ -6,17 +6,17 @@ import SmallCard from "@/components/layout/SmallCard/SmallCard";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/base/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
 import SegmentedControl from "@/components/base/SegmentedControl/SegmentedControl";
 import { useDebouncedState } from "@mantine/hooks";
 import Input from "@/components/base/Input/Input";
-import getCurrentAnimeChunk from "@/utils/misc/getCurrentAnimeChunk";
+import getCurrentAnimeChunk from "@/lib/misc/getCurrentAnimeChunk";
 import AnilistUsernamesDropdown from "@/components/integrations/AnilistUsernamesDropdown/AnilistUsernamesDropdown";
 import { PageRoutes } from "@/constants/routes";
-import useFuturePathname from "@/utils/stores/useFuturePathname";
+import useFuturePathname from "@/stores/useFuturePathname";
 
 const mediaListStatuses: Array<string> = ["Loading", "user", "lists.", "Please", "wait!"];
 

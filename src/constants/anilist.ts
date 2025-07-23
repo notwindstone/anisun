@@ -1,4 +1,4 @@
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { getRelativeDate } from "@/lib/misc/getRelativeDate";
 import { QueryType } from "@/types/Anime/Query.type";
 import { SeasonType } from "@/types/Anime/Queries/Season.type";
 import { FormatType } from "@/types/Anime/Queries/Format.type";

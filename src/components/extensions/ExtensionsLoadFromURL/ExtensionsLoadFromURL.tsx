@@ -1,13 +1,13 @@
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Button from "@/components/base/Button/Button";
-import getSafeExtensionsValues from "@/utils/configs/getSafeExtensionsValues";
+import getSafeExtensionsValues from "@/lib/configs/getSafeExtensionsValues";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
 import Badge from "@/components/base/Badge/Badge";
 import { useRef, useState } from "react";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 
 export default function ExtensionsLoadFromURL() {
     const { base, theme } = useContextSelector(ConfigsContext, (value) => {

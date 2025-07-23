@@ -4,7 +4,7 @@ import { useMediaQuery } from "@mantine/hooks";
 import { UserType } from "@/types/OAuth2/User.type";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import Sidebar from "@/components/layout/Sidebar/Sidebar";
 
 export default function SidebarWrapper({

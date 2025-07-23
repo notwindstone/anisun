@@ -5,11 +5,11 @@ import { useEffect } from "react";
 import { HistoryEntriesLimit, HistoryLocalStorageKey } from "@/constants/app";
 import { useQuery } from "@tanstack/react-query";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import getAnimePageQueryKey from "@/utils/misc/getAnimePageQueryKey";
-import getRouteState from "@/utils/misc/getRouteStates";
-import useQueriesStore from "@/utils/stores/useQueriesStore";
+import getAnimePageQueryKey from "@/lib/misc/getAnimePageQueryKey";
+import getRouteState from "@/lib/misc/getRouteStates";
+import useQueriesStore from "@/stores/useQueriesStore";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 
 export default function HistoryLogger(): React.ReactNode {
     const loggerEnabled = useContextSelector(ConfigsContext, (value) => value.data.other.historyEnabled);

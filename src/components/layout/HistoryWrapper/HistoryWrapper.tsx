@@ -4,7 +4,7 @@ import { HistoryLocalStorageKey } from "@/constants/app";
 import HistoryLoader from "@/components/layout/HistoryLoader/HistoryLoader";
 import { useQuery } from "@tanstack/react-query";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 
 export default function HistoryWrapper(): React.ReactNode {
     const chunkSize = useContextSelector(ConfigsContext, (value) => value.data.library.historyEntriesOnThePage);

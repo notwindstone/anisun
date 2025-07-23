@@ -1,5 +1,5 @@
 import { AnimeType } from "@/types/Anime/Anime.type";
-import simpleMatch from "@/utils/misc/simpleMatch";
+import simpleMatch from "@/lib/misc/simpleMatch";
 
 export default function getCurrentAnimeChunk({
     data,

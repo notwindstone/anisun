@@ -2,8 +2,8 @@
 
 import { useCallback, useMemo, useState } from "react";
 import { ListFilter } from "lucide-react";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import { SearchContext } from "@/utils/providers/SearchProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import { SearchContext } from "@/lib/providers/SearchProvider";
 import { useContextSelector } from "use-context-selector";
 import { useSearchParams } from "next/navigation";
 import Modal from "@/components/base/Modal/Modal";

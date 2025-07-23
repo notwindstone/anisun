@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useState } from "react";
 import { createContext } from "use-context-selector";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { ParsedConfigType } from "@/types/Configs/ParsedConfig.type";
-import getSafeConfigValues from "@/utils/configs/getSafeConfigValues";
+import getSafeConfigValues from "@/lib/configs/getSafeConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { InitialConfig } from "@/constants/configs";
 

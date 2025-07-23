@@ -1,9 +1,9 @@
-import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import getGraphQLResponse from "@/lib/misc/getGraphQLResponse";
 import { GraphQLClient } from "@/lib/graphql/client";
 import { CurrentAnimeYear, GeneralFields } from "@/constants/anilist";
 import { RemoteRoutes } from "@/constants/routes";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { getNextSeason } from "@/utils/misc/getNextSeason";
+import { getNextSeason } from "@/lib/misc/getNextSeason";
 
 const GetHomePageTitles = (options?: Partial<Request> | undefined) => getGraphQLResponse<AnimeType>({
     url:     RemoteRoutes.Anilist.GraphQL.Root,

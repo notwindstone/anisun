@@ -4,7 +4,7 @@ import { cookies } from "next/headers";
 import { getCookie } from "@/lib/actions/cookies";
 import { AccessTokenCookieKey } from "@/constants/app";
 import OAuth2LogOut from "@/components/misc/OAuth2LogOut/OAuth2LogOut";
-import translate from "@/utils/misc/translate";
+import translate from "@/lib/misc/translate";
 import { Locale } from "@/i18n-config";
 
 type entriesType = Array<keyof typeof OAuth2Routes>;

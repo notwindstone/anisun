@@ -1,4 +1,4 @@
-import { SearchProvider } from "@/utils/providers/SearchProvider";
+import { SearchProvider } from "@/lib/providers/SearchProvider";
 import AdvancedSearchBar from "@/components/search/AdvancedSearchBar/AdvancedSearchBar";
 import ClientFetchWithSearchWrapper from "@/components/fetch/ClientFetchWrapper/ClientFetchWithSearchWrapper";
 

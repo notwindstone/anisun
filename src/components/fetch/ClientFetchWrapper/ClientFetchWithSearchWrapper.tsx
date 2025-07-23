@@ -1,7 +1,7 @@
 "use client";
 
 import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
-import { SearchContext } from "@/utils/providers/SearchProvider";
+import { SearchContext } from "@/lib/providers/SearchProvider";
 import Cards from "@/components/layout/Cards/Cards";
 import { useContextSelector } from "use-context-selector";
 

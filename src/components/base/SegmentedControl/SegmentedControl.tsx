@@ -1,8 +1,8 @@
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import React, { createRef, Dispatch, SetStateAction, useEffect, useMemo, useState } from "react";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 
 export default function SegmentedControl({
     list,

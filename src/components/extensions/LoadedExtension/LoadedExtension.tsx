@@ -4,12 +4,12 @@ import { Blocks, Ellipsis, Palette, ToggleLeft, ToggleRight, X } from "lucide-re
 import Link from "next/link";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
 import { useContextSelector } from "use-context-selector";
-import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import { useState } from "react";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 
 export default function LoadedExtension({
     extension,

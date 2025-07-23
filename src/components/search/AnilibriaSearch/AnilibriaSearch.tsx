@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef } from "react";
-import { AnilibriaSearchContext } from "@/utils/providers/AnilibriaSearchProvider";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import { AnilibriaSearchContext } from "@/lib/providers/AnilibriaSearchProvider";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { SearchIcon } from "lucide-react";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { useContextSelector } from "use-context-selector";
 
 export default function AnilibriaSearch() {

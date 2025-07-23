@@ -5,7 +5,7 @@ import { NextRequest } from "next/server";
 import { PageRoutes } from "@/constants/routes";
 import { ErrorStrings } from "@/constants/errors";
 import { setCookie } from "@/lib/actions/cookies";
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { getRelativeDate } from "@/lib/misc/getRelativeDate";
 import { cookies } from "next/headers";
 import { AccessTokenCookieKey, AccessTokenProviderCookieKey, AccountInfoCookieKey } from "@/constants/app";
 import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";

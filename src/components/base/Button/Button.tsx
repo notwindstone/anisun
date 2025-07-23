@@ -1,9 +1,9 @@
 "use client";
 
 import { ButtonHTMLAttributes } from "react";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { ButtonStylesType } from "@/types/Appearance/ButtonStyles.type";
-import getButtonColor from "@/utils/appearance/getButtonColor";
+import getButtonColor from "@/lib/appearance/getButtonColor";
 import { useContextSelector } from "use-context-selector";
 
 export default function Button({

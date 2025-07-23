@@ -1,7 +1,7 @@
 import * as arctic from "arctic";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { AnilistProvider } from "@/utils/providers/OAuth2Providers";
+import { AnilistProvider } from "@/lib/providers/OAuth2Providers";
 
 export async function GET(): Promise<Response> {
     const cookieStore = await cookies();

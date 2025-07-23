@@ -6,7 +6,7 @@ import { i18n } from "./i18n-config";
 import { match as matchLocale } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import { CookieLocaleKey, DefaultLocale } from "@/constants/localization";
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { getRelativeDate } from "@/lib/misc/getRelativeDate";
 
 function getLocale(request: NextRequest): string | undefined {
     const locales: string[] = i18n.locales;

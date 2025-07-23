@@ -6,10 +6,10 @@ import {
     DefaultUsername,
 } from "@/constants/app";
 import { cookies } from "next/headers";
-import getAccessTokenProvider from "@/utils/oauth2/getAccessTokenProvider";
-import readCookiesData from "@/utils/configs/readCookiesData";
+import getAccessTokenProvider from "@/lib/oauth2/getAccessTokenProvider";
+import readCookiesData from "@/lib/configs/readCookiesData";
 import { UserType } from "@/types/OAuth2/User.type";
-import getSafeAccountData from "@/utils/configs/getSafeAccountData";
+import getSafeAccountData from "@/lib/configs/getSafeAccountData";
 import AnilistLibraryWrapper from "@/components/integrations/AnilistLibraryWrapper/AnilistLibraryWrapper";
 import { PlaceholderAccount } from "@/constants/configs";
 

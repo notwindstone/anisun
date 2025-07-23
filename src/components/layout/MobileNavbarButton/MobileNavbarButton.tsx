@@ -1,4 +1,4 @@
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
 import React, {
@@ -9,10 +9,10 @@ import React, {
     startTransition,
 } from "react";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
-import useFuturePathname from "@/utils/stores/useFuturePathname";
-import useQueriesStore from "@/utils/stores/useQueriesStore";
+import useFuturePathname from "@/stores/useFuturePathname";
+import useQueriesStore from "@/stores/useQueriesStore";
 
 const navbarBackground = {
     opened: {

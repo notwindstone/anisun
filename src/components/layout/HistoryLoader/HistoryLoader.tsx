@@ -5,7 +5,7 @@ import GridCards from "@/components/layout/GridCards/GridCards";
 import SmallCard from "@/components/layout/SmallCard/SmallCard";
 import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSmallCard";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/base/Pagination/Pagination";
 

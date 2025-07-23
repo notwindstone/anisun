@@ -1,6 +1,6 @@
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
 import { StepsType } from "@/types/TailwindCSS/Steps.type";
-import getSafeTailwindColors from "@/utils/appearance/getSafeTailwindColors";
+import getSafeTailwindColors from "@/lib/appearance/getSafeTailwindColors";
 
 export default function parseTailwindColor({
     color,

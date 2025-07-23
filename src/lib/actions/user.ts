@@ -1,7 +1,7 @@
 "use server";
 
 import { UserType } from "@/types/OAuth2/User.type";
-import { getUniversalUser } from "@/utils/oauth2/getUniversalUser";
+import { getUniversalUser } from "@/lib/oauth2/getUniversalUser";
 import { OAuth2Routes } from "@/constants/routes";
 import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 

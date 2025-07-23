@@ -3,7 +3,7 @@
 import { useMediaQuery } from "@mantine/hooks";
 import { getNavbarItems } from "@/constants/navbar";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import MobileNavbar from "@/components/layout/MobileNavbar/MobileNavbar";
 import { UserType } from "@/types/OAuth2/User.type";
 

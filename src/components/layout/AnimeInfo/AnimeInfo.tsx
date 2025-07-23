@@ -1,7 +1,7 @@
 "use client";
 
 import { useContextSelector } from "use-context-selector";
-import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
+import { ClientFetchDataContext } from "@/lib/providers/ClientFetchDataProvider";
 import { useEffect, useState } from "react";
 
 export default function AnimeInfo() {

@@ -1,6 +1,6 @@
 import { setCookie } from "@/lib/actions/cookies";
 import { CookieConfigKey } from "@/constants/configs";
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { getRelativeDate } from "@/lib/misc/getRelativeDate";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
 import { setCookie as setCookiesClient } from 'cookies-next/client';
 

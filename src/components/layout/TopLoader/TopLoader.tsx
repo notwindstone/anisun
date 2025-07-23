@@ -1,8 +1,8 @@
 "use client";
 
 import NextTopLoader from "nextjs-toploader";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { useContextSelector } from "use-context-selector";
 
 export default function TopLoader() {

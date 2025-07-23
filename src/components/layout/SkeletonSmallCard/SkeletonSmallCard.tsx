@@ -1,5 +1,5 @@
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 
 const placeholderArray = [ "w-18", "w-8" ];

@@ -1,10 +1,10 @@
 "use client";
 
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import LoadedExtension from "@/components/extensions/LoadedExtension/LoadedExtension";
 import ExtensionsLoadFromURL from "@/components/extensions/ExtensionsLoadFromURL/ExtensionsLoadFromURL";
 import ExtensionsBrowser from "@/components/extensions/ExtensionsBrowser/ExtensionsBrowser";

@@ -5,7 +5,7 @@ import { AnimeLRUCache, MiscLRUCache } from "@/lib/cache/LRUCaches";
 import { ServerFetchErrorCount, ServerFetchTimeout } from "@/constants/app";
 import { Getters } from "@/lib/anime/getters";
 import React from "react";
-import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import getGraphQLResponse from "@/lib/misc/getGraphQLResponse";
 
 // Because of the cache getting data requires just 1-3ms,
 // and the anime data will load instantly on the client.

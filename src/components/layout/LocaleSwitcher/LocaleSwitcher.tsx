@@ -4,11 +4,11 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import { i18n, type Locale } from "@/i18n-config";
 import { setCookie } from "@/lib/actions/cookies";
-import { getRelativeDate } from "@/utils/misc/getRelativeDate";
+import { getRelativeDate } from "@/lib/misc/getRelativeDate";
 import { CookieLocaleKey, LocaleItems } from "@/constants/localization";
 import Button from "@/components/base/Button/Button";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 
 const handleLocaleSwitch = async (locale: Locale) => {
     await setCookie({

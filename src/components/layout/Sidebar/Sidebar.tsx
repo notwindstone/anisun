@@ -1,21 +1,21 @@
 "use client";
 
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey, SidebarRightPosition } from "@/constants/configs";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import Button from "@/components/base/Button/Button";
 import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
-import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
+import { setConfigValuesClient } from "@/lib/configs/setConfigValues";
 import AnimatedGradientText from "@/components/base/AnimatedGradientText/AnimatedGradientText";
 import { AppName } from "@/constants/app";
 import Link from "next/link";
 import Favicon from "@/components/base/Favicon/Favicon";
 import { useContextSelector } from "use-context-selector";
-import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
+import { SidebarConfigContext } from "@/lib/providers/SidebarConfigProvider";
 import { getSideBarLinks } from "@/constants/sidebar";
 import { usePathname } from "next/navigation";
-import useFuturePathname from "@/utils/stores/useFuturePathname";
-import useQueriesStore from "@/utils/stores/useQueriesStore";
+import useFuturePathname from "@/stores/useFuturePathname";
+import useQueriesStore from "@/stores/useQueriesStore";
 
 const icons: {
     [key: string]: {

@@ -1,9 +1,9 @@
 "use client";
 
 import { DarkThemeKey } from "@/constants/configs";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { useEffect, useMemo, useState } from "react";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { getNavbarItems } from "@/constants/navbar";
 import React from "react";
 import { usePathname } from "next/navigation";

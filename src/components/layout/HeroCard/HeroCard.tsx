@@ -1,14 +1,14 @@
 "use client";
 
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Link from "next/link";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
+import { ClientFetchDataContext } from "@/lib/providers/ClientFetchDataProvider";
 import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";
-import translate from "@/utils/misc/translate";
+import translate from "@/lib/misc/translate";
 import { useContextSelector } from "use-context-selector";
 import HeroCardImage from "@/components/layout/HeroCardImage/HeroCardImage";
 

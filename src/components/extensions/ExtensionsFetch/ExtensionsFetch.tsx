@@ -2,7 +2,7 @@
 
 import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
 import { useContextSelector } from "use-context-selector";
-import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import Link from "next/link";
 
 export default function ExtensionsFetch({

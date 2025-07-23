@@ -2,12 +2,12 @@
 
 import { BaseColorsType } from "@/types/TailwindCSS/BaseColors.type";
 import { AccentColorsType } from "@/types/TailwindCSS/AccentColors.type";
-import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
+import { setConfigValuesClient } from "@/lib/configs/setConfigValues";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { AccentColors, BaseColors } from "@/constants/tailwind";
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import Button from "@/components/base/Button/Button";
 import { Check } from "lucide-react";
 import { useContextSelector } from "use-context-selector";

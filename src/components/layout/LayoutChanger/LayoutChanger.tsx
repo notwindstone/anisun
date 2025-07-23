@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { SidebarRightPosition } from "@/constants/configs";
 import { ArrowLeftRight } from "lucide-react";
 import { SafeConfigType } from "@/types/Configs/SafeConfigType.type";
-import { setConfigValuesClient } from "@/utils/configs/setConfigValues";
+import { setConfigValuesClient } from "@/lib/configs/setConfigValues";
 import Button from "@/components/base/Button/Button";
 import { useContextSelector } from "use-context-selector";
-import { SidebarConfigContext } from "@/utils/providers/SidebarConfigProvider";
+import { SidebarConfigContext } from "@/lib/providers/SidebarConfigProvider";
 
 function switchLayout({
     currentConfig,

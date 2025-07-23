@@ -3,8 +3,8 @@ import { QueryType } from "@/types/Anime/Query.type";
 import { VariablesType } from "@/types/Anime/Variables.type";
 import { ParameterType, QueryParametersType } from "@/constants/anilist";
 import IsKeyInObject from "@/types/Utils/IsKeyInObject";
-import capitalizeWord from "@/utils/misc/capitalizeWord";
-import formatArrayToGraphQLFields from "@/utils/misc/formatArrayToGraphQLFields";
+import capitalizeWord from "@/lib/misc/capitalizeWord";
+import formatArrayToGraphQLFields from "@/lib/misc/formatArrayToGraphQLFields";
 
 export const GraphQLClient = {
     Anilist: ({

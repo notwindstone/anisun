@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import { useDebouncedValue } from "@mantine/hooks";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 
 export default function RangedSlider({
     fixed,

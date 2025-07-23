@@ -2,7 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { Getters } from "@/lib/anime/getters";
-import { ClientFetchDataProvider } from "@/utils/providers/ClientFetchDataProvider";
+import { ClientFetchDataProvider } from "@/lib/providers/ClientFetchDataProvider";
 import { SearchType } from "@/types/Anime/Search.type";
 
 export default function ClientFetch({

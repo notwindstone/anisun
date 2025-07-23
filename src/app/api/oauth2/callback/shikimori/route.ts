@@ -1,6 +1,6 @@
 import { NextRequest } from "next/server";
 import { redirect } from "next/navigation";
-import { ShikimoriProvider } from "@/utils/providers/OAuth2Providers";
+import { ShikimoriProvider } from "@/lib/providers/OAuth2Providers";
 import { OAuth2Routes } from "@/constants/routes";
 import { handleCallback } from "@/lib/oauth2/handleCallback";
 

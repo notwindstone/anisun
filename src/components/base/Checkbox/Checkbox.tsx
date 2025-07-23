@@ -1,9 +1,9 @@
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import { Check } from "lucide-react";
 import { useState } from "react";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 
 export default function Checkbox({
     parameter,

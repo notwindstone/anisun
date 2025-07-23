@@ -1,6 +1,6 @@
 import QuickLRU from "quick-lru";
 import { AnimeType } from "@/types/Anime/Anime.type";
-import { getTimeDifference } from "@/utils/misc/getTimeDifference";
+import { getTimeDifference } from "@/lib/misc/getTimeDifference";
 
 // in-memory cache doesn't work in api routes tho
 // refer to https://github.com/vercel/next.js/discussions/59509 (no i'm not implementing that)

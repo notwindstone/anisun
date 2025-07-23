@@ -1,4 +1,4 @@
-import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import getGraphQLResponse from "@/lib/misc/getGraphQLResponse";
 import SkeletonHeroCard from "@/components/layout/SkeletonHeroCard/SkeletonHeroCard";
 import SearchedAnimes from "@/components/search/SearchedAnimes/SearchedAnimes";
 import { HomePageItems } from "@/constants/translated";

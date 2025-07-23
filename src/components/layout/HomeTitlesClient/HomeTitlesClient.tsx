@@ -1,10 +1,10 @@
 "use client";
 
 import { useContextSelector } from "use-context-selector";
-import { ClientFetchDataContext } from "@/utils/providers/ClientFetchDataProvider";
-import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import { ClientFetchDataContext } from "@/lib/providers/ClientFetchDataProvider";
+import getGraphQLResponse from "@/lib/misc/getGraphQLResponse";
 import HomeTitles from "@/components/layout/HomeTitles/HomeTitles";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { Locale } from "@/i18n-config";
 
 export default function HomeTitlesClient({

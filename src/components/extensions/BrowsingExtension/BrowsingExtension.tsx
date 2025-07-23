@@ -2,11 +2,11 @@ import Button from "@/components/base/Button/Button";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
 import { useContextSelector } from "use-context-selector";
-import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
 import { ArrowDownToLine, Blocks, Palette } from "lucide-react";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 
 export default function BrowsingExtension({

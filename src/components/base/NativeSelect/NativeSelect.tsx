@@ -1,8 +1,8 @@
 import { ChevronDown } from "lucide-react";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
-import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
+import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 
 export default function NativeSelect({
     parameter,

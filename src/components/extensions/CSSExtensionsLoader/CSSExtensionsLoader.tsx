@@ -1,7 +1,7 @@
 "use client";
 
 import { useContextSelector } from "use-context-selector";
-import { ExtensionsContext } from "@/utils/providers/ExtensionsProvider";
+import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import { useEffect, useState } from "react";
 import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
 import { usePathname } from "next/navigation";

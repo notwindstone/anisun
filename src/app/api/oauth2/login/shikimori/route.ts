@@ -1,7 +1,7 @@
 import * as arctic from "arctic";
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
-import { ShikimoriProvider } from "@/utils/providers/OAuth2Providers";
+import { ShikimoriProvider } from "@/lib/providers/OAuth2Providers";
 
 export async function GET(): Promise<Response> {
     const cookieStore = await cookies();

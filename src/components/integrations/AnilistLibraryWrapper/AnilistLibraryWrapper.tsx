@@ -2,16 +2,16 @@
 
 import { OAuth2ProvidersType } from "@/types/OAuth2/OAuth2Providers.type";
 import { useQuery } from "@tanstack/react-query";
-import getGraphQLResponse from "@/utils/misc/getGraphQLResponse";
+import getGraphQLResponse from "@/lib/misc/getGraphQLResponse";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import { RemoteRoutes } from "@/constants/routes";
 import { GraphQLClient } from "@/lib/graphql/client";
 import AnilistLibrary from "@/components/integrations/AnilistLibrary/AnilistLibrary";
 import { useSearchParams } from "next/navigation";
 import { useMemo } from "react";
-import divideMediaListCollectionToChunks from "@/utils/misc/divideMediaListCollectionToChunks";
+import divideMediaListCollectionToChunks from "@/lib/misc/divideMediaListCollectionToChunks";
 import { useContextSelector } from "use-context-selector";
-import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
+import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 
 export default function AnilistLibraryWrapper({
     username,

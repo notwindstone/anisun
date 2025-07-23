@@ -4,7 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { createContext } from "use-context-selector";
 import { ExtensionType } from "@/types/Extensions/Extension.type";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
-import getSafeExtensionsValues from "@/utils/configs/getSafeExtensionsValues";
+import getSafeExtensionsValues from "@/lib/configs/getSafeExtensionsValues";
 
 export const ExtensionsContext = createContext<{
     data: Array<ExtensionType> | undefined;
