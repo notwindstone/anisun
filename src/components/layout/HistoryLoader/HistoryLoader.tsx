@@ -7,7 +7,7 @@ import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSma
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
-import Pagination from "@/components/layout/Pagination/Pagination";
+import Pagination from "@/components/base/Pagination/Pagination";
 
 export default function HistoryLoader({
     passedChunkSize,

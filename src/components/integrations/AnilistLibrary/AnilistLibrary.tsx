@@ -8,9 +8,9 @@ import SkeletonSmallCard from "@/components/layout/SkeletonSmallCard/SkeletonSma
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
-import Pagination from "@/components/layout/Pagination/Pagination";
+import Pagination from "@/components/base/Pagination/Pagination";
 import { useSearchParams } from "next/navigation";
-import SegmentedControl from "@/components/layout/SegmentedControl/SegmentedControl";
+import SegmentedControl from "@/components/base/SegmentedControl/SegmentedControl";
 import { useDebouncedState } from "@mantine/hooks";
 import Input from "@/components/base/Input/Input";
 import getCurrentAnimeChunk from "@/utils/misc/getCurrentAnimeChunk";
