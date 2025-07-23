@@ -102,7 +102,7 @@ export default function AdvancedSearchBar() {
                     </p>
                 </div>
             </Input>
-            {memoizedModal}
+            {searchType === "name" && memoizedModal}
         </div>
     );
 }
