@@ -1,6 +1,6 @@
 import { useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useMemo } from "react";
-import { useDebouncedState } from "@mantine/hooks";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { useDebouncedValue } from "@mantine/hooks";
 import { useContextSelector } from "use-context-selector";
 import { SearchContext } from "@/utils/providers/SearchProvider";
 import { CheckboxFilters, getSelectableFilters, SliderFilters } from "@/constants/anilist";
@@ -15,7 +15,11 @@ export default function SearchFilters() {
         genres: value.mediaGenres,
         tags:   value.mediaTags,
     }));
-    const [debouncedFiltersState, setDebouncedFiltersState] = useDebouncedState<Record<string, string>>({}, 300);
+
+    // `useDebouncedState` loses all previous setter invocations data
+    const [filtersState, setFiltersState] = useState<Record<string, string>>({});
+    const [debouncedFiltersState] = useDebouncedValue(filtersState, 300);
+
     const searchParameters = useSearchParams();
 
     const memoizedCallback = useCallback(
@@ -26,7 +30,7 @@ export default function SearchFilters() {
             parameter: string;
             value:     string;
         }) => {
-            setDebouncedFiltersState((state) => {
+            setFiltersState((state) => {
                 const updated: Record<string, string> = {
                     ...state,
                 };
@@ -36,7 +40,7 @@ export default function SearchFilters() {
                 return updated;
             });
         },
-        [setDebouncedFiltersState],
+        [],
     );
 
     const searchParametersAsString = searchParameters.toString();
