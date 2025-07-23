@@ -78,6 +78,25 @@ export default function SearchFilters() {
         const entries = Object.entries(debouncedFiltersState);
 
         for (const [key, value] of entries) {
+            let parsedValue: Array<string> | string;
+
+            try {
+                // value can be either string or an array in the string representation
+                parsedValue = JSON.parse(value);
+            } catch {
+                // it's probably just a string then
+                parsedValue = value;
+            }
+
+            const isEmptyArrayValue = Array.isArray(parsedValue) && parsedValue.length === 0;
+            const isPlaceholderValue = parsedValue === AnyOption.value;
+
+            if (isEmptyArrayValue || isPlaceholderValue) {
+                modifiedParameters.delete(key);
+
+                continue;
+            }
+
             modifiedParameters.set(key, value);
         }
 
@@ -85,15 +104,15 @@ export default function SearchFilters() {
     }, [debouncedFiltersState, searchParametersAsString]);
 
     /**
-     * Genres - MultiSelect (order by alphabet)
-     * Year - Select
+       Genres - MultiSelect (order by alphabet)
+       Year - Select
      * Enable Ranged Year - Checkbox
      * Ranged Year - Slider
      * Sort - Select
-     * Season - Select
-     * Format (TV, TV_SHORT, etc.) - MultiSelect
-     * Airing Status - Select
-     * Source Material - Select
+       Season - Select
+       Format (TV, TV_SHORT, etc.) - MultiSelect
+       Airing Status - Select
+       Source Material - Select
      * Tags/Themes - Categorize and show buttons
      * Only Show My Anime - Checkbox
      * Hide My Anime - Checkbox
