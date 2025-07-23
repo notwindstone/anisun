@@ -1,7 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/utils/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
+import { useDebouncedValue } from "@mantine/hooks";
 import parseTailwindColor from "@/utils/appearance/parseTailwindColor";
 
 export default function RangedSlider({
@@ -44,6 +45,7 @@ export default function RangedSlider({
         min: fixed.min,
         max: fixed.max,
     });
+    const [debouncedCurrent] = useDebouncedValue(current, 300);
     const [mobileActive, setMobileActive] = useState<{
         left:  boolean;
         right: boolean;
@@ -51,6 +53,27 @@ export default function RangedSlider({
         left:  false,
         right: false,
     });
+
+    useEffect(() => {
+        const newValue = `${debouncedCurrent.min}-${debouncedCurrent.max}`;
+
+        if (
+            debouncedCurrent.min === fixed.min &&
+            debouncedCurrent.max === fixed.max
+        ) {
+            callback({
+                parameter,
+                value: "",
+            });
+
+            return;
+        }
+
+        callback({
+            parameter,
+            value: newValue,
+        });
+    }, [callback, parameter, fixed.min, fixed.max, debouncedCurrent.min, debouncedCurrent.max]);
 
     const handleMinimalChange = useCallback(
         (event: React.ChangeEvent<HTMLInputElement>) => {
