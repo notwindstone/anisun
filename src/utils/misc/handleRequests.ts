@@ -1,7 +1,7 @@
 import { userAgent } from "next/server";
 import { ReadonlyHeaders } from "next/dist/server/web/spec-extension/adapters/headers";
 
-export default function logRequests({
+export default function handleRequests({
     headers,
 }: {
     headers: ReadonlyHeaders;

@@ -22,7 +22,7 @@ import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSS
 import HistoryLogger from "@/components/misc/HistoryLogger/HistoryLogger";
 import MobileNavbarWrapper from "@/components/layout/MobileNavbarWrapper/MobileNavbarWrapper";
 import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
-import logRequests from "@/utils/misc/logRequests";
+import handleRequests from "@/utils/misc/handleRequests";
 import UnsupportedBrowserNotify from "@/components/misc/UnsupportedBrowserNotify/UnsupportedBrowserNotify";
 
 const geistSans = Geist({
@@ -94,7 +94,7 @@ export default async function RootLayout({
         account: parsedAccountInfoData,
     });
 
-    logRequests({
+    handleRequests({
         headers: headersList,
     });
 
