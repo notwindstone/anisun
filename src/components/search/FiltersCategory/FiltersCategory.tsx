@@ -5,11 +5,13 @@ export default function FiltersCategory({
     children,
     label,
     visualOnly,
+    additionalClassNames,
 }: {
-    children:    React.ReactNode;
-    label:       string;
+    children:              React.ReactNode;
+    label:                 string;
     /** hide element using CSS instead of react */
-    visualOnly?: boolean;
+    visualOnly?:           boolean;
+    additionalClassNames?: string;
 }) {
     const [show, setShow] = useState(false);
 
@@ -29,12 +31,12 @@ export default function FiltersCategory({
             </button>
             {
                 visualOnly ? (
-                    <div className={`flex-col gap-4 ${show ? "flex" : "hidden"}`}>
+                    <div className={`${additionalClassNames} flex-col gap-4 ${show ? "flex" : "hidden"}`}>
                         {children}
                     </div>
                 ) : (
                     show && (
-                        <div className="flex flex-col gap-4">
+                        <div className={`${additionalClassNames} flex flex-col gap-4`}>
                             {children}
                         </div>
                     )

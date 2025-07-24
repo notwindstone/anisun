@@ -124,10 +124,16 @@ export default function SearchFilters() {
                             }
                         </div>
                     </FiltersCategory>
-                    <SearchTags
-                        parameter="tags"
-                        callback={memoizedCallback}
-                    />
+                    <FiltersCategory
+                        visualOnly
+                        label="Tags"
+                        additionalClassNames="overflow-y-auto max-h-96"
+                    >
+                        <SearchTags
+                            parameter="tags"
+                            callback={memoizedCallback}
+                        />
+                    </FiltersCategory>
                 </div>
             </>
         ),

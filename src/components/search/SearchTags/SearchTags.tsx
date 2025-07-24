@@ -1,7 +1,6 @@
 import { useContextSelector } from "use-context-selector";
 import { SearchContext } from "@/lib/providers/SearchProvider";
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ChevronRight } from "lucide-react";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import { useDebouncedValue } from "@mantine/hooks";
@@ -40,7 +39,6 @@ export default function SearchTags({
         [parameter],
     );
 
-    const [show, setShow] = useState(false);
     const [selected, setSelected] = useState<Array<string>>(memoizedInitialValues);
     // for initial values
     const [debouncedSelected] = useDebouncedValue<Array<string>>(selected, 600);
@@ -83,7 +81,8 @@ export default function SearchTags({
         () => Object.keys(tags),
         [tags],
     );
-    const mappedTags = useMemo(
+
+    return useMemo(
         () => tagsKeys.map((tagKey) => (
             <div key={tagKey} className="flex flex-col gap-2">
                 <p className="text-sm">
@@ -106,25 +105,5 @@ export default function SearchTags({
             </div>
         )),
         [unselectedColor, tagsKeys, tags, memoizedCallback, debouncedSelectedAsSet],
-    );
-
-    return (
-        <div className="relative flex flex-col gap-4">
-            <button
-                className="flex flex-nowrap items-center gap-2 cursor-pointer opacity-60 hover:opacity-100 transition-[opacity] font-medium"
-                onClick={() => setShow((state) => !state)}
-            >
-                <ChevronRight
-                    size={20}
-                    className={`transition-[rotate] ${show ? "rotate-90" : "rotate-0"}`}
-                />
-                <span>
-                    Tags
-                </span>
-            </button>
-            <div className={`overflow-y-auto max-h-96 flex flex-col gap-4`}>
-                {show && mappedTags}
-            </div>
-        </div>
     );
 }
