@@ -14,6 +14,7 @@ import Checkbox from "@/components/base/Checkbox/Checkbox";
 import transformIntoDropdownOptions from "@/lib/misc/transformIntoDropdownOptions";
 import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
 import SearchTags from "@/components/search/SearchTags/SearchTags";
+import FiltersCategory from "@/components/search/FiltersCategory/FiltersCategory";
 
 export default function SearchFilters() {
     const { genres, setData } = useContextSelector(SearchContext, (value) => ({
@@ -45,26 +46,6 @@ export default function SearchFilters() {
         [setData],
     );
 
-    /**
-       Genres - MultiSelect (order by alphabet)
-       Year - Select
-       Enable Ranged Year - Checkbox
-       Ranged Year - Ranged Slider
-       Sort - Select
-       Season - Select
-       Format (TV, TV_SHORT, etc.) - MultiSelect
-       Airing Status - Select
-       Source Material - Select
-       Only Show My Anime - Checkbox
-       Hide My Anime - Checkbox
-       Score - Slider
-       Limit - Slider
-       Episode Duration - Ranged Slider
-       Episodes - Ranged Slider
-       Censored (isAdult === false) - checkbox
-     * Tags/Themes - Categorize and show buttons
-     */
-
     // basically never triggers on any of SearchFilters hooks
     return useMemo(
         () => (
@@ -76,67 +57,73 @@ export default function SearchFilters() {
                         options={transformIntoDropdownOptions(AnilistSortValues)}
                         callback={memoizedCallback}
                     />
-                    <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
-                        {
-                            getSelectableFilters(genres).map((filter) => (
-                                <SelectWrapper
-                                    key={filter.parameter}
-                                    parameter={filter.parameter}
-                                    multiple={filter.multiple}
-                                    searchable={filter.searchable}
-                                    additionalClassNames={filter.additionalClassNames}
-                                    options={
-                                        transformIntoDropdownOptions(
-                                            filter.options,
-                                            filter.multiple,
-                                        )
-                                    }
-                                    callback={memoizedCallback}
-                                    label={filter.label}
-                                />
-                            ))
-                        }
-                    </div>
-                    <div className="flex flex-wrap gap-4">
-                        {
-                            CheckboxFilters.map((filter) => (
-                                <Checkbox
-                                    key={filter.parameter}
-                                    parameter={filter.parameter}
-                                    label={filter.label}
-                                    callback={memoizedCallback}
-                                />
-                            ))
-                        }
-                    </div>
-                    <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2">
-                        {
-                            SliderFilters.map((filter) => (
-                                <RangedSlider
-                                    key={filter.parameter}
-                                    parameter={filter.parameter}
-                                    label={filter.label}
-                                    fixed={filter.fixed}
-                                    callback={memoizedCallback}
-                                    additionalClassNames={filter.additionalClassNames}
-                                />
-                            ))
-                        }
-                    </div>
-                    <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
-                        {
-                            SingleSliderFilters.map((filter) => (
-                                <NativeSlider
-                                    key={filter.parameter}
-                                    fixed={filter.fixed}
-                                    parameter={filter.parameter}
-                                    callback={memoizedCallback}
-                                    label={filter.label}
-                                    reverse={filter.reverse}
-                                />
-                            ))
-                        }
-                    </div>
+                    <FiltersCategory label="General" visualOnly>
+                        <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
+                            {
+                                getSelectableFilters(genres).map((filter) => (
+                                    <SelectWrapper
+                                        key={filter.parameter}
+                                        parameter={filter.parameter}
+                                        multiple={filter.multiple}
+                                        searchable={filter.searchable}
+                                        additionalClassNames={filter.additionalClassNames}
+                                        options={
+                                            transformIntoDropdownOptions(
+                                                filter.options,
+                                                filter.multiple,
+                                            )
+                                        }
+                                        callback={memoizedCallback}
+                                        label={filter.label}
+                                    />
+                                ))
+                            }
+                        </div>
+                    </FiltersCategory>
+                    <FiltersCategory label="Modifiers">
+                        <div className="flex flex-wrap gap-4">
+                            {
+                                CheckboxFilters.map((filter) => (
+                                    <Checkbox
+                                        key={filter.parameter}
+                                        parameter={filter.parameter}
+                                        label={filter.label}
+                                        callback={memoizedCallback}
+                                    />
+                                ))
+                            }
+                        </div>
+                    </FiltersCategory>
+                    <FiltersCategory label="Other">
+                        <div className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2">
+                            {
+                                SliderFilters.map((filter) => (
+                                    <RangedSlider
+                                        key={filter.parameter}
+                                        parameter={filter.parameter}
+                                        label={filter.label}
+                                        fixed={filter.fixed}
+                                        callback={memoizedCallback}
+                                        additionalClassNames={filter.additionalClassNames}
+                                    />
+                                ))
+                            }
+                        </div>
+                        <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
+                            {
+                                SingleSliderFilters.map((filter) => (
+                                    <NativeSlider
+                                        key={filter.parameter}
+                                        fixed={filter.fixed}
+                                        parameter={filter.parameter}
+                                        callback={memoizedCallback}
+                                        label={filter.label}
+                                        reverse={filter.reverse}
+                                    />
+                                ))
+                            }
+                        </div>
+                    </FiltersCategory>
                     <SearchTags
                         parameter="tags"
                         callback={memoizedCallback}

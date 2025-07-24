@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import Divider from "@/components/base/Divider/Divider";
-//import ExtensionsLoader from "@/components/extensions/ExtensionsLoader/ExtensionsLoader";
-import SearchedAnimes from "@/components/search/SearchedAnimes/SearchedAnimes";
+import ExtensionsLoader from "@/components/extensions/ExtensionsLoader/ExtensionsLoader";
 
 export const metadata: Metadata = {
     title: "Extensions",
@@ -17,11 +16,7 @@ export default function Page() {
                 Explore various plugins that extend website functionality
             </p>
             <Divider />
-            {/* <ExtensionsLoader /> */}
-            <SearchedAnimes
-                mediaGenres={[]}
-                mediaTags={[]}
-            />
+            <ExtensionsLoader />
         </div>
     );
 }

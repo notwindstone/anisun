@@ -219,7 +219,7 @@ export const AnilistSortValues: Array<{
         value: "TITLE_ROMAJI",
     },
     {
-        name:  "Most Popular",
+        name:  "Popularity",
         value: "POPULARITY_DESC",
     },
     {
@@ -227,11 +227,11 @@ export const AnilistSortValues: Array<{
         value: "SCORE_DESC",
     },
     {
-        name:  "Most Trending",
+        name:  "Trending",
         value: "TRENDING_DESC",
     },
     {
-        name:  "Most Favourites",
+        name:  "Favourites",
         value: "FAVOURITES_DESC",
     },
     {

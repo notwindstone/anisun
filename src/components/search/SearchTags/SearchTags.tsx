@@ -119,7 +119,7 @@ export default function SearchTags({
                     className={`transition-[rotate] ${show ? "rotate-90" : "rotate-0"}`}
                 />
                 <span>
-                    Advanced Tags Filter
+                    Tags
                 </span>
             </button>
             <div className={`overflow-y-auto max-h-96 flex flex-col gap-4`}>
