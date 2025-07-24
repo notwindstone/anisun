@@ -34,7 +34,7 @@ export default function ClientFetchWithSearchWrapper({
     return (
         <>
             <ClientFetch
-                queryKey={["search", search.search, search.type]}
+                queryKey={["search", search.search, search.type, JSON.stringify(search.filters)]}
                 method={"SearchTitles"}
                 pendingUI={
                     <Cards isGrid={isGrid} search={search.search} isPending />

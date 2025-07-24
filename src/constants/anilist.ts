@@ -7,6 +7,7 @@ import { VariablesType } from "@/types/Anime/Variables.type";
 import { SourceType } from "@/types/Anime/Queries/Source.type";
 import { SortType } from "@/types/Anime/Queries/Sort.type";
 
+export const AnilistPageMediaLimitDefault = 50;
 // If it's January 1, then ofc there will be no good animes
 // that were released on January 1, so we go back 30 days before.
 export const CurrentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();

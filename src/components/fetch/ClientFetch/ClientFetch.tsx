@@ -22,7 +22,18 @@ export default function ClientFetch({
 }) {
     const { isPending, error, data } = useQuery({
         queryKey: queryKey,
-        queryFn:  async () => await Getters[method](fetchArguments),
+        queryFn:  async () => {
+            const result = await Getters[method](fetchArguments);
+
+            if (
+                "Searched" in result &&
+                "media" in result.Searched
+            ) {
+                return result.Searched.media;
+            }
+
+            return result;
+        },
     });
 
     if (isPending) {
