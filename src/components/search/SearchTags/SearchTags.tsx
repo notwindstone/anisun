@@ -4,7 +4,9 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
+import { useDebouncedValue } from "@mantine/hooks";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
+import SearchTagButton from "@/components/search/SearchTagButton/SearchTagButton";
 
 export default function SearchTags({
     parameter,
@@ -19,8 +21,30 @@ export default function SearchTags({
         value:     string;
     }) => void;
 }) {
+    // this is a complete madness
+    const memoizedInitialValues: Array<string> = useMemo(
+        () => {
+            if (globalThis.window === undefined) {
+                return;
+            }
+
+            const searchParametersAsString = globalThis.window.location.search;
+            const searchParameters = new URLSearchParams(searchParametersAsString);
+
+            try {
+                return JSON.parse(searchParameters.get(parameter) ?? "");
+            } catch {
+                return [];
+            }
+        },
+        [parameter],
+    );
+
     const [show, setShow] = useState(false);
-    const [selected, setSelected] = useState<Array<string>>([]);
+    const [selected, setSelected] = useState<Array<string>>(memoizedInitialValues);
+    // for initial values
+    const [debouncedSelected] = useDebouncedValue<Array<string>>(selected, 600);
+    const debouncedSelectedAsSet = useMemo(() => new Set(debouncedSelected), [debouncedSelected]);
 
     useEffect(() => {
         callback({
@@ -30,9 +54,8 @@ export default function SearchTags({
     }, [callback, parameter, selected]);
 
     const { base, theme } = useContextSelector(ConfigsContext, (value) => ({
-        base:   value.data.colors.base,
-        accent: value.data.colors.accent,
-        theme:  value.data.theme,
+        base:  value.data.colors.base,
+        theme: value.data.theme,
     }));
 
     const unselectedColor = parseTailwindColor({
@@ -69,23 +92,20 @@ export default function SearchTags({
                 <div className="flex flex-wrap gap-2">
                     {
                         tags[tagKey]?.map((tag) => (
-                            <button
+                            <SearchTagButton
                                 key={tag.name}
-                                data-description={tag.description}
-                                className="transition-[background] px-2 py-1 text-sm dark:text-neutral-400 text-neutral-600 rounded-md cursor-pointer sm:hover:before:opacity-100 sm:before:block before:hidden sm:before:transition-[opacity] sm:before:duration-150 sm:before:text-start sm:before:text-balance sm:before:text-white sm:before:bg-black sm:before:px-2 sm:before:py-1 sm:before:rounded-md sm:before:bottom-0 sm:before:left-0 sm:before:w-48 sm:before:pointer-events-none sm:before:opacity-0 sm:before:absolute sm:before:content-[attr(data-description)] sm:before:z-1000"
-                                onClick={() => memoizedCallback(tag.name)}
-                                style={{
-                                    backgroundColor: unselectedColor,
-                                }}
-                            >
-                                {tag.name}
-                            </button>
+                                name={tag.name}
+                                description={tag.description}
+                                callback={memoizedCallback}
+                                unselectedColor={unselectedColor}
+                                selected={debouncedSelectedAsSet}
+                            />
                         ))
                     }
                 </div>
             </div>
         )),
-        [unselectedColor, tagsKeys, tags],
+        [unselectedColor, tagsKeys, tags, memoizedCallback, debouncedSelectedAsSet],
     );
 
     return (
