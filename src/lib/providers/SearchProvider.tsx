@@ -45,9 +45,7 @@ export function SearchProvider({
     });
     // `useDebouncedState` loses all previous setter invocations data
     // that's why i am using `useState` in pair with `useDebouncedValue`
-    const [debouncedSearchData] = useDebouncedValue(searchData, 300, {
-        leading: true,
-    });
+    const [debouncedSearchData] = useDebouncedValue(searchData, 300);
 
     return useMemo(
         () => (

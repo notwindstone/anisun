@@ -15,6 +15,10 @@ export default function ApplyToSearchParameters(): React.ReactNode {
         const modifiedParameters = new URLSearchParams(searchParametersAsString);
         const entries = Object.entries(data.filters);
 
+        if (data.search !== "") {
+            modifiedParameters.set("search", data.search);
+        }
+
         for (const [key, value] of entries) {
             let parsedValue: Array<string> | string | number | boolean = value;
 

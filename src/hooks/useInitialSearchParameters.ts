@@ -1,5 +1,5 @@
 export default function useInitialSearchParameters(parameter?: string) {
-    if (!parameter) {
+    if (!parameter || globalThis.window === undefined) {
         return;
     }
 

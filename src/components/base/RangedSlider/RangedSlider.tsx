@@ -48,8 +48,8 @@ export default function RangedSlider({
         min: number;
         max: number;
     }>({
-        min: Number(initialValues?.[0] ?? fixed.min),
-        max: Number(initialValues?.[1] ?? fixed.max),
+        min: Number(initialValues?.[0] || fixed.min),
+        max: Number(initialValues?.[1] || fixed.max),
     });
     const [debouncedCurrent] = useDebouncedValue(current, 300);
     const [mobileActive, setMobileActive] = useState<{
