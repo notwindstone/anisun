@@ -9,20 +9,22 @@ import { AnyOption } from "@/constants/app";
 export default function ApplyToSearchParameters(): React.ReactNode {
     const data = useContextSelector(SearchContext, (value) => value.data);
     const searchParameters = useSearchParams();
+    const searchParametersAsString = searchParameters.toString();
 
-    /*
     useEffect(() => {
         const modifiedParameters = new URLSearchParams(searchParametersAsString);
-        const entries = Object.entries(debouncedFiltersState);
+        const entries = Object.entries(data.filters);
 
         for (const [key, value] of entries) {
-            let parsedValue: Array<string> | string | number | boolean;
+            let parsedValue: Array<string> | string | number | boolean = value;
 
             try {
-                // value can be either string or an array in the string representation
-                parsedValue = JSON.parse(value);
+                // value can be either a primitive or an array in the string representation
+                if (typeof value === "string") {
+                    parsedValue = JSON.parse(value);
+                }
             } catch {
-                // it's probably just a string then
+                // it's probably just a primitive then
                 parsedValue = value;
             }
 
@@ -36,7 +38,7 @@ export default function ApplyToSearchParameters(): React.ReactNode {
                 continue;
             }
 
-            modifiedParameters.set(key, value);
+            modifiedParameters.set(key, value.toString());
         }
 
         const modifiedSearchParametersAsString = modifiedParameters.toString();
@@ -57,8 +59,7 @@ export default function ApplyToSearchParameters(): React.ReactNode {
 
         // apply search parameters
         globalThis.history.replaceState({}, "", `?${modifiedSearchParametersAsString}`);
-    }, [debouncedFiltersState, searchParametersAsString]);
-    */
+    }, [data, searchParametersAsString]);
 
     console.log("lul");
 
