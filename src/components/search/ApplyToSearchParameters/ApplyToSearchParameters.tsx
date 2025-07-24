@@ -19,7 +19,15 @@ export default function ApplyToSearchParameters(): React.ReactNode {
             modifiedParameters.set("search", data.search);
         }
 
+        if (data.search === "") {
+            modifiedParameters.delete("search");
+        }
+
         for (const [key, value] of entries) {
+            if (key === "search") {
+                continue;
+            }
+
             let parsedValue: Array<string> | string | number | boolean = value;
 
             try {
@@ -64,8 +72,6 @@ export default function ApplyToSearchParameters(): React.ReactNode {
         // apply search parameters
         globalThis.history.replaceState({}, "", `?${modifiedSearchParametersAsString}`);
     }, [data, searchParametersAsString]);
-
-    console.log("lul");
 
     return;
 }

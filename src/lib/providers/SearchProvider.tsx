@@ -4,6 +4,8 @@ import { Dispatch, SetStateAction, useMemo, useState } from "react";
 import { createContext } from "use-context-selector";
 import { useDebouncedValue } from "@mantine/hooks";
 import { SearchType } from "@/types/Anime/Search.type";
+import useInitialSearchParameters from "@/hooks/useInitialSearchParameters";
+import useInitialSearchParametersAsObject from "@/hooks/useInitialSearchParametersAsObject";
 
 export const SearchContext = createContext<{
     mediaGenres: Array<string>;
@@ -36,10 +38,12 @@ export function SearchProvider({
         description: string;
     }>>;
 }) {
+    const initialFiltersValue = useInitialSearchParametersAsObject() ?? {};
+    const initialSearchValue = useInitialSearchParameters("search") ?? "";
     const [searchData, setSearchData] = useState<SearchType>({
-        search:  "",
+        search:  initialSearchValue,
         type:    "name",
-        filters: {},
+        filters: initialFiltersValue,
     });
     // `useDebouncedState` loses all previous setter invocations data
     // that's why i am using `useState` in pair with `useDebouncedValue`

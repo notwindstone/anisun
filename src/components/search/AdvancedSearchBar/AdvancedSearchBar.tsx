@@ -44,11 +44,10 @@ export default function AdvancedSearchBar() {
         (value: string) => {
             setIsError(false);
 
-            setData({
-                search:  value,
-                type:    searchType,
-                filters: {},
-            });
+            setData((state) => ({
+                ...state,
+                search: value,
+            }));
 
             if (searchType === "id" && /[^0-9]/.test(value)) {
                 setIsError(true);
@@ -72,12 +71,10 @@ export default function AdvancedSearchBar() {
 
                 return "id";
             });
-            setData((state) => {
-                return {
-                    ...state,
-                    type: changedSearchType,
-                };
-            });
+            setData((state) => ({
+                ...state,
+                type: changedSearchType,
+            }));
         },
         [setData],
     );
