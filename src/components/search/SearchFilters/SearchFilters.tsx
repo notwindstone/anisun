@@ -137,7 +137,7 @@ export default function SearchFilters() {
                             ))
                         }
                     </div>
-                    <SearchTags />
+                    <SearchTags callback={memoizedCallback} />
                 </div>
             </>
         ),
