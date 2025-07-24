@@ -43,17 +43,19 @@ export default function NativeSlider({
     });
     const initialValue = useInitialSearchParameters(parameter);
     const [value, setValue] = useState<number>(
-        Number(initialValue || fixed.min),
+        reverse
+            ? fixed.max - Number(initialValue || fixed.min)
+            : Number(initialValue || fixed.min),
     );
     const [debouncedValue] = useDebouncedValue(value, 300);
     const [mobileActive, setMobileActive] = useState<boolean>(false);
 
     useEffect(() => {
-        const newValue = debouncedValue;
+        const newValue = reverse
+            ? fixed.max - debouncedValue
+            : debouncedValue;
 
-        if (
-            debouncedValue === fixed.min
-        ) {
+        if (newValue === fixed.min) {
             callback({
                 parameter,
                 value: "",
@@ -66,7 +68,7 @@ export default function NativeSlider({
             parameter,
             value: newValue.toString(),
         });
-    }, [callback, parameter, fixed.min, fixed.max, debouncedValue]);
+    }, [reverse, callback, parameter, fixed.min, fixed.max, debouncedValue]);
 
     const currentPosition = (
         (value - fixed.min) / (fixed.max - fixed.min)
@@ -117,7 +119,7 @@ export default function NativeSlider({
                         }
                     }
                 >
-                    {value}
+                    {reverse ? fixed.max - value : value}
                 </div>
             </div>
         </div>
