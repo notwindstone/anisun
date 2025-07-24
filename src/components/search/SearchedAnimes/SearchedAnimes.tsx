@@ -1,6 +1,7 @@
 import { SearchProvider } from "@/lib/providers/SearchProvider";
 import AdvancedSearchBar from "@/components/search/AdvancedSearchBar/AdvancedSearchBar";
 import ClientFetchWithSearchWrapper from "@/components/fetch/ClientFetchWrapper/ClientFetchWithSearchWrapper";
+import ApplyToSearchParameters from "@/components/search/ApplyToSearchParameters/ApplyToSearchParameters";
 
 export default function SearchedAnimes({
     mediaGenres,
@@ -25,6 +26,7 @@ export default function SearchedAnimes({
                         isGrid
                     />
                 </div>
+                <ApplyToSearchParameters />
             </SearchProvider>
         </>
     );

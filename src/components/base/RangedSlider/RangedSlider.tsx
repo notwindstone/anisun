@@ -4,6 +4,7 @@ import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import { useDebouncedValue } from "@mantine/hooks";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
+import useInitialSearchParameters from "@/hooks/useInitialSearchParameters";
 
 export default function RangedSlider({
     fixed,
@@ -32,18 +33,23 @@ export default function RangedSlider({
         accent: value.data.colors.accent,
         theme:  value.data.theme,
     }));
+
     const parsedColor = parseTailwindColor({
         color: accent,
         step:  theme === DarkThemeKey
             ? 400
             : 500,
     });
+
+    const initialValues = useInitialSearchParameters(parameter)
+        ?.split("-");
+
     const [current, setCurrent] = useState<{
         min: number;
         max: number;
     }>({
-        min: fixed.min,
-        max: fixed.max,
+        min: Number(initialValues?.[0] ?? fixed.min),
+        max: Number(initialValues?.[1] ?? fixed.max),
     });
     const [debouncedCurrent] = useDebouncedValue(current, 300);
     const [mobileActive, setMobileActive] = useState<{
