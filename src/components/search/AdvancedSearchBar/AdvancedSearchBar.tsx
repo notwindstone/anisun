@@ -34,6 +34,7 @@ export default function AdvancedSearchBar() {
                 label={filtersTitle}
                 description={filtersDescription}
                 shouldBeRelative={false}
+                additionalClassNames="max-w-256 sm:w-[calc(100%-32px)]"
             >
                 <SearchFilters />
             </Modal>

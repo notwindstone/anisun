@@ -12,11 +12,13 @@ export default function ModalTransition({
     hide,
     label,
     description,
+    additionalClassNames,
 }: {
-    children:    React.ReactNode;
-    hide:        () => void;
-    label:       string | undefined;
-    description: string | undefined;
+    children:              React.ReactNode;
+    hide:                  () => void;
+    label:                 string | undefined;
+    description:           string | undefined;
+    additionalClassNames?: string;
 }) {
     const { base, theme } = useContextSelector(ConfigsContext, (value) => {
         return {
@@ -46,7 +48,7 @@ export default function ModalTransition({
         <>
             <div className={`sm:hidden absolute top-0 bottom-0 right-0 left-0 bg-[theme(colors.white/.7)] dark:bg-[theme(colors.black/.7)] transition duration-300 z-1000 ${classNames.darken}`} />
             <div
-                className={`select-none absolute sm:top-12 sm:right-4 sm:left-4 sm:bottom-auto rounded-md sm:h-auto top-4 right-4 left-4 bottom-4 z-1000 transition duration-300 ease-out ${classNames.modal} sm:p-0`}
+                className={`select-none absolute sm:top-12 sm:right-4 sm:left-auto sm:bottom-auto sm:ml-4 rounded-md sm:h-auto top-4 right-4 left-4 bottom-4 z-1000 transition duration-300 ease-out ${classNames.modal} sm:p-0 ${additionalClassNames}`}
                 style={{
                     backgroundColor: parseTailwindColor({
                         color: base,

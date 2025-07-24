@@ -11,13 +11,15 @@ export default function Modal({
     label,
     description,
     shouldBeRelative,
+    additionalClassNames,
 }: {
     children:       React.ReactNode;
     buttonChildren: React.ReactNode;
     label:          string | undefined;
     description:    string | undefined;
     /** `false` if you define `relative` position on components that are higher in the tree */
-    shouldBeRelative: boolean;
+    shouldBeRelative:      boolean;
+    additionalClassNames?: string;
 }) {
     const [show, setShow] = useState(false);
     const modalReference = useClickOutside(() => setShow(false));
@@ -40,6 +42,7 @@ export default function Modal({
                         // should be ok, because these things don't update
                         label={label}
                         description={description}
+                        additionalClassNames={additionalClassNames}
                     >
                         {children}
                     </ModalTransition>

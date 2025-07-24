@@ -50,7 +50,7 @@ export default function SearchFilters() {
     return useMemo(
         () => (
             <>
-                <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4 flex flex-col gap-4">
+                <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4 flex flex-col gap-4 sm:min-h-83">
                     <SelectWrapper
                         parameter="sort"
                         label="Sort by"

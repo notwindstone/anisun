@@ -13,6 +13,22 @@ export default function ApplyToSearchParameters(): React.ReactNode {
 
     useEffect(() => {
         const modifiedParameters = new URLSearchParams(searchParametersAsString);
+
+        // when user comes from a page that had search params
+        // this code executes and applies these search params
+        // to the current route, which is a home page.
+        // as for now, only the `/library` can have search params,
+        // such as `page`, `list` and `username`.
+        // let's just remove those params, because they are not being used in search.
+        // this is a bad way to fix a problem tho, but whatever.
+        // idc at this point, lol
+        // fuck react, fuck re-renders
+        // i'm switching to vue and svelte
+
+        for (const itemToRemove of ["page", "list", "username"]) {
+            modifiedParameters.delete(itemToRemove);
+        }
+
         const entries = Object.entries(data.filters);
 
         if (data.search !== "") {
@@ -24,7 +40,7 @@ export default function ApplyToSearchParameters(): React.ReactNode {
         }
 
         for (const [key, value] of entries) {
-            if (key === "search") {
+            if (["page", "list", "username", "search"].includes(key)) {
                 continue;
             }
 
