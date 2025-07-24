@@ -3,6 +3,7 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
+import useInitialSearchParameters from "@/hooks/useInitialSearchParameters";
 
 export default function NativeSelect({
     parameter,
@@ -32,6 +33,7 @@ export default function NativeSelect({
             base:  value.data.colors.base,
         };
     });
+    const initialValue = useInitialSearchParameters(parameter);
 
     return (
         <div className={`flex flex-col gap-2 ${additionalClassNames}`}>
@@ -50,6 +52,7 @@ export default function NativeSelect({
                 }}
             >
                 <select
+                    defaultValue={initialValue}
                     className="cursor-pointer w-full pl-2 pr-8 h-10 flex bg-inherit rounded-md appearance-none text-sm outline-none"
                     onChange={(event: React.ChangeEvent<HTMLSelectElement>) => {
                         const value = event.target.value;

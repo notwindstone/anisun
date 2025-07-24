@@ -5,15 +5,30 @@ import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { useState } from "react";
+import useInitialSearchParameters from "@/hooks/useInitialSearchParameters";
 
 export default function NativeSlider({
     fixed,
+    parameter,
+    callback,
+    label,
+    additionalClassNames,
 }: {
     fixed: {
         min:  number;
         max:  number;
         step: number;
     };
+    parameter: string;
+    callback: ({
+        parameter,
+        value,
+    }: {
+        parameter: string;
+        value:     string;
+    }) => void;
+    label:                 string;
+    additionalClassNames?: string;
 }) {
     const { accent, theme } = useContextSelector(ConfigsContext, (value) => ({
         accent: value.data.colors.accent,
@@ -25,6 +40,7 @@ export default function NativeSlider({
             ? 400
             : 500,
     });
+    const initialValue = useInitialSearchParameters(parameter);
     const [value, setValue] = useState<number>(fixed.min);
     const [mobileActive, setMobileActive] = useState<boolean>(false);
 

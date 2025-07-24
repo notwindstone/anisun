@@ -8,6 +8,7 @@ import { AnyOption } from "@/constants/app";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import Badge from "@/components/base/Badge/Badge";
 import simpleMatch from "@/lib/misc/simpleMatch";
+import useInitialSearchParameters from "@/hooks/useInitialSearchParameters";
 
 export default function Select({
     parameter,
@@ -42,11 +43,25 @@ export default function Select({
             accent: value.data.colors.accent,
         };
     });
+    const initialValue = useInitialSearchParameters(parameter) ?? "";
+
+    let parsedInitialValue: Array<string> | string = initialValue;
+
+    try {
+        if (multiple) {
+            parsedInitialValue = JSON.parse(initialValue);
+        }
+    } catch {
+        parsedInitialValue = initialValue;
+    }
+
     const dropdownReference = useClickOutside(() => setDropdownOpened(false));
     const [currentSearch, setCurrentSearch] = useState<string>("");
     const [dropdownOpened, setDropdownOpened] = useState(false);
     const [selected, setSelected] = useState<string | Array<string>>(
-        multiple ? [] : options[0].value,
+        multiple
+            ? (parsedInitialValue || [])
+            : (parsedInitialValue || options[0].value),
     );
     const foundOptionName = options.find((currentOption) => {
         if (Array.isArray(selected)) {

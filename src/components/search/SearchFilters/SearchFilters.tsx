@@ -6,6 +6,7 @@ import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import transformIntoDropdownOptions from "@/lib/misc/transformIntoDropdownOptions";
+import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
 
 export default function SearchFilters() {
     const { genres, tags, setData } = useContextSelector(SearchContext, (value) => ({
@@ -63,6 +64,16 @@ export default function SearchFilters() {
         () => (
             <>
                 <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4 flex flex-col gap-4">
+                    <NativeSlider
+                        fixed={{
+                            min:  0,
+                            max:  1000,
+                            step: 1,
+                        }}
+                        parameter="hellNaw"
+                        callback={memoizedCallback}
+                        label="lol"
+                    />
                     <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
                         {
                             getSelectableFilters(genres).map((filter) => (
@@ -110,6 +121,7 @@ export default function SearchFilters() {
                             ))
                         }
                     </div>
+                    {JSON.stringify(tags)}
                 </div>
             </>
         ),

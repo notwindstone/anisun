@@ -4,6 +4,7 @@ import { DarkThemeKey } from "@/constants/configs";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
+import useInitialSearchParameters from "@/hooks/useInitialSearchParameters";
 
 export default function Checkbox({
     parameter,
@@ -25,7 +26,17 @@ export default function Checkbox({
         accent: value.data.colors.accent,
         theme:  value.data.theme,
     }));
-    const [checked, setChecked] = useState(false);
+    const initialValue = useInitialSearchParameters(parameter) ?? "false";
+
+    let parsedInitialValue: boolean;
+
+    try {
+        parsedInitialValue = JSON.parse(initialValue) === true;
+    } catch {
+        parsedInitialValue = false;
+    }
+
+    const [checked, setChecked] = useState(parsedInitialValue);
 
     const checkedColor = parseTailwindColor({
         color: accent,
