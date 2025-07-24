@@ -11,6 +11,7 @@ export default function NativeSlider({
     parameter,
     callback,
     label,
+    reverse,
     additionalClassNames,
 }: {
     fixed: {
@@ -27,6 +28,7 @@ export default function NativeSlider({
         value:     string;
     }) => void;
     label:                 string;
+    reverse?:              boolean;
     additionalClassNames?: string;
 }) {
     const { accent, theme } = useContextSelector(ConfigsContext, (value) => ({
@@ -84,7 +86,7 @@ export default function NativeSlider({
                     onTouchCancel={() => setMobileActive(false)}
                     onTouchEnd={() => setMobileActive(false)}
                     type="range"
-                    className="peer w-full range-native-base range-native-progress touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-[#262626] dark:[&::-webkit-slider-runnable-track]:bg-[#e5e5e5] [&::-moz-range-track]:bg-[#262626] [&::-moz-range-track]:border-[#262626] dark:[&::-moz-range-track]:bg-[#e5e5e5] dark:[&::-moz-range-track]:border-[#e5e5e5] [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
+                    className={`peer w-full range-native-base ${reverse ? "-scale-x-100 range-native-progress-flipped" : "range-native-progress"} touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-[#262626] dark:[&::-webkit-slider-runnable-track]:bg-[#e5e5e5] [&::-moz-range-track]:bg-[#262626] [&::-moz-range-track]:border-[#262626] dark:[&::-moz-range-track]:bg-[#e5e5e5] dark:[&::-moz-range-track]:border-[#e5e5e5] [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]`}
                     value={value}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setValue(
@@ -96,15 +98,24 @@ export default function NativeSlider({
                     }}
                 />
                 <div
-                    className={`absolute sm:peer-active:opacity-100 ${mobileActive ? "opacity-100" : ""} opacity-0 pointer-events-none bottom-8 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white`}
-                    style={{
-                        left: currentPosition <= 50
-                            ? `${currentPosition}%`
-                            : "auto",
-                        right: currentPosition > 50
-                            ? `${100 - currentPosition}%`
-                            : "auto",
-                    }}
+                    className={`absolute sm:peer-active:opacity-100 ${mobileActive ? "opacity-100" : ""} opacity-0 pointer-events-none bottom-10 z-100 rounded-md px-2 py-1 dark:bg-[#e5e5e5] bg-[#262626] dark:text-black text-white`}
+                    style={
+                        reverse ? {
+                            right: currentPosition <= 50
+                                ? `${currentPosition}%`
+                                : "auto",
+                            left: currentPosition > 50
+                                ? `${100 - currentPosition}%`
+                                : "auto",
+                        } : {
+                            left: currentPosition <= 50
+                                ? `${currentPosition}%`
+                                : "auto",
+                            right: currentPosition > 50
+                                ? `${100 - currentPosition}%`
+                                : "auto",
+                        }
+                    }
                 >
                     {value}
                 </div>

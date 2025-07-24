@@ -1,7 +1,13 @@
 import { useCallback, useMemo } from "react";
 import { useContextSelector } from "use-context-selector";
 import { SearchContext } from "@/lib/providers/SearchProvider";
-import { CheckboxFilters, getSelectableFilters, SliderFilters } from "@/constants/anilist";
+import {
+    AnilistSortValues,
+    CheckboxFilters,
+    getSelectableFilters,
+    SingleSliderFilters,
+    SliderFilters,
+} from "@/constants/anilist";
 import SelectWrapper from "@/components/base/SelectWrapper/SelectWrapper";
 import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
@@ -44,7 +50,7 @@ export default function SearchFilters() {
        Year - Select
        Enable Ranged Year - Checkbox
        Ranged Year - Ranged Slider
-     * Sort - Select
+       Sort - Select
        Season - Select
        Format (TV, TV_SHORT, etc.) - MultiSelect
        Airing Status - Select
@@ -64,15 +70,11 @@ export default function SearchFilters() {
         () => (
             <>
                 <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4 flex flex-col gap-4">
-                    <NativeSlider
-                        fixed={{
-                            min:  0,
-                            max:  1000,
-                            step: 1,
-                        }}
-                        parameter="hellNaw"
+                    <SelectWrapper
+                        parameter="sort"
+                        label="Sort by"
+                        options={transformIntoDropdownOptions(AnilistSortValues)}
                         callback={memoizedCallback}
-                        label="lol"
                     />
                     <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
                         {
@@ -117,6 +119,20 @@ export default function SearchFilters() {
                                     fixed={filter.fixed}
                                     callback={memoizedCallback}
                                     additionalClassNames={filter.additionalClassNames}
+                                />
+                            ))
+                        }
+                    </div>
+                    <div className="grid sm:grid-cols-2 grid-cols-1 gap-2">
+                        {
+                            SingleSliderFilters.map((filter) => (
+                                <NativeSlider
+                                    key={filter.parameter}
+                                    fixed={filter.fixed}
+                                    parameter={filter.parameter}
+                                    callback={memoizedCallback}
+                                    label={filter.label}
+                                    reverse={filter.reverse}
                                 />
                             ))
                         }

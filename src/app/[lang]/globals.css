@@ -127,6 +127,19 @@
     box-shadow: -1410px 0 0 1400px;
   }
 }
+@utility range-native-progress-flipped {
+  &::-webkit-slider-thumb {
+    /* slider progress */
+    /* i genuinely don't know how, but it works for `-scale-x-100` */
+    /* with just `-1410px 0 0 1400px` input range keeps being cropped */
+    box-shadow: -1410px 10px 10px 1400px;
+  }
+
+  &::-moz-range-thumb {
+    /* slider progress */
+    box-shadow: -1410px 10px 10px 1400px;
+  }
+}
 @utility dual-range-thumb-only {
   --local-border-width:   4px;
   --local-rounded:        16px;
@@ -195,7 +208,6 @@
       cursor: grabbing;
     }
   }
-
 }
 
 /*

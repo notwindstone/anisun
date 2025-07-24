@@ -5,6 +5,7 @@ import { FormatType } from "@/types/Anime/Queries/Format.type";
 import { StatusType } from "@/types/Anime/Queries/Status.type";
 import { VariablesType } from "@/types/Anime/Variables.type";
 import { SourceType } from "@/types/Anime/Queries/Source.type";
+import { SortType } from "@/types/Anime/Queries/Sort.type";
 
 // If it's January 1, then ofc there will be no good animes
 // that were released on January 1, so we go back 30 days before.
@@ -209,6 +210,35 @@ export const AnilistSourceMaterials: Array<{
         value: "OTHER",
     },
 ];
+export const AnilistSortValues: Array<{
+    name:  string;
+    value: SortType;
+}> = [
+    {
+        name:  "Alphabet",
+        value: "TITLE_ROMAJI",
+    },
+    {
+        name:  "Most Popular",
+        value: "POPULARITY_DESC",
+    },
+    {
+        name:  "Highest Score",
+        value: "SCORE_DESC",
+    },
+    {
+        name:  "Most Trending",
+        value: "TRENDING_DESC",
+    },
+    {
+        name:  "Most Favourites",
+        value: "FAVOURITES_DESC",
+    },
+    {
+        name:  "Newest",
+        value: "START_DATE_DESC",
+    },
+];
 export const getSelectableFilters = (genres: Array<string>): Array<{
     additionalClassNames: string;
     multiple:             boolean;
@@ -327,5 +357,36 @@ export const SliderFilters: Array<{
             step: 1,
         },
         additionalClassNames: "lg:col-span-1 sm:col-span-2",
+    },
+];
+export const SingleSliderFilters: Array<{
+    parameter: string;
+    label:     string;
+    fixed:     {
+        min:  number;
+        max:  number;
+        step: number;
+    };
+    reverse: boolean;
+}> = [
+    {
+        parameter: "averageScore_greater",
+        label:     "Score",
+        fixed:     {
+            min:  0,
+            max:  100,
+            step: 1,
+        },
+        reverse: true,
+    },
+    {
+        parameter: "perPage",
+        label:     "Limit",
+        fixed:     {
+            min:  1,
+            max:  50,
+            step: 1,
+        },
+        reverse: false,
     },
 ];
