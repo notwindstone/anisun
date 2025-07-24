@@ -25,7 +25,7 @@ export const getNavbarItems = ({
         icon: <Library className="shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
     },
     {
-        name: dictionaries?.sidebar?.extensions,
+        name: dictionaries?.sidebar?.browse,
         href: PageRoutes.Extensions.Root,
         icon: <Blocks className="shrink-0 w-5 h-5 xxs:w-6 xxs:h-6" size={24} />,
     },
