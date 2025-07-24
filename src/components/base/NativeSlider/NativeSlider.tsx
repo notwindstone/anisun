@@ -79,7 +79,7 @@ export default function NativeSlider({
             <p className="text-sm">
                 {label}
             </p>
-            <div className="relative overflow-x-clip">
+            <div className="relative overflow-x-clip touch-none">
                 <input
                     min={fixed.min}
                     max={fixed.max}
@@ -88,7 +88,7 @@ export default function NativeSlider({
                     onTouchCancel={() => setMobileActive(false)}
                     onTouchEnd={() => setMobileActive(false)}
                     type="range"
-                    className={`peer w-full range-native-base ${reverse ? "-scale-x-100 range-native-progress-flipped" : "range-native-progress"} touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-[#262626] dark:[&::-webkit-slider-runnable-track]:bg-[#e5e5e5] [&::-moz-range-track]:bg-[#262626] [&::-moz-range-track]:border-[#262626] dark:[&::-moz-range-track]:bg-[#e5e5e5] dark:[&::-moz-range-track]:border-[#e5e5e5] [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]`}
+                    className={`peer w-full range-native-base ${reverse ? "-scale-x-100 range-native-progress-flipped" : "range-native-progress"} [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-runnable-track]:bg-[#262626] dark:[&::-webkit-slider-runnable-track]:bg-[#e5e5e5] [&::-moz-range-track]:bg-[#262626] [&::-moz-range-track]:border-[#262626] dark:[&::-moz-range-track]:bg-[#e5e5e5] dark:[&::-moz-range-track]:border-[#e5e5e5] [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]`}
                     value={value}
                     onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                         setValue(

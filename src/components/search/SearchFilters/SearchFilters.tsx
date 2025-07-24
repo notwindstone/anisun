@@ -137,7 +137,7 @@ export default function SearchFilters() {
                             ))
                         }
                     </div>
-                    {JSON.stringify(tags)}
+
                 </div>
             </>
         ),

@@ -141,7 +141,7 @@ export default function RangedSlider({
                             ...state,
                             left: false,
                         }))}
-                        className="peer/left dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
+                        className="touch-none peer/left dual-range-thumb-only [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
                         type="range"
                         value={current.min}
                         min={fixed.min}
@@ -165,7 +165,7 @@ export default function RangedSlider({
                             ...state,
                             right: false,
                         }))}
-                        className="peer/right dual-range-thumb-only touch-none [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
+                        className="touch-none peer/right dual-range-thumb-only [&::-moz-range-thumb]:border-inherit [&::-webkit-slider-thumb]:bg-[#262626] dark:[&::-webkit-slider-thumb]:bg-[#e5e5e5] [&::-moz-range-thumb]:bg-[#262626] dark:[&::-moz-range-thumb]:bg-[#e5e5e5]"
                         type="range"
                         value={current.max}
                         min={fixed.min}
