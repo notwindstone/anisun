@@ -14,11 +14,31 @@ export default function SearchedAnimes({
         description: string;
     }>>;
 }) {
+    const categorizedTags: Record<string, Array<{
+        name:        string;
+        description: string;
+    }>> = {};
+
+    // 0.12870000302791595 ms to do all this work on ryzen 3 3100
+    // no need to cache or use maps here i guess
+    for (const tag of (mediaTags ?? [])) {
+        const safeCategory = tag?.category ?? "default";
+
+        if (categorizedTags[safeCategory] === undefined) {
+            categorizedTags[safeCategory] = [];
+        }
+
+        categorizedTags[safeCategory].push({
+            name:        tag?.name ?? "",
+            description: tag?.description ?? "",
+        });
+    }
+
     return (
         <>
             <SearchProvider
                 mediaGenres={mediaGenres}
-                mediaTags={mediaTags}
+                mediaTags={categorizedTags}
             >
                 <AdvancedSearchBar />
                 <div className="max-w-384 w-full mx-auto">

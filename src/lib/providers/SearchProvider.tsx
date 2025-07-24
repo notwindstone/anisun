@@ -7,16 +7,15 @@ import { SearchType } from "@/types/Anime/Search.type";
 
 export const SearchContext = createContext<{
     mediaGenres: Array<string>;
-    mediaTags:   Array<Partial<{
+    mediaTags:   Record<string, Array<{
         name:        string;
-        category:    string;
         description: string;
     }>>;
     data:    SearchType;
     setData: Dispatch<SetStateAction<SearchType>>;
 }>({
     mediaGenres: [],
-    mediaTags:   [],
+    mediaTags:   {},
     data:        {
         search:  "",
         type:    "name",
@@ -32,9 +31,8 @@ export function SearchProvider({
 }: {
     children: React.ReactNode;
     mediaGenres?: Array<string>;
-    mediaTags?:   Array<Partial<{
+    mediaTags?:   Record<string, Array<{
         name:        string;
-        category:    string;
         description: string;
     }>>;
 }) {
@@ -51,7 +49,7 @@ export function SearchProvider({
         () => (
             <SearchContext.Provider value={{
                 mediaGenres: mediaGenres ?? [],
-                mediaTags:   mediaTags ?? [],
+                mediaTags:   mediaTags ?? {},
                 data:        debouncedSearchData,
                 setData:     setSearchData,
             }}>

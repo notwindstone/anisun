@@ -13,11 +13,11 @@ import RangedSlider from "@/components/base/RangedSlider/RangedSlider";
 import Checkbox from "@/components/base/Checkbox/Checkbox";
 import transformIntoDropdownOptions from "@/lib/misc/transformIntoDropdownOptions";
 import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
+import SearchTags from "@/components/search/SearchTags/SearchTags";
 
 export default function SearchFilters() {
-    const { genres, tags, setData } = useContextSelector(SearchContext, (value) => ({
+    const { genres, setData } = useContextSelector(SearchContext, (value) => ({
         genres:  value.mediaGenres,
-        tags:    value.mediaTags,
         setData: value.setData,
     }));
 
@@ -57,8 +57,8 @@ export default function SearchFilters() {
        Source Material - Select
        Only Show My Anime - Checkbox
        Hide My Anime - Checkbox
-     * Score - Slider
-     * Limit - Slider
+       Score - Slider
+       Limit - Slider
        Episode Duration - Ranged Slider
        Episodes - Ranged Slider
        Censored (isAdult === false) - checkbox
@@ -137,10 +137,10 @@ export default function SearchFilters() {
                             ))
                         }
                     </div>
-
+                    <SearchTags />
                 </div>
             </>
         ),
-        [memoizedCallback, genres, tags],
+        [memoizedCallback, genres],
     );
 }
