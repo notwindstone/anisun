@@ -64,8 +64,8 @@ export default function getAnilistFilters({
         }
 
         const isCurrentFilterADate =
-            key === AnilistRangedFilterKeys.RangedEpisodes[0] ||
-            key === AnilistRangedFilterKeys.RangedEpisodes[1];
+            key === AnilistRangedFilterKeys.RangedYears[0] ||
+            key === AnilistRangedFilterKeys.RangedYears[1];
 
         if (isCurrentFilterADate) {
             appliedFilters[key] = `${value}0000`;
