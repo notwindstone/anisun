@@ -15,15 +15,18 @@ export default function getAnilistFilters({
     }
 
     for (const [key, value] of currentSearchFilters) {
-        const isValueEmpty = value === "" || value === undefined;
-        const isValuePlaceholder = value === AnyOption.value || value === AnyOption.name;
-        const isValueAnEmptyArray = value === "[]";
-
-        if (isValueEmpty || isValuePlaceholder || isValueAnEmptyArray) {
+        if (!AnilistAllowedFilterKeys.has(key)) {
             continue;
         }
 
+        const isValueEmpty = value === "" || value === undefined;
+        const isValuePlaceholder = value === AnyOption.value || value === AnyOption.name;
+        const isValueAnEmptyArray = value === "[]";
+        const isFalsyValue = value === "false" || value === false || value === 0 || value === "0";
 
+        if (isValueEmpty || isValuePlaceholder || isValueAnEmptyArray || isFalsyValue) {
+            continue;
+        }
 
         appliedFilters[key] = value;
     }
