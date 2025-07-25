@@ -32,7 +32,7 @@ export default function SelectWrapper({
         '(min-width: 640px)',
         // `useMediaQuery` returns `undefined` when component re-creates even if it's CSR already
         // and only then triggers a re-render and returns valid viewport
-        globalThis?.window?.innerWidth >= 64,
+        globalThis?.window?.innerWidth >= 640,
     );
 
     // Show custom <Select /> component only on the desktop,
