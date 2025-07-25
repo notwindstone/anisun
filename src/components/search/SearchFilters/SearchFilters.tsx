@@ -17,6 +17,7 @@ import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
 import SearchTags from "@/components/search/SearchTags/SearchTags";
 import SegmentedControl from "@/components/base/SegmentedControl/SegmentedControl";
 import AppliedFilters from "@/components/search/AppliedFilters/AppliedFilters";
+import Divider from "@/components/base/Divider/Divider";
 
 const categories: Array<string> = ["General", "Modifiers", "Tags"];
 
@@ -182,6 +183,7 @@ export default function SearchFilters() {
                     {memoizedSegmentedControl}
                     {memoizedAppliedFilters}
                 </div>
+                <Divider classNames="shrink-0" />
                 {memoizedFilterSelections[selected ?? categories[0]]}
             </div>
         </>
