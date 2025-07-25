@@ -16,6 +16,7 @@ import transformIntoDropdownOptions from "@/lib/misc/transformIntoDropdownOption
 import NativeSlider from "@/components/base/NativeSlider/NativeSlider";
 import SearchTags from "@/components/search/SearchTags/SearchTags";
 import SegmentedControl from "@/components/base/SegmentedControl/SegmentedControl";
+import AppliedFilters from "@/components/search/AppliedFilters/AppliedFilters";
 
 const categories: Array<string> = ["General", "Modifiers", "Tags"];
 
@@ -57,6 +58,14 @@ export default function SearchFilters() {
             selectList={setSelected}
         />
     ), [selected, setSelected]);
+    const memoizedAppliedFilters = useMemo(
+        () => (
+            <AppliedFilters
+                callback={memoizedCallback}
+            />
+        ),
+        [memoizedCallback],
+    );
     const memoizedSortFilter = useMemo(
         () => (
             <SelectWrapper
@@ -167,7 +176,10 @@ export default function SearchFilters() {
         <>
             <div className="overscroll-y-none overflow-y-auto sm:overflow-y-visible h-full px-4 pb-4 flex flex-col gap-4">
                 {memoizedSortFilter}
-                {memoizedSegmentedControl}
+                <div className="flex sm:flex-nowrap flex-wrap gap-2 justify-between">
+                    {memoizedSegmentedControl}
+                    {memoizedAppliedFilters}
+                </div>
                 {memoizedFilterSelections[selected ?? categories[0]]}
             </div>
         </>
