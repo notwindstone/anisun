@@ -4,6 +4,7 @@ import { AnyOption } from "@/constants/app";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { DarkThemeKey } from "@/constants/configs";
 import { X } from "lucide-react";
+import { AnilistFilterLabels } from "@/constants/anilist";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 
 export default function AppliedFilters({
@@ -61,7 +62,7 @@ export default function AppliedFilters({
                             }}
                         >
                             <span className="line-clamp-1">
-                                {key}
+                                {AnilistFilterLabels[key]}
                             </span>
                             <X size={14} />
                         </button>

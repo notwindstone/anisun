@@ -25,6 +25,28 @@ export const AnilistRangedFilterKeys = {
     RangedEpisodes: ["episodes_greater", "episodes_lesser"],
     Duration:       ["duration_greater", "duration_lesser"],
 } as const;
+export const AnilistFilterLabels: Record<
+    typeof AnilistFilterKeys[keyof typeof AnilistFilterKeys] | string,
+    string
+> = {
+    averageScore_greater: "Score",
+    sort:                 "Sort",
+    genre_in:             "Genres",
+    seasonYear:           "Year",
+    season:               "Season",
+    format:               "Format",
+    status:               "Status",
+    source:               "Source",
+    onList:               "Only my anime",
+    isAdult:              "Adult",
+    tag_in:               "Tags",
+    startDate_greater:    "Ranged year from",
+    endDate_lesser:       "Ranged year to",
+    episodes_greater:     "Episodes from",
+    episodes_lesser:      "Episodes to",
+    duration_greater:     "Duration from",
+    duration_lesser:      "Duration to",
+};
 export const AnilistAllowedFilterKeys: Set<string> = new Set([
     ...(Object.values(AnilistFilterKeys)),
     ...AnilistRangedFilterKeys.RangedYears,
