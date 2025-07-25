@@ -5,12 +5,16 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 
 export default function SegmentedControl({
+    darker,
+    fullWidth,
     list,
     selected,
     selectList,
 }: {
-    list: Array<string>;
-    selected: string | undefined;
+    darker?:    boolean;
+    fullWidth?: boolean;
+    list:       Array<string>;
+    selected:   string | undefined;
     selectList: Dispatch<SetStateAction<string | undefined>>;
 }) {
     const { theme, base } = useContextSelector(ConfigsContext, (value) => {
@@ -65,12 +69,12 @@ export default function SegmentedControl({
         <>
             <div className="flex gap-2 shrink-0 flex-wrap">
                 <div
-                    className="w-fit relative rounded-md flex gap-2 p-1 overflow-hidden shrink-0 flex-wrap"
+                    className={`${fullWidth ? "w-full" : "w-fit"} relative rounded-md flex gap-2 p-1 overflow-hidden shrink-0 flex-wrap`}
                     style={{
                         backgroundColor: parseTailwindColor({
                             color: base,
                             step:  theme === DarkThemeKey
-                                ? 900 : 100,
+                                ? (darker ? 800 : 900) : (darker ? 200 : 100),
                         }),
                     }}
                 >
@@ -80,7 +84,7 @@ export default function SegmentedControl({
                             backgroundColor: parseTailwindColor({
                                 color: base,
                                 step:  theme === DarkThemeKey
-                                    ? 800 : 200,
+                                    ? (darker ? 900 : 800) : (darker ? 100 : 200),
                             }),
                             width:     currentButtonWidth?.width ?? 0,
                             transform: `translateX(${currentButtonWidth?.offset?.left ?? 0}px) translateY(${currentButtonWidth?.offset?.top ?? 0}px)`,
@@ -108,7 +112,7 @@ export default function SegmentedControl({
                                     <button
                                         ref={references[index]}
                                         onClick={() => selectList(mediaListStatus)}
-                                        className="z-10 flex rounded-md py-1 px-2 h-8 cursor-pointer transition-[opacity] duration-300 opacity-80 hover:opacity-100"
+                                        className={`z-10 flex rounded-md py-1 px-2 h-8 cursor-pointer transition-[opacity] duration-300 opacity-80 hover:opacity-100 ${fullWidth ? "flex-1 justify-center" : ""}`}
                                     >
                                         {mediaListStatus}
                                     </button>
