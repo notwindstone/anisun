@@ -3,7 +3,7 @@ import { GraphQLClient } from "@/lib/graphql/client";
 import { RemoteRoutes } from "@/constants/routes";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import { SearchType } from "@/types/Anime/Search.type";
-import { AnilistPageMediaLimitDefault } from "@/constants/anilist";
+import { AnilistPageMediaLimitDefault, AnilistPageMediaLimitMax } from "@/constants/anilist";
 import getAnilistFilters from "@/lib/misc/getAnilistFilters";
 
 const SearchAnime = (
@@ -25,7 +25,7 @@ const SearchAnime = (
                                 Math.abs(
                                     Number(options?.filters?.["perPage"] ?? AnilistPageMediaLimitDefault),
                                 ),
-                                AnilistPageMediaLimitDefault,
+                                AnilistPageMediaLimitMax,
                             ),
                     },
                     media: {

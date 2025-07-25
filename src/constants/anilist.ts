@@ -31,7 +31,8 @@ export const AnilistAllowedFilterKeys: Set<string> = new Set([
     ...AnilistRangedFilterKeys.RangedEpisodes,
     ...AnilistRangedFilterKeys.Duration,
 ]);
-export const AnilistPageMediaLimitDefault = 50;
+export const AnilistPageMediaLimitDefault = 18;
+export const AnilistPageMediaLimitMax = 50;
 // If it's January 1, then ofc there will be no good animes
 // that were released on January 1, so we go back 30 days before.
 export const CurrentAnimeYear = getRelativeDate({ days: -30 }).getFullYear();
