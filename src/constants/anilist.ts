@@ -17,7 +17,6 @@ export const AnilistFilterKeys = {
     Status:      "status",
     Source:      "source",
     ShowMyAnime: "onList",
-    HideMyAnime: "onList",
     Censored:    "isAdult",
     Tags:        "tag_in",
 } as const;
@@ -338,16 +337,8 @@ export const CheckboxFilters: Array<{
     label:     string;
 }> = [
     {
-        parameter: "isRangedYear",
-        label:     "Select Year Range",
-    },
-    {
         parameter: AnilistFilterKeys.ShowMyAnime,
         label:     "Only Show My Anime",
-    },
-    {
-        parameter: AnilistFilterKeys.HideMyAnime,
-        label:     "Hide My Anime",
     },
     {
         parameter: AnilistFilterKeys.Censored,

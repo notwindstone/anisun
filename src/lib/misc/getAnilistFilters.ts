@@ -31,6 +31,19 @@ export default function getAnilistFilters({
             continue;
         }
 
+        if (key === AnilistFilterKeys.ShowMyAnime) {
+            appliedFilters[key] = value === "true";
+
+            continue;
+        }
+
+        if (key === AnilistFilterKeys.Censored) {
+            // `censored` represents the opposite of `isAdult`
+            appliedFilters[key] = value === "false";
+
+            continue;
+        }
+
         const isCurrentFilterAnArray =
             key === AnilistFilterKeys.Genres ||
             key === AnilistFilterKeys.Tags;
