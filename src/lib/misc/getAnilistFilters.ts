@@ -75,6 +75,6 @@ export default function getAnilistFilters({
 
         appliedFilters[key] = value;
     }
-    console.log(appliedFilters);
+
     return appliedFilters;
 }

@@ -3,7 +3,6 @@ import { FormatType } from "@/types/Anime/Queries/Format.type";
 import { StatusType } from "@/types/Anime/Queries/Status.type";
 import { SortType } from "@/types/Anime/Queries/Sort.type";
 import { SourceType } from "@/types/Anime/Queries/Source.type";
-import {ParameterType} from "@/constants/anilist";
 
 export type VariablesType = Partial<{
     type:                 "ANIME" | "MANGA";

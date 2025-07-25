@@ -5,6 +5,7 @@ import { SearchContext } from "@/lib/providers/SearchProvider";
 import Cards from "@/components/layout/Cards/Cards";
 import { useContextSelector } from "use-context-selector";
 import { useEffect, useState } from "react";
+import getAnilistFilters from "@/lib/misc/getAnilistFilters";
 
 export default function ClientFetchWithSearchWrapper({
     isGrid,
@@ -31,10 +32,18 @@ export default function ClientFetchWithSearchWrapper({
         return;
     }
 
+    const cleanedQueryKey = getAnilistFilters({
+        search: {
+            search:  "static-value---ignored",
+            type:    "name",
+            filters: search.filters,
+        },
+    });
+
     return (
         <>
             <ClientFetch
-                queryKey={["search", search.search, search.type, JSON.stringify(search.filters)]}
+                queryKey={["search", search.search, search.type, JSON.stringify(cleanedQueryKey)]}
                 method={"SearchTitles"}
                 pendingUI={
                     <Cards isGrid={isGrid} search={search.search} isPending />
