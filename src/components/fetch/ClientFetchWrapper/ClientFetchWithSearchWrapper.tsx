@@ -43,7 +43,15 @@ export default function ClientFetchWithSearchWrapper({
     return (
         <>
             <ClientFetch
-                queryKey={["search", search.search, search.type, JSON.stringify(cleanedQueryKey)]}
+                queryKey={[
+                    "search",
+                    search.search,
+                    search.type,
+                    // we can probably just fetch 50 entries
+                    // and then remove not needed entries client-side
+                    search.filters?.["perPage"]?.toString(),
+                    JSON.stringify(cleanedQueryKey),
+                ]}
                 method={"SearchAnime"}
                 pendingUI={
                     <Cards isGrid={isGrid} search={search.search} isPending />
