@@ -1,4 +1,8 @@
 export type QueryType =
+    | "airingSchedule.nodes.airingAt"
+    | "airingSchedule.nodes.timeUntilAiring"
+    | "airingSchedule.nodes.episode"
+
     | "averageScore"
     | "bannerImage"
     | "chapters"

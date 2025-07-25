@@ -1,11 +1,23 @@
+import { FormatType } from "@/types/Anime/Queries/Format.type";
+
 export type AnimeType = Partial<{
     id:                         number;
-    airingSchedule:             string // should change;
+    airingSchedule:             Partial<{
+        nodes: Partial<{
+            airingAt:        number;
+            episodes:        number;
+            timeUntilAiring: number;
+        }>;
+    }>;
     averageScore:               number;
     bannerImage:                string;
-    chapters:                   number;
-    characters:                 string // should change;
-    countryOfOrigin:            string // should change;
+    characters:                 Partial<{
+        nodes: Partial<{
+            image: Partial<{ large: string }>;
+            name:  Partial<{ full:  string }>;
+        }>;
+    }>;
+    countryOfOrigin:            string;
     coverImage: Partial<{
         color:                  string;
         extraLarge:             string;
@@ -14,11 +26,20 @@ export type AnimeType = Partial<{
     }>;
     description:                string;
     duration:                   number;
-    endDate:                    string // should change;
+    endDate:                    Partial<{
+        day:   number;
+        month: number;
+        year:  number;
+    }>;
     episodes:                   number;
-    externalLinks:              string // should change;
+    externalLinks:              Partial<{
+        color: string;
+        site:  string;
+        icon:  string;
+        url:   string;
+    }>;
     favourites:                 number;
-    format:                     string // should change;
+    format:                     FormatType;
     genres:                     Array<string>;
     hashtag:                    string;
     idMal:                      number;
@@ -30,7 +51,10 @@ export type AnimeType = Partial<{
     isRecommendationBlocked:    boolean;
     isReviewBlocked:            boolean;
     meanScore:                  number;
-    mediaListEntry:             string // should change;
+    mediaListEntry:             Partial<{
+        progress: number;
+        score:    number;
+    }>; /** peak */
     modNotes:                   string;
     nextAiringEpisode:          string // should change;
     popularity:                 number;
