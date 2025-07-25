@@ -28,7 +28,12 @@ export default function SelectWrapper({
     label:                 string;
     additionalClassNames?: string;
 }) {
-    const isProbablyDesktop = useMediaQuery('(min-width: 640px)');
+    const isProbablyDesktop = useMediaQuery(
+        '(min-width: 640px)',
+        // `useMediaQuery` returns `undefined` when component re-creates even if it's CSR already
+        // and only then triggers a re-render and returns valid viewport
+        globalThis?.window?.innerWidth >= 64,
+    );
 
     // Show custom <Select /> component only on the desktop,
     // or if the select should be searchable,
