@@ -35,10 +35,13 @@ const SearchAnime = (
                         })),
                     },
                 } : {
-                    page:  {},
+                    page: {
+                        page:    1,
+                        perPage: 10,
+                    },
                     media: {
                         type:  "ANIME",
-                        idMal: Number(options?.filters?.["idMal"] ?? 0),
+                        idMal: Number(options?.search ?? 0),
                     },
                 },
                 fields: [
