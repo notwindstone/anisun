@@ -25,7 +25,7 @@ export default function AppliedFilters({
     const filters = data.filters;
 
     return (
-        <div className="flex sm:flex-nowrap flex-wrap items-center gap-2 overflow-x-auto sm:h-10 max-h-20">
+        <div className="flex flex-wrap items-center gap-2 overflow-x-auto max-h-20">
             {
                 Object.entries(filters).map(([key, value]) => {
                     const isEmpty =
@@ -60,8 +60,8 @@ export default function AppliedFilters({
                                 }),
                             }}
                         >
-                            <span className="line-clamp-1 max-w-24">
-                                {value}
+                            <span className="line-clamp-1">
+                                {key}
                             </span>
                             <X size={14} />
                         </button>

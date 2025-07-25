@@ -51,12 +51,14 @@ export default function SearchFilters() {
         [setData],
     );
     const memoizedSegmentedControl = useMemo(() => (
-        <SegmentedControl
-            darker
-            list={categories}
-            selected={selected}
-            selectList={setSelected}
-        />
+        <div className="shrink-0">
+            <SegmentedControl
+                darker
+                list={categories}
+                selected={selected}
+                selectList={setSelected}
+            />
+        </div>
     ), [selected, setSelected]);
     const memoizedAppliedFilters = useMemo(
         () => (
@@ -176,7 +178,7 @@ export default function SearchFilters() {
         <>
             <div className="overscroll-y-none overflow-y-auto sm:overflow-y-visible h-full px-4 pb-4 flex flex-col gap-4">
                 {memoizedSortFilter}
-                <div className="flex sm:flex-nowrap flex-wrap gap-2 justify-between">
+                <div className="flex sm:flex-nowrap flex-wrap gap-2 items-starts justify-between">
                     {memoizedSegmentedControl}
                     {memoizedAppliedFilters}
                 </div>
