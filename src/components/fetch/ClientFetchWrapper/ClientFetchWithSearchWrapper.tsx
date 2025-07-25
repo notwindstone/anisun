@@ -46,6 +46,7 @@ export default function ClientFetchWithSearchWrapper({
             >
                 <Cards
                     search={search.search}
+                    areFiltersEmpty={areFiltersEmpty}
                     isImageUnoptimized
                     isGrid
                 />

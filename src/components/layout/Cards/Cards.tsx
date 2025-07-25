@@ -42,14 +42,16 @@ export default function Cards({
     isPending,
     isError,
     search,
+    areFiltersEmpty,
     data,
 }: {
     isImageUnoptimized?: boolean;
-    isGrid?: boolean;
-    isPending?: boolean;
-    isError?: boolean;
-    search?: string;
-    data?: AnimeType | Array<AnimeType>;
+    isGrid?:             boolean;
+    isPending?:          boolean;
+    isError?:            boolean;
+    search?:             string;
+    areFiltersEmpty?:    boolean;
+    data?:               AnimeType | Array<AnimeType>;
 }) {
     const animeData = useContextSelector(ClientFetchDataContext, (value) => value.data);
     const { theme, colors: { base } } = useContextSelector(ConfigsContext, (value) => {
@@ -104,7 +106,7 @@ export default function Cards({
         );
     }
 
-    if (search !== undefined && search === "") {
+    if (search !== undefined && (search === "" && areFiltersEmpty)) {
         return;
     }
 

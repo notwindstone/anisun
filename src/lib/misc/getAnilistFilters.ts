@@ -1,16 +1,19 @@
 import { SearchType } from "@/types/Anime/Search.type";
 import { AnyOption } from "@/constants/app";
-import { AnilistAllowedFilterKeys } from "@/constants/anilist";
+import {AnilistAllowedFilterKeys, AnilistFilterKeys, AnilistRangedFilterKeys} from "@/constants/anilist";
 
 export default function getAnilistFilters({
     search,
 }: {
     search: Partial<SearchType> | undefined;
-}): Record<string, string | number | boolean> {
-    const appliedFilters: Record<string, string | number | boolean> = {};
+}): Record<string, string | number | boolean | Array<string>> {
+    const appliedFilters: Record<string, string | number | boolean | Array<string>> = {};
     const currentSearchFilters = Object.entries(search?.filters ?? {});
 
-    if (search?.search !== undefined) {
+    if (
+        search?.search !== undefined &&
+        search.search !== ""
+    ) {
         appliedFilters["search"] = search.search;
     }
 
@@ -28,10 +31,40 @@ export default function getAnilistFilters({
             continue;
         }
 
+        const isCurrentFilterAnArray =
+            key === AnilistFilterKeys.Genres ||
+            key === AnilistFilterKeys.Tags;
+
+        if (isCurrentFilterAnArray && typeof value === "string") {
+            let parsed;
+
+            try {
+                parsed = JSON.parse(value);
+            } catch {
+                continue;
+            }
+
+            if (!Array.isArray(parsed)) {
+                continue;
+            }
+
+            appliedFilters[key] = parsed;
+
+            continue;
+        }
+
+        const isCurrentFilterADate =
+            key === AnilistRangedFilterKeys.RangedEpisodes[0] ||
+            key === AnilistRangedFilterKeys.RangedEpisodes[1];
+
+        if (isCurrentFilterADate) {
+            appliedFilters[key] = `${value}0000`;
+
+            continue;
+        }
+
         appliedFilters[key] = value;
     }
     console.log(appliedFilters);
-    console.log(AnilistAllowedFilterKeys);
-
-    return {};
+    return appliedFilters;
 }
