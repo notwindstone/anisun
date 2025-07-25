@@ -7,6 +7,31 @@ import { VariablesType } from "@/types/Anime/Variables.type";
 import { SourceType } from "@/types/Anime/Queries/Source.type";
 import { SortType } from "@/types/Anime/Queries/Sort.type";
 
+export const AnilistFilterKeys = {
+    Score:       "averageScore_greater",
+    Sort:        "sort",
+    Genres:      "genre_in",
+    Year:        "seasonYear",
+    Season:      "season",
+    Format:      "format",
+    Status:      "status",
+    Source:      "source",
+    ShowMyAnime: "onList",
+    HideMyAnime: "onList",
+    Censored:    "isAdult",
+    Tags:        "tag_in",
+} as const;
+export const AnilistRangedFilterKeys = {
+    RangedYears:    ["startDate_greater", "endDate_lesser"],
+    RangedEpisodes: ["episodes_greater", "episodes_lesser"],
+    Duration:       ["duration_greater", "duration_lesser"],
+} as const;
+export const AnilistAllowedFilterKeys: Set<string> = new Set([
+    ...(Object.values(AnilistFilterKeys)),
+    ...AnilistRangedFilterKeys.RangedYears,
+    ...AnilistRangedFilterKeys.RangedEpisodes,
+    ...AnilistRangedFilterKeys.Duration,
+]);
 export const AnilistPageMediaLimitDefault = 50;
 // If it's January 1, then ofc there will be no good animes
 // that were released on January 1, so we go back 30 days before.
@@ -244,7 +269,7 @@ export const getSelectableFilters = (genres: Array<string>): Array<{
     additionalClassNames: string;
     multiple:             boolean;
     searchable:           boolean;
-    parameter:            string;
+    parameter:            typeof AnilistFilterKeys[keyof typeof AnilistFilterKeys];
     label:                string;
     options:              Array<string | number | { name: string; value: string; }>;
 }> => ([
@@ -252,7 +277,7 @@ export const getSelectableFilters = (genres: Array<string>): Array<{
         additionalClassNames: "",
         multiple:             true,
         searchable:           true,
-        parameter:            "genre",
+        parameter:            AnilistFilterKeys.Genres,
         label:                "Genres",
         options:              genres,
     },
@@ -260,7 +285,7 @@ export const getSelectableFilters = (genres: Array<string>): Array<{
         additionalClassNames: "",
         multiple:             false,
         searchable:           false,
-        parameter:            "year",
+        parameter:            AnilistFilterKeys.Year,
         label:                "Year",
         options:              AnilistQueryYears,
     },
@@ -268,15 +293,15 @@ export const getSelectableFilters = (genres: Array<string>): Array<{
         additionalClassNames: "",
         multiple:             false,
         searchable:           false,
-        parameter:            "season",
+        parameter:            AnilistFilterKeys.Season,
         label:                "Season",
         options:              AnilistSeasons,
-    },
+    } ,
     {
         additionalClassNames: "",
         multiple:             false,
         searchable:           false,
-        parameter:            "format",
+        parameter:            AnilistFilterKeys.Format,
         label:                "Format",
         options:              AnilistFormats,
     },
@@ -284,7 +309,7 @@ export const getSelectableFilters = (genres: Array<string>): Array<{
         additionalClassNames: "lg:col-span-2",
         multiple:             false,
         searchable:           false,
-        parameter:            "status",
+        parameter:            AnilistFilterKeys.Status,
         label:                "Airing Status",
         options:              AnilistAiringStatuses,
     },
@@ -292,13 +317,13 @@ export const getSelectableFilters = (genres: Array<string>): Array<{
         additionalClassNames: "lg:col-span-2",
         multiple:             false,
         searchable:           false,
-        parameter:            "source",
+        parameter:            AnilistFilterKeys.Source,
         label:                "Source Material",
         options:              AnilistSourceMaterials,
     },
 ]);
 export const CheckboxFilters: Array<{
-    parameter: string;
+    parameter: typeof AnilistFilterKeys[keyof typeof AnilistFilterKeys] | "isRangedYear";
     label:     string;
 }> = [
     {
@@ -306,20 +331,20 @@ export const CheckboxFilters: Array<{
         label:     "Select Year Range",
     },
     {
-        parameter: "onlyShowMyAnime",
+        parameter: AnilistFilterKeys.ShowMyAnime,
         label:     "Only Show My Anime",
     },
     {
-        parameter: "hideMyAnime",
+        parameter: AnilistFilterKeys.HideMyAnime,
         label:     "Hide My Anime",
     },
     {
-        parameter: "isAdult",
+        parameter: AnilistFilterKeys.Censored,
         label:     "Censored",
     },
 ];
 export const SliderFilters: Array<{
-    parameter: string;
+    parameter: typeof AnilistRangedFilterKeys[keyof typeof AnilistRangedFilterKeys];
     label:     string;
     fixed:     {
         min:  number;
@@ -329,7 +354,7 @@ export const SliderFilters: Array<{
     additionalClassNames: string;
 }> = [
     {
-        parameter: "yearRange",
+        parameter: AnilistRangedFilterKeys.RangedYears,
         label:     "Year Range",
         fixed:     {
             min:  1970,
@@ -340,7 +365,7 @@ export const SliderFilters: Array<{
         additionalClassNames: "",
     },
     {
-        parameter: "episodes",
+        parameter: AnilistRangedFilterKeys.RangedEpisodes,
         label:     "Episodes",
         fixed:     {
             min:  0,
@@ -350,7 +375,7 @@ export const SliderFilters: Array<{
         additionalClassNames: "",
     },
     {
-        parameter: "duration",
+        parameter: AnilistRangedFilterKeys.Duration,
         label:     "Duration",
         fixed:     {
             min:  0,
@@ -361,7 +386,7 @@ export const SliderFilters: Array<{
     },
 ];
 export const SingleSliderFilters: Array<{
-    parameter: string;
+    parameter: typeof AnilistFilterKeys[keyof typeof AnilistFilterKeys] | "perPage";
     label:     string;
     fixed:     {
         min:  number;
@@ -371,7 +396,7 @@ export const SingleSliderFilters: Array<{
     reverse: boolean;
 }> = [
     {
-        parameter: "averageScore_greater",
+        parameter: AnilistFilterKeys.Score,
         label:     "Score",
         fixed:     {
             min:  0,

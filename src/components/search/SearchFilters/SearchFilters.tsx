@@ -2,6 +2,7 @@ import { useCallback, useMemo } from "react";
 import { useContextSelector } from "use-context-selector";
 import { SearchContext } from "@/lib/providers/SearchProvider";
 import {
+    AnilistFilterKeys,
     AnilistSortValues,
     CheckboxFilters,
     getSelectableFilters,
@@ -52,7 +53,7 @@ export default function SearchFilters() {
             <>
                 <div className="overscroll-y-none overflow-y-auto h-full px-4 pb-4 flex flex-col gap-4 sm:min-h-83">
                     <SelectWrapper
-                        parameter="sort"
+                        parameter={AnilistFilterKeys.Sort}
                         label="Sort by"
                         options={transformIntoDropdownOptions(AnilistSortValues)}
                         callback={memoizedCallback}
@@ -85,7 +86,8 @@ export default function SearchFilters() {
                             {
                                 CheckboxFilters.map((filter) => (
                                     <Checkbox
-                                        key={filter.parameter}
+                                        // there is two children with the `onList` parameter
+                                        key={`${filter.parameter}_${filter.label}`}
                                         parameter={filter.parameter}
                                         label={filter.label}
                                         callback={memoizedCallback}
@@ -99,7 +101,7 @@ export default function SearchFilters() {
                             {
                                 SliderFilters.map((filter) => (
                                     <RangedSlider
-                                        key={filter.parameter}
+                                        key={filter.parameter[0]}
                                         parameter={filter.parameter}
                                         label={filter.label}
                                         fixed={filter.fixed}
@@ -130,7 +132,7 @@ export default function SearchFilters() {
                         additionalClassNames="overflow-y-auto max-h-96"
                     >
                         <SearchTags
-                            parameter="tags"
+                            parameter={AnilistFilterKeys.Tags}
                             callback={memoizedCallback}
                         />
                     </FiltersCategory>

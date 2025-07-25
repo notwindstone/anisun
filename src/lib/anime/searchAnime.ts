@@ -4,7 +4,7 @@ import { RemoteRoutes } from "@/constants/routes";
 import { AnimeType } from "@/types/Anime/Anime.type";
 import { SearchType } from "@/types/Anime/Search.type";
 import { AnilistPageMediaLimitDefault } from "@/constants/anilist";
-import { SortType } from "@/types/Anime/Queries/Sort.type";
+import getAnilistFilters from "@/lib/misc/getAnilistFilters";
 
 const SearchAnime = (
     options?: Partial<SearchType> | undefined,
@@ -29,12 +29,10 @@ const SearchAnime = (
                             ),
                     },
                     media: {
-                        type:   "ANIME",
-                        search: options?.search,
-                        // make some function to check this shit
-                        // can be literally anything cuz user
-                        sort:   options?.filters?.["sort"] as SortType,
-                        genre:  options?.filters?.["genre"] as string,
+                        type: "ANIME",
+                        ...(getAnilistFilters({
+                            search: options,
+                        })),
                     },
                 } : {
                     page:  {},

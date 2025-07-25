@@ -18,7 +18,7 @@ export default function RangedSlider({
         max:  number;
         step: number;
     };
-    parameter: string;
+    parameter: readonly [string, string];
     callback: ({
         parameter,
         value,
@@ -41,15 +41,15 @@ export default function RangedSlider({
             : 500,
     });
 
-    const initialValues = useInitialSearchParameters(parameter)
-        ?.split("-");
+    const initialValueFirst = useInitialSearchParameters(parameter[0]);
+    const initialValueSecond = useInitialSearchParameters(parameter[1]);
 
     const [current, setCurrent] = useState<{
         min: number;
         max: number;
     }>({
-        min: Number(initialValues?.[0] || fixed.min),
-        max: Number(initialValues?.[1] || fixed.max),
+        min: Number(initialValueFirst || fixed.min),
+        max: Number(initialValueSecond || fixed.max),
     });
     const [debouncedCurrent] = useDebouncedValue(current, 300);
     const [mobileActive, setMobileActive] = useState<{
@@ -61,23 +61,29 @@ export default function RangedSlider({
     });
 
     useEffect(() => {
-        const newValue = `${debouncedCurrent.min}-${debouncedCurrent.max}`;
-
         if (
             debouncedCurrent.min === fixed.min &&
             debouncedCurrent.max === fixed.max
         ) {
             callback({
-                parameter,
-                value: "",
+                parameter: parameter[0],
+                value:     "",
+            });
+            callback({
+                parameter: parameter[1],
+                value:     "",
             });
 
             return;
         }
 
         callback({
-            parameter,
-            value: newValue,
+            parameter: parameter[0],
+            value:     debouncedCurrent.min.toString(),
+        });
+        callback({
+            parameter: parameter[1],
+            value:     debouncedCurrent.max.toString(),
         });
     }, [callback, parameter, fixed.min, fixed.max, debouncedCurrent.min, debouncedCurrent.max]);
 
