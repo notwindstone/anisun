@@ -5,6 +5,6 @@ import SearchAnime from "@/lib/anime/searchAnime";
 // A workaround for passing methods from server to the client
 export const Getters = {
     FetchHomePageTitles: GetHomePageTitles,
-    SearchTitles:        SearchAnime,
+    SearchAnime:         SearchAnime,
     FetchCurrentAnime:   FetchCurrentAnime,
 };
