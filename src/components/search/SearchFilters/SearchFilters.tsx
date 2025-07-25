@@ -57,6 +57,17 @@ export default function SearchFilters() {
             selectList={setSelected}
         />
     ), [selected, setSelected]);
+    const memoizedSortFilter = useMemo(
+        () => (
+            <SelectWrapper
+                parameter={AnilistFilterKeys.Sort}
+                label="Sort by"
+                options={transformIntoDropdownOptions(AnilistSortValues)}
+                callback={memoizedCallback}
+            />
+        ),
+        [memoizedCallback],
+    );
     const memoizedGeneralFilters = useMemo(
         () => (
             <div className="grid lg:grid-cols-4 sm:grid-cols-3 xxs:grid-cols-2 grid-cols-1 gap-2">
@@ -152,21 +163,13 @@ export default function SearchFilters() {
     );
 
     // basically never triggers on any of SearchFilters hooks
-    return useMemo(
-        () => (
-            <>
-                <div className="overscroll-y-none overflow-y-auto sm:overflow-y-visible h-full px-4 pb-4 flex flex-col gap-4">
-                    <SelectWrapper
-                        parameter={AnilistFilterKeys.Sort}
-                        label="Sort by"
-                        options={transformIntoDropdownOptions(AnilistSortValues)}
-                        callback={memoizedCallback}
-                    />
-                    {memoizedSegmentedControl}
-                    {memoizedFilterSelections[selected ?? categories[0]]}
-                </div>
-            </>
-        ),
-        [memoizedCallback, memoizedSegmentedControl, memoizedFilterSelections, selected],
+    return (
+        <>
+            <div className="overscroll-y-none overflow-y-auto sm:overflow-y-visible h-full px-4 pb-4 flex flex-col gap-4">
+                {memoizedSortFilter}
+                {memoizedSegmentedControl}
+                {memoizedFilterSelections[selected ?? categories[0]]}
+            </div>
+        </>
     );
 }
