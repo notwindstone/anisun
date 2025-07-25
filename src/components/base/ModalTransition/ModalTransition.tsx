@@ -78,7 +78,9 @@ export default function ModalTransition({
                             <X />
                         </Button>
                     </div>
-                    <Divider classNames="mx-4" />
+                    <div className="px-4">
+                        <Divider />
+                    </div>
                     {children}
                 </div>
             </div>
