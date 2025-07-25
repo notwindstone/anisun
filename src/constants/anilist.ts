@@ -342,7 +342,7 @@ export const CheckboxFilters: Array<{
     },
     {
         parameter: AnilistFilterKeys.Censored,
-        label:     "Censored",
+        label:     "Adult",
     },
 ];
 export const SliderFilters: Array<{

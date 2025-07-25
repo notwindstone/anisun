@@ -1,6 +1,6 @@
 import { SearchType } from "@/types/Anime/Search.type";
 import { AnyOption } from "@/constants/app";
-import {AnilistAllowedFilterKeys, AnilistFilterKeys, AnilistRangedFilterKeys} from "@/constants/anilist";
+import { AnilistAllowedFilterKeys, AnilistFilterKeys, AnilistRangedFilterKeys } from "@/constants/anilist";
 
 export default function getAnilistFilters({
     search,
@@ -31,15 +31,12 @@ export default function getAnilistFilters({
             continue;
         }
 
-        if (key === AnilistFilterKeys.ShowMyAnime) {
+        const isCurrentFilterABoolean =
+            key === AnilistFilterKeys.ShowMyAnime ||
+            key === AnilistFilterKeys.Censored;
+
+        if (isCurrentFilterABoolean) {
             appliedFilters[key] = value === "true";
-
-            continue;
-        }
-
-        if (key === AnilistFilterKeys.Censored) {
-            // `censored` represents the opposite of `isAdult`
-            appliedFilters[key] = value === "false";
 
             continue;
         }
