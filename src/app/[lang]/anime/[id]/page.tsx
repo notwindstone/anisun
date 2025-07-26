@@ -1,10 +1,13 @@
+"use client";
+
 import ExtensionsFetch from "@/components/extensions/ExtensionsFetch/ExtensionsFetch";
 import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
 import React from "react";
 import getAnimePageQueryKey from "@/lib/misc/getAnimePageQueryKey";
 import AnimeInfo from "@/components/layout/AnimeInfo/AnimeInfo";
+import { useParams, useSearchParams } from "next/navigation";
 
-export default async function Page({
+export default function Page(/*{
     params,
     searchParams,
 }: {
@@ -12,16 +15,22 @@ export default async function Page({
     searchParams?: Promise<{
         selectedExtension?: string;
     }>;
-}) {
+}*/) {
+    /*
     const parameters = await params;
     const id = parameters?.id;
     const search = await searchParams;
+    */
+    const parameters = useParams<{ id: string }>();
+    const id = parameters?.id;
+    const searchParameters = useSearchParams();
+    const selectedExtension = searchParameters?.get("selectedExtension");
 
     return (
         <div className="flex flex-col sm:p-4 gap-4 mx-auto max-w-384">
             <div className="z-1000 sticky sm:static sm:rounded-md overflow-clip top-0">
                 <ExtensionsFetch
-                    selectedExtension={search?.selectedExtension as string}
+                    selectedExtension={selectedExtension ?? ""}
                 />
             </div>
             <ClientFetch
