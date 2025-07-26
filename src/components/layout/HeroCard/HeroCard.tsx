@@ -55,10 +55,14 @@ export default function HeroCard({
 
     gradientColorOneArray.pop();
     gradientColorOneArray.push(" / 26.67%)");
+
     const gradientColorOne = gradientColorOneArray.join("");
 
     return (
-        <Link className="hero__wrapper select-none group w-full" href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}>
+        <Link
+            className="hero__wrapper select-none group w-full"
+            href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}
+        >
             <HeroCardImage
                 image={image}
                 name={name}
