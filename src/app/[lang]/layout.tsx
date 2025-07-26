@@ -24,6 +24,7 @@ import MobileNavbarWrapper from "@/components/layout/MobileNavbarWrapper/MobileN
 import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
 import handleRequests from "@/lib/misc/handleRequests";
 import UnsupportedBrowserNotify from "@/components/misc/UnsupportedBrowserNotify/UnsupportedBrowserNotify";
+import { AnimePageLoaderProvider } from "@/lib/providers/AnimePageLoader";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -110,7 +111,10 @@ export default async function RootLayout({
                                 <AppWrapper>
                                     <SidebarWrapper accountInfo={safeAccountValues} />
                                     <div className="overflow-y-auto w-full h-[calc(100svh-64px)] sm:h-full">
-                                        {children}
+                                        {/* just use CSR apps at this point 😭 */}
+                                        <AnimePageLoaderProvider>
+                                            {children}
+                                        </AnimePageLoaderProvider>
                                         <Footer dictionaries={dictionaries} />
                                     </div>
                                     <MobileNavbarWrapper accountInfo={safeAccountValues} />

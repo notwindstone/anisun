@@ -8,6 +8,7 @@ import Badge from "@/components/base/Badge/Badge";
 import { DefaultLocale } from "@/constants/localization";
 import translate from "@/lib/misc/translate";
 import { useContextSelector } from "use-context-selector";
+import { AnimePageLoaderContext } from "@/lib/providers/AnimePageLoader";
 
 export default function SmallCard({
     data,
@@ -23,6 +24,7 @@ export default function SmallCard({
     isGrid?: boolean;
     isImageUnoptimized?: boolean;
 }) {
+    const setOptimisticAnimePageData = useContextSelector(AnimePageLoaderContext, (value) => value.setOptimisticData);
     const { dictionaries, data: { theme, colors: { base } } } = useContextSelector(ConfigsContext, (value) => {
         return {
             dictionaries: value.dictionaries,
@@ -69,8 +71,15 @@ export default function SmallCard({
     return (
         <>
             <Link
-                href={`/anime/${data?.idMal}?title=${redirectURLAnimeName}`}
+                href="/anime"
                 className={`shrink-0 select-none group relative aspect-poster rounded-md overflow-clip ${gridClassNames}`}
+                onClick={() => {
+                    setOptimisticAnimePageData((state) => ({
+                        ...state,
+                        idMal: (data?.idMal ?? 0)?.toString(),
+                        title: redirectURLAnimeName.toString(),
+                    }));
+                }}
             >
                 <ConfiguredImage
                     className="object-cover duration-300 group-hover:scale-105 group-hover:brightness-75 group-focus:scale-105 group-focus:brightness-75"

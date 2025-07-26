@@ -11,12 +11,14 @@ import { DefaultLocale } from "@/constants/localization";
 import translate from "@/lib/misc/translate";
 import { useContextSelector } from "use-context-selector";
 import HeroCardImage from "@/components/layout/HeroCardImage/HeroCardImage";
+import { AnimePageLoaderContext } from "@/lib/providers/AnimePageLoader";
 
 export default function HeroCard({
     data,
 }: {
     data?: AnimeType | undefined;
 }) {
+    const setOptimisticAnimePageData = useContextSelector(AnimePageLoaderContext, (value) => value.setOptimisticData);
     const { dictionaries, data: { theme, colors: { base } } } = useContextSelector(ConfigsContext, (value) => {
         return {
             dictionaries: value.dictionaries,
@@ -60,8 +62,16 @@ export default function HeroCard({
 
     return (
         <Link
+            prefetch
             className="hero__wrapper select-none group w-full"
-            href={`/anime/${currentData?.idMal}?title=${redirectURLAnimeName}`}
+            href="/anime"
+            onClick={() => {
+                setOptimisticAnimePageData((state) => ({
+                    ...state,
+                    idMal: (currentData?.idMal ?? 0)?.toString(),
+                    title: redirectURLAnimeName.toString(),
+                }));
+            }}
         >
             <HeroCardImage
                 image={image}
