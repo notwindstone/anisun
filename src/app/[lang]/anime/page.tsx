@@ -7,6 +7,7 @@ import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
 import getAnimePageQueryKey from "@/lib/misc/getAnimePageQueryKey";
 import AnimeInfo from "@/components/layout/AnimeInfo/AnimeInfo";
 
+// loads when user opens anime page in the web app
 export default function Page() {
     const optimisticData = useContextSelector(AnimePageLoaderContext, (value) => value.optimisticData);
 

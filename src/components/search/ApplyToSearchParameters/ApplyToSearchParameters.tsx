@@ -6,6 +6,8 @@ import { SearchContext } from "@/lib/providers/SearchProvider";
 import { useEffect } from "react";
 import { AnyOption } from "@/constants/app";
 
+const disallowed = ["page", "list", "username", "title", "selectedExtension"];
+
 export default function ApplyToSearchParameters(): React.ReactNode {
     const data = useContextSelector(SearchContext, (value) => value.data);
     const searchParameters = useSearchParams();
@@ -25,7 +27,9 @@ export default function ApplyToSearchParameters(): React.ReactNode {
         // fuck react, fuck re-renders
         // i'm switching to vue and svelte
 
-        for (const itemToRemove of ["page", "list", "username"]) {
+        // update: there is also `title`, `selectedExtensions` params
+        // that come from an anime page
+        for (const itemToRemove of disallowed) {
             modifiedParameters.delete(itemToRemove);
         }
 
