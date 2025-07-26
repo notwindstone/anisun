@@ -1,21 +1,23 @@
 import { FormatType } from "@/types/Anime/Queries/Format.type";
+import { SeasonType } from "@/types/Anime/Queries/Season.type";
+import { StatusType } from "@/types/Anime/Queries/Status.type";
 
 export type AnimeType = Partial<{
     id:                         number;
     airingSchedule:             Partial<{
-        nodes: Partial<{
+        nodes: Array<Partial<{
             airingAt:        number;
             episodes:        number;
             timeUntilAiring: number;
-        }>;
+        }>>;
     }>;
     averageScore:               number;
     bannerImage:                string;
     characters:                 Partial<{
-        nodes: Partial<{
+        nodes: Array<Partial<{
             image: Partial<{ large: string }>;
             name:  Partial<{ full:  string }>;
-        }>;
+        }>>;
     }>;
     countryOfOrigin:            string;
     coverImage: Partial<{
@@ -54,12 +56,43 @@ export type AnimeType = Partial<{
     mediaListEntry:             Partial<{
         progress: number;
         score:    number;
-    }>; /** peak */
+    }>;
     modNotes:                   string;
-    nextAiringEpisode:          string // should change;
+    nextAiringEpisode:          Partial<{
+        airingAt:        number;
+        episodes:        number;
+        timeUntilAiring: number;
+    }>;
     popularity:                 number;
-    rankings:                   string // should change;
-    recommendations:            string // should change;
+    rankings:                   Partial<{
+        allTime: boolean;
+        context: string;
+        format:  FormatType;
+        id:      number;
+        rank:    number;
+        season:  SeasonType;
+        type:    "POPULAR" | "RATED";
+        year:    number;
+    }>;
+    recommendations:            Partial<{
+        nodes: Array<Partial<{
+            rating:              number;
+            mediaRecommendation: Partial<{
+                idMal:      number;
+                episodes:   number;
+                status:     StatusType;
+                genres:     Array<string>;
+                coverImage: Partial<{
+                    extraLarge: string;
+                }>;
+                title: Partial<{
+                    english: string;
+                    native:  string;
+                    romaji:  string;
+                }>;
+            }>;
+        }>>;
+    }>;
     relations:                  string // should change;
     reviews:                    string // should change;
     season:                     string // should change;
