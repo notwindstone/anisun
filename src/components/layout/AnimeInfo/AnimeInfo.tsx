@@ -21,7 +21,7 @@ export default function AnimeInfo({
     }));
     const data: Record<"Current", AnimeType> = useContextSelector(ClientFetchDataContext, (value) => value.data);
     const searchParameters = useSearchParams();
-    const selectedEpisode = Number(searchParameters.get("selectedEpisode") ?? 0);
+    const selectedEpisode = Number(searchParameters.get("episode") ?? 0);
 
     useEffect(() => {
         if (!data) {
@@ -121,7 +121,7 @@ export default function AnimeInfo({
                         <div
                             // aspect-video here so that this element won't exceed player height
                             // and at the same time will be able to stretch
-                            className="rounded-md w-full lg:max-w-96 flex flex-col gap-2 p-2 overflow-y-auto aspect-video lg:max-h-none max-h-96"
+                            className="rounded-md w-full lg:max-w-96 flex flex-col gap-2 p-2 overflow-y-auto lg:aspect-video lg:max-h-none max-h-96"
                             style={{
                                 backgroundColor: parseTailwindColor({
                                     color: base,
@@ -141,7 +141,7 @@ export default function AnimeInfo({
                                             onClick={() => {
                                                 const modifiedParameters = new URLSearchParams(searchParameters);
 
-                                                modifiedParameters.set("selectedEpisode", currentMappingEpisode.toString());
+                                                modifiedParameters.set("episode", currentMappingEpisode.toString());
 
                                                 globalThis.history.replaceState({}, "", `?${modifiedParameters.toString()}`);
                                             }}
@@ -156,9 +156,7 @@ export default function AnimeInfo({
                                                     alt="Anime episode thumbnail"
                                                 />
                                             </div>
-                                            <p
-                                                className="opacity-80 text-start text-sm"
-                                            >
+                                            <p className="opacity-80 text-start text-sm">
                                                 {episode.title}
                                             </p>
                                         </button>

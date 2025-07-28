@@ -162,7 +162,7 @@ export default function SmallCard({
                             )
                         }
                         {
-                            (currentSeason !== undefined && currentEpisode !== null) && (
+                            (currentSeason !== undefined && currentSeason !== null && currentEpisode !== null) && (
                                 <Badge
                                     appendClassNames="w-fit invert"
                                     textSize="text-xs"
