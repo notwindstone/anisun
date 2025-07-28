@@ -60,7 +60,7 @@ export type AnimeType = Partial<{
     modNotes:                   string;
     nextAiringEpisode:          Partial<{
         airingAt:        number;
-        episodes:        number;
+        episode:         number;
         timeUntilAiring: number;
     }>;
     popularity:                 number;
@@ -104,7 +104,10 @@ export type AnimeType = Partial<{
     startDate:                  string // should change;
     stats:                      string // should change;
     status:                     string // should change;
-    streamingEpisodes:          string // should change;
+    streamingEpisodes:          Array<Partial<{
+        thumbnail: string;
+        title:     string;
+    }>>; // should change;
     studios:                    string // should change;
     synonyms:                   string // should change;
     tags:                       string // should change;
