@@ -168,7 +168,7 @@ export default function AnimeInfo({
                 }
             </div>
             <div className="flex lg:flex-nowrap flex-wrap gap-4">
-
+                todo
             </div>
         </div>
     );
