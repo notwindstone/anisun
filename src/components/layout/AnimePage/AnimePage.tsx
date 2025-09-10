@@ -1,9 +1,9 @@
 "use client";
 
-import ExtensionsFetch from "@/components/extensions/ExtensionsFetch/ExtensionsFetch";
 import ClientFetch from "@/components/fetch/ClientFetch/ClientFetch";
 import getAnimePageQueryKey from "@/lib/misc/getAnimePageQueryKey";
 import AnimeInfo from "@/components/layout/AnimeInfo/AnimeInfo";
+import ExtensionsSelector from "@/components/extensions/ExtensionsSelector/ExtensionsSelector";
 
 export default function AnimePage({
     selectedExtension,
@@ -35,7 +35,7 @@ export default function AnimePage({
             >
                 <AnimeInfo>
                     <div className="z-1000 sm:rounded-md overflow-clip top-0 w-full">
-                        <ExtensionsFetch
+                        <ExtensionsSelector
                             selectedExtension={selectedExtension}
                         />
                     </div>

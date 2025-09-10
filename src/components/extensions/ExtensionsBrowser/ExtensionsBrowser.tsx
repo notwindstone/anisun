@@ -81,13 +81,15 @@ export default function ExtensionsBrowser() {
                     loading
                     key={`${_}_${index}`}
                     extension={{
-                        displayName: "Loading...",
-                        author:      "anisun",
-                        version:     "0.0",
-                        name:        "",
-                        url:         "",
-                        logo:        "",
-                        pages:       [],
+                        id:         "",
+                        name:       "Loading...",
+                        authors:    ["anisun"],
+                        version:    "0.0",
+                        url:        "",
+                        logo:       "",
+                        pages:      [],
+                        languages:  [],
+                        categories: [],
                     }}
                 />
             );
