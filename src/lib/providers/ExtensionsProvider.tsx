@@ -2,15 +2,15 @@
 
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { createContext } from "use-context-selector";
-import { ExtensionType } from "@/types/Extensions/Extension.type";
+import { ManifestType } from "@/types/Extensions/Extension.type";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
-import getSafeExtensionsValues from "@/lib/configs/getSafeExtensionsValues";
+import { getExtensions } from "@/lib/extensions/getExtensions";
 
 export const ExtensionsContext = createContext<{
-    data: Array<ExtensionType> | undefined;
+    data: Array<ManifestType>;
     optimisticallyUpdate: Dispatch<
         SetStateAction<
-            Array<ExtensionType> | undefined
+            Array<ManifestType>
         >
     > | undefined;
 }>({
@@ -23,51 +23,31 @@ export function ExtensionsProvider({
 }: {
     children: React.ReactNode;
 }) {
-    const [extensionsState, setExtensionsState] = useState<Array<ExtensionType> | undefined>();
-
-    const extensions = getSafeExtensionsValues({
-        parsedExtensions: extensionsState ?? [],
-    });
+    const [extensionsState, setExtensionsState] = useState<Array<ManifestType>>([]);
 
     useEffect(() => {
-        const storedExtensions = localStorage.getItem(ExtensionsLocalStorageKey);
-
-        if (!storedExtensions) {
-            localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify([]));
-
-            return;
-        }
-
-        let parsedExtensions: unknown;
-
-        try {
-            parsedExtensions = JSON.parse(storedExtensions);
-        } catch {
-            parsedExtensions = [];
-        }
-
-        if (!Array.isArray(parsedExtensions)) {
-            return;
-        }
+        const extensions = Object.values(getExtensions({
+            local: true,
+        }));
 
         // disable all plugins on /reset page navigation
         if (location !== undefined && location.pathname.startsWith("/reset")) {
             localStorage.setItem(ExtensionsLocalStorageKey, JSON.stringify(
-                extensions.map((extension) => ({
+                extensions.map((extension: ManifestType) => ({
                     ...extension,
-                    isDisabled: true,
+                    enabled: false,
                 })),
             ));
 
             return;
         }
 
-        setExtensionsState(parsedExtensions);
+        setExtensionsState(extensions);
     }, []);
 
     return (
         <ExtensionsContext.Provider value={{
-            data:                 extensions,
+            data:                 extensionsState,
             optimisticallyUpdate: setExtensionsState,
         }}>
             {children}

@@ -88,15 +88,11 @@ export default function Page() {
     const pluginsByPage = [];
 
     for (const extension of extensions) {
-        if (extension?.isDisabled) {
+        if (extension?.enabled === false) {
             continue;
         }
 
-        if (extension?.areStyles) {
-            continue;
-        }
-
-        for (const page of extension.pages) {
+        for (const page of (extension?.pages ?? [])) {
             pluginsByPage.push({
                 page,
                 url: extension.url,
