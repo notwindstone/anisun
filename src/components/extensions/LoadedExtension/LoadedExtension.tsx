@@ -157,7 +157,7 @@ export default function LoadedExtension({
                     }
                     {
                         (extension?.pages ?? []).map((page) => {
-                            const pageLink = `/${page}`;
+                            const pageLink = page;
 
                             return (
                                 <Link

@@ -102,7 +102,7 @@ export default function Page() {
     const pathnameWithoutLocale = pathname.split("/").slice(2).join("/");
 
     for (const plugin of pluginsByPage) {
-        if (plugin.page === pathnameWithoutLocale) {
+        if (plugin.page === `/${pathnameWithoutLocale}`) {
             return (
                 <div id="extensions-root-page-id" className="relative w-full" />
             );
