@@ -14,7 +14,6 @@
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
     "@mantine/hooks": "^7.17.5",
-    "@paciolan/remote-component": "^2.13.0",
     "@tanstack/react-query": "^5.71.10",
     "arctic": "^3.6.0",
     "cookies-next": "^5.1.0",
