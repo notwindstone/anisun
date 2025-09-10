@@ -1,1 +1,1 @@
-export type ExtensionFunctionType = (_module: object, _exports: object) => void;
+export type ExtensionFunctionType = (module: object, exports: object) => void;

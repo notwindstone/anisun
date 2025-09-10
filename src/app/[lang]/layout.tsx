@@ -18,13 +18,13 @@ import DarkReaderNotify from "@/components/misc/DarkReaderNotify/DarkReaderNotif
 import { SidebarConfigProvider } from "@/lib/providers/SidebarConfigProvider";
 import getSafeAccountData from "@/lib/configs/getSafeAccountData";
 import { ExtensionsProvider } from "@/lib/providers/ExtensionsProvider";
-import CSSExtensionsLoader from "@/components/extensions/CSSExtensionsLoader/CSSExtensionsLoader";
 import HistoryLogger from "@/components/misc/HistoryLogger/HistoryLogger";
 import MobileNavbarWrapper from "@/components/layout/MobileNavbarWrapper/MobileNavbarWrapper";
 import SidebarWrapper from "@/components/layout/SidebarWrapper/SidebarWrapper";
 import handleRequests from "@/lib/misc/handleRequests";
 import UnsupportedBrowserNotify from "@/components/misc/UnsupportedBrowserNotify/UnsupportedBrowserNotify";
 import { AnimePageLoaderProvider } from "@/lib/providers/AnimePageLoader";
+import ExtensionsLoader from "@/components/extensions/ExtensionsLoader/ExtensionsLoader";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -119,7 +119,7 @@ export default async function RootLayout({
                                     </div>
                                     <MobileNavbarWrapper accountInfo={safeAccountValues} />
                                 </AppWrapper>
-                                <CSSExtensionsLoader />
+                                <ExtensionsLoader />
                             </ExtensionsProvider>
                         </SidebarConfigProvider>
                         <HistoryLogger />

@@ -1,13 +1,13 @@
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
 import Button from "@/components/base/Button/Button";
-import getSafeExtensionsValues from "@/lib/configs/getSafeExtensionsValues";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
 import Badge from "@/components/base/Badge/Badge";
 import { useRef, useState } from "react";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
+import { validateManifest } from "@/lib/extensions/validateManifest";
 
 export default function ExtensionsLoadFromURL() {
     const { base, theme } = useContextSelector(ConfigsContext, (value) => {
@@ -94,10 +94,13 @@ export default function ExtensionsLoadFromURL() {
                                         const response = await fetch(input);
                                         const body = await response.json();
 
-                                        safelyParsedExtension = getSafeExtensionsValues({
-                                            parsedExtensions: [body],
-                                        })[0];
-                                        safelyParsedExtension.isDisabled = true;
+                                        safelyParsedExtension = validateManifest(body);
+
+                                        if (safelyParsedExtension === false) {
+                                            return;
+                                        }
+
+                                        safelyParsedExtension.enabled = false;
                                     } catch {
                                         setStatus("error");
 

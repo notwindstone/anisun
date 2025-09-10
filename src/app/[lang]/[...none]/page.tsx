@@ -9,7 +9,6 @@ import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import { usePathname } from "next/navigation";
 import { DictionariesType } from "@/types/Dictionaries/Dictionaries.type";
 import { PaletteType } from "@/types/TailwindCSS/Palette.type";
-import ExtensionWrapper from "@/components/extensions/ExtensionWrapper/ExtensionWrapper";
 import { useEffect, useState } from "react";
 
 const NotFoundComponent = ({
@@ -105,9 +104,7 @@ export default function Page() {
     for (const plugin of pluginsByPage) {
         if (plugin.page === pathnameWithoutLocale) {
             return (
-                <div id="extensions-root-page-id" className="relative w-full">
-                    <ExtensionWrapper url={plugin.url} isCustomPage />
-                </div>
+                <div id="extensions-root-page-id" className="relative w-full" />
             );
         }
     }

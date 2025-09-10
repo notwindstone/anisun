@@ -1,10 +1,10 @@
 import Button from "@/components/base/Button/Button";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
-import { ExtensionType } from "@/types/Extensions/Extension.type";
+import { ManifestType } from "@/types/Extensions/Extension.type";
 import { useContextSelector } from "use-context-selector";
 import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import ConfiguredImage from "@/components/base/ConfiguredImage/ConfiguredImage";
-import { ArrowDownToLine, Blocks, Palette } from "lucide-react";
+import { ArrowDownToLine, Blocks } from "lucide-react";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import parseTailwindColor from "@/lib/appearance/parseTailwindColor";
 import { DarkThemeKey } from "@/constants/configs";
@@ -13,7 +13,7 @@ export default function BrowsingExtension({
     extension,
     loading,
 }: {
-    extension: ExtensionType;
+    extension: ManifestType;
     loading?:  boolean;
 }) {
     const { base, theme } = useContextSelector(ConfigsContext, (value) => ({
@@ -23,13 +23,7 @@ export default function BrowsingExtension({
     const { data: extensions, optimisticallyUpdate: setExtensions } = useContextSelector(ExtensionsContext, (value) => value);
     const extensionIcon = (
         <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
-            {
-                extension.areStyles ? (
-                    <Palette size={24} />
-                ) : (
-                    <Blocks size={24} />
-                )
-            }
+            <Blocks size={24} />
         </div>
     );
     const hasInstalled = extensions?.some((filteringExtension) => filteringExtension.url === extension.url);
@@ -58,13 +52,13 @@ export default function BrowsingExtension({
                 }
             </div>
             <p className="text-md leading-none font-medium text-balance mb-1">
-                {extension.displayName} {extension.areStyles ? "🎨" : ""}
+                {extension.name}
             </p>
             <p className="leading-none text-sm opacity-60 mb-4">
-                @{extension.author}
+                @{extension.authors.join(", ")}
             </p>
             {
-                extension.pages.length > 0 && (
+                (extension.pages ?? []).length > 0 && (
                     <p className="leading-none opacity-80 text-sm mb-4">
                         Has custom pages
                     </p>

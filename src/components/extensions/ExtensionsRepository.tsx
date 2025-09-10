@@ -10,7 +10,7 @@ import ExtensionsLoadFromURL from "@/components/extensions/ExtensionsLoadFromURL
 import ExtensionsBrowser from "@/components/extensions/ExtensionsBrowser/ExtensionsBrowser";
 import { useLayoutEffect, useState } from "react";
 
-export default function ExtensionsLoader() {
+export default function ExtensionsRepository() {
     const { base, theme, accent } = useContextSelector(ConfigsContext, (value) => {
         return {
             base:   value.data.colors.base,
@@ -25,7 +25,7 @@ export default function ExtensionsLoader() {
     // with useEffect user will see loading state for a split second
     // even if the page was already in CSR
     useLayoutEffect(() => {
-        // disable loading state in CSR
+    // disable loading state in CSR
         setLoading(false);
     }, []);
 
@@ -42,10 +42,10 @@ export default function ExtensionsLoader() {
             >
                 <div className="flex justify-between">
                     <p className="leading-none text-lg font-medium">
-                        Installed
+            Installed
                     </p>
                     <p className="leading-none text-lg font-medium">
-                        Total:
+            Total:
                         {" "}
                         <span style={{
                             color: parseTailwindColor({

@@ -4,7 +4,7 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import { useQuery } from "@tanstack/react-query";
 import BrowsingExtension from "@/components/extensions/BrowsingExtension/BrowsingExtension";
-import { ExtensionType } from "@/types/Extensions/Extension.type";
+import { ManifestType } from "@/types/Extensions/Extension.type";
 import Input from "@/components/base/Input/Input";
 import { useDebouncedState } from "@mantine/hooks";
 import { useEffect, useLayoutEffect, useState } from "react";
@@ -24,7 +24,7 @@ export default function ExtensionsBrowser() {
             return data
                 .sort(
                     (a: unknown, b: unknown) => {
-                        // i wouldn't have this mess
+                        // i wouldn't have this mess...
                         if (
                             typeof a !== "object" ||
                             a === null ||
@@ -34,7 +34,7 @@ export default function ExtensionsBrowser() {
                             return 0;
                         }
 
-                        // if i have installed zod...
+                        // ...if i have installed zod
                         if (
                             !("name" in a) ||
                             !("name" in b) ||
@@ -70,7 +70,7 @@ export default function ExtensionsBrowser() {
     const [search, setSearch] = useDebouncedState("", 50, {
         leading: true,
     });
-    const [currentData, setCurrentData] = useState<Array<ExtensionType>>([]);
+    const [currentData, setCurrentData] = useState<Array<ManifestType>>([]);
 
     let extensionsNode: React.ReactNode;
 
@@ -103,7 +103,7 @@ export default function ExtensionsBrowser() {
     }
 
     if (data) {
-        extensionsNode = currentData.map((extensionFromStore: ExtensionType) => {
+        extensionsNode = currentData.map((extensionFromStore: ManifestType) => {
             return (
                 <BrowsingExtension
                     key={extensionFromStore.url}
@@ -132,8 +132,8 @@ export default function ExtensionsBrowser() {
             return;
         }
 
-        setCurrentData(data?.filter((extension: ExtensionType) => {
-            const name = extension?.displayName?.toLowerCase() ?? extension.name.toLowerCase();
+        setCurrentData(data?.filter((extension: ManifestType) => {
+            const name = extension?.name?.toLowerCase();
 
             // doesn't always work
             // tho it's really performant comparing to fuzzy search

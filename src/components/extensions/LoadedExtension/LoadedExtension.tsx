@@ -1,8 +1,8 @@
 import Button from "@/components/base/Button/Button";
 import { ExtensionsLocalStorageKey } from "@/constants/app";
-import { Blocks, Ellipsis, Palette, ToggleLeft, ToggleRight, X } from "lucide-react";
+import { Blocks, Ellipsis, ToggleLeft, ToggleRight, X } from "lucide-react";
 import Link from "next/link";
-import { ExtensionType } from "@/types/Extensions/Extension.type";
+import { ManifestType } from "@/types/Extensions/Extension.type";
 import { useContextSelector } from "use-context-selector";
 import { ExtensionsContext } from "@/lib/providers/ExtensionsProvider";
 import { useState } from "react";
@@ -15,7 +15,7 @@ export default function LoadedExtension({
     extension,
     index,
 }: {
-    extension: ExtensionType;
+    extension: ManifestType;
     index: number;
 }) {
     const { base, theme } = useContextSelector(ConfigsContext, (value) => {
@@ -29,7 +29,6 @@ export default function LoadedExtension({
     const [toDelete, setToDelete] = useState(false);
     const isDark = theme === DarkThemeKey;
     const isDefault = index === 0;
-    const isDisabled = extension.isDisabled;
 
     const deleteButton = (
         <Button
@@ -48,10 +47,6 @@ export default function LoadedExtension({
 
                 localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
                 setExtensions?.(newExtensions);
-
-                if (!isDisabled && extension.areStyles) {
-                    location.reload();
-                }
             }}
             custom={{ style: "base" }}
             label={"remove extension"}
@@ -72,7 +67,7 @@ export default function LoadedExtension({
 
                 for (const filteringExtension of filteredExtensions) {
                     if (filteringExtension.url === extension.url) {
-                        filteringExtension.isDisabled = !extension.isDisabled;
+                        filteringExtension.enabled = !extension.enabled;
                     }
                 }
 
@@ -82,32 +77,22 @@ export default function LoadedExtension({
 
                 localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensions));
                 setExtensions?.(newExtensions);
-
-                if (!isDisabled && extension.areStyles) {
-                    location.reload();
-                }
             }}
             custom={{ style: "base" }}
             label={"disable extension"}
         >
             {
-                extension.isDisabled ? (
-                    <ToggleLeft size={24} />
-                ) : (
+                extension.enabled ? (
                     <ToggleRight size={24} />
+                ) : (
+                    <ToggleLeft size={24} />
                 )
             }
         </Button>
     );
     const extensionIcon = (
         <div className="transition-colors bg-neutral-300 dark:bg-neutral-700 p-2 rounded-md flex justify-center items-center">
-            {
-                extension.areStyles ? (
-                    <Palette size={24} />
-                ) : (
-                    <Blocks size={24} />
-                )
-            }
+            <Blocks size={24} />
         </div>
     );
     const isTrusted = extension.url.startsWith("https://raw.githubusercontent.com/notwindstone");
@@ -117,7 +102,7 @@ export default function LoadedExtension({
         <div key={extension.url} className="select-none flex gap-2 items-center w-full">
             <div
                 onClick={() => {
-                    if (extension.isDisabled) {
+                    if (extension.enabled === false) {
                         return;
                     }
 
@@ -131,7 +116,7 @@ export default function LoadedExtension({
                     localStorage?.setItem(ExtensionsLocalStorageKey, JSON.stringify(newExtensionsOrder));
                     setExtensions?.(newExtensionsOrder);
                 }}
-                className={`relative p-1 rounded-md transition flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.isDisabled ? "opacity-40" : ""}`}
+                className={`relative p-1 rounded-md transition flex flex-1 flex-wrap justify-between gap-2 items-center ${selectedClassNames} ${extension.enabled ? "" : "opacity-40"}`}
                 style={
                     isDefault ? ({
                         backgroundColor: parseTailwindColor({
@@ -141,13 +126,6 @@ export default function LoadedExtension({
                     }) : undefined
                 }
             >
-                {
-                    extension.areStyles && (
-                        <div className="absolute left-5 -top-3 scale-60 opacity-50">
-                            {extensionIcon}
-                        </div>
-                    )
-                }
                 <div className="flex gap-4 items-center">
                     {
                         extension.logo === "" ? extensionIcon : (
@@ -162,28 +140,28 @@ export default function LoadedExtension({
                     }
                     <div className="flex flex-col gap-1">
                         <p className="leading-none font-medium">
-                            {extension.displayName ?? extension.name}
+                            {extension.name}
                         </p>
                         <p className="leading-none opacity-60 text-xs">
-                            @{extension.author}
+                            @{extension.authors.join(", ")}
                         </p>
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-2 items-center">
                     {
-                        (isDefault && !extension.areStyles) && (
+                        (isDefault) && (
                             <div className="text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] transition-colors dark:text-white text-black">
                                 default
                             </div>
                         )
                     }
                     {
-                        extension.pages.map((page) => {
+                        (extension?.pages ?? []).map((page) => {
                             const pageLink = `/${page}`;
 
                             return (
                                 <Link
-                                    className={`text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] text-sky-500 transition hover:opacity-50 ${extension.isDisabled ? "pointer-events-none" : ""}`}
+                                    className={`text-sm rounded-md py-1 px-2 bg-[theme(colors.neutral.400/.2)] text-sky-500 transition hover:opacity-50 ${extension.enabled ? "" : "pointer-events-none"}`}
                                     onClick={(event) => {
                                         event.stopPropagation();
                                     }}
