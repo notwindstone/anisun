@@ -5,12 +5,13 @@ import HistoryLoader from "@/components/layout/HistoryLoader/HistoryLoader";
 import { useQuery } from "@tanstack/react-query";
 import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
+import { AnimeType } from "@/types/Anime/Anime.type";
 
 export default function HistoryWrapper(): React.ReactNode {
     const chunkSize = useContextSelector(ConfigsContext, (value) => value.data.library.historyEntriesOnThePage);
     const { data, isPending, error } = useQuery({
         queryKey: ["anime", "history", "localStorage"],
-        queryFn:  () => {
+        queryFn:  (): Array<AnimeType & { date: string }> => {
             const historyString = localStorage?.getItem(HistoryLocalStorageKey) ?? "[]";
 
             let parsedHistory: Array<unknown>;
@@ -21,8 +22,17 @@ export default function HistoryWrapper(): React.ReactNode {
                 parsedHistory = [];
             }
 
-            // first elements will be most recent
-            return parsedHistory.reverse();
+            // at least validate that entries are objects
+            for (const parsedEntry of parsedHistory) {
+                if (typeof parsedEntry !== "object" || parsedEntry === null) {
+                    return [];
+                }
+            }
+
+            // first elements will be the most recent
+            // assure typescript that this array is actually an 'Array<AnimeType...>',
+            // even thought it is maybe not.
+            return parsedHistory.reverse() as Array<AnimeType & { date: string }>;
         },
     });
 

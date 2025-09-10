@@ -42,13 +42,7 @@ export default function SmallCard({
     const status = data?.status ?? "";
     const score = Number(data?.averageScore) / 10;
     const redirectURLAnimeName =
-        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
-        // eslint-disable-next-line
-        // @ts-ignore
         data?.relations?.nodes?.[0]?.title?.romaji
-        // eslint-disable-next-line unicorn/no-abusive-eslint-disable
-        // eslint-disable-next-line
-        // @ts-ignore
         ?? data?.relations?.nodes?.[0]?.title?.english
         ?? name;
 

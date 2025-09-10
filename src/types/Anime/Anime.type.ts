@@ -93,7 +93,16 @@ export type AnimeType = Partial<{
             }>;
         }>>;
     }>;
-    relations:                  string // should change;
+    relations:                  Partial<{
+        nodes: Array<Partial<{
+            title: Partial<{
+                english:                string;
+                native:                 string;
+                romaji:                 string;
+                userPreferred:          string;
+            }>;
+        }>>;
+    }>;
     reviews:                    string // should change;
     season:                     string // should change;
     seasonInt:                  number;

@@ -8,6 +8,7 @@ import { useContextSelector } from "use-context-selector";
 import { ConfigsContext } from "@/lib/providers/ConfigsProvider";
 import ErrorSmallCard from "@/components/layout/ErrorSmallCard/ErrorSmallCard";
 import Pagination from "@/components/base/Pagination/Pagination";
+import { AnimeType } from "@/types/Anime/Anime.type";
 
 export default function HistoryLoader({
     passedChunkSize,
@@ -16,7 +17,7 @@ export default function HistoryLoader({
     isError,
 }: {
     passedChunkSize: number;
-    history: Array<unknown>;
+    history: Array<AnimeType & { date: string } | number>;
     isPending?: boolean;
     isError?: boolean;
 }) {
@@ -77,14 +78,8 @@ export default function HistoryLoader({
                         ).map((historyEntry) => {
                             return (
                                 <SmallCard
-                                    // eslint-disable-next-line unicorn/no-abusive-eslint-disable
-                                    // eslint-disable-next-line
-                                    // @ts-ignore
-                                    key={`${historyEntry.idMal}_${historyEntry.date}`}
-                                    // eslint-disable-next-line unicorn/no-abusive-eslint-disable
-                                    // eslint-disable-next-line
-                                    // @ts-ignore
-                                    data={historyEntry}
+                                    key={typeof historyEntry === "number" ? historyEntry : `${historyEntry.idMal}_${historyEntry.date}`}
+                                    data={typeof historyEntry === "number" ? {} : historyEntry}
                                     isGrid
                                     isImageUnoptimized
                                 />
