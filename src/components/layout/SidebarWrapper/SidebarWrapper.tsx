@@ -26,8 +26,13 @@ export default function SidebarWrapper({
     });
 
     return (
-        <Sidebar
-            sidebarItems={sidebarItems}
-        />
+        <>
+            <div className="w-16 h-full" />
+            <div className="absolute h-full z-2000">
+                <Sidebar
+                    sidebarItems={sidebarItems}
+                />
+            </div>
+        </>
     );
 }

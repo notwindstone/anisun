@@ -1,18 +1,9 @@
 "use client";
 
-import { Suspense, useMemo } from "react";
+import { Suspense } from "react";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
 import Button from "@/components/base/Button/Button";
 import ExtensionSkeleton from "@/components/extensions/ExtensionSkeleton/ExtensionSkeleton";
-import {
-    createRemoteComponent,
-    createRequires,
-} from "@paciolan/remote-component";
-import { resolve } from "@/../remote-component.config.js";
-
-// @ts-expect-error | explanation:
-// this line of code is taken from the docs and is working like a charm
-const requires = createRequires(resolve);
 
 function refresh() {
     if (globalThis === undefined) {
@@ -29,13 +20,6 @@ export default function ExtensionWrapper({
     url: string;
     isCustomPage?: boolean;
 }) {
-    // if a remote component doesn't return anything, but just manually injects itself to the relative root node
-    // then we need to recreate it every time url changes to avoid buggy af behaviour
-    const RemoteComponent = useMemo(
-        () => createRemoteComponent({ requires }),
-        [url],
-    );
-
     return (
         <>
             <ErrorBoundary errorComponent={() => {
@@ -78,7 +62,7 @@ export default function ExtensionWrapper({
                                 </ExtensionSkeleton>
                             )
                         }
-                        <RemoteComponent url={url} />
+                        <div />
                     </div>
                 </Suspense>
             </ErrorBoundary>
