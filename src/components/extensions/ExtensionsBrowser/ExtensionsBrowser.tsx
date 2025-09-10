@@ -14,7 +14,7 @@ export default function ExtensionsBrowser() {
     const { data, isPending, error } = useQuery({
         queryKey: ["extensions", "browser"],
         queryFn:  async () => {
-            const response = await fetch("https://raw.githubusercontent.com/notwindstone/anisun-extensions/refs/heads/main/manifests.json");
+            const response = await fetch(process.env.NEXT_PUBLIC_EXTENSIONS_REPOSITORY!);
             const data: unknown = await response.json();
 
             if (!Array.isArray(data)) {

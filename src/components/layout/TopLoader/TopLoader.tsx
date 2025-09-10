@@ -17,6 +17,7 @@ export default function TopLoader() {
             <NextTopLoader
                 color={color}
                 showSpinner={false}
+                zIndex={5000}
             />
         </>
     );
