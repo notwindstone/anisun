@@ -4,9 +4,9 @@
 
 # [anisun](https://anime.tatar)
 
-**An extension-based web app for exploring anime**
+**A web app for exploring anime with extensions support**
 
-The goal of this project is to replicate a Tachiyomi-like experience for watching anime on a website.
+The initial goal of this project was to replicate a Tachiyomi-like experience for watching anime on a website.
 
 <p align="center">
 <strong>English</strong> | <a href="https://github.com/notwindstone/anisun/blob/main/docs/README_russian.md">Русский</a>
@@ -47,15 +47,15 @@ The goal of this project is to replicate a Tachiyomi-like experience for watchin
 ## Features
 
 * Extensions in JS (visit [docs.anime.tatar](https://docs.anime.tatar/) for more info)
-* Anilist and Shikimori integrations
-* Search anime by filters
+* Anilist integration (and Shikimori in the future)
+* Searching anime by filters
 * Watching history
 * Localization
 * Theme customization
 
 ## Performance
 
-Even though this website is written in React, I think I still managed to achieve great performance. I tried to make it as smooth as possible while dealing with the monstrous re-rendering nature of React. It should work perfectly on mobile phones too, both in Firefox and Chromium-based browsers.
+Even though this website is written in React, I think I still managed to achieve adequate performance. I tried to make it as smooth as possible while dealing with the monstrous re-rendering nature of React. It should work perfectly on not powerful mobile phones too, both in Firefox and Chromium-based browsers.
 
 ### PageSpeed Insights
 
@@ -202,6 +202,10 @@ The developer of this application does not have any affiliation with the content
 * `cos` for his help with the UI
 * [Anilist API](https://docs.anilist.co/)
 * [Shikimori API](https://shikimori.one/api/doc/graphql)
+
+## Afterword
+
+Thanks to this project I realized how stupid it was to constantly write `useMemo`, `useCallback`, `useTransition`, etc. to fix slowness on mobile phones (Firefox and old phone specific). I have dropped React completely and transitioned to Vue and Svelte now :3
 
 <!-- variables -->
 
